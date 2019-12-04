@@ -1,0 +1,17 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [fixedInViewport]="true" mode="side">
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="'/dashboard'" routerLinkActive="active">Home</a>
+      <a mat-list-item [routerLink]="'/plans'" routerLinkActive="active">Plans</a>
+      <a mat-list-item [routerLink]="'/persons'" routerLinkActive="active">Persons</a>
+      <a mat-list-item [routerLink]="'/repositories'" routerLinkActive="active">Repositories</a>
+      <a mat-list-item (click)="logout()">Logout</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar (click)="sidenav.opened = !sidenav.opened">
+      <h1>{{title}}</h1>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

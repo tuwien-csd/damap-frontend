@@ -19,8 +19,9 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatInputModule} from '@angular/material/input';
 import {AppStoreModule} from "./store/app-store.module";
 import {AuthService} from "./auth.service";
-import {AuthGuardService} from "./auth-guard.service";
 import {APP_ROUTES} from "./app.routes";
+import { LayoutComponent } from './layout/layout.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {APP_ROUTES} from "./app.routes";
     PlanComponent,
     PersonsComponent,
     NewPlanComponent,
-    LoginComponent
+    LoginComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import {APP_ROUTES} from "./app.routes";
     MatToolbarModule,
     MatSidenavModule,
     MatStepperModule,
-    AppStoreModule
+    AppStoreModule,
+    MatIconModule
   ],
   providers: [AppComponent, AuthService],
   bootstrap: [AppComponent]

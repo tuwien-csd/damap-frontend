@@ -12,19 +12,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private onDestroy$: Subject<boolean> = new Subject();
 
-  private token:string = sessionStorage.getItem('ID_TOKEN');
-
   constructor(private auth:AuthService, private router:Router) { }
 
   ngOnInit() {
     console.log('Login component loaded.');
-    if(this.token) {
-      this.router.navigate(['/dashboard']).then(r => console.log(r));
-    }
   }
 
   login(username:string, password:string) {
-    console.log(this.auth);
     this.auth.login(username, password).subscribe(data => this.auth.initSession(data), LoginComponent.onError);
   }
 
