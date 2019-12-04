@@ -19,6 +19,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatInputModule} from '@angular/material/input';
 import {AppStoreModule} from "./store/app-store.module";
 import {AuthService} from "./auth.service";
+import {AuthGuardService} from "./auth-guard.service";
+import {APP_ROUTES} from "./app.routes";
 
 @NgModule({
   declarations: [
@@ -37,17 +39,7 @@ import {AuthService} from "./auth.service";
     MatButtonModule,
     HttpClientModule,
     MatInputModule,
-    RouterModule.forRoot([
-      {path: 'login', component: LoginComponent},
-      {path: 'dashboard', component: DashboardComponent},
-      {path: 'plans', component: PlanComponent},
-      {path: 'persons', component: PersonsComponent},
-      {path: 'repositories', component: RepositoriesComponent},
-      {path: '', component: LoginComponent}
-    ]),
-    RouterModule.forChild([
-      {path: 'plans/new', component: NewPlanComponent}
-    ]),
+    RouterModule.forRoot(APP_ROUTES),
     BrowserAnimationsModule,
     MatListModule,
     MatToolbarModule,
