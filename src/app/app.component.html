@@ -1,0 +1,21 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [fixedInViewport]="true" mode="side">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/login" routerLinkActive="active" *ngIf="!isAuthenticated">Login</a>
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active" *ngIf="isAuthenticated">Home</a>
+      <a mat-list-item routerLink="/plans" routerLinkActive="active" *ngIf="isAuthenticated">Plans</a>
+      <a mat-list-item routerLink="/persons" routerLinkActive="active" *ngIf="isAuthenticated">Persons</a>
+      <a mat-list-item routerLink="/repositories" routerLinkActive="active" *ngIf="isAuthenticated">Repositories</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar (click)="sidenav.opened = !sidenav.opened">
+      <h1>{{title}}</h1>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+

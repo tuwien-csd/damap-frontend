@@ -1,0 +1,7 @@
+<div id="content">
+  <h3>Dashboard</h3>
+  <h4>Welcome, {{name}}!</h4>
+  <p>Username: {{username}}</p>
+  <p>Roles: {{roles | json}}</p>
+  <p>Expires: {{expiresAt}} <button mat-button (click)="refresh()">Refresh</button></p>
+</div>
