@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   login(username:string, password:string) {
     console.log(this.auth);
     this.auth.login(username, password).subscribe(data => this.auth.initSession(data), LoginComponent.onError);
-    this.auth.login(username, password).subscribe(this.auth.initSession, LoginComponent.onError);
   }
 
   static onError() {
