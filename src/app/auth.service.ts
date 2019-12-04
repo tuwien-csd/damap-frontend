@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,11 @@ export class AuthService {
     return this.http.post(this.tokenUrl, test, {observe: 'response', headers: headers});
   }
 
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['/login']).then(r => console.log('redirecting to login: ' + r));
+  }
+
   private refresh() : Observable<any> {
     let refreshToken:string = sessionStorage.getItem('REFRESH_TOKEN');
     let headers:HttpHeaders = new HttpHeaders({
@@ -35,7 +41,7 @@ export class AuthService {
     let jwt:any = data.body;
     AuthService.setAccessToken(jwt.access_token);
     AuthService.setRefreshToken(jwt.refresh_token);
-    this.router.navigate(['/dashboard']).then(r => console.log(r));
+    this.router.navigate(['/dashboard']).then(r => console.log('redirecting to dashboard: ' + r));
   }
 
   static setAccessToken(accessToken:string) {
