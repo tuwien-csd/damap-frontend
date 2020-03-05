@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../auth.service";
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'app-dashboard',
@@ -8,26 +8,19 @@ import {AuthService} from "../auth.service";
 })
 export class DashboardComponent implements OnInit {
 
-  public token:string;
+  public token:object;
   public name:string;
   public username:string;
-  public expiresAt:Date;
   public roles:string[];
 
-  constructor(private auth:AuthService) {}
+  constructor(private auth:KeycloakService) {}
 
   ngOnInit() {
     this.token = this.auth.getToken();
-    this.name = this.auth.getName();
+    this.auth.loadUserProfile().then(p => this.name = `${p.firstName} ${p.lastName}`);
     this.username = this.auth.getUsername();
-    this.roles = this.auth.getRoles();
-    this.expiresAt = this.auth.getExpiresAt();
+    this.roles = this.auth.getUserRoles(true);
     console.log("Dashboard component loaded.");
-  }
-
-  refresh() {
-    this.token = this.auth.getToken();
-    this.expiresAt = this.auth.getExpiresAt();
   }
 
 }
