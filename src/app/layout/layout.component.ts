@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../auth.service";
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'app-layout',
@@ -10,7 +10,7 @@ export class LayoutComponent implements OnInit {
 
   public title:string = 'Data Management Plan';
 
-  constructor(private auth:AuthService) { }
+  constructor(private auth:KeycloakService) { }
 
   ngOnInit() { }
 
