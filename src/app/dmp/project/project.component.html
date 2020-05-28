@@ -1,0 +1,32 @@
+<form>
+  <mat-form-field>
+    <mat-label>Project Name</mat-label>
+    <input matInput placeholder="The Title of your Project">
+  </mat-form-field>
+
+  <br/>
+
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput placeholder="Describe your project"></textarea>
+  </mat-form-field>
+
+  <br/>
+
+  <mat-form-field>
+    <mat-label>Project start date</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <br/>
+
+  <mat-form-field>
+    <mat-label>Project end date</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+</form>

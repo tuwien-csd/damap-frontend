@@ -11,9 +11,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {RouterModule} from '@angular/router';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {PlanComponent} from './plans/plan.component';
+import {PlansComponent} from './plans/plans.component';
 import {PersonsComponent} from './persons/persons.component';
-import {NewPlanComponent} from './plans/new-plan/new-plan.component';
+import {DmpComponent} from './dmp/dmp.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatInputModule} from '@angular/material/input';
 import {AppStoreModule} from "./store/app-store.module";
@@ -24,6 +24,9 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {OAuthModule} from "angular-oauth2-oidc";
 import {environment} from "../environments/environment";
 import {KeycloakService} from "keycloak-angular";
+import { ProjectComponent } from './dmp/project/project.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 
 const keycloakService = new KeycloakService();
 
@@ -32,10 +35,11 @@ const keycloakService = new KeycloakService();
     AppComponent,
     RepositoriesComponent,
     DashboardComponent,
-    PlanComponent,
+    PlansComponent,
     PersonsComponent,
-    NewPlanComponent,
-    LayoutComponent
+    DmpComponent,
+    LayoutComponent,
+    ProjectComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,10 @@ const keycloakService = new KeycloakService();
     MatIconModule,
     MatTabsModule,
     OAuthModule.forRoot(),
-    MatTabsModule
+    MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRippleModule
   ],
   providers: [
     AppComponent,
