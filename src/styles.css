@@ -1,5 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* TU Colors */
+:root {
+  --main-color: #069;
+  --accent-color-lighter: #3284ad;
+  --accent-color-darker: #084f72;
+  --secondary-color: #373737;
+}
+
 html, body {
   height: 100%;
 }
@@ -7,4 +15,28 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: .03rem;
+  font-weight: 300;
 }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+  border: 0
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+.active {
+  background-color: #f5f5f5;
+  padding-left: 22px;
+  border-left: 8px solid var(--main-color);
+  font-weight: 400;
+}
+
