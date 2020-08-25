@@ -1,3 +1,232 @@
-mat-sidenav {
+mat-nav-list {
   width: 300px;
+}
+
+.mm-navbars-top a {
+  color: #fff;
+}
+
+.mm-navbars-top {
+  background: inherit;
+  border-color: inherit;
+  background-color: var(--main-color);
+  border-width: 0;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50px;
+}
+
+.mm-navbar {
+  padding: 0;
+  border: none;
+  position: relative;
+  background-color: var(--main-color);
+  color: #fff;
+  width: 100%;
+  float: left;
+  clear: both;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  flex-grow: 0;
+  height: 100%;
+}
+
+.loginElement {
+  flex-basis: 100%;
+  flex-grow: 1;
+  /*display: -webkit-box;*/
+  /*display: -webkit-flex;*/
+  display: flex;
+  align-items: center;
+  text-align: left;
+  font-size: .8823529412rem;
+}
+
+.languageElement {
+  width: 110px;
+  flex-basis: 110px;
+  flex-shrink: 0;
+  /*display: -webkit-box;*/
+  /*display: -webkit-flex;*/
+  display: flex;
+  border-left: 1px solid var(--accent-color-lighter);
+  transition: color .3s ease;
+  /*align-items: center;*/
+  justify-content: center;
+}
+
+.mm-navbars-top .languageElement A {
+  line-height: 50px;
+  height: 50px;
+  text-decoration: none;
+  align-items: center;
+  /*justify-content: center;*/
+  display: flex;
+}
+
+.mm-navbars-top .languageElement A > SPAN {
+  display: block;
+  position: relative;
+  width: 50px;
+  height: 26px;
+  border-radius: 12px;
+  padding-left: 4px;
+  padding-right: 4px;
+  line-height: 26px;
+  white-space: nowrap;
+  background-color: var(--accent-color-darker);
+  transition: background .3s ease;
+}
+
+.mm-navbars-top .languageElement A > SPAN::before {
+  content: "";
+  display: inline-block;
+  height: 18px;
+  width: 18px;
+  border-radius: 12px;
+  background: #fff;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.mm-navbars-top .languageElement A > SPAN > SPAN {
+  display: block;
+  width: 100%;
+  padding-left: 2px;
+  padding-right: 2px;
+  font-size: .7647058824rem;
+  line-height: 26px;
+  position: relative;
+  left: 1px;
+}
+
+A[data-lang-active-de] > SPAN::before {
+  left: 4px;
+}
+
+A[data-lang-active-en] {
+  text-align: left;
+}
+
+.loginElement A {
+  padding-left: 30px;
+  transition: color .3s ease, background .3s ease;
+  line-height: 50px;
+  height: 50px;
+  text-decoration: none;
+}
+
+/*.loginElement A I::before {
+  font-family: tuwienIcon !important;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "";
+}*/
+
+#user {
+  margin-top: 50px;
+  padding: 19px 16px;
+  background-color: #373737;
+  color: white;
+  font-weight: 400;
+}
+
+#mainHeader {
+  height: 50px;
+  background-color: white;
+  overflow: visible;
+}
+
+#mainHeader #mainHeaderLogo A {
+  top: 5px;
+  position: relative;
+  display: block;
+}
+
+#mainHeaderLogo A svg {
+  width: 60px;
+  height: 60px;
+}
+
+svg {
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+#mainHeader .mainHeaderRight {
+  margin-left: auto;
+  display: flex;
+}
+.mainHeaderNav {
+  min-width: 50px;
+}
+
+#wpMainHeader .wpMainHeaderNav UL {
+  margin-right: 10px;
+  margin-bottom: 0;
+  display: none;
+}
+
+#mainHeader #mainHeaderLogo {
+  padding-right: 5px;
+  margin-left: auto;
+  display: flex;
+  align-self: flex-start;
+}
+
+.mainHeaderLeft {
+  background-color: var(--secondary-color);
+  color: #c5c5c5;
+  padding: 5px;
+}
+
+.mat-icon {
+  transform: scale(1.4);
+}
+
+@media only screen and (min-width: 1024px) {
+  .loginElement A {
+    line-height: 70px;
+    height: 70px;
+  }
+
+  .mm-navbars-top {
+    line-height: 70px;
+    height: 70px;
+  }
+
+  #user {
+    margin-top: 70px;
+    padding: 22px 16px;
+  }
+
+  .mm-navbars-top .languageElement A {
+    line-height: 70px;
+    height: 70px;
+  }
+
+  #mainHeaderLogo A svg {
+    width: 75px;
+    height: 75px;
+  }
+
+  #mainHeader {
+    height: 70px;
+  }
+
+  #mainHeader #mainHeaderLogo A {
+    top: 15px;
+    padding-right: 15px;
+    position: relative;
+  }
 }

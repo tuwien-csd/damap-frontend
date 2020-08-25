@@ -1,0 +1,70 @@
+/*
+Custom TU Color Palettes
+used for Angular Materials
+ */
+$custom-blue: (
+  50: #e0edf3,
+  100: #b3d1e0,
+  200: #80b3cc,
+  300: #4d94b8,
+  400: #267da8,
+  500: #006699,
+  600: #005e91,
+  700: #005386,
+  800: #00497c,
+  900: #00386b,
+  A100: #9ac6ff,
+  A200: #67aaff,
+  A400: #348dff,
+  A700: #1a7fff,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+$custom-grey: (
+  50 : #e7e7e7,
+  100 : #c3c3c3,
+  200 : #9b9b9b,
+  300 : #737373,
+  400 : #555555,
+  500 : #373737,
+  600 : #313131,
+  700 : #2a2a2a,
+  800 : #232323,
+  900 : #161616,
+  A100 : #ef6f6f,
+  A200 : #ea4141,
+  A400 : #f80000,
+  A700 : #df0000,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+$tu-wien-primary: mat-palette($custom-blue, 500, 500, white);
+$tu-wien-accent: mat-palette($custom-grey, 400, 600, white);
