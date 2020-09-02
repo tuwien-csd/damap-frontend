@@ -1,26 +1,52 @@
-<mat-vertical-stepper linear="true">
+<mat-vertical-stepper linear="false"> <!-- fixme: isLinear -->
+  <mat-step label="Choose title">
+    <form>
+      <mat-form-field>
+        <mat-label>DMP Title</mat-label>
+        <input matInput #dmpTitle (blur)="changeTitle(dmpTitle.value)">
+      </mat-form-field> <br/>
+      <mat-form-field [style]="'min-width:50%'">
+        <mat-label>DMP Description</mat-label>
+        <textarea matInput #dmpDescription (blur)="changeDescription(dmpDescription.value)"></textarea>
+      </mat-form-field>
+    </form>
+  </mat-step>
   <mat-step label="Choose project">
-    <app-dmp-project></app-dmp-project>
+    <app-dmp-project [dmp]="dmp"
+                     (projectToAdd)="addProject($event)"
+                     (projectToRemove)="removeProject($event)">
+    </app-dmp-project>
   </mat-step>
   <mat-step label="People involved in data management">
-    Content 2
+    <app-dmp-people [dmp]="dmp"
+                    (contributorToAdd)="addContributor($event)"
+                    (contributorToRemove)="removeContributor($event)"></app-dmp-people>
   </mat-step>
   <mat-step label="Specify research data">
-    Content 3
+    <app-dmp-specify-data></app-dmp-specify-data>
   </mat-step>
   <mat-step label="Documentation and data quality">
-    Content 4
+    <app-dmp-doc-data-quality></app-dmp-doc-data-quality>
   </mat-step>
   <mat-step label="Legal and ethical aspects">
-    Content 5
+    <app-dmp-legal-ethical-aspects></app-dmp-legal-ethical-aspects>
   </mat-step>
   <mat-step label="Licensing">
-    Content 6
+    <app-dmp-licenses></app-dmp-licenses>
   </mat-step>
+ <!-- <mat-step label="Storage">
+    Content Storage
+  </mat-step>-->
   <mat-step label="Specify repository/repositories">
-    Content 7
+    <app-dmp-repo></app-dmp-repo>
   </mat-step>
+<!--  <mat-step label="Costs">
+    Content Costs
+  </mat-step>-->
+<!--  <mat-step label="Deposit">
+    Content Deposit
+  </mat-step>-->
   <mat-step label="End">
-    Content 8
+    <app-dmp-summary [dmp]="dmp"></app-dmp-summary>
   </mat-step>
 </mat-vertical-stepper>

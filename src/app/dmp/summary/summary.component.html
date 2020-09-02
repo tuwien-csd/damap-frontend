@@ -1,0 +1,24 @@
+<p>Summary of the information you provided:</p>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="step">
+    <th mat-header-cell *matHeaderCellDef> Step </th>
+    <td mat-cell *matCellDef="let element"> {{element.step}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="completeness">
+    <th mat-header-cell *matHeaderCellDef> Completeness </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-progress-bar mode="determinate" [value]="element.completeness"></mat-progress-bar>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="summaryTableHeaders"></tr>
+  <tr mat-row *matRowDef="let row; columns: summaryTableHeaders;"></tr>
+</table>
+<button mat-raised-button (click)="updateTable()">Update</button>
