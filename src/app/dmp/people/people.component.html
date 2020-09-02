@@ -1,0 +1,19 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Search for person...</mat-label>
+    <!--    <span matPrefix>+1 &nbsp;</span>-->
+    <input type="search" matInput>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</form>
+
+<mat-card *ngFor="let person of people | slice: 0:5">
+  <div class="mat-card-container">
+    <div class="mat-card-left">
+      <div><mat-icon class="mat-icon-style">person</mat-icon>{{person.name}}</div>
+      <mat-icon class="mat-icon-style">mail_outline</mat-icon>
+      <a href="'mailto:' + {{person.mbox}}" class="person-contact">{{person.mbox}}</a>
+    </div>
+    <div class="mat-card-right"><button mat-raised-button>Select</button></div>
+  </div>
+</mat-card>

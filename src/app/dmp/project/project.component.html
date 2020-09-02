@@ -1,32 +1,47 @@
+<p *ngIf="projectList && projectList.length > 0">Please select the project(s) you want to create a DMP for:</p>
+<mat-card *ngFor="let project of projectList | slice:0:5">
+  <div class="mat-card-container">
+    <div class="mat-card-left">
+      <div><b>{{project.title}}</b></div>
+      <p>{{project.description}}</p>
+      <mat-icon class="mat-icon-style">date_range</mat-icon>
+      {{project.start | date}} - {{project.end | date}}
+    </div>
+    <div class="mat-card-right"><button mat-raised-button color="primary" (click)="addProject(project)">
+      <mat-icon color="white">add</mat-icon>
+    </button></div>
+  </div>
+</mat-card>
+
+<!-- TODO: Project Search -->
+<p>Project not listed? Try to find it with the search function.</p>
+
 <form>
   <mat-form-field>
-    <mat-label>Project Name</mat-label>
-    <input matInput placeholder="The Title of your Project">
+    <mat-label>Search projects...</mat-label>
+    <input #searchBox type="search" matInput (input)="searchProjects(searchBox.value)" >
+    <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
-
-  <br/>
-
-  <mat-form-field>
-    <mat-label>Description</mat-label>
-    <textarea matInput placeholder="Describe your project"></textarea>
-  </mat-form-field>
-
-  <br/>
-
-  <mat-form-field>
-    <mat-label>Project start date</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <br/>
-
-  <mat-form-field>
-    <mat-label>Project end date</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
 </form>
+<ul class="search-result">
+  <li *ngFor="let project of projects$ | async" (click)="addProject(project)">
+      {{project.title}}
+  </li>
+</ul>
+
+<!-- Selected projects -->
+<div *ngIf="dmp.projects != null && dmp.projects.length > 0">
+  <p>You selected:</p>
+  <mat-card *ngFor="let project of dmp.projects" class="mat-selected">
+    <div class="mat-card-container">
+      <div class="mat-card-left">
+        <div><b>{{project.title}}</b></div>
+        <mat-icon class="mat-icon-style">date_range</mat-icon>
+        {{project.start | date}} - {{project.end | date}}
+      </div>
+      <div class="mat-card-right"><button mat-button (click)="removeProject(project)">
+        <mat-icon color="white">delete</mat-icon>
+      </button></div>
+    </div>
+  </mat-card>
+</div>

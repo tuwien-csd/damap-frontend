@@ -1,0 +1,38 @@
+<form [formGroup]="specifyDataFormGroup">
+  <mat-label id="example-radio-group-label">What kinds of research data will you create?</mat-label>
+  <mat-radio-group aria-label="Select an option">
+    <mat-radio-button class="mat-radio-button" value="unknown" (click)="selectKind(unknown)">Don't know yet</mat-radio-button>
+    <mat-radio-button class="mat-radio-button" value="none" (click)="selectKind(none)">No data will be created or analysed</mat-radio-button>
+    <mat-radio-button class="mat-radio-button" value="assistance" (click)="selectKind(assistance)">Specify with assistance</mat-radio-button>
+  </mat-radio-group>
+
+<!-- TODO: save explanation in some object (variable tdb) -->
+  <mat-form-field [style]="'width:100%;'" *ngIf="dataKind === none" appearance="fill">
+    <mat-label>Please explain why you won't create or analyse any research data.</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="dataset-tags-chips" [style]="'width:100%;'" *ngIf="dataKind === assistance">
+    <mat-chip-list #chipList aria-label="Create names for your datasets">
+      <mat-chip *ngFor="let dataset of datasets" [selectable]="selectable"
+                [removable]="removable" (removed)="remove(dataset)">
+        {{dataset.getTitle()}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="New dataset..."
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+  </mat-form-field>
+
+  <mat-tab-group dynamicHeight *ngIf="dataKind === assistance">
+    <mat-tab label="Manually">
+      <button mat-raised-button color="primary" (click)="openDialog()">Specify new data</button>
+    </mat-tab>
+    <mat-tab label="Uploading sample data">
+    </mat-tab>
+  </mat-tab-group>
+
+</form>
