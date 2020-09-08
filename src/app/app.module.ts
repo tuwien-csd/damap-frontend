@@ -23,7 +23,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatTabsModule} from "@angular/material/tabs";
 import {OAuthModule} from "angular-oauth2-oidc";
 import {environment} from "../environments/environment";
-import {KeycloakService} from "keycloak-angular";
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {ProjectComponent} from './dmp/project/project.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
@@ -95,7 +95,8 @@ const keycloakService = new KeycloakService();
         MatCardModule,
         MatGridListModule,
         MatPaginatorModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        KeycloakAngularModule
     ],
   providers: [
     AppComponent,
