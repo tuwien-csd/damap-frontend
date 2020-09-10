@@ -1,4 +1,4 @@
-<div id="content" [style]="'max-width: 1440px;'">
+<div id="content" style="'max-width: 1440px;'">
   <h2>Plans</h2>
   <section>
     <button mat-button [routerLink]="'/dmp'" mat-raised-button color="primary">Create</button>
@@ -31,7 +31,7 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="edit" [style]="'width: 10px;'">
+      <ng-container matColumnDef="edit" style="'width: 10px;'">
         <th mat-header-cell *matHeaderCellDef><span class="sr-only">Edit</span></th>
         <td mat-cell *matCellDef="let element">
           <a routerLink="/dmp/{{element.id}}">
