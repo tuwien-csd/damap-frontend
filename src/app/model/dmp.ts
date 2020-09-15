@@ -1,15 +1,11 @@
 import {Project} from "./project";
 import {Dataset} from "./dataset";
-import {ContributorType} from "./enum/contributor-type.enum";
 import {Contributor} from "./contributor";
 
 export class Dmp {
   private readonly _id: number; // backend
   private _title: string; // step 1
-  private contactId: number;
-  private contactType: ContributorType;
-  // private contactName: string;
-  // private contactMbox: string;
+  private _contact: Contributor;
   private _created: Date;
   private _modified: Date;
   private _description: string; // step 1
@@ -41,6 +37,14 @@ export class Dmp {
 
   set title(value: string) {
     this._title = value;
+  }
+
+  get contact(): Contributor {
+    return this._contact;
+  }
+
+  set contact(value: Contributor) {
+    this._contact = value;
   }
 
   get created(): Date {
@@ -79,6 +83,27 @@ export class Dmp {
     if (this._projects == []) {
       this._projects = undefined;
     }
+  }
+
+  // TODO
+  public addContributor(contributor: Contributor): void {
+    if (this._contributors == null) {
+      this._contributors = [];
+    }
+    this._contributors.push(contributor);
+  }
+
+  // TODO
+  public removeContributor(contributor: Contributor) {
+    this._contributors = this._contributors.filter(c => c !== contributor);
+    if (this._contributors == []) {
+      this._contributors = undefined;
+    }
+  }
+
+  // TODO
+  public updateContributorRoles(contributorToUpdate: Contributor){
+
   }
 
 }

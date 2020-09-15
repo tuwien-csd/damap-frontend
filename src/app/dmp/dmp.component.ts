@@ -61,9 +61,15 @@ export class DmpComponent implements OnInit {
 
   addContributor($event: Contributor) {
     // todo
+    this.dmp.addContributor($event);
   }
 
   removeContributor($event: Contributor) {
+    // todo
+    this.dmp.removeContributor($event);
+  }
+
+  updateContributorRoles($event: Contributor) {
     // todo
   }
 

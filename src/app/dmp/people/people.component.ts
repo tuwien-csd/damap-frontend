@@ -14,10 +14,11 @@ export class PeopleComponent implements OnInit {
 
   @Input() dmp: Dmp;
   @Input() people: Contributor[];
-  contributorList: Contributor[] = [];
+  peopleList: Contributor[] = [];
 
   @Output() contributorToAdd = new EventEmitter<Contributor>();
   @Output() contributorToRemove = new EventEmitter<Contributor>();
+  @Output() contributorToUpdate = new EventEmitter<Contributor>();
 
   // todo: search
   contributors$: Observable<Project[]>;
@@ -31,13 +32,15 @@ export class PeopleComponent implements OnInit {
 
   addContributor(contributor: Contributor) {
     this.contributorToAdd.emit(contributor);
+    this.filterPeople();
   }
 
   removeContributor(contributor: Contributor) {
     this.contributorToRemove.emit(contributor);
+    this.filterPeople();
   }
 
-  addContributorRole(contributor: Contributor, role: string) {
+  updateContributorRoles(contributor: Contributor, role: string) {
 
   }
 
@@ -45,10 +48,17 @@ export class PeopleComponent implements OnInit {
     this.backendService.getPersons()
       .subscribe(people => {
         this.people = people;
-      })
+      });
+    this.filterPeople();
   }
 
-  private filterContributors(): void {
-    this.contributorList = Object.assign([], this.people)
+  // fixme
+  private filterPeople(): void {
+    this.peopleList = Object.assign([], this.people);
+    if (this.dmp.contributors) {
+      for (let entry of this.dmp.contributors) {
+        this.peopleList = this.peopleList.filter(e => e !== entry);
+      }
+    }
   }
 }
