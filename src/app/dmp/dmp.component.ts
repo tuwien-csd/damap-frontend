@@ -59,6 +59,14 @@ export class DmpComponent implements OnInit {
     this.dmp.removeProject(project);
   }
 
+  setContactPerson($event: Contributor) {
+    this.dmp.contact = $event;
+  }
+
+  unsetContactPerson() {
+    this.dmp.contact = undefined;
+  }
+
   addContributor($event: Contributor) {
     // todo
     this.dmp.addContributor($event);
@@ -80,5 +88,4 @@ export class DmpComponent implements OnInit {
   updateDmp(): void {
 
   }
-
 }
