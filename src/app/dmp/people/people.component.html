@@ -1,5 +1,25 @@
+<!-- Todo: Hint functions? -->
+<div *ngIf="dmp.contact != null">
+  <p>Contact person:</p>
+  <mat-card class="mat-selected">
+    <div class="mat-card-container">
+      <div class="mat-card-left">
+        <div>
+          <mat-icon class="mat-icon-style">person</mat-icon>
+          {{dmp.contact.name}}</div>
+        <mat-icon class="mat-icon-style">mail_outline</mat-icon>
+        <a href="'mailto:' + {{dmp.contact.mbox}}" class="person-contact">{{dmp.contact.mbox}}</a>
+      </div>
+      <div class="mat-card-right">
+        <button mat-button (click)="unsetContactPerson()">
+          <mat-icon color="white">delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card>
+</div>
 <div *ngIf="dmp.contributors != null && dmp.contributors.length > 0">
-  <p>You selected:</p>
+  <p>Contributors:</p>
   <mat-card *ngFor="let contributor of dmp.contributors | slice: 0:5" class="mat-selected">
     <div class="mat-card-container">
       <div class="mat-card-left">
@@ -37,7 +57,10 @@
       <a href="'mailto:' + {{person.mbox}}" class="person-contact">{{person.mbox}}</a>
     </div>
     <div class="mat-card-right" (click)="addContributor(person)">
-      <button mat-raised-button>Select</button>
+      <button mat-raised-button><mat-icon>person_add</mat-icon></button>
+    </div>
+    <div class="mat-card-right" (click)="setContactPerson(person)">
+      <button mat-raised-button><mat-icon>contact_mail</mat-icon></button>
     </div>
   </div>
 </mat-card>

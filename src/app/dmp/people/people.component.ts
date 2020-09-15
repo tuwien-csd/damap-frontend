@@ -13,9 +13,11 @@ import {Project} from "../../model/project";
 export class PeopleComponent implements OnInit {
 
   @Input() dmp: Dmp;
-  @Input() people: Contributor[];
-  peopleList: Contributor[] = [];
+  @Input() people: Contributor[]; // list of people from backend
+  peopleList: Contributor[] = []; // people minus selected contributors
 
+  @Output() contactPerson = new EventEmitter<Contributor>();
+  @Output() removeContactPerson = new EventEmitter<Contributor>();
   @Output() contributorToAdd = new EventEmitter<Contributor>();
   @Output() contributorToRemove = new EventEmitter<Contributor>();
   @Output() contributorToUpdate = new EventEmitter<Contributor>();
@@ -28,6 +30,18 @@ export class PeopleComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPeople();
+    // TODO
+    /*if(this.dmp.contact == null && this.dmp.projects != null) {
+      this.setContactPerson(this.dmp.projects[0].leader);
+    }*/
+  }
+
+  setContactPerson(contact: Contributor) {
+    this.contactPerson.emit(contact);
+  }
+
+  unsetContactPerson() {
+    this.removeContactPerson.emit();
   }
 
   addContributor(contributor: Contributor) {

@@ -7,6 +7,8 @@
   </mat-step>
   <mat-step label="People involved in data management">
     <app-dmp-people [dmp]="dmp"
+                    (contactPerson)="setContactPerson($event)"
+                    (removeContactPerson)="unsetContactPerson()"
                     (contributorToAdd)="addContributor($event)"
                     (contributorToRemove)="removeContributor($event)"
                     (contributorToUpdate)="updateContributorRoles($event)"></app-dmp-people>
