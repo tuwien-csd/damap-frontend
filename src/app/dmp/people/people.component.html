@@ -1,3 +1,23 @@
+<div *ngIf="dmp.contributors != null && dmp.contributors.length > 0">
+  <p>You selected:</p>
+  <mat-card *ngFor="let contributor of dmp.contributors | slice: 0:5" class="mat-selected">
+    <div class="mat-card-container">
+      <div class="mat-card-left">
+        <div>
+          <mat-icon class="mat-icon-style">person</mat-icon>
+          {{contributor.name}}</div>
+        <mat-icon class="mat-icon-style">mail_outline</mat-icon>
+        <a href="'mailto:' + {{contributor.mbox}}" class="person-contact">{{contributor.mbox}}</a>
+      </div>
+      <div class="mat-card-right">
+        <button mat-button (click)="removeContributor(contributor)">
+          <mat-icon color="white">delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
 <form class="example-form">
   <mat-form-field class="example-full-width">
     <mat-label>Search for person...</mat-label>
@@ -7,13 +27,17 @@
   </mat-form-field>
 </form>
 
-<mat-card *ngFor="let person of people | slice: 0:5">
+<mat-card *ngFor="let person of peopleList | slice: 0:5">
   <div class="mat-card-container">
     <div class="mat-card-left">
-      <div><mat-icon class="mat-icon-style">person</mat-icon>{{person.name}}</div>
+      <div>
+        <mat-icon class="mat-icon-style">person</mat-icon>
+        {{person.name}}</div>
       <mat-icon class="mat-icon-style">mail_outline</mat-icon>
       <a href="'mailto:' + {{person.mbox}}" class="person-contact">{{person.mbox}}</a>
     </div>
-    <div class="mat-card-right"><button mat-raised-button>Select</button></div>
+    <div class="mat-card-right" (click)="addContributor(person)">
+      <button mat-raised-button>Select</button>
+    </div>
   </div>
 </mat-card>
