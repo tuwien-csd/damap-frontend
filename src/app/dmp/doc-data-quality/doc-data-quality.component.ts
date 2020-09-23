@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-dmp-doc-data-quality',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocDataQualityComponent implements OnInit {
 
-  constructor() { }
+  // @Input() dmpForm: FormGroup;
+
+  docDataStep = this.formBuilder.group({
+    metadata: [''],
+    dataGeneration: [''],
+    structure: [''],
+    targetAudience: ['']
+  });
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    // this.dmpForm.addControl('docData', this.docDataStep);
+    // this.docDataStep.valueChanges.subscribe(newVal => console.log(newVal));
   }
 
 }
