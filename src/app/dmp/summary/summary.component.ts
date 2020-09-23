@@ -37,12 +37,12 @@ export class SummaryComponent implements OnInit {
 
     // Select project(s)
     let projectsLevel: Completeness = {step: "Select project(s)", completeness: 0, status: undefined};
-    if (this.dmp.projects == null) {
+    if (this.dmp.project == null) {
       projectsLevel.completeness = 0;
       projectsLevel.status = 'No project(s) selected yet';
     } else {
       projectsLevel.completeness = 100;
-      projectsLevel.status = this.dmp.projects.length + ' project(s) selected';
+      projectsLevel.status = 'Project: ' + this.dmp.project.title;
     }
 
     // People involved

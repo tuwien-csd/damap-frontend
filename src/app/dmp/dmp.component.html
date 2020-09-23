@@ -1,8 +1,6 @@
-<mat-vertical-stepper linear="false"> <!-- fixme: isLinear -->
+<mat-vertical-stepper [linear]="isLinear">
   <mat-step label="Choose project">
-    <app-dmp-project [dmp]="dmp"
-                     (projectToAdd)="addProject($event)"
-                     (projectToRemove)="removeProject($event)">
+    <app-dmp-project>
     </app-dmp-project>
   </mat-step>
   <mat-step label="People involved in data management">
@@ -14,9 +12,11 @@
                     (contributorToUpdate)="updateContributorRoles($event)"></app-dmp-people>
   </mat-step>
   <mat-step label="Specify research data">
+<!--    <app-dmp-specify-data [dmpForm]="dmpForm"></app-dmp-specify-data>-->
     <app-dmp-specify-data></app-dmp-specify-data>
   </mat-step>
   <mat-step label="Documentation and data quality">
+<!--    <app-dmp-doc-data-quality [dmpForm]="dmpForm"></app-dmp-doc-data-quality>-->
     <app-dmp-doc-data-quality></app-dmp-doc-data-quality>
   </mat-step>
   <mat-step label="Legal and ethical aspects">

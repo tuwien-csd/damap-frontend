@@ -1,10 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Project} from '../../model/project';
 import {BackendService} from "../../services/backend.service";
-import {MatTableDataSource} from "@angular/material/table";
-import {Dmp} from "../../model/dmp";
 import {Observable, Subject} from "rxjs";
 import {debounceTime, distinctUntilChanged, switchMap} from "rxjs/operators";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-dmp-project',
@@ -13,19 +12,12 @@ import {debounceTime, distinctUntilChanged, switchMap} from "rxjs/operators";
 })
 export class ProjectComponent implements OnInit {
 
-  completionLevel: number; // fixme
-
-  @Input() dmp: Dmp;
   @Input() projects: Project[];
-  projectList: Project[] = [];
-
-  @Output() projectToAdd = new EventEmitter<Project>();
-  @Output() projectToRemove = new EventEmitter<Project>();
 
   projects$: Observable<Project[]>;
   private searchTerms = new Subject<string>();
 
-  readonly projectTableHeaders: string[] = ['title', 'description', 'startDate', 'endDate', 'remove'];
+  projectStep = new FormControl();
 
   constructor(private backendService: BackendService) {
   }
@@ -36,18 +28,13 @@ export class ProjectComponent implements OnInit {
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((term: string) =>
-      this.backendService.searchProjects(term)),
+        this.backendService.searchProjects(term)),
     );
+    this.projectStep.valueChanges.subscribe(result => console.log(result));
   }
 
-  addProject(project: Project) {
-    this.projectToAdd.emit(project);
-    this.filterProjects();
-  }
-
-  removeProject(project: Project): void {
-    this.projectToRemove.emit(project);
-    this.filterProjects();
+  unsetProject(): void {
+    this.projectStep.reset();
   }
 
   searchProjects(term: string): void {
@@ -59,15 +46,5 @@ export class ProjectComponent implements OnInit {
       .subscribe(projects => {
         this.projects = projects;
       });
-    this.filterProjects();
-  }
-
-  private filterProjects(): void {
-    this.projectList = Object.assign([], this.projects);
-    if (this.dmp.projects) {
-      for (let entry of this.dmp.projects) {
-        this.projectList = this.projectList.filter(e => e !== entry);
-      }
-    }
   }
 }

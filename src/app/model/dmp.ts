@@ -9,7 +9,7 @@ export class Dmp {
   private _created: Date;
   private _modified: Date;
   private _description: string; // step 1
-  private _projects: Project[]; // step 2
+  private _project: Project; // step 2
   private _contributors: Contributor[]; // step 3
   private datasets: Dataset[]; // step 4
   private language; // step 1
@@ -21,10 +21,10 @@ export class Dmp {
   private costs; // ?
 
   // fixme: temp constructor for mock-data
-  constructor(id?: number, title?: string, projects?: Project[]) {
+  constructor(id?: number, title?: string, project?: Project) {
     this._id = id;
     this._title = title;
-    this._projects = projects;
+    this._project = project;
   }
 
   get id(): number {
@@ -63,26 +63,16 @@ export class Dmp {
     this._description = value;
   }
 
-  get projects(): Project[] {
-    return this._projects;
+  get project(): Project{
+    return this._project;
+  }
+
+  set project(value: Project){
+    this._project = value;
   }
 
   get contributors() {
     return this._contributors;
-  }
-
-  public addProject(project: Project): void {
-    if (this._projects == null) {
-      this._projects = [];
-    }
-    this._projects.push(project);
-  }
-
-  public removeProject(project: Project) {
-    this._projects = this._projects.filter(p => p !== project);
-    if (this._projects == []) {
-      this._projects = undefined;
-    }
   }
 
   // TODO

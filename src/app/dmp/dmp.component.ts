@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Dmp} from "../model/dmp";
 import {ActivatedRoute} from "@angular/router";
 import {BackendService} from "../services/backend.service";
-import {Project} from "../model/project";
 import {Contributor} from "../model/contributor";
+import {FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-dmp',
@@ -13,10 +13,12 @@ import {Contributor} from "../model/contributor";
 export class DmpComponent implements OnInit {
 
   // @Input()
+  // dmpForm = this.formBuilder.group({});
   dmp: Dmp;
-  isLinear = true;
+  isLinear = false;
 
   constructor(
+    // private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private backendService: BackendService,
     // private location: Location
@@ -25,38 +27,19 @@ export class DmpComponent implements OnInit {
 
   ngOnInit() {
     this.getDmpById();
+    // this.dmpForm.valueChanges.subscribe(() => console.debug('DMPform Update'));
+    // this.dmpForm.valueChanges.subscribe(newVal => console.debug(newVal));
   }
 
   getDmpById(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    console.log(id);
+    console.debug('Get DMP with ID: ' + id);
     if (id) {
       this.backendService.getDmpById(id)
         .subscribe(dmp => this.dmp = dmp);
     } else {
       this.dmp = new Dmp();
     }
-  }
-
-  changeTitle(title: string): void {
-    title = title.trim();
-    this.dmp.title = title;
-  }
-
-  changeDescription(description: string): void {
-    description = description.trim();
-    this.dmp.description = description;
-
-  }
-
-  addProject(project: Project): void {
-    // console.log("DMP - add project"); // fixme: debug statement
-    this.dmp.addProject(project);
-  }
-
-  removeProject(project: Project): void {
-    // console.log("DMP - remove project"); // fixme: debug statement
-    this.dmp.removeProject(project);
   }
 
   setContactPerson($event: Contributor) {
