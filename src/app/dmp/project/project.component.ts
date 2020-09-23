@@ -3,7 +3,7 @@ import {Project} from '../../model/project';
 import {BackendService} from "../../services/backend.service";
 import {Observable, Subject} from "rxjs";
 import {debounceTime, distinctUntilChanged, switchMap} from "rxjs/operators";
-import {FormControl} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-dmp-project',
@@ -12,12 +12,13 @@ import {FormControl} from "@angular/forms";
 })
 export class ProjectComponent implements OnInit {
 
+  @Input() dmpForm: FormGroup;
   @Input() projects: Project[];
 
   projects$: Observable<Project[]>;
   private searchTerms = new Subject<string>();
 
-  projectStep = new FormControl();
+  projectStep: FormControl;
 
   constructor(private backendService: BackendService) {
   }
@@ -30,7 +31,7 @@ export class ProjectComponent implements OnInit {
       switchMap((term: string) =>
         this.backendService.searchProjects(term)),
     );
-    this.projectStep.valueChanges.subscribe(result => console.log(result));
+    this.projectStep = this.dmpForm.get('project') as FormControl;
   }
 
   unsetProject(): void {

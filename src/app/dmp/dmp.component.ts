@@ -3,7 +3,7 @@ import {Dmp} from "../model/dmp";
 import {ActivatedRoute} from "@angular/router";
 import {BackendService} from "../services/backend.service";
 import {Contributor} from "../model/contributor";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-dmp',
@@ -13,12 +13,35 @@ import {FormBuilder} from "@angular/forms";
 export class DmpComponent implements OnInit {
 
   // @Input()
-  // dmpForm = this.formBuilder.group({});
+  dmpForm = this.formBuilder.group({
+    project: [null],
+    contact: [null],
+    data: this.formBuilder.group({
+      kind: [null],
+      explanation: [''],
+      datasets: this.formBuilder.array([])
+    }),
+    documentation: this.formBuilder.group({
+      metadata: [''],
+      dataGeneration: [''],
+      structure: [''],
+      targetAudience: ['']
+    }),
+    legal: this.formBuilder.group({
+      personalInformation: [null],
+      sensitiveData: [null],
+      legalRestrictions: [null],
+      ethicalIssues: [null],
+      committeeApproved: [null],
+      ethicsReport: [''],
+      optionalStatement: [''],
+    })
+  });
   dmp: Dmp;
   isLinear = false;
 
   constructor(
-    // private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private backendService: BackendService,
     // private location: Location
@@ -27,8 +50,8 @@ export class DmpComponent implements OnInit {
 
   ngOnInit() {
     this.getDmpById();
-    // this.dmpForm.valueChanges.subscribe(() => console.debug('DMPform Update'));
-    // this.dmpForm.valueChanges.subscribe(newVal => console.debug(newVal));
+    this.dmpForm.valueChanges.subscribe(() => console.debug('DMPform Update'));
+    this.dmpForm.valueChanges.subscribe(newVal => console.debug(newVal));
   }
 
   getDmpById(): void {
@@ -40,14 +63,6 @@ export class DmpComponent implements OnInit {
     } else {
       this.dmp = new Dmp();
     }
-  }
-
-  setContactPerson($event: Contributor) {
-    this.dmp.contact = $event;
-  }
-
-  unsetContactPerson() {
-    this.dmp.contact = undefined;
   }
 
   addContributor($event: Contributor) {
