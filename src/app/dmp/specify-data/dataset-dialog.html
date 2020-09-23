@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>New dataset title</h1>
+<div mat-dialog-content id="datasetDialog">
+  <form>
+    <div class="dialogRow">
+      <mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Dataset Title</mat-label>
+          <input matInput [formControl]="datasetTitle">
+        </mat-form-field>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="datasetTitle" mat-raised-button color="primary">Rename</button>
+</div>

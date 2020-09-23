@@ -8,6 +8,71 @@
   margin: 5px;
 }
 
-.mat-grid-tile .mat-figure{
-  display: grid;
+#specifyDialog {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
 }
+
+.dialogRow {
+  flex-direction: row;
+  width: 100%;
+}
+
+.mat-form-field {
+  display: block;
+}
+
+mat-tab-body {
+  padding-top: 10px;
+}
+
+/* Table Styles */
+
+table {
+  width: 100%;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.distribution-overview {
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.distribution-detail {
+  flex-direction: column;
+}
+
+.distribution-action {
+  display: flex;
+}
+
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+  width: 80%;
+}
+
+/* End Table Styles */

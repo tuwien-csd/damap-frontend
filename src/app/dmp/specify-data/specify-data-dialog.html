@@ -1,53 +1,50 @@
 <h1 mat-dialog-title>New data estimation</h1>
 <!-- TODO: distribution title needed -->
-<div mat-dialog-content>
-  <mat-grid-list cols="2" rowHeight="3:1">
-    <mat-grid-tile>
+<div mat-dialog-content id="specifyDialog">
+  <form [formGroup]="distribution">
+    <div class="dialogRow">
       <mat-form-field>
         <mat-label>Estimated type</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let type of filetypes" [value]="type">
+        <mat-select formControlName="type" required>
+          <mat-option *ngFor="let type of filetypes" [value]="type.label">
             {{type.label}}<br/>
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </mat-grid-tile>
-
-    <mat-grid-tile>
+    </div>
+    <div class="dialogRow">
       <mat-form-field>
         <mat-label>Estimated size</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let size of filesizes" [value]="size">
+        <mat-select formControlName="size">
+          <mat-option *ngFor="let size of filesizes" [value]="size.label">
             {{size.label}}<br/>
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </mat-grid-tile>
-
-    <mat-grid-tile>
       <mat-form-field>
         <mat-label>Belongs to dataset</mat-label>
-        <mat-select [disabled]="!data?.length">
-          <mat-option *ngFor="let option of data" [value]="option">
-            {{option.getTitle()}}<br/>
+        <mat-select [disabled]="!data?.length" [(ngModel)]="index" [ngModelOptions]="{standalone: true}" required>
+          <div *ngFor="let option of data.controls; let i=index" >
+          <mat-option *ngIf="option.value.title != null" [value]="i">
+            {{option.value.title}}<br/>
           </mat-option>
+          </div>
         </mat-select>
       </mat-form-field>
-    </mat-grid-tile>
-
-    <mat-grid-tile>
+    </div>
+    <div class="dialogRow">
       <mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Comment</mat-label>
-          <input matInput>
+          <input matInput formControlName="comment">
         </mat-form-field>
       </mat-form-field>
-    </mat-grid-tile>
-  </mat-grid-list>
+    </div>
+  </form>
 </div>
 
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="" mat-raised-button color="primary">Add</button>
+  <button mat-button [mat-dialog-close]="[index, distribution]" mat-raised-button color="primary">Add</button>
 </div>

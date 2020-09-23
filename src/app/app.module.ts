@@ -27,7 +27,7 @@ import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {ProjectComponent} from './dmp/project/project.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
-import {SpecifyDataComponent, SpecifyDataDialog} from './dmp/specify-data/specify-data.component';
+import {DatasetDialog, SpecifyDataComponent, SpecifyDataDialog} from './dmp/specify-data/specify-data.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from "@angular/material/table";
 import {MatChipsModule} from "@angular/material/chips";
@@ -58,6 +58,7 @@ const keycloakService = new KeycloakService();
     ProjectComponent,
     SpecifyDataComponent,
     SpecifyDataDialog,
+    DatasetDialog,
     LegalEthicalAspectsComponent,
     LicensesComponent,
     RepoComponent,
@@ -105,7 +106,7 @@ const keycloakService = new KeycloakService();
       useValue: keycloakService,
     },
   ],
-  entryComponents: [AppComponent],
+  entryComponents: [SpecifyDataDialog, DatasetDialog, AppComponent],
 })
 export class AppModule implements DoBootstrap {
   ngDoBootstrap(appRef: ApplicationRef) {

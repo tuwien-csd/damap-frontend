@@ -1,38 +1,103 @@
-<form [formGroup]="specifyDataFormGroup">
+<form [formGroup]="specifyDataStep">
   <mat-label id="example-radio-group-label">What kinds of research data will you create?</mat-label>
-  <mat-radio-group aria-label="Select an option">
-    <mat-radio-button class="mat-radio-button" value="unknown" (click)="selectKind(unknown)">Don't know yet</mat-radio-button>
-    <mat-radio-button class="mat-radio-button" value="none" (click)="selectKind(none)">No data will be created or analysed</mat-radio-button>
-    <mat-radio-button class="mat-radio-button" value="assistance" (click)="selectKind(assistance)">Specify with assistance</mat-radio-button>
+  <mat-radio-group aria-label="Select an option" formControlName="kind">
+    <mat-radio-button class="mat-radio-button" [value]="unknown">Don't know yet</mat-radio-button>
+    <mat-radio-button class="mat-radio-button" [value]="none">No data will be created or analysed</mat-radio-button>
+    <mat-radio-button class="mat-radio-button" [value]="specify">Specify with assistance</mat-radio-button>
   </mat-radio-group>
 
-<!-- TODO: save explanation in some object (variable tdb) -->
-  <mat-form-field [style]="'width:100%;'" *ngIf="dataKind === none" appearance="fill">
+  <mat-form-field [style]="'width:100%;'" *ngIf="specifyDataStep.value.kind === none" appearance="fill">
     <mat-label>Please explain why you won't create or analyse any research data.</mat-label>
-    <textarea matInput></textarea>
+    <textarea matInput formControlName="explanation"></textarea>
   </mat-form-field>
 
-  <mat-form-field class="dataset-tags-chips" [style]="'width:100%;'" *ngIf="dataKind === assistance">
+  <mat-form-field class="dataset-tags-chips" [style]="'width:100%;'"
+                  *ngIf="specifyDataStep.value.kind === specify">
     <mat-chip-list #chipList aria-label="Create names for your datasets">
-      <mat-chip *ngFor="let dataset of datasets" [selectable]="selectable"
-                [removable]="removable" (removed)="remove(dataset)">
-        {{dataset.getTitle()}}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-      </mat-chip>
-      <input placeholder="New dataset..."
+      <div *ngFor="let dataset of datasets.controls; let i=index">
+        <mat-chip *ngIf="dataset.value.title != null" [selectable]="selectable"
+                  removable="true" (removed)="remove(i)">
+          {{dataset.value.title}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </div>
+      <input placeholder="Create names for your datasets"
              [matChipInputFor]="chipList"
              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
              [matChipInputAddOnBlur]="addOnBlur"
              (matChipInputTokenEnd)="add($event)">
     </mat-chip-list>
   </mat-form-field>
-
-  <mat-tab-group dynamicHeight *ngIf="dataKind === assistance">
-    <mat-tab label="Manually">
-      <button mat-raised-button color="primary" (click)="openDialog()">Specify new data</button>
-    </mat-tab>
-    <mat-tab label="Uploading sample data">
-    </mat-tab>
-  </mat-tab-group>
-
 </form>
+
+<!--{{datasets.getRawValue()|json}}-->
+
+<mat-tab-group dynamicHeight
+               *ngIf="specifyDataStep.value.kind === specify && (datasets.getRawValue()|json) != '[]'">
+  <mat-tab label="Manually">
+    <button mat-raised-button color="primary" (click)="openSpecifyDialog()" [disabled]="(datasets.getRawValue()|json) == '[]'">
+      Specify new data
+    </button>
+  </mat-tab>
+  <mat-tab label="Uploading sample data">
+  </mat-tab>
+</mat-tab-group>
+
+<!-- TABLE -->
+<div *ngIf="specifyDataStep.value.kind === specify && (datasets.getRawValue()|json) != '[]'">
+  <h2>Data</h2>
+
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+    <ng-container matColumnDef="dataset">
+      <th mat-header-cell *matHeaderCellDef>Dataset</th>
+      <td mat-cell *matCellDef="let element">
+        <div>{{element.value.title}}</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef><span class="sr-only">Actions</span></th>
+      <td mat-cell *matCellDef="let element" [style]="'text-align: right'">
+        <button mat-button>
+          <mat-icon color="primary" (click)="openDatasetDialog(dataSource.data.indexOf(element))">edit</mat-icon>
+        </button>
+        <button mat-button>
+          <mat-icon color="primary" (click)="remove(dataSource.data.indexOf(element))">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="tableHeaders.length">
+        <div class="element-detail"
+             [@detailExpand]="element == expandedElement ? 'collapsed' : 'expanded'"
+             *ngIf="element.value.distributions != null">
+          <div *ngFor="let distribution of element.value.distributions|keyvalue">
+            <mat-divider></mat-divider>
+            <div class="distribution-overview">
+              <div class="distribution-detail">
+                <h4> {{distribution.value.type}} </h4>
+                <div> Size: {{distribution.value.size}}</div>
+                <div> Comment: {{distribution.value.comment}}</div>
+              </div>
+              <div class="distribution-action">
+                <button mat-button (click)="removeDistribution(element, distribution.key)">
+                  <mat-icon color="primary">delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
+    <tr mat-row *matRowDef="let element; columns: tableHeaders;"
+        class="element-row"
+        [class.expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+  </table>
+<!--  <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>-->
+
+</div>
