@@ -1,11 +1,11 @@
 <p>This step helps you to consider issues like personal data, intellectual property rights and ownership.</p>
-<form [formGroup]="legalEthicalAspectsFormGroup">
+<form [formGroup]="legalEthicalStep">
   <div *ngFor="let question of questions">
     <mat-label>{{question.label}}</mat-label>
     <mat-radio-group formControlName="{{question.model}}">
-      <mat-radio-button class="mat-radio-button" value="true" (click)="updateValue(question.model, true)">Yes
+      <mat-radio-button class="mat-radio-button" [value]="true">Yes
       </mat-radio-button>
-      <mat-radio-button class="mat-radio-button" value="false" (click)="updateValue(question.model, false)">No
+      <mat-radio-button class="mat-radio-button" [value]="false">No
       </mat-radio-button>
     </mat-radio-group>
     <br/>

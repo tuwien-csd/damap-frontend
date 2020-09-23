@@ -20,7 +20,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 })
 export class SpecifyDataComponent implements OnInit {
 
-  // @Input() dmpForm: FormGroup;
+  @Input() dmpForm: FormGroup;
   dataSource = new MatTableDataSource();
 
   readonly tableHeaders: string[] = ['dataset', 'actions'];
@@ -31,9 +31,7 @@ export class SpecifyDataComponent implements OnInit {
   readonly specify: string = "specify";
 
   specifyDataStep: FormGroup = this.formBuilder.group({
-    kind: [''],
-    explanation: [''],
-    datasets: this.formBuilder.array([])
+
   });
 
   // Mat Chip properties
@@ -45,7 +43,7 @@ export class SpecifyDataComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.dmpForm.addControl('researchData', this.specifyDataStep);
+    this.specifyDataStep = this.dmpForm.get('data') as FormGroup;
     this.specifyDataStep.statusChanges
       .subscribe(() =>
         this.dataSource.data = this.datasets.controls);
@@ -184,7 +182,6 @@ export class SpecifyDataDialog {
   }
 
 }
-
 
 @Component({
   selector: 'dataset-dialog',

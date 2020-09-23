@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
@@ -8,20 +8,9 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class LegalEthicalAspectsComponent implements OnInit {
 
-  //
+  @Input() dmpForm: FormGroup;
 
-  legalEthicalAspectsFormGroup = new FormGroup(
-    {
-      'personalInformation': new FormControl(),
-      'sensitiveData': new FormControl(),
-      'legalRestrictions': new FormControl(),
-      'ethicalIssues': new FormControl(),
-      'committeeApproved': new FormControl(),
-      'ethicsReport': new FormControl(),
-      'optionalStatement': new FormControl(),
-    }
-  );
-
+  legalEthicalStep: FormGroup;
 
   questions = [
     {label: 'Does your data contain personal information?', model: 'personalInformation'},
@@ -32,25 +21,11 @@ export class LegalEthicalAspectsComponent implements OnInit {
       model: 'committeeApproved'},
   ];
 
-
   constructor() {
   }
 
-  ngOnInit()
-    :
-    void {
-  }
-
-// fixme
-  showValue(value : boolean) {
-    console.log("Value: " + value);
-  }
-
-  updateValue(key: string, value: boolean) {
-    console.log(key);
-    console.log(this.legalEthicalAspectsFormGroup.controls[key]);
-
-    this.legalEthicalAspectsFormGroup.controls[key].setValue(value);
+  ngOnInit(): void {
+    this.legalEthicalStep = this.dmpForm.get('legal') as FormGroup;
   }
 
 }
