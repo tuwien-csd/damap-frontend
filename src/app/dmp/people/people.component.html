@@ -1,36 +1,18 @@
-<!-- Todo: Hint functions? -->
-<div *ngIf="dmp.contact != null">
+<!-- TODO: Hint functions? -->
+<!-- CONTACT -->
+<div *ngIf="contactStep != null && contactStep.value != null">
   <p>Contact person:</p>
   <mat-card class="mat-selected">
     <div class="mat-card-container">
       <div class="mat-card-left">
         <div>
           <mat-icon class="mat-icon-style">person</mat-icon>
-          {{dmp.contact.name}}</div>
+          {{contactStep.value.name}}</div>
         <mat-icon class="mat-icon-style">mail_outline</mat-icon>
-        <a href="'mailto:' + {{dmp.contact.mbox}}" class="person-contact">{{dmp.contact.mbox}}</a>
+        <a href="'mailto:' + {{contactStep.value.mbox}}" class="person-contact">{{contactStep.value.mbox}}</a>
       </div>
       <div class="mat-card-right">
-        <button mat-button (click)="unsetContactPerson()">
-          <mat-icon color="white">delete</mat-icon>
-        </button>
-      </div>
-    </div>
-  </mat-card>
-</div>
-<div *ngIf="dmp.contributors != null && dmp.contributors.length > 0">
-  <p>Contributors:</p>
-  <mat-card *ngFor="let contributor of dmp.contributors | slice: 0:5" class="mat-selected">
-    <div class="mat-card-container">
-      <div class="mat-card-left">
-        <div>
-          <mat-icon class="mat-icon-style">person</mat-icon>
-          {{contributor.name}}</div>
-        <mat-icon class="mat-icon-style">mail_outline</mat-icon>
-        <a href="'mailto:' + {{contributor.mbox}}" class="person-contact">{{contributor.mbox}}</a>
-      </div>
-      <div class="mat-card-right">
-        <button mat-button (click)="removeContributor(contributor)">
+        <button mat-button (click)="unsetContactPerson()" title="Remove as contact">
           <mat-icon color="white">delete</mat-icon>
         </button>
       </div>
@@ -38,6 +20,47 @@
   </mat-card>
 </div>
 
+<!-- CONTRIBUTORS -->
+<div *ngIf="contributorStep != null && contributorStep.length > 0">
+  <p>Contributors:</p>
+  <mat-card *ngFor="let i=index; let contributor of contributorStep.controls | slice: 0:5" class="mat-selected">
+    <div class="mat-card-container">
+      <div class="mat-card-left">
+        <div>
+          <div>
+            <mat-icon class="mat-icon-style">person</mat-icon>
+            {{contributor.value.person.name}}
+          </div>
+          <mat-icon class="mat-icon-style">mail_outline</mat-icon>
+          {{contributor.value.person.mbox}}
+        </div>
+
+      </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Role</mat-label>
+          <mat-select>
+            <mat-option
+              *ngFor="let role of roles | keyvalue" [value]="role.key" (onSelectionChange)="updateContributorRoles(i, role.value, $event)">
+              {{role.key}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="mat-card-right">
+        <button mat-button (click)="setContactPerson(contributor.value.person)"
+                *ngIf="contactStep.value != contributor.value.person" title="Set as contact">
+          <mat-icon>contact_mail</mat-icon>
+        </button>
+        <button mat-button (click)="removeContributor(i)" title="Remove from contributors">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+<!-- SEARCH -->
 <form class="example-form">
   <mat-form-field class="example-full-width">
     <mat-label>Search for person...</mat-label>
@@ -47,6 +70,7 @@
   </mat-form-field>
 </form>
 
+<!-- LIST OF PEOPLE -->
 <mat-card *ngFor="let person of peopleList | slice: 0:5">
   <div class="mat-card-container">
     <div class="mat-card-left">
@@ -54,13 +78,15 @@
         <mat-icon class="mat-icon-style">person</mat-icon>
         {{person.name}}</div>
       <mat-icon class="mat-icon-style">mail_outline</mat-icon>
-      <a href="'mailto:' + {{person.mbox}}" class="person-contact">{{person.mbox}}</a>
+      {{person.mbox}}
     </div>
-    <div class="mat-card-right" (click)="addContributor(person)">
-      <button mat-raised-button><mat-icon>person_add</mat-icon></button>
-    </div>
-    <div class="mat-card-right" (click)="setContactPerson(person)">
-      <button mat-raised-button><mat-icon>contact_mail</mat-icon></button>
+    <div class="mat-card-right">
+      <button mat-raised-button *ngIf="contactStep.value != person" (click)="setContactPerson(person)" title="Set as contact">
+        <mat-icon>contact_mail</mat-icon>
+      </button>
+      <button mat-raised-button (click)="addContributor(person)" title="Add as contributor">
+        <mat-icon>person_add</mat-icon>
+      </button>
     </div>
   </div>
 </mat-card>
