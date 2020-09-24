@@ -1,5 +1,5 @@
 export enum ContributorRole {
-  owner,
-  editor,
-  guest
+  owner = "OWNER",
+  editor = "EDITOR",
+  guest = "GUEST"
 }

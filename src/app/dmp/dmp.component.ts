@@ -1,9 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Dmp} from "../model/dmp";
 import {ActivatedRoute} from "@angular/router";
 import {BackendService} from "../services/backend.service";
-import {Contributor} from "../model/contributor";
-import {FormBuilder, FormControl} from "@angular/forms";
+import {FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-dmp',
@@ -12,10 +11,10 @@ import {FormBuilder, FormControl} from "@angular/forms";
 })
 export class DmpComponent implements OnInit {
 
-  // @Input()
   dmpForm = this.formBuilder.group({
     project: [null],
     contact: [null],
+    contributors: this.formBuilder.array([]),
     data: this.formBuilder.group({
       kind: [null],
       explanation: [''],
@@ -63,20 +62,6 @@ export class DmpComponent implements OnInit {
     } else {
       this.dmp = new Dmp();
     }
-  }
-
-  addContributor($event: Contributor) {
-    // todo
-    this.dmp.addContributor($event);
-  }
-
-  removeContributor($event: Contributor) {
-    // todo
-    this.dmp.removeContributor($event);
-  }
-
-  updateContributorRoles($event: Contributor) {
-    // todo
   }
 
   createDmp(): void {

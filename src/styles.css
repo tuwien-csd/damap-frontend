@@ -47,15 +47,16 @@ body {
 .mat-card-container {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .mat-card-left {
   flex-direction: column;
-  width: 90%;
+  /*width: 90%;*/
 }
 
 .mat-card-right {
-  float: right;
+  /*float: right;*/
 }
 
 .mat-selected {

@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {BackendService} from "../../services/backend.service";
 import {Contributor} from "../../model/contributor";
-import {Dmp} from "../../model/dmp";
 import {Observable, Subject} from "rxjs";
 import {Project} from "../../model/project";
+import {ContributorRole} from "../../model/enum/contributor-role.enum";
+import {FormArray, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-dmp-people',
@@ -12,50 +13,52 @@ import {Project} from "../../model/project";
 })
 export class PeopleComponent implements OnInit {
 
-  @Input() dmp: Dmp;
+  @Input() dmpForm: FormGroup;
   @Input() people: Contributor[]; // list of people from backend
-  peopleList: Contributor[] = []; // people minus selected contributors
 
-  @Output() contactPerson = new EventEmitter<Contributor>();
-  @Output() removeContactPerson = new EventEmitter<Contributor>();
-  @Output() contributorToAdd = new EventEmitter<Contributor>();
-  @Output() contributorToRemove = new EventEmitter<Contributor>();
-  @Output() contributorToUpdate = new EventEmitter<Contributor>();
+  peopleList: Contributor[] = []; // people minus contributors
+  roles = {'Editor': ContributorRole.editor, 'Guest': ContributorRole.guest};
 
   // todo: search
   contributors$: Observable<Project[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(private backendService: BackendService) { }
+  contactStep: FormControl;
+  contributorStep: FormArray;
+
+  constructor(private backendService: BackendService) {
+  }
 
   ngOnInit(): void {
     this.getPeople();
-    // TODO
-    /*if(this.dmp.contact == null && this.dmp.projects != null) {
-      this.setContactPerson(this.dmp.projects[0].leader);
-    }*/
+    this.contactStep = this.dmpForm.get('contact') as FormControl;
+    this.contributorStep = this.dmpForm.get('contributors') as FormArray;
   }
 
   setContactPerson(contact: Contributor) {
-    this.contactPerson.emit(contact);
+    this.contactStep.setValue(contact);
   }
 
   unsetContactPerson() {
-    this.removeContactPerson.emit();
+    this.contactStep.reset();
   }
 
   addContributor(contributor: Contributor) {
-    this.contributorToAdd.emit(contributor);
+    const contributorControl = new FormGroup({person: new FormControl(contributor), role: new FormControl(null)});
+    this.contributorStep.push(contributorControl);
     this.filterPeople();
   }
 
-  removeContributor(contributor: Contributor) {
-    this.contributorToRemove.emit(contributor);
+  removeContributor(index: number) {
+    this.contributorStep.removeAt(index);
     this.filterPeople();
   }
 
-  updateContributorRoles(contributor: Contributor, role: string) {
-
+  updateContributorRoles(index: number, role: string, event: any) {
+    if(event.source.selected) {
+      const contributor = this.contributorStep.at(index);
+      contributor.patchValue({role: role});
+    }
   }
 
   private getPeople(): void {
@@ -66,12 +69,11 @@ export class PeopleComponent implements OnInit {
     this.filterPeople();
   }
 
-  // fixme
   private filterPeople(): void {
     this.peopleList = Object.assign([], this.people);
-    if (this.dmp.contributors) {
-      for (let entry of this.dmp.contributors) {
-        this.peopleList = this.peopleList.filter(e => e !== entry);
+    if (this. contributorStep != null && this.contributorStep.length > 0) {
+      for (let entry of this.contributorStep.controls) {
+        this.peopleList = this.peopleList.filter(e => e !== entry.value.person);
       }
     }
   }

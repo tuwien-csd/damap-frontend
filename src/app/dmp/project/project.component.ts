@@ -32,6 +32,12 @@ export class ProjectComponent implements OnInit {
         this.backendService.searchProjects(term)),
     );
     this.projectStep = this.dmpForm.get('project') as FormControl;
+    this.projectStep.valueChanges.subscribe(newVal => {
+      const contact = newVal[0].leader;
+      if(contact) {
+        this.dmpForm.get('contact').setValue(contact);
+      }
+    });
   }
 
   unsetProject(): void {
