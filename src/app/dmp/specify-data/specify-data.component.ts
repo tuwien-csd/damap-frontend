@@ -30,9 +30,7 @@ export class SpecifyDataComponent implements OnInit {
   readonly none: string = "none";
   readonly specify: string = "specify";
 
-  specifyDataStep: FormGroup = this.formBuilder.group({
-
-  });
+  specifyDataStep: FormGroup = this.formBuilder.group({});
 
   // Mat Chip properties
   selectable = true;
@@ -61,7 +59,10 @@ export class SpecifyDataComponent implements OnInit {
     if ((value || '').trim()) {
       this.datasets.push(this.formBuilder.group({
           title: [value],
-          distributions: this.formBuilder.array([])
+          distributions: this.formBuilder.array([]),
+          publish: [false],
+          license: [''],
+          start_date: [null]
         })
       );
     }
@@ -83,11 +84,10 @@ export class SpecifyDataComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != null) {
-        let dataset;
         let distributions;
         const distributionToAdd = result[1];
         if (result[0] != null) {
-          dataset = this.datasets.at(result[0]);
+          const dataset = this.datasets.at(result[0]);
           distributions = dataset.get('distributions') as FormArray;
           if (distributions != null) {
             distributions.push(distributionToAdd);
@@ -104,7 +104,7 @@ export class SpecifyDataComponent implements OnInit {
   openDatasetDialog(index: number) {
 
     const dataset = this.datasets.at(index);
-    const dialogRef = this.dialog.open(DatasetDialog,{
+    const dialogRef = this.dialog.open(DatasetDialog, {
       width: '600px', data: dataset.value.title
     });
 
