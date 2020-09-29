@@ -30,8 +30,6 @@
   </mat-form-field>
 </form>
 
-<!--{{datasets.getRawValue()|json}}-->
-
 <mat-tab-group dynamicHeight
                *ngIf="specifyDataStep.value.kind === specify && (datasets.getRawValue()|json) != '[]'">
   <mat-tab label="Manually">
@@ -51,7 +49,12 @@
     <ng-container matColumnDef="dataset">
       <th mat-header-cell *matHeaderCellDef>Dataset</th>
       <td mat-cell *matCellDef="let element">
-        <div>{{element.value.title}}</div>
+        <div>{{element.value.title}}
+          <span *ngIf="element.value.distributions.length > 0">
+            <mat-icon *ngIf="expandedElement !== element">expand_more</mat-icon>
+            <mat-icon *ngIf="expandedElement === element">expand_less</mat-icon>
+          </span>
+        </div>
       </td>
     </ng-container>
 
@@ -70,7 +73,7 @@
     <ng-container matColumnDef="expandedDetail">
       <td mat-cell *matCellDef="let element" [attr.colspan]="tableHeaders.length">
         <div class="element-detail"
-             [@detailExpand]="element == expandedElement ? 'collapsed' : 'expanded'"
+             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'"
              *ngIf="element.value.distributions != null">
           <div *ngFor="let distribution of element.value.distributions|keyvalue">
             <mat-divider></mat-divider>

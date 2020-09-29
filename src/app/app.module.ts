@@ -41,8 +41,9 @@ import {MatCardModule} from "@angular/material/card";
 import {PeopleComponent} from './dmp/people/people.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import { SummaryComponent } from './dmp/summary/summary.component';
+import {SummaryComponent} from './dmp/summary/summary.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 const keycloakService = new KeycloakService();
 
@@ -66,39 +67,40 @@ const keycloakService = new KeycloakService();
     PeopleComponent,
     SummaryComponent
   ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        RouterModule,
-        MatButtonModule,
-        HttpClientModule,
-        MatInputModule,
-        RouterModule.forRoot(APP_ROUTES),
-        BrowserAnimationsModule,
-        MatListModule,
-        MatToolbarModule,
-        MatSidenavModule,
-        MatStepperModule,
-        AppStoreModule,
-        MatIconModule,
-        MatTabsModule,
-        OAuthModule.forRoot(),
-        MatTabsModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatRippleModule,
-        MatRadioModule,
-        MatTableModule,
-        MatChipsModule,
-        ReactiveFormsModule,
-        MatDialogModule,
-        MatSelectModule,
-        MatCardModule,
-        MatGridListModule,
-        MatPaginatorModule,
-        MatProgressBarModule,
-        KeycloakAngularModule
-    ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    RouterModule,
+    MatButtonModule,
+    HttpClientModule,
+    MatInputModule,
+    RouterModule.forRoot(APP_ROUTES),
+    BrowserAnimationsModule,
+    MatListModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatStepperModule,
+    AppStoreModule,
+    MatIconModule,
+    MatTabsModule,
+    OAuthModule.forRoot(),
+    MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRippleModule,
+    MatRadioModule,
+    MatTableModule,
+    MatChipsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatCardModule,
+    MatGridListModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    KeycloakAngularModule,
+    MatSlideToggleModule
+  ],
   providers: [
     AppComponent,
     {
