@@ -27,7 +27,7 @@ import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {ProjectComponent} from './dmp/project/project.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
-import {DatasetDialog, SpecifyDataComponent, SpecifyDataDialog} from './dmp/specify-data/specify-data.component';
+import {DatasetDialog, SpecifyDataComponent} from './dmp/specify-data/specify-data.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from "@angular/material/table";
 import {MatChipsModule} from "@angular/material/chips";
@@ -45,6 +45,7 @@ import {SummaryComponent} from './dmp/summary/summary.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {ProjectFilterPipe} from "./dmp/project/project-filter.pipe";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 const keycloakService = new KeycloakService();
 
@@ -59,7 +60,6 @@ const keycloakService = new KeycloakService();
     LayoutComponent,
     ProjectComponent,
     SpecifyDataComponent,
-    SpecifyDataDialog,
     DatasetDialog,
     LegalEthicalAspectsComponent,
     LicensesComponent,
@@ -101,7 +101,8 @@ const keycloakService = new KeycloakService();
     MatPaginatorModule,
     MatProgressBarModule,
     KeycloakAngularModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     AppComponent,
@@ -110,7 +111,7 @@ const keycloakService = new KeycloakService();
       useValue: keycloakService,
     },
   ],
-  entryComponents: [SpecifyDataDialog, DatasetDialog, AppComponent],
+  entryComponents: [DatasetDialog, AppComponent],
 })
 export class AppModule implements DoBootstrap {
   ngDoBootstrap(appRef: ApplicationRef) {
