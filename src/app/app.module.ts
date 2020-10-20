@@ -44,6 +44,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import {SummaryComponent} from './dmp/summary/summary.component';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {ProjectFilterPipe} from "./dmp/project/project-filter.pipe";
 
 const keycloakService = new KeycloakService();
 
@@ -65,7 +66,8 @@ const keycloakService = new KeycloakService();
     RepoComponent,
     DocDataQualityComponent,
     PeopleComponent,
-    SummaryComponent
+    SummaryComponent,
+    ProjectFilterPipe
   ],
   imports: [
     BrowserModule,
