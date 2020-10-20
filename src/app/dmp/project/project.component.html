@@ -4,9 +4,9 @@
   <mat-card class="mat-selected">
     <div class="mat-card-container">
       <div class="mat-card-left">
-        <div><b>{{projectStep.value[0].title}}</b></div>
+        <div><b>{{projectStep.value.title}}</b></div>
         <mat-icon class="mat-icon-style">date_range</mat-icon>
-        {{projectStep.value[0].start | date}} - {{projectStep.value[0].end | date}}
+        {{projectStep.value.start | date}} - {{projectStep.value.end | date}}
       </div>
       <div class="mat-card-right">
         <button mat-button (click)="unsetProject()">
@@ -17,34 +17,23 @@
   </mat-card>
 </div>
 
-<p *ngIf="projects && projects.length > 0">Please select the project you want to create a DMP for:</p>
+<p *ngIf="projects && projects.length > 0 && projectStep.value == null">Please select the project you want to create a DMP for:</p>
 <form>
-  <mat-selection-list [multiple]="false" [formControl]="projectStep">
-    <mat-list-option *ngFor="let project of projects | slice:0:5" [style]="'height: auto;'"
-                     [value]="project">
-      <mat-list-item>
-          <div class="mat-card-left">
-            <div mat-line><b>{{project.title}}</b></div>
-            <div mat-line><mat-icon class="mat-icon-style">date_range</mat-icon>
-              {{project.start | date}} - {{project.end | date}}</div>
-          </div>
+  <mat-form-field>
+    <mat-label>Search repository...</mat-label>
+    <input #searchBox type="search" matInput>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <mat-selection-list [multiple]="false">
+    <mat-list-option *ngFor="let project of (projects | projectFilter:searchBox.value) | slice:0:5"
+                     [style]="'height: auto;'" [selected]="project === projectStep.value">
+      <mat-list-item (click)="setProject(project)">
+        <div class="mat-card-left">
+          <div mat-line><b>{{project.title}}</b></div>
+          <div mat-line><mat-icon class="mat-icon-style">date_range</mat-icon>
+            {{project.start | date}} - {{project.end | date}}</div>
+        </div>
       </mat-list-item>
     </mat-list-option>
   </mat-selection-list>
 </form>
-
-<!-- TODO: Project Search -->
-<p>Project not listed? Try to find it with the search function.</p>
-
-<form>
-  <mat-form-field>
-    <mat-label>Search projects...</mat-label>
-    <input #searchBox type="search" matInput (input)="searchProjects(searchBox.value)">
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
-</form>
-<!--<ul class="search-result">
-  <li *ngFor="let project of projects$ | async" (click)="setProject(project)">
-    {{project.title}}
-  </li>
-</ul>-->
