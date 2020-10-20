@@ -71,9 +71,9 @@ tr.element-row:not(.expanded-row):active {
   display: flex;
 }
 
-th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+/*th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
   width: 80%;
-}
+}*/
 
 /* End Table Styles */
 

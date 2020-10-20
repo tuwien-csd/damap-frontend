@@ -1,5 +1,5 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormArray, FormGroup, FormControl} from "@angular/forms";
+import {FormBuilder, FormArray, FormGroup, Validators} from "@angular/forms";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {MatChipInputEvent} from '@angular/material/chips';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
@@ -23,7 +23,7 @@ export class SpecifyDataComponent implements OnInit {
   @Input() dmpForm: FormGroup;
   dataSource = new MatTableDataSource();
 
-  readonly tableHeaders: string[] = ['dataset', 'actions'];
+  readonly tableHeaders: string[] = ['dataset', 'datatype', 'size', 'comment', 'actions'];
   expandedElement: FormArray | null;
 
   readonly unknown: string = "unknown";
@@ -58,11 +58,13 @@ export class SpecifyDataComponent implements OnInit {
     // Add dataset title
     if ((value || '').trim()) {
       this.datasets.push(this.formBuilder.group({
-          title: [value],
-          distributions: this.formBuilder.array([]),
+          title: [value, Validators.required],
           publish: [false],
           license: [''],
-          start_date: [null]
+          start_date: [null],
+          type: [null],
+          size: [''],
+          comment: ['']
         })
       );
     }
@@ -77,66 +79,49 @@ export class SpecifyDataComponent implements OnInit {
     this.datasets.removeAt(index);
   }
 
-  openSpecifyDialog(): void {
-    const dialogRef = this.dialog.open(SpecifyDataDialog, {
-      width: '600px', data: this.datasets as FormArray,
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result != null) {
-        let distributions;
-        const distributionToAdd = result[1];
-        if (result[0] != null) {
-          const dataset = this.datasets.at(result[0]);
-          distributions = dataset.get('distributions') as FormArray;
-          if (distributions != null) {
-            distributions.push(distributionToAdd);
-          } else {
-            distributions = new FormArray([]);
-            distributions.push(distributionToAdd);
-            dataset.patchValue({distributions: distributions});
-          }
-        }
-      }
-    });
-  }
-
   openDatasetDialog(index: number) {
 
     const dataset = this.datasets.at(index);
+
     const dialogRef = this.dialog.open(DatasetDialog, {
-      width: '600px', data: dataset.value.title
+      width: '600px',
+      data: {
+        title: dataset.value.title,
+        size: dataset.value.size,
+        comment: dataset.value.comment,
+        type: dataset.value.type
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      dataset.patchValue({title: result.value});
-    })
-  }
-
-  removeDistribution(dataset: FormGroup, index: number) {
-    const distributions = dataset.get('distributions') as FormArray;
-    console.log("remove distribution");
-    console.log(dataset);
-    console.log(index);
-    distributions.removeAt(index);
+        if (result) {
+          dataset.patchValue({
+            title: result.value.title,
+            type: result.value.type,
+            size: result.value.size,
+            comment: result.value.comment
+          });
+        }
+      }
+    );
   }
 
 }
 
 @Component({
-  selector: 'specify-data-dialog',
-  templateUrl: 'specify-data-dialog.html',
+  selector: 'dataset-dialog',
+  templateUrl: 'dataset-dialog.html',
   styleUrls: ['./specify-data.component.css']
 })
 
-export class SpecifyDataDialog {
-  index: number;
-  distribution = new FormGroup({
-    type: new FormControl(''),
-    size: new FormControl(''),
-    comment: new FormControl('')
-  })
+export class DatasetDialog {
 
+  dataset = this.fb.group({
+    title: [this.data.title, Validators.required],
+    type: [this.data.type],
+    size: [this.data.size],
+    comment: [this.data.comment]
+  })
   readonly filetypes = [
     {label: "STANDARD_OFFICE_DOCUMENTS", description: 'text documents, spreadsheets, presentations'},
     {label: "NETWORKBASED_DATA", description: 'websites, email, chat history, etc.'},
@@ -173,28 +158,9 @@ export class SpecifyDataDialog {
   ];
 
   constructor(
-    public dialogRef: MatDialogRef<SpecifyDataDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: FormArray) {
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}
-
-@Component({
-  selector: 'dataset-dialog',
-  templateUrl: 'dataset-dialog.html',
-  styleUrls: ['./specify-data.component.css']
-})
-
-export class DatasetDialog {
-  datasetTitle = new FormControl(this.data);
-
-  constructor(
     public dialogRef: MatDialogRef<DatasetDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: string) {
+    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: { title: string, size: string, comment: string, type: string }) {
   }
 
   onNoClick(): void {

@@ -1,18 +1,48 @@
-<h1 mat-dialog-title>New dataset title</h1>
+<h1 mat-dialog-title>Edit dataset</h1>
+
 <div mat-dialog-content id="datasetDialog">
-  <form>
+  <form [formGroup]="dataset">
     <div class="dialogRow">
       <mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>Dataset Title</mat-label>
-          <input matInput [formControl]="datasetTitle">
+          <input matInput type="text" formControlName="title" required>
+        </mat-form-field>
+      </mat-form-field>
+    </div>
+    <div class="dialogRow">
+      <mat-form-field>
+        <mat-label>Estimated type</mat-label>
+        <mat-select formControlName="type" required>
+          <mat-option *ngFor="let type of filetypes" [value]="type.label">
+            {{type.label}}<br/>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="dialogRow">
+      <mat-form-field>
+        <mat-label>Estimated size</mat-label>
+        <mat-select formControlName="size">
+          <mat-option *ngFor="let size of filesizes" [value]="size.label">
+            {{size.label}}<br/>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="dialogRow">
+      <mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Comment</mat-label>
+          <input matInput formControlName="comment">
         </mat-form-field>
       </mat-form-field>
     </div>
   </form>
 </div>
 
+
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="datasetTitle" mat-raised-button color="primary">Rename</button>
+  <button mat-button [mat-dialog-close]="dataset" mat-raised-button color="primary">Update</button>
 </div>
