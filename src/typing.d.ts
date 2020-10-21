@@ -1,0 +1,4 @@
+declare var $KEYCLOAK: KEYCLOAK;
+declare var $BACKEND: BACKEND;
+interface KEYCLOAK { DAMAP_KEYCLOAK_DEV: string; DAMAP_KEYCLOAK_OPENSHIFT: string; DAMAP_KEYCLOAK_PROD: string; }
+interface BACKEND { DAMAP_OPENSHIFT: string; DAMAP_PROD: string; }
