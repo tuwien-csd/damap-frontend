@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  keycloakUrl: 'https://keycloak.devcloud.tiss.tuwien.ac.at/auth',
-  backendUrl: 'https://tiss.tuwien.ac.at'
+  keycloakUrl: $KEYCLOAK.DAMAP_KEYCLOAK_PROD,
+  backendUrl: $BACKEND.DAMAP_PROD
 };
