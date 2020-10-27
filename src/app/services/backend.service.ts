@@ -7,13 +7,15 @@ import {DMPS} from "../mockdata/mock-dmps";
 import {HttpClient} from "@angular/common/http";
 import {Contributor} from "../model/contributor";
 import {PEOPLE} from "../mockdata/mock-people";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
 
-  private backendUrl = 'localhost:8080';
+  private backendUrl = environment.backendUrl;
+  private repositoryBackendUrl = this.backendUrl  + "/repositories"
 
   constructor(
     private http: HttpClient) {
@@ -27,6 +29,10 @@ export class BackendService {
     return of(DMPS[0]);
   }
 
+  createDmp(dmp: Dmp): void {
+
+  }
+
   editDmp(dmp: Dmp): void {
 
   }
@@ -35,32 +41,27 @@ export class BackendService {
 
   }
 
-  createDmp(dmp: Dmp): void {
-
-  }
-
   getProjects(): Observable<Project[]> {
     return of(PROJECTS);
   }
 
-  searchProjects(term: string): Observable<Project[]> {
-    if (!term.trim()) {
-      return of([]);
-    }
-    return this.http.get<Project[]>
-    (`${this.backendUrl}/?name=${term}`).pipe(
-      /*tap(x => x.length ?
-        this.log(`found projects matching "${term}"`) :
-        this.log(`no projects matching "${term}"`)),
-      catchError(this.handleError<Project[]>('searchProjects', []))*/
-    );
-  }
-
-  getPersons(): Observable<Contributor[]>  {
+  getPersons(): Observable<Contributor[]> {
     return of(PEOPLE);
   }
 
   searchPerson(term: string) {
 
+  }
+
+  getRepositories(): Observable<any>  {
+    return this.http.get(this.repositoryBackendUrl).pipe(
+    //   TODO: Error Handling here
+    );
+  }
+
+  getRepositoryById(id: string): Observable<any> {
+    return this.http.get(`${this.repositoryBackendUrl}/${id}`).pipe(
+      // TODO: Error Handling here
+    );
   }
 }
