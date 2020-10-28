@@ -51,11 +51,15 @@ export class SpecifyDataComponent implements OnInit {
     return this.specifyDataStep.get('datasets') as FormArray;
   }
 
+  get hosts() {
+    return this.dmpForm.get('hosts') as FormArray;
+  }
+
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 
-    // Add dataset title
+    // Add dataset
     if ((value || '').trim()) {
       this.datasets.push(this.formBuilder.group({
           title: [value, Validators.required],
@@ -64,7 +68,8 @@ export class SpecifyDataComponent implements OnInit {
           start_date: [null],
           type: [null],
           size: [''],
-          comment: ['']
+          comment: [''],
+          created: [new Date()] // not to be changed, used as reference
         })
       );
     }
@@ -76,6 +81,7 @@ export class SpecifyDataComponent implements OnInit {
   }
 
   remove(index: number): void {
+    this.removeRepoDatasets(this.datasets.at(index));
     this.datasets.removeAt(index);
   }
 
@@ -87,9 +93,9 @@ export class SpecifyDataComponent implements OnInit {
       width: '600px',
       data: {
         title: dataset.value.title,
+        type: dataset.value.type,
         size: dataset.value.size,
-        comment: dataset.value.comment,
-        type: dataset.value.type
+        comment: dataset.value.comment
       }
     });
 
@@ -104,6 +110,19 @@ export class SpecifyDataComponent implements OnInit {
         }
       }
     );
+  }
+
+  private removeRepoDatasets(dataset) {
+    const hosts = this.hosts;
+    for (let i = 0; i < hosts.controls.length; i++) {
+      let host = hosts.at(i);
+      for (let j = 0; j < host.value.datasets.length; j++) {
+        let repoDataset = host.value.datasets[j];
+        if (dataset.value.created == repoDataset.created) {
+          host.value.datasets.slice(j,1);
+        }
+      }
+    }
   }
 
 }

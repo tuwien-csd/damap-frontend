@@ -18,18 +18,9 @@
   <mat-step label="Licensing">
     <app-dmp-licenses [dmpForm]="dmpForm"></app-dmp-licenses>
   </mat-step>
-  <!-- <mat-step label="Storage">
-     Content Storage
-   </mat-step>-->
   <mat-step label="Specify repository/repositories">
-    <app-dmp-repo></app-dmp-repo>
+    <app-dmp-repo [dmpForm]="dmpForm"></app-dmp-repo>
   </mat-step>
-  <!--  <mat-step label="Costs">
-      Content Costs
-    </mat-step>-->
-  <!--  <mat-step label="Deposit">
-      Content Deposit
-    </mat-step>-->
   <mat-step label="End">
     <app-dmp-summary [dmp]="dmp"></app-dmp-summary>
   </mat-step>

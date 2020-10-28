@@ -34,7 +34,8 @@ export class DmpComponent implements OnInit {
       committeeApproved: [null],
       ethicsReport: [''],
       optionalStatement: [''],
-    })
+    }),
+    hosts: this.formBuilder.array([])
   });
   dmp: Dmp;
   isLinear = false;
