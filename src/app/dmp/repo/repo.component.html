@@ -1,1 +1,107 @@
-<p>repo works!</p>
+<div *ngIf="!datasets.controls.length">
+  Please specify your datasets first.
+</div>
+<!-- SELECTED REPOS-->
+<div *ngIf="repoStep.controls.length">
+  <p>You selected:</p>
+  <mat-card *ngFor="let repo of repoStep.controls, let i=index" class="mat-selected">
+    <div class="mat-card-container">
+      <div class="mat-card-left">
+        <h4>{{repo.value.name}}</h4>
+      </div>
+      <div class="mat-card-right">
+        <mat-icon (click)="removeRepo(i)">cancel</mat-icon>
+      </div>
+    </div>
+    <form [formGroup]="repo">
+      <div class="mat-card-container">
+        <mat-form-field>
+          <mat-label>Dataset(s) for deposit</mat-label>
+          <mat-select multiple formControlName="datasets">
+            <mat-option *ngFor="let dataset of datasets.controls" [value]="{created: dataset.value.created}">
+              {{dataset.value.title}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="mat-card-container">
+        <mat-form-field>
+          <mat-label>Available until</mat-label>
+          <input matInput [matDatepicker]="picker_i" formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="picker_i"></mat-datepicker-toggle>
+          <mat-datepicker #picker_i></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card>
+</div>
+
+<!-- TABLE -->
+<h2>Repositories</h2>
+<div *ngIf="!reposLoaded" style="'display: flex; justify-content: center;">
+  <button mat-button (click)="getRepositories()">Load repositories</button>
+</div>
+<div [hidden]="!reposLoaded">
+  <mat-form-field>
+    <mat-label>Search repository</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search repository" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+    <ng-container matColumnDef="expand">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" (click)="getRepoDetails(element)">
+        <mat-icon *ngIf="element === expandedElement" color="primary">expand_less</mat-icon>
+        <mat-icon *ngIf="element !== expandedElement" color="primary">expand_more</mat-icon>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Title</th>
+      <td mat-cell *matCellDef="let element" (click)="getRepoDetails(element)"><h3>{{element.name}}</h3></td>
+    </ng-container>
+
+    <ng-container matColumnDef="add">
+      <th mat-header-cell *matHeaderCellDef><span class="sr-only">Add repository</span></th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="datasets.controls.length">
+          <button mat-button>
+            <mat-icon color="accent" (click)="addRepo(element)">add_circle</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="tableHeaders.length">
+        <div class="element-detail"
+             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <div *ngIf="element.info">
+            <mat-divider></mat-divider>
+            <div *ngIf="element.info.repository && element.info.repository.length > 0">
+              <h4
+                *ngIf="element.info.repository[0].additionalName.length">{{element.info.repository[0].additionalName[0].value}}</h4>
+              <p *ngIf="element.info.repository[0].description.value">
+                {{element.info.repository[0].description.value}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
+    <tr mat-row *matRowDef="let element; columns: tableHeaders;"
+        class="element-row"
+        [class.expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row">
+    </tr>
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+  <mat-paginator class="mat-elevation-z8" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons></mat-paginator>
+</div>
