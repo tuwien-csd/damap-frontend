@@ -1,11 +1,18 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+import { KeycloakConfig } from 'keycloak-js';
+
+const keycloakConfig: KeycloakConfig = {
+  url: $KEYCLOAK.DAMAP_KEYCLOAK_DEV,
+  realm: 'quarkus',
+  clientId: 'dmap'
+};
 
 export const environment = {
   production: false,
-  keycloakUrl: $KEYCLOAK.DAMAP_KEYCLOAK_DEV,
-  backendUrl: 'http://localhost:8080/'
+  backendUrl: 'http://localhost:8080/',
+  keycloakConfig
 };
 
 /*

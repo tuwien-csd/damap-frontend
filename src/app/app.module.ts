@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {ApplicationRef, DoBootstrap, NgModule} from '@angular/core';
+import {DoBootstrap, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
@@ -114,25 +114,22 @@ const keycloakService = new KeycloakService();
   entryComponents: [DatasetDialog, AppComponent],
 })
 export class AppModule implements DoBootstrap {
-  ngDoBootstrap(appRef: ApplicationRef) {
-    keycloakService
-      .init({
-        config: {
-          url: environment.keycloakUrl,
-          realm: 'quarkus',
-          clientId: 'dmap'
-        },
+  async ngDoBootstrap(app) {
+
+    const {keycloakConfig} = environment;
+    try {
+      await keycloakService.init({
+        config: keycloakConfig,
         initOptions: {
           onLoad: 'login-required',
           checkLoginIframe: false
         },
         enableBearerInterceptor: true,
-      })
-      .then(() => {
-        console.log('[ngDoBootstrap] bootstrap app');
-
-        appRef.bootstrap(AppComponent);
-      })
-      .catch(error => console.error('[ngDoBootstrap] init Keycloak failed', error));
+        loadUserProfileAtStartUp: true
+      });
+      app.bootstrap(AppComponent);
+    } catch (error) {
+      console.error('Keycloak init failed', error);
+    }
   }
 }
