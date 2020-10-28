@@ -27,8 +27,8 @@
     "@ngrx/store-devtools": "^10.0.1",
     "angular-oauth2-oidc": "^10.0.3",
     "cors": "^2.8.5",
-    "keycloak-angular": "^7.3.1",
-    "keycloak-js": "8.0.2",
+    "keycloak-angular": "^8.0.1",
+    "keycloak-js": "11.0.2",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.3",
     "zone.js": "~0.10.3"
