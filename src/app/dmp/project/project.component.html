@@ -4,9 +4,9 @@
   <mat-card class="mat-selected">
     <div class="mat-card-container">
       <div class="mat-card-left">
-        <div><b>{{projectStep.value.title}}</b></div>
+        <div><b>{{projectStep.value.titleEn}}</b></div>
         <mat-icon class="mat-icon-style">date_range</mat-icon>
-        {{projectStep.value.start | date}} - {{projectStep.value.end | date}}
+        <!--{{projectStep.value.start | date}} - -->{{projectStep.value.end | date}}
       </div>
       <div class="mat-card-right">
         <button mat-button (click)="unsetProject()">
@@ -29,9 +29,9 @@
                      [style]="'height: auto;'" [selected]="project === projectStep.value">
       <mat-list-item (click)="setProject(project)">
         <div class="mat-card-left">
-          <div mat-line><b>{{project.title}}</b></div>
+          <div mat-line><b>{{project.titleEn}}</b></div>
           <div mat-line><mat-icon class="mat-icon-style">date_range</mat-icon>
-            {{project.start | date}} - {{project.end | date}}</div>
+            <!--{{project.start | date}} - -->{{project.end | date}}</div>
         </div>
       </mat-list-item>
     </mat-list-option>

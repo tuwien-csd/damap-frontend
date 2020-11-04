@@ -3,6 +3,9 @@ import {Dmp} from "../model/dmp";
 import {ActivatedRoute} from "@angular/router";
 import {BackendService} from "../services/backend.service";
 import {FormBuilder} from "@angular/forms";
+import {KeycloakService} from "keycloak-angular";
+import {from, Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-dmp',
@@ -10,6 +13,8 @@ import {FormBuilder} from "@angular/forms";
   styleUrls: ['./dmp.component.css']
 })
 export class DmpComponent implements OnInit {
+
+  public userId$: Observable<any>;
 
   dmpForm = this.formBuilder.group({
     project: [null],
@@ -41,6 +46,7 @@ export class DmpComponent implements OnInit {
   isLinear = false;
 
   constructor(
+    private auth: KeycloakService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private backendService: BackendService,
@@ -49,6 +55,9 @@ export class DmpComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userId$ = from(this.auth.loadUserProfile()).pipe(
+      map(p => p?.['attributes']?.tissID?.find(Boolean))
+    );
     this.getDmpById();
     this.dmpForm.valueChanges.subscribe(() => console.debug('DMPform Update'));
     this.dmpForm.valueChanges.subscribe(newVal => console.debug(newVal));
