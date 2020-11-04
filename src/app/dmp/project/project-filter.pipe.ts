@@ -8,7 +8,7 @@ export class ProjectFilterPipe implements PipeTransform {
     if (searchText == null || data == null) {
       return data;
     }
-    return data.filter(item => item.title.toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
+    return data.filter(item => item.titleEn.toLowerCase().indexOf(searchText.toLowerCase()) !== -1);
 
   }
 

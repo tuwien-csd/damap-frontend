@@ -8,6 +8,7 @@ import {HttpClient} from "@angular/common/http";
 import {Contributor} from "../model/contributor";
 import {PEOPLE} from "../mockdata/mock-people";
 import {environment} from "../../environments/environment";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class BackendService {
 
   private backendUrl = environment.backendUrl;
   private repositoryBackendUrl = this.backendUrl  + "/repositories"
+  private pdbBackendUrl = this.backendUrl + "/api/pdb"
 
   constructor(
     private http: HttpClient) {
@@ -41,8 +43,14 @@ export class BackendService {
 
   }
 
-  getProjects(): Observable<Project[]> {
-    return of(PROJECTS);
+  getProjectById(projectId: number) {
+
+  }
+
+  getSuggestedProjects(userId: number): Observable<any> {
+    return this.http.get(`${this.pdbBackendUrl}/suggest-projects/${userId}`).pipe(
+      // TODO: Error handling
+    );
   }
 
   getPersons(): Observable<Contributor[]> {

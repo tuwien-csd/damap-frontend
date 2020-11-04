@@ -1,7 +1,6 @@
 <mat-vertical-stepper [linear]="isLinear">
   <mat-step label="Choose project">
-    <app-dmp-project [dmpForm]="dmpForm">
-    </app-dmp-project>
+    <app-dmp-project [dmpForm]="dmpForm" [userId]="userId$ | async"></app-dmp-project>
   </mat-step>
   <mat-step label="People involved in data management">
     <app-dmp-people [dmpForm]="dmpForm"></app-dmp-people>
