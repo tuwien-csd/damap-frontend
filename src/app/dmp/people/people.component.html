@@ -7,9 +7,9 @@
       <div class="mat-card-left">
         <div>
           <mat-icon class="mat-icon-style">person</mat-icon>
-          {{contactStep.value.name}}</div>
+          {{contactStep.value.personDetails.first_name}} {{contactStep.value.personDetails.last_name}}</div>
         <mat-icon class="mat-icon-style">mail_outline</mat-icon>
-        <a href="'mailto:' + {{contactStep.value.mbox}}" class="person-contact">{{contactStep.value.mbox}}</a>
+        <a href="'mailto:' + {{contactStep.value.personDetails.main_email}}" class="person-contact">{{contactStep.value.personDetails.main_email}}</a>
       </div>
       <div class="mat-card-right">
         <button mat-button (click)="unsetContactPerson()" title="Remove as contact">
@@ -29,10 +29,10 @@
         <div>
           <div>
             <mat-icon class="mat-icon-style">person</mat-icon>
-            {{contributor.value.person.name}}
+            {{contributor.value.person.personDetails.first_name}} {{contributor.value.person.personDetails.last_name}}
           </div>
           <mat-icon class="mat-icon-style">mail_outline</mat-icon>
-          {{contributor.value.person.mbox}}
+          {{contributor.value.person.personDetails.main_email}}
         </div>
 
       </div>
@@ -76,9 +76,10 @@
     <div class="mat-card-left">
       <div>
         <mat-icon class="mat-icon-style">person</mat-icon>
-        {{person.name}}</div>
+        {{person.personDetails.first_name}} {{person.personDetails.last_name}}
+      </div>
       <mat-icon class="mat-icon-style">mail_outline</mat-icon>
-      {{person.mbox}}
+      {{person.personDetails.main_email}}
     </div>
     <div class="mat-card-right">
       <button mat-raised-button *ngIf="contactStep.value != person" (click)="setContactPerson(person)" title="Set as contact">
