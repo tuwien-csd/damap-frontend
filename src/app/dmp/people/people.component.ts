@@ -14,9 +14,9 @@ import {FormArray, FormControl, FormGroup} from "@angular/forms";
 export class PeopleComponent implements OnInit {
 
   @Input() dmpForm: FormGroup;
-  @Input() people: Contributor[]; // list of people from backend
+  @Input() people: any[]; // list of people from backend
 
-  peopleList: Contributor[] = []; // people minus contributors
+  peopleList: any[] = []; // people minus contributors
   roles = {'Editor': ContributorRole.editor, 'Guest': ContributorRole.guest};
 
   // todo: search
@@ -25,14 +25,23 @@ export class PeopleComponent implements OnInit {
 
   contactStep: FormControl;
   contributorStep: FormArray;
+  projectStep: FormControl;
 
   constructor(private backendService: BackendService) {
   }
 
   ngOnInit(): void {
-    this.getPeople();
     this.contactStep = this.dmpForm.get('contact') as FormControl;
     this.contributorStep = this.dmpForm.get('contributors') as FormArray;
+    this.projectStep = this.dmpForm.get('project') as FormControl;
+    this.projectStep.valueChanges.subscribe(newVal => {
+      if (newVal) {
+        const projectId = newVal.projectId;
+        if (projectId) {
+          this.getProjectMembers(projectId);
+        }
+      }
+    });
   }
 
   setContactPerson(contact: Contributor) {
@@ -61,12 +70,12 @@ export class PeopleComponent implements OnInit {
     }
   }
 
-  private getPeople(): void {
-    this.backendService.getPersons()
-      .subscribe(people => {
-        this.people = people;
+  private getProjectMembers(projectId: number) {
+    this.backendService.getProjectMembers(projectId)
+      .subscribe(members => {
+        this.people = members;
+        this.filterPeople();
       });
-    this.filterPeople();
   }
 
   private filterPeople(): void {

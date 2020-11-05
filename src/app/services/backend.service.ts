@@ -57,6 +57,13 @@ export class BackendService {
     return of(PEOPLE);
   }
 
+  getProjectMembers(projectId: number): Observable<any> {
+    return this.http.get(`${this.pdbBackendUrl}/project/${projectId}/staff`).pipe(
+      //   TODO: Error Handling here
+    );
+
+  }
+
   searchPerson(term: string) {
 
   }
