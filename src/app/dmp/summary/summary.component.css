@@ -1,3 +1,7 @@
 table {
   width: 100%;
 }
+
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+  width: 20%;
+}
