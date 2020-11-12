@@ -26,8 +26,6 @@ export class SummaryComponent implements OnInit {
     this.evaluateCompleteness();
     this.dmpForm.valueChanges.subscribe(() => {
       this.evaluateCompleteness();
-      console.log("Update summary");
-      console.log(this.dataSource.data);
     });
   }
 
