@@ -66,5 +66,5 @@ $custom-grey: (
     A700 : #ffffff,
   )
 );
-$tu-wien-primary: mat-palette($custom-blue, 500, 500, white);
-$tu-wien-accent: mat-palette($custom-grey, 400, 600, white);
+$tu-wien-primary: mat-palette($custom-blue, 500, 200, 800, white);
+$tu-wien-accent: mat-palette($custom-grey, 500, 400, 600, white);
