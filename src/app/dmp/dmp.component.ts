@@ -56,7 +56,7 @@ export class DmpComponent implements OnInit {
 
   ngOnInit() {
     this.userId$ = from(this.auth.loadUserProfile()).pipe(
-      map(p => p.attributes?.tissID?.find(Boolean))
+      map(p => p['attributes']?.tissID?.find(Boolean))
     );
     this.getDmpById();
     this.dmpForm.valueChanges.subscribe(() => console.log('DMPform Update'));
