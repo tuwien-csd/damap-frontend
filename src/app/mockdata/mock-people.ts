@@ -1,29 +1,26 @@
-import {Contributor} from "../model/contributor";
-import {ContributorType} from "../model/enum/contributor-type.enum";
+import {PersonIdType} from '../domain/enum/person-id-type.enum';
+import {Person} from '../domain/person';
 
-export const PEOPLE: Contributor[] = [
+export const PEOPLE: Person[] = [
   {
-    id: 123,
-    contributorId: 297350,
-    contributorType: ContributorType.tissid,
+    id: '297350',
+    personId: {identifier: '123', type: PersonIdType.ORCID},
     mbox: 'tomasz.miksa@tuwien.ac.at',
-    name: 'Tomasz Miksa',
-    role: undefined
+    firstName: 'Tomasz',
+    lastName: 'Miksa'
   },
   {
-    id: 456,
-    contributorId: 181524,
-    contributorType: ContributorType.tissid,
+    id: '181524',
+    personId: {identifier: '456', type: PersonIdType.ORCID},
     mbox: 'zeno.casellato@tuwien.ac.at',
-    name: 'Zeno Casellato',
-    role: undefined
+    firstName: 'Zeno',
+    lastName: 'Casellato'
   },
   {
-    id: 789,
-    contributorId: 292790,
-    contributorType: ContributorType.tissid,
+    id: '292792',
+    personId: {identifier: '789', type: PersonIdType.ORCID},
     mbox: 'clara.schuster@tuwien.ac.at',
-    name: 'Clara Schuster',
-    role: undefined
+    firstName: 'Clara',
+    lastName: 'Schuster'
   }
 ];

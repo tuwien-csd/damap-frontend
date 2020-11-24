@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Dmp} from "../model/dmp";
-import {MatTableDataSource} from "@angular/material/table";
-import {BackendService} from "../services/backend.service";
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import {Dmp} from '../domain/dmp';
+import {MatTableDataSource} from '@angular/material/table';
+import {BackendService} from '../services/backend.service';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-plan',
