@@ -1,14 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from "rxjs";
-import {Project} from "../model/project";
-import {PROJECTS} from "../mockdata/mock-projects";
-import {Dmp} from "../model/dmp";
-import {DMPS} from "../mockdata/mock-dmps";
-import {HttpClient} from "@angular/common/http";
-import {Contributor} from "../model/contributor";
-import {PEOPLE} from "../mockdata/mock-people";
-import {environment} from "../../environments/environment";
-import {map} from "rxjs/operators";
+import {Observable, of} from 'rxjs';
+import {Dmp} from '../domain/dmp';
+import {DMPS} from '../mockdata/mock-dmps';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
+import {ProjectMember} from '../domain/project-member';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +12,8 @@ import {map} from "rxjs/operators";
 export class BackendService {
 
   private backendUrl = environment.backendUrl;
-  private repositoryBackendUrl = this.backendUrl  + "/repositories"
-  private pdbBackendUrl = this.backendUrl + "/api/pdb"
+  private repositoryBackendUrl = this.backendUrl  + '/repositories'
+  private pdbBackendUrl = this.backendUrl + '/api/pdb'
 
   constructor(
     private http: HttpClient) {
@@ -53,12 +49,8 @@ export class BackendService {
     );
   }
 
-  getPersons(): Observable<Contributor[]> {
-    return of(PEOPLE);
-  }
-
-  getProjectMembers(projectId: number): Observable<any> {
-    return this.http.get(`${this.pdbBackendUrl}/project/${projectId}/staff`).pipe(
+  getProjectMembers(projectId: number): Observable<ProjectMember[]> {
+    return this.http.get<ProjectMember[]>(`${this.pdbBackendUrl}/project/${projectId}/staff`).pipe(
       //   TODO: Error Handling here
     );
 

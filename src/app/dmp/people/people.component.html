@@ -7,9 +7,9 @@
       <div class="mat-card-left">
         <div>
           <mat-icon class="mat-icon-style">person</mat-icon>
-          {{contactStep.value.personDetails.first_name}} {{contactStep.value.personDetails.last_name}}</div>
+          {{contactStep.value.firstName}} {{contactStep.value.lastName}}</div>
         <mat-icon class="mat-icon-style">mail_outline</mat-icon>
-        <a href="'mailto:' + {{contactStep.value.personDetails.main_email}}" class="person-contact">{{contactStep.value.personDetails.main_email}}</a>
+        {{contactStep.value.mbox}}
       </div>
       <div class="mat-card-right">
         <button mat-button (click)="unsetContactPerson()" title="Remove as contact">
@@ -29,10 +29,10 @@
         <div>
           <div>
             <mat-icon class="mat-icon-style">person</mat-icon>
-            {{contributor.value.person.personDetails.first_name}} {{contributor.value.person.personDetails.last_name}}
+            {{contributor.value.person.firstName}} {{contributor.value.person.lastName}}
           </div>
           <mat-icon class="mat-icon-style">mail_outline</mat-icon>
-          {{contributor.value.person.personDetails.main_email}}
+          {{contributor.value.person.mbox}}
         </div>
 
       </div>
@@ -76,18 +76,26 @@
     <div class="mat-card-left">
       <div>
         <mat-icon class="mat-icon-style">person</mat-icon>
-        {{person.personDetails.first_name}} {{person.personDetails.last_name}}
+        {{person.person.firstName}} {{person.person.lastName}}
       </div>
       <mat-icon class="mat-icon-style">mail_outline</mat-icon>
-      {{person.personDetails.main_email}}
+      {{person.person.mbox}}
     </div>
     <div class="mat-card-right">
-      <button mat-raised-button *ngIf="contactStep.value != person" (click)="setContactPerson(person)" title="Set as contact">
+      <button mat-raised-button *ngIf="contactStep.value != person.person" (click)="setContactPerson(person.person)" title="Set as contact">
         <mat-icon>contact_mail</mat-icon>
       </button>
-      <button mat-raised-button (click)="addContributor(person)" title="Add as contributor">
+      <button mat-raised-button (click)="addContributor(person.person)" title="Add as contributor">
         <mat-icon>person_add</mat-icon>
       </button>
+    </div>
+  </div>
+  <div class="mat-card-container" *ngIf="person.roleInProject">
+    <div class="projectRoleTag">
+      {{person.roleInProject}}
+    </div>
+    <div class="personIdentifier">
+
     </div>
   </div>
 </mat-card>

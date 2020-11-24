@@ -1,5 +1,5 @@
-import {Project} from "../model/project";
-import {PEOPLE} from "./mock-people";
+import {Project} from '../domain/project';
+import {PEOPLE} from './mock-people';
 
 export const PROJECTS: Project[] = [
   { id: 1, title: 'Mock Project 1', description: 'This is a mock project', end: new Date(), start: new Date(), leader: PEOPLE[0] },
