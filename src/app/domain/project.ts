@@ -1,4 +1,4 @@
-import {Contributor} from "./contributor";
+import {Person} from './person';
 
 export interface Project {
   id: number;
@@ -6,5 +6,5 @@ export interface Project {
   description: string;
   start: Date;
   end: Date;
-  leader: Contributor;
+  leader: Person;
 }
