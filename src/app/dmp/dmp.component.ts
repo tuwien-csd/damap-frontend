@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Dmp} from "../model/dmp";
-import {ActivatedRoute} from "@angular/router";
-import {BackendService} from "../services/backend.service";
-import {FormBuilder} from "@angular/forms";
-import {KeycloakService} from "keycloak-angular";
-import {from, Observable} from "rxjs";
-import {map} from "rxjs/operators";
+import {Dmp} from '../domain/dmp';
+import {ActivatedRoute} from '@angular/router';
+import {BackendService} from '../services/backend.service';
+import {FormBuilder} from '@angular/forms';
+import {KeycloakService} from 'keycloak-angular';
+import {from, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dmp',
@@ -56,16 +56,16 @@ export class DmpComponent implements OnInit {
 
   ngOnInit() {
     this.userId$ = from(this.auth.loadUserProfile()).pipe(
-      map(p => p?.['attributes']?.tissID?.find(Boolean))
+      map(p => p['attributes']?.tissID?.find(Boolean))
     );
     this.getDmpById();
-    this.dmpForm.valueChanges.subscribe(() => console.debug('DMPform Update'));
-    this.dmpForm.valueChanges.subscribe(newVal => console.debug(newVal));
+    this.dmpForm.valueChanges.subscribe(() => console.log('DMPform Update'));
+    this.dmpForm.valueChanges.subscribe(newVal => console.log(newVal));
   }
 
   getDmpById(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    console.debug('Get DMP with ID: ' + id);
+    console.log('Get DMP with ID: ' + id);
     if (id) {
       this.backendService.getDmpById(id)
         .subscribe(dmp => this.dmp = dmp);

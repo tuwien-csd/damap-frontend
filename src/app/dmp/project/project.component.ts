@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Project} from '../../model/project';
-import {BackendService} from "../../services/backend.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {Project} from '../../domain/project';
+import {BackendService} from '../../services/backend.service';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-dmp-project',

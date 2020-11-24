@@ -1,17 +1,16 @@
 import {Project} from "./project";
-import {Dataset} from "./dataset";
 import {Contributor} from "./contributor";
+import {Person} from './person';
 
 export class Dmp {
   private readonly _id: number; // backend
   private _title: string; // step 1
-  private _contact: Contributor;
+  private _contact: Person;
   private _created: Date;
   private _modified: Date;
   private _description: string; // step 1
   private _project: Project; // step 2
-  private _contributors: Contributor[]; // step 3
-  private datasets: Dataset[]; // step 4
+  private _contributors: Person[]; // step 3
   private language; // step 1
   private dmpId; // ?
   private dmpIdType; // ?
@@ -39,11 +38,11 @@ export class Dmp {
     this._title = value;
   }
 
-  get contact(): Contributor {
+  get contact(): Person {
     return this._contact;
   }
 
-  set contact(value: Contributor) {
+  set contact(value: Person) {
     this._contact = value;
   }
 
@@ -73,27 +72,6 @@ export class Dmp {
 
   get contributors() {
     return this._contributors;
-  }
-
-  // TODO
-  public addContributor(contributor: Contributor): void {
-    if (this._contributors == null) {
-      this._contributors = [];
-    }
-    this._contributors.push(contributor);
-  }
-
-  // TODO
-  public removeContributor(contributor: Contributor) {
-    this._contributors = this._contributors.filter(c => c !== contributor);
-    if (this._contributors == []) {
-      this._contributors = undefined;
-    }
-  }
-
-  // TODO
-  public updateContributorRoles(contributorToUpdate: Contributor){
-
   }
 
 }
