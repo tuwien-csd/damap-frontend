@@ -2,6 +2,10 @@
 Custom TU Color Palettes
 used for Angular Materials
  */
+
+$light-primary-text: white;
+$dark-primary-text: rgba(black, 0.87);
+
 $custom-blue: (
   50: #e0edf3,
   100: #b3d1e0,
@@ -18,20 +22,20 @@ $custom-blue: (
   A400: #348dff,
   A700: #1a7fff,
   contrast: (
-    50: white,
-    100: white,
-    200: white,
-    300: white,
-    400: white,
-    500: white,
-    600: white,
-    700: white,
-    800: white,
-    900: white,
-    A100: white,
-    A200: white,
-    A400: white,
-    A700: white,
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
   )
 );
 $custom-grey: (
@@ -50,21 +54,19 @@ $custom-grey: (
   A400 : #f80000,
   A700 : #df0000,
   contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #ffffff,
-    400 : #ffffff,
-    500 : #ffffff,
-    600 : #ffffff,
-    700 : #ffffff,
-    800 : #ffffff,
-    900 : #ffffff,
-    A100 : #000000,
-    A200 : #ffffff,
-    A400 : #ffffff,
-    A700 : #ffffff,
+    50 : $dark-primary-text,
+    100 : $dark-primary-text,
+    200 : $dark-primary-text,
+    300 : $light-primary-text,
+    400 : $light-primary-text,
+    500 : $light-primary-text,
+    600 : $light-primary-text,
+    700 : $light-primary-text,
+    800 : $light-primary-text,
+    900 : $light-primary-text,
+    A100 : $dark-primary-text,
+    A200 : $light-primary-text,
+    A400 : $light-primary-text,
+    A700 : $light-primary-text,
   )
 );
-$tu-wien-primary: mat-palette($custom-blue, 500, 200, 800, white);
-$tu-wien-accent: mat-palette($custom-grey, 500, 400, 600, white);
