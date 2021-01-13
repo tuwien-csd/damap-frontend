@@ -51,7 +51,7 @@ export class BackendService {
   }
 
   getProjectMembers(projectId: number): Observable<ProjectMember[]> {
-    return this.http.get<ProjectMember[]>(`${this.pdbBackendUrl}/project/${projectId}/staff`).pipe(
+    return this.http.get<ProjectMember[]>(`${this.pdbBackendUrl}/project-staff/${projectId}`).pipe(
       //   TODO: Error Handling here
     );
 
