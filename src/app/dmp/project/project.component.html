@@ -4,9 +4,9 @@
   <mat-card class="mat-selected">
     <div class="mat-card-container">
       <div class="mat-card-left">
-        <div><b>{{projectStep.value.titleEn}}</b></div>
+        <div><b>{{projectStep.value.title}}</b></div>
         <mat-icon class="mat-icon-style">date_range</mat-icon>
-        <!--{{projectStep.value.start | date}} - -->{{projectStep.value.end | date}}
+        {{projectStep.value.start | date}} - {{projectStep.value.end | date}}
       </div>
       <div class="mat-card-right">
         <button mat-button (click)="unsetProject()">
@@ -17,23 +17,27 @@
   </mat-card>
 </div>
 
-<p *ngIf="projects && projects.length > 0 && projectStep.value == null">Please select the project you want to create a DMP for:</p>
+<p *ngIf="projects && projects.length > 0 && projectStep.value == null">
+  Please select the project you want to create a DMP for:</p>
 <form>
   <mat-form-field>
-    <mat-label>Search repository...</mat-label>
+    <mat-label>Search project...</mat-label>
     <input #searchBox type="search" matInput>
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
-  <mat-selection-list [multiple]="false">
-    <mat-list-option *ngFor="let project of (projects | projectFilter:searchBox.value) | slice:0:5"
+  <div class="list-container">
+  <mat-selection-list [multiple]="false" style="'height: 500px; overflow:scroll'">
+    <mat-list-option *ngFor="let project of (projects | projectFilter:searchBox.value)"
                      [style]="'height: auto;'" [selected]="project === projectStep.value">
       <mat-list-item (click)="setProject(project)">
         <div class="mat-card-left">
-          <div mat-line><b>{{project.titleEn}}</b></div>
-          <div mat-line><mat-icon class="mat-icon-style">date_range</mat-icon>
-            <!--{{project.start | date}} - -->{{project.end | date}}</div>
+          <div mat-line><b>{{project.title}}</b></div>
+          <div mat-line>
+            <mat-icon class="mat-icon-style">date_range</mat-icon>
+            {{project.start | date}} - {{project.end | date}}</div>
         </div>
       </mat-list-item>
     </mat-list-option>
   </mat-selection-list>
+  </div>
 </form>

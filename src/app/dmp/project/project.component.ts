@@ -13,7 +13,7 @@ export class ProjectComponent implements OnInit, OnChanges {
   @Input() dmpForm: FormGroup;
   @Input() userId;
 
-  projects: any[];
+  projects: Project[];
   projectStep: FormControl;
 
   constructor(private backendService: BackendService) {

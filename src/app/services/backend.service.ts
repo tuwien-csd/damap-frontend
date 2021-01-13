@@ -5,6 +5,7 @@ import {DMPS} from '../mockdata/mock-dmps';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {ProjectMember} from '../domain/project-member';
+import {Project} from '../domain/project';
 
 @Injectable({
   providedIn: 'root'
@@ -43,14 +44,14 @@ export class BackendService {
 
   }
 
-  getSuggestedProjects(userId: number): Observable<any> {
-    return this.http.get(`${this.pdbBackendUrl}/suggest-projects/${userId}`).pipe(
+  getSuggestedProjects(userId: number): Observable<Project[]> {
+    return this.http.get<Project[]>(`${this.pdbBackendUrl}/suggest-projects/${userId}`).pipe(
       // TODO: Error handling
     );
   }
 
   getProjectMembers(projectId: number): Observable<ProjectMember[]> {
-    return this.http.get<ProjectMember[]>(`${this.pdbBackendUrl}/project/${projectId}/staff`).pipe(
+    return this.http.get<ProjectMember[]>(`${this.pdbBackendUrl}/project-staff/${projectId}`).pipe(
       //   TODO: Error Handling here
     );
 
