@@ -31,7 +31,7 @@ export class PeopleComponent implements OnInit {
     this.projectStep = this.dmpForm.get('project') as FormControl;
     this.projectStep.valueChanges.subscribe(newVal => {
       if (newVal) {
-        const projectId = newVal.projectId;
+        const projectId = newVal.id;
         if (projectId) {
           this.getProjectMembers(projectId);
         }
