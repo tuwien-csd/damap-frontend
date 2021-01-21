@@ -21,7 +21,10 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-             </div>
+        <app-license-selector [reference]="'license_' + i"
+          (licenseSelection)="setLicenseSelectorResult($event, i)">
+        </app-license-selector>
+      </div>
       <div class="mat-card-container" *ngIf="dataset.value.publish">
         <mat-form-field class="example-full-width">
           <mat-label>Choose a date</mat-label>
@@ -30,7 +33,6 @@
           <mat-datepicker #picker_i></mat-datepicker>
         </mat-form-field>
       </div>
-
     </form>
   </mat-card>
 </form>
