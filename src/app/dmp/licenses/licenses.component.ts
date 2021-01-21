@@ -20,4 +20,9 @@ export class LicensesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  setLicenseSelectorResult($event, index: number) {
+    console.log($event);
+    const dataset = this.datasets.at(index);
+    dataset.patchValue({license: $event});
+  }
 }
