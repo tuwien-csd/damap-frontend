@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-dmp-legal-ethical-aspects',
@@ -8,9 +8,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class LegalEthicalAspectsComponent implements OnInit {
 
-  @Input() dmpForm: FormGroup;
-
-  legalEthicalStep: FormGroup;
+  @Input() legalEthicalStep: FormGroup;
 
   questions = [
     {label: 'Does your data contain personal information?', model: 'personalInformation'},
@@ -25,7 +23,6 @@ export class LegalEthicalAspectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.legalEthicalStep = this.dmpForm.get('legal') as FormGroup;
   }
 
 }

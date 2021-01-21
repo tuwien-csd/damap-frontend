@@ -1,5 +1,5 @@
 .list-container {
   position: relative;
-  max-height: 400px;
+  max-height: 300px;
   overflow: auto;
 }

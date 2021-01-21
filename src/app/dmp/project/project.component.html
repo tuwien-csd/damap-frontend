@@ -9,7 +9,7 @@
         {{projectStep.value.start | date}} - {{projectStep.value.end | date}}
       </div>
       <div class="mat-card-right">
-        <button mat-button (click)="unsetProject()">
+        <button mat-button (click)="changeProject(null)">
           <mat-icon color="white">delete</mat-icon>
         </button>
       </div>
@@ -29,7 +29,7 @@
   <mat-selection-list [multiple]="false" style="'height: 500px; overflow:scroll'">
     <mat-list-option *ngFor="let project of (projects | projectFilter:searchBox.value)"
                      [style]="'height: auto;'" [selected]="project === projectStep.value">
-      <mat-list-item (click)="setProject(project)">
+      <mat-list-item (click)="changeProject(project)">
         <div class="mat-card-left">
           <div mat-line><b>{{project.title}}</b></div>
           <div mat-line>
