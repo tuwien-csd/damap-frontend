@@ -10,7 +10,7 @@
         <h4>{{repo.value.name}}</h4>
       </div>
       <div class="mat-card-right">
-        <mat-icon (click)="removeRepo(i)">cancel</mat-icon>
+        <mat-icon (click)="removeRepository(i)">cancel</mat-icon>
       </div>
     </div>
     <form [formGroup]="repo">
@@ -18,7 +18,7 @@
         <mat-form-field>
           <mat-label>Dataset(s) for deposit</mat-label>
           <mat-select multiple formControlName="datasets">
-            <mat-option *ngFor="let dataset of datasets.controls" [value]="{created: dataset.value.created}">
+            <mat-option *ngFor="let dataset of datasets.controls" [value]="dataset.value.referenceHash">
               {{dataset.value.title}}
             </mat-option>
           </mat-select>
@@ -38,10 +38,8 @@
 
 <!-- TABLE -->
 <h2>Repositories</h2>
-<div *ngIf="!reposLoaded" style="'display: flex; justify-content: center;">
-  <button mat-button (click)="getRepositories()">Load repositories</button>
-</div>
-<div [hidden]="!reposLoaded">
+
+<div [hidden]="!repositories">
   <mat-form-field>
     <mat-label>Search repository</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Search repository" #input>
@@ -66,7 +64,7 @@
       <td mat-cell *matCellDef="let element">
         <div *ngIf="datasets.controls.length">
           <button mat-button>
-            <mat-icon color="accent" (click)="addRepo(element)">add_circle</mat-icon>
+            <mat-icon color="accent" (click)="addRepository(element)">add_circle</mat-icon>
           </button>
         </div>
       </td>
@@ -79,11 +77,8 @@
           <div *ngIf="element.info">
             <mat-divider></mat-divider>
             <div *ngIf="element.info.repository && element.info.repository.length > 0">
-              <h4
-                *ngIf="element.info.repository[0].additionalName.length">{{element.info.repository[0].additionalName[0].value}}</h4>
-              <p *ngIf="element.info.repository[0].description.value">
-                {{element.info.repository[0].description.value}}
-              </p>
+              <h4>{{element.info.repository[0].additionalName[0]?.value}}</h4>
+              <p>{{element.info.repository[0].description?.value}}</p>
             </div>
           </div>
         </div>

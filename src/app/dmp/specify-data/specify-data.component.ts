@@ -1,10 +1,12 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormArray, FormGroup, Validators} from "@angular/forms";
-import {COMMA, ENTER} from "@angular/cdk/keycodes";
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormArray, FormGroup, Validators} from '@angular/forms';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {MatTableDataSource} from "@angular/material/table";
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatTableDataSource} from '@angular/material/table';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {DataKind} from '../../domain/enum/data-kind.enum';
+import {FILE_SIZES, FILE_TYPES} from './data-specs';
 
 @Component({
   selector: 'app-dmp-specify-data',
@@ -20,17 +22,20 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 })
 export class SpecifyDataComponent implements OnInit {
 
-  @Input() dmpForm: FormGroup;
-  dataSource = new MatTableDataSource();
+  @Input() specifyDataStep: FormGroup;
+  @Input() datasets: FormArray;
 
+  @Output() createDataset = new EventEmitter<string>();
+  @Output() updateDataset = new EventEmitter<any>();
+  @Output() removeDataset = new EventEmitter<number>();
+
+  dataSource = new MatTableDataSource();
   readonly tableHeaders: string[] = ['dataset', 'datatype', 'size', 'comment', 'actions'];
   expandedElement: FormArray | null;
 
-  readonly unknown: string = "unknown";
-  readonly none: string = "none";
-  readonly specify: string = "specify";
-
-  specifyDataStep: FormGroup = this.formBuilder.group({});
+  readonly unknown: DataKind = DataKind.UNKNOWN;
+  readonly none: DataKind = DataKind.NONE;
+  readonly specify: DataKind = DataKind.SPECIFY;
 
   // Mat Chip properties
   selectable = true;
@@ -41,18 +46,8 @@ export class SpecifyDataComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.specifyDataStep = this.dmpForm.get('data') as FormGroup;
     this.specifyDataStep.statusChanges
-      .subscribe(() =>
-        this.dataSource.data = this.datasets.controls);
-  }
-
-  get datasets() {
-    return this.specifyDataStep.get('datasets') as FormArray;
-  }
-
-  get hosts() {
-    return this.dmpForm.get('hosts') as FormArray;
+      .subscribe(() => this.dataSource.data = this.datasets.controls);
   }
 
   add(event: MatChipInputEvent): void {
@@ -61,17 +56,7 @@ export class SpecifyDataComponent implements OnInit {
 
     // Add dataset
     if ((value || '').trim()) {
-      this.datasets.push(this.formBuilder.group({
-          title: [value, Validators.required],
-          publish: [false],
-          license: [''],
-          start_date: [null],
-          type: [null],
-          size: [''],
-          comment: [''],
-          created: [new Date()] // not to be changed, used as reference
-        })
-      );
+      this.createDataset.emit(value);
     }
 
     // Reset the input value
@@ -81,8 +66,7 @@ export class SpecifyDataComponent implements OnInit {
   }
 
   remove(index: number): void {
-    this.removeRepoDatasets(this.datasets.at(index));
-    this.datasets.removeAt(index);
+    this.removeDataset.emit(index);
   }
 
   openDatasetDialog(index: number) {
@@ -99,30 +83,12 @@ export class SpecifyDataComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          dataset.patchValue({
-            title: result.value.title,
-            type: result.value.type,
-            size: result.value.size,
-            comment: result.value.comment
-          });
+    dialogRef.afterClosed().subscribe(update => {
+        if (update) {
+          this.updateDataset.emit({index, update});
         }
       }
     );
-  }
-
-  private removeRepoDatasets(dataset) {
-    const hosts = this.hosts;
-    for (let i = 0; i < hosts.controls.length; i++) {
-      let host = hosts.at(i);
-      for (let j = 0; j < host.value.datasets.length; j++) {
-        let repoDataset = host.value.datasets[j];
-        if (dataset.value.created == repoDataset.created) {
-          host.value.datasets.slice(j,1);
-        }
-      }
-    }
   }
 
 }
@@ -141,40 +107,8 @@ export class DatasetDialog {
     size: [this.data.size],
     comment: [this.data.comment]
   })
-  readonly filetypes = [
-    {label: "STANDARD_OFFICE_DOCUMENTS", description: 'text documents, spreadsheets, presentations'},
-    {label: "NETWORKBASED_DATA", description: 'websites, email, chat history, etc.'},
-    {label: "DATABASES", description: 'DBASE, MS Access, Oracle, MySQL, etc.'},
-    {label: "IMAGES", description: 'JPEG, JPEG2000, GIF, TIF, PNG, SVG, etc.'},
-    {label: "STRUCTURED_GRAPHICS", description: 'CAD, CAM, 3D, VRML, etc.'},
-    {label: "AUDIOVISUAL_DATA", description: 'WAVE, MP3, MP4, Flash, etc.'},
-    {label: "SCIENTIFIC_STATISTICAL_DATA", description: 'SPSS, FITS, GIS, etc.'},
-    {label: "RAW_DATA", description: 'device specific output'},
-    {label: "PLAIN_TEXT", description: 'TXT in various encodings'},
-    {label: "STRUCTURED_TEXT", description: 'XML, SGML, etc.'},
-    {label: "ARCHIVED_DATA", description: 'ZIP, RAR, JAR, etc.'},
-    {label: "SOFTWARE_APPLICATIONS", description: 'modelling tools, editors, IDE, compilers, etc.'},
-    {label: "SOURCE_CODE", description: 'scripting, Java, C, C++, Fortran, etc.'},
-    {label: "CONFIGURATION_DATA", description: 'parameter settings, logs, library files'},
-    {label: "OTHER", description: ''}
-  ];
-  readonly filesizes = [
-    {label: '< 100 MB', min: 0, max: 100000000},
-    {label: '100 - 1000 MB', min: 100000000, max: 1000000000},
-    {label: '1 - 5 GB', min: 1000000000, max: 5000000000},
-    {label: '5 - 20 GB', min: 5000000000, max: 20000000000},
-    {label: '20 - 50 GB', min: 20000000000, max: 50000000000},
-    {label: '50 - 100 GB', min: 50000000000, max: 100000000000},
-    {label: '100 - 500 GB', min: 100000000000, max: 500000000000},
-    {label: '500 - 1000 GB', min: 500000000000, max: 1000000000000},
-    {label: '1 - 5 TB', min: 1000000000000, max: 5000000000000},
-    {label: '5 - 10 TB', min: 5000000000000, max: 10000000000000},
-    {label: '10 - 100 TB', min: 10000000000000, max: 100000000000000},
-    {label: '100 - 500 TB', min: 100000000000000, max: 500000000000000},
-    {label: '500 - 1000 TB', min: 500000000000000, max: 1000000000000000},
-    {label: '> 1 PB', min: 1000000000000000, max: undefined},
-    {label: 'Don\'t know', min: 0, max: 0}
-  ];
+  readonly FILE_TYPES = FILE_TYPES;
+  readonly FILE_SIZES = FILE_SIZES;
 
   constructor(
     public dialogRef: MatDialogRef<DatasetDialog>,

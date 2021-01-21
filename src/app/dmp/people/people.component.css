@@ -4,3 +4,9 @@
   background: aliceblue;
   font-size: 10pt;
 }
+
+.list-container {
+  position: relative;
+  max-height: 300px;
+  overflow: auto;
+}

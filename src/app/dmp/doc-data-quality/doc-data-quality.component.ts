@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-dmp-doc-data-quality',
@@ -8,14 +8,11 @@ import {FormGroup} from "@angular/forms";
 })
 export class DocDataQualityComponent implements OnInit {
 
-  @Input() dmpForm: FormGroup;
-
-  docDataStep: FormGroup
+  @Input() docDataStep: FormGroup;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.docDataStep = this.dmpForm.get('documentation') as FormGroup;
   }
 
 }

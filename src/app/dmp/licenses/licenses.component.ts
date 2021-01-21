@@ -1,10 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormGroup} from "@angular/forms";
-
-interface License {
-  value: string;
-  viewValue: string;
-}
+import {FormArray} from '@angular/forms';
+import {LicenseDefinitions} from './license-list';
+import {License} from '../../domain/license';
 
 @Component({
   selector: 'app-dmp-licenses',
@@ -14,22 +11,13 @@ interface License {
 
 export class LicensesComponent implements OnInit {
 
-  @Input() dmpForm: FormGroup;
+  @Input() datasets: FormArray;
 
-  licenses: License[] = [
-    {value: 'license-0', viewValue: 'License 1'},
-    {value: 'license-1', viewValue: 'License 2'},
-    {value: 'license-2', viewValue: 'License 3'}
-  ];
+  licenses: License[] = LicenseDefinitions;
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  get datasets() {
-    const data = this.dmpForm.get('data') as FormGroup;
-    return data.get('datasets') as FormArray;
   }
 
 }
