@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Dmp} from '../domain/dmp';
-import {DMPS} from '../mockdata/mock-dmps';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {ProjectMember} from '../domain/project-member';
 import {Project} from '../domain/project';
+import {DMPS} from '../mockdata/mock-dmps';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ import {Project} from '../domain/project';
 export class BackendService {
 
   private backendUrl = environment.backendUrl;
-  private repositoryBackendUrl = this.backendUrl  + '/repositories'
-  private pdbBackendUrl = this.backendUrl + '/api/pdb'
+  private repositoryBackendUrl = this.backendUrl + 'repositories'
+  private pdbBackendUrl = this.backendUrl + 'api/pdb'
 
   constructor(
     private http: HttpClient) {
@@ -40,11 +40,7 @@ export class BackendService {
 
   }
 
-  getProjectById(projectId: number) {
-
-  }
-
-  getSuggestedProjects(userId: number): Observable<Project[]> {
+  getSuggestedProjects(userId: string): Observable<Project[]> {
     return this.http.get<Project[]>(`${this.pdbBackendUrl}/suggest-projects/${userId}`).pipe(
       // TODO: Error handling
     );
@@ -52,7 +48,7 @@ export class BackendService {
 
   getProjectMembers(projectId: number): Observable<ProjectMember[]> {
     return this.http.get<ProjectMember[]>(`${this.pdbBackendUrl}/project-staff/${projectId}`).pipe(
-      //   TODO: Error Handling here
+      // TODO: Error Handling here
     );
 
   }
@@ -61,9 +57,9 @@ export class BackendService {
 
   }
 
-  getRepositories(): Observable<any>  {
+  getRepositories(): Observable<any> {
     return this.http.get(this.repositoryBackendUrl).pipe(
-    //   TODO: Error Handling here
+      // TODO: Error Handling here
     );
   }
 
