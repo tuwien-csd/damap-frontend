@@ -10,6 +10,10 @@ import {Person} from '../domain/person';
 import {ProjectMember} from '../domain/project-member';
 import {ContributorRole} from '../domain/enum/contributor-role.enum';
 import {Project} from '../domain/project';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../store/states/app.state';
+import {selectProjects, selectProjectsLoading} from '../store/selectors/project.selectors';
+import {LoadSuggestedProjects} from '../store/actions/project.actions';
 
 @Component({
   selector: 'app-dmp',
@@ -61,7 +65,8 @@ export class DmpComponent implements OnInit {
   repoStep: FormArray;
 
   // Resources
-  projects: Project[];
+  projectsLoaded$: Observable<boolean>;
+  projects$: Observable<Project[]>;
   people: ProjectMember[];
   peopleList: ProjectMember[] = []; // people minus contributors
   repositories: any;//: Observable<any>;
@@ -71,11 +76,14 @@ export class DmpComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private backendService: BackendService,
+    private store: Store<AppState>
     // private location: Location
   ) {
   }
 
   ngOnInit() {
+    this.projectsLoaded$ = this.store.pipe(select(selectProjectsLoading));
+    this.projects$ = this.store.pipe(select(selectProjects));
     this.userId$ = from(this.auth.loadUserProfile()).pipe(
       map(p => p['attributes']?.tissID?.find(Boolean))
     );
@@ -83,6 +91,7 @@ export class DmpComponent implements OnInit {
       this.userId = userId;
       this.getSuggestedProjects(userId);
     });
+
     this.getDmpById();
     this.dmpForm.valueChanges.subscribe(() => console.log('DMPform Update'));
     this.dmpForm.valueChanges.subscribe(newVal => console.log(newVal));
@@ -211,11 +220,8 @@ export class DmpComponent implements OnInit {
     }
   }
 
-  private getSuggestedProjects(userId: number) {
-    this.backendService.getSuggestedProjects(userId)
-      .subscribe(projects => {
-        this.projects = projects;
-      });
+  private getSuggestedProjects(userId: string) {
+    this.store.dispatch(new LoadSuggestedProjects({userId}));
   }
 
   private getProjectMembers(projectId: number) {
@@ -250,6 +256,6 @@ export class DmpComponent implements OnInit {
   private getRepositories() {
     this.backendService.getRepositories().subscribe((data: JSON) => {
       this.repositories = data;
-    });;
+    });
   }
 }

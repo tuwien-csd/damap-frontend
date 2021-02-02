@@ -1,9 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {StoreModule} from '@ngrx/store';
-import {config, reducers} from "./main";
-import {environment} from "../../environments/environment";
-import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {config, reducers} from './main';
+import {environment} from '../../environments/environment';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {EffectsModule} from '@ngrx/effects';
+import {ProjectEffects} from './effects/project.effects';
 
 
 @NgModule({
@@ -11,6 +13,7 @@ import {StoreDevtoolsModule} from "@ngrx/store-devtools";
   imports: [
     CommonModule,
     StoreModule.forRoot(reducers, config),
+    EffectsModule.forRoot([ProjectEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ]
 })

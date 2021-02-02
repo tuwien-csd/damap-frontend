@@ -1,6 +1,7 @@
 <mat-vertical-stepper [linear]="isLinear">
   <mat-step label="Choose project">
-    <app-dmp-project [projects]="projects"
+    <app-dmp-project [projects]="projects$ | async"
+                     [loaded]="projectsLoaded$ | async"
                      [projectStep]="projectStep"
                      (project)="changeProject($event)"></app-dmp-project>
   </mat-step>

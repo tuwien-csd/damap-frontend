@@ -10,6 +10,7 @@ import {FormControl} from '@angular/forms';
 export class ProjectComponent implements OnInit {
 
   @Input() projects: Project[];
+  @Input() loaded: boolean;
   @Input() projectStep: FormControl;
 
   @Output() project = new EventEmitter<any>();
