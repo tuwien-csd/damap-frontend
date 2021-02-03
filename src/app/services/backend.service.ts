@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Dmp} from '../domain/dmp';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {ProjectMember} from '../domain/project-member';
 import {Project} from '../domain/project';
-import {DMPS} from '../mockdata/mock-dmps';
+import {PersonId} from '../domain/person-id';
 
 @Injectable({
   providedIn: 'root'
@@ -21,19 +21,35 @@ export class BackendService {
   }
 
   getDmps(): Observable<Dmp[]> {
-    return of(DMPS);
+    return of([]);
   }
 
   getDmpById(id: number): Observable<Dmp> {
-    return of(DMPS[0]);
+    // TODO
+    return null;
   }
 
-  createDmp(dmp: Dmp): void {
-
+  createDmp(editedBy: PersonId, dmp: Dmp): Observable<string> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    console.log(editedBy);
+    return this.http.post<string>(`${this.backendUrl}api/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions).pipe(
+      // TODO: Error handling
+    );
   }
 
-  editDmp(dmp: Dmp): void {
-
+  editDmp(editedBy: PersonId, dmp: Dmp): void {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    this.http.post(`${this.backendUrl}api/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions).pipe(
+      // TODO: Error handling
+    );
   }
 
   deleteDmp(id: number): void {

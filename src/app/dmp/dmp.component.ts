@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Dmp} from '../domain/dmp';
 import {ActivatedRoute} from '@angular/router';
 import {BackendService} from '../services/backend.service';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {KeycloakService} from 'keycloak-angular';
-import {from, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 import {Person} from '../domain/person';
 import {ProjectMember} from '../domain/project-member';
 import {ContributorRole} from '../domain/enum/contributor-role.enum';
@@ -14,6 +12,9 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../store/states/app.state';
 import {selectProjects, selectProjectsLoading} from '../store/selectors/project.selectors';
 import {LoadSuggestedProjects} from '../store/actions/project.actions';
+import {FormService} from '../services/form.service';
+import {PersonIdType} from '../domain/enum/person-id-type.enum';
+import {PersonId} from '../domain/person-id';
 
 @Component({
   selector: 'app-dmp',
@@ -22,36 +23,9 @@ import {LoadSuggestedProjects} from '../store/actions/project.actions';
 })
 export class DmpComponent implements OnInit {
 
-  public userId$: Observable<any>;
   userId: string;
 
-  dmpForm = this.formBuilder.group({
-    project: [null],
-    contact: [null],
-    contributors: this.formBuilder.array([]),
-    data: this.formBuilder.group({
-      kind: [null],
-      explanation: [''],
-      datasets: this.formBuilder.array([])
-    }),
-    documentation: this.formBuilder.group({
-      metadata: [''],
-      dataGeneration: [''],
-      structure: [''],
-      targetAudience: ['']
-    }),
-    legal: this.formBuilder.group({
-      personalInformation: [null],
-      sensitiveData: [null],
-      legalRestrictions: [null],
-      ethicalIssues: [null],
-      committeeApproved: [null],
-      ethicsReport: [''],
-      optionalStatement: [''],
-    }),
-    hosts: this.formBuilder.array([])
-  });
-  dmp: Dmp;
+  dmpForm = this.formService.createDmpForm();
   isLinear = false;
 
   // Steps
@@ -74,6 +48,7 @@ export class DmpComponent implements OnInit {
   constructor(
     private auth: KeycloakService,
     private formBuilder: FormBuilder,
+    private formService: FormService,
     private route: ActivatedRoute,
     private backendService: BackendService,
     private store: Store<AppState>
@@ -84,13 +59,12 @@ export class DmpComponent implements OnInit {
   ngOnInit() {
     this.projectsLoaded$ = this.store.pipe(select(selectProjectsLoading));
     this.projects$ = this.store.pipe(select(selectProjects));
-    this.userId$ = from(this.auth.loadUserProfile()).pipe(
-      map(p => p['attributes']?.tissID?.find(Boolean))
+    this.auth.loadUserProfile().then(
+      p => {
+        this.userId = p['attributes']?.tissID?.[0];
+        this.getSuggestedProjects(this.userId);
+      }
     );
-    this.userId$.subscribe(userId => {
-      this.userId = userId;
-      this.getSuggestedProjects(userId);
-    });
 
     this.getDmpById();
     this.dmpForm.valueChanges.subscribe(() => console.log('DMPform Update'));
@@ -122,12 +96,17 @@ export class DmpComponent implements OnInit {
     // TODO
   }
 
-  createDmp(): void {
-
-  }
-
-  updateDmp(): void {
-
+  saveDmp(): void {
+    console.log(this.userId);
+    if (this.userId !== undefined) {
+      const personId: PersonId = {identifier: this.userId, type: PersonIdType.UNIVERSITYID}
+      if (this.dmpForm.value.id) {
+        this.backendService.editDmp(personId, this.formService.mapFormToDmp(this.dmpForm));
+      } else {
+        this.backendService.createDmp(personId, this.formService.mapFormToDmp(this.dmpForm))
+          .subscribe(newId => this.dmpForm.setValue({id: newId}));
+      }
+    }
   }
 
   changeProject(project: Project) {
