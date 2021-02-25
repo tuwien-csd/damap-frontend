@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
 import {ProjectEffects} from './effects/project.effects';
+import {DmpEffects} from './effects/dmp.effects';
 
 
 @NgModule({
@@ -13,7 +14,7 @@ import {ProjectEffects} from './effects/project.effects';
   imports: [
     CommonModule,
     StoreModule.forRoot(reducers, config),
-    EffectsModule.forRoot([ProjectEffects]),
+    EffectsModule.forRoot([DmpEffects, ProjectEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ]
 })

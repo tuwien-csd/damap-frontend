@@ -76,7 +76,7 @@ export class FormService {
       project: formValue.project,
       contact: formValue.contact,
       contributors,
-      datakind: formValue.data.datakind,
+      dataKind: formValue.data.kind,
       noDataExplanation: formValue.data.explanation,
       datasets,
       metadata: formValue.documentation.metadata,

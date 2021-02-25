@@ -10,11 +10,9 @@ import {ContributorRole} from '../domain/enum/contributor-role.enum';
 import {Project} from '../domain/project';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../store/states/app.state';
-import {selectProjects, selectProjectsLoading} from '../store/selectors/project.selectors';
+import {selectProjects, selectProjectsLoaded} from '../store/selectors/project.selectors';
 import {LoadSuggestedProjects} from '../store/actions/project.actions';
 import {FormService} from '../services/form.service';
-import {PersonIdType} from '../domain/enum/person-id-type.enum';
-import {PersonId} from '../domain/person-id';
 
 @Component({
   selector: 'app-dmp',
@@ -57,7 +55,7 @@ export class DmpComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectsLoaded$ = this.store.pipe(select(selectProjectsLoading));
+    this.projectsLoaded$ = this.store.pipe(select(selectProjectsLoaded));
     this.projects$ = this.store.pipe(select(selectProjects));
     this.auth.loadUserProfile().then(
       p => {
@@ -99,12 +97,11 @@ export class DmpComponent implements OnInit {
   saveDmp(): void {
     console.log(this.userId);
     if (this.userId !== undefined) {
-      const personId: PersonId = {identifier: this.userId, type: PersonIdType.UNIVERSITYID}
       if (this.dmpForm.value.id) {
-        this.backendService.editDmp(personId, this.formService.mapFormToDmp(this.dmpForm));
+        this.backendService.editDmp(this.userId, this.formService.mapFormToDmp(this.dmpForm));
       } else {
-        this.backendService.createDmp(personId, this.formService.mapFormToDmp(this.dmpForm))
-          .subscribe(newId => this.dmpForm.setValue({id: newId}));
+        this.backendService.createDmp(this.userId, this.formService.mapFormToDmp(this.dmpForm))
+          .subscribe(newId => this.dmpForm.patchValue({id: newId}));
       }
     }
   }

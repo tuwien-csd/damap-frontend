@@ -48,6 +48,7 @@ import {ProjectFilterPipe} from './dmp/project/project-filter.pipe';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {LicenseSelectorComponent} from './license-selector/license-selector.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { DmpTableComponent } from './widgets/dmp-table/dmp-table.component';
 
 const keycloakService = new KeycloakService();
 
@@ -70,7 +71,8 @@ const keycloakService = new KeycloakService();
     PeopleComponent,
     SummaryComponent,
     ProjectFilterPipe,
-    LicenseSelectorComponent
+    LicenseSelectorComponent,
+    DmpTableComponent
   ],
   imports: [
     BrowserModule,
