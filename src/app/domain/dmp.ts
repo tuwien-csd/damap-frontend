@@ -14,7 +14,7 @@ export interface Dmp {
   project: Project;
   contact: Person;
   contributors: Contributor[];
-  datakind: DataKind;
+  dataKind: DataKind;
   noDataExplanation: string;
   datasets: Dataset[];
   metadata: string;

@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Dmp} from '../domain/dmp';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {ProjectMember} from '../domain/project-member';
 import {Project} from '../domain/project';
-import {PersonId} from '../domain/person-id';
+import {DmpListItem} from '../domain/dmp-list-item';
 
 @Injectable({
   providedIn: 'root'
@@ -20,34 +20,39 @@ export class BackendService {
     private http: HttpClient) {
   }
 
-  getDmps(): Observable<Dmp[]> {
-    return of([]);
+  // TODO: remove
+  me() {
+    return this.http.get<string>(`${this.backendUrl}users/me`);
+  }
+
+  getDmps(userId: string): Observable<DmpListItem[]> {
+    return this.http.get<DmpListItem[]>(`${this.backendUrl}plans/dmp-list/${userId}`).pipe();
+    // TODO: Error handling
   }
 
   getDmpById(id: number): Observable<Dmp> {
     // TODO
-    return null;
+    return this.http.get<Dmp>(`${this.backendUrl}plans/dmp/${id}`).pipe();
   }
 
-  createDmp(editedBy: PersonId, dmp: Dmp): Observable<string> {
+  createDmp(editedBy: string, dmp: Dmp): Observable<{ id: number }> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    console.log(editedBy);
-    return this.http.post<string>(`${this.backendUrl}api/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions).pipe(
+    return this.http.post<{ id: number }>(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions).pipe(
       // TODO: Error handling
     );
   }
 
-  editDmp(editedBy: PersonId, dmp: Dmp): void {
+  editDmp(editedBy: string, dmp: Dmp): void {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    this.http.post(`${this.backendUrl}api/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions).pipe(
+    this.http.post(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions).pipe(
       // TODO: Error handling
     );
   }
@@ -83,5 +88,10 @@ export class BackendService {
     return this.http.get(`${this.repositoryBackendUrl}/${id}`).pipe(
       // TODO: Error Handling here
     );
+  }
+
+  analyseFileData(file: FormData): Observable<any> {
+    return this.http.post(`${this.backendUrl}api/fits/examine`, file, {reportProgress: true, observe: 'events'})
+      .pipe( /* TODO: Error handling */);
   }
 }

@@ -4,7 +4,7 @@ import * as fromProjects from '../reducers/project.reducer';
 
 export const selectProjectsState = createFeatureSelector<ProjectState>('projects');
 
-export const selectProjectsLoading = createSelector(
+export const selectProjectsLoaded = createSelector(
   selectProjectsState,
   projectsState => projectsState.loaded
 );
