@@ -1,5 +1,5 @@
 #save-dmp {
-  position: fixed;
-  bottom: 50px;
-  right: 100px;
+  position: relative;
+  float: right;
+  margin: 20px 50px 50px 20px;
 }

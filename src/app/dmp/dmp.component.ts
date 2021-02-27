@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../services/backend.service';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {KeycloakService} from 'keycloak-angular';
@@ -23,7 +23,7 @@ export class DmpComponent implements OnInit {
 
   userId: string;
 
-  dmpForm = this.formService.createDmpForm();
+  dmpForm: FormGroup = this.formService.createDmpForm();
   isLinear = false;
 
   // Steps
@@ -41,13 +41,15 @@ export class DmpComponent implements OnInit {
   projects$: Observable<Project[]>;
   people: ProjectMember[];
   peopleList: ProjectMember[] = []; // people minus contributors
-  repositories: any;//: Observable<any>;
+  repositories: any;
 
+  // TODO: Manage editability based on accessType (role)
   constructor(
     private auth: KeycloakService,
     private formBuilder: FormBuilder,
     private formService: FormService,
     private route: ActivatedRoute,
+    private router: Router,
     private backendService: BackendService,
     private store: Store<AppState>
     // private location: Location
@@ -67,11 +69,12 @@ export class DmpComponent implements OnInit {
     this.getDmpById();
     this.dmpForm.valueChanges.subscribe(() => console.log('DMPform Update'));
     this.dmpForm.valueChanges.subscribe(newVal => console.log(newVal));
+
     this.projectStep = this.dmpForm.get('project') as FormControl;
     this.contactStep = this.dmpForm.get('contact') as FormControl;
     this.contributorStep = this.dmpForm.get('contributors') as FormArray;
     this.specifyDataStep = this.dmpForm.get('data') as FormGroup;
-    this.datasets = this.specifyDataStep.get('datasets') as FormArray;
+    this.datasets = this.dmpForm.get('datasets') as FormArray;
     this.docDataStep = this.dmpForm.get('documentation') as FormGroup;
     this.legalEthicalStep = this.dmpForm.get('legal') as FormGroup;
     this.repoStep = this.dmpForm.get('hosts') as FormArray;
@@ -84,24 +87,31 @@ export class DmpComponent implements OnInit {
         }
       }
     });
-
+    // TODO: ngrx entity
     this.getRepositories();
   }
 
+// TODO: make sure users can only retrieve dmps they are authorized to
   getDmpById(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    console.log('Get DMP with ID: ' + id);
-    // TODO
+    if (id) {
+      console.log('Get DMP with ID: ' + id);
+      this.backendService.getDmpById(id).subscribe(
+        dmp => {
+          this.formService.mapDmpToForm(dmp, this.dmpForm);
+        });
+    }
   }
 
   saveDmp(): void {
     console.log(this.userId);
     if (this.userId !== undefined) {
       if (this.dmpForm.value.id) {
-        this.backendService.editDmp(this.userId, this.formService.mapFormToDmp(this.dmpForm));
+        // TODO: reload page after update
+        this.backendService.editDmp(this.userId, this.formService.exportFormToDmp(this.dmpForm));
       } else {
-        this.backendService.createDmp(this.userId, this.formService.mapFormToDmp(this.dmpForm))
-          .subscribe(newId => this.dmpForm.patchValue({id: newId}));
+        this.backendService.createDmp(this.userId, this.formService.exportFormToDmp(this.dmpForm))
+          .subscribe(newId => this.router.navigate([`${newId.id}`], {relativeTo: this.route}));
       }
     }
   }
