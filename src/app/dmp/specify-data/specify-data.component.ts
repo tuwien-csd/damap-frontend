@@ -46,7 +46,7 @@ export class SpecifyDataComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.specifyDataStep.statusChanges
+    this.datasets.statusChanges
       .subscribe(() => this.dataSource.data = this.datasets.controls);
   }
 
