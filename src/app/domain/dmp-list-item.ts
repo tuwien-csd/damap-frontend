@@ -6,8 +6,8 @@ export interface DmpListItem {
   readonly id: number;
   readonly title?: string;
   readonly contact: Person;
-  readonly created?: Date;
-  readonly modified?: Date;
+  readonly created: Date;
+  readonly modified: Date;
   readonly description?: string;
   readonly project: Project;
   readonly accessType: FunctionRole;
