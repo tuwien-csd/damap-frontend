@@ -13,6 +13,10 @@ import {AppState} from '../store/states/app.state';
 import {selectProjects, selectProjectsLoaded} from '../store/selectors/project.selectors';
 import {LoadSuggestedProjects} from '../store/actions/project.actions';
 import {FormService} from '../services/form.service';
+import {Repository} from '../domain/repository';
+import {selectRepositories, selectRepositoriesLoaded} from '../store/selectors/repository.selectors';
+import {LoadRepositories, LoadRepository} from '../store/actions/repository.actions';
+import {StepperSelectionEvent} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-dmp',
@@ -42,6 +46,8 @@ export class DmpComponent implements OnInit {
   people: ProjectMember[];
   peopleList: ProjectMember[] = []; // people minus contributors
   repositories: any;
+  repositoriesLoaded$: Observable<boolean>;
+  repositories$: Observable<Repository[]>;
 
   // TODO: Manage editability based on accessType (role)
   constructor(
@@ -59,6 +65,8 @@ export class DmpComponent implements OnInit {
   ngOnInit() {
     this.projectsLoaded$ = this.store.pipe(select(selectProjectsLoaded));
     this.projects$ = this.store.pipe(select(selectProjects));
+    this.repositoriesLoaded$ = this.store.pipe(select(selectRepositoriesLoaded));
+    this.repositories$ = this.store.pipe(select(selectRepositories));
     this.auth.loadUserProfile().then(
       p => {
         this.userId = p['attributes']?.tissID?.[0];
@@ -87,8 +95,11 @@ export class DmpComponent implements OnInit {
         }
       }
     });
-    // TODO: ngrx entity
-    this.getRepositories();
+  }
+  changeStep(event: StepperSelectionEvent) {
+    if(event.selectedIndex === 6) {
+      this.getRepositories();
+    }
   }
 
 // TODO: make sure users can only retrieve dmps they are authorized to
@@ -193,16 +204,9 @@ export class DmpComponent implements OnInit {
     this.repoStep.removeAt(index);
   }
 
-  getRepositoryDetails(repo) {
+  getRepositoryDetails(repo: Repository) {
     if (!repo.info) {
-      let repoInfo;
-      this.backendService.getRepositoryById(repo.id).subscribe((data: JSON) => {
-        repoInfo = data;
-        if (repoInfo && this.repositories.length > 0) {
-          const index = this.repositories.map(e => e.id).indexOf(repo.id);
-          this.repositories[index].info = repoInfo;
-        }
-      });
+      this.store.dispatch(new LoadRepository({id: repo.id}));
     }
   }
 
@@ -239,9 +243,11 @@ export class DmpComponent implements OnInit {
     }
   }
 
-  private getRepositories() {
-    this.backendService.getRepositories().subscribe((data: JSON) => {
-      this.repositories = data;
+  getRepositories() {
+    this.repositoriesLoaded$.subscribe(loaded => {
+      if(!loaded) {
+        this.store.dispatch(new LoadRepositories());
+      }
     });
   }
 }
