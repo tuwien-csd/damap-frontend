@@ -2,8 +2,8 @@ import {Component, Input, OnInit, EventEmitter, Output, ViewChild, OnChanges, Si
 import {FormArray} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
-import {BackendService} from '../../services/backend.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Repository} from '../../domain/repository';
 
 @Component({
   selector: 'app-dmp-repo',
@@ -19,7 +19,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class RepoComponent implements OnInit, OnChanges {
 
-  @Input() repositories: any; // Repo list loaded from backend
+  @Input() loaded: boolean;
+  @Input() repositories: Repository[]; // Repo list loaded from backend
   repoList: any = []; // Filtered repo list (repo list minus selected repos)
   reposSelected: any = []; // selected repos
 
@@ -32,19 +33,19 @@ export class RepoComponent implements OnInit, OnChanges {
 
   readonly tableHeaders: string[] = ['expand', 'title', 'add'];
   expandedElement: any | null;
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource<Repository>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private backendService: BackendService) {
+  constructor() {
   }
 
   ngOnInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.repositories && this.repositories) {
-      this.filterRepos();
+    if (changes.repositories) {
+      setTimeout(_ => this.filterRepos(), 1);
     }
   }
 
@@ -74,7 +75,7 @@ export class RepoComponent implements OnInit, OnChanges {
     }
   }
 
-  addRepository(repo: any) {
+  addRepository(repo: Repository) {
     this.repositoryToAdd.emit(repo);
   }
 

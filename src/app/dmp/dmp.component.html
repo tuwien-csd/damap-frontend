@@ -1,4 +1,4 @@
-<mat-vertical-stepper [linear]="isLinear">
+<mat-vertical-stepper [linear]="isLinear" (selectionChange)="changeStep($event)">
   <mat-step label="Choose project">
     <app-dmp-project [projects]="projects$ | async"
                      [loaded]="projectsLoaded$ | async"
@@ -33,13 +33,13 @@
     <app-dmp-licenses [datasets]="datasets"></app-dmp-licenses>
   </mat-step>
   <mat-step label="Specify repository/repositories">
-    <app-dmp-repo [repoStep]="repoStep" [datasets]="datasets"
-                  [repositories]="repositories"
-                  (repositoryToAdd)="addRepository($event)"
-                  (repositoryToRemove)="removeRepository($event)"
-                  (repositoryDetails)="getRepositoryDetails($event)">
-
-    </app-dmp-repo>
+      <app-dmp-repo [repoStep]="repoStep" [datasets]="datasets"
+                    [loaded]="repositoriesLoaded$ | async"
+                    [repositories]="repositories$ | async"
+                    (repositoryToAdd)="addRepository($event)"
+                    (repositoryToRemove)="removeRepository($event)"
+                    (repositoryDetails)="getRepositoryDetails($event)">
+      </app-dmp-repo>
   </mat-step>
   <mat-step label="End">
     <app-dmp-summary [dmpForm]="dmpForm"></app-dmp-summary>

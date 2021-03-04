@@ -38,19 +38,22 @@
 
 <!-- TABLE -->
 <h2>Repositories</h2>
-
-<div [hidden]="!repositories">
+<ng-container>
   <mat-form-field>
     <mat-label>Search repository</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Search repository" #input>
   </mat-form-field>
 
   <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+    <ng-container *ngIf="!loaded">
+      <p>Load repositories...</p>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </ng-container>
     <ng-container matColumnDef="expand">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element" (click)="getRepoDetails(element)">
-        <mat-icon *ngIf="element === expandedElement" color="primary">expand_less</mat-icon>
-        <mat-icon *ngIf="element !== expandedElement" color="primary">expand_more</mat-icon>
+        <mat-icon *ngIf="element.id === expandedElement" color="primary">expand_less</mat-icon>
+        <mat-icon *ngIf="element.id !== expandedElement" color="primary">expand_more</mat-icon>
       </td>
     </ng-container>
 
@@ -73,14 +76,15 @@
     <ng-container matColumnDef="expandedDetail">
       <td mat-cell *matCellDef="let element" [attr.colspan]="tableHeaders.length">
         <div class="element-detail"
-             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-          <div *ngIf="element.info">
+             [@detailExpand]="element.id == expandedElement ? 'expanded' : 'collapsed'">
+          <ng-container *ngIf="element.info else loading">
             <mat-divider></mat-divider>
-            <div *ngIf="element.info.repository && element.info.repository.length > 0">
-              <h4>{{element.info.repository[0].additionalName[0]?.value}}</h4>
-              <p>{{element.info.repository[0].description?.value}}</p>
-            </div>
-          </div>
+            <h4>{{element.info.additionalName[0]?.value}}</h4>
+            <p>{{element.info.description?.value}}</p>
+          </ng-container>
+          <ng-template #loading>
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </ng-template>
         </div>
       </td>
     </ng-container>
@@ -88,8 +92,8 @@
     <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
     <tr mat-row *matRowDef="let element; columns: tableHeaders;"
         class="element-row"
-        [class.expanded-row]="expandedElement === element"
-        (click)="expandedElement = expandedElement === element ? null : element">
+        [class.expanded-row]="expandedElement === element.id"
+        (click)="expandedElement = expandedElement === element.id ? null : element.id">
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row">
     </tr>
     <!-- Row shown when there is no matching data. -->
@@ -99,4 +103,4 @@
   </table>
   <mat-paginator class="mat-elevation-z8" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
                  showFirstLastButtons></mat-paginator>
-</div>
+</ng-container>

@@ -6,6 +6,8 @@ import {environment} from '../../environments/environment';
 import {ProjectMember} from '../domain/project-member';
 import {Project} from '../domain/project';
 import {DmpListItem} from '../domain/dmp-list-item';
+import {Repository} from '../domain/repository';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -79,19 +81,22 @@ export class BackendService {
   }
 
   getRepositories(): Observable<any> {
-    return this.http.get(this.repositoryBackendUrl).pipe(
+    return this.http.get<Repository[]>(this.repositoryBackendUrl).pipe(
       // TODO: Error Handling here
     );
   }
 
   getRepositoryById(id: string): Observable<any> {
-    return this.http.get(`${this.repositoryBackendUrl}/${id}`).pipe(
+    return this.http.get<any>(`${this.repositoryBackendUrl}/${id}`).pipe(
+      map(details => ({id, changes: {info: details.repository[0]}}))
       // TODO: Error Handling here
     );
   }
 
+  /*
   analyseFileData(file: FormData): Observable<any> {
     return this.http.post(`${this.backendUrl}api/fits/examine`, file, {reportProgress: true, observe: 'events'})
-      .pipe( /* TODO: Error handling */);
+      .pipe();
   }
+  */
 }
