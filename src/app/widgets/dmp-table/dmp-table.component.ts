@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import {Dmp} from '../../domain/dmp';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {DmpListItem} from '../../domain/dmp-list-item';
 
 @Component({
   selector: 'app-dmp-table',
@@ -17,11 +17,11 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class DmpTableComponent implements OnInit {
 
-  @Input() dmps: Dmp[];
+  @Input() dmps: DmpListItem[];
   dataSource = new MatTableDataSource();
 
   readonly tableHeaders: string[] = ['title', 'created', 'modified', 'edit', 'history', 'remove'];
-  expandedElement: Dmp | null;
+  expandedElement: DmpListItem | null;
 
   constructor() {
   }
@@ -30,6 +30,7 @@ export class DmpTableComponent implements OnInit {
     this.dataSource.data = this.dmps;
   }
 
+  // TODO: Filter doesn't work with nested fields (project title)
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

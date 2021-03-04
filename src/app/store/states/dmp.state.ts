@@ -1,5 +1,4 @@
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
-import {Dmp} from '../../domain/dmp';
 import {DmpListItem} from '../../domain/dmp-list-item';
 
 export interface DmpState extends EntityState<DmpListItem>{
