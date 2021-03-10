@@ -1,0 +1,42 @@
+.storage-selected {
+  flex-grow: 100;
+}
+
+.mat-card {
+  display: flex;
+}
+
+.storage-card-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mat-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-card-actions {
+  margin: 0;
+  padding: 0;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  flex-basis: max-content;
+  flex-grow: 100;
+  justify-content: space-evenly;
+}
+
+mat-card > form {
+  flex-grow: 1;
+}
+
+mat-form-field {
+  flex-grow: 0.45;
+}
+
+.full-width {
+  width: 100%;
+}
