@@ -4,6 +4,7 @@ import {Dmp} from '../domain/dmp';
 import {Contributor} from '../domain/contributor';
 import {Dataset} from '../domain/dataset';
 import {Host} from '../domain/host';
+import {TuStorage} from '../dmp/data-storage/storage/storage-list';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,8 @@ export class FormService {
         ethicsReport: [''],
         optionalStatement: [''],
       }),
+      storage: this.formBuilder.array([]),
+      externalStorage: this.formBuilder.array([]),
       hosts: this.formBuilder.array([])
     });
   }
@@ -127,6 +130,25 @@ export class FormService {
       optionalStatement: formValue.legal.optionalStatement,
       hosts
     };
+  }
+
+  public addStorageToForm(form: FormGroup, storage: TuStorage) {
+    const storageGroup = this.formBuilder.group({
+      service: [storage],
+      datasets: [null]
+    });
+    (form.get('storage') as FormArray).push(storageGroup);
+  }
+
+  public addExternalStorageToForm(form: FormGroup) {
+    const externalStorageGroup = this.formBuilder.group({
+      title: ['Other'],
+      storageLocation: [''],
+      backupLocation: [''],
+      backupFrequency: [''],
+      datasets: [null]
+    });
+    (form.get('externalStorage') as FormArray).push(externalStorageGroup);
   }
 
   private createDatasetFormGroup(title: string): FormGroup {

@@ -49,6 +49,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {LicenseSelectorComponent} from './license-selector/license-selector.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { DmpTableComponent } from './widgets/dmp-table/dmp-table.component';
+import { StorageComponent } from './dmp/data-storage/storage/storage.component';
+import { StorageFilterPipe } from './dmp/data-storage/storage/storage-filter.pipe';
+import { ExternalStorageComponent } from './dmp/data-storage/external-storage/external-storage.component';
 
 const keycloakService = new KeycloakService();
 
@@ -72,7 +75,10 @@ const keycloakService = new KeycloakService();
     SummaryComponent,
     ProjectFilterPipe,
     LicenseSelectorComponent,
-    DmpTableComponent
+    DmpTableComponent,
+    StorageComponent,
+    StorageFilterPipe,
+    ExternalStorageComponent
   ],
   imports: [
     BrowserModule,

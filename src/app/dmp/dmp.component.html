@@ -32,14 +32,26 @@
   <mat-step label="Licensing">
     <app-dmp-licenses [datasets]="datasets"></app-dmp-licenses>
   </mat-step>
+  <mat-step label="Storage and backup">
+    <app-dmp-storage [storageStep]="storageStep"
+                     [datasets]="datasets"
+                     (storageToAdd)="addStorage($event)"
+                     (storageToRemove)="removeStorage($event)">
+    </app-dmp-storage>
+    <app-dmp-external-storage [externalStorageStep]="externalStorageStep"
+                              [datasets]="datasets"
+                              (externalStorageToAdd)="addExternalStorage()"
+                              (externalStorageToRemove)="removeExternalStorage($event)">
+    </app-dmp-external-storage>
+  </mat-step>
   <mat-step label="Specify repository/repositories">
-      <app-dmp-repo [repoStep]="repoStep" [datasets]="datasets"
-                    [loaded]="repositoriesLoaded$ | async"
-                    [repositories]="repositories$ | async"
-                    (repositoryToAdd)="addRepository($event)"
-                    (repositoryToRemove)="removeRepository($event)"
-                    (repositoryDetails)="getRepositoryDetails($event)">
-      </app-dmp-repo>
+    <app-dmp-repo [repoStep]="repoStep" [datasets]="datasets"
+                  [loaded]="repositoriesLoaded$ | async"
+                  [repositories]="repositories$ | async"
+                  (repositoryToAdd)="addRepository($event)"
+                  (repositoryToRemove)="removeRepository($event)"
+                  (repositoryDetails)="getRepositoryDetails($event)">
+    </app-dmp-repo>
   </mat-step>
   <mat-step label="End">
     <app-dmp-summary [dmpForm]="dmpForm"></app-dmp-summary>

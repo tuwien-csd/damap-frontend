@@ -17,6 +17,7 @@ import {Repository} from '../domain/repository';
 import {selectRepositories, selectRepositoriesLoaded} from '../store/selectors/repository.selectors';
 import {LoadRepositories, LoadRepository} from '../store/actions/repository.actions';
 import {StepperSelectionEvent} from '@angular/cdk/stepper';
+import {TuStorage} from './data-storage/storage/storage-list';
 
 @Component({
   selector: 'app-dmp',
@@ -38,6 +39,8 @@ export class DmpComponent implements OnInit {
   datasets: FormArray;
   docDataStep: FormGroup;
   legalEthicalStep: FormGroup;
+  storageStep: FormArray;
+  externalStorageStep: FormArray;
   repoStep: FormArray;
 
   // Resources
@@ -85,6 +88,8 @@ export class DmpComponent implements OnInit {
     this.datasets = this.dmpForm.get('datasets') as FormArray;
     this.docDataStep = this.dmpForm.get('documentation') as FormGroup;
     this.legalEthicalStep = this.dmpForm.get('legal') as FormGroup;
+    this.storageStep = this.dmpForm.get('storage') as FormArray;
+    this.externalStorageStep = this.dmpForm.get('externalStorage') as FormArray;
     this.repoStep = this.dmpForm.get('hosts') as FormArray;
 
     this.projectStep.valueChanges.subscribe(newVal => {
@@ -96,8 +101,9 @@ export class DmpComponent implements OnInit {
       }
     });
   }
+
   changeStep(event: StepperSelectionEvent) {
-    if(event.selectedIndex === 6) {
+    if (event.selectedIndex === 7) {
       this.getRepositories();
     }
   }
@@ -190,6 +196,22 @@ export class DmpComponent implements OnInit {
     this.datasets.removeAt(index);
   }
 
+  addStorage(storage: TuStorage) {
+    this.formService.addStorageToForm(this.dmpForm, storage);
+  }
+
+  removeStorage(index: number): void {
+    this.storageStep.removeAt(index);
+  }
+
+  addExternalStorage() {
+    this.formService.addExternalStorageToForm(this.dmpForm);
+  }
+
+  removeExternalStorage(index: number): void {
+    this.externalStorageStep.removeAt(index);
+  }
+
   addRepository(repo: any) {
     const repoGroup = this.formBuilder.group({
       id: repo.id,
@@ -245,7 +267,7 @@ export class DmpComponent implements OnInit {
 
   getRepositories() {
     this.repositoriesLoaded$.subscribe(loaded => {
-      if(!loaded) {
+      if (!loaded) {
         this.store.dispatch(new LoadRepositories());
       }
     });
