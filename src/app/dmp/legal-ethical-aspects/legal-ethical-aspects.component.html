@@ -11,6 +11,15 @@
     <br/>
   </div>
 
+  <mat-form-field appearance="fill" [style]="'width: 100%'" *ngIf="legalEthicalStep.value.sensitiveData">
+    <mat-label [style]="'white-space: normal;'">
+      What kind of additional security measures in terms of physical security,
+      network security, and security of computer systems and files will be taken
+        to ensure that stored and transferred sensitive data is safe?
+    </mat-label>
+    <textarea matInput formControlName="sensitiveDataSecurity"></textarea>
+  </mat-form-field>
+
   <mat-form-field appearance="fill" [style]="'width:100%'">
     <mat-label>Links to ethics report or related document:</mat-label>
     <textarea matInput formControlName="ethicsReport"></textarea>

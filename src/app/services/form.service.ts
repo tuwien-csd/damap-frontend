@@ -37,6 +37,7 @@ export class FormService {
         legalRestrictions: [null],
         ethicalIssues: [null],
         committeeApproved: [null],
+        sensitiveDataSecurity: [''],
         ethicsReport: [''],
         optionalStatement: [''],
       }),
@@ -68,6 +69,7 @@ export class FormService {
         legalRestrictions: dmp.legalRestrictions,
         ethicalIssues: dmp.ethicalIssuesExist,
         committeeApproved: dmp.committeeApproved,
+        sensitiveDataSecurity: dmp.sensitiveDataSecurity,
         ethicsReport: dmp.ethicsReport,
         optionalStatement: dmp.optionalStatement,
       }
@@ -126,6 +128,7 @@ export class FormService {
       legalRestrictions: formValue.legal.legalRestrictions,
       ethicalIssuesExist: formValue.legal.ethicalIssues,
       committeeApproved: formValue.legal.committeeApproved,
+      sensitiveDataSecurity: formValue.legal.sensitiveData ? formValue.legal.sensitiveDataSecurity : '',
       ethicsReport: formValue.legal.ethicsReport,
       optionalStatement: formValue.legal.optionalStatement,
       hosts
