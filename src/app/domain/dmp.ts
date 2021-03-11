@@ -23,6 +23,7 @@ export interface Dmp {
   targetAudience: string;
   personalInformation: boolean;
   sensitiveData: boolean;
+  sensitiveDataSecurity?: string;
   legalRestrictions: boolean;
   ethicalIssuesExist: boolean;
   committeeApproved: boolean;
