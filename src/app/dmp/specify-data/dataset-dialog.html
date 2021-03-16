@@ -12,8 +12,9 @@
       <mat-form-field>
         <mat-label>Estimated type</mat-label>
         <mat-select formControlName="type" required>
-          <mat-option *ngFor="let type of FILE_TYPES" [value]="type.label">
-            {{type.label}}<br/>
+          <mat-option class ="type-selection" *ngFor="let type of FILE_TYPES" [value]="type.label">
+            {{type.label}} <br/>
+            <span class="type-description" *ngIf="type.description"> [{{type.description}}]</span>
           </mat-option>
         </mat-select>
       </mat-form-field>

@@ -82,3 +82,12 @@ tr.element-row:not(.expanded-row):active {
   display: inline-flex;
   vertical-align: middle;
 }
+
+.type-selection {
+  height: auto;
+}
+
+.type-description {
+  color: var(--secondary-color);
+  margin: 0 10px;
+}
