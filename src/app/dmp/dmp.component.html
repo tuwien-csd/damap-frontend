@@ -26,12 +26,6 @@
   <mat-step label="Documentation and data quality">
     <app-dmp-doc-data-quality [docDataStep]="docDataStep"></app-dmp-doc-data-quality>
   </mat-step>
-  <mat-step label="Legal and ethical aspects">
-    <app-dmp-legal-ethical-aspects [legalEthicalStep]="legalEthicalStep"></app-dmp-legal-ethical-aspects>
-  </mat-step>
-  <mat-step label="Licensing">
-    <app-dmp-licenses [datasets]="datasets"></app-dmp-licenses>
-  </mat-step>
   <mat-step label="Storage and backup">
     <app-dmp-storage [storageStep]="storageStep"
                      [datasets]="datasets"
@@ -43,6 +37,12 @@
                               (externalStorageToAdd)="addExternalStorage()"
                               (externalStorageToRemove)="removeExternalStorage($event)">
     </app-dmp-external-storage>
+  </mat-step>
+  <mat-step label="Legal and ethical aspects">
+    <app-dmp-legal-ethical-aspects [legalEthicalStep]="legalEthicalStep"></app-dmp-legal-ethical-aspects>
+  </mat-step>
+  <mat-step label="Licensing">
+    <app-dmp-licenses [datasets]="datasets"></app-dmp-licenses>
   </mat-step>
   <mat-step label="Specify repository/repositories">
     <app-dmp-repo [repoStep]="repoStep" [datasets]="datasets"
