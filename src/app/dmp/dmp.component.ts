@@ -6,7 +6,6 @@ import {KeycloakService} from 'keycloak-angular';
 import {Observable} from 'rxjs';
 import {Person} from '../domain/person';
 import {ProjectMember} from '../domain/project-member';
-import {ContributorRole} from '../domain/enum/contributor-role.enum';
 import {Project} from '../domain/project';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../store/states/app.state';
@@ -150,21 +149,13 @@ export class DmpComponent implements OnInit {
   }
 
   addContributor(contributor: Person) {
-    const contributorControl = new FormGroup({person: new FormControl(contributor), role: new FormControl(null)});
-    this.contributorStep.push(contributorControl);
+    this.formService.addContributorToForm(this.dmpForm, contributor);
     this.filterPeople();
   }
 
   removeContributor(index: number) {
-    this.contributorStep.removeAt(index);
+    this.formService.removeContributorFromForm(this.dmpForm, index);
     this.filterPeople();
-  }
-
-  updateContributorRoles($event: { index: number, role: ContributorRole }) {
-    const index = $event.index;
-    const role = $event.role;
-    const contributor = this.contributorStep.at(index);
-    contributor.patchValue({role});
   }
 
   createDataset(title: string) {
