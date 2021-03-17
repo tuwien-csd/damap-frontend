@@ -5,6 +5,7 @@ import {Contributor} from '../domain/contributor';
 import {Dataset} from '../domain/dataset';
 import {Host} from '../domain/host';
 import {TuStorage} from '../dmp/data-storage/storage/storage-list';
+import {Person} from '../domain/person';
 
 @Injectable({
   providedIn: 'root'
@@ -77,7 +78,11 @@ export class FormService {
 
     // Contributors, datasets, hosts
     for (const contributor of dmp.contributors) {
-      (form.controls.contributors as FormArray).push(new FormControl(contributor));
+      (form.controls.contributors as FormArray).push(
+        this.formBuilder.group({
+          person: [contributor.person],
+          roles: [contributor.roles]
+        }));
     }
     for (const dataset of dmp.datasets) {
       (form.controls.datasets as FormArray).push(this.mapDatasetToFormGroup(dataset));
@@ -133,6 +138,15 @@ export class FormService {
       optionalStatement: formValue.legal.optionalStatement,
       hosts
     };
+  }
+
+  public addContributorToForm(form: FormGroup, contributor: Person) {
+    const contributorControl = new FormGroup({person: new FormControl(contributor), roles: new FormControl(null)});
+    (form.get('contributors') as FormArray).push(contributorControl);
+  }
+
+  public removeContributorFromForm(form: FormGroup, index: number) {
+    (form.get('contributors') as FormArray).removeAt(index);
   }
 
   public addStorageToForm(form: FormGroup, storage: TuStorage) {
