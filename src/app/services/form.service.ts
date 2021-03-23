@@ -159,7 +159,7 @@ export class FormService {
 
   public addExternalStorageToForm(form: FormGroup) {
     const externalStorageGroup = this.formBuilder.group({
-      title: ['Other'],
+      title: ['Other', Validators.required],
       storageLocation: [''],
       backupLocation: [''],
       backupFrequency: [''],
