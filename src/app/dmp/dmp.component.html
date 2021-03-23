@@ -52,6 +52,9 @@
                   (repositoryDetails)="getRepositoryDetails($event)">
     </app-dmp-repo>
   </mat-step>
+  <mat-step label="Reuse of data">
+    <app-dmp-reuse [reuseStep]="reuseStep"></app-dmp-reuse>
+  </mat-step>
   <mat-step label="End">
     <app-dmp-summary [dmpForm]="dmpForm"></app-dmp-summary>
   </mat-step>
