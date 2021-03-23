@@ -43,10 +43,16 @@ export class FormService {
       }),
       storage: this.formBuilder.array([]),
       externalStorage: this.formBuilder.array([]),
-      hosts: this.formBuilder.array([])
+      hosts: this.formBuilder.array([]),
+      reuse: this.formBuilder.group({
+        targetAudience: [''],
+        tools: [''],
+        restrictedAccess: ['']
+      })
     });
   }
 
+  // TODO: Fix data model and mapping
   public mapDmpToForm(dmp: Dmp, form: FormGroup): FormGroup {
 
     form.patchValue({
@@ -92,6 +98,7 @@ export class FormService {
     return form;
   }
 
+  // TODO: Fix data model and mapping
   public exportFormToDmp(form: FormGroup): Dmp {
     const formValue = form.getRawValue();
 

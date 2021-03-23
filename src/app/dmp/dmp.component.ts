@@ -41,6 +41,7 @@ export class DmpComponent implements OnInit {
   storageStep: FormArray;
   externalStorageStep: FormArray;
   repoStep: FormArray;
+  reuseStep: FormGroup;
 
   // Resources
   projectsLoaded$: Observable<boolean>;
@@ -90,6 +91,7 @@ export class DmpComponent implements OnInit {
     this.storageStep = this.dmpForm.get('storage') as FormArray;
     this.externalStorageStep = this.dmpForm.get('externalStorage') as FormArray;
     this.repoStep = this.dmpForm.get('hosts') as FormArray;
+    this.reuseStep = this.dmpForm.get('reuse') as FormGroup;
 
     this.projectStep.valueChanges.subscribe(newVal => {
       if (newVal) {

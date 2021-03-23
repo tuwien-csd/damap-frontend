@@ -52,6 +52,7 @@ import { DmpTableComponent } from './widgets/dmp-table/dmp-table.component';
 import { StorageComponent } from './dmp/data-storage/storage/storage.component';
 import { StorageFilterPipe } from './dmp/data-storage/storage/storage-filter.pipe';
 import { ExternalStorageComponent } from './dmp/data-storage/external-storage/external-storage.component';
+import { ReuseComponent } from './dmp/reuse/reuse.component';
 
 const keycloakService = new KeycloakService();
 
@@ -78,7 +79,8 @@ const keycloakService = new KeycloakService();
     DmpTableComponent,
     StorageComponent,
     StorageFilterPipe,
-    ExternalStorageComponent
+    ExternalStorageComponent,
+    ReuseComponent
   ],
   imports: [
     BrowserModule,
