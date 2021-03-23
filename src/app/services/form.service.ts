@@ -29,8 +29,7 @@ export class FormService {
       documentation: this.formBuilder.group({
         metadata: [''],
         dataGeneration: [''],
-        structure: [''],
-        targetAudience: ['']
+        structure: ['']
       }),
       legal: this.formBuilder.group({
         personalInformation: [null],
