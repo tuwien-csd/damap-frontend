@@ -53,6 +53,8 @@ import { StorageComponent } from './dmp/data-storage/storage/storage.component';
 import { StorageFilterPipe } from './dmp/data-storage/storage/storage-filter.pipe';
 import { ExternalStorageComponent } from './dmp/data-storage/external-storage/external-storage.component';
 import { ReuseComponent } from './dmp/reuse/reuse.component';
+import { CostsComponent } from './dmp/costs/costs.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 const keycloakService = new KeycloakService();
 
@@ -80,7 +82,8 @@ const keycloakService = new KeycloakService();
     StorageComponent,
     StorageFilterPipe,
     ExternalStorageComponent,
-    ReuseComponent
+    ReuseComponent,
+    CostsComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,7 +119,8 @@ const keycloakService = new KeycloakService();
     KeycloakAngularModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatExpansionModule
   ],
   providers: [
     AppComponent,

@@ -42,6 +42,7 @@ export class DmpComponent implements OnInit {
   externalStorageStep: FormArray;
   repoStep: FormArray;
   reuseStep: FormGroup;
+  costsStep: FormGroup;
 
   // Resources
   projectsLoaded$: Observable<boolean>;
@@ -92,6 +93,7 @@ export class DmpComponent implements OnInit {
     this.externalStorageStep = this.dmpForm.get('externalStorage') as FormArray;
     this.repoStep = this.dmpForm.get('hosts') as FormArray;
     this.reuseStep = this.dmpForm.get('reuse') as FormGroup;
+    this.costsStep = this.dmpForm.get('costs') as FormGroup;
 
     this.projectStep.valueChanges.subscribe(newVal => {
       if (newVal) {
@@ -223,6 +225,14 @@ export class DmpComponent implements OnInit {
     if (!repo.info) {
       this.store.dispatch(new LoadRepository({id: repo.id}));
     }
+  }
+
+  addCost() {
+    this.formService.addCostToForm(this.dmpForm);
+  }
+
+  removeCost(index: number) {
+    this.formService.removeCostFromForm(this.dmpForm, index);
   }
 
   private getSuggestedProjects(userId: string) {

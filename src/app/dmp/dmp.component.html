@@ -55,6 +55,12 @@
   <mat-step label="Reuse of data">
     <app-dmp-reuse [reuseStep]="reuseStep"></app-dmp-reuse>
   </mat-step>
+  <mat-step label="Costs">
+    <app-dmp-costs [costsStep]="costsStep"
+                   (costToAdd)="addCost()"
+                   (costToRemove)="removeCost($event)">
+    </app-dmp-costs>
+  </mat-step>
   <mat-step label="End">
     <app-dmp-summary [dmpForm]="dmpForm"></app-dmp-summary>
   </mat-step>
