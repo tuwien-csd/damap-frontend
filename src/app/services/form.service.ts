@@ -48,6 +48,10 @@ export class FormService {
         targetAudience: [''],
         tools: [''],
         restrictedAccess: ['']
+      }),
+      costs: this.formBuilder.group({
+        exist: [null],
+        list: this.formBuilder.array([])
       })
     });
   }
@@ -172,6 +176,21 @@ export class FormService {
       datasets: [null]
     });
     (form.get('externalStorage') as FormArray).push(externalStorageGroup);
+  }
+
+  public addCostToForm(form: FormGroup) {
+    const costFormGroup: FormGroup = this.formBuilder.group({
+      title: ['New cost', Validators.required],
+      currency_code: ['EUR'],
+      value: [0], // validate number
+      type: [''], // controlled vocabulary
+      description: ['']
+    });
+    ((form.get('costs') as FormGroup).get('list') as FormArray).push(costFormGroup);
+  }
+
+  public removeCostFromForm(form: FormGroup, index: number) {
+    ((form.get('costs') as FormGroup).get('list') as FormArray).removeAt(index);
   }
 
   private createDatasetFormGroup(title: string): FormGroup {

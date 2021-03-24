@@ -1,0 +1,18 @@
+mat-radio-button {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.cost-form-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.mat-form-field {
+  width: 48%;
+}
+.mat-raised-button {
+  margin: 1rem 0;
+}

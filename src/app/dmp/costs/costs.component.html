@@ -1,0 +1,55 @@
+<form [formGroup]="costsStep">
+  <label id="costsFormGroup">
+    Select the statement which best describes the situation in your project with respect to costs of data management.
+  </label>
+  <mat-radio-group aria-labelledby="costsFormGroup" formControlName="exist">
+    <mat-radio-button [value]="false">There are no costs dedicated to data management and ensuring that data will be
+      FAIR.
+    </mat-radio-button>
+    <mat-radio-button [value]="true">There are costs dedicated to data management and ensuring that data will be FAIR as
+      outlined below.
+    </mat-radio-button>
+  </mat-radio-group>
+</form>
+<ng-container *ngIf="costsStep.controls.exist.value == true">
+  <button mat-raised-button color="primary" (click)="addCost()">
+    <mat-icon>add_circle</mat-icon>
+    Add cost
+  </button>
+  <form [formGroup]="costsStep">
+    <mat-accordion formArrayName="list">
+      <mat-expansion-panel *ngFor="let item of list.controls; let i = index">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{item.value.title}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{item.value.value | currency}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div [formArrayName]="i">
+          <div class="cost-form-group">
+            <mat-form-field>
+              <mat-label>Title</mat-label>
+              <input matInput formControlName="title" required>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Estimated cost</mat-label>
+              <span matPrefix>€</span>
+              <input matInput type="number" formControlName="value">
+            </mat-form-field>
+          </div>
+          <div class="cost-form-group">
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matInput type="text" formControlName="description"></textarea>
+          </mat-form-field>
+          <button mat-icon-button color="primary" (click)="removeCost(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </form>
+</ng-container>
