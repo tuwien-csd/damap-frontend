@@ -30,4 +30,6 @@ export interface Dmp {
   ethicsReport: string;
   optionalStatement: string;
   hosts: Host[];
+  costsExist: boolean;
+  costs: Cost[];
 }
