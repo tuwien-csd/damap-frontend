@@ -24,7 +24,7 @@
             {{item.value.title}}
           </mat-panel-title>
           <mat-panel-description>
-            {{item.value.value | currency}}
+            {{item.value.value | currency: item.value.currency_code}}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div [formArrayName]="i">
@@ -35,7 +35,7 @@
             </mat-form-field>
             <mat-form-field>
               <mat-label>Estimated cost</mat-label>
-              <span matPrefix>€</span>
+              <span matPrefix>€ &nbsp;</span>
               <input matInput type="number" formControlName="value">
             </mat-form-field>
           </div>
