@@ -6,6 +6,7 @@ import {Dataset} from '../domain/dataset';
 import {Host} from '../domain/host';
 import {TuStorage} from '../dmp/data-storage/storage/storage-list';
 import {Person} from '../domain/person';
+import {Cost} from '../domain/cost';
 
 @Injectable({
   providedIn: 'root'
@@ -82,10 +83,13 @@ export class FormService {
         sensitiveDataSecurity: dmp.sensitiveDataSecurity,
         ethicsReport: dmp.ethicsReport,
         optionalStatement: dmp.optionalStatement,
+      },
+      costs: {
+        exist: dmp.costsExist
       }
     });
 
-    // Contributors, datasets, hosts
+    // Contributors, datasets, hosts, costs
     for (const contributor of dmp.contributors) {
       (form.controls.contributors as FormArray).push(
         this.formBuilder.group({
@@ -98,6 +102,9 @@ export class FormService {
     }
     for (const host of dmp.hosts) {
       (form.controls.hosts as FormArray).push(this.mapHostToFormGroup(host));
+    }
+    for (const cost of dmp.costs) {
+      (form.controls.costs.get('list') as FormArray).push(this.mapCostToFormGroup(cost));
     }
     return form;
   }
@@ -127,6 +134,13 @@ export class FormService {
       }
     }
 
+    const costs: Cost[] = [];
+    if (formValue.costs?.list?.length > 0) {
+      for (const cost of formValue.costs.list) {
+        costs.push(cost);
+      }
+    }
+
     return {
       project: formValue.project,
       contact: formValue.contact,
@@ -146,7 +160,9 @@ export class FormService {
       sensitiveDataSecurity: formValue.legal.sensitiveData ? formValue.legal.sensitiveDataSecurity : '',
       ethicsReport: formValue.legal.ethicsReport,
       optionalStatement: formValue.legal.optionalStatement,
-      hosts
+      hosts,
+      costsExist: formValue.costs?.exist,
+      costs
     };
   }
 
@@ -179,13 +195,7 @@ export class FormService {
   }
 
   public addCostToForm(form: FormGroup) {
-    const costFormGroup: FormGroup = this.formBuilder.group({
-      title: ['New cost', Validators.required],
-      currency_code: ['EUR', Validators.required],
-      value: [null, Validators.pattern('^[0-9]*\.?[0-9]{0,2}$')], // validate cost
-      type: [''], // controlled vocabulary
-      description: ['']
-    });
+    const costFormGroup: FormGroup = this.createCostFormGroup();
     ((form.get('costs') as FormGroup).get('list') as FormArray).push(costFormGroup);
   }
 
@@ -236,6 +246,31 @@ export class FormService {
       name: host.name || '',
       date: host.date || null,
       datasets: host.datasets
+    });
+    return formGroup;
+  }
+
+  private createCostFormGroup(): FormGroup {
+    const costFormGroup: FormGroup = this.formBuilder.group({
+      id: [null, {disabled: true}],
+      title: ['New cost', Validators.required],
+      currency_code: ['EUR', Validators.required],
+      value: [null, Validators.pattern('^[0-9]*\.?[0-9]{0,2}$')], // validate format
+      type: [''],
+      description: ['']
+    });
+    return costFormGroup;
+  }
+
+  private mapCostToFormGroup(cost: Cost): FormGroup {
+    const formGroup = this.createCostFormGroup();
+    formGroup.setValue({
+      id: cost.id,
+      title: cost.title,
+      currency_code: cost.currency_code,
+      value: cost.value,
+      type: cost.type,
+      description: cost.description
     });
     return formGroup;
   }
