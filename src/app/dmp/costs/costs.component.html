@@ -16,7 +16,7 @@
     <mat-icon>add_circle</mat-icon>
     Add cost
   </button>
-  <form [formGroup]="costsStep">
+  <form [formGroup]="costsStep" (keydown.enter)="$event.preventDefault()">
     <mat-accordion formArrayName="list">
       <mat-expansion-panel *ngFor="let item of list.controls; let i = index">
         <mat-expansion-panel-header>
@@ -36,7 +36,10 @@
             <mat-form-field>
               <mat-label>Estimated cost</mat-label>
               <span matPrefix>€ &nbsp;</span>
-              <input matInput type="number" formControlName="value">
+              <input matInput formControlName="value" placeholder="1000.00">
+              <mat-error *ngIf="!item.get('value').valid">
+                Invalid input, please use the following format: 1234.56
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="cost-form-group">

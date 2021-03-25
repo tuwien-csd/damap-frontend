@@ -182,7 +182,7 @@ export class FormService {
     const costFormGroup: FormGroup = this.formBuilder.group({
       title: ['New cost', Validators.required],
       currency_code: ['EUR', Validators.required],
-      value: [0], // validate number
+      value: [null, Validators.pattern('^[0-9]*\.?[0-9]{0,2}$')], // validate cost
       type: [''], // controlled vocabulary
       description: ['']
     });
