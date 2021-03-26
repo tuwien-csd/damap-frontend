@@ -84,6 +84,11 @@ export class FormService {
         ethicsReport: dmp.ethicsReport,
         optionalStatement: dmp.optionalStatement,
       },
+      reuse: {
+        targetAudience: dmp.targetAudience,
+        tools: dmp.tools,
+        restrictedAccess: dmp.restrictedDataAccess
+      },
       costs: {
         exist: dmp.costsExist
       }
@@ -151,7 +156,6 @@ export class FormService {
       metadata: formValue.documentation.metadata,
       dataGeneration: formValue.documentation.dataGeneration,
       structure: formValue.documentation.structure,
-      targetAudience: formValue.documentation.targetAudience,
       personalInformation: formValue.legal.personalInformation,
       sensitiveData: formValue.legal.sensitiveData,
       legalRestrictions: formValue.legal.legalRestrictions,
@@ -160,6 +164,9 @@ export class FormService {
       sensitiveDataSecurity: formValue.legal.sensitiveData ? formValue.legal.sensitiveDataSecurity : '',
       ethicsReport: formValue.legal.ethicsReport,
       optionalStatement: formValue.legal.optionalStatement,
+      targetAudience: formValue.reuse.targetAudience,
+      restrictedDataAccess: formValue.reuse.restrictedAccess,
+      tools: formValue.reuse.tools,
       hosts,
       costsExist: formValue.costs?.exist,
       costs

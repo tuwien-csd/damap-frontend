@@ -22,6 +22,8 @@ export interface Dmp {
   dataGeneration: string;
   structure: string;
   targetAudience: string;
+  tools: string;
+  restrictedDataAccess: string;
   personalInformation: boolean;
   sensitiveData: boolean;
   sensitiveDataSecurity?: string;
