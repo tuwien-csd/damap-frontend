@@ -4,6 +4,7 @@ import {Person} from './person';
 import {DataKind} from './enum/data-kind.enum';
 import {Dataset} from './dataset';
 import {Host} from './host';
+import {Cost} from './cost';
 
 export interface Dmp {
   readonly created?: Date;
