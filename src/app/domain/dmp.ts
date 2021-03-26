@@ -31,7 +31,7 @@ export interface Dmp {
   ethicalIssuesExist: boolean;
   committeeApproved: boolean;
   ethicsReport: string;
-  optionalStatement: string;
+  ethicalComplianceStatement: string;
   storage: Storage[];
   externalStorage: Storage[];
   hosts: Host[];

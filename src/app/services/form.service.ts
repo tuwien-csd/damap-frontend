@@ -81,7 +81,7 @@ export class FormService {
         committeeApproved: dmp.committeeApproved,
         sensitiveDataSecurity: dmp.sensitiveDataSecurity,
         ethicsReport: dmp.ethicsReport,
-        optionalStatement: dmp.optionalStatement,
+        optionalStatement: dmp.ethicalComplianceStatement,
       },
       reuse: {
         targetAudience: dmp.targetAudience,
@@ -176,7 +176,7 @@ export class FormService {
       committeeApproved: formValue.legal.committeeApproved,
       sensitiveDataSecurity: formValue.legal.sensitiveData ? formValue.legal.sensitiveDataSecurity : '',
       ethicsReport: formValue.legal.ethicsReport,
-      optionalStatement: formValue.legal.optionalStatement,
+      ethicalComplianceStatement: formValue.legal.optionalStatement,
       targetAudience: formValue.reuse.targetAudience,
       restrictedDataAccess: formValue.reuse.restrictedAccess,
       tools: formValue.reuse.tools,
