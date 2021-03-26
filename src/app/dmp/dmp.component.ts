@@ -16,7 +16,6 @@ import {Repository} from '../domain/repository';
 import {selectRepositories, selectRepositoriesLoaded} from '../store/selectors/repository.selectors';
 import {LoadRepositories, LoadRepository} from '../store/actions/repository.actions';
 import {StepperSelectionEvent} from '@angular/cdk/stepper';
-import {TuStorage} from './data-storage/storage/storage-list';
 
 @Component({
   selector: 'app-dmp',
@@ -191,12 +190,12 @@ export class DmpComponent implements OnInit {
     this.datasets.removeAt(index);
   }
 
-  addStorage(storage: TuStorage) {
+  addStorage(storage: Storage) {
     this.formService.addStorageToForm(this.dmpForm, storage);
   }
 
   removeStorage(index: number): void {
-    this.storageStep.removeAt(index);
+    this.formService.removeStorageFromForm(this.dmpForm, index);
   }
 
   addExternalStorage() {
@@ -204,21 +203,15 @@ export class DmpComponent implements OnInit {
   }
 
   removeExternalStorage(index: number): void {
-    this.externalStorageStep.removeAt(index);
+    this.formService.removeExternalStorageFromForm(this.dmpForm, index);
   }
 
-  addRepository(repo: any) {
-    const repoGroup = this.formBuilder.group({
-      id: repo.id,
-      name: repo.name,
-      datasets: [''],
-      date: ['']
-    });
-    this.repoStep.push(repoGroup);
+  addRepository(repo: {id: string, name: string}) {
+    this.formService.addRepositoryToForm(this.dmpForm, repo);
   }
 
   removeRepository(index: number): void {
-    this.repoStep.removeAt(index);
+    this.formService.removeRepositoryFromForm(this.dmpForm, index);
   }
 
   getRepositoryDetails(repo: Repository) {

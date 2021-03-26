@@ -1,6 +1,6 @@
 export interface Host {
-  id: string;
-  name: string;
-  date: Date;
-  datasets: string[]; // referenceHashes
+  id: string; // r3data id
+  title: string;
+  date?: Date;
+  datasets?: string[]; // referenceHashes
 }

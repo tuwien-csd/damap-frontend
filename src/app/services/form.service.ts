@@ -4,7 +4,6 @@ import {Dmp} from '../domain/dmp';
 import {Contributor} from '../domain/contributor';
 import {Dataset} from '../domain/dataset';
 import {Host} from '../domain/host';
-import {TuStorage} from '../dmp/data-storage/storage/storage-list';
 import {Person} from '../domain/person';
 import {Cost} from '../domain/cost';
 
@@ -146,6 +145,20 @@ export class FormService {
       }
     }
 
+    const storage: Storage[] = [];
+    if (formValue.storage?.length > 0) {
+      for (const item of formValue.storage) {
+        storage.push(item);
+      }
+    }
+
+    const externalStorage: Storage[] = [];
+    if (formValue.externalStorage?.length > 0) {
+      for (const item of formValue.externalStorage) {
+        externalStorage.push(item);
+      }
+    }
+
     return {
       project: formValue.project,
       contact: formValue.contact,
@@ -167,6 +180,8 @@ export class FormService {
       targetAudience: formValue.reuse.targetAudience,
       restrictedDataAccess: formValue.reuse.restrictedAccess,
       tools: formValue.reuse.tools,
+      storage,
+      externalStorage,
       hosts,
       costsExist: formValue.costs?.exist,
       costs
@@ -182,12 +197,17 @@ export class FormService {
     (form.get('contributors') as FormArray).removeAt(index);
   }
 
-  public addStorageToForm(form: FormGroup, storage: TuStorage) {
+  public addStorageToForm(form: FormGroup, storage: Storage) {
     const storageGroup = this.formBuilder.group({
-      service: [storage],
+      id: [storage.id],
+      title: [storage.title],
       datasets: [null]
     });
     (form.get('storage') as FormArray).push(storageGroup);
+  }
+
+  public removeStorageFromForm(form: FormGroup, index: number) {
+    (form.get('storage') as FormArray).removeAt(index);
   }
 
   public addExternalStorageToForm(form: FormGroup) {
@@ -201,6 +221,23 @@ export class FormService {
     (form.get('externalStorage') as FormArray).push(externalStorageGroup);
   }
 
+  public removeExternalStorageFromForm(form: FormGroup, index: number) {
+    (form.get('externalStorage') as FormArray).removeAt(index);
+  }
+
+  public addRepositoryToForm(form: FormGroup, repo: {id: string, name: string}) {
+    const repoGroup = this.formBuilder.group({
+      id: repo.id,
+      title: repo.name,
+      datasets: [''],
+      date: ['']
+    });
+    (form.get('hosts') as FormArray).push(repoGroup);
+  }
+
+  public removeRepositoryFromForm(form: FormGroup, index: number) {
+    (form.get('hosts') as FormArray).removeAt(index);
+  }
   public addCostToForm(form: FormGroup) {
     const costFormGroup: FormGroup = this.createCostFormGroup();
     ((form.get('costs') as FormGroup).get('list') as FormArray).push(costFormGroup);
@@ -240,7 +277,7 @@ export class FormService {
   private createHostFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [''],
-      name: [''],
+      title: [''],
       date: [null],
       datasets: ['']
     });
@@ -250,7 +287,7 @@ export class FormService {
     const formGroup = this.createHostFormGroup();
     formGroup.patchValue({
       id: host.id,
-      name: host.name || '',
+      title: host.title || '',
       date: host.date || null,
       datasets: host.datasets
     });

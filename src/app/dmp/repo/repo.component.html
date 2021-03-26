@@ -7,7 +7,7 @@
   <mat-card *ngFor="let repo of repoStep.controls, let i=index" class="mat-selected">
     <div class="mat-card-container">
       <div class="mat-card-left">
-        <h4>{{repo.value.name}}</h4>
+        <h4>{{repo.value.title}}</h4>
       </div>
       <div class="mat-card-right">
         <mat-icon (click)="removeRepository(i)">cancel</mat-icon>

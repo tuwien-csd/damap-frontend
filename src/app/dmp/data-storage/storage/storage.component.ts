@@ -1,7 +1,7 @@
 import {Component, Input, EventEmitter, OnInit, Output} from '@angular/core';
 import {TU_STORAGE} from './storage-list';
 import {FormArray} from '@angular/forms';
-import {TuStorage} from './storage-list';
+import {Storage} from '../../../domain/storage';
 
 @Component({
   selector: 'app-dmp-storage',
@@ -13,10 +13,10 @@ export class StorageComponent implements OnInit {
   @Input() storageStep: FormArray;
   @Input() datasets: FormArray;
 
-  @Output() storageToAdd = new EventEmitter<TuStorage>();
+  @Output() storageToAdd = new EventEmitter<Storage>();
   @Output() storageToRemove = new EventEmitter<number>();
 
-  storage: TuStorage[] = TU_STORAGE;
+  storage: Storage[] = TU_STORAGE;
 
   constructor() {
   }
@@ -24,7 +24,7 @@ export class StorageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addStorage(storage: TuStorage) {
+  addStorage(storage: Storage) {
     this.storageToAdd.emit(storage);
   }
 
