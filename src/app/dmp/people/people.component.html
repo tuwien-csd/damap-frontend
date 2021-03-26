@@ -40,7 +40,7 @@
         <form [formGroup]="contributor">
         <mat-form-field appearance="fill">
           <mat-label>Role</mat-label>
-          <mat-select formControlName="roles" multiple>
+          <mat-select formControlName="role">
             <mat-option
               *ngFor="let role of roles | keyvalue" [value]="role.value">
               {{role.value}}

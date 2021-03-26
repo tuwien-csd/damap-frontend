@@ -98,7 +98,7 @@ export class FormService {
       (form.controls.contributors as FormArray).push(
         this.formBuilder.group({
           person: [contributor.person],
-          roles: [contributor.roles]
+          role: contributor.role
         }));
     }
     for (const dataset of dmp.datasets) {
@@ -189,7 +189,7 @@ export class FormService {
   }
 
   public addContributorToForm(form: FormGroup, contributor: Person) {
-    const contributorControl = new FormGroup({person: new FormControl(contributor), roles: new FormControl(null)});
+    const contributorControl = new FormGroup({person: new FormControl(contributor), role: new FormControl(null)});
     (form.get('contributors') as FormArray).push(contributorControl);
   }
 
