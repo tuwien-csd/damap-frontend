@@ -4,7 +4,7 @@
 </button>
 <section class="external-storage">
   <mat-card *ngFor="let item of externalStorageStep.controls; let i = index">
-    <form [formGroup]="item">
+    <form [formGroup]="item" (keydown.enter)="$event.preventDefault()">
       <div class="storage-card-top">
       <mat-card-header>
         <mat-card-title><mat-form-field>

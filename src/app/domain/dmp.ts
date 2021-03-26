@@ -32,6 +32,8 @@ export interface Dmp {
   committeeApproved: boolean;
   ethicsReport: string;
   optionalStatement: string;
+  storage: Storage[];
+  externalStorage: Storage[];
   hosts: Host[];
   costsExist: boolean;
   costs: Cost[];

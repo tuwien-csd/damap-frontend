@@ -1,13 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {TuStorage} from './storage-list';
+import {Storage} from '../../../domain/storage';
 
 @Pipe({
   name: 'storageFilter'
 })
 export class StorageFilterPipe implements PipeTransform {
 
-  transform(data: TuStorage[], selected: {service: TuStorage, datasets: string[]}[]) {
-    return data.filter(item => !selected.find(entry => entry.service.id === item.id));
+  transform(data: Storage[], selected: {id: string, datasets: string[]}[]) {
+    return data.filter(item => !selected.find(entry => entry.id === item.id));
   }
 
 }
