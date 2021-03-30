@@ -41,9 +41,23 @@
                 Invalid input, please use the following format: 1234.56
               </mat-error>
             </mat-form-field>
+            <mat-form-field>
+              <mat-label>Cost Type</mat-label>
+              <mat-select formControlName="type">
+                <mat-option *ngFor="let type of costType | keyvalue" [value]="type.value">
+                  {{type.value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
+          <div class="cost-form-group" *ngIf="item.value.type === costType.other">
+          <mat-form-field class="full-width">
+            <mat-label>Please specify the cost type</mat-label>
+            <input matInput type="text" formControlName="customType">
+          </mat-form-field>
+        </div>
           <div class="cost-form-group">
-          <mat-form-field>
+          <mat-form-field class="full-width">
             <mat-label>Description</mat-label>
             <textarea matInput type="text" formControlName="description"></textarea>
           </mat-form-field>

@@ -295,15 +295,15 @@ export class FormService {
   }
 
   private createCostFormGroup(): FormGroup {
-    const costFormGroup: FormGroup = this.formBuilder.group({
+    return this.formBuilder.group({
       id: [null, {disabled: true}],
       title: ['New cost', Validators.required],
       currency_code: ['EUR', Validators.required],
       value: [null, Validators.pattern('^[0-9]*\.?[0-9]{0,2}$')], // validate format
-      type: [''],
+      type: [null],
+      customType: [null],
       description: ['']
     });
-    return costFormGroup;
   }
 
   private mapCostToFormGroup(cost: Cost): FormGroup {
@@ -314,6 +314,7 @@ export class FormService {
       currency_code: cost.currency_code,
       value: cost.value,
       type: cost.type,
+      customType: cost.customType,
       description: cost.description
     });
     return formGroup;
