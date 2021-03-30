@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
+import {CostType} from '../../domain/enum/cost-type.enum';
 
 @Component({
   selector: 'app-dmp-costs',
@@ -13,7 +14,7 @@ export class CostsComponent implements OnInit {
   @Output() costToAdd = new EventEmitter();
   @Output() costToRemove = new EventEmitter<number>();
 
-  // panelOpenState = false;
+  costType: any = CostType;
 
   constructor() {
   }
