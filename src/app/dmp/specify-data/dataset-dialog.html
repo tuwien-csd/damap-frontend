@@ -23,8 +23,16 @@
       <mat-form-field>
         <mat-label>Estimated size</mat-label>
         <mat-select formControlName="size">
-          <mat-option *ngFor="let size of FILE_SIZES" [value]="size.label">
+          <mat-option *ngFor="let size of FILE_SIZES" [value]="size.max">
             {{size.label}}<br/>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Data Access</mat-label>
+        <mat-select formControlName="dataAccess">
+          <mat-option *ngFor="let type of accessType | keyvalue" [value]="type.value">
+            {{type.value}}<br/>
           </mat-option>
         </mat-select>
       </mat-form-field>

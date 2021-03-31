@@ -6,6 +6,7 @@ import {Dataset} from '../domain/dataset';
 import {Host} from '../domain/host';
 import {Person} from '../domain/person';
 import {Cost} from '../domain/cost';
+import {DataAccessType} from '../domain/enum/data-access-type.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -247,7 +248,7 @@ export class FormService {
     ((form.get('costs') as FormGroup).get('list') as FormArray).removeAt(index);
   }
 
-  private createDatasetFormGroup(title: string): FormGroup {
+  public createDatasetFormGroup(title: string): FormGroup {
     return this.formBuilder.group({
       title: [title, Validators.required],
       publish: [false],
@@ -256,21 +257,14 @@ export class FormService {
       type: [null],
       size: [''],
       comment: [''],
+      dataAccess: [DataAccessType.open],
       referenceHash: ['']
     });
   }
 
   private mapDatasetToFormGroup(dataset: Dataset): FormGroup {
     const formGroup = this.createDatasetFormGroup(dataset.title);
-    formGroup.patchValue({
-      publish: dataset.publish || false,
-      license: dataset.license,
-      startDate: dataset.startDate || null,
-      type: dataset.type || null,
-      size: dataset.type,
-      comment: dataset.comment,
-      referenceHash: dataset.referenceHash
-    })
+    formGroup.setValue(dataset);
     return formGroup;
   }
 
