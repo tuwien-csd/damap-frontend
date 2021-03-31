@@ -52,6 +52,8 @@ export class FormService {
         tools: [''],
         restrictedAccess: ['']
       }),
+      restrictedAccessInfo: [''],
+      closedAccessInfo: [''],
       costs: this.formBuilder.group({
         exist: [null],
         list: this.formBuilder.array([])
@@ -93,7 +95,9 @@ export class FormService {
       },
       costs: {
         exist: dmp.costsExist
-      }
+      },
+      restrictedAccessInfo: dmp.restrictedAccessInfo,
+      closedAccessInfo: dmp.closedAccessInfo,
     });
 
     // Contributors, datasets, hosts, costs
@@ -186,6 +190,8 @@ export class FormService {
       externalStorage,
       externalStorageInfo: formValue.externalStorageInfo,
       hosts,
+      restrictedAccessInfo: formValue.restrictedAccessInfo,
+      closedAccessInfo: formValue.closedAccessInfo,
       costsExist: formValue.costs?.exist,
       costs
     };
@@ -228,7 +234,7 @@ export class FormService {
     (form.get('externalStorage') as FormArray).removeAt(index);
   }
 
-  public addRepositoryToForm(form: FormGroup, repo: {id: string, name: string}) {
+  public addRepositoryToForm(form: FormGroup, repo: { id: string, name: string }) {
     const repoGroup = this.formBuilder.group({
       id: repo.id,
       title: repo.name,

@@ -44,8 +44,9 @@
   <mat-step label="Licensing">
     <app-dmp-licenses [datasets]="datasets"></app-dmp-licenses>
   </mat-step>
-  <mat-step label="Specify repository/repositories">
+  <mat-step label="Specify repositories for publication and preservation">
     <app-dmp-repo [repoStep]="repoStep" [datasets]="datasets"
+                  [restrictedAccessInfo]="restrictedAccessInfo" [closedAccessInfo]="closedAccessInfo"
                   [loaded]="repositoriesLoaded$ | async"
                   [repositories]="repositories$ | async"
                   (repositoryToAdd)="addRepository($event)"

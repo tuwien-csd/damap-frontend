@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../services/backend.service';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {KeycloakService} from 'keycloak-angular';
 import {Observable} from 'rxjs';
 import {Person} from '../domain/person';
@@ -42,6 +42,8 @@ export class DmpComponent implements OnInit {
   externalStorageStep: FormArray;
   externalStorageInfo: FormControl;
   repoStep: FormArray;
+  restrictedAccessInfo: FormControl;
+  closedAccessInfo: FormControl;
   reuseStep: FormGroup;
   costsStep: FormGroup;
 
@@ -94,6 +96,8 @@ export class DmpComponent implements OnInit {
     this.externalStorageStep = this.dmpForm.get('externalStorage') as FormArray;
     this.externalStorageInfo = this.dmpForm.get('externalStorageInfo') as FormControl;
     this.repoStep = this.dmpForm.get('hosts') as FormArray;
+    this.restrictedAccessInfo = this.dmpForm.get('restrictedAccessInfo') as FormControl;
+    this.closedAccessInfo = this.dmpForm.get('closedAccessInfo') as FormControl;
     this.reuseStep = this.dmpForm.get('reuse') as FormGroup;
     this.costsStep = this.dmpForm.get('costs') as FormGroup;
 
@@ -196,7 +200,7 @@ export class DmpComponent implements OnInit {
     this.formService.removeExternalStorageFromForm(this.dmpForm, index);
   }
 
-  addRepository(repo: {id: string, name: string}) {
+  addRepository(repo: { id: string, name: string }) {
     this.formService.addRepositoryToForm(this.dmpForm, repo);
   }
 

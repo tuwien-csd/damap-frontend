@@ -38,6 +38,29 @@
   </mat-card>
 </div>
 
+<ng-container *ngIf="restricted.length > 0">
+  <mat-form-field class="full-width">
+    <mat-label class="wrap-label">Dataset<span *ngIf="restricted.length > 1">s</span> <span
+      *ngFor="let set of closed, last as last">
+      <span *ngIf="last && restricted.length > 1"> and </span> {{set}}<span *ngIf="!last">, </span> </span>
+      will have access restrictions. Explain why and clearly describe the access conditions.
+    </mat-label>
+    <textarea matInput [formControl]="restrictedAccessInfo"></textarea>
+  </mat-form-field>
+</ng-container>
+
+<ng-container *ngIf="closed.length > 0">
+  <mat-form-field class="full-width">
+    <mat-label class="wrap-label">For dataset<span *ngIf="restricted.length > 1">s</span>
+      <span *ngFor="let set of restricted, last as last">
+      <span *ngIf="last && closed.length > 1"> and </span> {{set}}<span *ngIf="!last">, </span> </span>
+      only the metadata will be published open access.
+      Explain why the data will not be accessible (closed access).
+    </mat-label>
+    <textarea matInput [formControl]="closedAccessInfo"></textarea>
+  </mat-form-field>
+</ng-container>
+
 <!-- TABLE -->
 <h2>Repositories</h2>
 <ng-container *ngIf="loaded else loadRepos">
