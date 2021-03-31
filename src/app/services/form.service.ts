@@ -7,6 +7,7 @@ import {Host} from '../domain/host';
 import {Person} from '../domain/person';
 import {Cost} from '../domain/cost';
 import {DataAccessType} from '../domain/enum/data-access-type.enum';
+import {Storage} from '../domain/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,9 @@ export class FormService {
         dataGeneration: [''],
         structure: ['']
       }),
+      storage: this.formBuilder.array([]),
+      externalStorage: this.formBuilder.array([]),
+      externalStorageInfo: [''],
       legal: this.formBuilder.group({
         personalInformation: [null],
         sensitiveData: [null],
@@ -42,8 +46,6 @@ export class FormService {
         ethicsReport: [''],
         optionalStatement: [''],
       }),
-      storage: this.formBuilder.array([]),
-      externalStorage: this.formBuilder.array([]),
       hosts: this.formBuilder.array([]),
       reuse: this.formBuilder.group({
         targetAudience: [''],
@@ -57,7 +59,6 @@ export class FormService {
     });
   }
 
-  // TODO: Fix data model and mapping
   public mapDmpToForm(dmp: Dmp, form: FormGroup): FormGroup {
 
     form.patchValue({
@@ -74,6 +75,7 @@ export class FormService {
         structure: dmp.structure,
         targetAudience: dmp.targetAudience
       },
+      externalStorageInfo: dmp.externalStorageInfo,
       legal: {
         personalInformation: dmp.project,
         sensitiveData: dmp.sensitiveData,
@@ -114,7 +116,6 @@ export class FormService {
     return form;
   }
 
-  // TODO: Fix data model and mapping
   public exportFormToDmp(form: FormGroup): Dmp {
     const formValue = form.getRawValue();
 
@@ -183,6 +184,7 @@ export class FormService {
       tools: formValue.reuse.tools,
       storage,
       externalStorage,
+      externalStorageInfo: formValue.externalStorageInfo,
       hosts,
       costsExist: formValue.costs?.exist,
       costs
@@ -239,6 +241,7 @@ export class FormService {
   public removeRepositoryFromForm(form: FormGroup, index: number) {
     (form.get('hosts') as FormArray).removeAt(index);
   }
+
   public addCostToForm(form: FormGroup) {
     const costFormGroup: FormGroup = this.createCostFormGroup();
     ((form.get('costs') as FormGroup).get('list') as FormArray).push(costFormGroup);
