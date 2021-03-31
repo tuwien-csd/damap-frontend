@@ -162,27 +162,14 @@ export class DmpComponent implements OnInit {
   }
 
   createDataset(title: string) {
-    this.datasets.push(this.formBuilder.group({
-        title: [title, Validators.required],
-        publish: [false],
-        license: [''],
-        startDate: [null],
-        type: [null],
-        size: [''],
-        comment: [''],
-        referenceHash: this.userId + (+new Date()).toString(36)
-      })
-    );
+    const dataset = this.formService.createDatasetFormGroup(title);
+    dataset.patchValue({referenceHash: this.userId + (+new Date()).toString(36)});
+    this.datasets.push(dataset);
   }
 
   updateDataset(event: { index: number, update: FormGroup }) {
     const dataset = this.datasets.at(event.index);
-    dataset.patchValue({
-      title: event.update.value.title,
-      type: event.update.value.type,
-      size: event.update.value.size,
-      comment: event.update.value.comment
-    });
+    dataset.patchValue(event.update.getRawValue());
   }
 
   removeDataset(index: number) {

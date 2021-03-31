@@ -84,7 +84,7 @@ tr.element-row:not(.expanded-row):active {
 }
 
 .type-selection {
-  height: auto;
+  height: auto !important;
 }
 
 .type-description {

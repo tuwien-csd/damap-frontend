@@ -55,6 +55,7 @@ import { ExternalStorageComponent } from './dmp/data-storage/external-storage/ex
 import { ReuseComponent } from './dmp/reuse/reuse.component';
 import { CostsComponent } from './dmp/costs/costs.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { BytePipe } from './pipe/byte.pipe';
 
 const keycloakService = new KeycloakService();
 
@@ -84,6 +85,7 @@ const keycloakService = new KeycloakService();
     ExternalStorageComponent,
     ReuseComponent,
     CostsComponent,
+    BytePipe,
   ],
   imports: [
     BrowserModule,
