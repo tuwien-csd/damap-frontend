@@ -10,7 +10,7 @@ export class ExternalStorageComponent implements OnInit {
 
   @Input() externalStorageStep: FormArray;
   @Input() datasets: FormArray;
-  storageInfo: FormControl = new FormControl(); // TODO: add to dmp Form
+  @Input() externalStorageInfo: FormControl = new FormControl();
 
   @Output() externalStorageToAdd = new EventEmitter();
   @Output() externalStorageToRemove = new EventEmitter<number>();

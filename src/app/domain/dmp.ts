@@ -5,6 +5,7 @@ import {DataKind} from './enum/data-kind.enum';
 import {Dataset} from './dataset';
 import {Host} from './host';
 import {Cost} from './cost';
+import {Storage} from './storage';
 
 export interface Dmp {
   readonly created?: Date;
@@ -34,6 +35,7 @@ export interface Dmp {
   ethicalComplianceStatement: string;
   storage: Storage[];
   externalStorage: Storage[];
+  externalStorageInfo: string;
   hosts: Host[];
   costsExist: boolean;
   costs: Cost[];

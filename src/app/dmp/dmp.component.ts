@@ -16,6 +16,7 @@ import {Repository} from '../domain/repository';
 import {selectRepositories, selectRepositoriesLoaded} from '../store/selectors/repository.selectors';
 import {LoadRepositories, LoadRepository} from '../store/actions/repository.actions';
 import {StepperSelectionEvent} from '@angular/cdk/stepper';
+import {Storage} from '../domain/storage';
 
 @Component({
   selector: 'app-dmp',
@@ -39,6 +40,7 @@ export class DmpComponent implements OnInit {
   legalEthicalStep: FormGroup;
   storageStep: FormArray;
   externalStorageStep: FormArray;
+  externalStorageInfo: FormControl;
   repoStep: FormArray;
   reuseStep: FormGroup;
   costsStep: FormGroup;
@@ -90,6 +92,7 @@ export class DmpComponent implements OnInit {
     this.legalEthicalStep = this.dmpForm.get('legal') as FormGroup;
     this.storageStep = this.dmpForm.get('storage') as FormArray;
     this.externalStorageStep = this.dmpForm.get('externalStorage') as FormArray;
+    this.externalStorageInfo = this.dmpForm.get('externalStorageInfo') as FormControl;
     this.repoStep = this.dmpForm.get('hosts') as FormArray;
     this.reuseStep = this.dmpForm.get('reuse') as FormGroup;
     this.costsStep = this.dmpForm.get('costs') as FormGroup;
