@@ -37,6 +37,8 @@ export interface Dmp {
   externalStorage: Storage[];
   externalStorageInfo: string;
   hosts: Host[];
+  restrictedAccessInfo: string;
+  closedAccessInfo: string;
   costsExist: boolean;
   costs: Cost[];
 }

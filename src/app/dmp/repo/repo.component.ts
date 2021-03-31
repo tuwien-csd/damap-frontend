@@ -1,9 +1,10 @@
 import {Component, Input, OnInit, EventEmitter, Output, ViewChild, OnChanges, SimpleChanges} from '@angular/core';
-import {FormArray} from '@angular/forms';
+import {FormArray, FormControl} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Repository} from '../../domain/repository';
+import {DataAccessType} from '../../domain/enum/data-access-type.enum';
 
 @Component({
   selector: 'app-dmp-repo',
@@ -25,6 +26,8 @@ export class RepoComponent implements OnInit, OnChanges {
 
   @Input() repoStep: FormArray;
   @Input() datasets: FormArray;
+  @Input() restrictedAccessInfo: FormControl;
+  @Input() closedAccessInfo: FormControl;
 
   @Output() repositoryToAdd = new EventEmitter<any>();
   @Output() repositoryToRemove = new EventEmitter<any>();
@@ -34,12 +37,29 @@ export class RepoComponent implements OnInit, OnChanges {
   expandedElement: any | null;
   dataSource = new MatTableDataSource<Repository>();
 
+  restricted: string[] = [];
+  closed: string[] = [];
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.datasets.valueChanges.subscribe(
+      newVal => {
+        this.restricted = [];
+        this.closed = [];
+        for (const val of newVal) {
+          if(val.dataAccess === DataAccessType.restricted) {
+            this.addRestricted(val.title);
+          }
+          if(val.dataAccess === DataAccessType.closed) {
+            this.addClosed(val.title);
+          }
+        }
+      }
+    )
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -89,6 +109,14 @@ export class RepoComponent implements OnInit, OnChanges {
   removeRepository(index: number): void {
     this.repositoryToRemove.emit(index);
     this.filterRepos();
+  }
+
+  private addRestricted(value: string) {
+    this.restricted.push(value);
+  }
+
+  private addClosed(value: string) {
+    this.closed.push(value);
   }
 
 }
