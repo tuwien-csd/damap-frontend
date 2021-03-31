@@ -22,7 +22,6 @@ export class RepoComponent implements OnInit, OnChanges {
   @Input() loaded: boolean;
   @Input() repositories: Repository[]; // Repo list loaded from backend
   repoList: any = []; // Filtered repo list (repo list minus selected repos)
-  reposSelected: any = []; // selected repos
 
   @Input() repoStep: FormArray;
   @Input() datasets: FormArray;
@@ -45,27 +44,34 @@ export class RepoComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.repositories) {
+      // Timeout needed for paginator init
       setTimeout(_ => this.filterRepos(), 1);
     }
   }
 
-  getRepoDetails(repo) {
+  expandRow(repo: Repository) {
+    this.expandedElement = this.expandedElement === repo.id ? null : repo.id;
+    if (!repo.info) {
+      this.getRepoDetails(repo);
+    }
+  }
+
+
+  private getRepoDetails(repo: Repository) {
     this.repositoryDetails.emit(repo);
   }
 
   // Filter selected repos from repo list
   private filterRepos(): void {
     this.repoList = Object.assign([], this.repositories);
-    if (this.reposSelected.length > 0) {
-      for (const entry of this.reposSelected) {
-        this.repoList = this.repoList.filter(e => e !== entry);
-      }
+    for (const entry of this.repoStep.controls) {
+      this.repoList = this.repoList.filter(e => e.id !== entry.value.id);
     }
-    this.dataSource.data = this.repoList;
     this.dataSource.paginator = this.paginator;
+    this.dataSource.data = this.repoList;
   }
 
-  // Table Filter
+  // Table Search Filter
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -77,10 +83,12 @@ export class RepoComponent implements OnInit, OnChanges {
 
   addRepository(repo: Repository) {
     this.repositoryToAdd.emit(repo);
+    this.filterRepos();
   }
 
   removeRepository(index: number): void {
     this.repositoryToRemove.emit(index);
+    this.filterRepos();
   }
 
 }
