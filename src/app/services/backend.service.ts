@@ -101,16 +101,22 @@ export class BackendService {
 
   getDmpDocument(id: number) {
     return this.http.get(this.backendUrl + 'document/' + id,
-      {responseType: 'blob'}).subscribe(
+      {responseType: 'blob', observe: 'response'}).subscribe(
       response => {
         const a = document.createElement('a');
         const url = URL || webkitURL;
-        a.href = url.createObjectURL(response);
-        a.download = 'dmp.docx';
+        const contentDisposition = response.headers.get('content-disposition');
+        a.href = url.createObjectURL(response.body);
+        a.download = this.getFilenameFromContentDisposition(contentDisposition);
         // start download
         a.click();
         url.revokeObjectURL(a.href);
       }
     );
+  }
+
+  private getFilenameFromContentDisposition(contentDisposition: string): string {
+    const start = contentDisposition.lastIndexOf('filename=');
+    return contentDisposition.substring(start+9);
   }
 }
