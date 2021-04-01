@@ -21,6 +21,7 @@ export class DmpTableComponent implements OnInit {
   dataSource = new MatTableDataSource();
 
   @Output() createDocument = new EventEmitter<number>();
+  @Output() createJsonFile = new EventEmitter<number>();
 
   readonly tableHeaders: string[] = ['title', 'created', 'modified', 'edit', 'history', 'remove'];
   expandedElement: DmpListItem | null;
@@ -40,6 +41,10 @@ export class DmpTableComponent implements OnInit {
 
   getDocument(id: number) {
     this.createDocument.emit(id);
+  }
+
+  getJsonFile(id: number) {
+    this.createJsonFile.emit(id);
   }
 
 }
