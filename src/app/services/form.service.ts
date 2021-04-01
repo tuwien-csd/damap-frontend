@@ -101,21 +101,29 @@ export class FormService {
     });
 
     // Contributors, datasets, hosts, costs
-    for (const contributor of dmp.contributors) {
-      (form.controls.contributors as FormArray).push(
-        this.formBuilder.group({
-          person: [contributor.person],
-          role: contributor.role
-        }));
+    if(dmp.contributors) {
+      for (const contributor of dmp.contributors) {
+        (form.controls.contributors as FormArray).push(
+          this.formBuilder.group({
+            person: [contributor.person],
+            role: contributor.role
+          }));
+      }
     }
-    for (const dataset of dmp.datasets) {
-      (form.controls.datasets as FormArray).push(this.mapDatasetToFormGroup(dataset));
+    if(dmp.datasets) {
+      for (const dataset of dmp.datasets) {
+        (form.controls.datasets as FormArray).push(this.mapDatasetToFormGroup(dataset));
+      }
     }
-    for (const host of dmp.hosts) {
-      (form.controls.hosts as FormArray).push(this.mapHostToFormGroup(host));
+    if(dmp.hosts) {
+      for (const host of dmp.hosts) {
+        (form.controls.hosts as FormArray).push(this.mapHostToFormGroup(host));
+      }
     }
-    for (const cost of dmp.costs) {
-      (form.controls.costs.get('list') as FormArray).push(this.mapCostToFormGroup(cost));
+    if(dmp.costs) {
+      for (const cost of dmp.costs) {
+        (form.controls.costs.get('list') as FormArray).push(this.mapCostToFormGroup(cost));
+      }
     }
     return form;
   }
@@ -274,7 +282,7 @@ export class FormService {
 
   private mapDatasetToFormGroup(dataset: Dataset): FormGroup {
     const formGroup = this.createDatasetFormGroup(dataset.title);
-    formGroup.setValue(dataset);
+    formGroup.patchValue(dataset);
     return formGroup;
   }
 
