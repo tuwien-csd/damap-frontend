@@ -115,8 +115,24 @@ export class BackendService {
     );
   }
 
+  getMaDmpJsonFile(id: number) {
+    return this.http.get(this.backendUrl + 'madmp/file/' + id,
+      {responseType: 'blob', observe: 'response'}).subscribe(
+      response => {
+        const a = document.createElement('a');
+        const url = URL || webkitURL;
+        const contentDisposition = response.headers.get('content-disposition')
+        a.href = url.createObjectURL(response.body);
+        a.download = this.getFilenameFromContentDisposition(contentDisposition);
+        // start download
+        a.click();
+        url.revokeObjectURL(a.href);
+      }
+    );
+  }
+
   private getFilenameFromContentDisposition(contentDisposition: string): string {
     const start = contentDisposition.lastIndexOf('filename=');
-    return contentDisposition.substring(start+9);
+    return contentDisposition.substring(start + 9);
   }
 }

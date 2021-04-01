@@ -28,7 +28,7 @@ export class PlansComponent implements OnInit {
     this.dmpsLoaded$ = this.store.pipe(select(selectDmpsLoaded));
     this.dmps$ = this.store.pipe(select(selectDmps));
     this.dmpsLoaded$.subscribe(loaded => {
-      if(!loaded) {
+      if (!loaded) {
         this.auth.loadUserProfile().then(
           p => {
             this.userId = p['attributes']?.tissID?.[0];
@@ -49,6 +49,10 @@ export class PlansComponent implements OnInit {
 
   getDocument(id: number) {
     return this.backendService.getDmpDocument(id);
+  }
+
+  getJsonFile(id: number) {
+    return this.backendService.getMaDmpJsonFile(id);
   }
 
   removeDmp(dmp: Dmp) {
