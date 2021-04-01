@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {KeycloakService} from 'keycloak-angular';
 import {LoadDmps} from '../store/actions/dmp.actions';
 import {DmpListItem} from '../domain/dmp-list-item';
+import {BackendService} from '../services/backend.service';
 
 @Component({
   selector: 'app-plan',
@@ -21,7 +22,8 @@ export class PlansComponent implements OnInit {
 
   constructor(
     private auth: KeycloakService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private backendService: BackendService
   ) {
     this.dmpsLoaded$ = this.store.pipe(select(selectDmpsLoaded));
     this.dmps$ = this.store.pipe(select(selectDmps));
@@ -43,6 +45,10 @@ export class PlansComponent implements OnInit {
   getDmps(userId: string) {
     console.log('Fetch Dmps for id: ' + userId);
     this.store.dispatch(new LoadDmps({userId}));
+  }
+
+  getDocument(id: number) {
+    return this.backendService.getDmpDocument(id);
   }
 
   removeDmp(dmp: Dmp) {

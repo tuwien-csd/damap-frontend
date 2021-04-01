@@ -97,6 +97,20 @@ export class BackendService {
   analyseFileData(file: FormData): Observable<any> {
     return this.http.post(`${this.backendUrl}api/fits/examine`, file, {reportProgress: true, observe: 'events'})
       .pipe();
+  }*/
+
+  getDmpDocument(id: number) {
+    return this.http.get(this.backendUrl + 'document/' + id,
+      {responseType: 'blob'}).subscribe(
+      response => {
+        const a = document.createElement('a');
+        const url = URL || webkitURL;
+        a.href = url.createObjectURL(response);
+        a.download = 'dmp.docx';
+        // start download
+        a.click();
+        url.revokeObjectURL(a.href);
+      }
+    );
   }
-  */
 }
