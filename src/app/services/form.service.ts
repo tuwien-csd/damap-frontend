@@ -79,7 +79,7 @@ export class FormService {
       },
       externalStorageInfo: dmp.externalStorageInfo,
       legal: {
-        personalInformation: dmp.project,
+        personalInformation: dmp.personalInformation,
         sensitiveData: dmp.sensitiveData,
         legalRestrictions: dmp.legalRestrictions,
         ethicalIssues: dmp.ethicalIssuesExist,
@@ -131,8 +131,8 @@ export class FormService {
     }
 
     const datasets: Dataset[] = [];
-    if (formValue.data?.datasets?.length > 0) {
-      for (const dataset of formValue.data.datasets) {
+    if (formValue.datasets?.length > 0) {
+      for (const dataset of formValue.datasets) {
         datasets.push(dataset);
       }
     }
