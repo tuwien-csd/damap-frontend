@@ -10,7 +10,7 @@ import {Storage} from './storage';
 export interface Dmp {
   readonly created?: Date;
   readonly modified?: Date;
-  id?: number;
+  readonly id: number;
   title?: string;
   description?: string;
   project: Project;

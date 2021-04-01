@@ -125,18 +125,33 @@ export class DmpComponent implements OnInit {
       this.backendService.getDmpById(id).subscribe(
         dmp => {
           this.formService.mapDmpToForm(dmp, this.dmpForm);
+          if (dmp.project) {
+            this.projects$.subscribe(projects => projects.filter(e => {
+              if (e.title === dmp.project.title) {
+                this.getProjectMembers(e.id);
+              }
+            }))
+          }
         });
     }
   }
 
+  getRepositories() {
+    this.repositoriesLoaded$.subscribe(loaded => {
+      if (!loaded) {
+        this.store.dispatch(new LoadRepositories());
+      }
+    });
+  }
+
   saveDmp(): void {
     console.log(this.userId);
+    const dmp = this.formService.exportFormToDmp(this.dmpForm);
     if (this.userId !== undefined) {
       if (this.dmpForm.value.id) {
-        // TODO: reload page after update
-        this.backendService.editDmp(this.userId, this.formService.exportFormToDmp(this.dmpForm));
+        this.backendService.editDmp(this.userId, dmp).subscribe();
       } else {
-        this.backendService.createDmp(this.userId, this.formService.exportFormToDmp(this.dmpForm))
+        this.backendService.createDmp(this.userId, dmp)
           .subscribe(newId => this.router.navigate([`${newId.id}`], {relativeTo: this.route}));
       }
     }
@@ -253,13 +268,5 @@ export class DmpComponent implements OnInit {
         }
       }
     }
-  }
-
-  getRepositories() {
-    this.repositoriesLoaded$.subscribe(loaded => {
-      if (!loaded) {
-        this.store.dispatch(new LoadRepositories());
-      }
-    });
   }
 }
