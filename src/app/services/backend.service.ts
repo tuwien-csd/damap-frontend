@@ -48,13 +48,13 @@ export class BackendService {
     );
   }
 
-  editDmp(editedBy: string, dmp: Dmp): void {
+  editDmp(editedBy: string, dmp: Dmp): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    this.http.post(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions).pipe(
+    return this.http.post(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions).pipe(
       // TODO: Error handling
     );
   }

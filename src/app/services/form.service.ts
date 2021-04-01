@@ -166,6 +166,7 @@ export class FormService {
     }
 
     return {
+      id: formValue.id,
       project: formValue.project,
       contact: formValue.contact,
       contributors,
