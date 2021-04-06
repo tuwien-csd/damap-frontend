@@ -1,0 +1,25 @@
+<form [formGroup]="reuseStep">
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label class="wrap-label">Who is the target audience and who could be interested in reusing the data and why?
+    </mat-label>
+    <textarea matInput formControlName="targetAudience"></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label class="wrap-label">Indicate whether potential users need specific tools or software to access and
+      (re-)use the data.
+    </mat-label>
+    <textarea matInput formControlName="tools"></textarea>
+  </mat-form-field>
+
+  <ng-container *ngIf="restricted.length > 0">
+    <article>For the following datasets restricted access was selected:
+      <span *ngFor="let set of restricted, last as last"> "{{set}}"<span *ngIf="!last">, </span> </span>
+    </article>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label class="wrap-label">Explain how others will get access to the data.
+      </mat-label>
+      <textarea matInput formControlName="restrictedAccess"></textarea>
+    </mat-form-field>
+  </ng-container>
+</form>

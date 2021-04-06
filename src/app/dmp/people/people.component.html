@@ -37,16 +37,17 @@
 
       </div>
       <div>
+        <form [formGroup]="contributor">
         <mat-form-field appearance="fill">
           <mat-label>Role</mat-label>
-          <mat-select>
+          <mat-select formControlName="role">
             <mat-option
-              *ngFor="let role of roles | keyvalue" [value]="role.key"
-              (onSelectionChange)="updateContributorRoles(i, role.value, $event)">
-              {{role.key}}
+              *ngFor="let role of roles | keyvalue" [value]="role.value">
+              {{role.value}}
             </mat-option>
           </mat-select>
         </mat-form-field>
+        </form>
       </div>
       <div class="mat-card-right">
         <button mat-button (click)="changeContactPerson(contributor.value.person)"

@@ -1,31 +1,18 @@
-<p>Please indicate which metadata will be provided to help others identify, discover and reuse the data.</p>
 <form [formGroup]="docDataStep">
-  <mat-form-field appearance="fill" [style]="'width:100%'">
-    <mat-label>Metadata</mat-label>
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label class="wrap-label">Please indicate which metadata will be provided to help others identify,
+      discover and reuse the data.
+    </mat-label>
     <textarea matInput formControlName="metadata"></textarea>
   </mat-form-field>
 
-  <br>
-
-  <p>How will the research data be generated and which methods will be used?</p>
-  <mat-form-field appearance="fill" [style]="'width:100%'">
-    <mat-label>Data generation</mat-label>
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label class="wrap-label">How will the research data be generated and which methods will be used?</mat-label>
     <textarea matInput formControlName="dataGeneration"></textarea>
   </mat-form-field>
 
-  <br>
-
-  <p>How will you structure the data and handle versioning?</p>
-  <mat-form-field appearance="fill" [style]="'width:100%'">
-    <mat-label>Structure and versioning</mat-label>
-    <textarea matInput formControlName="structure"></textarea>
-  </mat-form-field>
-
-  <br>
-
-  <p>Who is the target audience?</p>
-  <mat-form-field appearance="fill" [style]="'width:100%'">
-    <mat-label>Target audience</mat-label>
-    <textarea matInput formControlName="targetAudience"></textarea>
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label class="wrap-label">How will you structure the data and handle versioning?</mat-label>
+      <textarea matInput formControlName="structure"></textarea>
   </mat-form-field>
 </form>

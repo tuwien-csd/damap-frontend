@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../services/backend.service';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {KeycloakService} from 'keycloak-angular';
 import {Observable} from 'rxjs';
 import {Person} from '../domain/person';
 import {ProjectMember} from '../domain/project-member';
-import {ContributorRole} from '../domain/enum/contributor-role.enum';
 import {Project} from '../domain/project';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../store/states/app.state';
@@ -17,6 +16,7 @@ import {Repository} from '../domain/repository';
 import {selectRepositories, selectRepositoriesLoaded} from '../store/selectors/repository.selectors';
 import {LoadRepositories, LoadRepository} from '../store/actions/repository.actions';
 import {StepperSelectionEvent} from '@angular/cdk/stepper';
+import {Storage} from '../domain/storage';
 
 @Component({
   selector: 'app-dmp',
@@ -38,7 +38,14 @@ export class DmpComponent implements OnInit {
   datasets: FormArray;
   docDataStep: FormGroup;
   legalEthicalStep: FormGroup;
+  storageStep: FormArray;
+  externalStorageStep: FormArray;
+  externalStorageInfo: FormControl;
   repoStep: FormArray;
+  restrictedAccessInfo: FormControl;
+  closedAccessInfo: FormControl;
+  reuseStep: FormGroup;
+  costsStep: FormGroup;
 
   // Resources
   projectsLoaded$: Observable<boolean>;
@@ -85,7 +92,14 @@ export class DmpComponent implements OnInit {
     this.datasets = this.dmpForm.get('datasets') as FormArray;
     this.docDataStep = this.dmpForm.get('documentation') as FormGroup;
     this.legalEthicalStep = this.dmpForm.get('legal') as FormGroup;
+    this.storageStep = this.dmpForm.get('storage') as FormArray;
+    this.externalStorageStep = this.dmpForm.get('externalStorage') as FormArray;
+    this.externalStorageInfo = this.dmpForm.get('externalStorageInfo') as FormControl;
     this.repoStep = this.dmpForm.get('hosts') as FormArray;
+    this.restrictedAccessInfo = this.dmpForm.get('restrictedAccessInfo') as FormControl;
+    this.closedAccessInfo = this.dmpForm.get('closedAccessInfo') as FormControl;
+    this.reuseStep = this.dmpForm.get('reuse') as FormGroup;
+    this.costsStep = this.dmpForm.get('costs') as FormGroup;
 
     this.projectStep.valueChanges.subscribe(newVal => {
       if (newVal) {
@@ -96,8 +110,9 @@ export class DmpComponent implements OnInit {
       }
     });
   }
+
   changeStep(event: StepperSelectionEvent) {
-    if(event.selectedIndex === 6) {
+    if (event.selectedIndex === 7) {
       this.getRepositories();
     }
   }
@@ -110,18 +125,33 @@ export class DmpComponent implements OnInit {
       this.backendService.getDmpById(id).subscribe(
         dmp => {
           this.formService.mapDmpToForm(dmp, this.dmpForm);
+          if (dmp.project) {
+            this.projects$.subscribe(projects => projects.filter(e => {
+              if (e.title === dmp.project.title) {
+                this.getProjectMembers(e.id);
+              }
+            }))
+          }
         });
     }
   }
 
+  getRepositories() {
+    this.repositoriesLoaded$.subscribe(loaded => {
+      if (!loaded) {
+        this.store.dispatch(new LoadRepositories());
+      }
+    });
+  }
+
   saveDmp(): void {
     console.log(this.userId);
+    const dmp = this.formService.exportFormToDmp(this.dmpForm);
     if (this.userId !== undefined) {
       if (this.dmpForm.value.id) {
-        // TODO: reload page after update
-        this.backendService.editDmp(this.userId, this.formService.exportFormToDmp(this.dmpForm));
+        this.backendService.editDmp(this.userId, dmp).subscribe();
       } else {
-        this.backendService.createDmp(this.userId, this.formService.exportFormToDmp(this.dmpForm))
+        this.backendService.createDmp(this.userId, dmp)
           .subscribe(newId => this.router.navigate([`${newId.id}`], {relativeTo: this.route}));
       }
     }
@@ -144,45 +174,24 @@ export class DmpComponent implements OnInit {
   }
 
   addContributor(contributor: Person) {
-    const contributorControl = new FormGroup({person: new FormControl(contributor), role: new FormControl(null)});
-    this.contributorStep.push(contributorControl);
+    this.formService.addContributorToForm(this.dmpForm, contributor);
     this.filterPeople();
   }
 
   removeContributor(index: number) {
-    this.contributorStep.removeAt(index);
+    this.formService.removeContributorFromForm(this.dmpForm, index);
     this.filterPeople();
   }
 
-  updateContributorRoles($event: { index: number, role: ContributorRole }) {
-    const index = $event.index;
-    const role = $event.role;
-    const contributor = this.contributorStep.at(index);
-    contributor.patchValue({role});
-  }
-
   createDataset(title: string) {
-    this.datasets.push(this.formBuilder.group({
-        title: [title, Validators.required],
-        publish: [false],
-        license: [''],
-        startDate: [null],
-        type: [null],
-        size: [''],
-        comment: [''],
-        referenceHash: this.userId + (+new Date()).toString(36)
-      })
-    );
+    const dataset = this.formService.createDatasetFormGroup(title);
+    dataset.patchValue({referenceHash: this.userId + (+new Date()).toString(36)});
+    this.datasets.push(dataset);
   }
 
   updateDataset(event: { index: number, update: FormGroup }) {
     const dataset = this.datasets.at(event.index);
-    dataset.patchValue({
-      title: event.update.value.title,
-      type: event.update.value.type,
-      size: event.update.value.size,
-      comment: event.update.value.comment
-    });
+    dataset.patchValue(event.update.getRawValue());
   }
 
   removeDataset(index: number) {
@@ -190,24 +199,42 @@ export class DmpComponent implements OnInit {
     this.datasets.removeAt(index);
   }
 
-  addRepository(repo: any) {
-    const repoGroup = this.formBuilder.group({
-      id: repo.id,
-      name: repo.name,
-      datasets: [''],
-      date: ['']
-    });
-    this.repoStep.push(repoGroup);
+  addStorage(storage: Storage) {
+    this.formService.addStorageToForm(this.dmpForm, storage);
+  }
+
+  removeStorage(index: number): void {
+    this.formService.removeStorageFromForm(this.dmpForm, index);
+  }
+
+  addExternalStorage() {
+    this.formService.addExternalStorageToForm(this.dmpForm);
+  }
+
+  removeExternalStorage(index: number): void {
+    this.formService.removeExternalStorageFromForm(this.dmpForm, index);
+  }
+
+  addRepository(repo: { id: string, name: string }) {
+    this.formService.addRepositoryToForm(this.dmpForm, repo);
   }
 
   removeRepository(index: number): void {
-    this.repoStep.removeAt(index);
+    this.formService.removeRepositoryFromForm(this.dmpForm, index);
   }
 
   getRepositoryDetails(repo: Repository) {
     if (!repo.info) {
       this.store.dispatch(new LoadRepository({id: repo.id}));
     }
+  }
+
+  addCost() {
+    this.formService.addCostToForm(this.dmpForm);
+  }
+
+  removeCost(index: number) {
+    this.formService.removeCostFromForm(this.dmpForm, index);
   }
 
   private getSuggestedProjects(userId: string) {
@@ -241,13 +268,5 @@ export class DmpComponent implements OnInit {
         }
       }
     }
-  }
-
-  getRepositories() {
-    this.repositoriesLoaded$.subscribe(loaded => {
-      if(!loaded) {
-        this.store.dispatch(new LoadRepositories());
-      }
-    });
   }
 }

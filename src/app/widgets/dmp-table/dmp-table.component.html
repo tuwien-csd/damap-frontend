@@ -7,7 +7,7 @@
 <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
   <ng-container matColumnDef="title">
     <th mat-header-cell *matHeaderCellDef>Title</th>
-    <td mat-cell *matCellDef="let element"> <h3>{{element.project.title || 'DMP id: ' + element.id}}</h3> </td>
+    <td mat-cell *matCellDef="let element"><h3>{{element.project.title || 'DMP id: ' + element.id}}</h3></td>
   </ng-container>
 
   <ng-container matColumnDef="created">
@@ -24,7 +24,7 @@
     <th mat-header-cell *matHeaderCellDef><span class="sr-only">Edit</span></th>
     <td mat-cell *matCellDef="let element">
       <a routerLink="/dmp/{{element.id}}">
-        <button mat-button>
+        <button mat-icon-button>
           <mat-icon color="primary">edit</mat-icon>
         </button>
       </a>
@@ -35,7 +35,7 @@
     <th mat-header-cell *matHeaderCellDef><span class="sr-only">History</span></th>
     <td mat-cell *matCellDef="let element">
       <a routerLink="/dmp/history/{{element.id}}">
-        <button mat-button>
+        <button mat-icon-button>
           <mat-icon color="accent">history</mat-icon>
         </button>
       </a>
@@ -58,11 +58,18 @@
         <mat-divider></mat-divider>
         <div class="project-overview">
           <h4> {{element.project.title}} </h4>
-          <div> Project Duration: {{element.project.start | date:'d.M.y'}} - {{element.project.end | date:'d.M.y'}}</div>
+          <div> Project Duration: {{element.project.start | date:'d.M.y'}}
+            - {{element.project.end | date:'d.M.y'}}</div>
         </div>
         <div class="project-description">
           {{element.description}}
           <span> tbd </span>
+        </div>
+        <div id="dmp-actions">
+          <button mat-raised-button color="primary" (click)="getJsonFile(element.id)">
+            <mat-icon color="white">code</mat-icon> Export as JSON</button>
+          <button mat-raised-button color="primary" (click)="getDocument(element.id)">
+            <mat-icon color="white">description</mat-icon> Export as document</button>
         </div>
       </div>
     </td>

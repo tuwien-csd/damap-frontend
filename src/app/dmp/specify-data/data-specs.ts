@@ -31,5 +31,5 @@ export const FILE_SIZES = [
   {label: '100 - 500 TB', min: 100000000000000, max: 500000000000000},
   {label: '500 - 1000 TB', min: 500000000000000, max: 1000000000000000},
   {label: '> 1 PB', min: 1000000000000000, max: undefined},
-  {label: 'Don\'t know', min: 0, max: 0}
+  {label: 'I don\'t know yet', min: 0, max: 0}
 ];

@@ -1,0 +1,59 @@
+<button mat-stroked-button label="Add other storage location"
+        (click)="addExternalStorage()" [style]="'margin: 5px;'">
+  Add other storage location
+</button>
+<section class="external-storage">
+  <mat-card *ngFor="let item of externalStorageStep.controls; let i = index">
+    <form [formGroup]="item" (keydown.enter)="$event.preventDefault()">
+      <div class="storage-card-top">
+      <mat-card-header>
+        <mat-card-title><mat-form-field>
+          <mat-label>Storage Name</mat-label>
+          <input matInput type="text" formControlName="title" required>
+        </mat-form-field></mat-card-title>
+      </mat-card-header>
+      <mat-card-actions>
+        <button mat-icon-button color="accent" aria-label="Remove external storage"
+                (click)="removeExternalStorage(i)">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-card-actions>
+    </div>
+    <mat-card-content>
+        <div class="form-row">
+          <mat-form-field>
+            <mat-label>Storage Location</mat-label>
+            <input matInput type="text" formControlName="storageLocation">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Backup Location</mat-label>
+            <input matInput type="text" formControlName="backupLocation">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field>
+            <mat-label>Backup Frequency</mat-label>
+            <input matInput type="text" formControlName="backupFrequency">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Dataset(s) stored</mat-label>
+            <mat-select multiple formControlName="datasets">
+              <mat-option *ngFor="let dataset of datasets.controls" [value]="dataset.value.referenceHash">
+                {{dataset.value.title}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+    </mat-card-content>
+    </form>
+  </mat-card>
+  <div *ngIf="externalStorageStep.controls.length" class="storage-textarea" [style]="'margin: 5px;'">
+    <form>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Please explain why institutional storage will not be used.</mat-label>
+        <textarea matInput [formControl]="externalStorageInfo" required></textarea>
+      </mat-form-field>
+    </form>
+  </div>
+</section>
+

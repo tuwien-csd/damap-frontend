@@ -7,6 +7,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {DataKind} from '../../domain/enum/data-kind.enum';
 import {FILE_SIZES, FILE_TYPES} from './data-specs';
+import {DataAccessType} from '../../domain/enum/data-access-type.enum';
+import {FormService} from '../../services/form.service';
 
 @Component({
   selector: 'app-dmp-specify-data',
@@ -71,16 +73,11 @@ export class SpecifyDataComponent implements OnInit {
 
   openDatasetDialog(index: number) {
 
-    const dataset = this.datasets.at(index);
+    const dataset = this.datasets.at(index) as FormGroup;
 
     const dialogRef = this.dialog.open(DatasetDialog, {
       width: '600px',
-      data: {
-        title: dataset.value.title,
-        type: dataset.value.type,
-        size: dataset.value.size,
-        comment: dataset.value.comment
-      }
+      data: dataset.getRawValue()
     });
 
     dialogRef.afterClosed().subscribe(update => {
@@ -101,19 +98,17 @@ export class SpecifyDataComponent implements OnInit {
 
 export class DatasetDialog {
 
-  dataset = this.fb.group({
-    title: [this.data.title, Validators.required],
-    type: [this.data.type],
-    size: [this.data.size],
-    comment: [this.data.comment]
-  })
+  dataset: FormGroup = this.formService.createDatasetFormGroup(this.data.title);
+
   readonly FILE_TYPES = FILE_TYPES;
   readonly FILE_SIZES = FILE_SIZES;
+  accessType: any = DataAccessType;
 
   constructor(
     public dialogRef: MatDialogRef<DatasetDialog>,
-    private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { title: string, size: string, comment: string, type: string }) {
+    private formService: FormService,
+    @Inject(MAT_DIALOG_DATA) public data: { title: string, size: string, comment: string, type: string, dataAccess: DataAccessType }) {
+    this.dataset.setValue(this.data);
   }
 
   onNoClick(): void {
