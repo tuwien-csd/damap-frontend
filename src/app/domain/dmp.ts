@@ -4,11 +4,13 @@ import {Person} from './person';
 import {DataKind} from './enum/data-kind.enum';
 import {Dataset} from './dataset';
 import {Host} from './host';
+import {Cost} from './cost';
+import {Storage} from './storage';
 
 export interface Dmp {
   readonly created?: Date;
   readonly modified?: Date;
-  id?: number;
+  readonly id: number;
   title?: string;
   description?: string;
   project: Project;
@@ -21,12 +23,22 @@ export interface Dmp {
   dataGeneration: string;
   structure: string;
   targetAudience: string;
+  tools: string;
+  restrictedDataAccess: string;
   personalInformation: boolean;
   sensitiveData: boolean;
+  sensitiveDataSecurity?: string;
   legalRestrictions: boolean;
   ethicalIssuesExist: boolean;
   committeeApproved: boolean;
   ethicsReport: string;
-  optionalStatement: string;
+  ethicalComplianceStatement: string;
+  storage: Storage[];
+  externalStorage: Storage[];
+  externalStorageInfo: string;
   hosts: Host[];
+  restrictedAccessInfo: string;
+  closedAccessInfo: string;
+  costsExist: boolean;
+  costs: Cost[];
 }

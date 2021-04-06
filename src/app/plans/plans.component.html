@@ -5,7 +5,7 @@
   </section>
 
   <div *ngIf="dmpsLoaded$ | async">
-    <app-dmp-table [dmps]="dmps$ | async"></app-dmp-table>
+    <app-dmp-table [dmps]="dmps$ | async" (createDocument)="getDocument($event)" (createJsonFile)="getJsonFile($event)"></app-dmp-table>
   </div>
   <div *ngIf="!(dmpsLoaded$ | async)">
   </div>
