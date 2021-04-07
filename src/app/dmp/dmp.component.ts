@@ -17,6 +17,7 @@ import {selectRepositories, selectRepositoriesLoaded} from '../store/selectors/r
 import {LoadRepositories, LoadRepository} from '../store/actions/repository.actions';
 import {StepperSelectionEvent} from '@angular/cdk/stepper';
 import {Storage} from '../domain/storage';
+import {FeedbackService} from '../services/feedback.service';
 
 @Component({
   selector: 'app-dmp',
@@ -64,7 +65,8 @@ export class DmpComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private backendService: BackendService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private feedbackService: FeedbackService
     // private location: Location
   ) {
   }
@@ -74,6 +76,7 @@ export class DmpComponent implements OnInit {
     this.projects$ = this.store.pipe(select(selectProjects));
     this.repositoriesLoaded$ = this.store.pipe(select(selectRepositoriesLoaded));
     this.repositories$ = this.store.pipe(select(selectRepositories));
+    this.getDmpById();
     this.auth.loadUserProfile().then(
       p => {
         this.userId = p['attributes']?.tissID?.[0];
@@ -81,7 +84,6 @@ export class DmpComponent implements OnInit {
       }
     );
 
-    this.getDmpById();
     this.dmpForm.valueChanges.subscribe(() => console.log('DMPform Update'));
     this.dmpForm.valueChanges.subscribe(newVal => console.log(newVal));
 
@@ -124,13 +126,17 @@ export class DmpComponent implements OnInit {
       console.log('Get DMP with ID: ' + id);
       this.backendService.getDmpById(id).subscribe(
         dmp => {
-          this.formService.mapDmpToForm(dmp, this.dmpForm);
-          if (dmp.project) {
-            this.projects$.subscribe(projects => projects.filter(e => {
-              if (e.title === dmp.project.title) {
-                this.getProjectMembers(e.id);
-              }
-            }))
+          if (dmp !== undefined) {
+            this.formService.mapDmpToForm(dmp, this.dmpForm);
+             if (dmp.project) {
+               this.projects$.subscribe(projects => projects.filter(e => {
+                 if (e.title === dmp.project.title) {
+                   this.getProjectMembers(e.id);
+                 }
+               }))
+             }
+          } else {
+            this.router.navigate(['plans']);
           }
         });
     }
@@ -149,10 +155,17 @@ export class DmpComponent implements OnInit {
     const dmp = this.formService.exportFormToDmp(this.dmpForm);
     if (this.userId !== undefined) {
       if (this.dmpForm.value.id) {
-        this.backendService.editDmp(this.userId, dmp).subscribe();
+        this.backendService.editDmp(this.userId, dmp).subscribe(
+          _ => {},
+          () => {},
+          () => this.feedbackService.success('Plan was updated!')
+        );
       } else {
         this.backendService.createDmp(this.userId, dmp)
-          .subscribe(newId => this.router.navigate([`${newId.id}`], {relativeTo: this.route}));
+          .subscribe(
+            newId => newId !== undefined ? this.router.navigate([`${newId.id}`], {relativeTo: this.route}) : undefined,
+            () => {},
+            () => this.feedbackService.success('Plan was saved!'));
       }
     }
   }
@@ -253,7 +266,7 @@ export class DmpComponent implements OnInit {
     this.peopleList = Object.assign([], this.people);
     if (this.contributorStep != null && this.contributorStep.length > 0) {
       for (const entry of this.contributorStep.controls) {
-        this.peopleList = this.peopleList.filter(e => e.person !== entry.value.person);
+        this.peopleList = this.peopleList.filter(e => e.person.id !== entry.value.person.id);
       }
     }
   }

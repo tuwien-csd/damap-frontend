@@ -6,6 +6,10 @@
   --accent-color-lighter: #3284ad;
   --accent-color-darker: #084f72;
   --secondary-color: #373737;
+  --error-bg: #FAD1D5;
+  --success-bg: #E9F5D2;
+  --info-bg: #C4D8E2;
+  --warning-bg: #FFF4CB;
 }
 
 html, body {
@@ -65,4 +69,16 @@ body {
 
 mat-card {
   margin: 5px;
+}
+
+.snack-error {
+  background-color: var(--error-bg);
+  color: black;
+  font-weight: bold;
+}
+
+.snack-success {
+  background-color: var(--success-bg);
+  color: black;
+  font-weight: bold;
 }
