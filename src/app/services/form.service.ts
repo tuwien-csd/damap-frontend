@@ -101,7 +101,7 @@ export class FormService {
     });
 
     // Contributors, datasets, hosts, costs
-    if(dmp.contributors) {
+    if (dmp.contributors) {
       for (const contributor of dmp.contributors) {
         (form.controls.contributors as FormArray).push(
           this.formBuilder.group({
@@ -110,19 +110,29 @@ export class FormService {
           }));
       }
     }
-    if(dmp.datasets) {
+    if (dmp.datasets) {
       for (const dataset of dmp.datasets) {
         (form.controls.datasets as FormArray).push(this.mapDatasetToFormGroup(dataset));
       }
     }
-    if(dmp.hosts) {
+    if (dmp.hosts) {
       for (const host of dmp.hosts) {
         (form.controls.hosts as FormArray).push(this.mapHostToFormGroup(host));
       }
     }
-    if(dmp.costs) {
+    if (dmp.costs) {
       for (const cost of dmp.costs) {
         (form.controls.costs.get('list') as FormArray).push(this.mapCostToFormGroup(cost));
+      }
+    }
+    if (dmp.storage) {
+      for (const storage of dmp.storage) {
+        (form.controls.storage as FormArray).push(this.mapStorageToFormGroup(storage));
+      }
+    }
+    if (dmp.externalStorage) {
+      for (const externalStorage of dmp.externalStorage) {
+        (form.controls.externalStorage as FormArray).push(this.mapExternalStorageToFormGroup(externalStorage));
       }
     }
     return form;
@@ -216,11 +226,8 @@ export class FormService {
   }
 
   public addStorageToForm(form: FormGroup, storage: Storage) {
-    const storageGroup = this.formBuilder.group({
-      id: [storage.id],
-      title: [storage.title],
-      datasets: [null]
-    });
+    const storageGroup = this.createStorageFormGroup();
+    storageGroup.patchValue({id: storage.id, title: storage.title});
     (form.get('storage') as FormArray).push(storageGroup);
   }
 
@@ -229,13 +236,7 @@ export class FormService {
   }
 
   public addExternalStorageToForm(form: FormGroup) {
-    const externalStorageGroup = this.formBuilder.group({
-      title: ['Other', Validators.required],
-      storageLocation: [''],
-      backupLocation: [''],
-      backupFrequency: [''],
-      datasets: [null]
-    });
+    const externalStorageGroup = this.createExternalStorageFormGroup();
     (form.get('externalStorage') as FormArray).push(externalStorageGroup);
   }
 
@@ -286,9 +287,51 @@ export class FormService {
     return formGroup;
   }
 
+  private createStorageFormGroup(): FormGroup {
+    return this.formBuilder.group({
+      id: [null, {disabled: true}],
+      title: ['', Validators.required],
+      datasets: [null]
+    });
+  }
+
+  private mapStorageToFormGroup(storage: Storage): FormGroup {
+    const formGroup = this.createStorageFormGroup();
+    formGroup.setValue({
+      id: storage.id,
+      title: storage.title,
+      datasets: storage.datasets || null
+    });
+    return formGroup;
+  }
+
+  private createExternalStorageFormGroup(): FormGroup {
+    return this.formBuilder.group({
+      id: [null, {disabled: true}],
+      title: ['Other', Validators.required],
+      storageLocation: [''],
+      backupLocation: [''],
+      backupFrequency: [''],
+      datasets: [null]
+    });
+  }
+
+  private mapExternalStorageToFormGroup(externalStorage: Storage): FormGroup {
+    const formGroup = this.createExternalStorageFormGroup();
+    formGroup.setValue({
+      id: externalStorage.id,
+      title: externalStorage.title,
+      storageLocation: externalStorage.storageLocation || null,
+      backupLocation: externalStorage.backupLocation || null,
+      backupFrequency: externalStorage.backupFrequency || null,
+      datasets: externalStorage.datasets || null
+    });
+    return formGroup;
+  }
+
   private createHostFormGroup(): FormGroup {
     return this.formBuilder.group({
-      id: [''],
+      id: [null, {disabled: true}],
       title: [''],
       date: [null],
       datasets: ['']
