@@ -352,7 +352,7 @@ export class FormService {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
       title: ['New cost', Validators.required],
-      currency_code: ['EUR', Validators.required],
+      currencyCode: ['EUR', Validators.required],
       value: [null, Validators.pattern('^[0-9]*\.?[0-9]{0,2}$')], // validate format
       type: [null],
       customType: [null],
@@ -365,7 +365,7 @@ export class FormService {
     formGroup.setValue({
       id: cost.id,
       title: cost.title,
-      currency_code: cost.currency_code,
+      currencyCode: cost.currencyCode || 'EUR',
       value: cost.value,
       type: cost.type,
       customType: cost.customType,
