@@ -318,7 +318,7 @@ export class FormService {
   private mapExternalStorageToFormGroup(externalStorage: Storage): FormGroup {
     const formGroup = this.createExternalStorageFormGroup();
     formGroup.setValue({
-      id: externalStorage.id,
+      id: externalStorage.id || null,
       title: externalStorage.title,
       storageLocation: externalStorage.storageLocation || null,
       backupLocation: externalStorage.backupLocation || null,
