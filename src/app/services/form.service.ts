@@ -245,11 +245,10 @@ export class FormService {
   }
 
   public addRepositoryToForm(form: FormGroup, repo: { id: string, name: string }) {
-    const repoGroup = this.formBuilder.group({
+    const repoGroup = this.createHostFormGroup();
+    repoGroup.patchValue({
       id: repo.id,
-      title: repo.name,
-      datasets: [''],
-      date: ['']
+      title: repo.name
     });
     (form.get('hosts') as FormArray).push(repoGroup);
   }
@@ -291,7 +290,7 @@ export class FormService {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
       title: ['', Validators.required],
-      datasets: [null]
+      datasets: [[]]
     });
   }
 
@@ -300,7 +299,7 @@ export class FormService {
     formGroup.setValue({
       id: storage.id,
       title: storage.title,
-      datasets: storage.datasets || null
+      datasets: storage.datasets || []
     });
     return formGroup;
   }
@@ -312,7 +311,7 @@ export class FormService {
       storageLocation: [''],
       backupLocation: [''],
       backupFrequency: [''],
-      datasets: [null]
+      datasets: [[]]
     });
   }
 
@@ -324,7 +323,7 @@ export class FormService {
       storageLocation: externalStorage.storageLocation || null,
       backupLocation: externalStorage.backupLocation || null,
       backupFrequency: externalStorage.backupFrequency || null,
-      datasets: externalStorage.datasets || null
+      datasets: externalStorage.datasets || []
     });
     return formGroup;
   }
@@ -334,7 +333,7 @@ export class FormService {
       id: [null, {disabled: true}],
       title: [''],
       date: [null],
-      datasets: ['']
+      datasets: [[]]
     });
   }
 
@@ -344,7 +343,7 @@ export class FormService {
       id: host.id,
       title: host.title || '',
       date: host.date || null,
-      datasets: host.datasets
+      datasets: host.datasets || []
     });
     return formGroup;
   }
