@@ -363,13 +363,13 @@ export class FormService {
   private mapCostToFormGroup(cost: Cost): FormGroup {
     const formGroup = this.createCostFormGroup();
     formGroup.setValue({
-      id: cost.id,
+      id: cost.id || null,
       title: cost.title,
       currencyCode: cost.currencyCode || 'EUR',
-      value: cost.value,
-      type: cost.type,
-      customType: cost.customType,
-      description: cost.description
+      value: cost.value || null,
+      type: cost.type || null,
+      customType: cost.customType || null,
+      description: cost.description || ''
     });
     return formGroup;
   }
