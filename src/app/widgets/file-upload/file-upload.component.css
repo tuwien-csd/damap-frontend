@@ -1,0 +1,38 @@
+.file-input {
+  margin-bottom: 10px;
+}
+
+.dropzone {
+  margin: 10px 0;
+  height: 200px;
+  width: auto;
+  flex-direction: column;
+  font-size: x-large;
+  color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-self: center;
+  border: 3px solid #E6E6E6;
+  border-radius: 5px;
+}
+
+.dropzone > mat-icon {
+  margin-bottom: 30px;
+  transform: scale(2,2);
+}
+
+.fileover {
+  opacity: 0.5;
+  border: 3px solid var(--accent-color-lighter);
+}
+
+.progress {
+  display: flex;
+  flex-direction: row;align-items: center;
+  justify-content: space-between;
+}
+mat-progress-bar {
+  max-width: 90%;
+}

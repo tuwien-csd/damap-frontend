@@ -1,0 +1,17 @@
+<div class="dropzone" dragdrop (fileDropped)="onFileDropped($event)">
+  <input type="file" #fileDrop id="fileDrop" multiple (change)="onFileSelected($event)" hidden/>
+  <mat-icon>upload_file</mat-icon>
+  <span>Drag and drop files here</span>
+</div>
+
+<div class="file-input">
+  <button mat-raised-button color="primary" class="upload-btn"
+          (click)="fileDrop.click()">
+    <label for="fileDrop"> Choose File </label>
+    <mat-icon>attach_file</mat-icon>
+  </button>
+</div>
+
+
+
+

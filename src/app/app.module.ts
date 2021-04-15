@@ -57,6 +57,8 @@ import {CostsComponent} from './dmp/costs/costs.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {BytePipe} from './pipe/byte.pipe';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {DragdropDirective} from './directives/dragdrop.directive';
+import {FileUploadComponent} from './widgets/file-upload/file-upload.component';
 
 const keycloakService = new KeycloakService();
 
@@ -87,6 +89,8 @@ const keycloakService = new KeycloakService();
     ReuseComponent,
     CostsComponent,
     BytePipe,
+    DragdropDirective,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
