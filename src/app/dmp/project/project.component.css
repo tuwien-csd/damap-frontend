@@ -1,3 +1,5 @@
-table {
-  width: 100%;
+.list-container {
+  position: relative;
+  max-height: 300px;
+  overflow: auto;
 }

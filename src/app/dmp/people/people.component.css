@@ -1,1 +1,12 @@
+.projectRoleTag {
+  padding: 5px 7px;
+  border-radius: 4px;
+  background: aliceblue;
+  font-size: 10pt;
+}
 
+.list-container {
+  position: relative;
+  max-height: 300px;
+  overflow: auto;
+}

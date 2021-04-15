@@ -1,9 +1,10 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {MatTableDataSource} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
-import {BackendService} from "../../services/backend.service";
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import {Component, Input, OnInit, EventEmitter, Output, ViewChild, OnChanges, SimpleChanges} from '@angular/core';
+import {FormArray, FormControl} from '@angular/forms';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Repository} from '../../domain/repository';
+import {DataAccessType} from '../../domain/enum/data-access-type.enum';
 
 @Component({
   selector: 'app-dmp-repo',
@@ -17,69 +18,80 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     ]),
   ],
 })
-export class RepoComponent implements OnInit {
+export class RepoComponent implements OnInit, OnChanges {
 
-  @Input() dmpForm;
-  private backendRepos: any = []; // Repo list loaded from backend
+  @Input() loaded: boolean;
+  @Input() repositories: Repository[]; // Repo list loaded from backend
   repoList: any = []; // Filtered repo list (repo list minus selected repos)
-  reposSelected: any = []; // selected repos
 
-  repoStep: FormArray;
+  @Input() repoStep: FormArray;
+  @Input() datasets: FormArray;
+  @Input() restrictedAccessInfo: FormControl;
+  @Input() closedAccessInfo: FormControl;
+
+  @Output() repositoryToAdd = new EventEmitter<any>();
+  @Output() repositoryToRemove = new EventEmitter<any>();
+  @Output() repositoryDetails = new EventEmitter<any>();
 
   readonly tableHeaders: string[] = ['expand', 'title', 'add'];
   expandedElement: any | null;
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource<Repository>();
+
+  restricted: string[] = [];
+  closed: string[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  reposLoaded: boolean = false;
 
-  constructor(private backendService: BackendService, private formBuilder: FormBuilder) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.repoStep = this.dmpForm.get('hosts') as FormArray;
-  }
-
-  getRepositories() {
-    this.backendService.getRepositories().subscribe((data: JSON) => {
-      this.backendRepos = data;
-      this.filterRepos();
-      this.reposLoaded = true;
-    });
-  }
-
-  getRepoDetails(repo) {
-    if(!repo.info){
-      let repoInfo;
-      this.backendService.getRepositoryById(repo.id).subscribe((data: JSON) => {
-        repoInfo = data;
-        if (repoInfo && this.backendRepos.length > 0) {
-          const index = this.backendRepos.map(e => e.id).indexOf(repo.id);
-          this.backendRepos[index].info = repoInfo;
+    this.datasets.valueChanges.subscribe(
+      newVal => {
+        this.restricted = [];
+        this.closed = [];
+        for (const val of newVal) {
+          if(val.dataAccess === DataAccessType.restricted) {
+            this.addRestricted(val.title);
+          }
+          if(val.dataAccess === DataAccessType.closed) {
+            this.addClosed(val.title);
+          }
         }
-        this.filterRepos();
-      });
+      }
+    )
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.repositories) {
+      // Timeout needed for paginator init
+      setTimeout(_ => this.filterRepos(), 1);
     }
   }
 
-  get datasets() {
-    const data = this.dmpForm.get('data') as FormGroup;
-    return data.get('datasets') as FormArray;
+  expandRow(repo: Repository) {
+    this.expandedElement = this.expandedElement === repo.id ? null : repo.id;
+    if (!repo.info) {
+      this.getRepoDetails(repo);
+    }
+  }
+
+
+  private getRepoDetails(repo: Repository) {
+    this.repositoryDetails.emit(repo);
   }
 
   // Filter selected repos from repo list
   private filterRepos(): void {
-    this.repoList = Object.assign([], this.backendRepos);
-    if (this.reposSelected.length > 0) {
-      for (let entry of this.reposSelected) {
-        this.repoList = this.repoList.filter(e => e !== entry);
-      }
+    this.repoList = Object.assign([], this.repositories);
+    for (const entry of this.repoStep.controls) {
+      this.repoList = this.repoList.filter(e => e.id !== entry.value.id);
     }
-    this.dataSource.data = this.repoList;
     this.dataSource.paginator = this.paginator;
+    this.dataSource.data = this.repoList;
   }
 
-  // Table Filter
+  // Table Search Filter
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -89,17 +101,22 @@ export class RepoComponent implements OnInit {
     }
   }
 
-  addRepo(repo: any) {
-    let repoGroup = this.formBuilder.group({
-      id: repo.id,
-      name: repo.name,
-      datasets: [''],
-      date: ['']
-    });
-    this.repoStep.push(repoGroup);
+  addRepository(repo: Repository) {
+    this.repositoryToAdd.emit(repo);
+    this.filterRepos();
   }
 
-  removeRepo(index: number): void {
-    this.repoStep.removeAt(index);
+  removeRepository(index: number): void {
+    this.repositoryToRemove.emit(index);
+    this.filterRepos();
   }
+
+  private addRestricted(value: string) {
+    this.restricted.push(value);
+  }
+
+  private addClosed(value: string) {
+    this.closed.push(value);
+  }
+
 }

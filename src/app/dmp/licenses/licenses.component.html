@@ -13,27 +13,26 @@
         </div>
       </div>
       <div class="mat-card-container" *ngIf="dataset.value.publish">
-        Select your license here!
-      </div>
-      <div class="mat-card-container" *ngIf="dataset.value.publish">
         <mat-form-field style="width: 100% !important">
           <mat-label>Planned license</mat-label>
           <mat-select formControlName="license">
-            <mat-option *ngFor="let license of licenses" [value]="license.value">
-              {{license.viewValue}}
+            <mat-option *ngFor="let license of licenses" [value]="license.url">
+              {{license.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <app-license-selector [reference]="'license_' + i"
+          (licenseSelection)="setLicenseSelectorResult($event, i)">
+        </app-license-selector>
       </div>
       <div class="mat-card-container" *ngIf="dataset.value.publish">
         <mat-form-field class="example-full-width">
           <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker_i" formControlName="start_date">
+          <input matInput [matDatepicker]="picker_i" formControlName="startDate">
           <mat-datepicker-toggle matSuffix [for]="picker_i"></mat-datepicker-toggle>
           <mat-datepicker #picker_i></mat-datepicker>
         </mat-form-field>
       </div>
-
     </form>
   </mat-card>
 </form>

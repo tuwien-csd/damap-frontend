@@ -1,26 +1,75 @@
-<mat-vertical-stepper [linear]="isLinear">
+<mat-vertical-stepper [linear]="isLinear" (selectionChange)="changeStep($event)">
   <mat-step label="Choose project">
-    <app-dmp-project [dmpForm]="dmpForm" [userId]="userId$ | async"></app-dmp-project>
+    <app-dmp-project [projects]="projects$ | async"
+                     [loaded]="projectsLoaded$ | async"
+                     [projectStep]="projectStep"
+                     (project)="changeProject($event)"></app-dmp-project>
   </mat-step>
   <mat-step label="People involved in data management">
-    <app-dmp-people [dmpForm]="dmpForm"></app-dmp-people>
+    <app-dmp-people [people]="people" [peopleList]="peopleList"
+                    [contactStep]="contactStep"
+                    [contributorStep]="contributorStep"
+                    (contactPerson)="changeContactPerson($event)"
+                    (contributorToAdd)="addContributor($event)"
+                    (contributorToRemove)="removeContributor($event)">
+    </app-dmp-people>
   </mat-step>
   <mat-step label="Specify research data">
-    <app-dmp-specify-data [dmpForm]="dmpForm"></app-dmp-specify-data>
+    <app-dmp-specify-data [specifyDataStep]="specifyDataStep"
+                          [datasets]="datasets"
+                          (createDataset)="createDataset($event)"
+                          (updateDataset)="updateDataset($event)"
+                          (removeDataset)="removeDataset($event)">
+    </app-dmp-specify-data>
   </mat-step>
   <mat-step label="Documentation and data quality">
-    <app-dmp-doc-data-quality [dmpForm]="dmpForm"></app-dmp-doc-data-quality>
+    <app-dmp-doc-data-quality [docDataStep]="docDataStep"></app-dmp-doc-data-quality>
+  </mat-step>
+  <mat-step label="Storage and backup">
+    <app-dmp-storage [storageStep]="storageStep"
+                     [datasets]="datasets"
+                     (storageToAdd)="addStorage($event)"
+                     (storageToRemove)="removeStorage($event)">
+    </app-dmp-storage>
+    <app-dmp-external-storage [externalStorageStep]="externalStorageStep"
+                              [externalStorageInfo]="externalStorageInfo"
+                              [datasets]="datasets"
+                              (externalStorageToAdd)="addExternalStorage()"
+                              (externalStorageToRemove)="removeExternalStorage($event)">
+    </app-dmp-external-storage>
   </mat-step>
   <mat-step label="Legal and ethical aspects">
-    <app-dmp-legal-ethical-aspects [dmpForm]="dmpForm"></app-dmp-legal-ethical-aspects>
+    <app-dmp-legal-ethical-aspects [legalEthicalStep]="legalEthicalStep"></app-dmp-legal-ethical-aspects>
   </mat-step>
   <mat-step label="Licensing">
-    <app-dmp-licenses [dmpForm]="dmpForm"></app-dmp-licenses>
+    <app-dmp-licenses [datasets]="datasets"></app-dmp-licenses>
   </mat-step>
-  <mat-step label="Specify repository/repositories">
-    <app-dmp-repo [dmpForm]="dmpForm"></app-dmp-repo>
+  <mat-step label="Specify repositories for publication and preservation">
+    <app-dmp-repo [repoStep]="repoStep" [datasets]="datasets"
+                  [restrictedAccessInfo]="restrictedAccessInfo" [closedAccessInfo]="closedAccessInfo"
+                  [loaded]="repositoriesLoaded$ | async"
+                  [repositories]="repositories$ | async"
+                  (repositoryToAdd)="addRepository($event)"
+                  (repositoryToRemove)="removeRepository($event)"
+                  (repositoryDetails)="getRepositoryDetails($event)">
+    </app-dmp-repo>
+  </mat-step>
+  <mat-step label="Reuse of data">
+    <app-dmp-reuse [reuseStep]="reuseStep"
+                   [datasets]="datasets">
+    </app-dmp-reuse>
+  </mat-step>
+  <mat-step label="Costs">
+    <app-dmp-costs [costsStep]="costsStep"
+                   (costToAdd)="addCost()"
+                   (costToRemove)="removeCost($event)">
+    </app-dmp-costs>
   </mat-step>
   <mat-step label="End">
-    <app-dmp-summary [dmp]="dmp"></app-dmp-summary>
+    <app-dmp-summary [dmpForm]="dmpForm"></app-dmp-summary>
   </mat-step>
 </mat-vertical-stepper>
+<div id="save-dmp">
+  <button mat-button color="primary" [routerLink]="'/plans'" routerLinkActive="active">Discard changes</button>
+  <button mat-raised-button color="primary" (click)="saveDmp()">Save changes</button>
+</div>

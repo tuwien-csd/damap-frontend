@@ -1,48 +1,61 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Dmp} from "../model/dmp";
-import {MatTableDataSource} from "@angular/material/table";
-import {BackendService} from "../services/backend.service";
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import {Component, OnInit} from '@angular/core';
+import {Dmp} from '../domain/dmp';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../store/states/app.state';
+import {selectDmps, selectDmpsLoaded} from '../store/selectors/dmp.selectors';
+import {Observable} from 'rxjs';
+import {KeycloakService} from 'keycloak-angular';
+import {LoadDmps} from '../store/actions/dmp.actions';
+import {DmpListItem} from '../domain/dmp-list-item';
+import {BackendService} from '../services/backend.service';
 
 @Component({
   selector: 'app-plan',
   templateUrl: './plans.component.html',
-  styleUrls: ['./plans.component.css'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+  styleUrls: ['./plans.component.css']
 })
 export class PlansComponent implements OnInit {
 
-  @Input() public userDmps: Dmp[] = [];
-  dataSource = new MatTableDataSource();
+  userId: string;
+  dmps$: Observable<DmpListItem[]>;
+  dmpsLoaded$: Observable<boolean>;
 
-  readonly tableHeaders: string[] = ['title', 'created', 'modified', 'edit','history', 'remove'];
-  expandedElement: Dmp | null;
-
-  constructor(private backendService: BackendService) {
+  constructor(
+    private auth: KeycloakService,
+    private store: Store<AppState>,
+    private backendService: BackendService
+  ) {
+    this.dmpsLoaded$ = this.store.pipe(select(selectDmpsLoaded));
+    this.dmps$ = this.store.pipe(select(selectDmps));
+    this.dmpsLoaded$.subscribe(loaded => {
+      if (!loaded) {
+        this.auth.loadUserProfile().then(
+          p => {
+            this.userId = p['attributes']?.tissID?.[0];
+            this.getDmps(this.userId);
+          }
+        );
+      }
+    })
   }
 
   ngOnInit() {
-    this.getDmps();
-    this.dataSource.data = this.userDmps;
+  }
+
+  getDmps(userId: string) {
+    console.log('Fetch Dmps for id: ' + userId);
+    this.store.dispatch(new LoadDmps({userId}));
+  }
+
+  getDocument(id: number) {
+    return this.backendService.getDmpDocument(id);
+  }
+
+  getJsonFile(id: number) {
+    return this.backendService.getMaDmpJsonFile(id);
   }
 
   removeDmp(dmp: Dmp) {
     // todo
-  }
-
-  private getDmps() {
-    this.backendService.getDmps()
-      .subscribe(dmps => this.userDmps = dmps);
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

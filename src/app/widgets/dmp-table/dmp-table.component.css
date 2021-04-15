@@ -1,0 +1,64 @@
+table {
+  width: 100%;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+td.mat-column-title {
+  float: left;
+  overflow: hidden;
+}
+
+td.mat-column-created,
+td.mat-column-modified{
+  min-width: 100px;
+  overflow: hidden;
+}
+
+.mat-column-edit,
+.mat-column-remove,
+.mat-column-history {
+  max-width: 30px;
+}
+
+.project-overview {
+  text-align: left;
+  float: left;
+  width: 50%;
+  padding: 0.5rem;
+}
+
+.project-description {
+  text-align: left;
+  float: right;
+  width: 50%;
+  padding: 0.5rem;
+}
+
+#dmp-actions {
+  margin: 1rem 0.5rem;
+}
+
+#dmp-actions > button {
+  margin-right: 0.5rem;
+}

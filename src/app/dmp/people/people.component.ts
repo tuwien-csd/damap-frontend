@@ -1,10 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {BackendService} from "../../services/backend.service";
-import {Contributor} from "../../model/contributor";
-import {Observable, Subject} from "rxjs";
-import {Project} from "../../model/project";
-import {ContributorRole} from "../../model/enum/contributor-role.enum";
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
+import {Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
+import {ContributorRole} from '../../domain/enum/contributor-role.enum';
+import {FormArray, FormControl} from '@angular/forms';
+import {Person} from '../../domain/person';
+import {ProjectMember} from '../../domain/project-member';
 
 @Component({
   selector: 'app-dmp-people',
@@ -13,77 +11,62 @@ import {FormArray, FormControl, FormGroup} from "@angular/forms";
 })
 export class PeopleComponent implements OnInit {
 
-  @Input() dmpForm: FormGroup;
-  @Input() people: any[]; // list of people from backend
+  @Input() people: ProjectMember[]; // list of people from backend
 
-  peopleList: any[] = []; // people minus contributors
-  roles = {'Editor': ContributorRole.editor, 'Guest': ContributorRole.guest};
+  @Input() peopleList: ProjectMember[] = []; // people minus contributors
+  roles = {
+    dataCollector: ContributorRole.DataCollector,
+    dataCurator: ContributorRole.DataCurator,
+    dataManager: ContributorRole.DataManager,
+    distributor: ContributorRole.Distributor,
+    editor: ContributorRole.Editor,
+    hostingInstitution: ContributorRole.HostingInstitution,
+    producer: ContributorRole.Producer,
+    projectLeader: ContributorRole.ProjectLeader,
+    projectManager: ContributorRole.ProjectManager,
+    projectMember: ContributorRole.ProjectMember,
+    registrationAgency: ContributorRole.RegistrationAgency,
+    registrationAuthority: ContributorRole.RegistrationAuthority,
+    relatedPerson: ContributorRole.RelatedPerson,
+    researcher: ContributorRole.Researcher,
+    researchGroup: ContributorRole.ResearchGroup,
+    rightsHolder: ContributorRole.RightsHolder,
+    sponsor: ContributorRole.Sponsor,
+    supervisor: ContributorRole.Supervisor,
+    workPackageLeader: ContributorRole.WorkPackageLeader,
+    other: ContributorRole.Other
+  };
 
-  // todo: search
-  contributors$: Observable<Project[]>;
-  private searchTerms = new Subject<string>();
+  @Input() contactStep: FormControl;
+  @Input() contributorStep: FormArray;
 
-  contactStep: FormControl;
-  contributorStep: FormArray;
-  projectStep: FormControl;
+  @Output() contactPerson = new EventEmitter<any>();
+  @Output() contributorToAdd = new EventEmitter<any>();
+  @Output() contributorToRemove = new EventEmitter<any>();
+  @Output() contributorToUpdate = new EventEmitter<any>();
 
-  constructor(private backendService: BackendService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.contactStep = this.dmpForm.get('contact') as FormControl;
-    this.contributorStep = this.dmpForm.get('contributors') as FormArray;
-    this.projectStep = this.dmpForm.get('project') as FormControl;
-    this.projectStep.valueChanges.subscribe(newVal => {
-      if (newVal) {
-        const projectId = newVal.projectId;
-        if (projectId) {
-          this.getProjectMembers(projectId);
-        }
-      }
-    });
   }
 
-  setContactPerson(contact: Contributor) {
-    this.contactStep.setValue(contact);
+  changeContactPerson(contact: Person) {
+    this.contactPerson.emit(contact);
   }
 
-  unsetContactPerson() {
-    this.contactStep.reset();
-  }
-
-  addContributor(contributor: Contributor) {
-    const contributorControl = new FormGroup({person: new FormControl(contributor), role: new FormControl(null)});
-    this.contributorStep.push(contributorControl);
-    this.filterPeople();
+  addContributor(contributor: Person) {
+    this.contributorToAdd.emit(contributor);
   }
 
   removeContributor(index: number) {
-    this.contributorStep.removeAt(index);
-    this.filterPeople();
+    this.contributorToRemove.emit(index);
   }
 
-  updateContributorRoles(index: number, role: string, event: any) {
-    if(event.source.selected) {
-      const contributor = this.contributorStep.at(index);
-      contributor.patchValue({role: role});
+  updateContributorRoles(index: number, role: ContributorRole, event: any) {
+    if (event.source.selected) {
+      this.contributorToUpdate.emit({index, role});
     }
   }
 
-  private getProjectMembers(projectId: number) {
-    this.backendService.getProjectMembers(projectId)
-      .subscribe(members => {
-        this.people = members;
-        this.filterPeople();
-      });
-  }
-
-  private filterPeople(): void {
-    this.peopleList = Object.assign([], this.people);
-    if (this. contributorStep != null && this.contributorStep.length > 0) {
-      for (let entry of this.contributorStep.controls) {
-        this.peopleList = this.peopleList.filter(e => e !== entry.value.person);
-      }
-    }
-  }
 }
