@@ -26,10 +26,12 @@ export class SpecifyDataComponent implements OnInit {
 
   @Input() specifyDataStep: FormGroup;
   @Input() datasets: FormArray;
+  @Input() fileUpload: {file: File, progress: number, finalized: boolean}[];
 
   @Output() createDataset = new EventEmitter<string>();
   @Output() updateDataset = new EventEmitter<any>();
   @Output() fileToAnalyse = new EventEmitter<File>();
+  @Output() uploadToCancel = new EventEmitter<number>();
   @Output() removeDataset = new EventEmitter<number>();
 
   dataSource = new MatTableDataSource();
@@ -93,6 +95,9 @@ export class SpecifyDataComponent implements OnInit {
     );
   }
 
+  cancelUpload(index: number) {
+    this.uploadToCancel.emit(index);
+  }
 }
 
 @Component({

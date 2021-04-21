@@ -20,7 +20,7 @@
 
 .dropzone > mat-icon {
   margin-bottom: 30px;
-  transform: scale(2,2);
+  transform: scale(2, 2);
 }
 
 .fileover {
@@ -30,9 +30,28 @@
 
 .progress {
   display: flex;
-  flex-direction: row;align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  padding: 5px 5px 10px 10px;
+  border: 1px solid #E6E6E6;
+  border-radius: 3px;
+  margin-bottom: 5px;
 }
+
 mat-progress-bar {
-  max-width: 90%;
+  max-width: calc(100% - 40px);
+}
+
+.progress-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-list-item {
+  height: auto;
+}
+
+.cancel-upload {
+  float: right;
 }
