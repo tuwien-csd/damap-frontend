@@ -94,11 +94,13 @@ export class BackendService {
     );
   }
 
-  /*
   analyseFileData(file: FormData): Observable<any> {
-    return this.http.post(`${this.backendUrl}api/fits/examine`, file, {reportProgress: true, observe: 'events'})
-      .pipe();
-  }*/
+    return this.http.post(`${this.backendUrl}api/fits/examine`, file,
+      {reportProgress: true, observe: 'events'})
+      .pipe(
+        catchError(this.handleError('Failed to analyse file.'))
+      );
+  }
 
   getDmpDocument(id: number) {
     return this.http.get(this.backendUrl + 'document/' + id,

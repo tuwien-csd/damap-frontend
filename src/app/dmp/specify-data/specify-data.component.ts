@@ -29,6 +29,7 @@ export class SpecifyDataComponent implements OnInit {
 
   @Output() createDataset = new EventEmitter<string>();
   @Output() updateDataset = new EventEmitter<any>();
+  @Output() fileToAnalyse = new EventEmitter<File>();
   @Output() removeDataset = new EventEmitter<number>();
 
   dataSource = new MatTableDataSource();
@@ -69,6 +70,10 @@ export class SpecifyDataComponent implements OnInit {
 
   remove(index: number): void {
     this.removeDataset.emit(index);
+  }
+
+  analyseFile(file: File) {
+    this.fileToAnalyse.emit(file);
   }
 
   openDatasetDialog(index: number) {

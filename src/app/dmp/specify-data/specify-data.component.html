@@ -27,9 +27,9 @@
                (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
     </mat-form-field>
-
   </mat-tab>
   <mat-tab label="Uploading sample data">
+    <app-file-upload (fileToUpload)="analyseFile($event)"></app-file-upload>
   </mat-tab>
 </mat-tab-group>
 
