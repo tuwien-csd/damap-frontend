@@ -9,14 +9,17 @@ export class BytePipe implements PipeTransform {
     if(value <= 0) {
       return 'Unkown';
     }
+    if(value <= 1000000) {
+      return '< ' + (value/1000).toFixed(2) + ' KB';
+    }
     if(value <= 1000000000) {
-      return '< ' + value/1000000 + ' MB';
+      return '< ' + (value/1000000).toFixed(2) + ' MB';
     }
     if(value <= 1000000000000) {
-      return '< ' + value/1000000000 + ' GB';
+      return '< ' + (value/1000000000).toFixed(2) + ' GB';
     }
     if(value <= 1000000000000000) {
-      return '< ' + value/1000000000000 + ' TB';
+      return '< ' + (value/1000000000000).toFixed(2) + ' TB';
     }
     return '> 1 PB';
   }
