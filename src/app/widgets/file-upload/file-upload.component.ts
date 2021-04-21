@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-file-upload',
@@ -7,7 +7,10 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class FileUploadComponent implements OnInit {
 
+  @Input() fileUpload: { file: File, progress: number, finalized: boolean }[];
+
   @Output() fileToUpload = new EventEmitter<File>();
+  @Output() uploadToCancel = new EventEmitter<number>();
 
   constructor() {
   }
@@ -23,6 +26,10 @@ export class FileUploadComponent implements OnInit {
 
   onFileSelected(event) {
     this.onFileDropped(event.target.files);
+  }
+
+  cancelUpload(index: number) {
+    this.uploadToCancel.emit(index);
   }
 
 }

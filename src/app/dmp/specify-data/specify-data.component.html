@@ -29,7 +29,10 @@
     </mat-form-field>
   </mat-tab>
   <mat-tab label="Uploading sample data">
-    <app-file-upload (fileToUpload)="analyseFile($event)"></app-file-upload>
+    <app-file-upload [fileUpload]="fileUpload"
+      (fileToUpload)="analyseFile($event)"
+    (uploadToCancel)="cancelUpload($event)">
+    </app-file-upload>
   </mat-tab>
 </mat-tab-group>
 

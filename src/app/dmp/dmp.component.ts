@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../services/backend.service';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {KeycloakService} from 'keycloak-angular';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {Person} from '../domain/person';
 import {ProjectMember} from '../domain/project-member';
 import {Project} from '../domain/project';
@@ -57,6 +57,9 @@ export class DmpComponent implements OnInit {
   repositories: any;
   repositoriesLoaded$: Observable<boolean>;
   repositories$: Observable<Repository[]>;
+
+  fileUpload: { file: File, progress: number, finalized: boolean }[] = [];
+  fileUploadSubscription: Subscription[] = [];
 
   // TODO: Manage editability based on accessType (role)
   constructor(
@@ -210,17 +213,29 @@ export class DmpComponent implements OnInit {
     formData.append('file', event);
     const filename = event.name;
     const reference = this.generateReferenceHash();
-    this.backendService.analyseFileData(formData)
+    const upload = {file: event, progress: 0, finalized: false};
+    this.fileUpload.push(upload);
+    const uploadSub = this.backendService.analyseFileData(formData)
       .subscribe((response) => {
-          if (response.type === HttpEventType.Response) {
-            const dataset = response.body;
-            dataset.title = filename;
-            dataset.referenceHash = reference;
-            this.formService.addFileAnalysisAsDatasetToForm(this.dmpForm, dataset);
-          }
-        },
-        error => console.error(error)
-      );
+        if (response.type === HttpEventType.UploadProgress) {
+          upload.progress = Math.round(100 * (response.loaded / response.total));
+        }
+        if (response.type === HttpEventType.Response) {
+          const dataset = response.body;
+          dataset.title = filename;
+          dataset.referenceHash = reference;
+          this.formService.addFileAnalysisAsDatasetToForm(this.dmpForm, dataset);
+        }
+      },
+      error => console.error(error),
+      () => upload.finalized = true
+    );
+    this.fileUploadSubscription.push(uploadSub);
+  }
+
+  cancelFileUpload(index: number) {
+    this.fileUploadSubscription[index].unsubscribe();
+    this.fileUpload[index].finalized = true;
   }
 
   removeDataset(index: number) {
