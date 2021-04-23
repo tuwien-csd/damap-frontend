@@ -51,8 +51,7 @@ export class DmpComponent implements OnInit {
   // Resources
   projectsLoaded$: Observable<boolean>;
   projects$: Observable<Project[]>;
-  people: ProjectMember[];
-  peopleList: ProjectMember[] = []; // people minus contributors
+  projectMembers: ProjectMember[];
   repositories: any;
   repositoriesLoaded$: Observable<boolean>;
   repositories$: Observable<Repository[]>;
@@ -103,11 +102,12 @@ export class DmpComponent implements OnInit {
     this.reuseStep = this.dmpForm.get('reuse') as FormGroup;
     this.costsStep = this.dmpForm.get('costs') as FormGroup;
 
+    // Set project leader as contact person on project change
     this.projectStep.valueChanges.subscribe(newVal => {
       if (newVal) {
         const projectId = newVal.id;
         if (projectId) {
-          this.getProjectMembers(projectId);
+          this.getProjectMembers(projectId, true);
         }
       }
     });
@@ -117,37 +117,6 @@ export class DmpComponent implements OnInit {
     if (event.selectedIndex === 7) {
       this.getRepositories();
     }
-  }
-
-// TODO: make sure users can only retrieve dmps they are authorized to
-  getDmpById(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    if (id) {
-      console.log('Get DMP with ID: ' + id);
-      this.backendService.getDmpById(id).subscribe(
-        dmp => {
-          if (dmp !== undefined) {
-            this.formService.mapDmpToForm(dmp, this.dmpForm);
-             if (dmp.project) {
-               this.projects$.subscribe(projects => projects.filter(e => {
-                 if (e.title === dmp.project.title) {
-                   this.getProjectMembers(e.id);
-                 }
-               }))
-             }
-          } else {
-            this.router.navigate(['plans']);
-          }
-        });
-    }
-  }
-
-  getRepositories() {
-    this.repositoriesLoaded$.subscribe(loaded => {
-      if (!loaded) {
-        this.store.dispatch(new LoadRepositories());
-      }
-    });
   }
 
   saveDmp(): void {
@@ -188,12 +157,10 @@ export class DmpComponent implements OnInit {
 
   addContributor(contributor: Person) {
     this.formService.addContributorToForm(this.dmpForm, contributor);
-    this.filterPeople();
   }
 
   removeContributor(index: number) {
     this.formService.removeContributorFromForm(this.dmpForm, index);
-    this.filterPeople();
   }
 
   createDataset(title: string) {
@@ -250,25 +217,55 @@ export class DmpComponent implements OnInit {
     this.formService.removeCostFromForm(this.dmpForm, index);
   }
 
+  private getDmpById() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    if (id) {
+      console.log('Get DMP with ID: ' + id);
+      this.backendService.getDmpById(id).subscribe(
+        dmp => {
+          if (dmp !== undefined) {
+            this.formService.mapDmpToForm(dmp, this.dmpForm);
+            if (dmp.project) {
+              this.projects$.subscribe(projects => projects.filter(e => {
+                if (e.title === dmp.project.title) {
+                  this.getProjectMembers(e.id, false);
+                }
+              }))
+            }
+          } else {
+            this.router.navigate(['plans']);
+          }
+        });
+    }
+  }
+
+
   private getSuggestedProjects(userId: string) {
     this.store.dispatch(new LoadSuggestedProjects({userId}));
   }
 
-  private getProjectMembers(projectId: number) {
+  // get project members and set contact person if specified
+  private getProjectMembers(projectId: number, setContactPerson: boolean) {
     this.backendService.getProjectMembers(projectId)
       .subscribe(members => {
-        this.people = members;
-        this.filterPeople();
+        this.projectMembers = members;
+        if (setContactPerson) {
+          for (const member of members) {
+            if (member.roleInProject && member.roleInProject === 'Project leader') {
+              this.changeContactPerson(member.person);
+              break;
+            }
+          }
+        }
       });
   }
 
-  private filterPeople(): void {
-    this.peopleList = Object.assign([], this.people);
-    if (this.contributorStep != null && this.contributorStep.length > 0) {
-      for (const entry of this.contributorStep.controls) {
-        this.peopleList = this.peopleList.filter(e => e.person.id !== entry.value.person.id);
+  private getRepositories() {
+    this.repositoriesLoaded$.subscribe(loaded => {
+      if (!loaded) {
+        this.store.dispatch(new LoadRepositories());
       }
-    }
+    });
   }
 
   private removeRepoDatasets(dataset) {
