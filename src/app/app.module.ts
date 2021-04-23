@@ -57,6 +57,7 @@ import {CostsComponent} from './dmp/costs/costs.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {BytePipe} from './pipe/byte.pipe';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ContributorFilterPipe } from './pipe/contributor-filter.pipe';
 
 const keycloakService = new KeycloakService();
 
@@ -87,6 +88,7 @@ const keycloakService = new KeycloakService();
     ReuseComponent,
     CostsComponent,
     BytePipe,
+    ContributorFilterPipe,
   ],
   imports: [
     BrowserModule,
