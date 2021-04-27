@@ -33,7 +33,7 @@
     <div class="list-container">
       <mat-selection-list [multiple]="false" style="'height: 500px; overflow:scroll'">
         <mat-list-option *ngFor="let project of (projects | projectFilter:searchBox.value)"
-                         [style]="'height: auto;'" [selected]="project === projectStep.value">
+                         [style]="'height: auto;'" [selected]="project.universityId === projectStep?.value?.universityId">
           <mat-list-item (click)="changeProject(project)">
             <div class="mat-card-left">
               <div mat-line><b>{{project.title}}</b></div>
