@@ -85,7 +85,7 @@ export class RepoComponent implements OnInit, OnChanges {
   private filterRepos(): void {
     this.repoList = Object.assign([], this.repositories);
     for (const entry of this.repoStep.controls) {
-      this.repoList = this.repoList.filter(e => e.id !== entry.value.id);
+      this.repoList = this.repoList.filter(e => !(e.id === entry.value.hostId));
     }
     this.dataSource.paginator = this.paginator;
     this.dataSource.data = this.repoList;
