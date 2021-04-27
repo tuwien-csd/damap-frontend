@@ -45,7 +45,7 @@ export class BackendService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<Dmp>(`${this.backendUrl}plans/save-dmp/`, {dmp}, httpOptions)
+    return this.http.post<Dmp>(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions)
       .pipe(
         retry(3),
         catchError(this.handleError('Failed to save plan.'))
