@@ -7,7 +7,7 @@
 <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
   <ng-container matColumnDef="title">
     <th mat-header-cell *matHeaderCellDef>Title</th>
-    <td mat-cell *matCellDef="let element"><h3>{{element.project.title || 'DMP id: ' + element.id}}</h3></td>
+    <td mat-cell *matCellDef="let element"><h3>{{element.project?.title || 'DMP ID: ' + element.id}}</h3></td>
   </ng-container>
 
   <ng-container matColumnDef="created">
