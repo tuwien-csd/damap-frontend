@@ -1,13 +1,12 @@
 import {Project} from '../../domain/project';
-import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 
-export interface ProjectState extends EntityState<Project>{
+export interface ProjectState {
+  projects: Project[];
   loaded: boolean;
 }
 
-export const adapter: EntityAdapter<Project> = createEntityAdapter<Project>();
-
-export const initialProjectsState: ProjectState = adapter.getInitialState({
+export const initialProjectsState: ProjectState = {
+  projects: [],
   loaded: false
-});
+};
 

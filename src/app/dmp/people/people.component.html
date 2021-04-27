@@ -79,13 +79,13 @@
       <div class="mat-card-left">
         <div>
           <mat-icon class="mat-icon-style">person</mat-icon>
-          {{person.person.firstName}} {{person.person.lastName}}
+          {{person.person?.firstName}} {{person.person?.lastName}}
         </div>
         <mat-icon class="mat-icon-style">mail_outline</mat-icon>
-        {{person.person.mbox}}
+        {{person.person?.mbox}}
       </div>
       <div class="mat-card-right">
-        <button mat-raised-button *ngIf="contactStep.value != person.person"
+        <button mat-raised-button *ngIf="contactStep.value?.universityId != person.person?.universityId"
                 (click)="changeContactPerson(person.person)"
                 title="Set as contact">
           <mat-icon>contact_mail</mat-icon>

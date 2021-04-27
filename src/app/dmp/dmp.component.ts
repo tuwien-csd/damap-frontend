@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../services/backend.service';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {KeycloakService} from 'keycloak-angular';
 import {Observable} from 'rxjs';
 import {Person} from '../domain/person';
@@ -61,7 +61,6 @@ export class DmpComponent implements OnInit {
   // TODO: Manage editability based on accessType (role)
   constructor(
     private auth: KeycloakService,
-    private formBuilder: FormBuilder,
     private formService: FormService,
     private route: ActivatedRoute,
     private router: Router,
@@ -105,9 +104,9 @@ export class DmpComponent implements OnInit {
     this.costsStep = this.dmpForm.get('costs') as FormGroup;
 
     // Set project leader as contact person on project change
-    this.projectStep.valueChanges.subscribe(newVal => {
+    this.projectStep.valueChanges.subscribe((newVal: Project) => {
       if (newVal) {
-        const projectId = newVal.id;
+        const projectId = newVal.universityId;
         if (projectId) {
           this.getProjectMembers(projectId, true);
         }
@@ -236,7 +235,7 @@ export class DmpComponent implements OnInit {
             if (dmp.project) {
               this.projects$.subscribe(projects => projects.filter(e => {
                 if (e.title === dmp.project.title) {
-                  this.getProjectMembers(e.id, false);
+                  this.getProjectMembers(e.universityId, false);
                 }
               }))
             }
