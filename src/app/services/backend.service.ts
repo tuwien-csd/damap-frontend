@@ -39,28 +39,30 @@ export class BackendService {
     );
   }
 
-  createDmp(editedBy: string, dmp: Dmp): Observable<{ id: number }> {
+  createDmp(editedBy: string, dmp: Dmp): Observable<Dmp> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<{ id: number }>(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions).pipe(
-      retry(3),
-      catchError(this.handleError('Failed to save plan.'))
-    );
+    return this.http.post<Dmp>(`${this.backendUrl}plans/save-dmp/`, {dmp}, httpOptions)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('Failed to save plan.'))
+      );
   }
 
-  editDmp(editedBy: string, dmp: Dmp): Observable<any> {
+  editDmp(editedBy: string, dmp: Dmp): Observable<Dmp> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions).pipe(
-      retry(3),
-      catchError(this.handleError('Failed to update plan.'))
-    );
+    return this.http.post<Dmp>(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('Failed to update plan.'))
+      );
   }
 
   getSuggestedProjects(userId: string): Observable<Project[]> {

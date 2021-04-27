@@ -18,6 +18,8 @@ import {LoadRepositories, LoadRepository} from '../store/actions/repository.acti
 import {StepperSelectionEvent} from '@angular/cdk/stepper';
 import {Storage} from '../domain/storage';
 import {FeedbackService} from '../services/feedback.service';
+import {Location} from '@angular/common';
+import {LoadDmps} from '../store/actions/dmp.actions';
 
 @Component({
   selector: 'app-dmp',
@@ -65,8 +67,8 @@ export class DmpComponent implements OnInit {
     private router: Router,
     private backendService: BackendService,
     private store: Store<AppState>,
-    private feedbackService: FeedbackService
-    // private location: Location
+    private feedbackService: FeedbackService,
+    private location: Location
   ) {
   }
 
@@ -125,14 +127,20 @@ export class DmpComponent implements OnInit {
     if (this.userId !== undefined) {
       if (this.dmpForm.value.id) {
         this.backendService.editDmp(this.userId, dmp).subscribe(
-          _ => {},
+          response => this.dmpForm.patchValue(response),
           () => {},
           () => this.feedbackService.success('Plan was updated!')
         );
       } else {
         this.backendService.createDmp(this.userId, dmp)
           .subscribe(
-            newId => newId !== undefined ? this.router.navigate([`${newId.id}`], {relativeTo: this.route}) : undefined,
+            response => {
+              if(response) {
+                this.location.replaceState(`dmp/${response.id}`);
+                this.dmpForm.patchValue(response);
+                this.store.dispatch(new LoadDmps({userId: this.userId}));
+              }
+            },
             () => {},
             () => this.feedbackService.success('Plan was saved!'));
       }
