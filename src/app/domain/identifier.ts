@@ -1,4 +1,4 @@
 export interface Identifier {
-  identifier: string;
-  type: string;
+  readonly identifier: string;
+  readonly type: string;
 }
