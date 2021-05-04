@@ -227,7 +227,7 @@ export class DmpComponent implements OnInit {
           this.formService.addFileAnalysisAsDatasetToForm(this.dmpForm, dataset);
         }
       },
-      error => console.error(error),
+      _ => upload.finalized = true,
       () => upload.finalized = true
     );
     this.fileUploadSubscription.push(uploadSub);
