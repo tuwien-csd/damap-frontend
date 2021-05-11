@@ -1,5 +1,5 @@
 export interface Repository {
-  id: string;
+  readonly id: string;
   name: string;
   info: any;
 }
