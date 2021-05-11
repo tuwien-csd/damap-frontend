@@ -1,6 +1,7 @@
 import {DataAccessType} from './enum/data-access-type.enum';
 
 export interface Dataset {
+  readonly id: number;
   title: string;
   type: any;
   size: number;

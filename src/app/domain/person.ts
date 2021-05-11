@@ -1,9 +1,10 @@
 import {PersonId} from './person-id';
 
 export interface Person {
-  readonly id: string; // damap internal ID
+  readonly id: number;
+  readonly universityId: string;
   readonly personId: PersonId;
-  readonly mbox: string;
   readonly firstName: string;
   readonly lastName: string;
+  readonly mbox: string;
 }
