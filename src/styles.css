@@ -37,12 +37,6 @@ body {
 *, ::after, ::before {
   box-sizing: border-box;
 }
-.active {
-  background-color: #f5f5f5;
-  padding-left: 22px;
-  border-left: 8px solid var(--main-color);
-  font-weight: 400;
-}
 
 .mat-icon-style {
   font-size: smaller;
