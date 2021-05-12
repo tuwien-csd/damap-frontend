@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {KeycloakService} from "keycloak-angular";
+import {KeycloakService} from 'keycloak-angular';
 
 @Component({
   selector: 'app-layout',
@@ -8,11 +8,12 @@ import {KeycloakService} from "keycloak-angular";
 })
 export class LayoutComponent implements OnInit {
 
-  public title:string = 'Data Management Plan';
+  public title = 'Data Management Plan';
   public token:object;
   public name:string;
   public username:string;
   public roles:string[];
+  public widescreen = () => window.innerWidth >= 1024;
 
   constructor(private auth:KeycloakService) { }
 
@@ -25,10 +26,6 @@ export class LayoutComponent implements OnInit {
 
   public logout() {
     this.auth.logout();
-  }
-
-  public widescreen(): boolean {
-    return window.innerWidth >= 1024;
   }
 
 }
