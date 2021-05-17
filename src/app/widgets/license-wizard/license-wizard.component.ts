@@ -28,7 +28,7 @@ export class LicenseWizardComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(LicenseSelectorDialog, {
-      width: '80%'
+      width: '800px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -106,6 +106,7 @@ export class LicenseSelectorDialog {
   reset() {
     this.steps = [QUESTION_TREE];
     this.matrix = [];
+    this.options = [];
     this.licenseList = [...LicenseDefinitions];
   }
 

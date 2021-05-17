@@ -6,7 +6,10 @@
         <mat-icon>looks_{{i == 0 ? 'one' : (i == 1 ? 'two' : i + 1)}}</mat-icon>
       </button>-->
       <div class="ls-question" *ngIf="last">
-        <button id="ls-reset-button" mat-stroked-button (click)="reset()"><mat-icon>replay</mat-icon> Reset form</button>
+        <button id="ls-reset-button" mat-stroked-button (click)="reset()">
+          <mat-icon>replay</mat-icon>
+          Reset form
+        </button>
         <h3>{{step.question}}</h3>
         <!-- Software: License Matrix -->
         <ng-container *ngIf="step.question === 'Select licenses in your code:'">
@@ -40,7 +43,7 @@
   </div>
   <!-- List of licenses -->
   <ng-container *ngIf="licenseList?.length">
-    <div>
+    <div id="ls-search">
       <mat-form-field>
         <mat-label>Search license...</mat-label>
         <input #searchBox type="search" matInput>
@@ -48,9 +51,16 @@
       </mat-form-field>
     </div>
     <div class="ls-list">
-      <mat-card class="ls-item" *ngFor="let license of (licenseList | licenseFilter:searchBox.value)" [mat-dialog-close]="license">
-        <h3>{{license.name}}</h3>
-        {{license.description}}
+      <mat-card class="ls-item" *ngFor="let license of (licenseList | licenseFilter:searchBox.value)">
+        <div class="ls-item-header">
+          <h3 [mat-dialog-close]="license">{{license.name}}</h3>
+          <div>
+            <a href="{{license.url}}" target="_blank" mat-button >More info</a>
+          </div>
+        </div>
+          <div class="ls-description" [mat-dialog-close]="license">
+            {{license.description}}
+          </div>
       </mat-card>
     </div>
   </ng-container>
