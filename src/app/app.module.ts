@@ -58,6 +58,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {BytePipe} from './pipe/byte.pipe';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ContributorFilterPipe } from './pipe/contributor-filter.pipe';
+import {LicenseSelectorDialog, LicenseWizardComponent} from './widgets/license-wizard/license-wizard.component';
+import {LicenseFilterPipe} from './widgets/license-wizard/license-filter.pipe';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 const keycloakService = new KeycloakService();
 
@@ -89,6 +92,9 @@ const keycloakService = new KeycloakService();
     CostsComponent,
     BytePipe,
     ContributorFilterPipe,
+    LicenseWizardComponent,
+    LicenseFilterPipe,
+    LicenseSelectorDialog
   ],
   imports: [
     BrowserModule,
@@ -126,7 +132,8 @@ const keycloakService = new KeycloakService();
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatExpansionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCheckboxModule
   ],
   providers: [
     AppComponent,
@@ -135,7 +142,7 @@ const keycloakService = new KeycloakService();
       useValue: keycloakService,
     },
   ],
-  entryComponents: [DatasetDialog, AppComponent],
+  entryComponents: [DatasetDialog, LicenseSelectorDialog, AppComponent],
 })
 export class AppModule implements DoBootstrap {
   async ngDoBootstrap(app) {
