@@ -1,0 +1,33 @@
+.ls-list {
+  max-height: 400px;
+  overflow: scroll;
+}
+
+.ls-answer-buttons {
+  display: flex;
+}
+
+.ls-item {
+  cursor: pointer;
+}
+
+.ls-item:hover {
+  border: 1px solid var(--main-color);
+}
+
+#ls-reset-button {
+  align-self: flex-end;
+}
+
+.ls-steps {
+  display: inline;
+}
+
+.ls-question {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-dialog-container {
+  width: 800px;
+}
