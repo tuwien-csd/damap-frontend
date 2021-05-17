@@ -1,18 +1,31 @@
-.ls-list {
-  max-height: 400px;
-  overflow: scroll;
+#ls-search {
+  margin-top: 1.5rem;
+}
+
+.ls-description {
+  color: #666;
+  cursor: pointer;
 }
 
 .ls-answer-buttons {
   display: flex;
 }
 
-.ls-item {
-  cursor: pointer;
+.ls-answer-buttons button {
+  margin-right: 1rem;
 }
 
 .ls-item:hover {
   border: 1px solid var(--main-color);
+}
+
+.ls-item-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ls-item-header h3 {
+  cursor: pointer;
 }
 
 #ls-reset-button {
