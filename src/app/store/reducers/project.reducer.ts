@@ -1,4 +1,4 @@
-import {adapter, initialProjectsState, ProjectState} from '../states/project.state';
+import {initialProjectsState, ProjectState} from '../states/project.state';
 import {ProjectActions, ProjectActionTypes} from '../actions/project.actions';
 
 export function projectReducer(
@@ -8,21 +8,14 @@ export function projectReducer(
     case ProjectActionTypes.LoadSuggestedProjects:
       return state;
     case ProjectActionTypes.SuggestedProjectsLoaded: {
-      return adapter.setAll(action.payload.projects, {
+      return {
         ...state,
+        projects: action.payload.projects,
         loaded: true
-      });
+      };
     }
     default: {
       return state;
     }
   }
 }
-
-
-export const {
-  selectAll,
-  selectEntities,
-  selectIds,
-  selectTotal
-} = adapter.getSelectors();

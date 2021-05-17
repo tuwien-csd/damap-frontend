@@ -1,6 +1,6 @@
 {
   "name": "dmap-frontend",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -56,9 +56,6 @@
     "protractor": "^7.0.0",
     "ts-node": "~9.0.0",
     "tslint": "^6.1.3",
-    "typescript": "~4.0.5",
-    "LicenseSelector": "https://github.com/ufal/public-license-selector.git#releases",
-    "jquery": "^2.1.1",
-    "lodash": "^2.4.1"
+    "typescript": "~4.0.5"
   }
 }

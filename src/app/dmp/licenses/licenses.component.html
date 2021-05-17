@@ -21,9 +21,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <app-license-selector [reference]="'license_' + i"
-          (licenseSelection)="setLicenseSelectorResult($event, i)">
-        </app-license-selector>
+        <app-license-wizard (selectedLicense)="setLicenseSelectorResult($event, i)"></app-license-wizard>
       </div>
       <div class="mat-card-container" *ngIf="dataset.value.publish">
         <mat-form-field class="example-full-width">
