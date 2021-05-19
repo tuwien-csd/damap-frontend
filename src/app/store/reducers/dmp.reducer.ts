@@ -17,7 +17,7 @@ export function dmpReducer(
         loaded: LoadingState.LOADED
       });
     }
-    case DmpActionTypes.DmpsFailedToLoad: {
+    case DmpActionTypes.FailedToLoadDmps: {
       return {
         ...state,
         loaded: LoadingState.FAILED

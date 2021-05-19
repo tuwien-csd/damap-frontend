@@ -2,9 +2,9 @@ import {Action} from '@ngrx/store';
 import {DmpListItem} from '../../domain/dmp-list-item';
 
 export enum DmpActionTypes {
-  LoadDmps = '[Dmps] Load',
-  DmpsLoaded = '[Dmps] Loaded',
-  DmpsFailedToLoad = '[Dmps] Failed to load'
+  LoadDmps = '[Dmps] Load all',
+  DmpsLoaded = '[Dmps] All loaded',
+  FailedToLoadDmps = '[Dmps] Failed to load all'
 }
 
 export class LoadDmps implements Action {
@@ -21,11 +21,11 @@ export class DmpsLoaded implements Action {
   }
 }
 
-export class DmpsFailedToLoad implements Action {
-  readonly type = DmpActionTypes.DmpsFailedToLoad;
+export class FailedToLoadDmps implements Action {
+  readonly type = DmpActionTypes.FailedToLoadDmps;
 }
 
 export type DmpActions =
   LoadDmps
   | DmpsLoaded
-  | DmpsFailedToLoad;
+  | FailedToLoadDmps;
