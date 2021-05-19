@@ -5,6 +5,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Repository} from '../../domain/repository';
 import {DataAccessType} from '../../domain/enum/data-access-type.enum';
+import {LoadingState} from '../../domain/enum/loading-state.enum';
 
 @Component({
   selector: 'app-dmp-repo',
@@ -20,7 +21,7 @@ import {DataAccessType} from '../../domain/enum/data-access-type.enum';
 })
 export class RepoComponent implements OnInit, OnChanges {
 
-  @Input() loaded: boolean;
+  @Input() loaded: LoadingState;
   @Input() repositories: Repository[]; // Repo list loaded from backend
   repoList: any = []; // Filtered repo list (repo list minus selected repos)
 
@@ -40,6 +41,8 @@ export class RepoComponent implements OnInit, OnChanges {
   restricted: string[] = [];
   closed: string[] = [];
 
+  LoadingState = LoadingState;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor() {
@@ -51,10 +54,10 @@ export class RepoComponent implements OnInit, OnChanges {
         this.restricted = [];
         this.closed = [];
         for (const val of newVal) {
-          if(val.dataAccess === DataAccessType.restricted) {
+          if (val.dataAccess === DataAccessType.restricted) {
             this.addRestricted(val.title);
           }
-          if(val.dataAccess === DataAccessType.closed) {
+          if (val.dataAccess === DataAccessType.closed) {
             this.addClosed(val.title);
           }
         }

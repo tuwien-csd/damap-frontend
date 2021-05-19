@@ -56,7 +56,7 @@ export class DmpComponent implements OnInit {
   projects$: Observable<Project[]>;
   projectMembers: ProjectMember[];
   repositories: any;
-  repositoriesLoaded$: Observable<boolean>;
+  repositoriesLoaded$: Observable<LoadingState>;
   repositories$: Observable<Repository[]>;
 
   // TODO: Manage editability based on accessType (role)
@@ -273,7 +273,7 @@ export class DmpComponent implements OnInit {
 
   private getRepositories() {
     this.repositoriesLoaded$.subscribe(loaded => {
-      if (!loaded) {
+      if (loaded === LoadingState.NOT_LOADED) {
         this.store.dispatch(new LoadRepositories());
       }
     });
