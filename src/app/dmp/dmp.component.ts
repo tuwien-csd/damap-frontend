@@ -109,7 +109,7 @@ export class DmpComponent implements OnInit {
       if (newVal) {
         const projectId = newVal.universityId;
         if (projectId) {
-          this.getProjectMembers(projectId, true);
+          this.getProjectMembersAndSetContact(projectId);
         }
       }
     });
@@ -236,7 +236,7 @@ export class DmpComponent implements OnInit {
             if (dmp.project) {
               this.projects$.subscribe(projects => projects.filter(e => {
                 if (e.title === dmp.project.title) {
-                  this.getProjectMembers(e.universityId, false);
+                  this.getProjectMembers(e.universityId);
                 }
               }))
             }
@@ -251,17 +251,21 @@ export class DmpComponent implements OnInit {
     this.store.dispatch(new LoadProjects({userId}));
   }
 
-  // get project members and set contact person if specified
-  private getProjectMembers(projectId: number, setContactPerson: boolean) {
+  private getProjectMembers(projectId: number) {
     this.backendService.getProjectMembers(projectId)
       .subscribe(members => {
         this.projectMembers = members;
-        if (setContactPerson) {
-          for (const member of members) {
-            if (member.roleInProject && member.roleInProject === 'Project leader') {
-              this.changeContactPerson(member.person);
-              break;
-            }
+      });
+  }
+
+  private getProjectMembersAndSetContact(projectId: number) {
+    this.backendService.getProjectMembers(projectId)
+      .subscribe(members => {
+        this.projectMembers = members;
+        for (const member of members) {
+          if (member.roleInProject === 'Project leader') {
+            this.changeContactPerson(member.person);
+            break;
           }
         }
       });
