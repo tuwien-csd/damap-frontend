@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {catchError, map, mergeMap} from 'rxjs/operators';
-import {LoadProjects, ProjectActionTypes, ProjectsFailedToLoad, ProjectsLoaded} from '../actions/project.actions';
+import {LoadProjects, ProjectActionTypes, FailedToLoadProjects, ProjectsLoaded} from '../actions/project.actions';
 import {BackendService} from '../../services/backend.service';
 import {of} from 'rxjs';
 
@@ -14,7 +14,7 @@ export class ProjectEffects {
     mergeMap(action => this.backendService.getSuggestedProjects(action.payload.userId)
       .pipe(
         map(projects => new ProjectsLoaded({projects})),
-        catchError(() => of(new ProjectsFailedToLoad()))
+        catchError(() => of(new FailedToLoadProjects()))
       )
     ),
   );
