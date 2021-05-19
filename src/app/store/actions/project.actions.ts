@@ -2,9 +2,9 @@ import {Action} from '@ngrx/store';
 import {Project} from '../../domain/project';
 
 export enum ProjectActionTypes {
-  LoadProjects = '[Projects] Load',
-  ProjectsLoaded = '[Projects] Loaded',
-  ProjectsFailedToLoad = '[Projects] Failed to load'
+  LoadProjects = '[Projects] Load all',
+  ProjectsLoaded = '[Projects] All loaded',
+  FailedToLoadProjects = '[Projects] Failed to load all'
 }
 
 export class LoadProjects implements Action {
@@ -21,11 +21,11 @@ export class ProjectsLoaded implements Action {
   }
 }
 
-export class ProjectsFailedToLoad implements Action {
-  readonly type = ProjectActionTypes.ProjectsFailedToLoad;
+export class FailedToLoadProjects implements Action {
+  readonly type = ProjectActionTypes.FailedToLoadProjects;
 }
 
 export type ProjectActions =
   LoadProjects
   | ProjectsLoaded
-  | ProjectsFailedToLoad;
+  | FailedToLoadProjects;

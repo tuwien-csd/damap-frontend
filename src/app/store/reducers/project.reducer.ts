@@ -19,7 +19,7 @@ export function projectReducer(
         loaded: LoadingState.LOADED
       };
     }
-    case ProjectActionTypes.ProjectsFailedToLoad: {
+    case ProjectActionTypes.FailedToLoadProjects: {
       return {
         ...state,
         loaded: LoadingState.FAILED
