@@ -1,17 +1,28 @@
 import {initialProjectsState, ProjectState} from '../states/project.state';
 import {ProjectActions, ProjectActionTypes} from '../actions/project.actions';
+import {LoadingState} from '../../domain/enum/loading-state.enum';
 
 export function projectReducer(
   state = initialProjectsState,
   action: ProjectActions): ProjectState {
   switch (action.type) {
-    case ProjectActionTypes.LoadSuggestedProjects:
-      return state;
-    case ProjectActionTypes.SuggestedProjectsLoaded: {
+    case ProjectActionTypes.LoadProjects:{
+      return {
+        ...state,
+        loaded: LoadingState.LOADING
+      };
+    }
+    case ProjectActionTypes.ProjectsLoaded: {
       return {
         ...state,
         projects: action.payload.projects,
-        loaded: true
+        loaded: LoadingState.LOADED
+      };
+    }
+    case ProjectActionTypes.ProjectsFailedToLoad: {
+      return {
+        ...state,
+        loaded: LoadingState.FAILED
       };
     }
     default: {
