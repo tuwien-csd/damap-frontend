@@ -10,7 +10,7 @@ import {Project} from '../domain/project';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../store/states/app.state';
 import {selectProjects, selectProjectsLoaded} from '../store/selectors/project.selectors';
-import {LoadSuggestedProjects} from '../store/actions/project.actions';
+import {LoadProjects} from '../store/actions/project.actions';
 import {FormService} from '../services/form.service';
 import {Repository} from '../domain/repository';
 import {selectRepositories, selectRepositoriesLoaded} from '../store/selectors/repository.selectors';
@@ -20,6 +20,7 @@ import {Storage} from '../domain/storage';
 import {FeedbackService} from '../services/feedback.service';
 import {Location} from '@angular/common';
 import {LoadDmps} from '../store/actions/dmp.actions';
+import {LoadingState} from '../domain/enum/loading-state.enum';
 
 @Component({
   selector: 'app-dmp',
@@ -51,7 +52,7 @@ export class DmpComponent implements OnInit {
   costsStep: FormGroup;
 
   // Resources
-  projectsLoaded$: Observable<boolean>;
+  projectsLoaded$: Observable<LoadingState>;
   projects$: Observable<Project[]>;
   projectMembers: ProjectMember[];
   repositories: any;
@@ -134,7 +135,7 @@ export class DmpComponent implements OnInit {
         this.backendService.createDmp(this.userId, dmp)
           .subscribe(
             response => {
-              if(response) {
+              if (response) {
                 this.location.replaceState(`dmp/${response.id}`);
                 this.dmpForm.patchValue(response);
                 this.store.dispatch(new LoadDmps({userId: this.userId}));
@@ -246,9 +247,8 @@ export class DmpComponent implements OnInit {
     }
   }
 
-
   private getSuggestedProjects(userId: string) {
-    this.store.dispatch(new LoadSuggestedProjects({userId}));
+    this.store.dispatch(new LoadProjects({userId}));
   }
 
   // get project members and set contact person if specified
