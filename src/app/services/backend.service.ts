@@ -24,6 +24,11 @@ export class BackendService {
     private feedbackService: FeedbackService) {
   }
 
+  private static getFilenameFromContentDisposition(contentDisposition: string): string {
+    const start = contentDisposition.lastIndexOf('filename=');
+    return contentDisposition.substring(start + 9);
+  }
+
   getDmps(userId: string): Observable<DmpListItem[]> {
     return this.http.get<DmpListItem[]>(`${this.backendUrl}plans/dmp-list/${userId}`).pipe(
       retry(3),
@@ -110,7 +115,7 @@ export class BackendService {
         const url = URL || webkitURL;
         const contentDisposition = response.headers.get('content-disposition');
         a.href = url.createObjectURL(response.body);
-        a.download = this.getFilenameFromContentDisposition(contentDisposition);
+        a.download = BackendService.getFilenameFromContentDisposition(contentDisposition);
         // start download
         a.click();
         url.revokeObjectURL(a.href);
@@ -126,7 +131,7 @@ export class BackendService {
         const url = URL || webkitURL;
         const contentDisposition = response.headers.get('content-disposition')
         a.href = url.createObjectURL(response.body);
-        a.download = this.getFilenameFromContentDisposition(contentDisposition);
+        a.download = BackendService.getFilenameFromContentDisposition(contentDisposition);
         // start download
         a.click();
         url.revokeObjectURL(a.href);
@@ -134,10 +139,6 @@ export class BackendService {
     );
   }
 
-  private getFilenameFromContentDisposition(contentDisposition: string): string {
-    const start = contentDisposition.lastIndexOf('filename=');
-    return contentDisposition.substring(start + 9);
-  }
 
   private handleError(message = 'Failed to load resource.') {
     return (error: HttpErrorResponse) => {
