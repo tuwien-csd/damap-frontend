@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {Dmp} from '../domain/dmp';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {ProjectMember} from '../domain/project-member';
 import {Project} from '../domain/project';
@@ -140,9 +140,21 @@ export class BackendService {
   }
 
   private handleError(message = 'Failed to load resource.') {
-    return (error: any) => {
+    return (error: HttpErrorResponse) => {
+      if (error.status === 0) {
+        message += '\nService can not be reached, please retry later. If the issue persists contact [insert contact for technical issue].'
+      }
+      else if (error.status === 404) {
+        message += '\nThe requested resource could not be found.'
+      }
+      else if (error.status === 500) {
+        message += '\nAn error occurred, please contact [insert contact for technical issue].'
+      }
+      else if (error.status === 503) {
+        message += '\nService is currently unavailable, please retry later.'
+      }
       this.feedbackService.error(message);
-      return throwError(error);
+      return throwError(message);
     };
   }
 }
