@@ -56,10 +56,11 @@ import {CostsComponent} from './dmp/costs/costs.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {BytePipe} from './pipe/byte.pipe';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { ContributorFilterPipe } from './pipe/contributor-filter.pipe';
+import {ContributorFilterPipe} from './pipe/contributor-filter.pipe';
 import {LicenseSelectorDialog, LicenseWizardComponent} from './widgets/license-wizard/license-wizard.component';
 import {LicenseFilterPipe} from './widgets/license-wizard/license-filter.pipe';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {ErrorMessageComponent} from './widgets/error-message/error-message.component';
 
 const keycloakService = new KeycloakService();
 
@@ -92,7 +93,8 @@ const keycloakService = new KeycloakService();
     ContributorFilterPipe,
     LicenseWizardComponent,
     LicenseFilterPipe,
-    LicenseSelectorDialog
+    LicenseSelectorDialog,
+    ErrorMessageComponent
   ],
   imports: [
     BrowserModule,

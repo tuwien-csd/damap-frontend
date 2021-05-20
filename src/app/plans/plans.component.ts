@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Dmp} from '../domain/dmp';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../store/states/app.state';
 import {selectDmps, selectDmpsLoaded} from '../store/selectors/dmp.selectors';
@@ -8,6 +7,7 @@ import {KeycloakService} from 'keycloak-angular';
 import {LoadDmps} from '../store/actions/dmp.actions';
 import {DmpListItem} from '../domain/dmp-list-item';
 import {BackendService} from '../services/backend.service';
+import {LoadingState} from '../domain/enum/loading-state.enum';
 
 @Component({
   selector: 'app-plan',
@@ -17,18 +17,20 @@ import {BackendService} from '../services/backend.service';
 export class PlansComponent implements OnInit {
 
   userId: string;
-  dmps$: Observable<DmpListItem[]>;
-  dmpsLoaded$: Observable<boolean>;
+  dmps$: Observable<DmpListItem[]> = this.store.pipe(select(selectDmps));
+  dmpsLoaded$: Observable<LoadingState> = this.store.pipe(select(selectDmpsLoaded));
+  LoadingState = LoadingState;
 
   constructor(
     private auth: KeycloakService,
     private store: Store<AppState>,
     private backendService: BackendService
   ) {
-    this.dmpsLoaded$ = this.store.pipe(select(selectDmpsLoaded));
-    this.dmps$ = this.store.pipe(select(selectDmps));
+  }
+
+  ngOnInit() {
     this.dmpsLoaded$.subscribe(loaded => {
-      if (!loaded) {
+      if (loaded === LoadingState.NOT_LOADED) {
         this.auth.loadUserProfile().then(
           p => {
             this.userId = p['attributes']?.tissID?.[0];
@@ -37,9 +39,6 @@ export class PlansComponent implements OnInit {
         );
       }
     })
-  }
-
-  ngOnInit() {
   }
 
   getDmps(userId: string) {
@@ -53,9 +52,5 @@ export class PlansComponent implements OnInit {
 
   getJsonFile(id: number) {
     return this.backendService.getMaDmpJsonFile(id);
-  }
-
-  removeDmp(dmp: Dmp) {
-    // todo
   }
 }
