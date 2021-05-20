@@ -22,7 +22,7 @@
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 <div *ngIf="loaded === LoadingState.LOADED">
-  <p *ngIf="!projectStep?.value">
+  <p *ngIf="!projectStep?.value && projects?.length">
     Please select the project you want to create a DMP for:</p>
   <ng-container *ngIf="projects?.length else empty">
     <mat-form-field>
@@ -47,7 +47,7 @@
     </div>
   </ng-container>
   <ng-template #empty>
-    You have no projects assigned.
+    No projects are assigned to you.
   </ng-template>
 </div>
 <div *ngIf="loaded === LoadingState.FAILED">
