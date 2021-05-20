@@ -1,20 +1,30 @@
 import {adapter, initialRepositoryState, RepositoryState} from '../states/repository.state';
 import {RepositoryActions, RepositoryActionTypes} from '../actions/repository.actions';
+import {LoadingState} from '../../domain/enum/loading-state.enum';
 
 export function repositoryReducer(
   state = initialRepositoryState,
   action: RepositoryActions): RepositoryState {
   switch (action.type) {
     case RepositoryActionTypes.LoadRepositories:
-      return state;
+      return {
+        ...state,
+        loaded: LoadingState.LOADING
+      };
     case RepositoryActionTypes.RepositoriesLoaded: {
       return adapter.setAll(action.payload.repositories, {
         ...state,
-        loaded: true
+        loaded: LoadingState.LOADED
       });
     }
     case RepositoryActionTypes.UpdateRepository: {
       return adapter.updateOne(action.payload.update, state);
+    }
+    case RepositoryActionTypes.FailedToLoadRepositories: {
+      return {
+        ...state,
+        loaded: LoadingState.FAILED
+      }
     }
     default: {
       return state;
@@ -23,8 +33,5 @@ export function repositoryReducer(
 }
 
 export const {
-  selectAll,
-  selectEntities,
-  selectIds,
-  selectTotal
+  selectAll
 } = adapter.getSelectors();

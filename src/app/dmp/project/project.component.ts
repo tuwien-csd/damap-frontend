@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Project} from '../../domain/project';
 import {FormControl} from '@angular/forms';
+import {LoadingState} from '../../domain/enum/loading-state.enum';
 
 @Component({
   selector: 'app-dmp-project',
@@ -10,10 +11,12 @@ import {FormControl} from '@angular/forms';
 export class ProjectComponent implements OnInit {
 
   @Input() projects: Project[];
-  @Input() loaded: boolean;
+  @Input() loaded: LoadingState;
   @Input() projectStep: FormControl;
 
   @Output() project = new EventEmitter<any>();
+
+  LoadingState = LoadingState;
 
   constructor() {
   }

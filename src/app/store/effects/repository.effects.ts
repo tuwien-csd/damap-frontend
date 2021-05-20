@@ -1,8 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {map, mergeMap} from 'rxjs/operators';
+import {catchError, map, mergeMap} from 'rxjs/operators';
 import {BackendService} from '../../services/backend.service';
-import {LoadRepositories, LoadRepository, RepositoriesLoaded, RepositoryActionTypes, UpdateRepository} from '../actions/repository.actions';
+import {
+  FailedToLoadRepositories,
+  LoadRepositories,
+  LoadRepository,
+  RepositoriesLoaded,
+  RepositoryActionTypes,
+  UpdateRepository
+} from '../actions/repository.actions';
+import {of} from 'rxjs';
 
 @Injectable()
 export class RepositoryEffects {
@@ -10,15 +18,17 @@ export class RepositoryEffects {
   @Effect()
   loadRepositories = this.actions$.pipe(
     ofType<LoadRepositories>(RepositoryActionTypes.LoadRepositories),
-    mergeMap(_ => this.backendService.getRepositories()),
-    map(repositories => new RepositoriesLoaded({repositories}))
+    mergeMap(_ => this.backendService.getRepositories().pipe(
+      map(repositories => new RepositoriesLoaded({repositories})),
+      catchError(() => of(new FailedToLoadRepositories()))
+    )),
   );
 
   @Effect()
   loadRepository = this.actions$.pipe(
     ofType<LoadRepository>(RepositoryActionTypes.LoadRepository),
     mergeMap(action => this.backendService.getRepositoryById(action.payload.id)),
-    map(update => new UpdateRepository({ update }))
+    map(update => new UpdateRepository({update}))
   )
 
   constructor(

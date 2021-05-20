@@ -2,7 +2,7 @@
   Please specify your datasets first.
 </div>
 <!-- SELECTED REPOS-->
-<div *ngIf="repoStep.controls.length">
+<div *ngIf="repoStep?.controls.length">
   <p>You selected:</p>
   <mat-card *ngFor="let repo of repoStep.controls, let i=index" class="mat-selected">
     <div class="mat-card-container">
@@ -62,8 +62,8 @@
 </ng-container>
 
 <!-- TABLE -->
-<h2>Repositories</h2>
-<ng-container *ngIf="loaded else loadRepos">
+<ng-container *ngIf="loaded === LoadingState.LOADED">
+  <h2>Repositories</h2>
   <mat-form-field>
     <mat-label>Search repository</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Search repository" #input>
@@ -120,13 +120,22 @@
     </tr>
     <!-- Row shown when there is no matching data. -->
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      <ng-container *ngIf="input.value.length > 0 else empty">
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </ng-container>
+      <ng-template #empty>
+        <td class="mat-cell" colspan="4">No repositories found.</td>
+      </ng-template>
     </tr>
   </table>
   <mat-paginator class="mat-elevation-z8" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
                  showFirstLastButtons></mat-paginator>
 </ng-container>
-<ng-template #loadRepos>
+<ng-container *ngIf="loaded === LoadingState.LOADING">
   <p>Load repositories...</p>
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</ng-template>
+</ng-container>
+<ng-container *ngIf="loaded === LoadingState.FAILED">
+  <app-error-message [message]="'Repositories could not be loaded.'"></app-error-message>
+</ng-container>
+
