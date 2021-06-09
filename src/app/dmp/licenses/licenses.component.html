@@ -1,36 +1,47 @@
-<p *ngIf="datasets.controls.length > 0">Please indicate which datasets you plan to keep closed or publish.
+<p *ngIf="datasets?.controls.length > 0">Please indicate which datasets you plan to keep closed or publish.
   Select a license for the datasets you want to publish and estimate the release date.</p>
-<p *ngIf="datasets.controls.length == 0">No datasets defined.</p>
-<form>
-  <mat-card *ngFor="let dataset of datasets.controls, let i=index" class="mat-selected">
-    <form [formGroup]="dataset">
-      <div class="mat-card-container">
-        <div class="mat-card-left">
-          <h4>{{dataset.value.title}}</h4>
+<p *ngIf="datasets?.controls.length == 0">No datasets defined.</p>
+<div [formGroup]="dmpForm">
+  <ng-container formArrayName="datasets">
+    <mat-card *ngFor="let dataset of datasets?.controls; index as i" class="mat-selected">
+      <ng-container [formGroupName]="i">
+        <div class="mat-card-container">
+          <div class="mat-card-left">
+            <h4>{{dataset.value.title}}</h4>
+          </div>
+          <div class="mat-card-right">
+            <mat-form-field>
+              <mat-label>Data Access</mat-label>
+              <mat-select formControlName="dataAccess">
+                <mat-option *ngFor="let type of accessType | keyvalue" [value]="type.value">
+                  {{type.value}}<br/>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
-        <div class="mat-card-right">
-          <mat-slide-toggle formControlName="publish" color="primary">Publish</mat-slide-toggle>
-        </div>
-      </div>
-      <div class="mat-card-container" *ngIf="dataset.value.publish">
-        <mat-form-field style="width: 100% !important">
-          <mat-label>Planned license</mat-label>
-          <mat-select formControlName="license">
-            <mat-option *ngFor="let license of licenses" [value]="license.url">
-              {{license.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <app-license-wizard (selectedLicense)="setLicenseSelectorResult($event, i)"></app-license-wizard>
-      </div>
-      <div class="mat-card-container" *ngIf="dataset.value.publish">
-        <mat-form-field class="example-full-width">
-          <mat-label>Choose a date</mat-label>
-          <input matInput [matDatepicker]="picker_i" formControlName="startDate">
-          <mat-datepicker-toggle matSuffix [for]="picker_i"></mat-datepicker-toggle>
-          <mat-datepicker #picker_i></mat-datepicker>
-        </mat-form-field>
-      </div>
-    </form>
-  </mat-card>
-</form>
+        <ng-container *ngIf="dataset.value.dataAccess === accessType.open">
+          <div class="mat-card-container">
+            <mat-form-field style="width: 100% !important">
+              <mat-label>Planned license</mat-label>
+              <mat-select formControlName="license">
+                <mat-option *ngFor="let license of licenses" [value]="license.url">
+                  {{license.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <app-license-wizard (selectedLicense)="setLicenseSelectorResult($event, i)"></app-license-wizard>
+          </div>
+          <div class="mat-card-container">
+            <mat-form-field class="example-full-width">
+              <mat-label>Choose a date</mat-label>
+              <input matInput [matDatepicker]="picker_i" formControlName="startDate">
+              <mat-datepicker-toggle matSuffix [for]="picker_i"></mat-datepicker-toggle>
+              <mat-datepicker #picker_i></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </ng-container>
+      </ng-container>
+    </mat-card>
+  </ng-container>
+</div>
