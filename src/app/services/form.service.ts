@@ -37,7 +37,8 @@ export class FormService {
       externalStorage: this.formBuilder.array([]),
       externalStorageInfo: [''],
       legal: this.formBuilder.group({
-        personalInformation: [false],
+        personalData: [false],
+        authorizedDataAccess: [false],
         sensitiveData: [false],
         legalRestrictions: [false],
         ethicalIssues: [false],
@@ -79,7 +80,8 @@ export class FormService {
       },
       externalStorageInfo: dmp.externalStorageInfo,
       legal: {
-        personalInformation: dmp.personalInformation,
+        personalData: dmp.personalData,
+        authorizedDataAccess: dmp.authorizedDataAccess,
         sensitiveData: dmp.sensitiveData,
         legalRestrictions: dmp.legalRestrictions,
         ethicalIssues: dmp.ethicalIssuesExist,
@@ -190,7 +192,8 @@ export class FormService {
       metadata: formValue.documentation.metadata,
       dataGeneration: formValue.documentation.dataGeneration,
       structure: formValue.documentation.structure,
-      personalInformation: formValue.legal.personalInformation,
+      personalData: formValue.legal.personalData,
+      authorizedDataAccess: formValue.legal.authorizedDataAccess,
       sensitiveData: formValue.legal.sensitiveData,
       legalRestrictions: formValue.legal.legalRestrictions,
       ethicalIssuesExist: formValue.legal.ethicalIssues,
@@ -267,12 +270,13 @@ export class FormService {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
       title: [title, Validators.required],
-      publish: [false],
       license: [''],
       startDate: [null],
       type: [null],
       size: [''],
       comment: [''],
+      personalData: [false],
+      sensitiveData: [false],
       dataAccess: [DataAccessType.open],
       referenceHash: ['']
     });

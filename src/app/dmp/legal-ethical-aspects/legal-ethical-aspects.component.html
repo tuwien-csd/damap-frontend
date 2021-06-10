@@ -1,24 +1,58 @@
 <p>This step helps you to consider issues like personal data, intellectual property rights and ownership.</p>
-<form [formGroup]="legalEthicalStep">
+<div [formGroup]="legalEthicalStep">
   <div *ngFor="let question of questions">
     <mat-label>{{question.label}}</mat-label>
     <mat-radio-group formControlName="{{question.model}}">
-      <mat-radio-button class="mat-radio-button" [value]="true">Yes
+      <mat-radio-button class="boolean-mat-radio-button" [value]="true">Yes
       </mat-radio-button>
-      <mat-radio-button class="mat-radio-button" [value]="false">No
+      <mat-radio-button class="boolean-mat-radio-button" [value]="false">No
       </mat-radio-button>
     </mat-radio-group>
-    <br/>
+    <ng-container *ngIf="question.model === 'personalData' && legalEthicalStep?.value.personalData">
+      <div>
+        <section class="dataset-checkbox-section" [formGroup]="dmpForm">
+          Please select the datasets containing personal data:
+          <div formArrayName="datasets">
+            <ng-container *ngFor="let dataset of datasets?.controls; index as i">
+              <ng-container [formGroupName]="i">
+                <mat-checkbox class="dataset-checkbox"
+                              formControlName="personalData">{{dataset.value.title}}</mat-checkbox>
+              </ng-container>
+            </ng-container>
+          </div>
+        </section>
+      </div>
+      <mat-form-field appearance="fill" [style]="'width: 100%'">
+        <mat-label [style]="'white-space: normal;'">
+          How will you ensure that only authorised users can access personal data?
+        </mat-label>
+        <textarea matInput formControlName="authorizedDataAccess"></textarea>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *ngIf="question.model === 'sensitiveData' && legalEthicalStep?.value.sensitiveData">
+      <div>
+        <section class="dataset-checkbox-section" [formGroup]="dmpForm">
+          Please select the datasets containing sensitive data:
+          <div formArrayName="datasets">
+            <ng-container *ngFor="let dataset of datasets?.controls; index as i">
+              <ng-container [formGroupName]="i">
+                <mat-checkbox class="dataset-checkbox"
+                              formControlName="sensitiveData">{{dataset.value.title}}</mat-checkbox>
+              </ng-container>
+            </ng-container>
+          </div>
+        </section>
+      </div>
+      <mat-form-field appearance="fill" [style]="'width: 100%'">
+        <mat-label [style]="'white-space: normal;'">
+          What kind of additional security measures in terms of physical security,
+          network security, and security of computer systems and files will be taken
+          to ensure that stored and transferred sensitive data is safe?
+        </mat-label>
+        <textarea matInput formControlName="sensitiveDataSecurity"></textarea>
+      </mat-form-field>
+    </ng-container>
   </div>
-
-  <mat-form-field appearance="fill" [style]="'width: 100%'" *ngIf="legalEthicalStep.value.sensitiveData">
-    <mat-label [style]="'white-space: normal;'">
-      What kind of additional security measures in terms of physical security,
-      network security, and security of computer systems and files will be taken
-        to ensure that stored and transferred sensitive data is safe?
-    </mat-label>
-    <textarea matInput formControlName="sensitiveDataSecurity"></textarea>
-  </mat-form-field>
 
   <mat-form-field appearance="fill" [style]="'width:100%'">
     <mat-label>Links to ethics report or related document:</mat-label>
@@ -29,4 +63,4 @@
     <mat-label>Other statement regarding ethical compliance (optional):</mat-label>
     <textarea matInput formControlName="optionalStatement"></textarea>
   </mat-form-field>
-</form>
+</div>

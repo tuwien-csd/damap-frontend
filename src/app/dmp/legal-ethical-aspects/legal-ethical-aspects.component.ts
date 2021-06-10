@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormArray, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-dmp-legal-ethical-aspects',
@@ -8,10 +8,12 @@ import {FormGroup} from '@angular/forms';
 })
 export class LegalEthicalAspectsComponent implements OnInit {
 
+  @Input() dmpForm: FormGroup;
   @Input() legalEthicalStep: FormGroup;
+  @Input() datasets: FormArray;
 
   questions = [
-    {label: 'Will personal data be collected/used as part of the project?', model: 'personalInformation'},
+    {label: 'Will personal data be collected/used as part of the project?', model: 'personalData'},
     {label: 'Is your data or part of it sensitive, for example personal data, politically sensitive information, or trade secrets?', model: 'sensitiveData'},
     {label: 'Are there any other legal restrictions on how data is processed or shared?', model: 'legalRestrictions'},
     {label: 'Are there any ethical issues associated with your research data?', model: 'ethicalIssues'},

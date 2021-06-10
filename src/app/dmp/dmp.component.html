@@ -39,11 +39,15 @@
     </app-dmp-external-storage>
   </mat-step>
   <mat-step label="Legal and ethical aspects">
-    <app-dmp-legal-ethical-aspects [legalEthicalStep]="legalEthicalStep"></app-dmp-legal-ethical-aspects>
+    <app-dmp-legal-ethical-aspects [dmpForm]="dmpForm"
+                                   [legalEthicalStep]="legalEthicalStep"
+                                   [datasets]="datasets">
+    </app-dmp-legal-ethical-aspects>
   </mat-step>
   <mat-step label="Data access and licensing">
     <app-dmp-licenses [dmpForm]="dmpForm"
-                      [datasets]="datasets"></app-dmp-licenses>
+                      [datasets]="datasets">
+    </app-dmp-licenses>
   </mat-step>
   <mat-step label="Specify repositories for publication and preservation">
     <app-dmp-repo [repoStep]="repoStep" [datasets]="datasets"
