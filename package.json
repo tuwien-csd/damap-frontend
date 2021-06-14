@@ -1,6 +1,6 @@
 {
   "name": "dmap-frontend",
-  "version": "0.5.2",
+  "version": "0.5.3-SNAPSHOT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
