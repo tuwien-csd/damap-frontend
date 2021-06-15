@@ -26,7 +26,9 @@ export interface Dmp {
   tools: string;
   restrictedDataAccess: string;
   personalData: boolean;
-  authorizedDataAccess: string;
+  personalDataAccess: string;
+  personalDataCompliance: string[];
+  otherPersonalDataCompliance: string;
   sensitiveData: boolean;
   sensitiveDataSecurity: string;
   legalRestrictions: boolean;
