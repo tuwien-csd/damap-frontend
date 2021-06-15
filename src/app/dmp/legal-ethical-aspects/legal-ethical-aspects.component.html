@@ -7,6 +7,9 @@
       </mat-radio-button>
       <mat-radio-button class="boolean-mat-radio-button" [value]="false">No
       </mat-radio-button>
+      <mat-radio-button *ngIf="question.model === 'personalData'" class="boolean-mat-radio-button" [value]="null">
+        Unknown
+      </mat-radio-button>
     </mat-radio-group>
     <ng-container *ngIf="question.model === 'personalData' && legalEthicalStep?.value.personalData">
       <div>
@@ -22,11 +25,29 @@
           </div>
         </section>
       </div>
+      <div>
+        <mat-form-field appearance="fill" [style]="'width: 100%'">
+          <mat-label>How will compliance with applicable legislation be ensured?</mat-label>
+          <mat-select formControlName="personalDataCompliance" multiple>
+            <mat-option *ngFor="let option of complianceOptions" [value]="option.value">
+              {{option.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ng-container *ngIf="isOthersSelected">
+          <mat-form-field appearance="fill" [style]="'width: 100%'">
+            <mat-label [style]="'white-space: normal;'">
+              Please specify what other measures are taken.
+            </mat-label>
+            <input matInput formControlName="otherPersonalDataCompliance">
+          </mat-form-field>
+        </ng-container>
+      </div>
       <mat-form-field appearance="fill" [style]="'width: 100%'">
         <mat-label [style]="'white-space: normal;'">
           How will you ensure that only authorised users can access personal data?
         </mat-label>
-        <textarea matInput formControlName="authorizedDataAccess"></textarea>
+        <textarea matInput formControlName="personalDataAccess"></textarea>
       </mat-form-field>
     </ng-container>
     <ng-container *ngIf="question.model === 'sensitiveData' && legalEthicalStep?.value.sensitiveData">
@@ -52,12 +73,21 @@
         <textarea matInput formControlName="sensitiveDataSecurity"></textarea>
       </mat-form-field>
     </ng-container>
+    <ng-container *ngIf="question.model === 'ethicalIssues' && legalEthicalStep?.value.ethicalIssues">
+      <mat-radio-group formControlName="committeeApproved">
+        <mat-label>Was your plan to deal with these ethical issues approved by the ethics committee?</mat-label>
+        <mat-radio-button class="boolean-mat-radio-button" [value]="true">Yes
+        </mat-radio-button>
+        <mat-radio-button class="boolean-mat-radio-button" [value]="false">No
+        </mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field *ngIf="legalEthicalStep?.value.committeeApproved"
+                      appearance="fill" [style]="'width:100%'">
+        <mat-label>Links to ethics report or related documents:</mat-label>
+        <textarea matInput formControlName="ethicsReport"></textarea>
+      </mat-form-field>
+    </ng-container>
   </div>
-
-  <mat-form-field appearance="fill" [style]="'width:100%'">
-    <mat-label>Links to ethics report or related document:</mat-label>
-    <textarea matInput formControlName="ethicsReport"></textarea>
-  </mat-form-field>
 
   <mat-form-field appearance="fill" [style]="'width:100%'">
     <mat-label>Other statement regarding ethical compliance (optional):</mat-label>
