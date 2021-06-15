@@ -1,0 +1,12 @@
+.warning {
+  background-color: lightgrey;
+  border-radius: 4px;
+  padding: 0.75rem;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.warning-icon {
+  padding-right: 0.5rem;
+}

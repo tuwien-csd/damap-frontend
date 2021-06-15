@@ -21,6 +21,12 @@
           </div>
         </div>
         <ng-container *ngIf="dataset.value.dataAccess === accessType.open">
+          <div class="warning" *ngIf="dataset.value.personalData || dataset.value.sensitiveData">
+            <div class="warning-icon"><mat-icon>error_outline</mat-icon></div>
+            <div>You indicated in step 6 that this dataset contains sensitive/
+            personal data. Do you really want to publish the dataset open, without restrictions? Have you considered
+              anonymisation/pseudonymisation?</div>
+          </div>
           <div class="mat-card-container">
             <mat-form-field style="width: 100% !important">
               <mat-label>Planned license</mat-label>
