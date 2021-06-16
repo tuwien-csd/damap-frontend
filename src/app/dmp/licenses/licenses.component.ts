@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormArray} from '@angular/forms';
-import {LicenseDefinitions} from './license-list';
 import {License} from '../../domain/license';
+import {LicenseDefinitions} from '../../widgets/license-wizard/license-wizard-list';
 
 @Component({
   selector: 'app-dmp-licenses',
@@ -20,9 +20,8 @@ export class LicensesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  setLicenseSelectorResult($event, index: number) {
-    console.log($event);
+  setLicenseSelectorResult(event, index: number) {
     const dataset = this.datasets.at(index);
-    dataset.patchValue({license: $event});
+    dataset.patchValue({license: event.url});
   }
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Dmp} from '../domain/dmp';
 import {Contributor} from '../domain/contributor';
 import {Dataset} from '../domain/dataset';
@@ -103,11 +103,7 @@ export class FormService {
     // Contributors, datasets, hosts, costs
     if (dmp.contributors) {
       for (const contributor of dmp.contributors) {
-        (form.controls.contributors as FormArray).push(
-          this.formBuilder.group({
-            person: [contributor.person],
-            role: contributor.role
-          }));
+        (form.controls.contributors as FormArray).push(this.mapContributorToFormGroup(contributor));
       }
     }
     if (dmp.datasets) {
@@ -217,8 +213,9 @@ export class FormService {
   }
 
   public addContributorToForm(form: FormGroup, contributor: Person) {
-    const contributorControl = new FormGroup({person: new FormControl(contributor), role: new FormControl(null)});
-    (form.get('contributors') as FormArray).push(contributorControl);
+    const contributorFormGroup = this.createContributorFormGroup();
+    contributorFormGroup.patchValue({person: contributor});
+    (form.get('contributors') as FormArray).push(contributorFormGroup);
   }
 
   public removeContributorFromForm(form: FormGroup, index: number) {
@@ -247,9 +244,9 @@ export class FormService {
   }
 
   public addStorageToForm(form: FormGroup, storage: Storage) {
-    const storageGroup = this.createStorageFormGroup();
-    storageGroup.patchValue({id: storage.id, title: storage.title});
-    (form.get('storage') as FormArray).push(storageGroup);
+    const storageFormGroup = this.createStorageFormGroup();
+    storageFormGroup.patchValue({hostId: storage.hostId, title: storage.title});
+    (form.get('storage') as FormArray).push(storageFormGroup);
   }
 
   public removeStorageFromForm(form: FormGroup, index: number) {
@@ -257,8 +254,8 @@ export class FormService {
   }
 
   public addExternalStorageToForm(form: FormGroup) {
-    const externalStorageGroup = this.createExternalStorageFormGroup();
-    (form.get('externalStorage') as FormArray).push(externalStorageGroup);
+    const externalStorageFormGroup = this.createExternalStorageFormGroup();
+    (form.get('externalStorage') as FormArray).push(externalStorageFormGroup);
   }
 
   public removeExternalStorageFromForm(form: FormGroup, index: number) {
@@ -266,12 +263,12 @@ export class FormService {
   }
 
   public addRepositoryToForm(form: FormGroup, repo: { id: string, name: string }) {
-    const repoGroup = this.createHostFormGroup();
-    repoGroup.patchValue({
-      id: repo.id,
+    const hostFormGroup = this.createHostFormGroup();
+    hostFormGroup.patchValue({
+      hostId: repo.id,
       title: repo.name
     });
-    (form.get('hosts') as FormArray).push(repoGroup);
+    (form.get('hosts') as FormArray).push(hostFormGroup);
   }
 
   public removeRepositoryFromForm(form: FormGroup, index: number) {
@@ -289,6 +286,7 @@ export class FormService {
 
   public createDatasetFormGroup(title: string): FormGroup {
     return this.formBuilder.group({
+      id: [null, {disabled: true}],
       title: [title, Validators.required],
       publish: [false],
       license: [''],
@@ -307,9 +305,28 @@ export class FormService {
     return formGroup;
   }
 
+  private createContributorFormGroup(): FormGroup {
+    return this.formBuilder.group({
+      id: [null, {disabled: true}],
+      person: [null],
+      role: [null]
+    });
+  }
+
+  private mapContributorToFormGroup(contributor: Contributor): FormGroup {
+    const formGroup = this.createContributorFormGroup();
+    formGroup.setValue({
+      id: contributor.id,
+      person: contributor.person,
+      role: contributor.role || null
+    });
+    return formGroup;
+  }
+
   private createStorageFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
+      hostId: [null, {disabled: true}],
       title: ['', Validators.required],
       datasets: [[]]
     });
@@ -319,6 +336,7 @@ export class FormService {
     const formGroup = this.createStorageFormGroup();
     formGroup.setValue({
       id: storage.id,
+      hostId: storage.hostId || null,
       title: storage.title,
       datasets: storage.datasets || []
     });
@@ -352,6 +370,7 @@ export class FormService {
   private createHostFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
+      hostId: [null],
       title: [''],
       date: [null],
       datasets: [[]]
@@ -362,6 +381,7 @@ export class FormService {
     const formGroup = this.createHostFormGroup();
     formGroup.patchValue({
       id: host.id,
+      hostId: host.hostId,
       title: host.title || '',
       date: host.date || null,
       datasets: host.datasets || []

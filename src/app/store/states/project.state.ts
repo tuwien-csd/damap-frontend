@@ -1,13 +1,13 @@
 import {Project} from '../../domain/project';
-import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
+import {LoadingState} from '../../domain/enum/loading-state.enum';
 
-export interface ProjectState extends EntityState<Project>{
-  loaded: boolean;
+export interface ProjectState {
+  projects: Project[];
+  loaded: LoadingState;
 }
 
-export const adapter: EntityAdapter<Project> = createEntityAdapter<Project>();
-
-export const initialProjectsState: ProjectState = adapter.getInitialState({
-  loaded: false
-});
+export const initialProjectsState: ProjectState = {
+  projects: [],
+  loaded: LoadingState.NOT_LOADED
+};
 

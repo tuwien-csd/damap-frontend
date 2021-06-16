@@ -3,10 +3,11 @@ import {Repository} from '../../domain/repository';
 import {Update} from '@ngrx/entity';
 
 export enum RepositoryActionTypes {
-  LoadRepositories = '[Repositories] Load Repositories',
-  RepositoriesLoaded = '[Repositories] Repositories Loaded',
-  LoadRepository = '[Repositories] Load entity',
-  UpdateRepository = '[Repositories] Update entity'
+  LoadRepositories = '[Repositories] Load all',
+  RepositoriesLoaded = '[Repositories] All loaded',
+  LoadRepository = '[Repositories] Load one',
+  UpdateRepository = '[Repositories] Update one',
+  FailedToLoadRepositories = '[Repositories] Failed to load all'
 }
 
 export class LoadRepositories implements Action {
@@ -34,8 +35,13 @@ export class UpdateRepository implements Action {
   }
 }
 
+export class FailedToLoadRepositories implements Action {
+  readonly type = RepositoryActionTypes.FailedToLoadRepositories;
+}
+
 export type RepositoryActions =
   LoadRepositories
   | RepositoriesLoaded
   | LoadRepository
-  | UpdateRepository;
+  | UpdateRepository
+  | FailedToLoadRepositories;

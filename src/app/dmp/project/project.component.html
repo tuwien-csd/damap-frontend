@@ -1,5 +1,5 @@
 <!-- Selected project -->
-<div *ngIf="projectStep.value != null">
+<div *ngIf="projectStep?.value">
   <p>You selected:</p>
   <mat-card class="mat-selected">
     <div class="mat-card-container">
@@ -17,14 +17,14 @@
   </mat-card>
 </div>
 
-<div *ngIf="!loaded">
+<div *ngIf="loaded === LoadingState.LOADING">
   <p>Load projects...</p>
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
-<div *ngIf="loaded && projects && projects.length > 0">
-  <p *ngIf="projectStep.value == null">
+<div *ngIf="loaded === LoadingState.LOADED">
+  <p *ngIf="!projectStep?.value && projects?.length">
     Please select the project you want to create a DMP for:</p>
-  <form>
+  <ng-container *ngIf="projects?.length else empty">
     <mat-form-field>
       <mat-label>Search project...</mat-label>
       <input #searchBox type="search" matInput>
@@ -33,7 +33,7 @@
     <div class="list-container">
       <mat-selection-list [multiple]="false" style="'height: 500px; overflow:scroll'">
         <mat-list-option *ngFor="let project of (projects | projectFilter:searchBox.value)"
-                         [style]="'height: auto;'" [selected]="project === projectStep.value">
+                         [style]="'height: auto;'" [selected]="project.universityId === projectStep?.value?.universityId">
           <mat-list-item (click)="changeProject(project)">
             <div class="mat-card-left">
               <div mat-line><b>{{project.title}}</b></div>
@@ -45,5 +45,11 @@
         </mat-list-option>
       </mat-selection-list>
     </div>
-  </form>
+  </ng-container>
+  <ng-template #empty>
+    No projects are assigned to you.
+  </ng-template>
+</div>
+<div *ngIf="loaded === LoadingState.FAILED">
+  <app-error-message [message]="'Projects could not be loaded.'"></app-error-message>
 </div>

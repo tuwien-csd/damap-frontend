@@ -46,7 +46,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {ProjectFilterPipe} from './dmp/project/project-filter.pipe';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {LicenseSelectorComponent} from './license-selector/license-selector.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {DmpTableComponent} from './widgets/dmp-table/dmp-table.component';
 import {StorageComponent} from './dmp/data-storage/storage/storage.component';
@@ -59,6 +58,11 @@ import {BytePipe} from './pipe/byte.pipe';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {DragdropDirective} from './directives/dragdrop.directive';
 import {FileUploadComponent} from './widgets/file-upload/file-upload.component';
+import {ContributorFilterPipe} from './pipe/contributor-filter.pipe';
+import {LicenseSelectorDialog, LicenseWizardComponent} from './widgets/license-wizard/license-wizard.component';
+import {LicenseFilterPipe} from './widgets/license-wizard/license-filter.pipe';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {ErrorMessageComponent} from './widgets/error-message/error-message.component';
 
 const keycloakService = new KeycloakService();
 
@@ -81,7 +85,6 @@ const keycloakService = new KeycloakService();
     PeopleComponent,
     SummaryComponent,
     ProjectFilterPipe,
-    LicenseSelectorComponent,
     DmpTableComponent,
     StorageComponent,
     StorageFilterPipe,
@@ -90,7 +93,12 @@ const keycloakService = new KeycloakService();
     CostsComponent,
     BytePipe,
     DragdropDirective,
-    FileUploadComponent
+    FileUploadComponent,
+    ContributorFilterPipe,
+    LicenseWizardComponent,
+    LicenseFilterPipe,
+    LicenseSelectorDialog,
+    ErrorMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -128,7 +136,8 @@ const keycloakService = new KeycloakService();
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatExpansionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCheckboxModule
   ],
   providers: [
     AppComponent,
@@ -137,7 +146,7 @@ const keycloakService = new KeycloakService();
       useValue: keycloakService,
     },
   ],
-  entryComponents: [DatasetDialog, AppComponent],
+  entryComponents: [DatasetDialog, LicenseSelectorDialog, AppComponent],
 })
 export class AppModule implements DoBootstrap {
   async ngDoBootstrap(app) {

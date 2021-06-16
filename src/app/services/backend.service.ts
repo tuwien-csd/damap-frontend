@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {Dmp} from '../domain/dmp';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {ProjectMember} from '../domain/project-member';
 import {Project} from '../domain/project';
@@ -24,6 +24,11 @@ export class BackendService {
     private feedbackService: FeedbackService) {
   }
 
+  private static getFilenameFromContentDisposition(contentDisposition: string): string {
+    const start = contentDisposition.lastIndexOf('filename=');
+    return contentDisposition.substring(start + 9);
+  }
+
   getDmps(userId: string): Observable<DmpListItem[]> {
     return this.http.get<DmpListItem[]>(`${this.backendUrl}plans/dmp-list/${userId}`).pipe(
       retry(3),
@@ -39,28 +44,30 @@ export class BackendService {
     );
   }
 
-  createDmp(editedBy: string, dmp: Dmp): Observable<{ id: number }> {
+  createDmp(editedBy: string, dmp: Dmp): Observable<Dmp> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<{ id: number }>(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions).pipe(
-      retry(3),
-      catchError(this.handleError('Failed to save plan.'))
-    );
+    return this.http.post<Dmp>(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('Failed to save plan.'))
+      );
   }
 
-  editDmp(editedBy: string, dmp: Dmp): Observable<any> {
+  editDmp(editedBy: string, dmp: Dmp): Observable<Dmp> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions).pipe(
-      retry(3),
-      catchError(this.handleError('Failed to update plan.'))
-    );
+    return this.http.post<Dmp>(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('Failed to update plan.'))
+      );
   }
 
   getSuggestedProjects(userId: string): Observable<Project[]> {
@@ -110,7 +117,7 @@ export class BackendService {
         const url = URL || webkitURL;
         const contentDisposition = response.headers.get('content-disposition');
         a.href = url.createObjectURL(response.body);
-        a.download = this.getFilenameFromContentDisposition(contentDisposition);
+        a.download = BackendService.getFilenameFromContentDisposition(contentDisposition);
         // start download
         a.click();
         url.revokeObjectURL(a.href);
@@ -126,7 +133,7 @@ export class BackendService {
         const url = URL || webkitURL;
         const contentDisposition = response.headers.get('content-disposition')
         a.href = url.createObjectURL(response.body);
-        a.download = this.getFilenameFromContentDisposition(contentDisposition);
+        a.download = BackendService.getFilenameFromContentDisposition(contentDisposition);
         // start download
         a.click();
         url.revokeObjectURL(a.href);
@@ -134,15 +141,23 @@ export class BackendService {
     );
   }
 
-  private getFilenameFromContentDisposition(contentDisposition: string): string {
-    const start = contentDisposition.lastIndexOf('filename=');
-    return contentDisposition.substring(start + 9);
-  }
 
   private handleError(message = 'Failed to load resource.') {
-    return (error: any) => {
+    return (error: HttpErrorResponse) => {
+      if (error.status === 0) {
+        message += '\nService can not be reached, please retry later. If the issue persists contact [insert contact for technical issue].'
+      }
+      else if (error.status === 404) {
+        message += '\nThe requested resource could not be found.'
+      }
+      else if (error.status === 500) {
+        message += '\nAn error occurred, please contact [insert contact for technical issue].'
+      }
+      else if (error.status === 503) {
+        message += '\nService is currently unavailable, please retry later.'
+      }
       this.feedbackService.error(message);
-      return throwError(error);
+      return throwError(message);
     };
   }
 }

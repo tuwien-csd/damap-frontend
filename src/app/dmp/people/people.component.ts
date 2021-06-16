@@ -11,31 +11,9 @@ import {ProjectMember} from '../../domain/project-member';
 })
 export class PeopleComponent implements OnInit {
 
-  @Input() people: ProjectMember[]; // list of people from backend
+  @Input() projectMembers: ProjectMember[];
 
-  @Input() peopleList: ProjectMember[] = []; // people minus contributors
-  roles = {
-    dataCollector: ContributorRole.DataCollector,
-    dataCurator: ContributorRole.DataCurator,
-    dataManager: ContributorRole.DataManager,
-    distributor: ContributorRole.Distributor,
-    editor: ContributorRole.Editor,
-    hostingInstitution: ContributorRole.HostingInstitution,
-    producer: ContributorRole.Producer,
-    projectLeader: ContributorRole.ProjectLeader,
-    projectManager: ContributorRole.ProjectManager,
-    projectMember: ContributorRole.ProjectMember,
-    registrationAgency: ContributorRole.RegistrationAgency,
-    registrationAuthority: ContributorRole.RegistrationAuthority,
-    relatedPerson: ContributorRole.RelatedPerson,
-    researcher: ContributorRole.Researcher,
-    researchGroup: ContributorRole.ResearchGroup,
-    rightsHolder: ContributorRole.RightsHolder,
-    sponsor: ContributorRole.Sponsor,
-    supervisor: ContributorRole.Supervisor,
-    workPackageLeader: ContributorRole.WorkPackageLeader,
-    other: ContributorRole.Other
-  };
+  roles: any = ContributorRole;
 
   @Input() contactStep: FormControl;
   @Input() contributorStep: FormArray;

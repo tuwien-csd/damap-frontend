@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LicenseSelectorComponent } from './license-selector.component';
+import { LicenseWizardComponent } from './license-wizard.component';
 
-describe('LicenseSelectorComponent', () => {
-  let component: LicenseSelectorComponent;
-  let fixture: ComponentFixture<LicenseSelectorComponent>;
+describe('LicenseWizardComponent', () => {
+  let component: LicenseWizardComponent;
+  let fixture: ComponentFixture<LicenseWizardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LicenseSelectorComponent ]
+      declarations: [ LicenseWizardComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LicenseSelectorComponent);
+    fixture = TestBed.createComponent(LicenseWizardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
