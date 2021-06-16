@@ -73,6 +73,21 @@
         <textarea matInput formControlName="sensitiveDataSecurity"></textarea>
       </mat-form-field>
     </ng-container>
+    <ng-container *ngIf="question.model === 'legalRestrictions' && legalEthicalStep?.value.legalRestrictions">
+      <div>
+        <section class="dataset-checkbox-section" [formGroup]="dmpForm">
+          Please select the datasets concerned:
+          <div formArrayName="datasets">
+            <ng-container *ngFor="let dataset of datasets?.controls; index as i">
+              <ng-container [formGroupName]="i">
+                <mat-checkbox class="dataset-checkbox"
+                              formControlName="legalRestrictions">{{dataset.value.title}}</mat-checkbox>
+              </ng-container>
+            </ng-container>
+          </div>
+        </section>
+      </div>
+    </ng-container>
     <ng-container *ngIf="question.model === 'ethicalIssues' && legalEthicalStep?.value.ethicalIssues">
       <mat-radio-group formControlName="committeeApproved">
         <mat-label>Was your plan to deal with these ethical issues approved by the ethics committee?</mat-label>

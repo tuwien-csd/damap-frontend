@@ -8,6 +8,7 @@ export interface Dataset {
   comment: string;
   personalData: boolean;
   sensitiveData: boolean;
+  legalRestrictions: boolean;
   license: string;
   startDate: Date;
   dataAccess: DataAccessType;
