@@ -169,7 +169,8 @@ export class DmpComponent implements OnInit {
 
   createDataset(title: string) {
     const dataset = this.formService.createDatasetFormGroup(title);
-    dataset.patchValue({referenceHash: this.userId + (+new Date()).toString(36)});
+    const startDate = this.dmpForm.value.project?.end || null;
+    dataset.patchValue({startDate, referenceHash: this.userId + (+new Date()).toString(36)});
     this.datasets.push(dataset);
   }
 
