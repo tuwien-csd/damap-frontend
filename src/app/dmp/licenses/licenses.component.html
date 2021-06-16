@@ -22,13 +22,16 @@
         </div>
         <ng-container *ngIf="dataset.value.dataAccess === accessType.open">
           <div class="warning" *ngIf="dataset.value.personalData || dataset.value.sensitiveData">
-            <div class="warning-icon"><mat-icon>error_outline</mat-icon></div>
+            <div class="warning-icon">
+              <mat-icon>error_outline</mat-icon>
+            </div>
             <div>You indicated in step 6 that this dataset contains sensitive/
-            personal data. Do you really want to publish the dataset open, without restrictions? Have you considered
-              anonymisation/pseudonymisation?</div>
+              personal data. Do you really want to publish the dataset open, without restrictions? Have you considered
+              anonymisation/pseudonymisation?
+            </div>
           </div>
           <div class="mat-card-container">
-            <mat-form-field style="width: 100% !important">
+            <mat-form-field class="full-width">
               <mat-label>Planned license</mat-label>
               <mat-select formControlName="license">
                 <mat-option *ngFor="let license of licenses" [value]="license.url">
@@ -39,7 +42,7 @@
             <app-license-wizard (selectedLicense)="setLicenseSelectorResult($event, i)"></app-license-wizard>
           </div>
           <div class="mat-card-container">
-            <mat-form-field class="example-full-width">
+            <mat-form-field>
               <mat-label>Choose a date</mat-label>
               <input matInput [matDatepicker]="picker_i" formControlName="startDate">
               <mat-datepicker-toggle matSuffix [for]="picker_i"></mat-datepicker-toggle>
@@ -50,4 +53,31 @@
       </ng-container>
     </mat-card>
   </ng-container>
+</div>
+<div [style.margin.px]="'5'">
+  <div [formGroup]="dmpForm">
+    <ng-container *ngIf="restricted?.length > 0">
+      <mat-form-field class="full-width">
+        <mat-label class="wrap-normal-label">Dataset<span *ngIf="restricted.length > 1">s</span>
+          <ng-container *ngFor="let set of restricted, first as first, last as last, index as i">
+            <span *ngIf="last && !first"> and </span> "{{set.title}}"<span *ngIf="i < restricted.length-2">, </span>
+          </ng-container>
+          will have access restrictions. Explain why and clearly describe the access conditions.
+        </mat-label>
+        <textarea matInput formControlName="restrictedAccessInfo"></textarea>
+      </mat-form-field>
+    </ng-container>
+
+    <ng-container *ngIf="closed?.length > 0">
+      <mat-form-field class="full-width">
+        <mat-label class="wrap-normal-label">For dataset<span *ngIf="restricted.length > 1">s</span>
+          <span *ngFor="let set of closed, first as first, last as last, index as i">
+      <span *ngIf="last && !first"> and </span> "{{set.title}}"<span *ngIf="i < closed.length-2">, </span> </span>
+          only the metadata will be published open access.
+          Explain why the data will not be accessible (closed access).
+        </mat-label>
+        <textarea matInput formControlName="closedAccessInfo"></textarea>
+      </mat-form-field>
+    </ng-container>
+  </div>
 </div>

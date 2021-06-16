@@ -12,9 +12,9 @@
     <textarea matInput formControlName="tools"></textarea>
   </mat-form-field>
 
-  <ng-container *ngIf="restricted.length > 0">
+  <ng-container *ngIf="restricted?.length > 0">
     <article>For the following datasets restricted access was selected:
-      <span *ngFor="let set of restricted, last as last"> "{{set}}"<span *ngIf="!last">, </span> </span>
+      <span *ngFor="let set of restricted, last as last"> "{{set.title}}"<span *ngIf="!last">, </span> </span>
     </article>
     <mat-form-field class="full-width" appearance="fill">
       <mat-label class="wrap-label">Explain how others will get access to the data.
