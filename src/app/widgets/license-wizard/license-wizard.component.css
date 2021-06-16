@@ -1,0 +1,46 @@
+#ls-search {
+  margin-top: 1.5rem;
+}
+
+.ls-description {
+  color: #666;
+  cursor: pointer;
+}
+
+.ls-answer-buttons {
+  display: flex;
+}
+
+.ls-answer-buttons button {
+  margin-right: 1rem;
+}
+
+.ls-item:hover {
+  border: 1px solid var(--main-color);
+}
+
+.ls-item-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ls-item-header h3 {
+  cursor: pointer;
+}
+
+#ls-reset-button {
+  align-self: flex-end;
+}
+
+.ls-steps {
+  display: inline;
+}
+
+.ls-question {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-dialog-container {
+  width: 800px;
+}

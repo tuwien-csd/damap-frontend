@@ -1,28 +1,32 @@
-import {adapter, initialProjectsState, ProjectState} from '../states/project.state';
+import {initialProjectsState, ProjectState} from '../states/project.state';
 import {ProjectActions, ProjectActionTypes} from '../actions/project.actions';
+import {LoadingState} from '../../domain/enum/loading-state.enum';
 
 export function projectReducer(
   state = initialProjectsState,
   action: ProjectActions): ProjectState {
   switch (action.type) {
-    case ProjectActionTypes.LoadSuggestedProjects:
-      return state;
-    case ProjectActionTypes.SuggestedProjectsLoaded: {
-      return adapter.setAll(action.payload.projects, {
+    case ProjectActionTypes.LoadProjects:{
+      return {
         ...state,
-        loaded: true
-      });
+        loaded: LoadingState.LOADING
+      };
+    }
+    case ProjectActionTypes.ProjectsLoaded: {
+      return {
+        ...state,
+        projects: action.payload.projects,
+        loaded: LoadingState.LOADED
+      };
+    }
+    case ProjectActionTypes.FailedToLoadProjects: {
+      return {
+        ...state,
+        loaded: LoadingState.FAILED
+      };
     }
     default: {
       return state;
     }
   }
 }
-
-
-export const {
-  selectAll,
-  selectEntities,
-  selectIds,
-  selectTotal
-} = adapter.getSelectors();

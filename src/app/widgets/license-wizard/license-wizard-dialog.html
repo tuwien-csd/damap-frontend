@@ -1,0 +1,67 @@
+<h2 mat-dialog-title>Choose a License</h2>
+<mat-dialog-content class="mat-typography">
+  <div>
+    <div class="ls-steps" *ngFor="let step of steps, let i = index, let last = last">
+      <!--<button mat-icon-button color="primary" aria-label="Example icon button with a heart icon">
+        <mat-icon>looks_{{i == 0 ? 'one' : (i == 1 ? 'two' : i + 1)}}</mat-icon>
+      </button>-->
+      <div class="ls-question" *ngIf="last">
+        <button id="ls-reset-button" mat-stroked-button (click)="reset()">
+          <mat-icon>replay</mat-icon>
+          Reset form
+        </button>
+        <h3>{{step.question}}</h3>
+        <!-- Software: License Matrix -->
+        <ng-container *ngIf="step.question === 'Select licenses in your code:'">
+          <div *ngFor="let license of softwareLicenses">
+            <mat-checkbox *ngIf="license.code"
+                          (change)="changeLicenseMatrix(license.code)">
+              {{license.name}}
+            </mat-checkbox>
+          </div>
+        </ng-container>
+        <!-- Data: License Options -->
+        <ng-container *ngIf="step.question === 'Choose licenses present in your dataset:'">
+          <div *ngFor="let licenses of dataLicenses, let j = index" style="align-content: flex-start">
+            <mat-checkbox (change)="changeLicenseOptions(j)">
+              <ng-container *ngFor="let licence of licenses; last as isLast">
+                {{licence.name}}
+                <ng-container *ngIf="!isLast">,</ng-container>
+              </ng-container>
+              {{licenses.name}}
+            </mat-checkbox>
+          </div>
+        </ng-container>
+        <!-- Answers -->
+        <div class="ls-answer-buttons">
+          <ng-container *ngFor="let item of step.answers | keyvalue: originalOrder">
+            <button mat-raised-button (click)="setNextStep(i, item.value)" color="primary">{{item.key}}</button>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- List of licenses -->
+  <ng-container *ngIf="licenseList?.length">
+    <div id="ls-search">
+      <mat-form-field>
+        <mat-label>Search license...</mat-label>
+        <input #searchBox type="search" matInput>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="ls-list">
+      <mat-card class="ls-item" *ngFor="let license of (licenseList | licenseFilter:searchBox.value)">
+        <div class="ls-item-header">
+          <h3 [mat-dialog-close]="license">{{license.name}}</h3>
+          <div>
+            <a href="{{license.url}}" target="_blank" mat-button >More info</a>
+          </div>
+        </div>
+          <div class="ls-description" [mat-dialog-close]="license">
+            {{license.description}}
+          </div>
+      </mat-card>
+    </div>
+  </ng-container>
+</mat-dialog-content>

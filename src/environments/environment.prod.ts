@@ -2,8 +2,8 @@ import { KeycloakConfig } from 'keycloak-js';
 
 const keycloakConfig: KeycloakConfig = {
   url: $KEYCLOAK.DAMAP_KEYCLOAK_PROD,
-  realm: 'quarkus',
-  clientId: 'dmap'
+  realm: $KEYCLOAK.DAMAP_REALM_PROD,
+  clientId: $KEYCLOAK.DAMAP_CLIENT_ID_PROD
 };
 
 export const environment = {

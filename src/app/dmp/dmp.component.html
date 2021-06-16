@@ -6,7 +6,7 @@
                      (project)="changeProject($event)"></app-dmp-project>
   </mat-step>
   <mat-step label="People involved in data management">
-    <app-dmp-people [people]="people" [peopleList]="peopleList"
+    <app-dmp-people [projectMembers]="projectMembers"
                     [contactStep]="contactStep"
                     [contributorStep]="contributorStep"
                     (contactPerson)="changeContactPerson($event)"

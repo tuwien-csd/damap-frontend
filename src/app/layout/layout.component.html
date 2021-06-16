@@ -1,11 +1,10 @@
 <mat-sidenav-container>
-  <mat-sidenav #sidenav [fixedInViewport]="true" [opened]="widescreen()" mode="side">
+  <mat-sidenav #sidenav [fixedInViewport]="true" (window:resize)="widescreen()" [opened]="widescreen()" mode="side">
     <div class="mm-navbars-top">
       <div class="mm-navbar mm-navbar-size-1">
-        <div class="loginElement">
-          <a title="Benutzer abmelden" target="_self" (click)="logout()">
-            <span>Abmelden
-            </span>
+        <div class="logo">
+          <a title="Damap" id="damap-logo" target="_self" routerLink="/">
+            DAMAP
           </a>
         </div>
         <div class="languageElement">
@@ -23,10 +22,8 @@
       <span> {{name}} </span>
     </div>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="'/dashboard'" routerLinkActive="active">Home</a>
-      <a mat-list-item [routerLink]="'/plans'" routerLinkActive="active">Plans</a>
-      <a mat-list-item [routerLink]="'/persons'" routerLinkActive="active">Persons</a>
-      <a mat-list-item [routerLink]="'/repositories'" routerLinkActive="active">Repositories</a>
+      <a mat-list-item class="nav-item-mobile" [routerLink]="'/dashboard'" routerLinkActive="active">Home</a>
+      <a mat-list-item class="nav-item-mobile" [routerLink]="'/plans'" routerLinkActive="active">Plans</a>
       <a mat-list-item (click)="logout()">Logout</a>
     </mat-nav-list>
   </mat-sidenav>
@@ -34,24 +31,24 @@
     <mat-toolbar>
       <mat-toolbar-row id="mainHeader" [style]="'padding: 0px;'">
         <!-- MOBILE -->
-        <div class="mainHeaderLeft" *ngIf="!widescreen()">
+        <div class="mainHeaderLeft">
           <button mat-icon-button title="Open page navigation"
             (click)="sidenav.opened = !sidenav.opened"
-            *ngIf="!sidenav.opened && !widescreen()">
+            *ngIf="!sidenav.opened">
             <mat-icon>menu</mat-icon>
           </button>
           <button mat-icon-button title="Close page navigation"
+                  class="sidenav-btn"
             (click)="sidenav.opened = !sidenav.opened"
-            *ngIf="sidenav.opened && !widescreen()">
+            *ngIf="sidenav.opened">
             <mat-icon>close</mat-icon>
           </button>
         </div>
         <!-- MOBILE End -->
         <div class="mainHeaderRight">
           <nav class="mainHeaderNav">
-            <!--<ul>
-              <li class="dropdown"><a href="https://www.tuwien.at/" role="button" aria-haspopup="true" aria-expanded="false">TU Wien</a></li>
-            </ul>-->
+            <a mat-list-item class="nav-item-desktop" [routerLink]="'/dashboard'" routerLinkActive="active">Home</a>
+            <a mat-list-item class="nav-item-desktop" [routerLink]="'/plans'" routerLinkActive="active">Plans</a>
           </nav>
 
         </div>
