@@ -27,4 +27,12 @@ export class LicensesComponent implements OnInit {
     const dataset = this.datasets.at(index);
     dataset.patchValue({license: event.url});
   }
+
+  get restricted() {
+    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.restricted);
+  }
+
+  get closed() {
+    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.closed);
+  }
 }

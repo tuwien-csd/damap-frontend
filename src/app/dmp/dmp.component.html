@@ -51,7 +51,6 @@
   </mat-step>
   <mat-step label="Specify repositories for publication and preservation">
     <app-dmp-repo [repoStep]="repoStep" [datasets]="datasets"
-                  [restrictedAccessInfo]="restrictedAccessInfo" [closedAccessInfo]="closedAccessInfo"
                   [loaded]="repositoriesLoaded$ | async"
                   [repositories]="repositories$ | async"
                   (repositoryToAdd)="addRepository($event)"
