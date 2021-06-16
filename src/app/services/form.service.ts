@@ -283,6 +283,7 @@ export class FormService {
       comment: [''],
       personalData: [false],
       sensitiveData: [false],
+      legalRestrictions: [false],
       dataAccess: [DataAccessType.open],
       referenceHash: ['']
     });
