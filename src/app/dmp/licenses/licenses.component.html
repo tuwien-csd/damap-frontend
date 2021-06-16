@@ -42,11 +42,14 @@
             <app-license-wizard (selectedLicense)="setLicenseSelectorResult($event, i)"></app-license-wizard>
           </div>
           <div class="mat-card-container">
-            <mat-form-field>
+            <mat-form-field class="date-form">
               <mat-label>Choose a date</mat-label>
               <input matInput [matDatepicker]="picker_i" formControlName="startDate">
               <mat-datepicker-toggle matSuffix [for]="picker_i"></mat-datepicker-toggle>
               <mat-datepicker #picker_i></mat-datepicker>
+              <mat-hint *ngIf="dmpForm?.controls.project?.value.end === dataset.value.startDate">
+                The release date was set to the project end date. Feel free to modify it.
+              </mat-hint>
             </mat-form-field>
           </div>
         </ng-container>

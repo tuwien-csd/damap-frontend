@@ -10,3 +10,7 @@
 .warning-icon {
   padding-right: 0.5rem;
 }
+
+.date-form{
+  min-width: 300px;
+}
