@@ -3,6 +3,7 @@ import {FormArray, FormGroup} from '@angular/forms';
 import {License} from '../../domain/license';
 import {LicenseDefinitions} from '../../widgets/license-wizard/license-wizard-list';
 import {DataAccessType} from '../../domain/enum/data-access-type.enum';
+import {ComplianceType} from '../../domain/enum/compliance-type.enum';
 
 @Component({
   selector: 'app-dmp-licenses',
@@ -26,6 +27,11 @@ export class LicensesComponent implements OnInit {
   setLicenseSelectorResult(event, index: number) {
     const dataset = this.datasets.at(index);
     dataset.patchValue({license: event.url});
+  }
+
+  get isAnonymisedOrPseudonymised() {
+    return this.dmpForm?.value.legal.personalDataCompliance?.includes(ComplianceType.Anonymisation) ||
+      this.dmpForm?.value.legal.personalDataCompliance?.includes(ComplianceType.Pseudonymisation);
   }
 
   get restricted() {

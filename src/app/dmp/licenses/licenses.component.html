@@ -28,8 +28,10 @@
             </div>
             <div *ngIf="dataset.value.personalData || dataset.value.sensitiveData">
               You indicated in step 6 that this dataset contains sensitive/
-              personal data. Do you really want to publish the dataset open, without restrictions? Have you considered
-              anonymisation/pseudonymisation?
+              personal data. Do you really want to publish the dataset open, without restrictions?
+              <ng-container *ngIf="!isAnonymisedOrPseudonymised">
+                Have you considered anonymisation/pseudonymisation?
+              </ng-container>
             </div>
             <div *ngIf="dataset.value.legalRestrictions">
               You indicated in step 6 that this dataset is subject to legal restrictions. Do you really want to publish
