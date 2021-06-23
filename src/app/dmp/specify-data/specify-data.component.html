@@ -1,20 +1,22 @@
-<form [formGroup]="specifyDataStep">
-  <mat-label id="example-radio-group-label">What kinds of research data will you create?</mat-label>
-  <mat-radio-group aria-label="Select an option" formControlName="kind">
-    <mat-radio-button class="mat-radio-button" [value]="unknown">I don't know yet.</mat-radio-button>
-    <mat-radio-button class="mat-radio-button" [value]="none">No data will be created or analysed</mat-radio-button>
-    <mat-radio-button class="mat-radio-button" [value]="specify">Specify datasets</mat-radio-button>
-  </mat-radio-group>
-</form>
+<ng-container *ngIf="specifyDataStep">
+  <div [formGroup]="specifyDataStep">
+    <mat-label id="example-radio-group-label">What kinds of research data will you create?</mat-label>
+    <mat-radio-group aria-label="Select an option" formControlName="kind">
+      <mat-radio-button class="mat-radio-button" [value]="unknown">I don't know yet.</mat-radio-button>
+      <mat-radio-button class="mat-radio-button" [value]="none">No data will be created or analysed</mat-radio-button>
+      <mat-radio-button class="mat-radio-button" [value]="specify">Specify datasets</mat-radio-button>
+    </mat-radio-group>
+  </div>
+</ng-container>
 <mat-tab-group dynamicHeight
-               *ngIf="specifyDataStep.value.kind === specify">
+               *ngIf="specifyDataStep?.value.kind === specify">
   <mat-tab label="Manually">
 
     <mat-form-field class="dataset-tags-chips" [style]="'width:100%;'"
-                    *ngIf="specifyDataStep.value.kind === specify">
+                    *ngIf="specifyDataStep?.value.kind === specify">
       <mat-chip-list #chipList aria-label="Create names for your datasets">
-        <ng-container *ngFor="let dataset of datasets.controls; let i=index">
-          <mat-chip *ngIf="dataset.value.title != null" [selectable]="selectable"
+        <ng-container *ngFor="let dataset of datasets?.controls; let i=index">
+          <mat-chip *ngIf="dataset.value.title != null" [selectable]="true"
                     removable="true" (removed)="remove(i)">
             {{dataset.value.title}}
             <mat-icon matChipRemove>cancel</mat-icon>
@@ -23,21 +25,21 @@
         <input placeholder="Create names for your datasets"
                [matChipInputFor]="chipList"
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-               [matChipInputAddOnBlur]="addOnBlur"
+               [matChipInputAddOnBlur]="true"
                (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
     </mat-form-field>
   </mat-tab>
   <mat-tab label="Uploading sample data">
     <app-file-upload [fileUpload]="fileUpload"
-      (fileToUpload)="analyseFile($event)"
-    (uploadToCancel)="cancelUpload($event)">
+                     (fileToUpload)="analyseFile($event)"
+                     (uploadToCancel)="cancelUpload($event)">
     </app-file-upload>
   </mat-tab>
 </mat-tab-group>
 
 <!-- TABLE -->
-<div *ngIf="specifyDataStep.value.kind === specify && datasets.controls.length > 0">
+<div *ngIf="specifyDataStep?.value.kind === specify && datasets.controls.length > 0">
   <h2>Data</h2>
 
   <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
@@ -92,9 +94,11 @@
 </div>
 
 <!-- NO DATA -->
-<form [formGroup]="specifyDataStep">
-  <mat-form-field [style]="'width:100%;'" *ngIf="specifyDataStep.value.kind === none" appearance="fill">
-    <mat-label>Please explain why you won't create or analyse any research data.</mat-label>
-    <textarea matInput formControlName="explanation"></textarea>
-  </mat-form-field>
-</form>
+<ng-container *ngIf="specifyDataStep?.value.kind === none">
+  <div [formGroup]="specifyDataStep">
+    <mat-form-field [style]="'width:100%;'" appearance="fill">
+      <mat-label>Please explain why you won't create or analyse any research data.</mat-label>
+      <textarea matInput formControlName="explanation"></textarea>
+    </mat-form-field>
+  </div>
+</ng-container>

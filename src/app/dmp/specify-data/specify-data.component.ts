@@ -43,15 +43,13 @@ export class SpecifyDataComponent implements OnInit {
   readonly specify: DataKind = DataKind.SPECIFY;
 
   // Mat Chip properties
-  selectable = true;
-  addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.datasets.statusChanges
+    this.datasets?.statusChanges
       .subscribe(() => this.dataSource.data = this.datasets.controls);
   }
 
