@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
+import {ComplianceType} from '../../domain/enum/compliance-type.enum';
 
 @Component({
   selector: 'app-dmp-legal-ethical-aspects',
@@ -21,13 +22,7 @@ export class LegalEthicalAspectsComponent implements OnInit {
     // {label: 'Was your plan to deal with these ethical issues approved by the ethics committee?', model: 'committeeApproved'}
   ];
 
-  complianceOptions: Array<any> = [
-    {label: 'by gaining informed consent', value: 'by gaining informed consent'},
-    {label: 'by encryption', value: 'by encryption'},
-    {label: 'by anonymisation', value: 'by anonymisation'},
-    {label: 'by pseudonymisation', value: 'by pseudonymisation'},
-    {label: 'others', value: 'others'}
-  ];
+  complianceOptions: any = ComplianceType;
 
   constructor() {
   }
@@ -35,8 +30,8 @@ export class LegalEthicalAspectsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get isOthersSelected() {
-    return ((this.legalEthicalStep.controls.personalDataCompliance?.value) as Array<string>)?.find(item => item === 'others') != null;
+  get isOtherSelected() {
+    return this.legalEthicalStep?.controls.personalDataCompliance?.value.includes(ComplianceType.Other);
   }
 
 }
