@@ -76,3 +76,12 @@ mat-card {
   color: black;
   font-weight: bold;
 }
+
+.full-width {
+  width: 100%;
+}
+
+.wrap-normal-label {
+  white-space: normal;
+  height: auto;
+}

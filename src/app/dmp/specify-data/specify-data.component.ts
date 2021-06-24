@@ -7,7 +7,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {DataKind} from '../../domain/enum/data-kind.enum';
 import {FILE_SIZES, FILE_TYPES} from './data-specs';
-import {DataAccessType} from '../../domain/enum/data-access-type.enum';
 import {FormService} from '../../services/form.service';
 
 @Component({
@@ -102,12 +101,11 @@ export class DatasetDialog {
 
   readonly FILE_TYPES = FILE_TYPES;
   readonly FILE_SIZES = FILE_SIZES;
-  accessType: any = DataAccessType;
 
   constructor(
     public dialogRef: MatDialogRef<DatasetDialog>,
     private formService: FormService,
-    @Inject(MAT_DIALOG_DATA) public data: { title: string, size: string, comment: string, type: string, dataAccess: DataAccessType }) {
+    @Inject(MAT_DIALOG_DATA) public data: { title: string, size: string, comment: string, type: string}) {
     this.dataset.setValue(this.data);
   }
 
