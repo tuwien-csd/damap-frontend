@@ -12,26 +12,14 @@ export class ReuseComponent implements OnInit {
   @Input() reuseStep: FormGroup;
   @Input() datasets: FormArray;
 
-  restricted: string[] = [];
-
   constructor() {
   }
 
   ngOnInit(): void {
-    this.datasets.valueChanges.subscribe(
-      newVal => {
-        this.restricted = [];
-        for (const val of newVal) {
-          if(val.dataAccess === DataAccessType.restricted) {
-            this.addRestricted(val.title);
-          }
-        }
-      }
-    )
   }
 
-  private addRestricted(value: string) {
-    this.restricted.push(value);
+  get restricted() {
+    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.restricted);
   }
 
 }

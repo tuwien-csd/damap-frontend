@@ -1,5 +1,30 @@
-.mat-radio-button {
+.boolean-mat-radio-button {
   display: flex;
   flex-direction: column;
   margin: 15px 0;
+}
+
+.dataset-checkbox-section {
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  margin: 0 1rem 0.5rem 0;
+}
+
+.dataset-checkbox {
+  margin-right: 1rem;
+  padding-top: 0.5rem;
+}
+
+.compliance-radio-button {
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+}
+
+.dataset-checkbox-section > div {
+  margin: 1rem;
+}
+
+.inline-radio-group {
+  padding: 1rem;
 }

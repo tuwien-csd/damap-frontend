@@ -46,8 +46,6 @@ export class DmpComponent implements OnInit {
   externalStorageStep: FormArray;
   externalStorageInfo: FormControl;
   repoStep: FormArray;
-  restrictedAccessInfo: FormControl;
-  closedAccessInfo: FormControl;
   reuseStep: FormGroup;
   costsStep: FormGroup;
 
@@ -99,8 +97,6 @@ export class DmpComponent implements OnInit {
     this.externalStorageStep = this.dmpForm.get('externalStorage') as FormArray;
     this.externalStorageInfo = this.dmpForm.get('externalStorageInfo') as FormControl;
     this.repoStep = this.dmpForm.get('hosts') as FormArray;
-    this.restrictedAccessInfo = this.dmpForm.get('restrictedAccessInfo') as FormControl;
-    this.closedAccessInfo = this.dmpForm.get('closedAccessInfo') as FormControl;
     this.reuseStep = this.dmpForm.get('reuse') as FormGroup;
     this.costsStep = this.dmpForm.get('costs') as FormGroup;
 
@@ -173,7 +169,8 @@ export class DmpComponent implements OnInit {
 
   createDataset(title: string) {
     const dataset = this.formService.createDatasetFormGroup(title);
-    dataset.patchValue({referenceHash: this.userId + (+new Date()).toString(36)});
+    const startDate = this.dmpForm.value.project?.end || null;
+    dataset.patchValue({startDate, referenceHash: this.userId + (+new Date()).toString(36)});
     this.datasets.push(dataset);
   }
 

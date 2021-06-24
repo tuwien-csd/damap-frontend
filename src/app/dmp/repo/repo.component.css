@@ -33,11 +33,3 @@ th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:
   padding: 0 15px;
 }
 
-.full-width {
-  width: 100%;
-}
-
-.wrap-label {
-  white-space: normal;
-  height: auto;
-}
