@@ -38,9 +38,9 @@ export class FormService {
       externalStorageInfo: [''],
       legal: this.formBuilder.group({
         personalData: [false],
-        personalDataAccess: [false],
-        personalDataCompliance: [],
-        otherPersonalDataCompliance: [null],
+        personalDataAccess: [''],
+        personalDataCompliance: this.formBuilder.array([]),
+        otherPersonalDataCompliance: [''],
         sensitiveData: [false],
         legalRestrictions: [false],
         ethicalIssues: [false],
