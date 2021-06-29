@@ -12,7 +12,7 @@ export class FeedbackService {
   error(message: string) {
     this._snackBar.open(message, 'x', {
       duration: 4500,
-      horizontalPosition: 'end',
+      horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: 'snack-error'
     });
@@ -21,7 +21,7 @@ export class FeedbackService {
   success(message: string) {
     this._snackBar.open(message, 'x', {
       duration: 4500,
-      horizontalPosition: 'end',
+      horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: 'snack-success'
     });
