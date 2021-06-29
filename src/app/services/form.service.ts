@@ -37,7 +37,10 @@ export class FormService {
       externalStorage: this.formBuilder.array([]),
       externalStorageInfo: [''],
       legal: this.formBuilder.group({
-        personalInformation: [false],
+        personalData: [false],
+        personalDataAccess: [''],
+        personalDataCompliance: [[]],
+        otherPersonalDataCompliance: [''],
         sensitiveData: [false],
         legalRestrictions: [false],
         ethicalIssues: [false],
@@ -79,7 +82,10 @@ export class FormService {
       },
       externalStorageInfo: dmp.externalStorageInfo,
       legal: {
-        personalInformation: dmp.personalInformation,
+        personalData: dmp.personalData,
+        personalDataAccess: dmp.personalDataAccess,
+        personalDataCompliance: dmp.personalDataCompliance,
+        otherPersonalDataCompliance: dmp.otherPersonalDataCompliance,
         sensitiveData: dmp.sensitiveData,
         legalRestrictions: dmp.legalRestrictions,
         ethicalIssues: dmp.ethicalIssuesExist,
@@ -190,7 +196,10 @@ export class FormService {
       metadata: formValue.documentation.metadata,
       dataGeneration: formValue.documentation.dataGeneration,
       structure: formValue.documentation.structure,
-      personalInformation: formValue.legal.personalInformation,
+      personalData: formValue.legal.personalData,
+      personalDataAccess: formValue.legal.personalDataAccess,
+      personalDataCompliance: formValue.legal.personalDataCompliance,
+      otherPersonalDataCompliance: formValue.legal.otherPersonalDataCompliance,
       sensitiveData: formValue.legal.sensitiveData,
       legalRestrictions: formValue.legal.legalRestrictions,
       ethicalIssuesExist: formValue.legal.ethicalIssues,
@@ -224,7 +233,10 @@ export class FormService {
 
   public addDatasetToForm(form: FormGroup, reference: string, title: string) {
     const formGroup = this.createDatasetFormGroup(title);
-    formGroup.patchValue({referenceHash: reference});
+    formGroup.patchValue({
+      referenceHash: reference,
+      startDate: form.value.project?.end || null
+    });
     (form.get('datasets') as FormArray).push(formGroup);
   }
 
@@ -288,12 +300,14 @@ export class FormService {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
       title: [title, Validators.required],
-      publish: [false],
       license: [''],
       startDate: [null],
       type: [null],
       size: [''],
       comment: [''],
+      personalData: [false],
+      sensitiveData: [false],
+      legalRestrictions: [false],
       dataAccess: [DataAccessType.open],
       referenceHash: ['']
     });
