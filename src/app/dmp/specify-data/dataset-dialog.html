@@ -28,14 +28,6 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Data Access</mat-label>
-        <mat-select formControlName="dataAccess">
-          <mat-option *ngFor="let type of accessType | keyvalue" [value]="type.value">
-            {{type.value}}<br/>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
     </div>
     <div class="dialogRow">
         <mat-form-field appearance="fill">

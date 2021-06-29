@@ -6,7 +6,9 @@ export interface Dataset {
   type: any;
   size: number;
   comment: string;
-  publish: boolean;
+  personalData: boolean;
+  sensitiveData: boolean;
+  legalRestrictions: boolean;
   license: string;
   startDate: Date;
   dataAccess: DataAccessType;
