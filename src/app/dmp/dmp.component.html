@@ -17,8 +17,11 @@
   <mat-step label="Specify research data">
     <app-dmp-specify-data [specifyDataStep]="specifyDataStep"
                           [datasets]="datasets"
-                          (createDataset)="createDataset($event)"
+                          [fileUpload]="fileUpload"
+                          (createDataset)="addDataset($event)"
                           (updateDataset)="updateDataset($event)"
+                          (fileToAnalyse)="analyseFile($event)"
+                          (uploadToCancel)="cancelFileUpload($event)"
                           (removeDataset)="removeDataset($event)">
     </app-dmp-specify-data>
   </mat-step>

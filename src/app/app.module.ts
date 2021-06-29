@@ -56,6 +56,8 @@ import {CostsComponent} from './dmp/costs/costs.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {BytePipe} from './pipe/byte.pipe';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {DragdropDirective} from './directives/dragdrop.directive';
+import {FileUploadComponent} from './widgets/file-upload/file-upload.component';
 import {ContributorFilterPipe} from './pipe/contributor-filter.pipe';
 import {LicenseSelectorDialog, LicenseWizardComponent} from './widgets/license-wizard/license-wizard.component';
 import {LicenseFilterPipe} from './widgets/license-wizard/license-filter.pipe';
@@ -90,6 +92,8 @@ const keycloakService = new KeycloakService();
     ReuseComponent,
     CostsComponent,
     BytePipe,
+    DragdropDirective,
+    FileUploadComponent,
     ContributorFilterPipe,
     LicenseWizardComponent,
     LicenseFilterPipe,

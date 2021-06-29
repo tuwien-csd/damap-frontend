@@ -25,9 +25,12 @@ export class SpecifyDataComponent implements OnInit {
 
   @Input() specifyDataStep: FormGroup;
   @Input() datasets: FormArray;
+  @Input() fileUpload: {file: File, progress: number, finalized: boolean}[];
 
   @Output() createDataset = new EventEmitter<string>();
   @Output() updateDataset = new EventEmitter<any>();
+  @Output() fileToAnalyse = new EventEmitter<File>();
+  @Output() uploadToCancel = new EventEmitter<number>();
   @Output() removeDataset = new EventEmitter<number>();
 
   dataSource = new MatTableDataSource();
@@ -39,15 +42,13 @@ export class SpecifyDataComponent implements OnInit {
   readonly specify: DataKind = DataKind.SPECIFY;
 
   // Mat Chip properties
-  selectable = true;
-  addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.datasets.statusChanges
+    this.datasets?.statusChanges
       .subscribe(() => this.dataSource.data = this.datasets.controls);
   }
 
@@ -70,6 +71,10 @@ export class SpecifyDataComponent implements OnInit {
     this.removeDataset.emit(index);
   }
 
+  analyseFile(file: File) {
+    this.fileToAnalyse.emit(file);
+  }
+
   openDatasetDialog(index: number) {
 
     const dataset = this.datasets.at(index) as FormGroup;
@@ -87,6 +92,9 @@ export class SpecifyDataComponent implements OnInit {
     );
   }
 
+  cancelUpload(index: number) {
+    this.uploadToCancel.emit(index);
+  }
 }
 
 @Component({
