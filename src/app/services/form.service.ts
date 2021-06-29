@@ -39,7 +39,7 @@ export class FormService {
       legal: this.formBuilder.group({
         personalData: [false],
         personalDataAccess: [''],
-        personalDataCompliance: this.formBuilder.array([]),
+        personalDataCompliance: [[]],
         otherPersonalDataCompliance: [''],
         sensitiveData: [false],
         legalRestrictions: [false],

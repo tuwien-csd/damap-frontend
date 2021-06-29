@@ -11,7 +11,7 @@
         Unknown
       </mat-radio-button>
     </mat-radio-group>
-    <ng-container *ngIf="question.model === 'personalData' && legalEthicalStep?.value.personalData">
+    <ng-container *ngIf="question.model === 'personalData' && legalEthicalStep?.value.personalData && datasets?.length">
       <div>
         <section class="dataset-checkbox-section" [formGroup]="dmpForm">
           Please select the datasets containing personal data:
@@ -50,7 +50,7 @@
         <textarea matInput formControlName="personalDataAccess"></textarea>
       </mat-form-field>
     </ng-container>
-    <ng-container *ngIf="question.model === 'sensitiveData' && legalEthicalStep?.value.sensitiveData">
+    <ng-container *ngIf="question.model === 'sensitiveData' && legalEthicalStep?.value.sensitiveData && datasets?.length">
       <div>
         <section class="dataset-checkbox-section" [formGroup]="dmpForm">
           Please select the datasets containing sensitive data:
