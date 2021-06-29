@@ -1,0 +1,57 @@
+.file-input {
+  margin-bottom: 10px;
+}
+
+.dropzone {
+  margin: 10px 0;
+  height: 200px;
+  width: auto;
+  flex-direction: column;
+  font-size: x-large;
+  color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-self: center;
+  border: 3px solid #E6E6E6;
+  border-radius: 5px;
+}
+
+.dropzone > mat-icon {
+  margin-bottom: 30px;
+  transform: scale(2, 2);
+}
+
+.fileover {
+  opacity: 0.5;
+  border: 3px solid var(--accent-color-lighter);
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 5px 10px 10px;
+  border: 1px solid #E6E6E6;
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
+
+mat-progress-bar {
+  max-width: calc(100% - 40px);
+}
+
+.progress-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-list-item {
+  height: auto;
+}
+
+.cancel-upload {
+  float: right;
+}

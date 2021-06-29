@@ -231,6 +231,30 @@ export class FormService {
     (form.get('contributors') as FormArray).removeAt(index);
   }
 
+  public addDatasetToForm(form: FormGroup, reference: string, title: string) {
+    const formGroup = this.createDatasetFormGroup(title);
+    formGroup.patchValue({
+      referenceHash: reference,
+      startDate: form.value.project?.end || null
+    });
+    (form.get('datasets') as FormArray).push(formGroup);
+  }
+
+  public updateDatasetOfForm(form: FormGroup, index: number, update: FormGroup) {
+    const dataset = (form.get('datasets') as FormArray).at(index);
+    dataset.patchValue(update.getRawValue());
+  }
+
+  public removeDatasetFromForm(form: FormGroup, index: number) {
+    this.removeDatasetReferences(form, index);
+    (form.get('datasets') as FormArray).removeAt(index);
+  }
+
+  public addFileAnalysisAsDatasetToForm(form: FormGroup, dataset: Dataset) {
+    const formGroup = this.mapDatasetToFormGroup(dataset);
+    (form.get('datasets') as FormArray).push(formGroup);
+  }
+
   public addStorageToForm(form: FormGroup, storage: Storage) {
     const storageFormGroup = this.createStorageFormGroup();
     storageFormGroup.patchValue({hostId: storage.hostId, title: storage.title});
@@ -347,7 +371,7 @@ export class FormService {
   private mapExternalStorageToFormGroup(externalStorage: Storage): FormGroup {
     const formGroup = this.createExternalStorageFormGroup();
     formGroup.setValue({
-      id: externalStorage.id || null,
+      id: externalStorage.id,
       title: externalStorage.title,
       storageLocation: externalStorage.storageLocation || null,
       backupLocation: externalStorage.backupLocation || null,
@@ -403,5 +427,29 @@ export class FormService {
       description: cost.description || ''
     });
     return formGroup;
+  }
+
+  private removeDatasetReferences(form: FormGroup, index: number) {
+    const dataset = (form.get('datasets') as FormArray).at(index) as FormGroup;
+
+    // Storage
+    const storageStep = form.get('storage') as FormArray;
+    this.removeDatasetReferenceInFormArray(storageStep, dataset);
+
+    // External Storage
+    const eStorageStep = form.get('externalStorage') as FormArray;
+    this.removeDatasetReferenceInFormArray(eStorageStep, dataset);
+
+    // Repositories
+    const repoStep = form.get('hosts') as FormArray;
+    this.removeDatasetReferenceInFormArray(repoStep, dataset);
+  }
+
+  private removeDatasetReferenceInFormArray(array: FormArray, dataset: FormGroup) {
+    for (let i = 0; i < array.controls?.length; i++) {
+      const item = array.at(i);
+      const datasets = item.value.datasets.filter(entry => entry !== dataset.value.referenceHash);
+      item.patchValue({datasets});
+    }
   }
 }

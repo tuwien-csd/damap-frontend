@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../services/backend.service';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {KeycloakService} from 'keycloak-angular';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {Person} from '../domain/person';
 import {ProjectMember} from '../domain/project-member';
 import {Project} from '../domain/project';
@@ -18,6 +18,7 @@ import {LoadRepositories, LoadRepository} from '../store/actions/repository.acti
 import {StepperSelectionEvent} from '@angular/cdk/stepper';
 import {Storage} from '../domain/storage';
 import {FeedbackService} from '../services/feedback.service';
+import {HttpEventType} from '@angular/common/http';
 import {Location} from '@angular/common';
 import {LoadDmps} from '../store/actions/dmp.actions';
 import {LoadingState} from '../domain/enum/loading-state.enum';
@@ -56,6 +57,9 @@ export class DmpComponent implements OnInit {
   repositories: any;
   repositoriesLoaded$: Observable<LoadingState>;
   repositories$: Observable<Repository[]>;
+
+  fileUpload: { file: File, progress: number, finalized: boolean }[] = [];
+  fileUploadSubscription: Subscription[] = [];
 
   // TODO: Manage editability based on accessType (role)
   constructor(
@@ -167,21 +171,46 @@ export class DmpComponent implements OnInit {
     this.formService.removeContributorFromForm(this.dmpForm, index);
   }
 
-  createDataset(title: string) {
-    const dataset = this.formService.createDatasetFormGroup(title);
-    const startDate = this.dmpForm.value.project?.end || null;
-    dataset.patchValue({startDate, referenceHash: this.userId + (+new Date()).toString(36)});
-    this.datasets.push(dataset);
+  addDataset(title: string) {
+    this.formService.addDatasetToForm(this.dmpForm, this.generateReferenceHash(), title);
   }
 
   updateDataset(event: { index: number, update: FormGroup }) {
-    const dataset = this.datasets.at(event.index);
-    dataset.patchValue(event.update.getRawValue());
+    this.formService.updateDatasetOfForm(this.dmpForm, event.index, event.update);
+  }
+
+  analyseFile(event: File) {
+    const formData = new FormData();
+    formData.append('file', event);
+    const filename = event.name;
+    const reference = this.generateReferenceHash();
+    const upload = {file: event, progress: 0, finalized: false};
+    this.fileUpload.push(upload);
+    const uploadSub = this.backendService.analyseFileData(formData)
+      .subscribe((response) => {
+        if (response.type === HttpEventType.UploadProgress) {
+          upload.progress = Math.round(100 * (response.loaded / response.total));
+        }
+        if (response.type === HttpEventType.Response) {
+          const dataset = response.body;
+          dataset.title = filename;
+          dataset.referenceHash = reference;
+          this.formService.addFileAnalysisAsDatasetToForm(this.dmpForm, dataset);
+        }
+      },
+      _ => upload.finalized = true,
+      () => upload.finalized = true
+    );
+    this.fileUploadSubscription.push(uploadSub);
+  }
+
+  cancelFileUpload(index: number) {
+    this.fileUploadSubscription[index].unsubscribe();
+    this.fileUpload[index].finalized = true;
   }
 
   removeDataset(index: number) {
-    this.removeRepoDatasets(this.datasets.at(index));
-    this.datasets.removeAt(index);
+    this.formService.removeDatasetFromForm(this.dmpForm, index);
   }
 
   addStorage(storage: Storage) {
@@ -276,15 +305,9 @@ export class DmpComponent implements OnInit {
     });
   }
 
-  private removeRepoDatasets(dataset) {
-    for (let i = 0; i < this.repoStep.controls.length; i++) {
-      const host = this.repoStep.at(i);
-      for (let j = 0; j < host.value.datasets.length; j++) {
-        const repoDataset = host.value.datasets[j];
-        if (dataset.value.referenceHash === repoDataset.referenceHash) {
-          host.value.datasets.slice(j, 1);
-        }
-      }
-    }
+  // TODO: move to service, add for storage
+
+  private generateReferenceHash(): string {
+    return this.userId + (+new Date()).toString(36);
   }
 }
