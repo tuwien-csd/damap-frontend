@@ -1,0 +1,44 @@
+<div class="tree-select" #treeselect (focusout)="showTreeSelection()">
+  <mat-form-field appearance="fill">
+    <mat-label>{{label}}</mat-label>
+    <mat-chip-list aria-label="Filter selection">
+      <mat-chip *ngFor="let node of selectionList" (focus)="showTreeSelection()"
+        [selectable]="false"
+        [removable]="true"
+        (removed)="todoItemSelectionToggle(node)">
+        {{node.item.label}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+    <input matInput (focus)="showTreeSelection()">
+  </mat-form-field>
+
+  <div class="tree-select-list">
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" *ngIf="showTree">
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+        <button mat-icon-button disabled></button>
+        <mat-checkbox class="checklist-leaf-node"
+                      [checked]="checklistSelection.isSelected(node)"
+                      (change)="todoLeafItemSelectionToggle(node)"
+                      (mousedown)="$event.preventDefault()">{{node.item.label}}</mat-checkbox>
+      </mat-tree-node>
+
+      <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+        <button mat-icon-button disabled></button>
+      </mat-tree-node>
+
+      <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+        <button mat-icon-button matTreeNodeToggle
+                [attr.aria-label]="'Toggle ' + node.item.label">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        <mat-checkbox [checked]="descendantsAllSelected(node)"
+                      [indeterminate]="descendantsPartiallySelected(node)"
+                      (change)="todoItemSelectionToggle(node)"
+                      (mousedown)="$event.preventDefault()">{{node.item.label}}</mat-checkbox>
+      </mat-tree-node>
+    </mat-tree>
+  </div>
+</div>
