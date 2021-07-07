@@ -16,8 +16,9 @@ import {FeedbackService} from './feedback.service';
 export class BackendService {
 
   private backendUrl = environment.backendUrl;
-  private repositoryBackendUrl = this.backendUrl + 'repositories'
-  private pdbBackendUrl = this.backendUrl + 'api/pdb'
+  private pdbBackendUrl = this.backendUrl + 'api/pdb';
+  private repositoryBackendUrl = this.backendUrl + 'repositories';
+  private repositoryUrl = 'https://www.re3data.org/api/beta/repositories';
 
   constructor(
     private http: HttpClient,
@@ -86,7 +87,7 @@ export class BackendService {
 
   }
 
-  getRepositories(): Observable<any> {
+  getRepositories(): Observable<Repository[]> {
     return this.http.get<Repository[]>(this.repositoryBackendUrl).pipe(
       retry(3),
       catchError(this.handleError('Failed to load repositories.'))
@@ -98,6 +99,18 @@ export class BackendService {
       map(details => ({id, changes: {info: details.repository[0]}})),
       retry(3),
       catchError(this.handleError('Failed to load repository details.'))
+    );
+  }
+
+  searchRepository(filters: any): Observable<Repository[]> {
+    let query = '';
+    for (const key in filters) {
+      if (filters.hasOwnProperty(key)) {
+        filters[key]?.forEach(item => query += `&${key}[]=${item}`);
+      }
+    }
+    return this.http.get<Repository[]>(`${this.repositoryUrl}?query=${query}`).pipe(
+      catchError(this.handleError('Failed to search repositories'))
     );
   }
 
@@ -146,14 +159,11 @@ export class BackendService {
     return (error: HttpErrorResponse) => {
       if (error.status === 0) {
         message += '\nService can not be reached, please retry later. If the issue persists contact [insert contact for technical issue].'
-      }
-      else if (error.status === 404) {
+      } else if (error.status === 404) {
         message += '\nThe requested resource could not be found.'
-      }
-      else if (error.status === 500) {
+      } else if (error.status === 500) {
         message += '\nAn error occurred, please contact [insert contact for technical issue].'
-      }
-      else if (error.status === 503) {
+      } else if (error.status === 503) {
         message += '\nService is currently unavailable, please retry later.'
       }
       this.feedbackService.error(message);
