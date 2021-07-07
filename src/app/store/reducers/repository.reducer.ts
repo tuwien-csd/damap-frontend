@@ -26,6 +26,16 @@ export function repositoryReducer(
         loaded: LoadingState.FAILED
       }
     }
+    case RepositoryActionTypes.SetRepositoryFilter: {
+      return {
+        ...state,
+        loaded: LoadingState.LOADING,
+        filters: {
+          ...state.filters,
+          [action.payload.filter.name]: action.payload.filter.value
+        }
+      }
+    }
     default: {
       return state;
     }
