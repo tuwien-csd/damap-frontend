@@ -110,7 +110,7 @@ export class BackendService {
       }
     }
     return this.http.get<Repository[]>(`${this.repositoryUrl}?query=${query}`).pipe(
-      catchError(this.handleError('Failed to search repositories'))
+      catchError(this.handleError('Failed to search repositories.'))
     );
   }
 
