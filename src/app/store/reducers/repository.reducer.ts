@@ -36,6 +36,12 @@ export function repositoryReducer(
         }
       }
     }
+    case RepositoryActionTypes.ResetRepositoryFilter: {
+      return {
+        ...state,
+        filters: {}
+      }
+    }
     default: {
       return state;
     }
