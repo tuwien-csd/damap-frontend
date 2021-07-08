@@ -33,3 +33,17 @@ th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:
   padding: 0 15px;
 }
 
+.repo-container {
+  display: flex;
+}
+
+.repo-filter {
+  min-width: 400px;
+  width: 40%;
+  margin: 0.5rem;
+}
+
+.repos {
+  width: 100%;
+  margin: 0.5rem;
+}
