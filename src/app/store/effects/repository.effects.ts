@@ -7,7 +7,7 @@ import {
   LoadRepositories,
   LoadRepository,
   RepositoriesLoaded,
-  RepositoryActionTypes,
+  RepositoryActionTypes, ResetRepositoryFilter, SetRepositoryFilter,
   UpdateRepository
 } from '../actions/repository.actions';
 import {of} from 'rxjs';
@@ -33,18 +33,24 @@ export class RepositoryEffects {
     mergeMap(action => this.backendService.getRepositoryById(action.payload.id).pipe(
       map(update => new UpdateRepository({update}))
     )),
-  )
+  );
 
   @Effect()
   searchRepositoriesByQuery = this.actions$.pipe(
-    ofType<LoadRepository>(RepositoryActionTypes.SetRepositoryFilter),
+    ofType<SetRepositoryFilter>(RepositoryActionTypes.SetRepositoryFilter),
     debounceTime(500),
     withLatestFrom(this.store$.select(selectFilters)),
     mergeMap(([_, state]) => this.backendService.searchRepository(state).pipe(
       map(repositories => new RepositoriesLoaded({repositories})),
       catchError(() => of(new FailedToLoadRepositories()))
     )),
-  )
+  );
+
+  @Effect()
+  resetRepositoryFilter = this.actions$.pipe(
+    ofType<ResetRepositoryFilter>(RepositoryActionTypes.ResetRepositoryFilter),
+    map(_ => new LoadRepositories())
+  );
 
   constructor(
     private actions$: Actions,

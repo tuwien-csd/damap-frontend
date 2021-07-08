@@ -8,7 +8,8 @@ export enum RepositoryActionTypes {
   LoadRepository = '[Repositories] Load one',
   UpdateRepository = '[Repositories] Update one',
   FailedToLoadRepositories = '[Repositories] Failed to load all',
-  SetRepositoryFilter = '[Repositories] Set filter'
+  SetRepositoryFilter = '[Repositories] Set filter',
+  ResetRepositoryFilter = '[Repositories] Reset filter'
 }
 
 export class LoadRepositories implements Action {
@@ -47,10 +48,15 @@ export class SetRepositoryFilter implements Action {
   }
 }
 
+export class ResetRepositoryFilter implements Action {
+  readonly type = RepositoryActionTypes.ResetRepositoryFilter;
+}
+
 export type RepositoryActions =
   LoadRepositories
   | RepositoriesLoaded
   | LoadRepository
   | UpdateRepository
   | FailedToLoadRepositories
-  | SetRepositoryFilter;
+  | SetRepositoryFilter
+  | ResetRepositoryFilter;
