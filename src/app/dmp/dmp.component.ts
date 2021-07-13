@@ -127,7 +127,10 @@ export class DmpComponent implements OnInit {
     if (this.userId !== undefined) {
       if (this.dmpForm.value.id) {
         this.backendService.editDmp(this.userId, dmp).subscribe(
-          response => this.dmpForm.patchValue(response),
+          response => {
+            this.dmpForm.patchValue(response);
+            this.store.dispatch(new LoadDmps({userId: this.userId}));
+          },
           () => {},
           () => this.feedbackService.success('Plan was updated!')
         );
