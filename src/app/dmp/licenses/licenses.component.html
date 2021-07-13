@@ -55,7 +55,7 @@
               <input matInput [matDatepicker]="picker_i" formControlName="startDate">
               <mat-datepicker-toggle matSuffix [for]="picker_i"></mat-datepicker-toggle>
               <mat-datepicker #picker_i></mat-datepicker>
-              <mat-hint *ngIf="dmpForm?.controls.project?.value.end === dataset.value.startDate">
+              <mat-hint *ngIf="dmpForm?.controls.project?.value?.end === dataset.value.startDate && dataset.value.startDate != null">
                 The release date was set to the project end date. Feel free to modify it.
               </mat-hint>
             </mat-form-field>
