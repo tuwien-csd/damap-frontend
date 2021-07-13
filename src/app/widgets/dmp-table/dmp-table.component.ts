@@ -31,9 +31,10 @@ export class DmpTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource.data = this.dmps;
+    this.dataSource.filterPredicate = (data: DmpListItem, filter: string) =>
+      data.project?.title?.toLowerCase().includes(filter) || data.title?.toLowerCase().includes(filter);
   }
 
-  // TODO: Filter doesn't work with nested fields (project title)
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
