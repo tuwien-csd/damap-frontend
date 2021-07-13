@@ -252,6 +252,9 @@ export class FormService {
 
   public addFileAnalysisAsDatasetToForm(form: FormGroup, dataset: Dataset) {
     const formGroup = this.mapDatasetToFormGroup(dataset);
+    formGroup.patchValue({
+      startDate: form.value.project?.end || null
+    });
     (form.get('datasets') as FormArray).push(formGroup);
   }
 
