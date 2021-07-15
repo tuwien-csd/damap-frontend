@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {Dmp} from '../domain/dmp';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {ProjectMember} from '../domain/project-member';
 import {Project} from '../domain/project';
@@ -18,7 +18,6 @@ export class BackendService {
   private backendUrl = environment.backendUrl;
   private pdbBackendUrl = this.backendUrl + 'api/pdb';
   private repositoryBackendUrl = this.backendUrl + 'repositories';
-  private repositoryUrl = 'https://www.re3data.org/api/beta/repositories';
 
   constructor(
     private http: HttpClient,
@@ -103,13 +102,13 @@ export class BackendService {
   }
 
   searchRepository(filters: any): Observable<Repository[]> {
-    let query = '';
+    let params = new HttpParams();
     for (const key in filters) {
       if (filters.hasOwnProperty(key)) {
-        filters[key]?.forEach(item => query += `&${key}[]=${item}`);
+        filters[key]?.forEach(item => params = params.append(key, item));
       }
     }
-    return this.http.get<Repository[]>(`${this.repositoryUrl}?query=${query}`).pipe(
+    return this.http.get<Repository[]>(`${this.repositoryBackendUrl}/search`, {params}).pipe(
       catchError(this.handleError('Failed to search repositories.'))
     );
   }
