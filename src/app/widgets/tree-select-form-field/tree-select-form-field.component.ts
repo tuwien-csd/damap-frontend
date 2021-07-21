@@ -3,7 +3,7 @@ import {BehaviorSubject} from 'rxjs';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {SelectionModel} from '@angular/cdk/collections';
-import {debounceTime} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 
 /* TODO:
 *   - Tests
@@ -16,12 +16,14 @@ import {debounceTime} from 'rxjs/operators';
 export class TodoItemNode {
   children: TodoItemNode[];
   item: { id: string, label: string };
+  visible: boolean;
 }
 
 /** Flat to-do item node with expandable and level information */
 export class TodoItemFlatNode {
   item: { id: string, label: string };
   level: number;
+  visible: boolean;
   expandable: boolean;
 }
 
@@ -59,6 +61,7 @@ export class ChecklistDatabase {
     return Object.keys(obj).reduce<TodoItemNode[]>((accumulator, key) => {
       const node = new TodoItemNode();
       node.item = {id: obj[key].id, label: obj[key].label};
+      node.visible = true;
 
       if (obj[key].children) {
         node.children = this.buildFileTree(obj[key].children, level + 1);
@@ -66,6 +69,13 @@ export class ChecklistDatabase {
 
       return accumulator.concat(node);
     }, []);
+  }
+
+  /**
+   * Notify tree data change when searching
+   */
+  filterTree() {
+    this.dataChange.next(this.data);
   }
 }
 
@@ -89,6 +99,8 @@ export class TreeSelectFormFieldComponent implements OnInit {
 
   dataSource: MatTreeFlatDataSource<TodoItemNode, TodoItemFlatNode>;
 
+  searchFilter: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
   @Input() label: string;
   @Input() treeData: any;
 
@@ -103,6 +115,7 @@ export class TreeSelectFormFieldComponent implements OnInit {
   selectionList: TodoItemFlatNode[] = [];
 
   @ViewChild('treeselect') treeSelect: ElementRef<HTMLDivElement>;
+  @ViewChild('input') treeInput: ElementRef<HTMLInputElement>;
   showTree = false;
 
   constructor(private _database: ChecklistDatabase) {
@@ -116,11 +129,11 @@ export class TreeSelectFormFieldComponent implements OnInit {
       debounceTime(50) // emits twice on change
     ).subscribe(
       _ => {
+        this.setFocus();
         this.setSelectionList();
         this.updateAndEmitParams();
       }
     );
-
   }
 
   ngOnInit(): void {
@@ -130,6 +143,15 @@ export class TreeSelectFormFieldComponent implements OnInit {
     this._database.dataChange.subscribe(data => {
       this.dataSource.data = data;
     });
+    this.searchFilter.pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe(text => {
+          const data = this._database.data;
+          for (const node of data) {
+            this.filterTree(node, text);
+          }
+          this._database.filterTree();
+        }
+      );
   }
 
   getLevel = (node: TodoItemFlatNode) => node.level;
@@ -151,6 +173,7 @@ export class TreeSelectFormFieldComponent implements OnInit {
       ? existingNode
       : new TodoItemFlatNode();
     flatNode.item = node.item;
+    flatNode.visible = node.visible;
     flatNode.level = level;
     flatNode.expandable = !!node.children?.length;
     this.flatNodeMap.set(flatNode, node);
@@ -235,8 +258,13 @@ export class TreeSelectFormFieldComponent implements OnInit {
     return null;
   }
 
+  /** Set focus to input field */
+  private setFocus() {
+    this.treeInput.nativeElement.focus();
+  }
+
   /** Find top nodes in checklistSelection and store them in selectionList */
-  setSelectionList() {
+  private setSelectionList() {
     this.selectionList = [];
     for (const item of this.checklistSelection.selected) {
       const parent = this.getParentNode(item);
@@ -246,7 +274,7 @@ export class TreeSelectFormFieldComponent implements OnInit {
     }
   }
 
-  updateAndEmitParams() {
+  private updateAndEmitParams() {
     const params: string[] = [];
     for (const item of this.selectionList) {
       params.push(item.item.id);
@@ -256,6 +284,25 @@ export class TreeSelectFormFieldComponent implements OnInit {
 
   showTreeSelection() {
     this.showTree = this.treeSelect.nativeElement.matches(':focus-within');
-    console.log(document.activeElement);
+  }
+
+  applyFilter(event: Event) {
+    let filterText = (event.target as HTMLInputElement).value;
+    filterText = filterText == null ? '' : filterText;
+    this.searchFilter.next(filterText);
+  }
+
+  private filterTree(node: TodoItemNode, filterText: string) {
+    node.visible = node.item.label.toLowerCase().includes(filterText.toLowerCase())
+    if (!node.visible && node.children) {
+      for (const child of node.children) {
+        if (child.children) {
+          this.filterTree(child, filterText);
+        } else {
+          child.visible = child.item.label.toLowerCase().includes(filterText.toLowerCase());
+        }
+        node.visible = child.visible || node.visible;
+      }
+    }
   }
 }
