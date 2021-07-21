@@ -4,8 +4,21 @@ mat-form-field {
 
 .tree-select-list{
   margin-top: -1.4rem;
+  position: absolute;
+  background-color: white;
+  z-index: 1;
+  min-width: 100%;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  max-height: 800px;
+  overflow-y: auto;
+  padding-right: 1rem;
 }
 
 .tree-select {
-  margin: 0.5rem 0;
+  margin-bottom: -0.5rem;
+  position: relative;
+}
+
+.hidden {
+  display: none;
 }

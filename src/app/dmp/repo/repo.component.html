@@ -1,4 +1,4 @@
-<div *ngIf="!datasets.controls.length">
+<div *ngIf="!datasets?.controls.length">
   Please specify your datasets first.
 </div>
 <!-- SELECTED REPOS-->
@@ -114,13 +114,12 @@
       <mat-paginator class="mat-elevation-z8" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
                      showFirstLastButtons></mat-paginator>
     </ng-container>
+    <ng-container *ngIf="loaded === LoadingState.LOADING">
+      <p>Load repositories...</p>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </ng-container>
+    <ng-container *ngIf="loaded === LoadingState.FAILED">
+      <app-error-message [message]="'Repositories could not be loaded.'"></app-error-message>
+    </ng-container>
   </div>
 </div>
-<ng-container *ngIf="loaded === LoadingState.LOADING">
-  <p>Load repositories...</p>
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</ng-container>
-<ng-container *ngIf="loaded === LoadingState.FAILED">
-  <app-error-message [message]="'Repositories could not be loaded.'"></app-error-message>
-</ng-container>
-
