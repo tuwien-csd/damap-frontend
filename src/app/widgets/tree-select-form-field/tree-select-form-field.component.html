@@ -5,7 +5,7 @@
       <mat-chip *ngFor="let node of selectionList" (focus)="showTreeSelection()"
                 [selectable]="false"
                 [removable]="true"
-                (removed)="todoItemSelectionToggle(node)">
+                (removed)="itemSelectionToggle(node)">
         {{node.item.label}}
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
@@ -22,7 +22,7 @@
         <button mat-icon-button disabled></button>
         <mat-checkbox class="checklist-leaf-node"
                       [checked]="checklistSelection.isSelected(node)"
-                      (change)="todoLeafItemSelectionToggle(node)"
+                      (change)="leafItemSelectionToggle(node)"
                       (mousedown)="$event.preventDefault()">{{node.item.label}}
         </mat-checkbox>
       </mat-tree-node>
@@ -40,7 +40,7 @@
         </button>
         <mat-checkbox [checked]="descendantsAllSelected(node)"
                       [indeterminate]="descendantsPartiallySelected(node)"
-                      (change)="todoItemSelectionToggle(node)"
+                      (change)="itemSelectionToggle(node)"
                       (mousedown)="$event.preventDefault()">{{node.item.label}}</mat-checkbox>
       </mat-tree-node>
     </mat-tree>
