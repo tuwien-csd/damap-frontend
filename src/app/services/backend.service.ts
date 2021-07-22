@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {Dmp} from '../domain/dmp';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {ProjectMember} from '../domain/project-member';
 import {Project} from '../domain/project';
@@ -16,8 +16,8 @@ import {FeedbackService} from './feedback.service';
 export class BackendService {
 
   private backendUrl = environment.backendUrl;
-  private repositoryBackendUrl = this.backendUrl + 'repositories'
-  private pdbBackendUrl = this.backendUrl + 'api/pdb'
+  private pdbBackendUrl = this.backendUrl + 'api/pdb';
+  private repositoryBackendUrl = this.backendUrl + 'repositories';
 
   constructor(
     private http: HttpClient,
@@ -86,7 +86,7 @@ export class BackendService {
 
   }
 
-  getRepositories(): Observable<any> {
+  getRepositories(): Observable<Repository[]> {
     return this.http.get<Repository[]>(this.repositoryBackendUrl).pipe(
       retry(3),
       catchError(this.handleError('Failed to load repositories.'))
@@ -98,6 +98,18 @@ export class BackendService {
       map(details => ({id, changes: {info: details.repository[0]}})),
       retry(3),
       catchError(this.handleError('Failed to load repository details.'))
+    );
+  }
+
+  searchRepository(filters: any): Observable<Repository[]> {
+    let params = new HttpParams();
+    for (const key in filters) {
+      if (filters.hasOwnProperty(key)) {
+        filters[key]?.forEach(item => params = params.append(key, item));
+      }
+    }
+    return this.http.get<Repository[]>(`${this.repositoryBackendUrl}/search`, {params}).pipe(
+      catchError(this.handleError('Failed to search repositories.'))
     );
   }
 
@@ -146,14 +158,11 @@ export class BackendService {
     return (error: HttpErrorResponse) => {
       if (error.status === 0) {
         message += '\nService can not be reached, please retry later. If the issue persists contact [insert contact for technical issue].'
-      }
-      else if (error.status === 404) {
+      } else if (error.status === 404) {
         message += '\nThe requested resource could not be found.'
-      }
-      else if (error.status === 500) {
+      } else if (error.status === 500) {
         message += '\nAn error occurred, please contact [insert contact for technical issue].'
-      }
-      else if (error.status === 503) {
+      } else if (error.status === 503) {
         message += '\nService is currently unavailable, please retry later.'
       }
       this.feedbackService.error(message);

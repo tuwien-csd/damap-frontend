@@ -63,6 +63,9 @@ import {LicenseSelectorDialog, LicenseWizardComponent} from './widgets/license-w
 import {LicenseFilterPipe} from './widgets/license-wizard/license-filter.pipe';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ErrorMessageComponent} from './widgets/error-message/error-message.component';
+import {TreeSelectFormFieldComponent} from './widgets/tree-select-form-field/tree-select-form-field.component';
+import {MatTreeModule} from '@angular/material/tree';
+import { RepoFilterComponent } from './dmp/repo/repo-filter/repo-filter.component';
 
 const keycloakService = new KeycloakService();
 
@@ -98,7 +101,9 @@ const keycloakService = new KeycloakService();
     LicenseWizardComponent,
     LicenseFilterPipe,
     LicenseSelectorDialog,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    TreeSelectFormFieldComponent,
+    RepoFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -137,7 +142,8 @@ const keycloakService = new KeycloakService();
     MatTooltipModule,
     MatExpansionModule,
     MatSnackBarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTreeModule
   ],
   providers: [
     AppComponent,

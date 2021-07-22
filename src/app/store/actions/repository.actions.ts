@@ -7,7 +7,9 @@ export enum RepositoryActionTypes {
   RepositoriesLoaded = '[Repositories] All loaded',
   LoadRepository = '[Repositories] Load one',
   UpdateRepository = '[Repositories] Update one',
-  FailedToLoadRepositories = '[Repositories] Failed to load all'
+  FailedToLoadRepositories = '[Repositories] Failed to load all',
+  SetRepositoryFilter = '[Repositories] Set filter',
+  ResetRepositoryFilter = '[Repositories] Reset filter'
 }
 
 export class LoadRepositories implements Action {
@@ -39,9 +41,22 @@ export class FailedToLoadRepositories implements Action {
   readonly type = RepositoryActionTypes.FailedToLoadRepositories;
 }
 
+export class SetRepositoryFilter implements Action {
+  readonly type = RepositoryActionTypes.SetRepositoryFilter;
+
+  constructor(public payload: { filter: { name: string, value: string [] } }) {
+  }
+}
+
+export class ResetRepositoryFilter implements Action {
+  readonly type = RepositoryActionTypes.ResetRepositoryFilter;
+}
+
 export type RepositoryActions =
   LoadRepositories
   | RepositoriesLoaded
   | LoadRepository
   | UpdateRepository
-  | FailedToLoadRepositories;
+  | FailedToLoadRepositories
+  | SetRepositoryFilter
+  | ResetRepositoryFilter;
