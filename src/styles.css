@@ -85,3 +85,8 @@ mat-card {
   white-space: normal;
   height: auto;
 }
+
+/* Makes sure repo filter select options are visible and not cut off by mat-step */
+#cdk-step-content-0-7 {
+  overflow: visible;
+}

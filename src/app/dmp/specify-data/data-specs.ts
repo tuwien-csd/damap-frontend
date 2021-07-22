@@ -1,20 +1,20 @@
-export const FILE_TYPES = [
-  {label: 'STANDARD_OFFICE_DOCUMENTS', description: 'text documents, spreadsheets, presentations'},
-  {label: 'NETWORKBASED_DATA', description: 'websites, email, chat history, etc.'},
-  {label: 'DATABASES', description: 'DBASE, MS Access, Oracle, MySQL, etc.'},
-  {label: 'IMAGES', description: 'JPEG, JPEG2000, GIF, TIF, PNG, SVG, etc.'},
-  {label: 'STRUCTURED_GRAPHICS', description: 'CAD, CAM, 3D, VRML, etc.'},
-  {label: 'AUDIOVISUAL_DATA', description: 'WAVE, MP3, MP4, Flash, etc.'},
-  {label: 'SCIENTIFIC_STATISTICAL_DATA', description: 'SPSS, FITS, GIS, etc.'},
-  {label: 'RAW_DATA', description: 'device specific output'},
-  {label: 'PLAIN_TEXT', description: 'TXT in various encodings'},
-  {label: 'STRUCTURED_TEXT', description: 'XML, SGML, etc.'},
-  {label: 'ARCHIVED_DATA', description: 'ZIP, RAR, JAR, etc.'},
-  {label: 'SOFTWARE_APPLICATIONS', description: 'modelling tools, editors, IDE, compilers, etc.'},
-  {label: 'SOURCE_CODE', description: 'scripting, Java, C, C++, Fortran, etc.'},
-  {label: 'CONFIGURATION_DATA', description: 'parameter settings, logs, library files'},
-  {label: 'OTHER', description: ''}
-];
+export const FILE_TYPES = {
+  STANDARD_OFFICE_DOCUMENTS: {label: 'STANDARD_OFFICE_DOCUMENTS', description: 'text documents, spreadsheets, presentations'},
+  NETWORKBASED_DATA: {label: 'NETWORKBASED_DATA', description: 'websites, email, chat history, etc.'},
+  DATABASES: {label: 'DATABASES', description: 'DBASE, MS Access, Oracle, MySQL, etc.'},
+  IMAGES: {label: 'IMAGES', description: 'JPEG, JPEG2000, GIF, TIF, PNG, SVG, etc.'},
+  STRUCTURED_GRAPHICS: {label: 'STRUCTURED_GRAPHICS', description: 'CAD, CAM, 3D, VRML, etc.'},
+  AUDIOVISUAL_DATA: {label: 'AUDIOVISUAL_DATA', description: 'WAVE, MP3, MP4, Flash, etc.'},
+  SCIENTIFIC_STATISTICAL_DATA: {label: 'SCIENTIFIC_STATISTICAL_DATA', description: 'SPSS, FITS, GIS, etc.'},
+  RAW_DATA: {label: 'RAW_DATA', description: 'device specific output'},
+  PLAIN_TEXT: {label: 'PLAIN_TEXT', description: 'TXT in various encodings'},
+  STRUCTURED_TEXT: {label: 'STRUCTURED_TEXT', description: 'XML, SGML, etc.'},
+  ARCHIVED_DATA: {label: 'ARCHIVED_DATA', description: 'ZIP, RAR, JAR, etc.'},
+  SOFTWARE_APPLICATIONS: {label: 'SOFTWARE_APPLICATIONS', description: 'modelling tools, editors, IDE, compilers, etc.'},
+  SOURCE_CODE: {label: 'SOURCE_CODE', description: 'scripting, Java, C, C++, Fortran, etc.'},
+  CONFIGURATION_DATA: {label: 'CONFIGURATION_DATA', description: 'parameter settings, logs, library files'},
+  OTHER: {label: 'OTHER', description: ''}
+};
 
 export const FILE_SIZES = [
   {label: '< 100 MB', min: 0, max: 100000000},
