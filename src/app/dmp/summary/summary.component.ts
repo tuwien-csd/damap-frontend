@@ -20,7 +20,7 @@ export class SummaryComponent implements OnInit {
   }
 
   get datasets() {
-    return this.dmpForm.get('datasets') as FormArray;
+    return this.dmpForm?.get('datasets') as FormArray;
   }
 
   @Input() dmpForm: FormGroup;
@@ -47,8 +47,7 @@ export class SummaryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.evaluateCompleteness();
-    this.dmpForm.valueChanges.subscribe(() => {
+    this.dmpForm?.valueChanges.subscribe(() => {
       this.evaluateCompleteness();
     });
   }
@@ -57,8 +56,8 @@ export class SummaryComponent implements OnInit {
     this.dataSource = [];
 
     // General properties
-    const restrictedDatasets = this.datasets.value.find(item => item.dataAccess === DataAccessType.restricted) != null;
-    const closedDatasets = this.datasets.value.find(item => item.dataAccess === DataAccessType.closed) != null;
+    const restrictedDatasets = this.datasets?.value.find(item => item.dataAccess === DataAccessType.restricted) != null;
+    const closedDatasets = this.datasets?.value.find(item => item.dataAccess === DataAccessType.closed) != null;
 
     // Select project
     const projectsLevel: Completeness = {step: 'Project', completeness: 0, status: undefined};
@@ -167,31 +166,35 @@ export class SummaryComponent implements OnInit {
       completeness: 0,
       status: undefined
     };
-    const legalPercent = 100 / 7;
-    if (this.dmpForm.value.legal.personalInformation != null) {
+    const legalPercent = 100 / 3;
+    if (this.dmpForm.value.legal.personalData === true) {
+      if (this.dmpForm.value.legal.personalDataAccess && this.dmpForm.value.legal.personalDataCompliance?.length) {
+        legalEthicalAspectsLevel.completeness += legalPercent;
+      }
+    } else {
       legalEthicalAspectsLevel.completeness += legalPercent;
     }
-    if (this.dmpForm.value.legal.sensitiveData != null) {
+    if (this.dmpForm.value.legal.sensitiveData) {
+      if (this.dmpForm.value.legal.sensitiveData === true && this.dmpForm.value.legal.sensitiveDataSecurity) {
+        legalEthicalAspectsLevel.completeness += legalPercent;
+      }
+    } else {
       legalEthicalAspectsLevel.completeness += legalPercent;
     }
-    if (this.dmpForm.value.legal.legalRestrictions != null) {
-      legalEthicalAspectsLevel.completeness += legalPercent;
-    }
-    if (this.dmpForm.value.legal.ethicalIssues != null) {
-      legalEthicalAspectsLevel.completeness += legalPercent;
-    }
-    if (this.dmpForm.value.legal.committeeApproved != null) {
-      legalEthicalAspectsLevel.completeness += legalPercent;
-    }
-    if (this.dmpForm.value.legal.ethicsReport) {
-      legalEthicalAspectsLevel.completeness += legalPercent;
-    }
-    if (this.dmpForm.value.legal.sensitiveDataSecurity) {
+    if (this.dmpForm.value.legal.ethicalIssues) {
+      if (this.dmpForm.value.legal.committeeApproved) {
+        if (this.dmpForm.value.legal.ethicsReport) {
+          legalEthicalAspectsLevel.completeness += legalPercent;
+        }
+      } else {
+        legalEthicalAspectsLevel.completeness += legalPercent;
+      }
+    } else {
       legalEthicalAspectsLevel.completeness += legalPercent;
     }
     if (legalEthicalAspectsLevel.completeness === 0) {
       legalEthicalAspectsLevel.status = 'No information provided.';
-    } else if (legalEthicalAspectsLevel.completeness === 100) {
+    } else if (legalEthicalAspectsLevel.completeness >= 100) {
       legalEthicalAspectsLevel.status = 'All information necessary provided.';
     } else {
       legalEthicalAspectsLevel.status = 'Partially filled out.'
