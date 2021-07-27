@@ -7,7 +7,8 @@
             DAMAP
           </a>
         </div>
-        <div class="languageElement">
+        <!-- TODO: Language selection -->
+        <!--<div class="languageElement">
           <a href="/en" title="Aktuelle Sprache DE, wechseln zu EN" hreflang="en-GB" data-lang-active-de="" style="">
             <span>
               <span data-label="EN">EN
@@ -15,7 +16,7 @@
               </span>
             </span>
           </a>
-        </div>
+        </div>-->
       </div>
     </div>
     <div id="user" class="dark-theme">
@@ -33,14 +34,14 @@
         <!-- MOBILE -->
         <div class="mainHeaderLeft">
           <button mat-icon-button title="Open page navigation"
-            (click)="sidenav.opened = !sidenav.opened"
-            *ngIf="!sidenav.opened">
+                  (click)="sidenav.opened = !sidenav.opened"
+                  *ngIf="!sidenav.opened">
             <mat-icon>menu</mat-icon>
           </button>
           <button mat-icon-button title="Close page navigation"
                   class="sidenav-btn"
-            (click)="sidenav.opened = !sidenav.opened"
-            *ngIf="sidenav.opened">
+                  (click)="sidenav.opened = !sidenav.opened"
+                  *ngIf="sidenav.opened">
             <mat-icon>close</mat-icon>
           </button>
         </div>
