@@ -47,7 +47,8 @@
         <textarea matInput formControlName="personalDataAccess"></textarea>
       </mat-form-field>
     </ng-container>
-    <ng-container *ngIf="question.model === 'sensitiveData' && legalEthicalStep?.value.sensitiveData && datasets?.length">
+    <ng-container
+      *ngIf="question.model === 'sensitiveData' && legalEthicalStep?.value.sensitiveData && datasets?.length">
       <div>
         <section class="dataset-checkbox-section" [formGroup]="dmpForm">
           Please select the datasets containing sensitive data:
@@ -83,6 +84,14 @@
             </ng-container>
           </div>
         </section>
+      </div>
+      <div>
+        <mat-form-field appearance="fill" [style]="'width: 100%'">
+          <mat-label [style]="'white-space: normal;'">
+            Please explain:
+          </mat-label>
+          <input matInput formControlName="legalRestrictionsComment">
+        </mat-form-field>
       </div>
     </ng-container>
     <ng-container *ngIf="question.model === 'ethicalIssues' && legalEthicalStep?.value.ethicalIssues">
