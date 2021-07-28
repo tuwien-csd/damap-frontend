@@ -7,9 +7,6 @@
       </mat-radio-button>
       <mat-radio-button class="boolean-mat-radio-button" [value]="false">No
       </mat-radio-button>
-      <mat-radio-button *ngIf="question.model === 'personalData'" class="boolean-mat-radio-button" [value]="null">
-        Unknown
-      </mat-radio-button>
     </mat-radio-group>
     <ng-container *ngIf="question.model === 'personalData' && legalEthicalStep?.value.personalData && datasets?.length">
       <div>
@@ -29,7 +26,7 @@
         <mat-form-field appearance="fill" [style]="'width: 100%'">
           <mat-label>How will compliance with applicable legislation be ensured?</mat-label>
           <mat-select formControlName="personalDataCompliance" multiple>
-            <mat-option *ngFor="let option of complianceOptions | keyvalue" [value]="option.value">
+            <mat-option *ngFor="let option of complianceOptions | keyvalue: originalOrder" [value]="option.value">
               {{option.value}}
             </mat-option>
           </mat-select>
@@ -50,7 +47,8 @@
         <textarea matInput formControlName="personalDataAccess"></textarea>
       </mat-form-field>
     </ng-container>
-    <ng-container *ngIf="question.model === 'sensitiveData' && legalEthicalStep?.value.sensitiveData && datasets?.length">
+    <ng-container
+      *ngIf="question.model === 'sensitiveData' && legalEthicalStep?.value.sensitiveData && datasets?.length">
       <div>
         <section class="dataset-checkbox-section" [formGroup]="dmpForm">
           Please select the datasets containing sensitive data:
@@ -73,7 +71,7 @@
         <textarea matInput formControlName="sensitiveDataSecurity"></textarea>
       </mat-form-field>
     </ng-container>
-    <ng-container *ngIf="question.model === 'legalRestrictions' && legalEthicalStep?.value.legalRestrictions">
+    <ng-container *ngIf="question.model === 'legalRestrictions' && legalEthicalStep?.value.legalRestrictions && datasets?.length">
       <div>
         <section class="dataset-checkbox-section" [formGroup]="dmpForm">
           Please select the datasets concerned:
@@ -86,6 +84,14 @@
             </ng-container>
           </div>
         </section>
+      </div>
+      <div>
+        <mat-form-field appearance="fill" [style]="'width: 100%'">
+          <mat-label [style]="'white-space: normal;'">
+            Please explain:
+          </mat-label>
+          <input matInput formControlName="legalRestrictionsComment">
+        </mat-form-field>
       </div>
     </ng-container>
     <ng-container *ngIf="question.model === 'ethicalIssues' && legalEthicalStep?.value.ethicalIssues">

@@ -166,16 +166,24 @@ export class SummaryComponent implements OnInit {
       completeness: 0,
       status: undefined
     };
-    const legalPercent = 100 / 3;
-    if (this.dmpForm.value.legal.personalData === true) {
-      if (this.dmpForm.value.legal.personalDataAccess && this.dmpForm.value.legal.personalDataCompliance?.length) {
+    const legalPercent = 25;
+    if (this.dmpForm.value.legal.sensitiveData) {
+      if ((this.dmpForm.value.legal.sensitiveData === true && this.dmpForm.value.legal.sensitiveDataSecurity) || !this.datasets.length) {
         legalEthicalAspectsLevel.completeness += legalPercent;
       }
     } else {
       legalEthicalAspectsLevel.completeness += legalPercent;
     }
-    if (this.dmpForm.value.legal.sensitiveData) {
-      if (this.dmpForm.value.legal.sensitiveData === true && this.dmpForm.value.legal.sensitiveDataSecurity) {
+    if (this.dmpForm.value.legal.personalData) {
+      if ((this.dmpForm.value.legal.personalDataAccess && this.dmpForm.value.legal.personalDataCompliance?.length)
+        || !this.datasets.length) {
+        legalEthicalAspectsLevel.completeness += legalPercent;
+      }
+    } else {
+      legalEthicalAspectsLevel.completeness += legalPercent;
+    }
+    if (this.dmpForm.value.legal.legalRestrictions) {
+      if ((this.dmpForm.value.legal.legalRestrictions && this.dmpForm.value.legal.legalRestrictionsComment) || !this.datasets.length) {
         legalEthicalAspectsLevel.completeness += legalPercent;
       }
     } else {
