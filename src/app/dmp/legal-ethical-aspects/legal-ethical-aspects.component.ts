@@ -14,15 +14,18 @@ export class LegalEthicalAspectsComponent implements OnInit {
   @Input() datasets: FormArray;
 
   questions = [
+    {
+      label: 'Is your data or part of it sensitive, for example personal data, politically sensitive information, or trade secrets?',
+      model: 'sensitiveData'
+    },
     {label: 'Will personal data be collected/used as part of the project?', model: 'personalData'},
-    {label: 'Is your data or part of it sensitive, for example personal data, politically sensitive information, or trade secrets?',
-      model: 'sensitiveData'},
     {label: 'Are there any other legal restrictions on how data is processed or shared?', model: 'legalRestrictions'},
-    {label: 'Are there any ethical issues associated with your research data?', model: 'ethicalIssues'},
-    // {label: 'Was your plan to deal with these ethical issues approved by the ethics committee?', model: 'committeeApproved'}
+    {label: 'Are there any ethical issues associated with your research data?', model: 'ethicalIssues'}
   ];
 
   complianceOptions: any = ComplianceType;
+
+  originalOrder = (): number => 0;
 
   constructor() {
   }

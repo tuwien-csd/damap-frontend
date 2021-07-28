@@ -32,6 +32,7 @@ export interface Dmp {
   sensitiveData: boolean;
   sensitiveDataSecurity: string;
   legalRestrictions: boolean;
+  legalRestrictionsComment: string;
   ethicalIssuesExist: boolean;
   committeeApproved: boolean;
   ethicsReport: string;
