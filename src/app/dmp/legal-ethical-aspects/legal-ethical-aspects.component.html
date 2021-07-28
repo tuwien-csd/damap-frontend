@@ -71,7 +71,7 @@
         <textarea matInput formControlName="sensitiveDataSecurity"></textarea>
       </mat-form-field>
     </ng-container>
-    <ng-container *ngIf="question.model === 'legalRestrictions' && legalEthicalStep?.value.legalRestrictions">
+    <ng-container *ngIf="question.model === 'legalRestrictions' && legalEthicalStep?.value.legalRestrictions && datasets?.length">
       <div>
         <section class="dataset-checkbox-section" [formGroup]="dmpForm">
           Please select the datasets concerned:
