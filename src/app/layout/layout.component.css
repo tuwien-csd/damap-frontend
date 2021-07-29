@@ -1,3 +1,13 @@
+.version-information {
+  background-color: #2a2a2a;
+  color: white;
+  font-size: small;
+  padding: 1rem;
+  bottom: 0;
+  position: fixed;
+  width: 300px;
+}
+
 mat-nav-list {
   width: 300px;
 }
