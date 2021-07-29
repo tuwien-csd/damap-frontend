@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {KeycloakService} from 'keycloak-angular';
+import pkg from '../../../package.json';
 
 @Component({
   selector: 'app-layout',
@@ -9,6 +10,7 @@ import {KeycloakService} from 'keycloak-angular';
 export class LayoutComponent implements OnInit {
 
   public title = 'Data Management Plan';
+  public version: string = pkg.version;
   public token:object;
   public name:string;
   public username:string;
