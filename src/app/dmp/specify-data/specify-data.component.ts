@@ -25,7 +25,7 @@ export class SpecifyDataComponent implements OnInit {
 
   @Input() specifyDataStep: FormGroup;
   @Input() datasets: FormArray;
-  @Input() fileUpload: {file: File, progress: number, finalized: boolean}[];
+  @Input() fileUpload: { file: File, progress: number, finalized: boolean }[];
 
   @Output() createDataset = new EventEmitter<string>();
   @Output() updateDataset = new EventEmitter<any>();
@@ -107,13 +107,15 @@ export class DatasetDialog {
 
   dataset: FormGroup = this.formService.createDatasetFormGroup(this.data.title);
 
+  originalOrder = (): number => 0;
+
   readonly FILE_TYPES = FILE_TYPES;
   readonly FILE_SIZES = FILE_SIZES;
 
   constructor(
     public dialogRef: MatDialogRef<DatasetDialog>,
     private formService: FormService,
-    @Inject(MAT_DIALOG_DATA) public data: { title: string, size: string, comment: string, type: string}) {
+    @Inject(MAT_DIALOG_DATA) public data: { title: string, size: string, comment: string, type: string }) {
     this.dataset.setValue(this.data);
   }
 
