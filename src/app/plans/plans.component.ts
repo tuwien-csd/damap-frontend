@@ -16,7 +16,6 @@ import {LoadingState} from '../domain/enum/loading-state.enum';
 })
 export class PlansComponent implements OnInit {
 
-  userId: string;
   dmps$: Observable<DmpListItem[]> = this.store.pipe(select(selectDmps));
   dmpsLoaded$: Observable<LoadingState> = this.store.pipe(select(selectDmpsLoaded));
   LoadingState = LoadingState;
@@ -31,19 +30,13 @@ export class PlansComponent implements OnInit {
   ngOnInit() {
     this.dmpsLoaded$.subscribe(loaded => {
       if (loaded === LoadingState.NOT_LOADED) {
-        this.auth.loadUserProfile().then(
-          p => {
-            this.userId = p['attributes']?.tissID?.[0];
-            this.getDmps(this.userId);
-          }
-        );
+        this.getDmps();
       }
     })
   }
 
-  getDmps(userId: string) {
-    console.log('Fetch Dmps for id: ' + userId);
-    this.store.dispatch(new LoadDmps({userId}));
+  getDmps() {
+    this.store.dispatch(new LoadDmps());
   }
 
   getDocument(id: number) {

@@ -16,6 +16,7 @@ import {FeedbackService} from './feedback.service';
 export class BackendService {
 
   private backendUrl = environment.backendUrl;
+  private dmpBackendUrl = this.backendUrl + 'dmps'
   private pdbBackendUrl = this.backendUrl + 'api/pdb';
   private repositoryBackendUrl = this.backendUrl + 'repositories';
 
@@ -29,8 +30,8 @@ export class BackendService {
     return contentDisposition.substring(start + 9);
   }
 
-  getDmps(userId: string): Observable<DmpListItem[]> {
-    return this.http.get<DmpListItem[]>(`${this.backendUrl}plans/dmp-list/${userId}`).pipe(
+  getDmps(): Observable<DmpListItem[]> {
+    return this.http.get<DmpListItem[]>(`${this.dmpBackendUrl}/list`).pipe(
       retry(3),
       catchError(this.handleError('Failed to load plans.'))
     );
@@ -38,32 +39,32 @@ export class BackendService {
   }
 
   getDmpById(id: number): Observable<Dmp> {
-    return this.http.get<Dmp>(`${this.backendUrl}plans/dmp/${id}`).pipe(
+    return this.http.get<Dmp>(`${this.dmpBackendUrl}/${id}`).pipe(
       retry(3),
       catchError(this.handleError('Failed to load plan.'))
     );
   }
 
-  createDmp(editedBy: string, dmp: Dmp): Observable<Dmp> {
+  createDmp(dmp: Dmp): Observable<Dmp> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<Dmp>(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions)
+    return this.http.post<Dmp>(this.dmpBackendUrl, dmp, httpOptions)
       .pipe(
         retry(3),
         catchError(this.handleError('Failed to save plan.'))
       );
   }
 
-  editDmp(editedBy: string, dmp: Dmp): Observable<Dmp> {
+  editDmp(dmp: Dmp): Observable<Dmp> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<Dmp>(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions)
+    return this.http.put<Dmp>(`${this.dmpBackendUrl}/${dmp.id}`, dmp, httpOptions)
       .pipe(
         retry(3),
         catchError(this.handleError('Failed to update plan.'))

@@ -25,7 +25,7 @@ describe('BackendService', () => {
   });
 
   it('should retrieve all dmps for user', () => {
-    service.getDmps('0').subscribe(
+    service.getDmps().subscribe(
       dmps => {
         expect(dmps).toBeTruthy('No dmps returned');
         expect(dmps.length).toBe(1, 'Incorrect number of dmps');
@@ -35,7 +35,7 @@ describe('BackendService', () => {
       }
     );
 
-    const req = httpTestingController.expectOne(`${environment.backendUrl}plans/dmp-list/0`);
+    const req = httpTestingController.expectOne(`${environment.backendUrl}dmps/list`);
     req.flush([{id: 1, project:{title: 'Random Dmp'}}]);
   });
 
