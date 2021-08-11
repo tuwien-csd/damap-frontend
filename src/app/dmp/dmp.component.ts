@@ -80,10 +80,10 @@ export class DmpComponent implements OnInit {
     this.repositoriesLoaded$ = this.store.pipe(select(selectRepositoriesLoaded));
     this.repositories$ = this.store.pipe(select(selectRepositories));
     this.getDmpById();
+    this.getSuggestedProjects();
     this.auth.loadUserProfile().then(
       p => {
         this.userId = p['attributes']?.tissID?.[0];
-        this.getSuggestedProjects(this.userId);
       }
     );
 
@@ -274,8 +274,8 @@ export class DmpComponent implements OnInit {
     }
   }
 
-  private getSuggestedProjects(userId: string) {
-    this.store.dispatch(new LoadProjects({userId}));
+  private getSuggestedProjects() {
+    this.store.dispatch(new LoadProjects());
   }
 
   private getProjectMembers(projectId: number) {
