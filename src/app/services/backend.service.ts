@@ -17,7 +17,7 @@ export class BackendService {
 
   private backendUrl = environment.backendUrl;
   private dmpBackendUrl = this.backendUrl + 'dmps'
-  private pdbBackendUrl = this.backendUrl + 'api/pdb';
+  private projectBackendUrl = this.backendUrl + 'projects';
   private repositoryBackendUrl = this.backendUrl + 'repositories';
 
   constructor(
@@ -71,8 +71,8 @@ export class BackendService {
       );
   }
 
-  getSuggestedProjects(userId: string): Observable<Project[]> {
-    return this.http.get<Project[]>(`${this.pdbBackendUrl}/suggest-projects/${userId}`).pipe(
+  getSuggestedProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>(`${this.projectBackendUrl}/suggest`).pipe(
       retry(3),
       catchError(this.handleError('Failed to load projects.')),
       shareReplay(1)
@@ -80,7 +80,7 @@ export class BackendService {
   }
 
   getProjectMembers(projectId: number): Observable<ProjectMember[]> {
-    return this.http.get<ProjectMember[]>(`${this.pdbBackendUrl}/project-staff/${projectId}`).pipe(
+    return this.http.get<ProjectMember[]>(`${this.projectBackendUrl}/${projectId}/staff`).pipe(
       retry(3),
       catchError(this.handleError('Failed to load project members.'))
     );
