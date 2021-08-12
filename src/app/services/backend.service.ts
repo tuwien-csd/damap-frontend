@@ -115,7 +115,7 @@ export class BackendService {
   }
 
   analyseFileData(file: FormData): Observable<any> {
-    return this.http.post(`${this.backendUrl}api/fits/examine`, file,
+    return this.http.post(`${this.backendUrl}fits/examine`, file,
       {reportProgress: true, observe: 'events'})
       .pipe(
         catchError(this.handleError('Failed to analyse file.'))
