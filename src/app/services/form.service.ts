@@ -309,7 +309,7 @@ export class FormService {
       license: [''],
       startDate: [null],
       type: [null],
-      size: [''],
+      size: [null],
       comment: [''],
       personalData: [false],
       sensitiveData: [false],
