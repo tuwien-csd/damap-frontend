@@ -1,23 +1,22 @@
 import {Injectable} from '@angular/core';
-import {Actions, Effect, ofType} from '@ngrx/effects';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {DmpActionTypes, FailedToLoadDmps, DmpsLoaded, LoadDmps} from '../actions/dmp.actions';
-import {catchError, map, mergeMap} from 'rxjs/operators';
+import {catchError, map, switchMap} from 'rxjs/operators';
 import {BackendService} from '../../services/backend.service';
 import {of} from 'rxjs';
 
 @Injectable()
 export class DmpEffects {
 
-  @Effect()
-  loadDmps$ = this.actions$.pipe(
+  loadDmps$ = createEffect(() => this.actions$.pipe(
     ofType<LoadDmps>(DmpActionTypes.LoadDmps),
-    mergeMap(action => this.backendService.getDmps(action.payload.userId)
+    switchMap(_ => this.backendService.getDmps()
       .pipe(
         map(dmps => new DmpsLoaded({dmps})),
         catchError(() => of(new FailedToLoadDmps()))
       )
     )
-  );
+  ));
 
   constructor(
     private actions$: Actions,

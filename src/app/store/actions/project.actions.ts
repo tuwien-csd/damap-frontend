@@ -9,9 +9,6 @@ export enum ProjectActionTypes {
 
 export class LoadProjects implements Action {
   readonly type = ProjectActionTypes.LoadProjects;
-
-  constructor(public payload: { userId: string }) {
-  }
 }
 
 export class ProjectsLoaded implements Action {
