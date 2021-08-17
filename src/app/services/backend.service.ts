@@ -16,7 +16,8 @@ import {FeedbackService} from './feedback.service';
 export class BackendService {
 
   private backendUrl = environment.backendUrl;
-  private pdbBackendUrl = this.backendUrl + 'api/pdb';
+  private dmpBackendUrl = this.backendUrl + 'dmps'
+  private projectBackendUrl = this.backendUrl + 'projects';
   private repositoryBackendUrl = this.backendUrl + 'repositories';
 
   constructor(
@@ -29,8 +30,8 @@ export class BackendService {
     return contentDisposition.substring(start + 9);
   }
 
-  getDmps(userId: string): Observable<DmpListItem[]> {
-    return this.http.get<DmpListItem[]>(`${this.backendUrl}plans/dmp-list/${userId}`).pipe(
+  getDmps(): Observable<DmpListItem[]> {
+    return this.http.get<DmpListItem[]>(`${this.dmpBackendUrl}/list`).pipe(
       retry(3),
       catchError(this.handleError('Failed to load plans.'))
     );
@@ -38,40 +39,40 @@ export class BackendService {
   }
 
   getDmpById(id: number): Observable<Dmp> {
-    return this.http.get<Dmp>(`${this.backendUrl}plans/dmp/${id}`).pipe(
+    return this.http.get<Dmp>(`${this.dmpBackendUrl}/${id}`).pipe(
       retry(3),
       catchError(this.handleError('Failed to load plan.'))
     );
   }
 
-  createDmp(editedBy: string, dmp: Dmp): Observable<Dmp> {
+  createDmp(dmp: Dmp): Observable<Dmp> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<Dmp>(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions)
+    return this.http.post<Dmp>(this.dmpBackendUrl, dmp, httpOptions)
       .pipe(
         retry(3),
         catchError(this.handleError('Failed to save plan.'))
       );
   }
 
-  editDmp(editedBy: string, dmp: Dmp): Observable<Dmp> {
+  editDmp(dmp: Dmp): Observable<Dmp> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<Dmp>(`${this.backendUrl}plans/save-dmp/`, {edited_by: editedBy, dmp}, httpOptions)
+    return this.http.put<Dmp>(`${this.dmpBackendUrl}/${dmp.id}`, dmp, httpOptions)
       .pipe(
         retry(3),
         catchError(this.handleError('Failed to update plan.'))
       );
   }
 
-  getSuggestedProjects(userId: string): Observable<Project[]> {
-    return this.http.get<Project[]>(`${this.pdbBackendUrl}/suggest-projects/${userId}`).pipe(
+  getSuggestedProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>(`${this.projectBackendUrl}/suggest`).pipe(
       retry(3),
       catchError(this.handleError('Failed to load projects.')),
       shareReplay(1)
@@ -79,7 +80,7 @@ export class BackendService {
   }
 
   getProjectMembers(projectId: number): Observable<ProjectMember[]> {
-    return this.http.get<ProjectMember[]>(`${this.pdbBackendUrl}/project-staff/${projectId}`).pipe(
+    return this.http.get<ProjectMember[]>(`${this.projectBackendUrl}/${projectId}/staff`).pipe(
       retry(3),
       catchError(this.handleError('Failed to load project members.'))
     );
@@ -114,7 +115,7 @@ export class BackendService {
   }
 
   analyseFileData(file: FormData): Observable<any> {
-    return this.http.post(`${this.backendUrl}api/fits/examine`, file,
+    return this.http.post(`${this.backendUrl}fits/examine`, file,
       {reportProgress: true, observe: 'events'})
       .pipe(
         catchError(this.handleError('Failed to analyse file.'))

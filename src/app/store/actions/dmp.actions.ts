@@ -9,9 +9,6 @@ export enum DmpActionTypes {
 
 export class LoadDmps implements Action {
   readonly type = DmpActionTypes.LoadDmps;
-
-  constructor(public payload: { userId: string }) {
-  }
 }
 
 export class DmpsLoaded implements Action {

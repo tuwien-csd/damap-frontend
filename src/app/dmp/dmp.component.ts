@@ -80,10 +80,10 @@ export class DmpComponent implements OnInit {
     this.repositoriesLoaded$ = this.store.pipe(select(selectRepositoriesLoaded));
     this.repositories$ = this.store.pipe(select(selectRepositories));
     this.getDmpById();
+    this.getSuggestedProjects();
     this.auth.loadUserProfile().then(
       p => {
         this.userId = p['attributes']?.tissID?.[0];
-        this.getSuggestedProjects(this.userId);
       }
     );
 
@@ -124,29 +124,27 @@ export class DmpComponent implements OnInit {
   saveDmp(): void {
     console.log(this.userId);
     const dmp = this.formService.exportFormToDmp(this.dmpForm);
-    if (this.userId !== undefined) {
-      if (this.dmpForm.value.id) {
-        this.backendService.editDmp(this.userId, dmp).subscribe(
+    if (this.dmpForm.value.id) {
+      this.backendService.editDmp(dmp).subscribe(
+        response => {
+          this.dmpForm.patchValue(response);
+          this.store.dispatch(new LoadDmps());
+        },
+        () => {},
+        () => this.feedbackService.success('Plan was updated!')
+      );
+    } else {
+      this.backendService.createDmp(dmp)
+        .subscribe(
           response => {
-            this.dmpForm.patchValue(response);
-            this.store.dispatch(new LoadDmps({userId: this.userId}));
+            if (response) {
+              this.location.replaceState(`dmp/${response.id}`);
+              this.dmpForm.patchValue(response);
+              this.store.dispatch(new LoadDmps());
+            }
           },
           () => {},
-          () => this.feedbackService.success('Plan was updated!')
-        );
-      } else {
-        this.backendService.createDmp(this.userId, dmp)
-          .subscribe(
-            response => {
-              if (response) {
-                this.location.replaceState(`dmp/${response.id}`);
-                this.dmpForm.patchValue(response);
-                this.store.dispatch(new LoadDmps({userId: this.userId}));
-              }
-            },
-            () => {},
-            () => this.feedbackService.success('Plan was saved!'));
-      }
+          () => this.feedbackService.success('Plan was saved!'));
     }
   }
 
@@ -191,19 +189,19 @@ export class DmpComponent implements OnInit {
     this.fileUpload.push(upload);
     const uploadSub = this.backendService.analyseFileData(formData)
       .subscribe((response) => {
-        if (response.type === HttpEventType.UploadProgress) {
-          upload.progress = Math.round(100 * (response.loaded / response.total));
-        }
-        if (response.type === HttpEventType.Response) {
-          const dataset = response.body;
-          dataset.title = filename;
-          dataset.referenceHash = reference;
-          this.formService.addFileAnalysisAsDatasetToForm(this.dmpForm, dataset);
-        }
-      },
-      _ => upload.finalized = true,
-      () => upload.finalized = true
-    );
+          if (response.type === HttpEventType.UploadProgress) {
+            upload.progress = Math.round(100 * (response.loaded / response.total));
+          }
+          if (response.type === HttpEventType.Response) {
+            const dataset = response.body;
+            dataset.title = filename;
+            dataset.referenceHash = reference;
+            this.formService.addFileAnalysisAsDatasetToForm(this.dmpForm, dataset);
+          }
+        },
+        _ => upload.finalized = true,
+        () => upload.finalized = true
+      );
     this.fileUploadSubscription.push(uploadSub);
   }
 
@@ -276,8 +274,8 @@ export class DmpComponent implements OnInit {
     }
   }
 
-  private getSuggestedProjects(userId: string) {
-    this.store.dispatch(new LoadProjects({userId}));
+  private getSuggestedProjects() {
+    this.store.dispatch(new LoadProjects());
   }
 
   private getProjectMembers(projectId: number) {
