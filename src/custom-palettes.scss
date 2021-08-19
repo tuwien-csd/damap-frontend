@@ -6,15 +6,15 @@ used for Angular Materials
 $light-primary-text: white;
 $dark-primary-text: rgba(black, 0.87);
 
-$custom-blue: (
+$custom-primary-color: (
   50: #e0edf3,
   100: #b3d1e0,
   200: #80b3cc,
   300: #4d94b8,
-  400: #267da8,
+  400: #3284ad,
   500: #006699,
   600: #005e91,
-  700: #005386,
+  700: #084f72,
   800: #00497c,
   900: #00386b,
   A100: #9ac6ff,
@@ -38,7 +38,7 @@ $custom-blue: (
     A700: $light-primary-text,
   )
 );
-$custom-grey: (
+$custom-accent-color: (
   50 : #e7e7e7,
   100 : #c3c3c3,
   200 : #9b9b9b,
