@@ -205,13 +205,8 @@ svg {
   display: block;
 }
 
-.logo a:focus {
-  outline: #fff solid 3px;
-}
-
-.mainHeaderNav a:focus {
-  outline: var(--main-color) solid 3px;
-  outline-offset: -3px;
+.logo > .mat-focus-indicator::before {
+  border-color: var(--main-color-contrast);
 }
 
 @media only screen and (min-width: 1024px) {
@@ -229,11 +224,6 @@ svg {
   .mm-navbars-top .languageElement A {
     line-height: 70px;
     height: 70px;
-  }
-
-  #mainHeaderLogo A svg {
-    width: 75px;
-    height: 75px;
   }
 
   #mainHeader {
