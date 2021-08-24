@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'byte'
@@ -6,22 +6,24 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class BytePipe implements PipeTransform {
 
   transform(value: number): string {
-    if(value <= 0) {
+    if (!value) {
+      return '';
+    }
+    if (value < 0) {
       return 'Unkown';
     }
-    if(value <= 1000000) {
-      return '< ' + (value/1000).toFixed(2) + ' KB';
+    if (value <= 1000000) {
+      return '< ' + (value / 1000).toFixed(0) + ' KB';
     }
-    if(value <= 1000000000) {
-      return '< ' + (value/1000000).toFixed(2) + ' MB';
+    if (value <= 1000000000) {
+      return '< ' + (value / 1000000).toFixed(0) + ' MB';
     }
-    if(value <= 1000000000000) {
-      return '< ' + (value/1000000000).toFixed(2) + ' GB';
+    if (value <= 1000000000000) {
+      return '< ' + (value / 1000000000).toFixed(0) + ' GB';
     }
-    if(value <= 1000000000000000) {
-      return '< ' + (value/1000000000000).toFixed(2) + ' TB';
+    if (value <= 1000000000000000) {
+      return '< ' + (value / 1000000000000).toFixed(0) + ' TB';
     }
-    return '> 1 PB';
+    return '> 1PB';
   }
-
 }
