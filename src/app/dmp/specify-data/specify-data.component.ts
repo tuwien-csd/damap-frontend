@@ -115,8 +115,8 @@ export class DatasetDialog {
   constructor(
     public dialogRef: MatDialogRef<DatasetDialog>,
     private formService: FormService,
-    @Inject(MAT_DIALOG_DATA) public data: { title: string, size: string, comment: string, type: string }) {
-    this.dataset.setValue(this.data);
+    @Inject(MAT_DIALOG_DATA) public data: { title: string, size: number, comment: string, type: string }) {
+    this.dataset.patchValue(this.data);
   }
 
   onNoClick(): void {

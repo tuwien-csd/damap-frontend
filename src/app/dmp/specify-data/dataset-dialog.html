@@ -23,7 +23,7 @@
       <mat-form-field>
         <mat-label>Estimated size</mat-label>
         <mat-select formControlName="size">
-          <mat-option *ngFor="let size of FILE_SIZES" [value]="size.max">
+          <mat-option *ngFor="let size of FILE_SIZES" [value]="size.size">
             {{size.label}}<br/>
           </mat-option>
         </mat-select>
