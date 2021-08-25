@@ -1,13 +1,19 @@
-import { KeycloakConfig } from 'keycloak-js';
+import {AuthConfig} from 'angular-oauth2-oidc';
 
-const keycloakConfig: KeycloakConfig = {
-  url: $KEYCLOAK.DAMAP_KEYCLOAK_PROD,
-  realm: $KEYCLOAK.DAMAP_REALM_PROD,
-  clientId: $KEYCLOAK.DAMAP_CLIENT_ID_PROD
-};
+const authConfig: AuthConfig = {
+  issuer: $KEYCLOAK.DAMAP_KEYCLOAK_PROD + '/realms/' + $KEYCLOAK.DAMAP_REALM_PROD,
+  clientId: $KEYCLOAK.DAMAP_CLIENT_ID_PROD,
+  redirectUri: window.location.origin,
+  oidc: true,
+  scope: 'openid profile email offline_access microprofile-jwt roles tissID',
+  useSilentRefresh: true,
+  responseType: 'code',
+  showDebugInformation: false,
+  // sessionChecksEnabled: true,
+}
 
 export const environment = {
   production: false,
   backendUrl: $BACKEND.DAMAP_PROD,
-  keycloakConfig
+  authConfig
 };
