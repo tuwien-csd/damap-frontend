@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../services/backend.service';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
-import {KeycloakService} from 'keycloak-angular';
 import {Observable, Subscription} from 'rxjs';
 import {Person} from '../domain/person';
 import {ProjectMember} from '../domain/project-member';
@@ -22,6 +21,7 @@ import {HttpEventType} from '@angular/common/http';
 import {Location} from '@angular/common';
 import {LoadDmps} from '../store/actions/dmp.actions';
 import {LoadingState} from '../domain/enum/loading-state.enum';
+import {OAuthService} from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-dmp',
@@ -63,7 +63,7 @@ export class DmpComponent implements OnInit {
 
   // TODO: Manage editability based on accessType (role)
   constructor(
-    private auth: KeycloakService,
+    private auth: OAuthService,
     private formService: FormService,
     private route: ActivatedRoute,
     private router: Router,
@@ -81,11 +81,7 @@ export class DmpComponent implements OnInit {
     this.repositories$ = this.store.pipe(select(selectRepositories));
     this.getDmpById();
     this.getSuggestedProjects();
-    this.auth.loadUserProfile().then(
-      p => {
-        this.userId = p['attributes']?.tissID?.[0];
-      }
-    );
+    this.userId = this.auth.getIdentityClaims()['tissID'];
 
     this.dmpForm.valueChanges.subscribe(() => console.log('DMPform Update'));
     this.dmpForm.valueChanges.subscribe(newVal => console.log(newVal));
