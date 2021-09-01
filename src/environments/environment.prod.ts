@@ -6,7 +6,7 @@ const authConfig: AuthConfig = {
   redirectUri: window.location.origin,
   oidc: true,
   scope: 'openid profile email offline_access microprofile-jwt roles tissID',
-  useSilentRefresh: true,
+  // useSilentRefresh: true,
   responseType: 'code',
   showDebugInformation: false,
   // sessionChecksEnabled: true,

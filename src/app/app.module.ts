@@ -70,6 +70,7 @@ import {AuthGuard} from './auth/auth.guard';
 function initializeAuth(oauthService: OAuthService) {
   return (): Promise<boolean> => {
     oauthService.configure(environment.authConfig);
+    oauthService.setupAutomaticSilentRefresh();
     return oauthService.loadDiscoveryDocumentAndLogin();
   }
 }
