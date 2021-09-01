@@ -3,7 +3,7 @@
   Add other storage location
 </button>
 <section class="external-storage">
-  <mat-card *ngFor="let item of externalStorageStep.controls; let i = index">
+  <mat-card *ngFor="let item of externalStorageStep?.controls; let i = index">
     <form [formGroup]="item" (keydown.enter)="$event.preventDefault()">
       <div class="storage-card-top">
       <mat-card-header>
@@ -38,7 +38,7 @@
           <mat-form-field>
             <mat-label>Dataset(s) stored</mat-label>
             <mat-select multiple formControlName="datasets">
-              <mat-option *ngFor="let dataset of datasets.controls" [value]="dataset.value.referenceHash">
+              <mat-option *ngFor="let dataset of datasets?.controls" [value]="dataset.value.referenceHash">
                 {{dataset.value.title}}
               </mat-option>
             </mat-select>
@@ -47,7 +47,7 @@
     </mat-card-content>
     </form>
   </mat-card>
-  <div *ngIf="externalStorageStep.controls.length" class="storage-textarea" [style]="'margin: 5px;'">
+  <div *ngIf="externalStorageStep?.controls.length" class="storage-textarea" [style]="'margin: 5px;'">
     <form>
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Please explain why institutional storage will not be used.</mat-label>
