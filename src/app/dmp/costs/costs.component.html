@@ -11,7 +11,7 @@
     </mat-radio-button>
   </mat-radio-group>
 </form>
-<ng-container *ngIf="costsStep.controls.exist.value == true">
+<ng-container *ngIf="costsStep?.controls.exist.value == true">
   <button mat-raised-button color="primary" (click)="addCost()">
     <mat-icon>add_circle</mat-icon>
     Add cost
