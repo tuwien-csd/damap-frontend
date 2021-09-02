@@ -29,7 +29,7 @@
         <form [formGroup]="item">
           <div class="form-row">
             <mat-form-field>
-              <mat-label>Dataset(s) stored</mat-label>
+              <mat-label>Select corresponding datasets</mat-label>
               <mat-select multiple formControlName="datasets">
                 <mat-option *ngFor="let dataset of datasets.controls" [value]="dataset.value.referenceHash">
                   {{dataset.value.title}}
