@@ -4,10 +4,10 @@
   </label>
   <mat-radio-group aria-labelledby="costsFormGroup" formControlName="exist">
     <mat-radio-button [value]="false">There are no costs dedicated to data management and ensuring that data will be
-      FAIR.
+      <a [href]="fairLink" target="_blank">FAIR</a>.
     </mat-radio-button>
-    <mat-radio-button [value]="true">There are costs dedicated to data management and ensuring that data will be FAIR as
-      outlined below.
+    <mat-radio-button [value]="true">There are costs dedicated to data management and ensuring that data will be <a
+      [href]="fairLink" target="_blank">FAIR</a> as outlined below.
     </mat-radio-button>
   </mat-radio-group>
 </form>
@@ -30,7 +30,7 @@
         <div [formArrayName]="i">
           <div class="cost-form-group">
             <mat-form-field>
-              <mat-label>Title</mat-label>
+              <mat-label>Item</mat-label>
               <input matInput formControlName="title" required>
             </mat-form-field>
             <mat-form-field>
