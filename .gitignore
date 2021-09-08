@@ -45,3 +45,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Themes
+src/themes/*
+!src/themes/README.md
