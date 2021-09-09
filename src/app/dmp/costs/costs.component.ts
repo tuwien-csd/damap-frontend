@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {CostType} from '../../domain/enum/cost-type.enum';
 
@@ -15,6 +15,7 @@ export class CostsComponent implements OnInit {
   @Output() costToRemove = new EventEmitter<number>();
 
   costType: any = CostType;
+  fairLink = 'https://www.tuwien.at/en/research/rti-support/research-data/research-data-management/fair-principles';
 
   constructor() {
   }
@@ -34,4 +35,7 @@ export class CostsComponent implements OnInit {
     this.costToRemove.emit(index);
   }
 
+  openExternalLink() {
+    window.open(this.fairLink, '_blank');
+  }
 }
