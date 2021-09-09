@@ -149,10 +149,10 @@ export class SummaryComponent implements OnInit {
         storageLevel.status = 'All data are stored. ';
       } else if (storageDatasets.length === 0) {
         storageLevel.completeness = 0;
-        storageLevel.status = 'No data stored yet. ';
+        storageLevel.status = 'No information provided. ';
       } else {
         storageLevel.completeness = 100 * (storageDatasets.length / this.datasets.length);
-        storageLevel.status = 'Some data are stored. ';
+        storageLevel.status = 'Some information provided. ';
       }
       if (eStorage.value.length && !this.dmpForm.value.externalStorageInfo) {
         storageLevel.completeness = storageLevel.completeness > 0 ? storageLevel.completeness * 0.5 : 0;
