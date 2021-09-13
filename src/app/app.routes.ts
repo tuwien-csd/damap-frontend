@@ -5,9 +5,10 @@ import {PersonsComponent} from './persons/persons.component';
 import {RepositoriesComponent} from './repositories/repositories.component';
 import {DmpComponent} from './dmp/dmp.component';
 import {LayoutComponent} from './layout/layout.component';
+import {AuthGuard} from './auth/auth.guard';
 
 export const APP_ROUTES: Routes = [
-  {path: '', component: LayoutComponent, children: [
+  {path: '', component: LayoutComponent, canActivate: [AuthGuard], children: [
       {path: 'dashboard', component: DashboardComponent},
       {path: 'persons', component: PersonsComponent},
       {path: 'repositories', component: RepositoriesComponent},

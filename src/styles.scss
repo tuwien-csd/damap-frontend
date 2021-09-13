@@ -1,11 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'themes/custom-theme';
 
-/* TU Colors */
+/* Theme colors as CSS variables */
 :root {
-  --main-color: #069;
-  --accent-color-lighter: #3284ad;
-  --accent-color-darker: #084f72;
-  --secondary-color: #373737;
+  --main-color: #{map-get($app-primary, 500)};
+  --main-color-contrast: #{map-get($app-primary, '500-contrast')};
+  --accent-color-lighter: #{map-get($app-primary, 400)};
+  --accent-color-darker: #{map-get($app-primary, 700)};
+  --secondary-color: #{map-get($app-accent, 500)};
   --error-bg: #FAD1D5;
   --success-bg: #E9F5D2;
   --info-bg: #C4D8E2;
@@ -34,6 +36,7 @@ body {
   clip-path: inset(50%);
   border: 0
 }
+
 *, ::after, ::before {
   box-sizing: border-box;
 }
@@ -50,11 +53,6 @@ body {
 
 .mat-card-left {
   flex-direction: column;
-  /*width: 90%;*/
-}
-
-.mat-card-right {
-  /*float: right;*/
 }
 
 .mat-selected {
