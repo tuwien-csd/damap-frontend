@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {KeycloakService} from 'keycloak-angular';
+import {Component, OnInit} from '@angular/core';
 import pkg from '../../../package.json';
+import {OAuthService} from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-layout',
@@ -11,23 +11,19 @@ export class LayoutComponent implements OnInit {
 
   public title = 'Data Management Plan';
   public version: string = pkg.version;
-  public token:object;
-  public name:string;
-  public username:string;
-  public roles:string[];
+  public name: string;
   public widescreen = () => window.innerWidth >= 1024;
 
-  constructor(private auth:KeycloakService) { }
+  constructor(private auth: OAuthService) {
+    const claims = this.auth.getIdentityClaims();
+    this.name = claims['name'];
+  }
 
   ngOnInit() {
-    this.token = this.auth.getToken();
-    this.auth.loadUserProfile().then(p => this.name = `${p.firstName} ${p.lastName}`);
-    this.username = this.auth.getUsername();
-    this.roles = this.auth.getUserRoles(true);
   }
 
   public logout() {
-    this.auth.logout();
+    this.auth.logOut();
   }
 
 }

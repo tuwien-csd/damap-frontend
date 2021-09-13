@@ -1,18 +1,24 @@
 // This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+// `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-import { KeycloakConfig } from 'keycloak-js';
+import {AuthConfig} from 'angular-oauth2-oidc';
 
-const keycloakConfig: KeycloakConfig = {
-  url: $KEYCLOAK.DAMAP_KEYCLOAK_DEV,
-  realm: $KEYCLOAK.DAMAP_REALM_DEV,
-  clientId: $KEYCLOAK.DAMAP_CLIENT_ID_DEV
-};
+const authConfig: AuthConfig = {
+  issuer: $KEYCLOAK.DAMAP_KEYCLOAK_DEV + '/realms/' + $KEYCLOAK.DAMAP_REALM_DEV,
+  clientId: $KEYCLOAK.DAMAP_CLIENT_ID_DEV,
+  redirectUri: window.location.origin,
+  oidc: true,
+  scope: 'openid profile email offline_access microprofile-jwt roles tissID',
+  // useSilentRefresh: true,
+  responseType: 'code',
+  showDebugInformation: true,
+  // sessionChecksEnabled: true,
+}
 
 export const environment = {
   production: false,
   backendUrl: $BACKEND.DAMAP_DEV,
-  keycloakConfig
+  authConfig
 };
 
 /*
