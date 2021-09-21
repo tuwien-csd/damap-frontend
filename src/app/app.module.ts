@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {DoBootstrap, NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
@@ -21,9 +21,8 @@ import {APP_ROUTES} from './app.routes';
 import {LayoutComponent} from './layout/layout.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
-import {OAuthModule} from 'angular-oauth2-oidc';
+import {OAuthModule, OAuthService} from 'angular-oauth2-oidc';
 import {environment} from '../environments/environment';
-import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {ProjectComponent} from './dmp/project/project.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
@@ -67,8 +66,15 @@ import {TreeSelectFormFieldComponent} from './widgets/tree-select-form-field/tre
 import {MatTreeModule} from '@angular/material/tree';
 import {RepoFilterComponent} from './dmp/repo/repo-filter/repo-filter.component';
 import {TooltipComponent} from './widgets/tooltip/tooltip.component';
+import {AuthGuard} from './auth/auth.guard';
 
-const keycloakService = new KeycloakService();
+function initializeAuth(oauthService: OAuthService) {
+  return (): Promise<boolean> => {
+    oauthService.configure(environment.authConfig);
+    oauthService.setupAutomaticSilentRefresh();
+    return oauthService.loadDiscoveryDocumentAndLogin();
+  }
+}
 
 @NgModule({
   declarations: [
@@ -123,7 +129,12 @@ const keycloakService = new KeycloakService();
     AppStoreModule,
     MatIconModule,
     MatTabsModule,
-    OAuthModule.forRoot(),
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: [environment.backendUrl],
+        sendAccessToken: true
+      }
+    }),
     MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -138,7 +149,6 @@ const keycloakService = new KeycloakService();
     MatGridListModule,
     MatPaginatorModule,
     MatProgressBarModule,
-    KeycloakAngularModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
@@ -147,32 +157,16 @@ const keycloakService = new KeycloakService();
     MatCheckboxModule,
     MatTreeModule
   ],
-  providers: [
-    AppComponent,
-    {
-      provide: KeycloakService,
-      useValue: keycloakService,
-    },
+  providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: initializeAuth,
+    multi: true,
+    deps: [OAuthService]
+  },
+    AuthGuard
   ],
-  entryComponents: [DatasetDialog, LicenseSelectorDialog, AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule implements DoBootstrap {
-  async ngDoBootstrap(app) {
 
-    const {keycloakConfig} = environment;
-    try {
-      await keycloakService.init({
-        config: keycloakConfig,
-        initOptions: {
-          onLoad: 'login-required',
-          checkLoginIframe: false
-        },
-        enableBearerInterceptor: true,
-        loadUserProfileAtStartUp: true
-      });
-      app.bootstrap(AppComponent);
-    } catch (error) {
-      console.error('Keycloak init failed', error);
-    }
-  }
+export class AppModule {
 }

@@ -3,7 +3,6 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../store/states/app.state';
 import {selectDmps, selectDmpsLoaded} from '../store/selectors/dmp.selectors';
 import {Observable} from 'rxjs';
-import {KeycloakService} from 'keycloak-angular';
 import {LoadDmps} from '../store/actions/dmp.actions';
 import {DmpListItem} from '../domain/dmp-list-item';
 import {BackendService} from '../services/backend.service';
@@ -21,7 +20,6 @@ export class PlansComponent implements OnInit {
   LoadingState = LoadingState;
 
   constructor(
-    private auth: KeycloakService,
     private store: Store<AppState>,
     private backendService: BackendService
   ) {
