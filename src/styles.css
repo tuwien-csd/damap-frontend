@@ -50,6 +50,7 @@ body {
 
 .mat-card-left {
   flex-direction: column;
+  flex-grow: 1;
   /*width: 90%;*/
 }
 
