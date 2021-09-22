@@ -1,0 +1,46 @@
+@Library('ops-jenkins-library') _
+
+pipeline {
+  agent { label 'nodejs' }
+
+  stages {
+    stage('Install dependencies') {
+      steps {
+        script {
+          sh 'npm install --registry=https://nexus.apps.dev.csd.tuwien.ac.at/repository/npm-registry-proxy/'
+        }
+      }
+    }
+
+    stage('Build') {
+      steps {
+        script {
+          withEnv(["PATH+=$WORKSPACE/node_modules/@angular/cli/bin/"]) {
+            sh 'cd $WORKSPACE && ng build'
+          }
+        }
+      }
+    }
+
+    stage('Test') {
+      steps {
+        script {
+          withEnv(["PATH+=$WORKSPACE/node_modules/@angular/cli/bin/"]) {
+            sh 'cd $WORKSPACE && ng test'
+          }
+        }
+      }
+    }
+
+    stage('Build container') {
+      steps {
+        script {
+          csdWithProject(this) {
+            csdBuild(this, 'damap-frontend')
+          }
+        }
+      }
+    }
+  }
+
+}

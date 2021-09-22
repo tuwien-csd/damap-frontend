@@ -1,0 +1,8 @@
+*
+*/**
+
+!src/**/*
+!*.json
+!*.js
+!browserslist
+!nginx.conf
