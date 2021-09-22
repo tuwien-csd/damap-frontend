@@ -30,7 +30,7 @@ import {OAuthService} from 'angular-oauth2-oidc';
 })
 export class DmpComponent implements OnInit {
 
-  userId: string;
+  username: string;
 
   dmpForm: FormGroup = this.formService.createDmpForm();
   isLinear = false;
@@ -81,7 +81,7 @@ export class DmpComponent implements OnInit {
     this.repositories$ = this.store.pipe(select(selectRepositories));
     this.getDmpById();
     this.getSuggestedProjects();
-    this.userId = this.auth.getIdentityClaims()['tissID'];
+    this.username = this.auth.getIdentityClaims()['preferred_username'];
 
     this.dmpForm.valueChanges.subscribe(() => console.log('DMPform Update'));
     this.dmpForm.valueChanges.subscribe(newVal => console.log(newVal));
@@ -118,7 +118,7 @@ export class DmpComponent implements OnInit {
   }
 
   saveDmp(): void {
-    console.log(this.userId);
+    console.log(this.username);
     const dmp = this.formService.exportFormToDmp(this.dmpForm);
     if (this.dmpForm.value.id) {
       this.backendService.editDmp(dmp).subscribe(
@@ -305,6 +305,6 @@ export class DmpComponent implements OnInit {
   // TODO: move to service, add for storage
 
   private generateReferenceHash(): string {
-    return this.userId + (+new Date()).toString(36);
+    return this.username + (+new Date()).toString(36);
   }
 }
