@@ -53,6 +53,12 @@ body {
 
 .mat-card-left {
   flex-direction: column;
+  flex-grow: 1;
+  /*width: 90%;*/
+}
+
+.mat-card-right {
+  /*float: right;*/
 }
 
 .mat-selected {
