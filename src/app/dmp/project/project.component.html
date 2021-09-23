@@ -33,13 +33,20 @@
     <div class="list-container">
       <mat-selection-list [multiple]="false" style="'height: 500px; overflow:scroll'">
         <mat-list-option *ngFor="let project of (projects | projectFilter:searchBox.value)"
-                         [style]="'height: auto;'" [selected]="project.universityId === projectStep?.value?.universityId">
+                         [style]="'height: auto;'"
+                         [selected]="project.universityId === projectStep?.value?.universityId">
           <mat-list-item (click)="changeProject(project)">
             <div class="mat-card-left">
               <div mat-line><b>{{project.title}}</b></div>
               <div mat-line>
                 <mat-icon class="mat-icon-style">date_range</mat-icon>
                 {{project.start | date}} - {{project.end | date}}</div>
+            </div>
+            <div class="mat-card-right">
+              <mat-icon *ngIf="project.dmpExists" matTooltip="A plan already exists for this project"
+                        class="dmp-warning">
+                warning
+              </mat-icon>
             </div>
           </mat-list-item>
         </mat-list-option>

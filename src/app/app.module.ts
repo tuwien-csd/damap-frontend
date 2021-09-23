@@ -64,6 +64,7 @@ import {ErrorMessageComponent} from './widgets/error-message/error-message.compo
 import {TreeSelectFormFieldComponent} from './widgets/tree-select-form-field/tree-select-form-field.component';
 import {MatTreeModule} from '@angular/material/tree';
 import {RepoFilterComponent} from './dmp/repo/repo-filter/repo-filter.component';
+import {TooltipComponent} from './widgets/tooltip/tooltip.component';
 import {AuthGuard} from './auth/auth.guard';
 import {ConfigService} from './services/config.service';
 
@@ -100,7 +101,8 @@ import {ConfigService} from './services/config.service';
     LicenseSelectorDialog,
     ErrorMessageComponent,
     TreeSelectFormFieldComponent,
-    RepoFilterComponent
+    RepoFilterComponent,
+    TooltipComponent
   ],
   imports: [
     BrowserModule,
