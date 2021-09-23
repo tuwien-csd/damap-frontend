@@ -3,7 +3,6 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
-import {RepositoriesComponent} from './repositories/repositories.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -71,7 +70,6 @@ import {ConfigService} from './services/config.service';
 @NgModule({
   declarations: [
     AppComponent,
-    RepositoriesComponent,
     DashboardComponent,
     PlansComponent,
     PersonsComponent,
