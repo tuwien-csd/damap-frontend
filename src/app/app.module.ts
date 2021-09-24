@@ -3,7 +3,6 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
-import {RepositoriesComponent} from './repositories/repositories.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -21,7 +20,7 @@ import {APP_ROUTES} from './app.routes';
 import {LayoutComponent} from './layout/layout.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
-import {OAuthModule, OAuthService} from 'angular-oauth2-oidc';
+import {OAuthModule} from 'angular-oauth2-oidc';
 import {environment} from '../environments/environment';
 import {ProjectComponent} from './dmp/project/project.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -67,19 +66,11 @@ import {MatTreeModule} from '@angular/material/tree';
 import {RepoFilterComponent} from './dmp/repo/repo-filter/repo-filter.component';
 import {TooltipComponent} from './widgets/tooltip/tooltip.component';
 import {AuthGuard} from './auth/auth.guard';
-
-function initializeAuth(oauthService: OAuthService) {
-  return (): Promise<boolean> => {
-    oauthService.configure(environment.authConfig);
-    oauthService.setupAutomaticSilentRefresh();
-    return oauthService.loadDiscoveryDocumentAndLogin();
-  }
-}
+import {ConfigService} from './services/config.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RepositoriesComponent,
     DashboardComponent,
     PlansComponent,
     PersonsComponent,
@@ -159,9 +150,9 @@ function initializeAuth(oauthService: OAuthService) {
   ],
   providers: [{
     provide: APP_INITIALIZER,
-    useFactory: initializeAuth,
+    useFactory: (configService: ConfigService) => () => configService.initializeApp(),
     multi: true,
-    deps: [OAuthService]
+    deps: [ConfigService]
   },
     AuthGuard
   ],

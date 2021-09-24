@@ -1,24 +1,10 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-import {AuthConfig} from 'angular-oauth2-oidc';
-
-const authConfig: AuthConfig = {
-  issuer: $KEYCLOAK.DAMAP_KEYCLOAK_DEV + '/realms/' + $KEYCLOAK.DAMAP_REALM_DEV,
-  clientId: $KEYCLOAK.DAMAP_CLIENT_ID_DEV,
-  redirectUri: window.location.origin,
-  oidc: true,
-  scope: 'openid profile email offline_access microprofile-jwt roles tissID',
-  // useSilentRefresh: true,
-  responseType: 'code',
-  showDebugInformation: true,
-  // sessionChecksEnabled: true,
-}
 
 export const environment = {
   production: false,
-  backendUrl: $BACKEND.DAMAP_DEV,
-  authConfig
+  backendUrl: $BACKEND.DAMAP_DEV
 };
 
 /*
