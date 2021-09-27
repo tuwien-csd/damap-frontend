@@ -66,6 +66,8 @@ import {TreeSelectFormFieldComponent} from './widgets/tree-select-form-field/tre
 import {MatTreeModule} from '@angular/material/tree';
 import {RepoFilterComponent} from './dmp/repo/repo-filter/repo-filter.component';
 import {AuthGuard} from './auth/auth.guard';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+//import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 
 function initializeAuth(oauthService: OAuthService) {
   return (): Promise<boolean> => {
@@ -153,7 +155,11 @@ function initializeAuth(oauthService: OAuthService) {
     MatExpansionModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    MatTreeModule
+    MatAutocompleteModule,
+    MatTreeModule,
+    //MatAutocompleteSelectedEvent,
+    //MatAutocomplete
+
   ],
   providers: [{
     provide: APP_INITIALIZER,

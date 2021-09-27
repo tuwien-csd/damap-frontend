@@ -2,14 +2,20 @@
   <mat-form-field class="full-width" appearance="fill">
     <mat-label class="wrap-label">Who is the target audience and who could be interested in reusing the data and why?
     </mat-label>
-    <textarea matInput formControlName="targetAudience"></textarea>
+    <!--<textarea matInput formControlName="targetAudience"></textarea>-->
+    <input type = "text" matInput formControlName="targetAudience" [matAutocomplete] = "auto"/>
+          <mat-autocomplete #auto = "matAutocomplete">
+              <mat-option *ngFor = "let option of optionsTargetAudience" [value] = "option">
+                  {{option}}
+              </mat-option>
+          </mat-autocomplete>
   </mat-form-field>
 
   <mat-form-field class="full-width" appearance="fill">
     <mat-label class="wrap-label">Indicate whether potential users need specific tools or software to access and
       (re-)use the data.
     </mat-label>
-    <textarea matInput formControlName="tools"></textarea>
+   <textarea matInput formControlName="tools"></textarea>
   </mat-form-field>
 
   <ng-container *ngIf="restricted?.length > 0">
