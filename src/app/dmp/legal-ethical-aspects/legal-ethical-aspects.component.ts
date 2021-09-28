@@ -13,6 +13,8 @@ export class LegalEthicalAspectsComponent implements OnInit {
   @Input() legalEthicalStep: FormGroup;
   @Input() datasets: FormArray;
 
+  optionsLinksEthics:string[] = ['Guidelines on Safeguarding Good Scientific Practice']; 
+
   questions = [
     {
       label: 'Is your data or part of it sensitive, for example personal data, politically sensitive information, or trade secrets?',

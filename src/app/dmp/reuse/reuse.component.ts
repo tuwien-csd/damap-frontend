@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import {DataAccessType} from '../../domain/enum/data-access-type.enum';
 
 @Component({
@@ -12,6 +13,13 @@ export class ReuseComponent implements OnInit {
   @Input() reuseStep: FormGroup;
   @Input() datasets: FormArray;
 
+  optionsTargetAudience: string[] = [
+  'Members of the scientific community',
+  'Officers of local/national governments',
+  'Decision makers in industry',
+  'Students and general public',
+  'Others:...'];
+
   constructor() {
   }
 
@@ -21,5 +29,4 @@ export class ReuseComponent implements OnInit {
   get restricted() {
     return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.restricted);
   }
-
 }

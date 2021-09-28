@@ -66,6 +66,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import {RepoFilterComponent} from './dmp/repo/repo-filter/repo-filter.component';
 import {TooltipComponent} from './widgets/tooltip/tooltip.component';
 import {AuthGuard} from './auth/auth.guard';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ConfigService} from './services/config.service';
 
 @NgModule({
@@ -146,7 +147,11 @@ import {ConfigService} from './services/config.service';
     MatExpansionModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    MatTreeModule
+    MatAutocompleteModule,
+    MatTreeModule,
+    //MatAutocompleteSelectedEvent,
+    //MatAutocomplete
+
   ],
   providers: [{
     provide: APP_INITIALIZER,
