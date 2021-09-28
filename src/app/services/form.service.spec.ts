@@ -137,7 +137,8 @@ describe('FormService', () => {
         start: new Date(),
         title: 'Project title',
         universityId: 1234,
-        description: ''
+        description: '',
+        dmpExists: false
       },
       restrictedAccessInfo: 'info how someone can access restricted data',
       restrictedDataAccess: 'send form',
