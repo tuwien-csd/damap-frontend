@@ -72,7 +72,7 @@ export class BackendService {
   }
 
   getSuggestedProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(`${this.projectBackendUrl}/suggest`).pipe(
+    return this.http.get<Project[]>(this.projectBackendUrl).pipe(
       retry(3),
       catchError(this.handleError('Failed to load projects.')),
       shareReplay(1)
