@@ -105,7 +105,14 @@
       <mat-form-field *ngIf="legalEthicalStep?.value.committeeApproved"
                       appearance="fill" [style]="'width:100%'">
         <mat-label>Links to ethics report or related documents:</mat-label>
-        <textarea matInput formControlName="ethicsReport"></textarea>
+             <textarea matInput formControlName="ethicsReport"></textarea>
+   <!-- <input type = "text" matInput formControlName="ethicsReport" [matAutocomplete] = "autol"/>
+    <mat-autocomplete #autol = "matAutocomplete">
+        <mat-option *ngFor = "let option of optionsLinksEthics" [value] = "option">
+          <a href="https://www.tuwien.at/index.php?eID=dms&s=4&path=Directives%20and%20Regulations%20of%20the%20Rectorate/Code%20of%20Conduct%20%E2%80%93%20Rules%20to%20Ensure%20Good%20Scientific%20Practice.pdf"> {{option}} 
+          </a>
+        </mat-option>
+    </mat-autocomplete>-->
       </mat-form-field>
     </ng-container>
   </div>
