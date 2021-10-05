@@ -8,7 +8,14 @@
     "build-openshift": "ng build --configuration=openshift",
     "build-prod": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "ci:build": "ng build",
+    "ci:lint": "ng lint",
+    "ci:test": "ng test --browsers ChromeHeadless --watch=false",
+    "ci:e2e": "ng e2e",
+    "ci:coverage": "ng test --browsers ChromeHeadless --watch=false --code-coverage",
+    "ci:audit": "npm audit",
+    "ci:install": "npm install && npm install -g @angular/cli"
   },
   "private": true,
   "dependencies": {
