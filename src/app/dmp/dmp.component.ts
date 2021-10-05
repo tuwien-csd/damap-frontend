@@ -218,14 +218,6 @@ export class DmpComponent implements OnInit {
     this.formService.removeStorageFromForm(this.dmpForm, index);
   }
 
-  addStorageAccessRight(index: number) {
-    this.formService.addAccessRightToStorage(this.dmpForm, index);
-  }
-
-  removeStorageAccessRight(index: number): void {
-    this.formService.removeAccessRightFromStorage(this.dmpForm, index);
-  }
-
   addExternalStorage() {
     this.formService.addExternalStorageToForm(this.dmpForm);
   }

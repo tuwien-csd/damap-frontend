@@ -268,26 +268,6 @@ export class FormService {
     (form.get('storage') as FormArray).push(storageFormGroup);
   }
 
-  public addAccessRightToStorage(form: FormGroup, index: number) {
-    const storage = (form.get('storage') as FormArray).at(index);
-    const hash = storage.value.datasets.find(item => storage.value.accessRights.find(rights => item === rights.dataset) === undefined);
-    const accessRightFormGroup = this.formBuilder.group({
-      dataset: hash,
-      selectedProjectMembers: AccessRight.write,
-      otherProjectMembers: AccessRight.write,
-      public: AccessRight.read
-    });
-    (storage.get('accessRights') as FormArray).push(accessRightFormGroup);
-  }
-
-  public removeAccessRightFromStorage(form: FormGroup, index: number) {
-    const storage = (form.get('storage') as FormArray).at(index);
-    const accessRights = storage.get('accessRights') as FormArray;
-    const hash = accessRights.value.find(item => !storage.value.datasets.includes(item.dataset));
-    const i = accessRights.value.findIndex(item => item.dataset === hash);
-    accessRights.removeAt(i);
-  }
-
   public removeStorageFromForm(form: FormGroup, index: number) {
     (form.get('storage') as FormArray).removeAt(index);
   }
@@ -336,7 +316,10 @@ export class FormService {
       sensitiveData: [false],
       legalRestrictions: [false],
       dataAccess: [DataAccessType.open],
-      referenceHash: ['']
+      referenceHash: [''],
+      selectedProjectMembersAccess: AccessRight.write,
+      otherProjectMembersAccess: AccessRight.write,
+      publicAccess: AccessRight.read
     });
   }
 
@@ -369,8 +352,7 @@ export class FormService {
       id: [null, {disabled: true}],
       hostId: [null, {disabled: true}],
       title: ['', Validators.required],
-      datasets: [[]],
-      accessRights: this.formBuilder.array([])
+      datasets: [[]]
     });
   }
 
@@ -392,8 +374,7 @@ export class FormService {
       storageLocation: [''],
       backupLocation: [''],
       backupFrequency: [''],
-      datasets: [[]],
-      accessRights: this.formBuilder.array([])
+      datasets: [[]]
     });
   }
 
