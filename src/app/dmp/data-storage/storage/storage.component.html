@@ -1,6 +1,6 @@
 <section class="tu-storage">
   <div class="storage-grid">
-    <mat-card *ngFor="let element of (storage | storageFilter: storageStep.getRawValue())" class="storage-card">
+    <mat-card *ngFor="let element of (storage | storageFilter: storageStep?.getRawValue())" class="storage-card">
       <mat-card-header (click)="addStorage(element)">
         <div mat-card-avatar>
           <mat-icon>folder_open</mat-icon>
@@ -14,7 +14,7 @@
   </div>
   <div class="storage-selected" [formGroup]="dmpForm">
     <ng-container formArrayName="storage">
-      <mat-card *ngFor="let item of storageStep.controls; let i = index">
+      <mat-card *ngFor="let item of storageStep?.controls; let i = index">
         <div class="storage-card-top">
           <mat-card-header>
             <mat-card-title>{{item.value.title}}</mat-card-title>
@@ -31,62 +31,12 @@
             <div class="form-row">
               <mat-form-field>
                 <mat-label>Select corresponding datasets</mat-label>
-                <mat-select multiple formControlName="datasets" (selectionChange)="onSelectChange(i)">
-                  <mat-option *ngFor="let dataset of datasets.controls" [value]="dataset.value.referenceHash">
+                <mat-select multiple formControlName="datasets">
+                  <mat-option *ngFor="let dataset of datasets?.controls" [value]="dataset.value.referenceHash">
                     {{dataset.value.title}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-            </div>
-            <div class="wrapper">
-              <ng-container formArrayName="accessRights">
-                <ng-container *ngIf="getAccessRights(i).controls.length">
-                  <div class="one">
-                    Dataset ID
-                  </div>
-                  <div class="two">
-                    for selected project members
-                  </div>
-                  <div class="three">
-                    for other project members
-                  </div>
-                  <div class="four">
-                    public
-                  </div>
-                </ng-container>
-                <ng-container *ngFor="let dataset of getAccessRights(i).controls; index as j">
-                  <ng-container [formGroupName]="j">
-                    <div class="one">
-                      {{getDatasetTitle(dataset.value.dataset)}}
-                    </div>
-                    <mat-form-field appearance="fill" class="two">
-                      <mat-label>Access right</mat-label>
-                      <mat-select formControlName="selectedProjectMembers">
-                        <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.value">
-                          {{right.value}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                    <mat-form-field appearance="fill" class="three">
-                      <mat-label>Access right</mat-label>
-                      <mat-select formControlName="otherProjectMembers">
-                        <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.value">
-                          {{right.value}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                    <mat-form-field appearance="fill" class="four">
-                      <mat-label>Access right</mat-label>
-                      <mat-select formControlName="public">
-                        <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.value">
-                          {{right.value}}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </ng-container>
-                  <br>
-                </ng-container>
-              </ng-container>
             </div>
           </div>
         </mat-card-content>
