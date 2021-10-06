@@ -31,7 +31,9 @@
               </div>
               <mat-form-field appearance="fill" class="two">
                 <mat-label>Access right</mat-label>
-                <mat-select formControlName="selectedProjectMembersAccess">
+                <mat-select
+                  [aria-label]="'Access right for selected project members for dataset ' + dataset.value.title"
+                  formControlName="selectedProjectMembersAccess">
                   <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.value">
                     {{right.value}}
                   </mat-option>
@@ -39,7 +41,8 @@
               </mat-form-field>
               <mat-form-field appearance="fill" class="three">
                 <mat-label>Access right</mat-label>
-                <mat-select formControlName="otherProjectMembersAccess">
+                <mat-select [aria-label]="'Access right for other project members for dataset ' + dataset.value.title"
+                            formControlName="otherProjectMembersAccess">
                   <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.value">
                     {{right.value}}
                   </mat-option>
@@ -47,7 +50,8 @@
               </mat-form-field>
               <mat-form-field appearance="fill" class="four">
                 <mat-label>Access right</mat-label>
-                <mat-select formControlName="publicAccess">
+                <mat-select [aria-label]="'Access right for the public for dataset ' + dataset.value.title"
+                            formControlName="publicAccess">
                   <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.value">
                     {{right.value}}
                   </mat-option>
