@@ -105,7 +105,7 @@ export class DmpComponent implements OnInit {
       if (newVal) {
         const projectId = newVal.universityId;
         if (projectId) {
-          this.getProjectMembersAndSetContact(projectId);
+          this.getProjectMembers(projectId);
         }
       }
     });
@@ -123,8 +123,8 @@ export class DmpComponent implements OnInit {
     if (this.dmpForm.value.id) {
       this.backendService.editDmp(dmp).subscribe(
         response => {
-          this.dmpForm.patchValue(response);
           this.store.dispatch(new LoadDmps());
+          this.router.navigate(['plans']);
         },
         () => {},
         () => this.feedbackService.success('Plan was updated!')
@@ -133,11 +133,9 @@ export class DmpComponent implements OnInit {
       this.backendService.createDmp(dmp)
         .subscribe(
           response => {
-            if (response) {
-              this.location.replaceState(`dmp/${response.id}`);
-              this.dmpForm.patchValue(response);
-              this.store.dispatch(new LoadDmps());
-            }
+            // this.location.replaceState(`dmp/${response.id}`);
+            this.store.dispatch(new LoadDmps());
+            this.router.navigate(['plans']);
           },
           () => {},
           () => this.feedbackService.success('Plan was saved!'));
@@ -147,6 +145,7 @@ export class DmpComponent implements OnInit {
   changeProject(project: Project) {
     if (project != null) {
       this.projectStep.setValue(project);
+      this.getProjectMembersAndSetContact(project.universityId);
     } else {
       this.projectStep.reset();
     }
