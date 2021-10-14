@@ -14,7 +14,7 @@ import {FeedbackService} from './feedback.service';
 })
 export class BackendService {
 
-  private backendUrl = isDevMode() ? 'http://localhost:8080/' : `${window.location.origin}/api/`
+  private backendUrl = isDevMode() ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`
   private dmpBackendUrl = this.backendUrl + 'dmps'
   private projectBackendUrl = this.backendUrl + 'projects';
   private repositoryBackendUrl = this.backendUrl + 'repositories';

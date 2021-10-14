@@ -124,7 +124,7 @@ import {DataAccessComponent} from './dmp/data-storage/data-access/data-access.co
     MatTabsModule,
     OAuthModule.forRoot({
       resourceServer: {
-        allowedUrls: [isDevMode() ? 'http://localhost:8080/' : `${window.location.origin}/api/`],
+        allowedUrls: [isDevMode() ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`],
         sendAccessToken: true
       }
     }),
