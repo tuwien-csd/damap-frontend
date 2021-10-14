@@ -29,7 +29,10 @@
     <app-dmp-doc-data-quality [docDataStep]="docDataStep"></app-dmp-doc-data-quality>
   </mat-step>
   <mat-step label="Storage and backup during the research process">
-    <app-dmp-storage [storageStep]="storageStep"
+    <app-data-access [dmpForm]="dmpForm"
+                     [datasets]="datasets"></app-data-access>
+    <app-dmp-storage [dmpForm]="dmpForm"
+                     [storageStep]="storageStep"
                      [datasets]="datasets"
                      (storageToAdd)="addStorage($event)"
                      (storageToRemove)="removeStorage($event)">
