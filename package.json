@@ -8,7 +8,14 @@
     "build-openshift": "ng build --configuration=openshift",
     "build-prod": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "ci:build": "ng build",
+    "ci:lint": "ng lint",
+    "ci:test": "ng test --browsers ChromeHeadless --watch=false",
+    "ci:e2e": "ng e2e",
+    "ci:coverage": "ng test --browsers ChromeHeadless --watch=false --code-coverage",
+    "ci:audit": "npm audit",
+    "ci:install": "npm install && npm install -g @angular/cli"
   },
   "private": true,
   "dependencies": {
@@ -28,8 +35,6 @@
     "@ngrx/store-devtools": "^12.4.0",
     "angular-oauth2-oidc": "^12.0.2",
     "cors": "^2.8.5",
-    "keycloak-angular": "^8.3.0",
-    "keycloak-js": "14.0.0",
     "rxjs": "~6.6.7",
     "tslib": "^2.3.1",
     "zone.js": "~0.11.4"
@@ -53,6 +58,7 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.1",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "karma-junit-reporter": "^2.0.1",
     "tslint": "^6.1.3",
     "typescript": "~4.3.5"
   }
