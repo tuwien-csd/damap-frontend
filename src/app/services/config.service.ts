@@ -23,22 +23,33 @@ export class ConfigService {
   public initializeApp(): Promise<boolean> {
     return this.loadConfig().toPromise().then(
       (config: Config) => {
-        const authConfig: AuthConfig = {
-          issuer: config.authUrl,
-          clientId: config.authClient,
-          redirectUri: window.location.origin,
-          oidc: true,
-          scope: config.authScope,
-          // useSilentRefresh: true,
-          responseType: 'code',
-          showDebugInformation: isDevMode(),
-          // sessionChecksEnabled: true,
+        if (!config) {
+          console.error('Config is missing!');
+          return new Promise<boolean>(_ => false);
+        } else {
+          const authConfig: AuthConfig = {
+            issuer: config.authUrl,
+            clientId: config.authClient,
+            redirectUri: window.location.origin,
+            oidc: true,
+            scope: config.authScope,
+            // useSilentRefresh: true,
+            responseType: 'code',
+            showDebugInformation: isDevMode(),
+            // sessionChecksEnabled: true,
+          }
+          this.oauthService.configure(authConfig);
+          this.oauthService.setupAutomaticSilentRefresh();
+          return this.oauthService.loadDiscoveryDocumentAndLogin();
         }
-        this.oauthService.configure(authConfig);
-        this.oauthService.setupAutomaticSilentRefresh();
-        return this.oauthService.loadDiscoveryDocumentAndLogin();
       }
     )
+      .catch(error => {
+        console.error('Failed to load config - please make sure your backend is up and running!');
+        console.log('Backend: ' + ConfigService.getHost());
+        console.error(error);
+        return new Promise(_ => false);
+      });
   }
 
   private loadConfig(): Observable<Config> {
