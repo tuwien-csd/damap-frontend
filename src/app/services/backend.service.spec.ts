@@ -2,12 +2,12 @@ import {TestBed} from '@angular/core/testing';
 import {BackendService} from './backend.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {FeedbackService} from './feedback.service';
-import {isDevMode} from '@angular/core';
+import {environment} from '../../environments/environment';
 
 describe('BackendService', () => {
   let service: BackendService;
   let httpTestingController: HttpTestingController;
-  let backendUrl = isDevMode() ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`
+  let backendUrl = !environment.production ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`
   let feedbackServiceSpy: jasmine.SpyObj<FeedbackService>
 
   beforeEach(() => {

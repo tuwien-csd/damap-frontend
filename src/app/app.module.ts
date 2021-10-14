@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {APP_INITIALIZER, isDevMode, NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
@@ -68,6 +68,7 @@ import {AuthGuard} from './auth/auth.guard';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ConfigService} from './services/config.service';
 import {DataAccessComponent} from './dmp/data-storage/data-access/data-access.component';
+import {environment} from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -124,7 +125,7 @@ import {DataAccessComponent} from './dmp/data-storage/data-access/data-access.co
     MatTabsModule,
     OAuthModule.forRoot({
       resourceServer: {
-        allowedUrls: [isDevMode() ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`],
+        allowedUrls: [!environment.production ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`],
         sendAccessToken: true
       }
     }),
