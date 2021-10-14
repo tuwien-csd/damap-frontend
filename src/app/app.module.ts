@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {APP_INITIALIZER, isDevMode, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
@@ -21,7 +21,6 @@ import {LayoutComponent} from './layout/layout.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {OAuthModule} from 'angular-oauth2-oidc';
-import {environment} from '../environments/environment';
 import {ProjectComponent} from './dmp/project/project.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
@@ -123,7 +122,7 @@ import {ConfigService} from './services/config.service';
     MatTabsModule,
     OAuthModule.forRoot({
       resourceServer: {
-        allowedUrls: [environment.backendUrl],
+        allowedUrls: [isDevMode() ? 'http://localhost:8080/' : `${window.location.origin}/api/`],
         sendAccessToken: true
       }
     }),
