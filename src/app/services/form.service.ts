@@ -9,13 +9,26 @@ import {Cost} from '../domain/cost';
 import {DataAccessType} from '../domain/enum/data-access-type.enum';
 import {Storage} from '../domain/storage';
 import {AccessRight} from '../domain/enum/access-right';
+import {DataKind} from '../domain/enum/data-kind.enum';
+import {ComplianceType} from '../domain/enum/compliance-type.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormService {
 
+  private TEXT_MAX_LENGTH = 4000;
+  private TEXT_SHORT_LENGTH = 255;
+
   constructor(private formBuilder: FormBuilder) {
+  }
+
+  private static restrictedDatasets(datasets: Dataset[]): boolean {
+    return datasets.find(item => item.dataAccess === DataAccessType.restricted) != null;
+  }
+
+  private static closedDatasets(datasets: Dataset[]): boolean {
+    return datasets.find(item => item.dataAccess === DataAccessType.closed) != null;
   }
 
   public createDmpForm(): FormGroup {
@@ -26,39 +39,39 @@ export class FormService {
       contributors: this.formBuilder.array([]),
       data: this.formBuilder.group({
         kind: [null],
-        explanation: [''],
+        explanation: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       }),
       datasets: this.formBuilder.array([]),
       documentation: this.formBuilder.group({
-        metadata: [''],
-        dataGeneration: [''],
-        structure: ['']
+        metadata: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        dataGeneration: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        structure: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
       }),
       storage: this.formBuilder.array([]),
       externalStorage: this.formBuilder.array([]),
-      externalStorageInfo: [''],
+      externalStorageInfo: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       legal: this.formBuilder.group({
         personalData: [false],
-        personalDataAccess: [''],
+        personalDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         personalDataCompliance: [[]],
-        otherPersonalDataCompliance: [''],
+        otherPersonalDataCompliance: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveData: [false],
         legalRestrictions: [false],
-        legalRestrictionsComment: [''],
+        legalRestrictionsComment: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         ethicalIssues: [false],
         committeeApproved: [false],
-        sensitiveDataSecurity: [''],
-        ethicsReport: [''],
-        optionalStatement: [''],
+        sensitiveDataSecurity: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        ethicsReport: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        ethicalComplianceStatement: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       }),
       hosts: this.formBuilder.array([]),
       reuse: this.formBuilder.group({
-        targetAudience: [''],
-        tools: [''],
-        restrictedAccess: ['']
+        targetAudience: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        tools: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        restrictedDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
       }),
-      restrictedAccessInfo: [''],
-      closedAccessInfo: [''],
+      restrictedAccessInfo: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+      closedAccessInfo: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       costs: this.formBuilder.group({
         exist: [null],
         list: this.formBuilder.array([])
@@ -95,12 +108,12 @@ export class FormService {
         committeeApproved: dmp.committeeApproved,
         sensitiveDataSecurity: dmp.sensitiveDataSecurity,
         ethicsReport: dmp.ethicsReport,
-        optionalStatement: dmp.ethicalComplianceStatement,
+        ethicalComplianceStatement: dmp.ethicalComplianceStatement,
       },
       reuse: {
         targetAudience: dmp.targetAudience,
         tools: dmp.tools,
-        restrictedAccess: dmp.restrictedDataAccess
+        restrictedDataAccess: dmp.restrictedDataAccess
       },
       costs: {
         exist: dmp.costsExist
@@ -146,83 +159,104 @@ export class FormService {
   public exportFormToDmp(form: FormGroup): Dmp {
     const formValue = form.getRawValue();
 
-    const contributors: Contributor[] = [];
-    if (formValue.contributors?.length > 0) {
-      for (const contributor of formValue.contributors) {
-        contributors.push(contributor);
-      }
-    }
-
-    const datasets: Dataset[] = [];
-    if (formValue.datasets?.length > 0) {
-      for (const dataset of formValue.datasets) {
-        datasets.push(dataset);
-      }
-    }
-
-    const hosts: Host[] = [];
-    if (formValue.hosts?.length > 0) {
-      for (const host of formValue.hosts) {
-        hosts.push(host);
-      }
-    }
-
-    const costs: Cost[] = [];
-    if (formValue.costs?.list?.length > 0) {
-      for (const cost of formValue.costs.list) {
-        costs.push(cost);
-      }
-    }
-
-    const storage: Storage[] = [];
-    if (formValue.storage?.length > 0) {
-      for (const item of formValue.storage) {
-        storage.push(item);
-      }
-    }
-
-    const externalStorage: Storage[] = [];
-    if (formValue.externalStorage?.length > 0) {
-      for (const item of formValue.externalStorage) {
-        externalStorage.push(item);
-      }
-    }
-
-    return {
+    const result: Dmp = {
+      closedAccessInfo: '',
+      committeeApproved: false,
+      contributors: formValue.contributors,
+      costs: formValue.costs?.exist ? formValue.costs.list : [],
+      costsExist: formValue.costs?.exist,
+      dataGeneration: '',
+      dataKind: formValue.data.kind,
+      datasets: [],
+      ethicalComplianceStatement: '',
+      ethicalIssuesExist: false,
+      ethicsReport: '',
+      externalStorage: [],
+      externalStorageInfo: '',
+      hosts: [],
+      legalRestrictions: false,
+      legalRestrictionsComment: '',
+      metadata: '',
+      noDataExplanation: '',
+      otherPersonalDataCompliance: '',
+      personalData: false,
+      personalDataAccess: '',
+      personalDataCompliance: [],
+      restrictedAccessInfo: '',
+      restrictedDataAccess: '',
+      sensitiveData: false,
+      sensitiveDataSecurity: '',
+      storage: [],
+      structure: '',
+      targetAudience: '',
+      tools: '',
       id: formValue.id,
       project: formValue.project,
-      contact: formValue.contact,
-      contributors,
-      dataKind: formValue.data.kind,
-      noDataExplanation: formValue.data.explanation,
-      datasets,
-      metadata: formValue.documentation.metadata,
-      dataGeneration: formValue.documentation.dataGeneration,
-      structure: formValue.documentation.structure,
-      personalData: formValue.legal.personalData,
-      personalDataAccess: formValue.legal.personalDataAccess,
-      personalDataCompliance: formValue.legal.personalDataCompliance,
-      otherPersonalDataCompliance: formValue.legal.otherPersonalDataCompliance,
-      sensitiveData: formValue.legal.sensitiveData,
-      legalRestrictions: formValue.legal.legalRestrictions,
-      legalRestrictionsComment: formValue.legal.legalRestrictionsComment,
-      ethicalIssuesExist: formValue.legal.ethicalIssues,
-      committeeApproved: formValue.legal.committeeApproved,
-      sensitiveDataSecurity: formValue.legal.sensitiveData ? formValue.legal.sensitiveDataSecurity : '',
-      ethicsReport: formValue.legal.ethicsReport,
-      ethicalComplianceStatement: formValue.legal.optionalStatement,
-      targetAudience: formValue.reuse.targetAudience,
-      restrictedDataAccess: formValue.reuse.restrictedAccess,
-      tools: formValue.reuse.tools,
-      storage,
-      externalStorage,
-      externalStorageInfo: formValue.externalStorageInfo,
-      hosts,
-      restrictedAccessInfo: formValue.restrictedAccessInfo,
-      closedAccessInfo: formValue.closedAccessInfo,
-      costsExist: formValue.costs?.exist,
-      costs
+      contact: formValue.contact
     };
+
+    if (formValue.data.kind === DataKind.SPECIFY) {
+      result.datasets = formValue.datasets;
+      result.hosts = formValue.hosts;
+      result.storage = formValue.storage;
+      result.externalStorage = formValue.externalStorage;
+
+      result.metadata = formValue.documentation.metadata;
+      result.dataGeneration = formValue.documentation.dataGeneration;
+      result.structure = formValue.documentation.structure;
+      result.externalStorageInfo = formValue.externalStorageInfo;
+
+      // Legal
+      if (formValue.legal.sensitiveData) {
+        result.sensitiveData = true;
+        result.sensitiveDataSecurity = formValue.legal.sensitiveDataSecurity;
+      } else {
+        for (const dataset of result.datasets) {
+          dataset.sensitiveData = false;
+        }
+      }
+
+      if (formValue.legal.personalData) {
+        result.personalData = true;
+        result.personalDataCompliance = formValue.legal.personalDataCompliance;
+        result.otherPersonalDataCompliance = result.personalDataCompliance.includes(ComplianceType.Other) ?
+          formValue.legal.otherPersonalDataCompliance : '';
+        result.personalDataAccess = formValue.legal.personalDataAccess;
+      } else {
+        for (const dataset of result.datasets) {
+          dataset.personalData = false;
+        }
+      }
+
+      if (formValue.legal.legalRestrictions) {
+        result.legalRestrictions = true;
+        result.legalRestrictionsComment = formValue.legal.legalRestrictionsComment;
+      } else {
+        for (const dataset of result.datasets) {
+          dataset.legalRestrictions = false;
+        }
+      }
+
+      if (formValue.legal.ethicalIssues) {
+        result.ethicalIssuesExist = true;
+        result.committeeApproved = formValue.legal.committeeApproved;
+        result.ethicsReport = result.committeeApproved ? formValue.legal.ethicsReport : '';
+      }
+      result.ethicalComplianceStatement = formValue.legal.ethicalComplianceStatement;
+
+      // Reuse
+      result.targetAudience = formValue.reuse.targetAudience;
+      result.restrictedDataAccess = formValue.reuse.restrictedDataAccess;
+      result.tools = formValue.reuse.tools;
+
+      // Licensing
+      result.restrictedAccessInfo = FormService.restrictedDatasets(result.datasets) ? formValue.restrictedAccessInfo : '';
+      result.closedAccessInfo = FormService.closedDatasets(result.datasets) ? formValue.closedAccessInfo : '';
+    } else {
+      result.noDataExplanation = formValue.data.kind === DataKind.NONE ? formValue.data.explanation : '';
+    }
+
+    return result;
   }
 
   public addContributorToForm(form: FormGroup, contributor: Person) {
@@ -307,19 +341,19 @@ export class FormService {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
       title: [title, Validators.required],
-      license: [''],
+      license: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       startDate: [null],
       type: [null],
       size: [null],
-      comment: [''],
+      comment: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       personalData: [false],
       sensitiveData: [false],
       legalRestrictions: [false],
       dataAccess: [DataAccessType.open],
-      referenceHash: [''],
-      selectedProjectMembersAccess: AccessRight.write,
-      otherProjectMembersAccess: AccessRight.write,
-      publicAccess: AccessRight.read
+      referenceHash: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
+      selectedProjectMembersAccess: [AccessRight.write],
+      otherProjectMembersAccess: [AccessRight.write],
+      publicAccess: [AccessRight.read]
     });
   }
 
@@ -351,7 +385,7 @@ export class FormService {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
       hostId: [null, {disabled: true}],
-      title: ['', Validators.required],
+      title: ['', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
       datasets: [[]]
     });
   }
@@ -370,10 +404,10 @@ export class FormService {
   private createExternalStorageFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
-      title: ['Other', Validators.required],
-      storageLocation: [''],
-      backupLocation: [''],
-      backupFrequency: [''],
+      title: ['Other', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
+      storageLocation: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
+      backupLocation: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
+      backupFrequency: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       datasets: [[]]
     });
   }
@@ -395,7 +429,7 @@ export class FormService {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
       hostId: [null],
-      title: [''],
+      title: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       date: [null],
       datasets: [[]]
     });
@@ -416,12 +450,12 @@ export class FormService {
   private createCostFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
-      title: ['New cost', Validators.required],
-      currencyCode: ['EUR', Validators.required],
+      title: ['New cost', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
+      currencyCode: ['EUR', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
       value: [null, Validators.pattern('^[0-9]*\.?[0-9]{0,2}$')], // validate format
       type: [null],
       customType: [null],
-      description: ['']
+      description: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
     });
   }
 
