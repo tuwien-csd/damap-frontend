@@ -49,3 +49,6 @@ Thumbs.db
 # Themes
 src/themes/*
 !src/themes/README.md
+
+# Testreports
+/reports
