@@ -1,5 +1,5 @@
 {
-  "name": "dmap-frontend",
+  "name": "damap-frontend",
   "version": "0.6.0-SNAPSHOT",
   "scripts": {
     "ng": "ng",
