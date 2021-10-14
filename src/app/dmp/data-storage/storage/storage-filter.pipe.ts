@@ -7,7 +7,7 @@ import {Storage} from '../../../domain/storage';
 export class StorageFilterPipe implements PipeTransform {
 
   transform(data: Storage[], selected: Storage[]) {
-    return data.filter(item => selected?.find(entry => entry.title === item.title));
+    return data.filter(item => !selected?.find(entry => entry.title === item.title));
   }
 
 }
