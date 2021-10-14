@@ -65,8 +65,9 @@ import {MatTreeModule} from '@angular/material/tree';
 import {RepoFilterComponent} from './dmp/repo/repo-filter/repo-filter.component';
 import {TooltipComponent} from './widgets/tooltip/tooltip.component';
 import {AuthGuard} from './auth/auth.guard';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ConfigService} from './services/config.service';
+import {DataAccessComponent} from './dmp/data-storage/data-access/data-access.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import {ConfigService} from './services/config.service';
     ErrorMessageComponent,
     TreeSelectFormFieldComponent,
     RepoFilterComponent,
-    TooltipComponent
+    TooltipComponent,
+    DataAccessComponent
   ],
   imports: [
     BrowserModule,

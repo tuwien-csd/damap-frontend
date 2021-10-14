@@ -1,6 +1,6 @@
-import {Component, Input, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TU_STORAGE} from './storage-list';
-import {FormArray} from '@angular/forms';
+import {FormArray, FormGroup} from '@angular/forms';
 import {Storage} from '../../../domain/storage';
 
 @Component({
@@ -10,6 +10,7 @@ import {Storage} from '../../../domain/storage';
 })
 export class StorageComponent implements OnInit {
 
+  @Input() dmpForm: FormGroup;
   @Input() storageStep: FormArray;
   @Input() datasets: FormArray;
 

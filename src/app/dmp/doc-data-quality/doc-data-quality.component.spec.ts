@@ -1,17 +1,19 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DocDataQualityComponent } from './doc-data-quality.component';
+import {DocDataQualityComponent} from './doc-data-quality.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 describe('DocDataQualityComponent', () => {
   let component: DocDataQualityComponent;
   let fixture: ComponentFixture<DocDataQualityComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DocDataQualityComponent ]
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [MatAutocompleteModule],
+      declarations: [DocDataQualityComponent]
     })
-    .compileComponents();
-  }));
+      .compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DocDataQualityComponent);
