@@ -1,0 +1,67 @@
+<mat-accordion>
+  <mat-expansion-panel  (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Dataset Access Rights
+      </mat-panel-title>
+      <mat-panel-description>
+        Set access rights for all datasets
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="wrapper" [formGroup]="dmpForm">
+      <ng-container formArrayName="datasets">
+        <ng-container *ngIf="datasets?.controls.length">
+          <div class="one bold">
+            Dataset
+          </div>
+          <div class="two bold">
+            for selected project members
+          </div>
+          <div class="three bold">
+            for other project members
+          </div>
+          <div class="four bold">
+            public
+          </div>
+          <ng-container *ngFor="let dataset of datasets.controls; index as j">
+            <ng-container [formGroupName]="j">
+              <div class="one">
+                {{dataset.value.title}}
+              </div>
+              <mat-form-field appearance="fill" class="two">
+                <mat-label>Access right</mat-label>
+                <mat-select
+                  [aria-label]="'Access right for selected project members for dataset ' + dataset.value.title"
+                  formControlName="selectedProjectMembersAccess">
+                  <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.value">
+                    {{right.value}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="three">
+                <mat-label>Access right</mat-label>
+                <mat-select [aria-label]="'Access right for other project members for dataset ' + dataset.value.title"
+                            formControlName="otherProjectMembersAccess">
+                  <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.value">
+                    {{right.value}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill" class="four">
+                <mat-label>Access right</mat-label>
+                <mat-select [aria-label]="'Access right for the public for dataset ' + dataset.value.title"
+                            formControlName="publicAccess">
+                  <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.value">
+                    {{right.value}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+          </ng-container>
+          <br>
+        </ng-container>
+      </ng-container>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

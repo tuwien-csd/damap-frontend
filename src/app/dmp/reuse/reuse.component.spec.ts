@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ReuseComponent } from './reuse.component';
+import {ReuseComponent} from './reuse.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 describe('ReuseComponent', () => {
   let component: ReuseComponent;
@@ -8,7 +9,8 @@ describe('ReuseComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReuseComponent ]
+      imports: [MatAutocompleteModule],
+      declarations: [ReuseComponent]
     })
     .compileComponents();
   });

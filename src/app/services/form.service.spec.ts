@@ -8,6 +8,7 @@ import {DataKind} from '../domain/enum/data-kind.enum';
 import {CostType} from '../domain/enum/cost-type.enum';
 import {ContributorRole} from '../domain/enum/contributor-role.enum';
 import {PersonIdType} from '../domain/enum/person-id-type.enum';
+import {AccessRight} from '../domain/enum/access-right';
 
 describe('FormService', () => {
   let service: FormService;
@@ -81,7 +82,10 @@ describe('FormService', () => {
           size: 0,
           startDate: null,
           title: 'Dataset 1',
-          type: 'STANDARD_OFFICE_DOCUMENTS'
+          type: 'STANDARD_OFFICE_DOCUMENTS',
+          selectedProjectMembersAccess: AccessRight.write,
+          otherProjectMembersAccess: AccessRight.read,
+          publicAccess: AccessRight.none
         }
       ],
       ethicalComplianceStatement: 'statement regarding ethical compliance',

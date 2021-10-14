@@ -8,6 +8,7 @@ import {Person} from '../domain/person';
 import {Cost} from '../domain/cost';
 import {DataAccessType} from '../domain/enum/data-access-type.enum';
 import {Storage} from '../domain/storage';
+import {AccessRight} from '../domain/enum/access-right';
 
 @Injectable({
   providedIn: 'root'
@@ -315,7 +316,10 @@ export class FormService {
       sensitiveData: [false],
       legalRestrictions: [false],
       dataAccess: [DataAccessType.open],
-      referenceHash: ['']
+      referenceHash: [''],
+      selectedProjectMembersAccess: AccessRight.write,
+      otherProjectMembersAccess: AccessRight.write,
+      publicAccess: AccessRight.read
     });
   }
 
@@ -354,7 +358,7 @@ export class FormService {
 
   private mapStorageToFormGroup(storage: Storage): FormGroup {
     const formGroup = this.createStorageFormGroup();
-    formGroup.setValue({
+    formGroup.patchValue({
       id: storage.id,
       hostId: storage.hostId || null,
       title: storage.title,
