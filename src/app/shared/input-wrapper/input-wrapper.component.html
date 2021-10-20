@@ -1,0 +1,21 @@
+<mat-form-field [appearance]="appearance">
+  <mat-label class="wrap-label">{{label}}</mat-label>
+  <span matPrefix>{{prefix}}</span>
+  <input matInput [formControl]="control" [placeholder]="placeholder" [type]="type" [required]="required">
+  <mat-error *ngIf="!control?.errors?.required && control?.errors?.empty">
+    Please provide a valid value.
+  </mat-error>
+  <mat-error *ngIf="control?.errors?.required">
+    Please provide a value.
+  </mat-error>
+  <mat-error *ngIf="control?.errors?.maxlength">
+    Value must not exceed {{control.errors?.maxlength?.requiredLength}} characters.
+    <!-- "maxlength": { "requiredLength": 255, "actualLength": 273 } -->
+  </mat-error>
+  <mat-error *ngIf="control?.errors?.pattern">
+    Invalid input, please use the following format: 1234.56
+    <!-- { "pattern": { "requiredPattern": "^[0-9]*.?[0-9]{0,2}$", "actualValue": "123,345" } } false -->
+  </mat-error>
+</mat-form-field>
+<!--{{control.errors | json}}-->
+<!--{{control.valid}}-->
