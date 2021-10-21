@@ -21,7 +21,6 @@ import {LayoutComponent} from './layout/layout.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {OAuthModule} from 'angular-oauth2-oidc';
-import {environment} from '../environments/environment';
 import {ProjectComponent} from './dmp/project/project.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
@@ -69,6 +68,7 @@ import {AuthGuard} from './auth/auth.guard';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ConfigService} from './services/config.service';
 import {DataAccessComponent} from './dmp/data-storage/data-access/data-access.component';
+import {environment} from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -125,7 +125,7 @@ import {DataAccessComponent} from './dmp/data-storage/data-access/data-access.co
     MatTabsModule,
     OAuthModule.forRoot({
       resourceServer: {
-        allowedUrls: [environment.backendUrl],
+        allowedUrls: [!environment.production ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`],
         sendAccessToken: true
       }
     }),
