@@ -7,6 +7,7 @@ import {environment} from '../../environments/environment';
 describe('BackendService', () => {
   let service: BackendService;
   let httpTestingController: HttpTestingController;
+  let backendUrl = !environment.production ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`
   let feedbackServiceSpy: jasmine.SpyObj<FeedbackService>
 
   beforeEach(() => {
@@ -35,7 +36,7 @@ describe('BackendService', () => {
       }
     );
 
-    const req = httpTestingController.expectOne(`${environment.backendUrl}dmps/list`);
+    const req = httpTestingController.expectOne(`${backendUrl}dmps/list`);
     req.flush([{id: 1, project:{title: 'Random Dmp'}}]);
   });
 
@@ -51,7 +52,7 @@ describe('BackendService', () => {
       }
     );
 
-    const req = httpTestingController.expectOne(`${environment.backendUrl}repositories`);
+    const req = httpTestingController.expectOne(`${backendUrl}repositories`);
     req.flush([{id: 'r3d100012810', name: 'Random Repo'}]);
   });
 
@@ -63,7 +64,7 @@ describe('BackendService', () => {
       }
     );
 
-    const req = httpTestingController.expectOne(`${environment.backendUrl}repositories/search?subjects=Cars`);
+    const req = httpTestingController.expectOne(`${backendUrl}repositories/search?subjects=Cars`);
     expect(req.request.params.get('subjects')).toEqual('Cars');
     req.flush([{},{}]);
   });

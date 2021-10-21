@@ -2,20 +2,20 @@ import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {Dmp} from '../domain/dmp';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
-import {environment} from '../../environments/environment';
 import {ProjectMember} from '../domain/project-member';
 import {Project} from '../domain/project';
 import {DmpListItem} from '../domain/dmp-list-item';
 import {Repository} from '../domain/repository';
 import {catchError, map, retry, shareReplay} from 'rxjs/operators';
 import {FeedbackService} from './feedback.service';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
 
-  private backendUrl = environment.backendUrl;
+  private backendUrl = !environment.production ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`
   private dmpBackendUrl = this.backendUrl + 'dmps'
   private projectBackendUrl = this.backendUrl + 'projects';
   private repositoryBackendUrl = this.backendUrl + 'repositories';
