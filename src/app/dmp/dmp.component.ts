@@ -100,15 +100,6 @@ export class DmpComponent implements OnInit {
     this.reuseStep = this.dmpForm.get('reuse') as FormGroup;
     this.costsStep = this.dmpForm.get('costs') as FormGroup;
 
-    // Set project leader as contact person on project change
-    this.projectStep.valueChanges.subscribe((newVal: Project) => {
-      if (newVal) {
-        const projectId = newVal.universityId;
-        if (projectId) {
-          this.getProjectMembers(projectId);
-        }
-      }
-    });
   }
 
   changeStep(event: StepperSelectionEvent) {

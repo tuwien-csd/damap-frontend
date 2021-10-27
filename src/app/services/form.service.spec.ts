@@ -7,7 +7,7 @@ import {DataAccessType} from '../domain/enum/data-access-type.enum';
 import {DataKind} from '../domain/enum/data-kind.enum';
 import {CostType} from '../domain/enum/cost-type.enum';
 import {ContributorRole} from '../domain/enum/contributor-role.enum';
-import {PersonIdType} from '../domain/enum/person-id-type.enum';
+import {IdentifierType} from '../domain/enum/person-id-type.enum';
 import {AccessRight} from '../domain/enum/access-right';
 
 describe('FormService', () => {
@@ -31,12 +31,14 @@ describe('FormService', () => {
       closedAccessInfo: 'closed access info',
       committeeApproved: false,
       contact: {
-        firstName: 'Max', id: 77, lastName: 'Mustermann', mbox: 'm.mustermann@university.ac.at', universityId: '12345', personId: null
+        firstName: 'Max', id: 77, lastName: 'Mustermann', mbox: 'm.mustermann@university.ac.at', universityId: '12345', personId: null,
+        affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR}
       },
       contributors: [
         {
           id: 84, person: {
-            firstName: 'Max', id: 85, lastName: 'Mustermann', mbox: 'm.mustermann@university.ac.at', universityId: '12345', personId: null
+            firstName: 'Max', id: 85, lastName: 'Mustermann', mbox: 'm.mustermann@university.ac.at', universityId: '12345', personId: null,
+            affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR}
           }, role: ContributorRole.Editor
         },
         {
@@ -48,9 +50,10 @@ describe('FormService', () => {
             mbox: 'm.musterfrau@university.ac.at',
             personId: {
               identifier: '0000-0000-0000-xxxx',
-              type: PersonIdType.ORCID
+              type: IdentifierType.ORCID
             },
-            universityId: '23456'
+            universityId: '23456',
+            affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR}
           },
           role: ContributorRole.ProjectManager
         }
@@ -130,7 +133,7 @@ describe('FormService', () => {
         end: new Date(),
         funding: {
           funderId: {
-            identifier: '501100004955', type: 'FUNDREF'
+            identifier: '501100004955', type: IdentifierType.FUNDREF
           }, fundingStatus: 'GRANTED',
           grantId: {
             identifier: '123456',
