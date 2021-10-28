@@ -16,6 +16,6 @@ ARG APP=damap-frontend
 
 FROM default-route-openshift-image-registry.apps.dev.csd.tuwien.ac.at/csd-images/nginx:2021.32 as runner
 
-COPY --from=deps --chown=1001:0 /app/dist/damap-frontend/* /opt/app-root/src/
+COPY --from=deps --chown=1001:0 /app/dist/damap-frontend/ /opt/app-root/src/
 
 
