@@ -1,0 +1,5 @@
+pipelines:
+  openshift:
+    stages:
+      deploy:
+        enabled: false
