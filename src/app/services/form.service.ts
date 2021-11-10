@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Dmp} from '../domain/dmp';
 import {Contributor} from '../domain/contributor';
 import {Dataset} from '../domain/dataset';
@@ -308,11 +308,25 @@ export class FormService {
 
   public addExternalStorageToForm(form: FormGroup) {
     const externalStorageFormGroup = this.createExternalStorageFormGroup();
-    (form.get('externalStorage') as FormArray).push(externalStorageFormGroup);
+    const storage = form.get('externalStorage') as FormArray;
+    const storageInfo = form.get('externalStorageInfo') as FormControl;
+    storage.push(externalStorageFormGroup);
+
+    if (storage.controls.length === 1) {
+      storageInfo.addValidators(Validators.required);
+    }
+    storageInfo.updateValueAndValidity();
   }
 
   public removeExternalStorageFromForm(form: FormGroup, index: number) {
-    (form.get('externalStorage') as FormArray).removeAt(index);
+    const storage = form.get('externalStorage') as FormArray;
+    storage.removeAt(index);
+    const storageInfo = form.get('externalStorageInfo') as FormControl;
+
+    if (storage.controls.length === 0) {
+      storageInfo.removeValidators(Validators.required);
+    }
+    storageInfo.updateValueAndValidity();
   }
 
   public addRepositoryToForm(form: FormGroup, repo: { id: string, name: string }) {
