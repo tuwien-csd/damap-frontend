@@ -1,4 +1,4 @@
-<form [formGroup]="costsStep">
+<div [formGroup]="costsStep">
   <label id="costsFormGroup">
     Select the statement which best describes the situation in your project with respect to costs of data management.
   </label>
@@ -10,13 +10,13 @@
       [href]="fairLink" target="_blank">FAIR</a> as outlined below.
     </mat-radio-button>
   </mat-radio-group>
-</form>
+</div>
 <ng-container *ngIf="costsStep?.controls.exist.value == true">
   <button mat-raised-button color="primary" (click)="addCost()">
     <mat-icon>add_circle</mat-icon>
     Add cost
   </button>
-  <form [formGroup]="costsStep" (keydown.enter)="$event.preventDefault()">
+  <div [formGroup]="costsStep">
     <mat-accordion formArrayName="list">
       <mat-expansion-panel *ngFor="let item of list.controls; let i = index">
         <mat-expansion-panel-header>
@@ -28,45 +28,43 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div [formArrayName]="i">
-          <div class="cost-form-group">
-            <mat-form-field>
-              <mat-label>Item</mat-label>
-              <input matInput formControlName="title" required>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Estimated cost</mat-label>
-              <span matPrefix>€ &nbsp;</span>
-              <input matInput formControlName="value" placeholder="1000.00">
-              <mat-error *ngIf="!item.get('value').valid">
-                Invalid input, please use the following format: 1234.56
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Cost Type</mat-label>
-              <mat-select formControlName="type">
-                <mat-option *ngFor="let type of costType | keyvalue" [value]="type.value">
-                  {{type.value}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+          <div class="form-row">
+            <div class="form-row-group">
+              <app-input-wrapper [label]="'Item'" [control]="getFormControl(i, 'title')">
+              </app-input-wrapper>
+              <button mat-icon-button color="accent" aria-label="Remove cost" (click)="removeCost(i)">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </div>
           </div>
-          <div class="cost-form-group" *ngIf="item.value.type === costType.other">
-          <mat-form-field class="full-width">
-            <mat-label>Please specify the cost type</mat-label>
-            <input matInput type="text" formControlName="customType">
-          </mat-form-field>
-        </div>
-          <div class="cost-form-group">
-          <mat-form-field class="full-width">
-            <mat-label>Description</mat-label>
-            <textarea matInput type="text" formControlName="description"></textarea>
-          </mat-form-field>
-          <button mat-icon-button color="primary" (click)="removeCost(i)">
-            <mat-icon>delete</mat-icon>
-          </button>
+          <div class="form-row">
+            <div class="form-row-group">
+              <app-input-wrapper [label]="'Estimated cost'" [prefix]="'€ &nbsp;'" [placeholder]="'1000.00'"
+                                 [control]="getFormControl(i, 'value')">
+              </app-input-wrapper>
+              <mat-form-field>
+                <mat-label>Cost Type</mat-label>
+                <mat-select formControlName="type">
+                  <mat-option *ngFor="let type of costType | keyvalue" [value]="type.value">
+                    {{type.value}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <ng-container *ngIf="item.value.type === costType.other">
+                <app-input-wrapper [label]="'Please specify the cost type'" [type]="'text'"
+                                   [control]="getFormControl(i, 'customType')">
+                </app-input-wrapper>
+              </ng-container>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-row-group">
+              <app-textarea-wrapper [label]="'Description'" [control]="getFormControl(i, 'description')">
+              </app-textarea-wrapper>
+            </div>
           </div>
         </div>
       </mat-expansion-panel>
     </mat-accordion>
-  </form>
+  </div>
 </ng-container>

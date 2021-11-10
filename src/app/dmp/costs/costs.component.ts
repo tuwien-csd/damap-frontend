@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {CostType} from '../../domain/enum/cost-type.enum';
 
 @Component({
@@ -24,7 +24,11 @@ export class CostsComponent implements OnInit {
   }
 
   get list() {
-    return this.costsStep.get('list') as FormArray;
+    return this.costsStep?.get('list') as FormArray;
+  }
+
+  getFormControl(index: number, controlName: string): FormControl {
+    return (this.list.at(index) as FormGroup)?.controls[controlName] as FormControl;
   }
 
   addCost() {
@@ -33,9 +37,5 @@ export class CostsComponent implements OnInit {
 
   removeCost(index: number) {
     this.costToRemove.emit(index);
-  }
-
-  openExternalLink() {
-    window.open(this.fairLink, '_blank');
   }
 }

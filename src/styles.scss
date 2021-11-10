@@ -94,3 +94,17 @@ mat-card {
 #cdk-step-content-0-7 {
   overflow: visible;
 }
+
+/* Form row styling */
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-row-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  gap: 1rem;
+  align-items: baseline;
+}

@@ -1,37 +1,13 @@
-<form [formGroup]="docDataStep">
-  <mat-form-field class="full-width" appearance="fill">
-    <mat-label class="wrap-label">Please indicate which metadata will be provided to help others identify,
-      discover and reuse the data.
-    </mat-label>
-     <!--<textarea matInput formControlName="metadata"></textarea>-->
-     <input type = "text" matInput formControlName="metadata"[matAutocomplete] = "auto"/>
-     <mat-autocomplete #auto = "matAutocomplete">
-         <mat-option *ngFor = "let option of optionsMetadata" [value] = "option">
-             {{option}}
-         </mat-option>
-     </mat-autocomplete>
+<app-textarea-wrapper
+  [label]="'Please indicate which metadata will be provided to help others identify, discover and reuse the data.'"
+  [control]="metadata" [autocompleteOptions]="optionsMetadata">
+</app-textarea-wrapper>
 
-  </mat-form-field>
+<app-textarea-wrapper [label]="'How will the research data be generated and which methods will be used?'"
+                      [control]="dataGeneration">
+</app-textarea-wrapper>
 
-  <mat-form-field class="full-width" appearance="fill">
-    <mat-label class="wrap-label">How will the research data be generated and which methods will be used?</mat-label>
-   <textarea matInput formControlName="dataGeneration"></textarea>
-     <!--<input type = "text" matInput formControlName="dataGeneration"[matAutocomplete] = "auto1"/>
-          <mat-autocomplete #auto1 = "matAutocomplete">
-              <mat-option *ngFor = "let option of optionsDataGeneration" [value] = "option">
-                  {{option}}
-              </mat-option>
-          </mat-autocomplete>-->
-  </mat-form-field>
-
-  <mat-form-field class="full-width" appearance="fill">
-    <mat-label class="wrap-label">How will you structure the data and handle versioning?</mat-label>
-       <!--<textarea matInput formControlName="structure"></textarea>-->
-       <input type = "text" matInput formControlName="structure"[matAutocomplete] = "auto2"/>
-          <mat-autocomplete #auto2 = "matAutocomplete">
-              <mat-option *ngFor = "let option of optionsStructureAndVersioning" [value] = "option">
-                  {{option}}
-              </mat-option>
-          </mat-autocomplete>
-  </mat-form-field>
-</form>
+<app-textarea-wrapper
+  [label]="'How will you structure the data and handle versioning?'"
+  [control]="structure" [autocompleteOptions]="optionsStructureAndVersioning">
+</app-textarea-wrapper>
