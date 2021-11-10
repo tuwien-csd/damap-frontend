@@ -276,7 +276,7 @@ export class DmpComponent implements OnInit {
       .subscribe(members => {
         this.projectMembers = members;
         for (const member of members) {
-          if (member.roleInProject === 'Project leader') {
+          if (member.projectLeader) {
             this.changeContactPerson(member.person);
             break;
           }
