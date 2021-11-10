@@ -1,18 +1,14 @@
 <h1 mat-dialog-title>Edit dataset</h1>
 
 <div mat-dialog-content id="datasetDialog">
-  <form [formGroup]="dataset">
-    <div class="dialogRow">
-        <mat-form-field appearance="fill">
-          <mat-label>Dataset Title</mat-label>
-          <input matInput type="text" formControlName="title" required>
-        </mat-form-field>
-    </div>
+  <div [formGroup]="dataset">
+    <app-input-wrapper [label]="'Dataset title'" [control]="title"></app-input-wrapper>
     <div class="dialogRow">
       <mat-form-field>
         <mat-label>Estimated type</mat-label>
         <mat-select formControlName="type" required>
-          <mat-option class ="type-selection" *ngFor="let type of FILE_TYPES | keyvalue: originalOrder" [value]="type.value.label">
+          <mat-option class="type-selection" *ngFor="let type of FILE_TYPES | keyvalue: originalOrder"
+                      [value]="type.value.label">
             {{type.value.label}} <br/>
             <span class="type-description" *ngIf="type.value.description"> [{{type.value.description}}]</span>
           </mat-option>
@@ -29,16 +25,13 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="dialogRow">
-        <mat-form-field appearance="fill">
-          <mat-label>Comment</mat-label>
-          <input matInput formControlName="comment">
-        </mat-form-field>
-    </div>
-  </form>
+    <app-input-wrapper [label]="'Comment'" [control]="comment"></app-input-wrapper>
+  </div>
 </div>
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="dataset" mat-raised-button color="primary">Update</button>
+  <button mat-button [mat-dialog-close]="dataset" mat-raised-button color="primary" [disabled]="dataset.invalid">
+    Update
+  </button>
 </div>

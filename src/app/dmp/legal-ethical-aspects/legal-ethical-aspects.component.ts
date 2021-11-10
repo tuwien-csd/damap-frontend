@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {ComplianceType} from '../../domain/enum/compliance-type.enum';
 
 @Component({
@@ -13,7 +13,7 @@ export class LegalEthicalAspectsComponent implements OnInit {
   @Input() legalEthicalStep: FormGroup;
   @Input() datasets: FormArray;
 
-  optionsLinksEthics:string[] = ['Guidelines on Safeguarding Good Scientific Practice']; 
+  optionsLinksEthics: string[] = ['Guidelines on Safeguarding Good Scientific Practice'];
 
   questions = [
     {
@@ -33,6 +33,30 @@ export class LegalEthicalAspectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  get personalDataAccess(): FormControl {
+    return this.legalEthicalStep?.get('personalDataAccess') as FormControl;
+  }
+
+  get otherPersonalDataCompliance(): FormControl {
+    return this.legalEthicalStep?.get('otherPersonalDataCompliance') as FormControl;
+  }
+
+  get sensitiveDataSecurity(): FormControl {
+    return this.legalEthicalStep?.get('sensitiveDataSecurity') as FormControl;
+  }
+
+  get legalRestrictionsComment(): FormControl {
+    return this.legalEthicalStep?.get('legalRestrictionsComment') as FormControl;
+  }
+
+  get ethicsReport(): FormControl {
+    return this.legalEthicalStep?.get('ethicsReport') as FormControl;
+  }
+
+  get ethicalComplianceStatement(): FormControl {
+    return this.legalEthicalStep?.get('ethicalComplianceStatement') as FormControl;
   }
 
   get isOtherSelected() {
