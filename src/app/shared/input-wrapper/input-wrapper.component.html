@@ -1,7 +1,8 @@
 <mat-form-field [appearance]="appearance">
   <mat-label class="wrap-label">{{label}}</mat-label>
   <span matPrefix>{{prefix}}</span>
-  <input matInput [formControl]="control" [placeholder]="placeholder" [type]="type" [required]="required">
+  <input matInput [formControl]="control" [placeholder]="placeholder" [type]="type || 'text'" [required]="required"
+         [step]="type === 'number' ? 0.01 : null">
   <mat-error *ngIf="!control?.errors?.required && control?.errors?.empty">
     Please provide a valid value.
   </mat-error>

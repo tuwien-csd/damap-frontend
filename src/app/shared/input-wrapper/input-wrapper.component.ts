@@ -12,7 +12,7 @@ export class InputWrapperComponent implements OnInit {
   @Input() label: string;
   @Input() control: FormControl;
   @Input() prefix: string;
-  @Input() type: 'text';
+  @Input() type: string;
   @Input() placeholder: string;
   @Input() appearance: MatFormFieldAppearance = 'standard';
 
