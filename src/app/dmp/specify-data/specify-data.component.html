@@ -95,10 +95,7 @@
 
 <!-- NO DATA -->
 <ng-container *ngIf="specifyDataStep?.value.kind === none">
-  <div [formGroup]="specifyDataStep">
-    <mat-form-field [style]="'width:100%;'" appearance="fill">
-      <mat-label>Please explain why you won't create or analyse any research data.</mat-label>
-      <textarea matInput formControlName="explanation"></textarea>
-    </mat-form-field>
-  </div>
+  <app-textarea-wrapper [label]="'Please explain why you won\'t create or analyse any research data.'"
+                        [control]="explanation">
+  </app-textarea-wrapper>
 </ng-container>
