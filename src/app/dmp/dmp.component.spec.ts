@@ -7,8 +7,11 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {BackendService} from '../services/backend.service';
 import {FeedbackService} from '../services/feedback.service';
 import {FormService} from '../services/form.service';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {LoadingState} from '../domain/enum/loading-state.enum';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatButtonModule} from '@angular/material/button';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('DmpComponent', () => {
   let component: DmpComponent;
@@ -28,13 +31,16 @@ describe('DmpComponent', () => {
         'addStorageToForm', 'removeStorageFromForm', 'addExternalStorageToForm', 'removeExternalStorageFromForm',
         'addRepositoryToForm', 'removeRepositoryFromForm', 'addCostToForm', 'removeCostFromForm', 'mapDmpToForm']);
     formSpy.createDmpForm.and.returnValue(new FormGroup({
-      project: new FormControl()
+      project: new FormControl(),
+      data: new FormGroup({kind: new FormControl('SPECIFY')}),
+      datasets: new FormArray([])
     }));
     const backendSpy = jasmine.createSpyObj('BackendService',
       ['getDmpById', 'getProjectMembers', 'editDmp', 'createDmp', 'analyseFileData']);
     const feedbackSpy = jasmine.createSpyObj('FeedbackService', ['error', 'success']);
     await TestBed.configureTestingModule({
       imports: [
+        ReactiveFormsModule, MatStepperModule, MatButtonModule, NoopAnimationsModule,
         RouterTestingModule.withRoutes(
           [/*{path: 'plans', component: PlansComponent}*/]
         )
