@@ -467,7 +467,7 @@ export class FormService {
       id: [null, {disabled: true}],
       title: ['New cost', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       currencyCode: ['EUR', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
-      value: [null, Validators.pattern('^[0-9]*\.?[0-9]{0,2}$')], // validate format
+      value: [null, Validators.pattern(/^\d+[,.]?\d{0,2}$/)], // validate currency format
       type: [null],
       customType: [null],
       description: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]

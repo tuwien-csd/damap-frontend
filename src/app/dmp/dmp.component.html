@@ -81,5 +81,5 @@
 </mat-vertical-stepper>
 <div id="save-dmp">
   <button mat-button color="primary" [routerLink]="'/plans'" routerLinkActive="active">Discard changes</button>
-  <button mat-raised-button color="primary" (click)="saveDmp()">Save changes</button>
+  <button mat-raised-button color="primary" (click)="saveDmp()" [disabled]="dmpForm.invalid">Save changes</button>
 </div>
