@@ -32,20 +32,12 @@
           </mat-select>
         </mat-form-field>
         <ng-container *ngIf="isOtherSelected">
-          <mat-form-field appearance="fill" [style]="'width: 100%'">
-            <mat-label [style]="'white-space: normal;'">
-              Please specify what other measures are taken.
-            </mat-label>
-            <input matInput formControlName="otherPersonalDataCompliance">
-          </mat-form-field>
+          <app-input-wrapper [label]="'Please specify what other measures are taken.'"
+                             [control]="otherPersonalDataCompliance"></app-input-wrapper>
         </ng-container>
       </div>
-      <mat-form-field appearance="fill" [style]="'width: 100%'">
-        <mat-label [style]="'white-space: normal;'">
-          How will you ensure that only authorised users can access personal data?
-        </mat-label>
-        <textarea matInput formControlName="personalDataAccess"></textarea>
-      </mat-form-field>
+      <app-input-wrapper [label]="'How will you ensure that only authorised users can access personal data?'"
+                         [appearance]="'fill'" [control]="personalDataAccess"></app-input-wrapper>
     </ng-container>
     <ng-container
       *ngIf="question.model === 'sensitiveData' && legalEthicalStep?.value.sensitiveData && datasets?.length">
@@ -62,16 +54,12 @@
           </div>
         </section>
       </div>
-      <mat-form-field appearance="fill" [style]="'width: 100%'">
-        <mat-label [style]="'white-space: normal;'">
-          What kind of additional security measures in terms of physical security,
-          network security, and security of computer systems and files will be taken
-          to ensure that stored and transferred sensitive data is safe?
-        </mat-label>
-        <textarea matInput formControlName="sensitiveDataSecurity"></textarea>
-      </mat-form-field>
+      <app-textarea-wrapper
+        [label]="'What kind of additional security measures in terms of physical security, network security, and security of computer systems and files will be taken to ensure that stored and transferred sensitive data is safe?'"
+        [control]="sensitiveDataSecurity"></app-textarea-wrapper>
     </ng-container>
-    <ng-container *ngIf="question.model === 'legalRestrictions' && legalEthicalStep?.value.legalRestrictions && datasets?.length">
+    <ng-container
+      *ngIf="question.model === 'legalRestrictions' && legalEthicalStep?.value.legalRestrictions && datasets?.length">
       <div>
         <section class="dataset-checkbox-section" [formGroup]="dmpForm">
           Please select the datasets concerned:
@@ -86,12 +74,8 @@
         </section>
       </div>
       <div>
-        <mat-form-field appearance="fill" [style]="'width: 100%'">
-          <mat-label [style]="'white-space: normal;'">
-            Please explain:
-          </mat-label>
-          <input matInput formControlName="legalRestrictionsComment">
-        </mat-form-field>
+        <app-input-wrapper [label]="'Please explain:'" [appearance]="'fill'"
+                           [control]="legalRestrictionsComment"></app-input-wrapper>
       </div>
     </ng-container>
     <ng-container *ngIf="question.model === 'ethicalIssues' && legalEthicalStep?.value.ethicalIssues">
@@ -102,23 +86,19 @@
         <mat-radio-button class="boolean-mat-radio-button" [value]="false">No
         </mat-radio-button>
       </mat-radio-group>
-      <mat-form-field *ngIf="legalEthicalStep?.value.committeeApproved"
-                      appearance="fill" [style]="'width:100%'">
-        <mat-label>Links to ethics report or related documents:</mat-label>
-             <textarea matInput formControlName="ethicsReport"></textarea>
-   <!-- <input type = "text" matInput formControlName="ethicsReport" [matAutocomplete] = "autol"/>
-    <mat-autocomplete #autol = "matAutocomplete">
-        <mat-option *ngFor = "let option of optionsLinksEthics" [value] = "option">
-          <a href="https://www.tuwien.at/index.php?eID=dms&s=4&path=Directives%20and%20Regulations%20of%20the%20Rectorate/Code%20of%20Conduct%20%E2%80%93%20Rules%20to%20Ensure%20Good%20Scientific%20Practice.pdf"> {{option}} 
-          </a>
-        </mat-option>
-    </mat-autocomplete>-->
-      </mat-form-field>
+      <app-textarea-wrapper *ngIf="legalEthicalStep?.value.committeeApproved"
+                            [label]="'Links to ethics report or related documents:'"
+                            [control]="ethicsReport"></app-textarea-wrapper>
+      <!-- <input type = "text" matInput formControlName="ethicsReport" [matAutocomplete] = "autol"/>
+       <mat-autocomplete #autol = "matAutocomplete">
+           <mat-option *ngFor = "let option of optionsLinksEthics" [value] = "option">
+             <a href="https://www.tuwien.at/index.php?eID=dms&s=4&path=Directives%20and%20Regulations%20of%20the%20Rectorate/Code%20of%20Conduct%20%E2%80%93%20Rules%20to%20Ensure%20Good%20Scientific%20Practice.pdf"> {{option}}
+             </a>
+           </mat-option>
+       </mat-autocomplete>-->
     </ng-container>
   </div>
 
-  <mat-form-field appearance="fill" [style]="'width:100%'">
-    <mat-label>Other statement regarding ethical compliance (optional):</mat-label>
-    <textarea matInput formControlName="optionalStatement"></textarea>
-  </mat-form-field>
+  <app-textarea-wrapper [label]="'Other statement regarding ethical compliance (optional):'"
+                        [control]="ethicalComplianceStatement"></app-textarea-wrapper>
 </div>
