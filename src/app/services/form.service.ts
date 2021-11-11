@@ -11,6 +11,7 @@ import {Storage} from '../domain/storage';
 import {AccessRight} from '../domain/enum/access-right';
 import {DataKind} from '../domain/enum/data-kind.enum';
 import {ComplianceType} from '../domain/enum/compliance-type.enum';
+import {notEmptyValidator} from '../validators/not-empty.validator';
 
 @Injectable({
   providedIn: 'root'
@@ -354,7 +355,7 @@ export class FormService {
   public createDatasetFormGroup(title: string): FormGroup {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
-      title: [title, Validators.required],
+      title: [title, [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       license: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       startDate: [null],
       type: [null],
@@ -399,7 +400,7 @@ export class FormService {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
       hostId: [null, {disabled: true}],
-      title: ['', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
+      title: ['', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       datasets: [[]]
     });
   }
@@ -418,7 +419,7 @@ export class FormService {
   private createExternalStorageFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
-      title: ['Other', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
+      title: ['Other', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       storageLocation: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       backupLocation: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       backupFrequency: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
@@ -464,7 +465,7 @@ export class FormService {
   private createCostFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
-      title: ['New cost', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
+      title: ['New cost', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       currencyCode: ['EUR', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
       value: [null, Validators.pattern('^[0-9]*\.?[0-9]{0,2}$')], // validate format
       type: [null],
