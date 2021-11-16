@@ -17,4 +17,7 @@ export interface Dataset {
   selectedProjectMembersAccess: AccessRight;
   otherProjectMembersAccess: AccessRight;
   publicAccess: AccessRight;
+  delete: boolean;
+  dateOfDeletion: Date;
+  reasonForDeletion: string;
 }
