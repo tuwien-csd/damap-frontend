@@ -198,6 +198,12 @@ export class FormService {
 
     if (formValue.data.kind === DataKind.SPECIFY) {
       result.datasets = formValue.datasets;
+      for (const dataset of result.datasets) {
+        if (!dataset.delete) {
+          dataset.dateOfDeletion = null;
+          dataset.reasonForDeletion = ''
+        }
+      }
       result.hosts = formValue.hosts;
       result.storage = formValue.storage;
       result.externalStorage = formValue.externalStorage;
@@ -368,7 +374,10 @@ export class FormService {
       referenceHash: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       selectedProjectMembersAccess: [AccessRight.write],
       otherProjectMembersAccess: [AccessRight.write],
-      publicAccess: [AccessRight.read]
+      publicAccess: [AccessRight.read],
+      delete: [false],
+      dateOfDeletion: [null],
+      reasonForDeletion: ['', Validators.maxLength(4000)]
     });
   }
 
