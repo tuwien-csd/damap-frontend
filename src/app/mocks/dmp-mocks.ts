@@ -69,9 +69,9 @@ export const completeDmp: Dmp = {
       selectedProjectMembersAccess: AccessRight.write,
       otherProjectMembersAccess: AccessRight.read,
       publicAccess: AccessRight.none,
-      delete: false,
-      dateOfDeletion: null,
-      reasonForDeletion: ''
+      delete: true,
+      dateOfDeletion: new Date(20000),
+      reasonForDeletion: 'reason1'
     },
     {
       comment: '',
@@ -89,9 +89,9 @@ export const completeDmp: Dmp = {
       selectedProjectMembersAccess: AccessRight.write,
       otherProjectMembersAccess: AccessRight.read,
       publicAccess: AccessRight.none,
-      delete: true,
-      dateOfDeletion: new Date(20000),
-      reasonForDeletion: 'reason1'
+      delete: false,
+      dateOfDeletion: null,
+      reasonForDeletion: ''
     }
   ],
   ethicalComplianceStatement: 'statement regarding ethical compliance',

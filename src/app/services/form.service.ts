@@ -199,6 +199,9 @@ export class FormService {
     if (formValue.data.kind === DataKind.SPECIFY) {
       result.datasets = formValue.datasets;
       for (const dataset of result.datasets) {
+        if (dataset.dataAccess !== DataAccessType.closed) {
+          dataset.delete = false;
+        }
         if (!dataset.delete) {
           dataset.dateOfDeletion = null;
           dataset.reasonForDeletion = ''
@@ -280,7 +283,8 @@ export class FormService {
     const formGroup = this.createDatasetFormGroup(title);
     formGroup.patchValue({
       referenceHash: reference,
-      startDate: form.value.project?.end || null
+      startDate: form.value.project?.end || null,
+      dateOfDeletion: form.value.project?.end || null,
     });
     (form.get('datasets') as FormArray).push(formGroup);
   }

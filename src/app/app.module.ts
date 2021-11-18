@@ -69,6 +69,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ConfigService} from './services/config.service';
 import {DataAccessComponent} from './dmp/data-storage/data-access/data-access.component';
 import {SharedModule} from './shared/shared.module';
+import {DataDeletionComponent} from './dmp/data-deletion/data-deletion.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import {SharedModule} from './shared/shared.module';
     RepoFilterComponent,
     TooltipComponent,
     DataAccessComponent,
+    DataDeletionComponent,
 
     // Directives
     DragdropDirective,
