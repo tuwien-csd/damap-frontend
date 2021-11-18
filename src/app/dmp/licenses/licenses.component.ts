@@ -41,4 +41,8 @@ export class LicensesComponent implements OnInit {
   get closed() {
     return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.closed);
   }
+
+  getFormGroup(index: number): FormGroup {
+    return this.datasets.at(index) as FormGroup;
+  }
 }
