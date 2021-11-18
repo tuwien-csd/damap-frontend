@@ -63,7 +63,7 @@
           </div>
         </ng-container>
         <ng-container *ngIf="dataset.value.dataAccess === accessType.closed">
-          <app-data-deletion [dataset]="getFormGroup(i)"></app-data-deletion>
+          <app-data-deletion [dataset]="getFormGroup(i)" [dmpForm]="dmpForm"></app-data-deletion>
         </ng-container>
       </ng-container>
     </mat-card>

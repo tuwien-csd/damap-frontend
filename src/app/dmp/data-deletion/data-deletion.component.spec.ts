@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DataDeletionComponent} from './data-deletion.component';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {MatSliderModule} from '@angular/material/slider';
 
 describe('DataDeletionComponent', () => {
@@ -23,6 +23,9 @@ describe('DataDeletionComponent', () => {
       delete: new FormControl(true),
       dateOfDeletion: new FormControl(null),
       reasonForDeletion: new FormControl('reason')
+    });
+    component.dmpForm = new FormGroup({
+      hosts: new FormArray([])
     });
     fixture.detectChanges();
   });

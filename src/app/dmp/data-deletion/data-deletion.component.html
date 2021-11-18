@@ -1,4 +1,10 @@
 <div [formGroup]="dataset">
+  <div class="warning" *ngIf="willBePublished">
+    <div class="warning-icon">
+      <mat-icon>error_outline</mat-icon>
+    </div>
+    This dataset was chosen for publication. Are you sure it shall be deleted?
+  </div>
   <div>
     <p>Does this dataset have to be deleted, e.g. for contractual, regulatory, or ethical reasons?
       If yes, please add an estimated date for the deletion, the reason for deletion, and a responsible person.</p>

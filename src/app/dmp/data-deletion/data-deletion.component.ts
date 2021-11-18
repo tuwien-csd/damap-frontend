@@ -9,6 +9,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 export class DataDeletionComponent implements OnInit {
 
   @Input() dataset: FormGroup;
+  @Input() dmpForm: FormGroup;
 
   constructor() {
   }
@@ -18,6 +19,11 @@ export class DataDeletionComponent implements OnInit {
 
   get reasonForDeletion(): FormControl {
     return this.dataset.controls.reasonForDeletion as FormControl;
+  }
+
+  get willBePublished(): boolean {
+    return this.dmpForm.value.hosts.filter(item =>
+      item.datasets.includes(this.dataset.value.referenceHash)).length;
   }
 
 }
