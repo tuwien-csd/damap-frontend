@@ -30,8 +30,8 @@ export class LicensesComponent implements OnInit {
   }
 
   get isAnonymisedOrPseudonymised() {
-    return this.dmpForm?.value.legal.personalDataCompliance?.includes(ComplianceType.Anonymisation) ||
-      this.dmpForm?.value.legal.personalDataCompliance?.includes(ComplianceType.Pseudonymisation);
+    return this.dmpForm?.value.legal.personalDataCompliance?.includes(ComplianceType.ANONYMISATION) ||
+      this.dmpForm?.value.legal.personalDataCompliance?.includes(ComplianceType.PSEUDONYMISATION);
   }
 
   get restricted() {

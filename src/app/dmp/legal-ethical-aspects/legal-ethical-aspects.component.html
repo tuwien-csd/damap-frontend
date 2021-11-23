@@ -32,14 +32,15 @@
               {{option.value}}
             </mat-option>
           </mat-select>
+          <mat-hint>Make sure you follow the TU Wien guidance on informed consent.</mat-hint>
         </mat-form-field>
+        <br><br>
         <ng-container *ngIf="isOtherSelected">
-          <app-input-wrapper [label]="'Please specify what other measures are taken.'"
-                             [control]="otherPersonalDataCompliance"></app-input-wrapper>
+          <app-input-wrapper [label]="'Please specify what other measures are taken:'"
+                             [control]="otherPersonalDataCompliance"
+                             [appearance]="'fill'"></app-input-wrapper>
         </ng-container>
       </div>
-      <app-input-wrapper [label]="'How will you ensure that only authorised users can access personal data?'"
-                         [appearance]="'fill'" [control]="personalDataAccess"></app-input-wrapper>
     </ng-container>
 
     <!--Sensitive Data-->
