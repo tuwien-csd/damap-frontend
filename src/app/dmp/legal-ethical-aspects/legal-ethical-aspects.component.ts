@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {ComplianceType} from '../../domain/enum/compliance-type.enum';
 import {SecurityMeasure} from '../../domain/enum/security-measure';
+import {Agreement} from '../../domain/enum/agreement';
 
 @Component({
   selector: 'app-dmp-legal-ethical-aspects',
@@ -28,6 +29,7 @@ export class LegalEthicalAspectsComponent implements OnInit {
 
   complianceOptions: any = ComplianceType;
   securityOptions: any = SecurityMeasure;
+  agreementOptions: any = Agreement;
 
   originalOrder = (): number => 0;
 
@@ -57,6 +59,14 @@ export class LegalEthicalAspectsComponent implements OnInit {
     return this.legalEthicalStep?.get('legalRestrictionsComment') as FormControl;
   }
 
+  get otherLegalRestrictionsDocuments(): FormControl {
+    return this.legalEthicalStep.get('otherLegalRestrictionsDocuments') as FormControl;
+  }
+
+  get dataRightsAndAccessControl(): FormControl {
+    return this.legalEthicalStep.get('dataRightsAndAccessControl') as FormControl;
+  }
+
   get ethicsReport(): FormControl {
     return this.legalEthicalStep?.get('ethicsReport') as FormControl;
   }
@@ -71,6 +81,10 @@ export class LegalEthicalAspectsComponent implements OnInit {
 
   get isOtherMeasureSelected() {
     return this.legalEthicalStep.controls.sensitiveDataSecurity.value?.includes(SecurityMeasure.OTHER);
+  }
+
+  get isOtherDocumentSelected() {
+    return this.legalEthicalStep.controls.legalRestrictionsDocuments.value?.includes(Agreement.OTHER);
   }
 
 }

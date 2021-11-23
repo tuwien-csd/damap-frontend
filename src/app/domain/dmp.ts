@@ -33,7 +33,10 @@ export interface Dmp {
   otherDataSecurityMeasures: string;
   sensitiveDataAccess: string;
   legalRestrictions: boolean;
+  legalRestrictionsDocuments: string[];
+  otherLegalRestrictionsDocuments: string;
   legalRestrictionsComment: string;
+  dataRightsAndAccessControl: string;
   ethicalIssuesExist: boolean;
   committeeApproved: boolean;
   ethicsReport: string;
