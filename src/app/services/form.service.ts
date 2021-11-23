@@ -11,6 +11,7 @@ import {Storage} from '../domain/storage';
 import {AccessRight} from '../domain/enum/access-right';
 import {DataKind} from '../domain/enum/data-kind.enum';
 import {ComplianceType} from '../domain/enum/compliance-type.enum';
+import {SecurityMeasure} from '../domain/enum/security-measure';
 import {notEmptyValidator} from '../validators/not-empty.validator';
 
 @Injectable({
@@ -57,11 +58,13 @@ export class FormService {
         personalDataCompliance: [[]],
         otherPersonalDataCompliance: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveData: [false],
+        sensitiveDataSecurity: [[], Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        otherDataSecurityMeasures: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        sensitiveDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictions: [false],
         legalRestrictionsComment: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         ethicalIssues: [false],
         committeeApproved: [false],
-        sensitiveDataSecurity: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         ethicsReport: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         ethicalComplianceStatement: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       }),
@@ -103,11 +106,13 @@ export class FormService {
         personalDataCompliance: dmp.personalDataCompliance,
         otherPersonalDataCompliance: dmp.otherPersonalDataCompliance,
         sensitiveData: dmp.sensitiveData,
+        sensitiveDataSecurity: dmp.sensitiveDataSecurity,
+        otherDataSecurityMeasures: dmp.otherDataSecurityMeasures,
+        sensitiveDataAccess: dmp.sensitiveDataAccess,
         legalRestrictions: dmp.legalRestrictions,
         legalRestrictionsComment: dmp.legalRestrictionsComment,
         ethicalIssues: dmp.ethicalIssuesExist,
         committeeApproved: dmp.committeeApproved,
-        sensitiveDataSecurity: dmp.sensitiveDataSecurity,
         ethicsReport: dmp.ethicsReport,
         ethicalComplianceStatement: dmp.ethicalComplianceStatement,
       },
@@ -186,7 +191,9 @@ export class FormService {
       restrictedAccessInfo: '',
       restrictedDataAccess: '',
       sensitiveData: false,
-      sensitiveDataSecurity: '',
+      sensitiveDataSecurity: [],
+      otherDataSecurityMeasures: '',
+      sensitiveDataAccess: '',
       storage: [],
       structure: '',
       targetAudience: '',
@@ -220,6 +227,10 @@ export class FormService {
       if (formValue.legal.sensitiveData) {
         result.sensitiveData = true;
         result.sensitiveDataSecurity = formValue.legal.sensitiveDataSecurity;
+        result.sensitiveDataAccess = formValue.legal.sensitiveDataAccess;
+        if (result.sensitiveDataSecurity.includes(SecurityMeasure.OTHER)) {
+          result.otherDataSecurityMeasures = formValue.legal.otherDataSecurityMeasures;
+        }
       } else {
         for (const dataset of result.datasets) {
           dataset.sensitiveData = false;

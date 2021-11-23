@@ -30,7 +30,9 @@ export interface Dmp {
   personalDataCompliance: string[];
   otherPersonalDataCompliance: string;
   sensitiveData: boolean;
-  sensitiveDataSecurity: string;
+  sensitiveDataSecurity: string[];
+  otherDataSecurityMeasures: string;
+  sensitiveDataAccess: string;
   legalRestrictions: boolean;
   legalRestrictionsComment: string;
   ethicalIssuesExist: boolean;

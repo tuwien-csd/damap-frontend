@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {ComplianceType} from '../../domain/enum/compliance-type.enum';
+import {SecurityMeasure} from '../../domain/enum/security-measure';
 
 @Component({
   selector: 'app-dmp-legal-ethical-aspects',
@@ -26,6 +27,7 @@ export class LegalEthicalAspectsComponent implements OnInit {
   ];
 
   complianceOptions: any = ComplianceType;
+  securityOptions: any = SecurityMeasure;
 
   originalOrder = (): number => 0;
 
@@ -35,16 +37,20 @@ export class LegalEthicalAspectsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get sensitiveDataAccess(): FormControl {
+    return this.legalEthicalStep.get('sensitiveDataAccess') as FormControl;
+  }
+
   get personalDataAccess(): FormControl {
-    return this.legalEthicalStep?.get('personalDataAccess') as FormControl;
+    return this.legalEthicalStep.get('personalDataAccess') as FormControl;
   }
 
   get otherPersonalDataCompliance(): FormControl {
     return this.legalEthicalStep?.get('otherPersonalDataCompliance') as FormControl;
   }
 
-  get sensitiveDataSecurity(): FormControl {
-    return this.legalEthicalStep?.get('sensitiveDataSecurity') as FormControl;
+  get otherDataSecurityMeasures(): FormControl {
+    return this.legalEthicalStep.get('otherDataSecurityMeasures') as FormControl;
   }
 
   get legalRestrictionsComment(): FormControl {
@@ -61,6 +67,10 @@ export class LegalEthicalAspectsComponent implements OnInit {
 
   get isOtherSelected() {
     return this.legalEthicalStep?.controls.personalDataCompliance?.value.includes(ComplianceType.Other);
+  }
+
+  get isOtherMeasureSelected() {
+    return this.legalEthicalStep.controls.sensitiveDataSecurity.value?.includes(SecurityMeasure.OTHER);
   }
 
 }
