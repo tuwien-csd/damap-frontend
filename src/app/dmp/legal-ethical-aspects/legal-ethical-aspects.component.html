@@ -99,9 +99,23 @@
         </section>
       </div>
       <div>
-        <app-input-wrapper [label]="'Please explain:'" [appearance]="'fill'"
+        <app-input-wrapper [label]="'Please specify the legal restrictions:'" [appearance]="'fill'"
                            [control]="legalRestrictionsComment"></app-input-wrapper>
       </div>
+      <mat-form-field appearance="fill" [style]="'width: 100%'">
+        <mat-label>In which document(s) are these restrictions specified?</mat-label>
+        <mat-select formControlName="legalRestrictionsDocuments" multiple>
+          <mat-option *ngFor="let option of agreementOptions | keyvalue: originalOrder" [value]="option.value">
+            {{option.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <ng-container *ngIf="isOtherDocumentSelected">
+        <app-input-wrapper [label]="'Please specify the other documents:'"
+                           [appearance]="'fill'" [control]="otherLegalRestrictionsDocuments"></app-input-wrapper>
+      </ng-container>
+      <app-input-wrapper [label]="'Who has rights to the produced data and who controls access to the data?'"
+                         [appearance]="'fill'" [control]="dataRightsAndAccessControl"></app-input-wrapper>
     </ng-container>
 
     <!--Ethical Aspects-->

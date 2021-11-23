@@ -12,6 +12,7 @@ import {AccessRight} from '../domain/enum/access-right';
 import {DataKind} from '../domain/enum/data-kind.enum';
 import {ComplianceType} from '../domain/enum/compliance-type.enum';
 import {SecurityMeasure} from '../domain/enum/security-measure';
+import {Agreement} from '../domain/enum/agreement';
 import {notEmptyValidator} from '../validators/not-empty.validator';
 
 @Injectable({
@@ -61,7 +62,10 @@ export class FormService {
         otherDataSecurityMeasures: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictions: [false],
+        legalRestrictionsDocuments: [[]],
+        otherLegalRestrictionsDocuments: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictionsComment: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        dataRightsAndAccessControl: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         ethicalIssues: [false],
         committeeApproved: [false],
         ethicsReport: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
@@ -179,7 +183,10 @@ export class FormService {
       externalStorageInfo: '',
       hosts: [],
       legalRestrictions: false,
+      legalRestrictionsDocuments: [],
+      otherLegalRestrictionsDocuments: '',
       legalRestrictionsComment: '',
+      dataRightsAndAccessControl: '',
       metadata: '',
       noDataExplanation: '',
       otherPersonalDataCompliance: '',
@@ -247,6 +254,11 @@ export class FormService {
 
       if (formValue.legal.legalRestrictions) {
         result.legalRestrictions = true;
+        result.legalRestrictionsDocuments = formValue.legal.legalRestrictionsDocuments;
+        result.dataRightsAndAccessControl = formValue.legal.dataRightsAndAccessControl;
+        if (result.legalRestrictionsDocuments.includes(Agreement.OTHER)) {
+          result.otherLegalRestrictionsDocuments = formValue.legal.otherLegalRestrictionsDocuments;
+        }
         result.legalRestrictionsComment = formValue.legal.legalRestrictionsComment;
       } else {
         for (const dataset of result.datasets) {
