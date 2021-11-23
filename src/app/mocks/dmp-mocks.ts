@@ -68,7 +68,10 @@ export const completeDmp: Dmp = {
       type: 'STANDARD_OFFICE_DOCUMENTS',
       selectedProjectMembersAccess: AccessRight.write,
       otherProjectMembersAccess: AccessRight.read,
-      publicAccess: AccessRight.none
+      publicAccess: AccessRight.none,
+      delete: true,
+      dateOfDeletion: new Date(20000),
+      reasonForDeletion: 'reason1'
     },
     {
       comment: '',
@@ -85,7 +88,10 @@ export const completeDmp: Dmp = {
       type: 'STANDARD_OFFICE_DOCUMENTS',
       selectedProjectMembersAccess: AccessRight.write,
       otherProjectMembersAccess: AccessRight.read,
-      publicAccess: AccessRight.none
+      publicAccess: AccessRight.none,
+      delete: false,
+      dateOfDeletion: null,
+      reasonForDeletion: ''
     }
   ],
   ethicalComplianceStatement: 'statement regarding ethical compliance',
@@ -226,7 +232,10 @@ export const noDataDmp: Dmp = {
       type: 'STANDARD_OFFICE_DOCUMENTS',
       selectedProjectMembersAccess: AccessRight.write,
       otherProjectMembersAccess: AccessRight.read,
-      publicAccess: AccessRight.none
+      publicAccess: AccessRight.none,
+      delete: false,
+      dateOfDeletion: new Date(20000),
+      reasonForDeletion: 'reason2'
     },
     {
       comment: '',
@@ -243,7 +252,10 @@ export const noDataDmp: Dmp = {
       type: 'STANDARD_OFFICE_DOCUMENTS',
       selectedProjectMembersAccess: AccessRight.write,
       otherProjectMembersAccess: AccessRight.read,
-      publicAccess: AccessRight.none
+      publicAccess: AccessRight.none,
+      delete: true,
+      dateOfDeletion: new Date(20000),
+      reasonForDeletion: 'reason1'
     }
   ],
   ethicalComplianceStatement: 'statement regarding ethical compliance',
