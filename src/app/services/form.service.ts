@@ -54,8 +54,7 @@ export class FormService {
       externalStorageInfo: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       legal: this.formBuilder.group({
         personalData: [false],
-        personalDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-        personalDataCompliance: [[]],
+        personalDataCompliance: [[ComplianceType.INFORMED_CONSENT]],
         otherPersonalDataCompliance: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveData: [false],
         sensitiveDataSecurity: [[], Validators.maxLength(this.TEXT_MAX_LENGTH)],
@@ -102,7 +101,6 @@ export class FormService {
       externalStorageInfo: dmp.externalStorageInfo,
       legal: {
         personalData: dmp.personalData,
-        personalDataAccess: dmp.personalDataAccess,
         personalDataCompliance: dmp.personalDataCompliance,
         otherPersonalDataCompliance: dmp.otherPersonalDataCompliance,
         sensitiveData: dmp.sensitiveData,
@@ -186,7 +184,6 @@ export class FormService {
       noDataExplanation: '',
       otherPersonalDataCompliance: '',
       personalData: false,
-      personalDataAccess: '',
       personalDataCompliance: [],
       restrictedAccessInfo: '',
       restrictedDataAccess: '',
@@ -242,7 +239,6 @@ export class FormService {
         result.personalDataCompliance = formValue.legal.personalDataCompliance;
         result.otherPersonalDataCompliance = result.personalDataCompliance.includes(ComplianceType.Other) ?
           formValue.legal.otherPersonalDataCompliance : '';
-        result.personalDataAccess = formValue.legal.personalDataAccess;
       } else {
         for (const dataset of result.datasets) {
           dataset.personalData = false;
