@@ -40,12 +40,15 @@ describe('FormService', () => {
     expect(result.restrictedAccessInfo).toEqual('');
     expect(result.closedAccessInfo).toEqual('');
     expect(result.sensitiveData).toEqual(false);
-    expect(result.sensitiveDataSecurity).toEqual('');
+    expect(result.sensitiveDataSecurity).toEqual([]);
+    expect(result.sensitiveDataAccess).toEqual('');
     expect(result.personalData).toEqual(false);
-    expect(result.personalDataAccess).toEqual('');
     expect(result.personalDataCompliance).toEqual([]);
     expect(result.otherPersonalDataCompliance).toEqual('');
     expect(result.legalRestrictions).toEqual(false);
     expect(result.legalRestrictionsComment).toEqual('');
+    expect(result.legalRestrictionsDocuments).toEqual([]);
+    expect(result.otherLegalRestrictionsDocuments).toEqual('');
+    expect(result.humanParticipants).toEqual(false);
   })
 });
