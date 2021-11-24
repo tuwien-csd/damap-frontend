@@ -70,6 +70,8 @@ import {ConfigService} from './services/config.service';
 import {DataAccessComponent} from './dmp/data-storage/data-access/data-access.component';
 import {SharedModule} from './shared/shared.module';
 import {DataDeletionComponent} from './dmp/data-deletion/data-deletion.component';
+import {EthicalAspectsComponent} from './dmp/legal-ethical-aspects/ethical-aspects/ethical-aspects.component';
+import {InfoMessageComponent} from './widgets/info-message/info-message.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +105,8 @@ import {DataDeletionComponent} from './dmp/data-deletion/data-deletion.component
     TooltipComponent,
     DataAccessComponent,
     DataDeletionComponent,
+    EthicalAspectsComponent,
+    InfoMessageComponent,
 
     // Directives
     DragdropDirective,

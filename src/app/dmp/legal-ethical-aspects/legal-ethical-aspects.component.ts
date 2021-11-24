@@ -23,8 +23,7 @@ export class LegalEthicalAspectsComponent implements OnInit {
       model: 'sensitiveData'
     },
     {label: 'Will personal data be collected/used as part of the project?', model: 'personalData'},
-    {label: 'Are there any other legal restrictions on how data is processed or shared?', model: 'legalRestrictions'},
-    {label: 'Are there any ethical issues associated with your research data?', model: 'ethicalIssues'}
+    {label: 'Are there any other legal restrictions on how data is processed or shared?', model: 'legalRestrictions'}
   ];
 
   complianceOptions: any = ComplianceType;
