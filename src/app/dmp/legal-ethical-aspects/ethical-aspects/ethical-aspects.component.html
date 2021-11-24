@@ -1,0 +1,54 @@
+<div [formGroup]="legalEthicalStep">
+  <label id="humanParticipants">
+    Will you involve human participants in the project and thereby collect or process their personal data?
+  </label>
+  <app-tooltip [tooltip]="'The participation may include activities such as interviews, prototype testing, ' +
+   'observations, surveys, etc.'"></app-tooltip>
+  <mat-radio-group aria-labelledby="humanParticipants" formControlName="humanParticipants">
+    <mat-radio-button class="boolean-mat-radio-button" [value]="true">Yes
+    </mat-radio-button>
+    <mat-radio-button class="boolean-mat-radio-button" [value]="false">No
+    </mat-radio-button>
+  </mat-radio-group>
+  <app-info-message *ngIf="legalEthicalStep.controls.humanParticipants.value">
+    An informed consent for participation (in addition to an informed consent to data processing) is required.
+    For more information, contact the research ethics coordination or consult:
+    <a href="https://colab.tuwien.ac.at/x/eQEhAw" target="_blank">https://colab.tuwien.ac.at/x/eQEhAw</a>.
+  </app-info-message>
+
+  <label id="ethicalIssues">
+    Beyond the use of sensitive personal data, are there any other ethical issues associated with your research?
+  </label>
+  <app-tooltip [tooltip]="'For example: Your research involves human embryos, foetuses, cells or tissues, animals, activities ' +
+   'that may adversely affect the environment or the health and safety of involved persons, artificial intelligence, ' +
+    'activities outside the EU, or there are dual use or misuse aspects that must be addressed.'"></app-tooltip>
+  <mat-radio-group aria-labelledby="ethicalIssues" formControlName="ethicalIssues">
+    <mat-radio-button class="boolean-mat-radio-button" [value]="true">Yes
+    </mat-radio-button>
+    <mat-radio-button class="boolean-mat-radio-button" [value]="false">No
+    </mat-radio-button>
+  </mat-radio-group>
+  <app-info-message *ngIf="legalEthicalStep.controls.ethicalIssues.value">
+    Your research plan may require ethical review. Inform yourself by consulting
+    <a href="https://www.tuwien.at/research-ethics" target="_blank">www.tuwien.at/research-ethics</a>.
+  </app-info-message>
+
+  <label id="committeeReviewed">
+    Was your research plan reviewed by an ethics committee, the
+    <a href="https://www.tuwien.at/en/research/rti-support/research-ethics/pilot-research-ethics-committee"
+       target="_blank">TU Wien Pilot Research Ethics Committee</a>, or a similar body?
+  </label>
+  <mat-radio-group aria-labelledby="committeeReviewed" formControlName="committeeReviewed">
+    <mat-radio-button class="boolean-mat-radio-button" [value]="true">Yes
+    </mat-radio-button>
+    <mat-radio-button class="boolean-mat-radio-button" [value]="false">No
+    </mat-radio-button>
+  </mat-radio-group>
+  <app-info-message>
+    Please note that you must address (potential) ethical issues in separate documents according to the requirements
+    of the relevant funding body. The DMP only serves to help identify some ethical issues. <br>
+    Please contact the TU Research Ethics Coordinator (Dr. Marjo Rauhala) at
+    <a href="mailto:ethics@tuwien.ac.at">ethics@tuwien.ac.at</a> for additional information and support.
+    You must do so if your planned research involves any human participation.
+  </app-info-message>
+</div>

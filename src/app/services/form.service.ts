@@ -66,10 +66,9 @@ export class FormService {
         otherLegalRestrictionsDocuments: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictionsComment: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         dataRightsAndAccessControl: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        humanParticipants: [false],
         ethicalIssues: [false],
-        committeeApproved: [false],
-        ethicsReport: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-        ethicalComplianceStatement: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        committeeReviewed: [false]
       }),
       hosts: this.formBuilder.array([]),
       reuse: this.formBuilder.group({
@@ -113,10 +112,9 @@ export class FormService {
         sensitiveDataAccess: dmp.sensitiveDataAccess,
         legalRestrictions: dmp.legalRestrictions,
         legalRestrictionsComment: dmp.legalRestrictionsComment,
+        humanParticipants: dmp.humanParticipants,
         ethicalIssues: dmp.ethicalIssuesExist,
-        committeeApproved: dmp.committeeApproved,
-        ethicsReport: dmp.ethicsReport,
-        ethicalComplianceStatement: dmp.ethicalComplianceStatement,
+        committeeReviewed: dmp.committeeReviewed,
       },
       reuse: {
         targetAudience: dmp.targetAudience,
@@ -169,19 +167,18 @@ export class FormService {
 
     const result: Dmp = {
       closedAccessInfo: '',
-      committeeApproved: false,
+      committeeReviewed: formValue.legal.humanParticipants,
       contributors: formValue.contributors,
       costs: formValue.costs?.exist ? formValue.costs.list : [],
       costsExist: formValue.costs?.exist,
       dataGeneration: '',
       dataKind: formValue.data.kind,
       datasets: [],
-      ethicalComplianceStatement: '',
-      ethicalIssuesExist: false,
-      ethicsReport: '',
+      ethicalIssuesExist: formValue.legal.ethicalIssues,
       externalStorage: [],
       externalStorageInfo: '',
       hosts: [],
+      humanParticipants: formValue.legal.humanParticipants,
       legalRestrictions: false,
       legalRestrictionsDocuments: [],
       otherLegalRestrictionsDocuments: '',
@@ -265,13 +262,6 @@ export class FormService {
           dataset.legalRestrictions = false;
         }
       }
-
-      if (formValue.legal.ethicalIssues) {
-        result.ethicalIssuesExist = true;
-        result.committeeApproved = formValue.legal.committeeApproved;
-        result.ethicsReport = result.committeeApproved ? formValue.legal.ethicsReport : '';
-      }
-      result.ethicalComplianceStatement = formValue.legal.ethicalComplianceStatement;
 
       // Reuse
       result.targetAudience = formValue.reuse.targetAudience;

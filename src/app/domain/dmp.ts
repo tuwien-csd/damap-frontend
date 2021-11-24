@@ -37,10 +37,9 @@ export interface Dmp {
   otherLegalRestrictionsDocuments: string;
   legalRestrictionsComment: string;
   dataRightsAndAccessControl: string;
+  humanParticipants: boolean;
   ethicalIssuesExist: boolean;
-  committeeApproved: boolean;
-  ethicsReport: string;
-  ethicalComplianceStatement: string;
+  committeeReviewed: boolean;
   storage: Storage[];
   externalStorage: Storage[];
   externalStorageInfo: string;
