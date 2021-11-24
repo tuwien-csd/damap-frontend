@@ -1,21 +1,34 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { LegalEthicalAspectsComponent } from './legal-ethical-aspects.component';
+import {LegalEthicalAspectsComponent} from './legal-ethical-aspects.component';
+import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {MatRadioModule} from '@angular/material/radio';
 
 describe('LegalEthicalAspectsComponent', () => {
   let component: LegalEthicalAspectsComponent;
   let fixture: ComponentFixture<LegalEthicalAspectsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LegalEthicalAspectsComponent ]
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule, MatRadioModule],
+      declarations: [LegalEthicalAspectsComponent]
     })
-    .compileComponents();
-  }));
+      .compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LegalEthicalAspectsComponent);
     component = fixture.componentInstance;
+    component.legalEthicalStep = new FormGroup({
+      sensitiveData: new FormControl(true),
+      sensitiveDataAccess: new FormControl(''),
+      personalData: new FormControl(true),
+      otherPersonalDataCompliance: new FormControl([]),
+      otherDataSecurityMeasures: new FormControl(''),
+      legalRestrictions: new FormControl(true),
+      legalRestrictionsComment: new FormControl(''),
+      otherLegalRestrictionsDocuments: new FormControl(''),
+    });
     fixture.detectChanges();
   });
 

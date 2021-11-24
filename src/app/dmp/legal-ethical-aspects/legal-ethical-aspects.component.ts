@@ -42,10 +42,6 @@ export class LegalEthicalAspectsComponent implements OnInit {
     return this.legalEthicalStep.get('sensitiveDataAccess') as FormControl;
   }
 
-  get personalDataAccess(): FormControl {
-    return this.legalEthicalStep.get('personalDataAccess') as FormControl;
-  }
-
   get otherPersonalDataCompliance(): FormControl {
     return this.legalEthicalStep?.get('otherPersonalDataCompliance') as FormControl;
   }
@@ -64,14 +60,6 @@ export class LegalEthicalAspectsComponent implements OnInit {
 
   get dataRightsAndAccessControl(): FormControl {
     return this.legalEthicalStep.get('dataRightsAndAccessControl') as FormControl;
-  }
-
-  get ethicsReport(): FormControl {
-    return this.legalEthicalStep?.get('ethicsReport') as FormControl;
-  }
-
-  get ethicalComplianceStatement(): FormControl {
-    return this.legalEthicalStep?.get('ethicalComplianceStatement') as FormControl;
   }
 
   get isOtherSelected() {

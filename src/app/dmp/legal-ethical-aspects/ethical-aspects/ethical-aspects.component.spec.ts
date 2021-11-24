@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EthicalAspectsComponent } from './ethical-aspects.component';
+import {EthicalAspectsComponent} from './ethical-aspects.component';
+import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {MatRadioModule} from '@angular/material/radio';
 
 describe('EthicalAspectsComponent', () => {
   let component: EthicalAspectsComponent;
@@ -8,7 +10,8 @@ describe('EthicalAspectsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EthicalAspectsComponent ]
+      imports: [ReactiveFormsModule, MatRadioModule],
+      declarations: [EthicalAspectsComponent]
     })
     .compileComponents();
   });
@@ -16,6 +19,11 @@ describe('EthicalAspectsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EthicalAspectsComponent);
     component = fixture.componentInstance;
+    component.legalEthicalStep = new FormGroup({
+      humanParticipants: new FormControl(false),
+      ethicalIssues: new FormControl(false),
+      committeeReviewed: new FormControl(false)
+    });
     fixture.detectChanges();
   });
 
