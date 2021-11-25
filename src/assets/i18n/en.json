@@ -157,7 +157,7 @@
         "intro": "This step helps you to specify the description of your datasets and their generation. This may include information on the methodology used to collect the data, analytical and procedural information, definitions of variables, units of measurement, information on data organisation and so on.",
         "question": {
           "metadata": "Please indicate which metadata will be provided to help others identify, discover and reuse the data.",
-          "datageneration": "How will the research data be generated and which methods will be used?",
+          "datageneration": "How will the research data be generated and which methods and software will be used?",
           "structure": "How will you structure the data and handle versioning?"
         }
       },
