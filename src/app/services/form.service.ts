@@ -11,6 +11,8 @@ import {Storage} from '../domain/storage';
 import {AccessRight} from '../domain/enum/access-right';
 import {DataKind} from '../domain/enum/data-kind.enum';
 import {ComplianceType} from '../domain/enum/compliance-type.enum';
+import {SecurityMeasure} from '../domain/enum/security-measure';
+import {Agreement} from '../domain/enum/agreement';
 import {notEmptyValidator} from '../validators/not-empty.validator';
 
 @Injectable({
@@ -53,17 +55,20 @@ export class FormService {
       externalStorageInfo: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       legal: this.formBuilder.group({
         personalData: [false],
-        personalDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-        personalDataCompliance: [[]],
+        personalDataCompliance: [[ComplianceType.INFORMED_CONSENT]],
         otherPersonalDataCompliance: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveData: [false],
+        sensitiveDataSecurity: [[], Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        otherDataSecurityMeasures: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        sensitiveDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictions: [false],
+        legalRestrictionsDocuments: [[]],
+        otherLegalRestrictionsDocuments: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictionsComment: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        dataRightsAndAccessControl: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        humanParticipants: [false],
         ethicalIssues: [false],
-        committeeApproved: [false],
-        sensitiveDataSecurity: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-        ethicsReport: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-        ethicalComplianceStatement: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        committeeReviewed: [false]
       }),
       hosts: this.formBuilder.array([]),
       reuse: this.formBuilder.group({
@@ -99,17 +104,20 @@ export class FormService {
       externalStorageInfo: dmp.externalStorageInfo,
       legal: {
         personalData: dmp.personalData,
-        personalDataAccess: dmp.personalDataAccess,
         personalDataCompliance: dmp.personalDataCompliance,
         otherPersonalDataCompliance: dmp.otherPersonalDataCompliance,
         sensitiveData: dmp.sensitiveData,
-        legalRestrictions: dmp.legalRestrictions,
-        legalRestrictionsComment: dmp.legalRestrictionsComment,
-        ethicalIssues: dmp.ethicalIssuesExist,
-        committeeApproved: dmp.committeeApproved,
         sensitiveDataSecurity: dmp.sensitiveDataSecurity,
-        ethicsReport: dmp.ethicsReport,
-        ethicalComplianceStatement: dmp.ethicalComplianceStatement,
+        otherDataSecurityMeasures: dmp.otherDataSecurityMeasures,
+        sensitiveDataAccess: dmp.sensitiveDataAccess,
+        legalRestrictions: dmp.legalRestrictions,
+        legalRestrictionsDocuments: dmp.legalRestrictionsDocuments,
+        otherLegalRestrictionsDocuments: dmp.otherLegalRestrictionsDocuments,
+        legalRestrictionsComment: dmp.legalRestrictionsComment,
+        dataRightsAndAccessControl: dmp.dataRightsAndAccessControl,
+        humanParticipants: dmp.humanParticipants,
+        ethicalIssues: dmp.ethicalIssuesExist,
+        committeeReviewed: dmp.committeeReviewed,
       },
       reuse: {
         targetAudience: dmp.targetAudience,
@@ -162,31 +170,34 @@ export class FormService {
 
     const result: Dmp = {
       closedAccessInfo: '',
-      committeeApproved: false,
+      committeeReviewed: formValue.legal.humanParticipants,
       contributors: formValue.contributors,
       costs: formValue.costs?.exist ? formValue.costs.list : [],
       costsExist: formValue.costs?.exist,
       dataGeneration: '',
       dataKind: formValue.data.kind,
       datasets: [],
-      ethicalComplianceStatement: '',
-      ethicalIssuesExist: false,
-      ethicsReport: '',
+      ethicalIssuesExist: formValue.legal.ethicalIssues,
       externalStorage: [],
       externalStorageInfo: '',
       hosts: [],
+      humanParticipants: formValue.legal.humanParticipants,
       legalRestrictions: false,
+      legalRestrictionsDocuments: [],
+      otherLegalRestrictionsDocuments: '',
       legalRestrictionsComment: '',
+      dataRightsAndAccessControl: '',
       metadata: '',
       noDataExplanation: '',
       otherPersonalDataCompliance: '',
       personalData: false,
-      personalDataAccess: '',
       personalDataCompliance: [],
       restrictedAccessInfo: '',
       restrictedDataAccess: '',
       sensitiveData: false,
-      sensitiveDataSecurity: '',
+      sensitiveDataSecurity: [],
+      otherDataSecurityMeasures: '',
+      sensitiveDataAccess: '',
       storage: [],
       structure: '',
       targetAudience: '',
@@ -220,6 +231,10 @@ export class FormService {
       if (formValue.legal.sensitiveData) {
         result.sensitiveData = true;
         result.sensitiveDataSecurity = formValue.legal.sensitiveDataSecurity;
+        result.sensitiveDataAccess = formValue.legal.sensitiveDataAccess;
+        if (result.sensitiveDataSecurity.includes(SecurityMeasure.OTHER)) {
+          result.otherDataSecurityMeasures = formValue.legal.otherDataSecurityMeasures;
+        }
       } else {
         for (const dataset of result.datasets) {
           dataset.sensitiveData = false;
@@ -231,7 +246,6 @@ export class FormService {
         result.personalDataCompliance = formValue.legal.personalDataCompliance;
         result.otherPersonalDataCompliance = result.personalDataCompliance.includes(ComplianceType.Other) ?
           formValue.legal.otherPersonalDataCompliance : '';
-        result.personalDataAccess = formValue.legal.personalDataAccess;
       } else {
         for (const dataset of result.datasets) {
           dataset.personalData = false;
@@ -240,19 +254,17 @@ export class FormService {
 
       if (formValue.legal.legalRestrictions) {
         result.legalRestrictions = true;
+        result.legalRestrictionsDocuments = formValue.legal.legalRestrictionsDocuments;
+        result.dataRightsAndAccessControl = formValue.legal.dataRightsAndAccessControl;
+        if (result.legalRestrictionsDocuments.includes(Agreement.OTHER)) {
+          result.otherLegalRestrictionsDocuments = formValue.legal.otherLegalRestrictionsDocuments;
+        }
         result.legalRestrictionsComment = formValue.legal.legalRestrictionsComment;
       } else {
         for (const dataset of result.datasets) {
           dataset.legalRestrictions = false;
         }
       }
-
-      if (formValue.legal.ethicalIssues) {
-        result.ethicalIssuesExist = true;
-        result.committeeApproved = formValue.legal.committeeApproved;
-        result.ethicsReport = result.committeeApproved ? formValue.legal.ethicsReport : '';
-      }
-      result.ethicalComplianceStatement = formValue.legal.ethicalComplianceStatement;
 
       // Reuse
       result.targetAudience = formValue.reuse.targetAudience;

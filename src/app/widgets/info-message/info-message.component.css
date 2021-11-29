@@ -1,0 +1,12 @@
+.info-message {
+  display: flex;
+  margin: 1rem 0;
+  padding: 1rem;
+  align-items: flex-start;
+  border-radius: 5px;
+  background-color: var(--info-bg);
+}
+
+.mat-icon {
+  font-size: 16pt;
+}

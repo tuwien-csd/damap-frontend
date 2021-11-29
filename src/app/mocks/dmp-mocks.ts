@@ -6,10 +6,16 @@ import {DataKind} from '../domain/enum/data-kind.enum';
 import {DataAccessType} from '../domain/enum/data-access-type.enum';
 import {AccessRight} from '../domain/enum/access-right';
 import {ComplianceType} from '../domain/enum/compliance-type.enum';
+import {SecurityMeasure} from '../domain/enum/security-measure';
+import {Agreement} from '../domain/enum/agreement';
 
 export const completeDmp: Dmp = {
+  dataRightsAndAccessControl: 'access control',
+  humanParticipants: true,
+  otherDataSecurityMeasures: 'other measure',
+  sensitiveDataAccess: 'sensitive data access',
   closedAccessInfo: 'closed access info',
-  committeeApproved: true,
+  committeeReviewed: true,
   contact: {
     firstName: 'Max', id: 77, lastName: 'Mustermann', mbox: 'm.mustermann@university.ac.at', universityId: '12345', personId: null,
     affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR}
@@ -94,9 +100,7 @@ export const completeDmp: Dmp = {
       reasonForDeletion: ''
     }
   ],
-  ethicalComplianceStatement: 'statement regarding ethical compliance',
   ethicalIssuesExist: true,
-  ethicsReport: 'link.to.report',
   externalStorage: [
     // TODO
     /*{
@@ -127,10 +131,11 @@ export const completeDmp: Dmp = {
   id: 76,
   legalRestrictions: true,
   legalRestrictionsComment: 'legally restricted',
+  legalRestrictionsDocuments: [Agreement.OTHER],
+  otherLegalRestrictionsDocuments: 'other document',
   metadata: 'provided metadata',
   noDataExplanation: '',
   personalData: true,
-  personalDataAccess: 'only people with access can access',
   personalDataCompliance: ['item1', 'item2', ComplianceType.Other],
   otherPersonalDataCompliance: 'other measures',
   project: {
@@ -154,7 +159,7 @@ export const completeDmp: Dmp = {
   restrictedAccessInfo: 'info how someone can access restricted data',
   restrictedDataAccess: 'send form',
   sensitiveData: true,
-  sensitiveDataSecurity: 'data will be stored in a vault',
+  sensitiveDataSecurity: [SecurityMeasure.OTHER],
   storage: [
     {
       datasets: [
@@ -172,8 +177,14 @@ export const completeDmp: Dmp = {
 };
 
 export const noDataDmp: Dmp = {
+  dataRightsAndAccessControl: 'access control',
+  humanParticipants: false,
+  legalRestrictionsDocuments: [Agreement.CONFIDENTIALITY_AGREEMENT],
+  otherDataSecurityMeasures: '',
+  otherLegalRestrictionsDocuments: '',
+  sensitiveDataAccess: 'access',
   closedAccessInfo: 'closed access info',
-  committeeApproved: true,
+  committeeReviewed: true,
   contact: {
     firstName: 'Max', id: 77, lastName: 'Mustermann', mbox: 'm.mustermann@university.ac.at', universityId: '12345', personId: null,
     affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR}
@@ -258,9 +269,7 @@ export const noDataDmp: Dmp = {
       reasonForDeletion: 'reason1'
     }
   ],
-  ethicalComplianceStatement: 'statement regarding ethical compliance',
   ethicalIssuesExist: false,
-  ethicsReport: 'link.to.report',
   externalStorage: [
     {
       hostId: 'TU Files',
@@ -293,7 +302,6 @@ export const noDataDmp: Dmp = {
   metadata: 'provided metadata',
   noDataExplanation: '',
   personalData: true,
-  personalDataAccess: 'only people with access can access',
   personalDataCompliance: ['item1', 'item2'],
   otherPersonalDataCompliance: 'other measures',
   project: {
@@ -317,7 +325,7 @@ export const noDataDmp: Dmp = {
   restrictedAccessInfo: 'info how someone can access restricted data',
   restrictedDataAccess: 'send form',
   sensitiveData: true,
-  sensitiveDataSecurity: 'data will be stored in a vault',
+  sensitiveDataSecurity: [SecurityMeasure.OTHER],
   storage: [
     {
       datasets: [
