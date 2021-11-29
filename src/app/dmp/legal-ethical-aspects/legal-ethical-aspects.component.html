@@ -1,5 +1,8 @@
+<h2>Legal aspects</h2>
 <p>This step helps you to consider issues like personal data, intellectual property rights and ownership.</p>
 <div [formGroup]="legalEthicalStep">
+
+  <!-- Yes/No Questions-->
   <div *ngFor="let question of questions">
     <mat-label>{{question.label}}</mat-label>
     <mat-radio-group formControlName="{{question.model}}">
@@ -8,6 +11,8 @@
       <mat-radio-button class="boolean-mat-radio-button" [value]="false">No
       </mat-radio-button>
     </mat-radio-group>
+
+    <!--Personal Data-->
     <ng-container *ngIf="question.model === 'personalData' && legalEthicalStep?.value.personalData && datasets?.length">
       <div>
         <section class="dataset-checkbox-section" [formGroup]="dmpForm">
@@ -30,15 +35,18 @@
               {{option.value}}
             </mat-option>
           </mat-select>
+          <mat-hint>Make sure you follow the TU Wien guidance on informed consent.</mat-hint>
         </mat-form-field>
+        <br><br>
         <ng-container *ngIf="isOtherSelected">
-          <app-input-wrapper [label]="'Please specify what other measures are taken.'"
-                             [control]="otherPersonalDataCompliance"></app-input-wrapper>
+          <app-input-wrapper [label]="'Please specify what other measures are taken:'"
+                             [control]="otherPersonalDataCompliance"
+                             [appearance]="'fill'"></app-input-wrapper>
         </ng-container>
       </div>
-      <app-input-wrapper [label]="'How will you ensure that only authorised users can access personal data?'"
-                         [appearance]="'fill'" [control]="personalDataAccess"></app-input-wrapper>
     </ng-container>
+
+    <!--Sensitive Data-->
     <ng-container
       *ngIf="question.model === 'sensitiveData' && legalEthicalStep?.value.sensitiveData && datasets?.length">
       <div>
@@ -54,10 +62,30 @@
           </div>
         </section>
       </div>
-      <app-textarea-wrapper
-        [label]="'What kind of additional security measures in terms of physical security, network security, and security of computer systems and files will be taken to ensure that stored and transferred sensitive data is safe?'"
-        [control]="sensitiveDataSecurity"></app-textarea-wrapper>
+      <div>
+        <mat-form-field appearance="fill" [style]="'width: 100%'">
+          <mat-label>What kind of additional security measures in terms of physical security, network security, and
+            security of computer systems and files will be taken to ensure that stored and transferred sensitive data is
+            safe?
+          </mat-label>
+          <mat-select formControlName="sensitiveDataSecurity" multiple>
+            <mat-option *ngFor="let option of securityOptions | keyvalue: originalOrder" [value]="option.value">
+              {{option.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ng-container *ngIf="isOtherMeasureSelected">
+          <app-input-wrapper [label]="'Please specify what other measures are taken:'"
+                             [control]="otherDataSecurityMeasures"
+                             [appearance]="'fill'"></app-input-wrapper>
+        </ng-container>
+        <app-input-wrapper [label]="'Who will be authorised to access sensitive data?'"
+                           [control]="sensitiveDataAccess"
+                           [appearance]="'fill'"></app-input-wrapper>
+      </div>
     </ng-container>
+
+    <!--Legal Restrictions-->
     <ng-container
       *ngIf="question.model === 'legalRestrictions' && legalEthicalStep?.value.legalRestrictions && datasets?.length">
       <div>
@@ -74,31 +102,25 @@
         </section>
       </div>
       <div>
-        <app-input-wrapper [label]="'Please explain:'" [appearance]="'fill'"
+        <app-input-wrapper [label]="'Please specify the legal restrictions:'" [appearance]="'fill'"
                            [control]="legalRestrictionsComment"></app-input-wrapper>
       </div>
-    </ng-container>
-    <ng-container *ngIf="question.model === 'ethicalIssues' && legalEthicalStep?.value.ethicalIssues">
-      <mat-radio-group formControlName="committeeApproved">
-        <mat-label>Was your plan to deal with these ethical issues approved by the ethics committee?</mat-label>
-        <mat-radio-button class="boolean-mat-radio-button" [value]="true">Yes
-        </mat-radio-button>
-        <mat-radio-button class="boolean-mat-radio-button" [value]="false">No
-        </mat-radio-button>
-      </mat-radio-group>
-      <app-textarea-wrapper *ngIf="legalEthicalStep?.value.committeeApproved"
-                            [label]="'Links to ethics report or related documents:'"
-                            [control]="ethicsReport"></app-textarea-wrapper>
-      <!-- <input type = "text" matInput formControlName="ethicsReport" [matAutocomplete] = "autol"/>
-       <mat-autocomplete #autol = "matAutocomplete">
-           <mat-option *ngFor = "let option of optionsLinksEthics" [value] = "option">
-             <a href="https://www.tuwien.at/index.php?eID=dms&s=4&path=Directives%20and%20Regulations%20of%20the%20Rectorate/Code%20of%20Conduct%20%E2%80%93%20Rules%20to%20Ensure%20Good%20Scientific%20Practice.pdf"> {{option}}
-             </a>
-           </mat-option>
-       </mat-autocomplete>-->
+      <mat-form-field appearance="fill" [style]="'width: 100%'">
+        <mat-label>In which document(s) are these restrictions specified?</mat-label>
+        <mat-select formControlName="legalRestrictionsDocuments" multiple>
+          <mat-option *ngFor="let option of agreementOptions | keyvalue: originalOrder" [value]="option.value">
+            {{option.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <ng-container *ngIf="isOtherDocumentSelected">
+        <app-input-wrapper [label]="'Please specify the other documents:'"
+                           [appearance]="'fill'" [control]="otherLegalRestrictionsDocuments"></app-input-wrapper>
+      </ng-container>
+      <app-input-wrapper [label]="'Who has rights to the produced data and who controls access to the data?'"
+                         [appearance]="'fill'" [control]="dataRightsAndAccessControl"></app-input-wrapper>
     </ng-container>
   </div>
-
-  <app-textarea-wrapper [label]="'Other statement regarding ethical compliance (optional):'"
-                        [control]="ethicalComplianceStatement"></app-textarea-wrapper>
 </div>
+
+<app-ethical-aspects [legalEthicalStep]="legalEthicalStep"></app-ethical-aspects>
