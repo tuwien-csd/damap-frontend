@@ -44,21 +44,10 @@ describe('BackendService', () => {
     req.flush([{id: 1, project:{title: 'Random Dmp'}}]);
   });
 
-
-/*class test2 implements Dmp{
-  readonly created?: Date;
-  readonly modified?: Date;
-  readonly id: number;
-  title?: string;
-  .
-  .
-  .
-}
-
+/*
 it('should get all suggested projects', () => {
   service.createDmp(test2).subscribe(
     dmps => {
-
     }
   );
   const req = httpTestingController.expectOne(`${environment.backendUrl}dmp`);
