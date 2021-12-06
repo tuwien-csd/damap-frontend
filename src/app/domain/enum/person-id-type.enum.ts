@@ -1,6 +1,12 @@
-export enum PersonIdType {
+export enum IdentifierType {
   ORCID = 'ORCID',
   ISNI = 'ISNI',
   OPENID = 'OPENID',
-  UNIVERSITYID = 'UNIVERSITYID'
+  HANDLE = 'HANDLE',
+  DOI = 'DOI',
+  ARK = 'ARK',
+  URL = 'URL',
+  FUNDREF = 'FUNDREF',
+  ROR = 'ROR',
+  OTHER = 'OTHER'
 }
