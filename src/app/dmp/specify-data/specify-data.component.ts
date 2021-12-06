@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormArray, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
@@ -44,12 +44,16 @@ export class SpecifyDataComponent implements OnInit {
   // Mat Chip properties
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {
+  constructor(public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.datasets?.statusChanges
       .subscribe(() => this.dataSource.data = this.datasets.controls);
+  }
+
+  get explanation(): FormControl {
+    return this.specifyDataStep.get('explanation') as FormControl;
   }
 
   add(event: MatChipInputEvent): void {
@@ -105,18 +109,26 @@ export class SpecifyDataComponent implements OnInit {
 
 export class DatasetDialog {
 
+  readonly FILE_TYPES = FILE_TYPES;
+  readonly FILE_SIZES = FILE_SIZES;
+
   dataset: FormGroup = this.formService.createDatasetFormGroup(this.data.title);
 
   originalOrder = (): number => 0;
-
-  readonly FILE_TYPES = FILE_TYPES;
-  readonly FILE_SIZES = FILE_SIZES;
 
   constructor(
     public dialogRef: MatDialogRef<DatasetDialog>,
     private formService: FormService,
     @Inject(MAT_DIALOG_DATA) public data: { title: string, size: number, comment: string, type: string }) {
     this.dataset.patchValue(this.data);
+  }
+
+  get title(): FormControl {
+    return this.dataset.get('title') as FormControl;
+  }
+
+  get comment(): FormControl {
+    return this.dataset.get('comment') as FormControl;
   }
 
   onNoClick(): void {
