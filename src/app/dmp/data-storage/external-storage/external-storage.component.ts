@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormArray, FormControl} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-dmp-external-storage',
@@ -21,6 +21,10 @@ export class ExternalStorageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getFormControl(index: number, controlName: string): FormControl {
+    return (this.externalStorageStep?.at(index) as FormGroup)?.controls[controlName] as FormControl;
+  }
+
   addExternalStorage() {
     this.externalStorageToAdd.emit();
   }
@@ -28,6 +32,5 @@ export class ExternalStorageComponent implements OnInit {
   removeExternalStorage(index: number) {
     this.externalStorageToRemove.emit(index);
   }
-
 
 }

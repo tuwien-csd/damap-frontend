@@ -26,17 +26,17 @@
             <div class="warning-icon">
               <mat-icon>error_outline</mat-icon>
             </div>
-            <div *ngIf="dataset.value.personalData || dataset.value.sensitiveData">
+            <ng-container *ngIf="dataset.value.personalData || dataset.value.sensitiveData">
               You indicated in step 6 that this dataset contains sensitive/
               personal data. Do you really want to publish the dataset open, without restrictions?
               <ng-container *ngIf="!isAnonymisedOrPseudonymised">
                 Have you considered anonymisation/pseudonymisation?
               </ng-container>
-            </div>
-            <div *ngIf="dataset.value.legalRestrictions">
+            </ng-container>
+            <ng-container *ngIf="dataset.value.legalRestrictions">
               You indicated in step 6 that this dataset is subject to legal restrictions. Do you really want to publish
               the dataset without restrictions?
-            </div>
+            </ng-container>
           </div>
           <div class="mat-card-container">
             <mat-form-field class="full-width">
@@ -55,11 +55,15 @@
               <input matInput [matDatepicker]="picker_i" formControlName="startDate">
               <mat-datepicker-toggle matSuffix [for]="picker_i"></mat-datepicker-toggle>
               <mat-datepicker #picker_i></mat-datepicker>
-              <mat-hint *ngIf="dmpForm?.controls.project?.value?.end === dataset.value.startDate && dataset.value.startDate != null">
+              <mat-hint
+                *ngIf="dmpForm?.controls.project?.value?.end === dataset.value.startDate && dataset.value.startDate != null">
                 The release date was set to the project end date. Feel free to modify it.
               </mat-hint>
             </mat-form-field>
           </div>
+        </ng-container>
+        <ng-container *ngIf="dataset.value.dataAccess === accessType.closed">
+          <app-data-deletion [dataset]="getFormGroup(i)" [dmpForm]="dmpForm"></app-data-deletion>
         </ng-container>
       </ng-container>
     </mat-card>

@@ -1,0 +1,16 @@
+mat-slide-toggle {
+  margin-bottom: 1rem;
+}
+
+.warning {
+  background-color: lightgrey;
+  border-radius: 4px;
+  padding: 0.75rem;
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.warning-icon {
+  padding-right: 0.5rem;
+}

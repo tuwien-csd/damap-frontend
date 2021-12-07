@@ -51,7 +51,7 @@
       </div>
       <div class="mat-card-right">
         <button mat-button (click)="changeContactPerson(contributor.value.person)"
-                *ngIf="contactStep.value.id !== contributor.value.person.id" title="Set as contact">
+                *ngIf="contactStep.value?.id !== contributor.value.person.id" title="Set as contact">
           <mat-icon>contact_mail</mat-icon>
         </button>
         <button mat-button (click)="removeContributor(i)" title="Remove from contributors">
