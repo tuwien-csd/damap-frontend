@@ -35,15 +35,14 @@ export class BackendService {
       retry(3),
       catchError(this.handleError('Failed to load plans.'))
     );
-
-  }  
+  }
 
   getDmpById(id: number): Observable<Dmp> {
     return this.http.get<Dmp>(`${this.dmpBackendUrl}/${id}`).pipe(
       retry(3),
       catchError(this.handleError('Failed to load plan.'))
     );
-  } 
+  }
 
   createDmp(dmp: Dmp): Observable<Dmp> {
     const httpOptions = {
@@ -77,7 +76,7 @@ export class BackendService {
       catchError(this.handleError('Failed to load projects.')),
       shareReplay(1)
     );
-  } 
+  }
 
   getProjectMembers(projectId: number): Observable<ProjectMember[]> {
     return this.http.get<ProjectMember[]>(`${this.projectBackendUrl}/${projectId}/staff`).pipe(
@@ -85,14 +84,14 @@ export class BackendService {
       catchError(this.handleError('Failed to load project members.'))
     );
 
-  } 
+  }
 
   getRepositories(): Observable<Repository[]> {
     return this.http.get<Repository[]>(this.repositoryBackendUrl).pipe(
       retry(3),
       catchError(this.handleError('Failed to load repositories.'))
     );
-  } 
+  }
 
   getRepositoryById(id: string): Observable<any> {
     return this.http.get<any>(`${this.repositoryBackendUrl}/${id}`).pipe(
@@ -100,8 +99,8 @@ export class BackendService {
       retry(3),
       catchError(this.handleError('Failed to load repository details.'))
     );
-  }  
-  
+  }
+
   searchRepository(filters: any): Observable<Repository[]> {
     let params = new HttpParams();
     for (const key in filters) {
