@@ -90,7 +90,27 @@ mat-card {
   height: auto;
 }
 
+.mat-tooltip {
+  font-size: 0.75rem !important;
+  line-height: 1rem;
+  background: #2a2a2a;
+}
+
 /* Makes sure repo filter select options are visible and not cut off by mat-step */
 #cdk-step-content-0-7 {
   overflow: visible;
+}
+
+/* Form row styling */
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-row-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  gap: 1rem;
+  align-items: baseline;
 }

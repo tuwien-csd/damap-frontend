@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -66,11 +65,17 @@ import {MatTreeModule} from '@angular/material/tree';
 import {RepoFilterComponent} from './dmp/repo/repo-filter/repo-filter.component';
 import {TooltipComponent} from './widgets/tooltip/tooltip.component';
 import {AuthGuard} from './auth/auth.guard';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ConfigService} from './services/config.service';
+import {DataAccessComponent} from './dmp/data-storage/data-access/data-access.component';
+import {SharedModule} from './shared/shared.module';
+import {DataDeletionComponent} from './dmp/data-deletion/data-deletion.component';
+import {EthicalAspectsComponent} from './dmp/legal-ethical-aspects/ethical-aspects/ethical-aspects.component';
+import {InfoMessageComponent} from './widgets/info-message/info-message.component';
 
 @NgModule({
   declarations: [
+    // Components
     AppComponent,
     DashboardComponent,
     PlansComponent,
@@ -86,47 +91,56 @@ import {ConfigService} from './services/config.service';
     DocDataQualityComponent,
     PeopleComponent,
     SummaryComponent,
-    ProjectFilterPipe,
     DmpTableComponent,
     StorageComponent,
-    StorageFilterPipe,
     ExternalStorageComponent,
     ReuseComponent,
     CostsComponent,
-    BytePipe,
-    DragdropDirective,
     FileUploadComponent,
-    ContributorFilterPipe,
     LicenseWizardComponent,
-    LicenseFilterPipe,
     LicenseSelectorDialog,
     ErrorMessageComponent,
     TreeSelectFormFieldComponent,
     RepoFilterComponent,
-    TooltipComponent
+    TooltipComponent,
+    DataAccessComponent,
+    DataDeletionComponent,
+    EthicalAspectsComponent,
+    InfoMessageComponent,
+
+    // Directives
+    DragdropDirective,
+
+    // Pipes
+    ProjectFilterPipe,
+    StorageFilterPipe,
+    BytePipe,
+    ContributorFilterPipe,
+    LicenseFilterPipe,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     RouterModule,
-    MatButtonModule,
     HttpClientModule,
-    MatInputModule,
     RouterModule.forRoot(APP_ROUTES),
     BrowserAnimationsModule,
+    AppStoreModule,
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: [!environment.production ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`],
+        sendAccessToken: true
+      }
+    }),
+
+    // Materials
+    MatButtonModule,
+    MatInputModule,
     MatListModule,
     MatToolbarModule,
     MatSidenavModule,
     MatStepperModule,
-    AppStoreModule,
     MatIconModule,
     MatTabsModule,
-    OAuthModule.forRoot({
-      resourceServer: {
-        allowedUrls: [environment.backendUrl],
-        sendAccessToken: true
-      }
-    }),
     MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -134,7 +148,6 @@ import {ConfigService} from './services/config.service';
     MatRadioModule,
     MatTableModule,
     MatChipsModule,
-    ReactiveFormsModule,
     MatDialogModule,
     MatSelectModule,
     MatCardModule,
@@ -149,9 +162,9 @@ import {ConfigService} from './services/config.service';
     MatCheckboxModule,
     MatAutocompleteModule,
     MatTreeModule,
-    //MatAutocompleteSelectedEvent,
-    //MatAutocomplete
 
+    // Custom
+    SharedModule
   ],
   providers: [{
     provide: APP_INITIALIZER,

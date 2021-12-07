@@ -100,15 +100,6 @@ export class DmpComponent implements OnInit {
     this.reuseStep = this.dmpForm.get('reuse') as FormGroup;
     this.costsStep = this.dmpForm.get('costs') as FormGroup;
 
-    // Set project leader as contact person on project change
-    this.projectStep.valueChanges.subscribe((newVal: Project) => {
-      if (newVal) {
-        const projectId = newVal.universityId;
-        if (projectId) {
-          this.getProjectMembersAndSetContact(projectId);
-        }
-      }
-    });
   }
 
   changeStep(event: StepperSelectionEvent) {
@@ -123,8 +114,8 @@ export class DmpComponent implements OnInit {
     if (this.dmpForm.value.id) {
       this.backendService.editDmp(dmp).subscribe(
         response => {
-          this.dmpForm.patchValue(response);
           this.store.dispatch(new LoadDmps());
+          this.router.navigate(['plans']);
         },
         () => {},
         () => this.feedbackService.success('Plan was updated!')
@@ -133,11 +124,9 @@ export class DmpComponent implements OnInit {
       this.backendService.createDmp(dmp)
         .subscribe(
           response => {
-            if (response) {
-              this.location.replaceState(`dmp/${response.id}`);
-              this.dmpForm.patchValue(response);
-              this.store.dispatch(new LoadDmps());
-            }
+            // this.location.replaceState(`dmp/${response.id}`);
+            this.store.dispatch(new LoadDmps());
+            this.router.navigate(['plans']);
           },
           () => {},
           () => this.feedbackService.success('Plan was saved!'));
@@ -147,6 +136,7 @@ export class DmpComponent implements OnInit {
   changeProject(project: Project) {
     if (project != null) {
       this.projectStep.setValue(project);
+      this.getProjectMembersAndSetContact(project.universityId);
     } else {
       this.projectStep.reset();
     }
@@ -286,7 +276,7 @@ export class DmpComponent implements OnInit {
       .subscribe(members => {
         this.projectMembers = members;
         for (const member of members) {
-          if (member.roleInProject === 'Project leader') {
+          if (member.projectLeader) {
             this.changeContactPerson(member.person);
             break;
           }

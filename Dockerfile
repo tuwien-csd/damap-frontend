@@ -1,8 +1,4 @@
-FROM node:latest as deps
-
-RUN mkdir /app
-
-WORKDIR /app
+FROM default-route-openshift-image-registry.apps.dev.csd.tuwien.ac.at/csd-images/nodejs:12 as deps
 
 COPY package.json package-lock.json /app/
 
@@ -18,8 +14,8 @@ RUN ng build
 
 ARG APP=damap-frontend
 
-FROM default-route-openshift-image-registry.apps.dev.csd.tuwien.ac.at/csd-ops-images-add-nginx-baseimage/nginx:2021.32 as runner
+FROM default-route-openshift-image-registry.apps.dev.csd.tuwien.ac.at/csd-images/nginx:2021.32 as runner
 
-COPY --from=deps --chown=1001:0 /app/dist/dmap-frontend/* /opt/app-root/src/webapp/
+COPY --from=deps --chown=1001:0 /app/dist/damap-frontend/ /opt/app-root/src/
 
 

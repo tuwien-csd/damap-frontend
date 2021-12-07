@@ -29,37 +29,48 @@
     <app-dmp-doc-data-quality [docDataStep]="docDataStep"></app-dmp-doc-data-quality>
   </mat-step>
   <mat-step label="Storage and backup during the research process">
-    <app-dmp-storage [storageStep]="storageStep"
-                     [datasets]="datasets"
-                     (storageToAdd)="addStorage($event)"
-                     (storageToRemove)="removeStorage($event)">
-    </app-dmp-storage>
-    <app-dmp-external-storage [externalStorageStep]="externalStorageStep"
-                              [externalStorageInfo]="externalStorageInfo"
-                              [datasets]="datasets"
-                              (externalStorageToAdd)="addExternalStorage()"
-                              (externalStorageToRemove)="removeExternalStorage($event)">
-    </app-dmp-external-storage>
+    <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
+      <app-data-access [dmpForm]="dmpForm"
+                       [datasets]="datasets"></app-data-access>
+      <app-dmp-storage [dmpForm]="dmpForm"
+                       [storageStep]="storageStep"
+                       [datasets]="datasets"
+                       (storageToAdd)="addStorage($event)"
+                       (storageToRemove)="removeStorage($event)">
+      </app-dmp-storage>
+      <app-dmp-external-storage [externalStorageStep]="externalStorageStep"
+                                [externalStorageInfo]="externalStorageInfo"
+                                [datasets]="datasets"
+                                (externalStorageToAdd)="addExternalStorage()"
+                                (externalStorageToRemove)="removeExternalStorage($event)">
+      </app-dmp-external-storage>
+    </ng-container>
   </mat-step>
   <mat-step label="Legal and ethical aspects">
-    <app-dmp-legal-ethical-aspects [dmpForm]="dmpForm"
-                                   [legalEthicalStep]="legalEthicalStep"
-                                   [datasets]="datasets">
-    </app-dmp-legal-ethical-aspects>
+    <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
+      <app-dmp-legal-ethical-aspects [dmpForm]="dmpForm"
+                                     [legalEthicalStep]="legalEthicalStep"
+                                     [datasets]="datasets">
+      </app-dmp-legal-ethical-aspects>
+    </ng-container>
   </mat-step>
   <mat-step label="Data access and licensing">
-    <app-dmp-licenses [dmpForm]="dmpForm"
-                      [datasets]="datasets">
-    </app-dmp-licenses>
+    <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
+      <app-dmp-licenses [dmpForm]="dmpForm"
+                        [datasets]="datasets">
+      </app-dmp-licenses>
+    </ng-container>
   </mat-step>
   <mat-step label="Specify repositories for publication and preservation">
-    <app-dmp-repo [repoStep]="repoStep" [datasets]="datasets"
-                  [loaded]="repositoriesLoaded$ | async"
-                  [repositories]="repositories$ | async"
-                  (repositoryToAdd)="addRepository($event)"
-                  (repositoryToRemove)="removeRepository($event)"
-                  (repositoryDetails)="getRepositoryDetails($event)">
-    </app-dmp-repo>
+    <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
+      <app-dmp-repo [repoStep]="repoStep" [datasets]="datasets"
+                    [loaded]="repositoriesLoaded$ | async"
+                    [repositories]="repositories$ | async"
+                    (repositoryToAdd)="addRepository($event)"
+                    (repositoryToRemove)="removeRepository($event)"
+                    (repositoryDetails)="getRepositoryDetails($event)">
+      </app-dmp-repo>
+    </ng-container>
   </mat-step>
   <mat-step label="Reuse of data">
     <app-dmp-reuse [reuseStep]="reuseStep"
@@ -78,5 +89,8 @@
 </mat-vertical-stepper>
 <div id="save-dmp">
   <button mat-button color="primary" [routerLink]="'/plans'" routerLinkActive="active">Discard changes</button>
-  <button mat-raised-button color="primary" (click)="saveDmp()">Save changes</button>
+  <button mat-raised-button color="primary" (click)="saveDmp()" [disabled]="dmpForm.invalid">Save changes</button>
 </div>
+<ng-template #noDatasets>
+  Please define datasets first.
+</ng-template>

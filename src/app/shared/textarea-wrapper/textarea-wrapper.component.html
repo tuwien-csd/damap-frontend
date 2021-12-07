@@ -1,0 +1,37 @@
+<mat-form-field [appearance]="appearance">
+  <mat-label class="wrap-label">{{label}}</mat-label>
+  <ng-template #standard>
+    <textarea matInput [formControl]="control" [placeholder]="placeholder" type="text" [required]="required"></textarea>
+  </ng-template>
+
+  <!-- AUTOCOMPLETE -->
+  <ng-container *ngIf="autocompleteOptions?.length else standard">
+    <textarea matInput [formControl]="control" [placeholder]="placeholder" type="text"
+              [matAutocomplete]="auto" [required]="required"></textarea>
+
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of autocompleteOptions" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </ng-container>
+
+  <!-- ERROR -->
+  <mat-error *ngIf="!control?.errors?.required && control?.errors?.empty">
+    Please provide a valid value.
+  </mat-error>
+  <mat-error *ngIf="control?.errors?.required">
+    Please provide a value.
+  </mat-error>
+  <mat-error *ngIf="control?.errors?.maxlength">
+    Value must not exceed {{control.errors.maxlength?.requiredLength}} characters.
+    <!-- "maxlength": { "requiredLength": 255, "actualLength": 273 } -->
+  </mat-error>
+  <mat-error *ngIf="control?.errors?.pattern">
+    Invalid input, please use the following format: 1234.56
+    <!-- { "pattern": { "requiredPattern": "^[0-9]*.?[0-9]{0,2}$", "actualValue": "123,345" } } false -->
+  </mat-error>
+</mat-form-field>
+<!--{{control.errors | json}}-->
+<!--{{control.valid}}-->
+
