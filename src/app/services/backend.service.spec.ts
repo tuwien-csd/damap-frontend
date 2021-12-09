@@ -6,11 +6,13 @@ import {environment} from '../../environments/environment';
 import {Project} from '../domain/project';
 import {ProjectMember} from '../domain/project-member';
 import {Dmp} from '../domain/dmp';
+import {completeDmp} from '../mocks/dmp-mocks';
+import {HttpEventType, HttpHeaders} from '@angular/common/http';
 
 describe('BackendService', () => {
   let service: BackendService;
   let httpTestingController: HttpTestingController;
-  let backendUrl = !environment.production ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`
+  const backendUrl = !environment.production ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`
   let feedbackServiceSpy: jasmine.SpyObj<FeedbackService>
 
   beforeEach(() => {
@@ -40,7 +42,7 @@ describe('BackendService', () => {
     );
 
     const req = httpTestingController.expectOne(`${backendUrl}dmps/list`);
-    req.flush([{id: 1, project:{title: 'Random Dmp'}}]);
+    req.flush([{id: 1, project: {title: 'Random Dmp'}}]);
   });
 
   it('should retrieve dmp for user', () => {
@@ -54,6 +56,30 @@ describe('BackendService', () => {
 
     const req = httpTestingController.expectOne(`${backendUrl}dmps/0`);
     req.flush({id: 1, project: {title: 'Random Dmp'}});
+  });
+
+  it('should create dmp', () => {
+    service.createDmp(completeDmp).subscribe(
+      (dmp: Dmp) => {
+        expect(dmp.id).toBe(1);
+      }
+    );
+
+    const req = httpTestingController.expectOne(`${backendUrl}dmps`);
+    expect(req.request.method).toBe('POST');
+    req.flush({id: 1});
+  });
+
+  it('should update dmp', () => {
+    service.editDmp(completeDmp).subscribe(
+      (dmp: Dmp) => {
+        expect(dmp.id).toBe(76);
+      }
+    );
+
+    const req = httpTestingController.expectOne(`${backendUrl}dmps/${completeDmp.id}`);
+    expect(req.request.method).toBe('PUT');
+    req.flush(completeDmp);
   });
 
 
@@ -82,7 +108,7 @@ describe('BackendService', () => {
         }
       );
 
-      const req = httpTestingController.expectOne(`${environment.backendUrl}repositories/${id}`);
+      const req = httpTestingController.expectOne(`${backendUrl}repositories/${id}`);
       req.flush([{id: 'r3d100012810', name: 'Random Repo'}]);
     });*/
 
@@ -129,6 +155,47 @@ describe('BackendService', () => {
     const req = httpTestingController.expectOne(`${backendUrl}repositories/search?subjects=Cars`);
     expect(req.request.params.get('subjects')).toEqual('Cars');
     req.flush([{}, {}]);
+  });
+
+  it('should upload file for analysis', () => {
+    const mockFile = new FormData();
+    mockFile.append('file', new Blob());
+    service.analyseFileData(mockFile).subscribe(
+      response => {
+        if (response.type === HttpEventType.UploadProgress) {
+          expect(response.loaded).toEqual(7);
+          expect(response.total).toEqual(10);
+        }
+        if (response.type === HttpEventType.Response) {
+          expect(response.body.title).toEqual('file');
+        }
+      }
+    );
+
+    const req = httpTestingController.expectOne(`${backendUrl}fits/examine`);
+    expect(req.request.method).toEqual('POST');
+    req.event({type: HttpEventType.UploadProgress, loaded: 7, total: 10});
+    req.event({
+      type: HttpEventType.Response, body: {title: 'file'}, status: 200, headers: new HttpHeaders(),
+      statusText: 'OK', url: '', ok: true, clone: null
+    });
+  });
+
+  it('should get dmp document', () => {
+    const spyObj = jasmine.createSpyObj('a', ['click']);
+    spyOn(document, 'createElement').and.returnValue(spyObj);
+
+    service.getDmpDocument(1);
+    const req = httpTestingController.expectOne(`${backendUrl}document/1`);
+    req.flush(new Blob(), {headers: new HttpHeaders({'content-disposition': 'filename=any.docx'})})
+
+    expect(document.createElement).toHaveBeenCalledTimes(1);
+    expect(document.createElement).toHaveBeenCalledWith('a');
+
+    expect(spyObj.download).toBe('any.docx');
+    expect(spyObj.click).toHaveBeenCalledTimes(1);
+    expect(spyObj.click).toHaveBeenCalledWith();
+
   });
 
   afterEach(() => {
