@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {Dmp} from '../domain/dmp';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders, HttpParams} from '@angular/common/http';
 import {ProjectMember} from '../domain/project-member';
 import {Project} from '../domain/project';
 import {DmpListItem} from '../domain/dmp-list-item';
@@ -113,7 +113,7 @@ export class BackendService {
     );
   }
 
-  analyseFileData(file: FormData): Observable<any> {
+  analyseFileData(file: FormData): Observable<HttpEvent<any>> {
     return this.http.post(`${this.backendUrl}fits/examine`, file,
       {reportProgress: true, observe: 'events'})
       .pipe(
