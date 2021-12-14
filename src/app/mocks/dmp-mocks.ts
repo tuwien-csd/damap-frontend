@@ -8,6 +8,8 @@ import {AccessRight} from '../domain/enum/access-right';
 import {ComplianceType} from '../domain/enum/compliance-type.enum';
 import {SecurityMeasure} from '../domain/enum/security-measure';
 import {Agreement} from '../domain/enum/agreement';
+import {mockProject} from './project-mocks';
+import {mockContact} from './person-mocks';
 
 export const completeDmp: Dmp = {
   dataRightsAndAccessControl: 'access control',
@@ -16,10 +18,7 @@ export const completeDmp: Dmp = {
   sensitiveDataAccess: 'sensitive data access',
   closedAccessInfo: 'closed access info',
   committeeReviewed: true,
-  contact: {
-    firstName: 'Max', id: 77, lastName: 'Mustermann', mbox: 'm.mustermann@university.ac.at', universityId: '12345', personId: null,
-    affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR}
-  },
+  contact: mockContact,
   contributors: [
     {
       id: 84, person: {
@@ -138,24 +137,7 @@ export const completeDmp: Dmp = {
   personalData: true,
   personalDataCompliance: ['item1', 'item2', ComplianceType.Other],
   otherPersonalDataCompliance: 'other measures',
-  project: {
-    end: new Date(),
-    funding: {
-      funderId: {
-        identifier: '501100004955', type: IdentifierType.FUNDREF
-      }, fundingStatus: 'GRANTED',
-      grantId: {
-        identifier: '123456',
-        type: null
-      }, id: 79
-    },
-    id: 78,
-    start: new Date(),
-    title: 'Project title',
-    universityId: 1234,
-    description: '',
-    dmpExists: false
-  },
+  project: mockProject,
   restrictedAccessInfo: 'info how someone can access restricted data',
   restrictedDataAccess: 'send form',
   sensitiveData: true,
@@ -185,10 +167,7 @@ export const noDataDmp: Dmp = {
   sensitiveDataAccess: 'access',
   closedAccessInfo: 'closed access info',
   committeeReviewed: true,
-  contact: {
-    firstName: 'Max', id: 77, lastName: 'Mustermann', mbox: 'm.mustermann@university.ac.at', universityId: '12345', personId: null,
-    affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR}
-  },
+  contact: mockContact,
   contributors: [
     {
       id: 84, person: {
@@ -304,24 +283,7 @@ export const noDataDmp: Dmp = {
   personalData: true,
   personalDataCompliance: ['item1', 'item2'],
   otherPersonalDataCompliance: 'other measures',
-  project: {
-    end: new Date(),
-    funding: {
-      funderId: {
-        identifier: '501100004955', type: IdentifierType.FUNDREF
-      }, fundingStatus: 'GRANTED',
-      grantId: {
-        identifier: '123456',
-        type: null
-      }, id: 79
-    },
-    id: 78,
-    start: new Date(),
-    title: 'Project title',
-    universityId: 1234,
-    description: '',
-    dmpExists: false
-  },
+  project: mockProject,
   restrictedAccessInfo: 'info how someone can access restricted data',
   restrictedDataAccess: 'send form',
   sensitiveData: true,
