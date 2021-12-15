@@ -19,7 +19,6 @@ import {Storage} from '../domain/storage';
 import {FeedbackService} from '../services/feedback.service';
 import {HttpEventType} from '@angular/common/http';
 import {Location} from '@angular/common';
-import {LoadDmps} from '../store/actions/dmp.actions';
 import {LoadingState} from '../domain/enum/loading-state.enum';
 import {OAuthService} from 'angular-oauth2-oidc';
 
@@ -32,7 +31,7 @@ export class DmpComponent implements OnInit {
 
   username: string;
 
-  dmpForm: FormGroup = this.formService.createDmpForm();
+  dmpForm: FormGroup = this.formService.dmpForm;
   isLinear = false;
 
   // Steps
@@ -109,27 +108,28 @@ export class DmpComponent implements OnInit {
   }
 
   saveDmp(): void {
-    console.log(this.username);
-    const dmp = this.formService.exportFormToDmp(this.dmpForm);
+    const dmp = this.formService.exportFormToDmp();
     if (this.dmpForm.value.id) {
       this.backendService.editDmp(dmp).subscribe(
         response => {
-          this.store.dispatch(new LoadDmps());
-          this.router.navigate(['plans']);
+          // this.store.dispatch(new LoadDmps());
+          // this.router.navigate(['plans']);
+          this.formService.mapDmpToForm(response);
         },
         () => {},
         () => this.feedbackService.success('Plan was updated!')
       );
     } else {
-      this.backendService.createDmp(dmp)
-        .subscribe(
-          response => {
-            // this.location.replaceState(`dmp/${response.id}`);
-            this.store.dispatch(new LoadDmps());
-            this.router.navigate(['plans']);
-          },
-          () => {},
-          () => this.feedbackService.success('Plan was saved!'));
+      this.backendService.createDmp(dmp).subscribe(
+        response => {
+          this.location.replaceState(`dmp/${response.id}`);
+          // this.store.dispatch(new LoadDmps());
+          // this.router.navigate(['plans']);
+          this.formService.mapDmpToForm(response);
+        },
+        () => {
+        },
+        () => this.feedbackService.success('Plan was saved!'));
     }
   }
 
@@ -151,19 +151,19 @@ export class DmpComponent implements OnInit {
   }
 
   addContributor(contributor: Person) {
-    this.formService.addContributorToForm(this.dmpForm, contributor);
+    this.formService.addContributorToForm(contributor);
   }
 
   removeContributor(index: number) {
-    this.formService.removeContributorFromForm(this.dmpForm, index);
+    this.formService.removeContributorFromForm(index);
   }
 
   addDataset(title: string) {
-    this.formService.addDatasetToForm(this.dmpForm, this.generateReferenceHash(), title);
+    this.formService.addDatasetToForm(this.generateReferenceHash(), title);
   }
 
   updateDataset(event: { index: number, update: FormGroup }) {
-    this.formService.updateDatasetOfForm(this.dmpForm, event.index, event.update);
+    this.formService.updateDatasetOfForm(event.index, event.update);
   }
 
   analyseFile(event: File) {
@@ -182,7 +182,7 @@ export class DmpComponent implements OnInit {
             const dataset = response.body;
             dataset.title = filename;
             dataset.referenceHash = reference;
-            this.formService.addFileAnalysisAsDatasetToForm(this.dmpForm, dataset);
+            this.formService.addFileAnalysisAsDatasetToForm(dataset);
           }
         },
         _ => upload.finalized = true,
@@ -197,31 +197,31 @@ export class DmpComponent implements OnInit {
   }
 
   removeDataset(index: number) {
-    this.formService.removeDatasetFromForm(this.dmpForm, index);
+    this.formService.removeDatasetFromForm(index);
   }
 
   addStorage(storage: Storage) {
-    this.formService.addStorageToForm(this.dmpForm, storage);
+    this.formService.addStorageToForm(storage);
   }
 
   removeStorage(index: number): void {
-    this.formService.removeStorageFromForm(this.dmpForm, index);
+    this.formService.removeStorageFromForm(index);
   }
 
   addExternalStorage() {
-    this.formService.addExternalStorageToForm(this.dmpForm);
+    this.formService.addExternalStorageToForm();
   }
 
   removeExternalStorage(index: number): void {
-    this.formService.removeExternalStorageFromForm(this.dmpForm, index);
+    this.formService.removeExternalStorageFromForm(index);
   }
 
   addRepository(repo: { id: string, name: string }) {
-    this.formService.addRepositoryToForm(this.dmpForm, repo);
+    this.formService.addRepositoryToForm(repo);
   }
 
   removeRepository(index: number): void {
-    this.formService.removeRepositoryFromForm(this.dmpForm, index);
+    this.formService.removeRepositoryFromForm(index);
   }
 
   getRepositoryDetails(repo: Repository) {
@@ -231,11 +231,11 @@ export class DmpComponent implements OnInit {
   }
 
   addCost() {
-    this.formService.addCostToForm(this.dmpForm);
+    this.formService.addCostToForm();
   }
 
   removeCost(index: number) {
-    this.formService.removeCostFromForm(this.dmpForm, index);
+    this.formService.removeCostFromForm(index);
   }
 
   private getDmpById() {
@@ -245,7 +245,7 @@ export class DmpComponent implements OnInit {
       this.backendService.getDmpById(id).subscribe(
         dmp => {
           if (dmp !== undefined) {
-            this.formService.mapDmpToForm(dmp, this.dmpForm);
+            this.formService.mapDmpToForm(dmp);
             if (dmp.project) {
               this.projects$.subscribe(projects => projects.filter(e => {
                 if (e.title === dmp.project.title) {
