@@ -28,3 +28,12 @@
 .inline-radio-group {
   padding: 1rem;
 }
+
+.form-field-hint {
+  display: flex;
+}
+
+hr {
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
