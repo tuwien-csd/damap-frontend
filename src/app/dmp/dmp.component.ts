@@ -21,6 +21,8 @@ import {HttpEventType} from '@angular/common/http';
 import {Location} from '@angular/common';
 import {LoadingState} from '../domain/enum/loading-state.enum';
 import {OAuthService} from 'angular-oauth2-oidc';
+import {formDiff, setFormValue} from '../store/actions/form.actions';
+import {selectFormChanged} from '../store/selectors/form.selectors';
 
 @Component({
   selector: 'app-dmp',
@@ -32,7 +34,7 @@ export class DmpComponent implements OnInit {
   username: string;
 
   dmpForm: FormGroup = this.formService.dmpForm;
-  isLinear = false;
+  formChanged: boolean;
 
   // Steps
   projectStep: FormControl;
@@ -56,6 +58,7 @@ export class DmpComponent implements OnInit {
   repositories: any;
   repositoriesLoaded$: Observable<LoadingState>;
   repositories$: Observable<Repository[]>;
+  formChanged$: Observable<boolean>;
 
   fileUpload: { file: File, progress: number, finalized: boolean }[] = [];
   fileUploadSubscription: Subscription[] = [];
@@ -67,7 +70,7 @@ export class DmpComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private backendService: BackendService,
-    private store: Store<AppState>,
+    public store: Store<AppState>,
     private feedbackService: FeedbackService,
     private location: Location
   ) {
@@ -78,12 +81,17 @@ export class DmpComponent implements OnInit {
     this.projects$ = this.store.pipe(select(selectProjects));
     this.repositoriesLoaded$ = this.store.pipe(select(selectRepositoriesLoaded));
     this.repositories$ = this.store.pipe(select(selectRepositories));
+    this.formChanged$ = this.store.pipe(select(selectFormChanged));
     this.getDmpById();
     this.getSuggestedProjects();
     this.username = this.auth.getIdentityClaims()['preferred_username'];
 
-    this.dmpForm.valueChanges.subscribe(() => console.log('DMPform Update'));
-    this.dmpForm.valueChanges.subscribe(newVal => console.log(newVal));
+    this.dmpForm.valueChanges.subscribe(value => {
+      console.log('DMPform Update');
+      console.log(value);
+      this.store.dispatch(formDiff({newDmp: value}));
+    });
+    this.formChanged$.subscribe(value => this.formChanged = value);
 
     this.projectStep = this.dmpForm.get('project') as FormControl;
     this.contactStep = this.dmpForm.get('contact') as FormControl;
@@ -98,12 +106,14 @@ export class DmpComponent implements OnInit {
     this.repoStep = this.dmpForm.get('hosts') as FormArray;
     this.reuseStep = this.dmpForm.get('reuse') as FormGroup;
     this.costsStep = this.dmpForm.get('costs') as FormGroup;
-
   }
 
   changeStep(event: StepperSelectionEvent) {
     if (event.selectedIndex === 7) {
       this.getRepositories();
+    }
+    if (this.formChanged) {
+      this.saveDmp();
     }
   }
 
@@ -115,8 +125,10 @@ export class DmpComponent implements OnInit {
           // this.store.dispatch(new LoadDmps());
           // this.router.navigate(['plans']);
           this.formService.mapDmpToForm(response);
+          this.store.dispatch(setFormValue({dmp: response}));
         },
-        () => {},
+        () => {
+        },
         () => this.feedbackService.success('Plan was updated!')
       );
     } else {
@@ -126,6 +138,7 @@ export class DmpComponent implements OnInit {
           // this.store.dispatch(new LoadDmps());
           // this.router.navigate(['plans']);
           this.formService.mapDmpToForm(response);
+          this.store.dispatch(setFormValue({dmp: response}));
         },
         () => {
         },
@@ -244,8 +257,9 @@ export class DmpComponent implements OnInit {
       console.log('Get DMP with ID: ' + id);
       this.backendService.getDmpById(id).subscribe(
         dmp => {
-          if (dmp !== undefined) {
+          if (dmp != null) {
             this.formService.mapDmpToForm(dmp);
+            this.store.dispatch(setFormValue({dmp}));
             if (dmp.project) {
               this.projects$.subscribe(projects => projects.filter(e => {
                 if (e.title === dmp.project.title) {
