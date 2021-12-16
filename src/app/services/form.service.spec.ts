@@ -10,7 +10,6 @@ describe('FormService', () => {
   let formbuilder: FormBuilder;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
     TestBed.configureTestingModule({providers: [FormBuilder]});
     service = TestBed.inject(FormService);
     formbuilder = TestBed.inject(FormBuilder);
@@ -22,15 +21,13 @@ describe('FormService', () => {
   });
 
   it('should export the same dmp as mapped to the form', () => {
-    const form = service.createDmpForm();
-    service.mapDmpToForm(completeDmp, form);
-    expect(service.exportFormToDmp(form)).toEqual(completeDmp);
+    service.mapDmpToForm(completeDmp);
+    expect(service.exportFormToDmp()).toEqual(completeDmp);
   })
 
   it('should not export dataset related fields when no datasets are defined', () => {
-    const form = service.createDmpForm();
-    service.mapDmpToForm(noDataDmp, form);
-    const result = service.exportFormToDmp(form);
+    service.mapDmpToForm(noDataDmp);
+    const result = service.exportFormToDmp();
     expect(result.dataKind).toEqual(DataKind.NONE);
     expect(result.datasets).toEqual([]);
     expect(result.noDataExplanation).toEqual('');

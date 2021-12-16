@@ -1,0 +1,13 @@
+<div class="save-status">
+  <ng-container *ngIf="saved else unsaved">
+    <mat-icon>done</mat-icon>&nbsp;&nbsp;
+    <div>
+      All changes have been saved.
+    </div>
+</ng-container><ng-template #unsaved>
+  <mat-icon>save</mat-icon>&nbsp;&nbsp;
+  <div>
+    You have unsaved changes.
+  </div>
+</ng-template>
+</div>

@@ -22,8 +22,14 @@ export class FormService {
 
   private TEXT_MAX_LENGTH = 4000;
   private TEXT_SHORT_LENGTH = 255;
+  private readonly form: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
+    this.form = this.createDmpForm();
+  }
+
+  get dmpForm(): FormGroup {
+    return this.form;
   }
 
   private static restrictedDatasets(datasets: Dataset[]): boolean {
@@ -34,7 +40,7 @@ export class FormService {
     return datasets.find(item => item.dataAccess === DataAccessType.closed) != null;
   }
 
-  public createDmpForm(): FormGroup {
+  private createDmpForm(): FormGroup {
     return this.formBuilder.group({
       id: [null],
       project: [null],
@@ -85,9 +91,10 @@ export class FormService {
     });
   }
 
-  public mapDmpToForm(dmp: Dmp, form: FormGroup): FormGroup {
+  public mapDmpToForm(dmp: Dmp) {
 
-    form.patchValue({
+    this.resetForm();
+    this.form.patchValue({
       id: dmp.id,
       project: dmp.project,
       contact: dmp.contact,
@@ -134,39 +141,38 @@ export class FormService {
     // Contributors, datasets, hosts, costs
     if (dmp.contributors) {
       for (const contributor of dmp.contributors) {
-        (form.controls.contributors as FormArray).push(this.mapContributorToFormGroup(contributor));
+        (this.form.controls.contributors as FormArray).push(this.mapContributorToFormGroup(contributor));
       }
     }
     if (dmp.datasets) {
       for (const dataset of dmp.datasets) {
-        (form.controls.datasets as FormArray).push(this.mapDatasetToFormGroup(dataset));
+        (this.form.controls.datasets as FormArray).push(this.mapDatasetToFormGroup(dataset));
       }
     }
     if (dmp.hosts) {
       for (const host of dmp.hosts) {
-        (form.controls.hosts as FormArray).push(this.mapHostToFormGroup(host));
+        (this.form.controls.hosts as FormArray).push(this.mapHostToFormGroup(host));
       }
     }
     if (dmp.costs) {
       for (const cost of dmp.costs) {
-        (form.controls.costs.get('list') as FormArray).push(this.mapCostToFormGroup(cost));
+        (this.form.controls.costs.get('list') as FormArray).push(this.mapCostToFormGroup(cost));
       }
     }
     if (dmp.storage) {
       for (const storage of dmp.storage) {
-        (form.controls.storage as FormArray).push(this.mapStorageToFormGroup(storage));
+        (this.form.controls.storage as FormArray).push(this.mapStorageToFormGroup(storage));
       }
     }
     if (dmp.externalStorage) {
       for (const externalStorage of dmp.externalStorage) {
-        (form.controls.externalStorage as FormArray).push(this.mapExternalStorageToFormGroup(externalStorage));
+        (this.form.controls.externalStorage as FormArray).push(this.mapExternalStorageToFormGroup(externalStorage));
       }
     }
-    return form;
   }
 
-  public exportFormToDmp(form: FormGroup): Dmp {
-    const formValue = form.getRawValue();
+  public exportFormToDmp(): Dmp {
+    const formValue = this.form.getRawValue();
 
     const result: Dmp = {
       closedAccessInfo: '',
@@ -281,58 +287,68 @@ export class FormService {
     return result;
   }
 
-  public addContributorToForm(form: FormGroup, contributor: Person) {
+  private resetForm(): void {
+    this.form.reset();
+    (this.form.controls.contributors as FormArray).clear();
+    (this.form.controls.datasets as FormArray).clear();
+    (this.form.controls.hosts as FormArray).clear();
+    (this.form.controls.costs.get('list') as FormArray).clear();
+    (this.form.controls.storage as FormArray).clear();
+    (this.form.controls.externalStorage as FormArray).clear();
+  }
+
+  public addContributorToForm(contributor: Person) {
     const contributorFormGroup = this.createContributorFormGroup();
     contributorFormGroup.patchValue({person: contributor});
-    (form.get('contributors') as FormArray).push(contributorFormGroup);
+    (this.form.get('contributors') as FormArray).push(contributorFormGroup);
   }
 
-  public removeContributorFromForm(form: FormGroup, index: number) {
-    (form.get('contributors') as FormArray).removeAt(index);
+  public removeContributorFromForm(index: number) {
+    (this.form.get('contributors') as FormArray).removeAt(index);
   }
 
-  public addDatasetToForm(form: FormGroup, reference: string, title: string) {
+  public addDatasetToForm(reference: string, title: string) {
     const formGroup = this.createDatasetFormGroup(title);
     formGroup.patchValue({
       referenceHash: reference,
-      startDate: form.value.project?.end || null,
-      dateOfDeletion: form.value.project?.end || null,
+      startDate: this.form.value.project?.end || null,
+      dateOfDeletion: this.form.value.project?.end || null,
     });
-    (form.get('datasets') as FormArray).push(formGroup);
+    (this.form.get('datasets') as FormArray).push(formGroup);
   }
 
-  public updateDatasetOfForm(form: FormGroup, index: number, update: FormGroup) {
-    const dataset = (form.get('datasets') as FormArray).at(index);
+  public updateDatasetOfForm(index: number, update: FormGroup) {
+    const dataset = (this.form.get('datasets') as FormArray).at(index);
     dataset.patchValue(update.getRawValue());
   }
 
-  public removeDatasetFromForm(form: FormGroup, index: number) {
-    this.removeDatasetReferences(form, index);
-    (form.get('datasets') as FormArray).removeAt(index);
+  public removeDatasetFromForm(index: number) {
+    this.removeDatasetReferences(index);
+    (this.form.get('datasets') as FormArray).removeAt(index);
   }
 
-  public addFileAnalysisAsDatasetToForm(form: FormGroup, dataset: Dataset) {
+  public addFileAnalysisAsDatasetToForm(dataset: Dataset) {
     const formGroup = this.mapDatasetToFormGroup(dataset);
     formGroup.patchValue({
-      startDate: form.value.project?.end || null
+      startDate: this.form.value.project?.end || null
     });
-    (form.get('datasets') as FormArray).push(formGroup);
+    (this.form.get('datasets') as FormArray).push(formGroup);
   }
 
-  public addStorageToForm(form: FormGroup, storage: Storage) {
+  public addStorageToForm(storage: Storage) {
     const storageFormGroup = this.createStorageFormGroup();
     storageFormGroup.patchValue({hostId: storage.hostId, title: storage.title});
-    (form.get('storage') as FormArray).push(storageFormGroup);
+    (this.form.get('storage') as FormArray).push(storageFormGroup);
   }
 
-  public removeStorageFromForm(form: FormGroup, index: number) {
-    (form.get('storage') as FormArray).removeAt(index);
+  public removeStorageFromForm(index: number) {
+    (this.form.get('storage') as FormArray).removeAt(index);
   }
 
-  public addExternalStorageToForm(form: FormGroup) {
+  public addExternalStorageToForm() {
     const externalStorageFormGroup = this.createExternalStorageFormGroup();
-    const storage = form.get('externalStorage') as FormArray;
-    const storageInfo = form.get('externalStorageInfo') as FormControl;
+    const storage = this.form.get('externalStorage') as FormArray;
+    const storageInfo = this.form.get('externalStorageInfo') as FormControl;
     storage.push(externalStorageFormGroup);
 
     if (storage.controls.length === 1) {
@@ -341,10 +357,10 @@ export class FormService {
     storageInfo.updateValueAndValidity();
   }
 
-  public removeExternalStorageFromForm(form: FormGroup, index: number) {
-    const storage = form.get('externalStorage') as FormArray;
+  public removeExternalStorageFromForm(index: number) {
+    const storage = this.form.get('externalStorage') as FormArray;
     storage.removeAt(index);
-    const storageInfo = form.get('externalStorageInfo') as FormControl;
+    const storageInfo = this.form.get('externalStorageInfo') as FormControl;
 
     if (storage.controls.length === 0) {
       storageInfo.removeValidators(Validators.required);
@@ -352,26 +368,26 @@ export class FormService {
     storageInfo.updateValueAndValidity();
   }
 
-  public addRepositoryToForm(form: FormGroup, repo: { id: string, name: string }) {
+  public addRepositoryToForm(repo: { id: string, name: string }) {
     const hostFormGroup = this.createHostFormGroup();
     hostFormGroup.patchValue({
       hostId: repo.id,
       title: repo.name
     });
-    (form.get('hosts') as FormArray).push(hostFormGroup);
+    (this.form.get('hosts') as FormArray).push(hostFormGroup);
   }
 
-  public removeRepositoryFromForm(form: FormGroup, index: number) {
-    (form.get('hosts') as FormArray).removeAt(index);
+  public removeRepositoryFromForm(index: number) {
+    (this.form.get('hosts') as FormArray).removeAt(index);
   }
 
-  public addCostToForm(form: FormGroup) {
+  public addCostToForm() {
     const costFormGroup: FormGroup = this.createCostFormGroup();
-    ((form.get('costs') as FormGroup).get('list') as FormArray).push(costFormGroup);
+    ((this.form.get('costs') as FormGroup).get('list') as FormArray).push(costFormGroup);
   }
 
-  public removeCostFromForm(form: FormGroup, index: number) {
-    ((form.get('costs') as FormGroup).get('list') as FormArray).removeAt(index);
+  public removeCostFromForm(index: number) {
+    ((this.form.get('costs') as FormGroup).get('list') as FormArray).removeAt(index);
   }
 
   public createDatasetFormGroup(title: string): FormGroup {
@@ -414,7 +430,7 @@ export class FormService {
   private mapContributorToFormGroup(contributor: Contributor): FormGroup {
     const formGroup = this.createContributorFormGroup();
     formGroup.setValue({
-      id: contributor.id,
+      id: contributor.id || null,
       person: contributor.person,
       role: contributor.role || null
     });
@@ -513,19 +529,19 @@ export class FormService {
     return formGroup;
   }
 
-  private removeDatasetReferences(form: FormGroup, index: number) {
-    const dataset = (form.get('datasets') as FormArray).at(index) as FormGroup;
+  private removeDatasetReferences(index: number) {
+    const dataset = (this.form.get('datasets') as FormArray).at(index) as FormGroup;
 
     // Storage
-    const storageStep = form.get('storage') as FormArray;
+    const storageStep = this.form.get('storage') as FormArray;
     this.removeDatasetReferenceInFormArray(storageStep, dataset);
 
     // External Storage
-    const eStorageStep = form.get('externalStorage') as FormArray;
+    const eStorageStep = this.form.get('externalStorage') as FormArray;
     this.removeDatasetReferenceInFormArray(eStorageStep, dataset);
 
     // Repositories
-    const repoStep = form.get('hosts') as FormArray;
+    const repoStep = this.form.get('hosts') as FormArray;
     this.removeDatasetReferenceInFormArray(repoStep, dataset);
   }
 
