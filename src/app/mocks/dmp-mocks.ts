@@ -86,7 +86,7 @@ export const completeDmp: Dmp = {
       personalData: true,
       sensitiveData: true,
       legalRestrictions: true,
-      referenceHash: '39608knzrof6y',
+      referenceHash: '39608knzrof6x',
       size: 0,
       startDate: null,
       title: 'Dataset 1',
@@ -119,7 +119,7 @@ export const completeDmp: Dmp = {
   hosts: [
     {
       datasets: [
-        '39608knzrof6y'
+        '39608knzrof6y', '39608knzrof6x'
       ],
       date: new Date(),
       hostId: 'r3d100013557',
@@ -131,7 +131,7 @@ export const completeDmp: Dmp = {
   legalRestrictions: true,
   legalRestrictionsComment: 'legally restricted',
   legalRestrictionsDocuments: [Agreement.OTHER],
-  otherLegalRestrictionsDocuments: 'other document',
+  otherLegalRestrictionsDocument: 'other document',
   metadata: 'provided metadata',
   noDataExplanation: '',
   personalData: true,
@@ -145,7 +145,7 @@ export const completeDmp: Dmp = {
   storage: [
     {
       datasets: [
-        '39608knzrof6y'
+        '39608knzrof6y', '39608knzrof6x'
       ],
       hostId: '0',
       id: 97,
@@ -163,7 +163,7 @@ export const noDataDmp: Dmp = {
   humanParticipants: false,
   legalRestrictionsDocuments: [Agreement.CONFIDENTIALITY_AGREEMENT],
   otherDataSecurityMeasures: '',
-  otherLegalRestrictionsDocuments: '',
+  otherLegalRestrictionsDocument: '',
   sensitiveDataAccess: 'access',
   closedAccessInfo: 'closed access info',
   committeeReviewed: true,
