@@ -72,6 +72,7 @@ import {SharedModule} from './shared/shared.module';
 import {DataDeletionComponent} from './dmp/data-deletion/data-deletion.component';
 import {EthicalAspectsComponent} from './dmp/legal-ethical-aspects/ethical-aspects/ethical-aspects.component';
 import {InfoMessageComponent} from './widgets/info-message/info-message.component';
+import {SaveStatusComponent} from './widgets/save-status/save-status.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import {InfoMessageComponent} from './widgets/info-message/info-message.componen
     DataDeletionComponent,
     EthicalAspectsComponent,
     InfoMessageComponent,
+    SaveStatusComponent,
 
     // Directives
     DragdropDirective,
