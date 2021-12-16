@@ -45,7 +45,7 @@ describe('FormService', () => {
     expect(result.legalRestrictions).toEqual(false);
     expect(result.legalRestrictionsComment).toEqual('');
     expect(result.legalRestrictionsDocuments).toEqual([]);
-    expect(result.otherLegalRestrictionsDocuments).toEqual('');
+    expect(result.otherLegalRestrictionsDocument).toEqual('');
     expect(result.humanParticipants).toEqual(false);
   })
 });
