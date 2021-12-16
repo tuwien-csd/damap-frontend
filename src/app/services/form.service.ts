@@ -119,7 +119,7 @@ export class FormService {
         sensitiveDataAccess: dmp.sensitiveDataAccess,
         legalRestrictions: dmp.legalRestrictions,
         legalRestrictionsDocuments: dmp.legalRestrictionsDocuments,
-        otherLegalRestrictionsDocuments: dmp.otherLegalRestrictionsDocuments,
+        otherLegalRestrictionsDocuments: dmp.otherLegalRestrictionsDocument,
         legalRestrictionsComment: dmp.legalRestrictionsComment,
         dataRightsAndAccessControl: dmp.dataRightsAndAccessControl,
         humanParticipants: dmp.humanParticipants,
@@ -190,7 +190,7 @@ export class FormService {
       humanParticipants: formValue.legal.humanParticipants,
       legalRestrictions: false,
       legalRestrictionsDocuments: [],
-      otherLegalRestrictionsDocuments: '',
+      otherLegalRestrictionsDocument: '',
       legalRestrictionsComment: '',
       dataRightsAndAccessControl: '',
       metadata: '',
@@ -263,7 +263,7 @@ export class FormService {
         result.legalRestrictionsDocuments = formValue.legal.legalRestrictionsDocuments;
         result.dataRightsAndAccessControl = formValue.legal.dataRightsAndAccessControl;
         if (result.legalRestrictionsDocuments.includes(Agreement.OTHER)) {
-          result.otherLegalRestrictionsDocuments = formValue.legal.otherLegalRestrictionsDocuments;
+          result.otherLegalRestrictionsDocument = formValue.legal.otherLegalRestrictionsDocuments;
         }
         result.legalRestrictionsComment = formValue.legal.legalRestrictionsComment;
       } else {
