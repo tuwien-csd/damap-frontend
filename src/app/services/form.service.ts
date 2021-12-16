@@ -61,7 +61,7 @@ export class FormService {
       externalStorageInfo: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       legal: this.formBuilder.group({
         personalData: [false],
-        personalDataCompliance: [[ComplianceType.INFORMED_CONSENT]],
+        personalDataCompliance: [[]],
         otherPersonalDataCompliance: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveData: [false],
         sensitiveDataSecurity: [[], Validators.maxLength(this.TEXT_MAX_LENGTH)],

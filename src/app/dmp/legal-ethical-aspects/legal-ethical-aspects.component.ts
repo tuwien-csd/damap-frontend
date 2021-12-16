@@ -18,10 +18,6 @@ export class LegalEthicalAspectsComponent implements OnInit {
   optionsLinksEthics: string[] = ['Guidelines on Safeguarding Good Scientific Practice'];
 
   questions = [
-    {
-      label: 'Is your data or part of it sensitive, for example personal data, politically sensitive information, or trade secrets?',
-      model: 'sensitiveData'
-    },
     {label: 'Will personal data be collected/used as part of the project?', model: 'personalData'},
     {label: 'Are there any other legal restrictions on how data is processed or shared?', model: 'legalRestrictions'}
   ];
