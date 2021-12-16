@@ -2,8 +2,64 @@
 <p>This step helps you to consider issues like personal data, intellectual property rights and ownership.</p>
 <div [formGroup]="legalEthicalStep">
 
+  <!--Sensitive Data-->
+  <div>
+    <mat-label>Is your data or part of it sensitive, for example
+      <a
+        href="https://ec.europa.eu/info/law/law-topic/data-protection/reform/rules-business-and-organisations/legal-grounds-processing-data/sensitive-data/what-personal-data-considered-sensitive_en"
+        target="_blank">
+        sensitive personal data</a>, politically sensitive information, or trade secrets?
+    </mat-label>
+    <mat-radio-group formControlName="sensitiveData">
+      <mat-radio-button class="boolean-mat-radio-button" [value]="true">Yes
+      </mat-radio-button>
+      <mat-radio-button class="boolean-mat-radio-button" [value]="false">No
+      </mat-radio-button>
+    </mat-radio-group>
+    <ng-container *ngIf="legalEthicalStep?.value.sensitiveData && datasets?.length">
+      <div>
+        <section class="dataset-checkbox-section" [formGroup]="dmpForm">
+          Please select the datasets containing sensitive data:
+          <div formArrayName="datasets">
+            <ng-container *ngFor="let dataset of datasets?.controls; index as i">
+              <ng-container [formGroupName]="i">
+                <mat-checkbox class="dataset-checkbox"
+                              formControlName="sensitiveData">{{dataset.value.title}}</mat-checkbox>
+              </ng-container>
+            </ng-container>
+          </div>
+        </section>
+      </div>
+      <div>
+        <div class="form-field-hint">
+          <mat-form-field appearance="fill" [style]="'width: 100%'">
+            <mat-label>What kind of additional security measures will be taken to ensure that stored and transferred
+              sensitive data is safe?
+            </mat-label>
+            <mat-select formControlName="sensitiveDataSecurity" multiple>
+              <mat-option *ngFor="let option of securityOptions | keyvalue: originalOrder" [value]="option.value">
+                {{option.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <app-tooltip
+            [tooltip]="'Referring to physical security, network security, and security of computer systems and files.'">
+          </app-tooltip>
+        </div>
+        <ng-container *ngIf="isOtherMeasureSelected">
+          <app-input-wrapper [label]="'Please specify what other measures are taken:'"
+                             [control]="otherDataSecurityMeasures"
+                             [appearance]="'fill'"></app-input-wrapper>
+        </ng-container>
+        <app-input-wrapper [label]="'Who will be authorised to access sensitive data?'"
+                           [control]="sensitiveDataAccess"
+                           [appearance]="'fill'"></app-input-wrapper>
+      </div>
+    </ng-container>
+    <hr>
+  </div>
   <!-- Yes/No Questions-->
-  <div *ngFor="let question of questions">
+  <div *ngFor="let question of questions, last as last">
     <mat-label>{{question.label}}</mat-label>
     <mat-radio-group formControlName="{{question.model}}">
       <mat-radio-button class="boolean-mat-radio-button" [value]="true">Yes
@@ -13,7 +69,8 @@
     </mat-radio-group>
 
     <!--Personal Data-->
-    <ng-container *ngIf="question.model === 'personalData' && legalEthicalStep?.value.personalData && datasets?.length">
+    <ng-container
+      *ngIf="question.model === 'personalData' && legalEthicalStep?.value.personalData && datasets?.length">
       <div>
         <section class="dataset-checkbox-section" [formGroup]="dmpForm">
           Please select the datasets containing personal data:
@@ -43,45 +100,6 @@
                              [control]="otherPersonalDataCompliance"
                              [appearance]="'fill'"></app-input-wrapper>
         </ng-container>
-      </div>
-    </ng-container>
-
-    <!--Sensitive Data-->
-    <ng-container
-      *ngIf="question.model === 'sensitiveData' && legalEthicalStep?.value.sensitiveData && datasets?.length">
-      <div>
-        <section class="dataset-checkbox-section" [formGroup]="dmpForm">
-          Please select the datasets containing sensitive data:
-          <div formArrayName="datasets">
-            <ng-container *ngFor="let dataset of datasets?.controls; index as i">
-              <ng-container [formGroupName]="i">
-                <mat-checkbox class="dataset-checkbox"
-                              formControlName="sensitiveData">{{dataset.value.title}}</mat-checkbox>
-              </ng-container>
-            </ng-container>
-          </div>
-        </section>
-      </div>
-      <div>
-        <mat-form-field appearance="fill" [style]="'width: 100%'">
-          <mat-label>What kind of additional security measures in terms of physical security, network security, and
-            security of computer systems and files will be taken to ensure that stored and transferred sensitive data is
-            safe?
-          </mat-label>
-          <mat-select formControlName="sensitiveDataSecurity" multiple>
-            <mat-option *ngFor="let option of securityOptions | keyvalue: originalOrder" [value]="option.value">
-              {{option.value}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <ng-container *ngIf="isOtherMeasureSelected">
-          <app-input-wrapper [label]="'Please specify what other measures are taken:'"
-                             [control]="otherDataSecurityMeasures"
-                             [appearance]="'fill'"></app-input-wrapper>
-        </ng-container>
-        <app-input-wrapper [label]="'Who will be authorised to access sensitive data?'"
-                           [control]="sensitiveDataAccess"
-                           [appearance]="'fill'"></app-input-wrapper>
       </div>
     </ng-container>
 
@@ -120,6 +138,7 @@
       <app-input-wrapper [label]="'Who has rights to the produced data and who controls access to the data?'"
                          [appearance]="'fill'" [control]="dataRightsAndAccessControl"></app-input-wrapper>
     </ng-container>
+    <hr *ngIf="!last">
   </div>
 </div>
 
