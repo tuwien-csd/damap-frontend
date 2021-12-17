@@ -46,6 +46,7 @@
       </app-dmp-external-storage>
     </ng-container>
   </mat-step>
+  
   <mat-step label="Legal and ethical aspects">
     <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
       <app-dmp-legal-ethical-aspects [dmpForm]="dmpForm"
@@ -91,6 +92,7 @@
   <button mat-button color="primary" [routerLink]="'/plans'" routerLinkActive="active">Discard changes</button>
   <button mat-raised-button color="primary" (click)="saveDmp()" [disabled]="dmpForm.invalid">Save changes</button>
 </div>
+
 <ng-template #noDatasets>
   Please define datasets first.
 </ng-template>

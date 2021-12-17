@@ -2,6 +2,7 @@
   <div [formGroup]="specifyDataStep">
     <mat-label id="example-radio-group-label">What kinds of research data will you create?</mat-label>
     <mat-radio-group aria-label="Select an option" formControlName="kind">
+      <p>Research data comes in all forms and sizes. The table below helps you to describe the data sets (i.e.  groups of data with similar properties) you are expecting to create or reuse during the project.</p>
       <mat-radio-button class="mat-radio-button" [value]="unknown">I don't know yet.</mat-radio-button>
       <mat-radio-button class="mat-radio-button" [value]="none">No data will be created or analysed</mat-radio-button>
       <mat-radio-button class="mat-radio-button" [value]="specify">Specify datasets</mat-radio-button>
