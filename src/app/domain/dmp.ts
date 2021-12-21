@@ -34,7 +34,7 @@ export interface Dmp {
   sensitiveDataAccess: string;
   legalRestrictions: boolean;
   legalRestrictionsDocuments: string[];
-  otherLegalRestrictionsDocuments: string;
+  otherLegalRestrictionsDocument: string;
   legalRestrictionsComment: string;
   dataRightsAndAccessControl: string;
   humanParticipants: boolean;

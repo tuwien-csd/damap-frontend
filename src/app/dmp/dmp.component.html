@@ -1,4 +1,5 @@
-<mat-vertical-stepper [linear]="isLinear" (selectionChange)="changeStep($event)">
+<app-save-status [saved]="!formChanged"></app-save-status>
+<mat-vertical-stepper [linear]="false" (selectionChange)="changeStep($event)">
   <mat-step label="Choose project from the project data base">
     <app-dmp-project [projects]="projects$ | async"
                      [loaded]="projectsLoaded$ | async"
@@ -85,7 +86,7 @@
     </app-dmp-costs>
   </mat-step>
   <mat-step label="End">
-    <app-dmp-summary [dmpForm]="dmpForm"></app-dmp-summary>
+    <app-dmp-summary></app-dmp-summary>
   </mat-step>
 </mat-vertical-stepper>
 <div id="save-dmp">
