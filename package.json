@@ -1,6 +1,6 @@
 {
   "name": "damap-frontend",
-  "version": "0.7.1-SNAPSHOT",
+  "version": "0.7.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
