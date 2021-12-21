@@ -13,7 +13,7 @@ import {
 import {mockDetailRepo, mockRepo} from '../../mocks/repository-mocks';
 import {provideMockStore} from '@ngrx/store/testing';
 import {selectFilters} from '../states/repository.state';
-import {IdentifierType} from '../../domain/enum/person-id-type.enum';
+import {IdentifierType} from '../../domain/enum/identifier-type.enum';
 import {TestScheduler} from 'rxjs/testing';
 import {HttpErrorResponse} from '@angular/common/http';
 
