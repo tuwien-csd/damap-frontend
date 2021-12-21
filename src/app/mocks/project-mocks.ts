@@ -1,4 +1,4 @@
-import {IdentifierType} from '../domain/enum/person-id-type.enum';
+import {IdentifierType} from '../domain/enum/identifier-type.enum';
 import {Project} from '../domain/project';
 
 export const mockProject: Project = {

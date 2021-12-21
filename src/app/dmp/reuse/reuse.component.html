@@ -1,8 +1,10 @@
-<form [formGroup]="reuseStep">
+<app-step-intro>This step helps you to think about foreseeable research uses or users of your data sets and what
+  potential reusers require to access your data.
+</app-step-intro>
+<div [formGroup]="reuseStep">
   <mat-form-field class="full-width" appearance="fill">
     <mat-label class="wrap-label">Who is the target audience and who could be interested in reusing the data and why?
     </mat-label>
-    <!--<textarea matInput formControlName="targetAudience"></textarea>-->
     <input type="text" matInput formControlName="targetAudience" [matAutocomplete]="auto"/>
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let option of optionsTargetAudience" [value]="option">
@@ -28,4 +30,4 @@
       <textarea matInput formControlName="restrictedDataAccess"></textarea>
     </mat-form-field>
   </ng-container>
-</form>
+</div>
