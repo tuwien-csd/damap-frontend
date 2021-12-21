@@ -1,6 +1,10 @@
-<p *ngIf="datasets?.controls.length > 0">Please indicate which datasets you plan to keep closed or publish.
+<app-step-intro>This step helps you to specify the access to your research output in the future: Which of your data sets
+  will be published, which will be provided to interested persons on request only and which need to be under lock and
+  key, for contractual, regulatory, or ethical reasons? It also reminds you to choose a license for your open data that
+  clearly describes the reuse conditions for potential reusers.
+</app-step-intro>
+<p>Please indicate which datasets you plan to keep closed or publish.
   Select a license for the datasets you want to publish and estimate the release date.</p>
-<p *ngIf="datasets?.controls.length == 0">No datasets defined.</p>
 <div [formGroup]="dmpForm">
   <ng-container formArrayName="datasets">
     <mat-card *ngFor="let dataset of datasets?.controls; index as i" class="mat-selected">
@@ -56,7 +60,7 @@
               <mat-datepicker-toggle matSuffix [for]="picker_i"></mat-datepicker-toggle>
               <mat-datepicker #picker_i></mat-datepicker>
               <mat-hint
-                *ngIf="dmpForm?.controls.project?.value?.end === dataset.value.startDate && dataset.value.startDate != null">
+                *ngIf="dmpForm.controls.project?.value?.end === dataset.value.startDate">
                 The release date was set to the project end date. Feel free to modify it.
               </mat-hint>
             </mat-form-field>
