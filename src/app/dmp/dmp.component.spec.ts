@@ -17,6 +17,7 @@ import {HarnessLoader} from '@angular/cdk/testing';
 import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
 import {MatStepperHarness} from '@angular/material/stepper/testing';
 import {selectRepositoriesLoaded} from '../store/selectors/repository.selectors';
+import {StepIntroComponent} from '../widgets/intro/step-intro.component';
 
 describe('DmpComponent', () => {
   let component: DmpComponent;
@@ -53,7 +54,7 @@ describe('DmpComponent', () => {
           [/*{path: 'plans', component: PlansComponent}*/]
         )
       ],
-      declarations: [DmpComponent],
+      declarations: [DmpComponent, StepIntroComponent],
       providers: [
         {provide: OAuthService, useValue: oauthSpy},
         {provide: FormService, useValue: formServiceStub},

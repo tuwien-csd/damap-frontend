@@ -1,0 +1,6 @@
+div{
+  margin-bottom: 1rem;
+  color: var(--step-intro-color);
+  font-weight: bolder;
+  font-size: 0.9rem;
+}

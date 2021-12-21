@@ -1,17 +1,17 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RepoComponent } from './repo.component';
+import {RepoComponent} from './repo.component';
+import {StepIntroComponent} from '../../widgets/intro/step-intro.component';
 
 describe('RepoComponent', () => {
   let component: RepoComponent;
   let fixture: ComponentFixture<RepoComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ RepoComponent ]
-    })
-    .compileComponents();
-  }));
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [RepoComponent, StepIntroComponent]
+    }).compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RepoComponent);

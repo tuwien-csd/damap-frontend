@@ -31,6 +31,9 @@
   </mat-step>
   <mat-step label="Storage and backup during the research process">
     <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
+      <app-step-intro>This step helps you to document who is allowed to see or edit your data in the project phase and
+        to find good storage and backup solutions for your data.
+      </app-step-intro>
       <app-data-access [dmpForm]="dmpForm"
                        [datasets]="datasets"></app-data-access>
       <app-dmp-storage [dmpForm]="dmpForm"
@@ -47,7 +50,7 @@
       </app-dmp-external-storage>
     </ng-container>
   </mat-step>
-  
+
   <mat-step label="Legal and ethical aspects">
     <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
       <app-dmp-legal-ethical-aspects [dmpForm]="dmpForm"

@@ -1,101 +1,101 @@
-<ng-container *ngIf="specifyDataStep">
-  <div [formGroup]="specifyDataStep">
-    <mat-label id="example-radio-group-label">What kinds of research data will you create?</mat-label>
-    <mat-radio-group aria-label="Select an option" formControlName="kind">
-      <p>Research data comes in all forms and sizes. The table below helps you to describe the data sets (i.e.  groups of data with similar properties) you are expecting to create or reuse during the project.</p>
-      <mat-radio-button class="mat-radio-button" [value]="unknown">I don't know yet.</mat-radio-button>
-      <mat-radio-button class="mat-radio-button" [value]="none">No data will be created or analysed</mat-radio-button>
-      <mat-radio-button class="mat-radio-button" [value]="specify">Specify datasets</mat-radio-button>
-    </mat-radio-group>
-  </div>
-</ng-container>
-<mat-tab-group dynamicHeight
-               *ngIf="specifyDataStep?.value.kind === specify">
-  <mat-tab label="Manually">
-
-    <mat-form-field class="dataset-tags-chips" [style]="'width:100%;'"
-                    *ngIf="specifyDataStep?.value.kind === specify">
-      <mat-chip-list #chipList aria-label="Create names for your datasets">
-        <ng-container *ngFor="let dataset of datasets?.controls; let i=index">
-          <mat-chip *ngIf="dataset.value.title != null" [selectable]="true"
-                    removable="true" (removed)="remove(i)">
-            {{dataset.value.title}}
-            <mat-icon matChipRemove>cancel</mat-icon>
-          </mat-chip>
-        </ng-container>
-        <input placeholder="Create names for your datasets"
-               [matChipInputFor]="chipList"
-               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-               [matChipInputAddOnBlur]="true"
-               (matChipInputTokenEnd)="add($event)">
-      </mat-chip-list>
-    </mat-form-field>
-  </mat-tab>
-  <mat-tab label="Uploading sample data">
-    <app-file-upload [fileUpload]="fileUpload"
-                     (fileToUpload)="analyseFile($event)"
-                     (uploadToCancel)="cancelUpload($event)">
-    </app-file-upload>
-  </mat-tab>
-</mat-tab-group>
-
-<!-- TABLE -->
-<div *ngIf="specifyDataStep?.value.kind === specify && datasets.controls.length > 0">
-  <h2>Data</h2>
-
-  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-    <ng-container matColumnDef="dataset">
-      <th mat-header-cell *matHeaderCellDef>Dataset</th>
-      <td mat-cell *matCellDef="let dataset">
-        <div>{{dataset.value.title}}
-        </div>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="datatype">
-      <th mat-header-cell *matHeaderCellDef>Datatype</th>
-      <td mat-cell *matCellDef="let dataset">
-        <div>{{dataset.value.type}}
-        </div>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="size">
-      <th mat-header-cell *matHeaderCellDef>Size</th>
-      <td mat-cell *matCellDef="let dataset">
-        <div>{{dataset.value.size | byte}}
-        </div>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="comment">
-      <th mat-header-cell *matHeaderCellDef>Comment</th>
-      <td mat-cell *matCellDef="let dataset">
-        <div>{{dataset.value.comment}}
-        </div>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef><span class="sr-only">Actions</span></th>
-      <td mat-cell *matCellDef="let element" [style]="'text-align: right'">
-        <button mat-icon-button>
-          <mat-icon color="primary" (click)="openDatasetDialog(dataSource.data.indexOf(element))">edit</mat-icon>
-        </button>
-        <button mat-icon-button>
-          <mat-icon color="primary" (click)="remove(dataSource.data.indexOf(element))">delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
-    <tr mat-row *matRowDef="let element; columns: tableHeaders;"
-        class="element-row">
-  </table>
+<div [formGroup]="specifyDataStep">
+  <mat-label id="example-radio-group-label">What kinds of research data will you create?</mat-label>
+  <mat-radio-group aria-label="Select an option" formControlName="kind">
+    <mat-radio-button class="mat-radio-button" [value]="unknown">I don't know yet.</mat-radio-button>
+    <mat-radio-button class="mat-radio-button" [value]="none">No data will be created or analysed</mat-radio-button>
+    <mat-radio-button class="mat-radio-button" [value]="specify">Specify datasets</mat-radio-button>
+  </mat-radio-group>
 </div>
 
+<ng-container *ngIf="specifyDataStep.value.kind === specify">
+  <mat-tab-group dynamicHeight>
+    <mat-tab label="Manually">
+      <mat-form-field class="dataset-tags-chips" [style]="'width:100%;'">
+        <mat-chip-list #chipList aria-label="Create names for your datasets">
+          <ng-container *ngFor="let dataset of datasets?.controls; let i=index">
+            <mat-chip *ngIf="dataset.value.title" [selectable]="true"
+                      removable="true" (removed)="remove(i)">
+              {{dataset.value.title}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </ng-container>
+          <input placeholder="Create names for your datasets"
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="true"
+                 (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      </mat-form-field>
+    </mat-tab>
+    <mat-tab label="Uploading sample data">
+      <app-file-upload [fileUpload]="fileUpload"
+                       (fileToUpload)="analyseFile($event)"
+                       (uploadToCancel)="cancelUpload($event)">
+      </app-file-upload>
+    </mat-tab>
+  </mat-tab-group>
+
+  <!-- TABLE -->
+  <div *ngIf="datasets.controls.length">
+    <app-step-intro>Research data comes in all forms and sizes. The table below helps you to describe the data sets
+      (i.e. groups of data with similar properties) you are expecting to create or reuse during the project.
+    </app-step-intro>
+    <h2>Data</h2>
+
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+      <ng-container matColumnDef="dataset">
+        <th mat-header-cell *matHeaderCellDef>Dataset</th>
+        <td mat-cell *matCellDef="let dataset">
+          <div>{{dataset.value.title}}
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="datatype">
+        <th mat-header-cell *matHeaderCellDef>Datatype</th>
+        <td mat-cell *matCellDef="let dataset">
+          <div>{{dataset.value.type}}
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="size">
+        <th mat-header-cell *matHeaderCellDef>Size</th>
+        <td mat-cell *matCellDef="let dataset">
+          <div>{{dataset.value.size | byte}}
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="comment">
+        <th mat-header-cell *matHeaderCellDef>Comment</th>
+        <td mat-cell *matCellDef="let dataset">
+          <div>{{dataset.value.comment}}
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef><span class="sr-only">Actions</span></th>
+        <td mat-cell *matCellDef="let element" [style]="'text-align: right'">
+          <button mat-icon-button>
+            <mat-icon color="primary" (click)="openDatasetDialog(dataSource.data.indexOf(element))">edit</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon color="primary" (click)="remove(dataSource.data.indexOf(element))">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
+      <tr mat-row *matRowDef="let element; columns: tableHeaders;"
+          class="element-row">
+    </table>
+  </div>
+</ng-container>
+
 <!-- NO DATA -->
-<ng-container *ngIf="specifyDataStep?.value.kind === none">
+<ng-container *ngIf="specifyDataStep.value.kind === none">
   <app-textarea-wrapper [label]="'Please explain why you won\'t create or analyse any research data.'"
                         [control]="explanation">
   </app-textarea-wrapper>
