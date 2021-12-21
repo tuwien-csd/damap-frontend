@@ -12,32 +12,41 @@ import {LoadingState} from '../domain/enum/loading-state.enum';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {mockProject} from '../mocks/project-mocks';
+import {HarnessLoader} from '@angular/cdk/testing';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {MatStepperHarness} from '@angular/material/stepper/testing';
+import {selectRepositoriesLoaded} from '../store/selectors/repository.selectors';
+import {StepIntroComponent} from '../widgets/intro/step-intro.component';
 
 describe('DmpComponent', () => {
   let component: DmpComponent;
   let fixture: ComponentFixture<DmpComponent>;
+  let loader: HarnessLoader;
+  let formServiceStub: Partial<FormService>;
   let store: MockStore;
+  let oauthSpy;
+  let backendSpy;
+  let feedbackSpy;
   const initialState = {
+    form: {dmp: null, changed: false},
     projects: {projects: [], loaded: LoadingState.LOADED},
     repositories: {ids: [], entities: {}, filters: [], loaded: LoadingState.LOADED}
   };
 
   beforeEach(async () => {
-    const oauthSpy = jasmine.createSpyObj('OAuthService', ['getIdentityClaims']);
+    oauthSpy = jasmine.createSpyObj('OAuthService', ['getIdentityClaims']);
     oauthSpy.getIdentityClaims.and.returnValue({name: 'name', groups: 'groups', preferred_username: 'username'});
-    const formSpy = jasmine.createSpyObj('FormService',
-      ['createDmpForm', 'exportFormToDmp', 'addContributorToForm', 'removeContributorFromForm',
-        'addDatasetToForm', 'updateDatasetOfForm', 'addFileAnalysisAsDatasetToForm', 'removeDatasetFromForm',
-        'addStorageToForm', 'removeStorageFromForm', 'addExternalStorageToForm', 'removeExternalStorageFromForm',
-        'addRepositoryToForm', 'removeRepositoryFromForm', 'addCostToForm', 'removeCostFromForm', 'mapDmpToForm']);
-    formSpy.createDmpForm.and.returnValue(new FormGroup({
-      project: new FormControl(),
-      data: new FormGroup({kind: new FormControl('SPECIFY')}),
-      datasets: new FormArray([])
-    }));
-    const backendSpy = jasmine.createSpyObj('BackendService',
-      ['getDmpById', 'getProjectMembers', 'editDmp', 'createDmp', 'analyseFileData']);
-    const feedbackSpy = jasmine.createSpyObj('FeedbackService', ['error', 'success']);
+    feedbackSpy = jasmine.createSpyObj('FeedbackService', ['error', 'success']);
+    formServiceStub = {
+      get dmpForm(): FormGroup {
+        return new FormGroup({
+          project: new FormControl(),
+          data: new FormGroup({kind: new FormControl('SPECIFY')}),
+          datasets: new FormArray([])
+        })
+      }
+    };
     await TestBed.configureTestingModule({
       imports: [
         ReactiveFormsModule, MatStepperModule, MatButtonModule, NoopAnimationsModule,
@@ -45,17 +54,22 @@ describe('DmpComponent', () => {
           [/*{path: 'plans', component: PlansComponent}*/]
         )
       ],
-      declarations: [DmpComponent],
+      declarations: [DmpComponent, StepIntroComponent],
       providers: [
         {provide: OAuthService, useValue: oauthSpy},
-        {provide: FormService, useValue: formSpy},
-        provideMockStore({initialState}),
+        {provide: FormService, useValue: formServiceStub},
+        provideMockStore({
+          initialState,
+          selectors: [{
+            selector: selectRepositoriesLoaded,
+            value: LoadingState.NOT_LOADED
+          }]
+        }),
         {provide: ActivatedRoute, useValue: {snapshot: {paramMap: {get: (id: number) => null}}}},
         {provide: BackendService, useValue: backendSpy},
         {provide: FeedbackService, useValue: feedbackSpy}
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -63,9 +77,38 @@ describe('DmpComponent', () => {
     component = fixture.componentInstance;
     store = TestBed.inject(MockStore);
     fixture.detectChanges();
+    loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should load all stepper harnesses and get steps of stepper', async () => {
+    const steppers = await loader.getAllHarnesses(MatStepperHarness);
+    expect(steppers.length).toBe(1);
+
+    const stepper = await loader.getHarness(MatStepperHarness);
+    const steps = await stepper.getSteps();
+    expect(steps.length).toEqual(11);
+  });
+
+  it('should change step, edit form and change step', async () => {
+    spyOn(component, 'saveDmp');
+
+    const storeSpy = spyOn(component.store, 'dispatch').and.callThrough();
+    const stepper = await loader.getHarness(MatStepperHarness);
+    const steps = await stepper.getSteps();
+    await steps[7].select();
+
+    steps[7].getLabel().then(label => expect(label).toEqual('Specify repositories for publication and preservation'));
+    expect(storeSpy).toHaveBeenCalledTimes(1);
+
+    (component.dmpForm.get('project') as FormControl).setValue(mockProject);
+    component.formChanged = true;
+    await steps[1].select();
+
+    expect(component.saveDmp).toHaveBeenCalledTimes(1);
+    expect(storeSpy).toHaveBeenCalledTimes(2);
   });
 });

@@ -1,3 +1,6 @@
+<app-step-intro>In this step you are asked to provide a realistic estimation of necessary resources for data management
+  and a clear statement on how these costs will be covered.
+</app-step-intro>
 <div [formGroup]="costsStep">
   <label id="costsFormGroup">
     Select the statement which best describes the situation in your project with respect to costs of data management.
@@ -11,7 +14,7 @@
     </mat-radio-button>
   </mat-radio-group>
 </div>
-<ng-container *ngIf="costsStep?.controls.exist.value == true">
+<ng-container *ngIf="costsStep.controls.exist.value">
   <button mat-raised-button color="primary" (click)="addCost()">
     <mat-icon>add_circle</mat-icon>
     Add cost
