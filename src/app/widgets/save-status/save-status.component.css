@@ -1,0 +1,10 @@
+.save-status {
+  display: flex;
+  margin: 1rem;
+  padding: 0.5rem;
+  align-items: flex-start;
+}
+
+.mat-icon {
+  font-size: 16pt;
+}

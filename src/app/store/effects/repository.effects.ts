@@ -7,10 +7,12 @@ import {
   LoadRepositories,
   LoadRepository,
   RepositoriesLoaded,
-  RepositoryActionTypes, ResetRepositoryFilter, SetRepositoryFilter,
+  RepositoryActionTypes,
+  ResetRepositoryFilter,
+  SetRepositoryFilter,
   UpdateRepository
 } from '../actions/repository.actions';
-import {of} from 'rxjs';
+import {asyncScheduler, of} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {AppState} from '../states/app.state';
 import {selectFilters} from '../states/repository.state';
@@ -18,7 +20,7 @@ import {selectFilters} from '../states/repository.state';
 @Injectable()
 export class RepositoryEffects {
 
-  loadRepositories = createEffect(() => this.actions$.pipe(
+  loadRepositories$ = createEffect(() => this.actions$.pipe(
     ofType<LoadRepositories>(RepositoryActionTypes.LoadRepositories),
     switchMap(_ => this.backendService.getRepositories().pipe(
       map(repositories => new RepositoriesLoaded({repositories})),
@@ -27,32 +29,35 @@ export class RepositoryEffects {
     )),
   ));
 
-  loadRepository = createEffect(() => this.actions$.pipe(
+  loadRepository$ = createEffect(() => this.actions$.pipe(
     ofType<LoadRepository>(RepositoryActionTypes.LoadRepository),
     switchMap(action => this.backendService.getRepositoryById(action.payload.id).pipe(
       map(update => new UpdateRepository({update}))
     )),
   ));
 
-  searchRepositoriesByQuery = createEffect(() => this.actions$.pipe(
-    ofType<SetRepositoryFilter>(RepositoryActionTypes.SetRepositoryFilter),
-    debounceTime(1500),
-    distinctUntilChanged(),
-    withLatestFrom(this.store$.select(selectFilters)),
-    switchMap(([_, state]) => {
-        const filters = Object.keys(state)?.find(item => state[item]?.length);
-        if (filters) {
-          return this.backendService.searchRepository(state).pipe(
-            map(repositories => new RepositoriesLoaded({repositories})),
-            catchError(() => of(new FailedToLoadRepositories())),
-            takeUntil(this.actions$.pipe(ofType(RepositoryActionTypes.ResetRepositoryFilter))))
+  searchRepositoriesByQuery$ = createEffect(() =>
+    ({ // assign default values so they can be overwritten for tests
+       debounce = 1500, scheduler = asyncScheduler
+     } = {}) => this.actions$.pipe(
+      ofType<SetRepositoryFilter>(RepositoryActionTypes.SetRepositoryFilter),
+      debounceTime(debounce, scheduler),
+      distinctUntilChanged(),
+      withLatestFrom(this.store$.select(selectFilters)),
+      switchMap(([_, state]) => {
+          const filters = Object.keys(state)?.find(item => state[item]?.length);
+          if (filters) {
+            return this.backendService.searchRepository(state).pipe(
+              map(repositories => new RepositoriesLoaded({repositories})),
+              catchError(() => of(new FailedToLoadRepositories())),
+              takeUntil(this.actions$.pipe(ofType(RepositoryActionTypes.ResetRepositoryFilter))))
+          }
+          return of(new LoadRepositories());
         }
-        return of(new LoadRepositories())
-      }
-    ),
-  ));
+      ),
+    ));
 
-  resetRepositoryFilter = createEffect(() => this.actions$.pipe(
+  resetRepositoryFilter$ = createEffect(() => this.actions$.pipe(
     ofType<ResetRepositoryFilter>(RepositoryActionTypes.ResetRepositoryFilter),
     map(_ => new LoadRepositories()),
     takeUntil(this.actions$.pipe(ofType(RepositoryActionTypes.SetRepositoryFilter)))
