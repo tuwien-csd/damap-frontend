@@ -1,6 +1,6 @@
 import {Dmp} from '../domain/dmp';
 import {ContributorRole} from '../domain/enum/contributor-role.enum';
-import {IdentifierType} from '../domain/enum/person-id-type.enum';
+import {IdentifierType} from '../domain/enum/identifier-type.enum';
 import {CostType} from '../domain/enum/cost-type.enum';
 import {DataKind} from '../domain/enum/data-kind.enum';
 import {DataAccessType} from '../domain/enum/data-access-type.enum';
@@ -8,6 +8,8 @@ import {AccessRight} from '../domain/enum/access-right';
 import {ComplianceType} from '../domain/enum/compliance-type.enum';
 import {SecurityMeasure} from '../domain/enum/security-measure';
 import {Agreement} from '../domain/enum/agreement';
+import {mockProject} from './project-mocks';
+import {mockContact} from './person-mocks';
 
 export const completeDmp: Dmp = {
   dataRightsAndAccessControl: 'access control',
@@ -16,10 +18,7 @@ export const completeDmp: Dmp = {
   sensitiveDataAccess: 'sensitive data access',
   closedAccessInfo: 'closed access info',
   committeeReviewed: true,
-  contact: {
-    firstName: 'Max', id: 77, lastName: 'Mustermann', mbox: 'm.mustermann@university.ac.at', universityId: '12345', personId: null,
-    affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR}
-  },
+  contact: mockContact,
   contributors: [
     {
       id: 84, person: {
@@ -87,7 +86,7 @@ export const completeDmp: Dmp = {
       personalData: true,
       sensitiveData: true,
       legalRestrictions: true,
-      referenceHash: '39608knzrof6y',
+      referenceHash: '39608knzrof6x',
       size: 0,
       startDate: null,
       title: 'Dataset 1',
@@ -120,7 +119,7 @@ export const completeDmp: Dmp = {
   hosts: [
     {
       datasets: [
-        '39608knzrof6y'
+        '39608knzrof6y', '39608knzrof6x'
       ],
       date: new Date(),
       hostId: 'r3d100013557',
@@ -132,30 +131,13 @@ export const completeDmp: Dmp = {
   legalRestrictions: true,
   legalRestrictionsComment: 'legally restricted',
   legalRestrictionsDocuments: [Agreement.OTHER],
-  otherLegalRestrictionsDocuments: 'other document',
+  otherLegalRestrictionsDocument: 'other document',
   metadata: 'provided metadata',
   noDataExplanation: '',
   personalData: true,
   personalDataCompliance: ['item1', 'item2', ComplianceType.Other],
   otherPersonalDataCompliance: 'other measures',
-  project: {
-    end: new Date(),
-    funding: {
-      funderId: {
-        identifier: '501100004955', type: IdentifierType.FUNDREF
-      }, fundingStatus: 'GRANTED',
-      grantId: {
-        identifier: '123456',
-        type: null
-      }, id: 79
-    },
-    id: 78,
-    start: new Date(),
-    title: 'Project title',
-    universityId: 1234,
-    description: '',
-    dmpExists: false
-  },
+  project: mockProject,
   restrictedAccessInfo: 'info how someone can access restricted data',
   restrictedDataAccess: 'send form',
   sensitiveData: true,
@@ -163,7 +145,7 @@ export const completeDmp: Dmp = {
   storage: [
     {
       datasets: [
-        '39608knzrof6y'
+        '39608knzrof6y', '39608knzrof6x'
       ],
       hostId: '0',
       id: 97,
@@ -181,14 +163,11 @@ export const noDataDmp: Dmp = {
   humanParticipants: false,
   legalRestrictionsDocuments: [Agreement.CONFIDENTIALITY_AGREEMENT],
   otherDataSecurityMeasures: '',
-  otherLegalRestrictionsDocuments: '',
+  otherLegalRestrictionsDocument: '',
   sensitiveDataAccess: 'access',
   closedAccessInfo: 'closed access info',
   committeeReviewed: true,
-  contact: {
-    firstName: 'Max', id: 77, lastName: 'Mustermann', mbox: 'm.mustermann@university.ac.at', universityId: '12345', personId: null,
-    affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR}
-  },
+  contact: mockContact,
   contributors: [
     {
       id: 84, person: {
@@ -304,24 +283,7 @@ export const noDataDmp: Dmp = {
   personalData: true,
   personalDataCompliance: ['item1', 'item2'],
   otherPersonalDataCompliance: 'other measures',
-  project: {
-    end: new Date(),
-    funding: {
-      funderId: {
-        identifier: '501100004955', type: IdentifierType.FUNDREF
-      }, fundingStatus: 'GRANTED',
-      grantId: {
-        identifier: '123456',
-        type: null
-      }, id: 79
-    },
-    id: 78,
-    start: new Date(),
-    title: 'Project title',
-    universityId: 1234,
-    description: '',
-    dmpExists: false
-  },
+  project: mockProject,
   restrictedAccessInfo: 'info how someone can access restricted data',
   restrictedDataAccess: 'send form',
   sensitiveData: true,

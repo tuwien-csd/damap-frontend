@@ -1,6 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CostsComponent } from './costs.component';
+import {CostsComponent} from './costs.component';
+import {FormArray, FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatIconModule} from '@angular/material/icon';
+import {StepIntroComponent} from '../../widgets/intro/step-intro.component';
 
 describe('CostsComponent', () => {
   let component: CostsComponent;
@@ -8,7 +13,8 @@ describe('CostsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CostsComponent ]
+      imports: [ReactiveFormsModule, MatExpansionModule, MatRadioModule, MatIconModule],
+      declarations: [CostsComponent, StepIntroComponent]
     })
     .compileComponents();
   });
@@ -16,6 +22,10 @@ describe('CostsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CostsComponent);
     component = fixture.componentInstance;
+    component.costsStep = new FormGroup({
+      exist: new FormControl(true),
+      list: new FormArray([])
+    });
     fixture.detectChanges();
   });
 

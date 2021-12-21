@@ -1,4 +1,5 @@
-<mat-vertical-stepper [linear]="isLinear" (selectionChange)="changeStep($event)">
+<app-save-status [saved]="!formChanged"></app-save-status>
+<mat-vertical-stepper [linear]="false" (selectionChange)="changeStep($event)">
   <mat-step label="Choose project from the project data base">
     <app-dmp-project [projects]="projects$ | async"
                      [loaded]="projectsLoaded$ | async"
@@ -30,6 +31,9 @@
   </mat-step>
   <mat-step label="Storage and backup during the research process">
     <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
+      <app-step-intro>This step helps you to document who is allowed to see or edit your data in the project phase and
+        to find good storage and backup solutions for your data.
+      </app-step-intro>
       <app-data-access [dmpForm]="dmpForm"
                        [datasets]="datasets"></app-data-access>
       <app-dmp-storage [dmpForm]="dmpForm"
@@ -46,6 +50,7 @@
       </app-dmp-external-storage>
     </ng-container>
   </mat-step>
+
   <mat-step label="Legal and ethical aspects">
     <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
       <app-dmp-legal-ethical-aspects [dmpForm]="dmpForm"
@@ -84,13 +89,14 @@
     </app-dmp-costs>
   </mat-step>
   <mat-step label="End">
-    <app-dmp-summary [dmpForm]="dmpForm"></app-dmp-summary>
+    <app-dmp-summary></app-dmp-summary>
   </mat-step>
 </mat-vertical-stepper>
 <div id="save-dmp">
   <button mat-button color="primary" [routerLink]="'/plans'" routerLinkActive="active">Discard changes</button>
   <button mat-raised-button color="primary" (click)="saveDmp()" [disabled]="dmpForm.invalid">Save changes</button>
 </div>
+
 <ng-template #noDatasets>
   Please define datasets first.
 </ng-template>
