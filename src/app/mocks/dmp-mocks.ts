@@ -1,6 +1,6 @@
 import {Dmp} from '../domain/dmp';
 import {ContributorRole} from '../domain/enum/contributor-role.enum';
-import {IdentifierType} from '../domain/enum/person-id-type.enum';
+import {IdentifierType} from '../domain/enum/identifier-type.enum';
 import {CostType} from '../domain/enum/cost-type.enum';
 import {DataKind} from '../domain/enum/data-kind.enum';
 import {DataAccessType} from '../domain/enum/data-access-type.enum';

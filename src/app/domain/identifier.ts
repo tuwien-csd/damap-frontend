@@ -1,4 +1,4 @@
-import {IdentifierType} from './enum/person-id-type.enum';
+import {IdentifierType} from './enum/identifier-type.enum';
 
 export interface Identifier {
 
