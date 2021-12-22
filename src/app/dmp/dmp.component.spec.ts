@@ -45,6 +45,8 @@ describe('DmpComponent', () => {
           data: new FormGroup({kind: new FormControl('SPECIFY')}),
           datasets: new FormArray([])
         })
+      },
+      resetForm() {
       }
     };
     await TestBed.configureTestingModule({
@@ -109,6 +111,18 @@ describe('DmpComponent', () => {
     await steps[1].select();
 
     expect(component.saveDmp).toHaveBeenCalledTimes(1);
+    expect(storeSpy).toHaveBeenCalledTimes(2);
+  });
+
+  it('should reset form and dispatch store calls on destroy', () => {
+    spyOn(component, 'ngOnDestroy');
+    spyOn(formServiceStub, 'resetForm');
+
+    const storeSpy = spyOn(component.store, 'dispatch').and.callThrough();
+
+    fixture.destroy();
+
+    expect(formServiceStub.resetForm).toHaveBeenCalledTimes(1);
     expect(storeSpy).toHaveBeenCalledTimes(2);
   });
 });

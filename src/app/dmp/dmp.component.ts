@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../services/backend.service';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
@@ -21,15 +21,16 @@ import {HttpEventType} from '@angular/common/http';
 import {Location} from '@angular/common';
 import {LoadingState} from '../domain/enum/loading-state.enum';
 import {OAuthService} from 'angular-oauth2-oidc';
-import {formDiff, setFormValue} from '../store/actions/form.actions';
+import {formDiff, resetFormValue, setFormValue} from '../store/actions/form.actions';
 import {selectFormChanged} from '../store/selectors/form.selectors';
+import {LoadDmps} from '../store/actions/dmp.actions';
 
 @Component({
   selector: 'app-dmp',
   templateUrl: './dmp.component.html',
   styleUrls: ['./dmp.component.css']
 })
-export class DmpComponent implements OnInit {
+export class DmpComponent implements OnInit, OnDestroy {
 
   username: string;
 
@@ -108,6 +109,12 @@ export class DmpComponent implements OnInit {
     this.costsStep = this.dmpForm.get('costs') as FormGroup;
   }
 
+  ngOnDestroy() {
+    this.formService.resetForm();
+    this.store.dispatch(resetFormValue());
+    this.store.dispatch(new LoadDmps());
+  }
+
   changeStep(event: StepperSelectionEvent) {
     if (event.selectedIndex === 7) {
       this.getRepositories();
@@ -122,8 +129,6 @@ export class DmpComponent implements OnInit {
     if (this.dmpForm.value.id) {
       this.backendService.editDmp(dmp).subscribe(
         response => {
-          // this.store.dispatch(new LoadDmps());
-          // this.router.navigate(['plans']);
           this.formService.mapDmpToForm(response);
           this.store.dispatch(setFormValue({dmp: response}));
         },
@@ -135,8 +140,6 @@ export class DmpComponent implements OnInit {
       this.backendService.createDmp(dmp).subscribe(
         response => {
           this.location.replaceState(`dmp/${response.id}`);
-          // this.store.dispatch(new LoadDmps());
-          // this.router.navigate(['plans']);
           this.formService.mapDmpToForm(response);
           this.store.dispatch(setFormValue({dmp: response}));
         },
