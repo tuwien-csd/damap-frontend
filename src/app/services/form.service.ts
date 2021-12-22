@@ -287,7 +287,7 @@ export class FormService {
     return result;
   }
 
-  private resetForm(): void {
+  public resetForm(): void {
     this.form.reset();
     (this.form.controls.contributors as FormArray).clear();
     (this.form.controls.datasets as FormArray).clear();

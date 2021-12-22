@@ -1,11 +1,12 @@
 import {initialFormState} from '../states/form.state';
 import {createReducer, on} from '@ngrx/store';
-import {formDiff, setFormValue} from '../actions/form.actions';
+import {formDiff, resetFormValue, setFormValue} from '../actions/form.actions';
 
 export const formReducer = createReducer(
   initialFormState,
   on(setFormValue, (state, {dmp}) => ({...state, dmp, changed: false})),
-  on(formDiff, (state, {newDmp}) => ({...state, changed: !equals(state.dmp, newDmp)}))
+  on(formDiff, (state, {newDmp}) => ({...state, changed: !equals(state.dmp, newDmp)})),
+  on(resetFormValue, _ => (initialFormState))
 );
 
 export function equals(a, b) {
