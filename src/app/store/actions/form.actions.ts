@@ -2,12 +2,13 @@ import {createAction, props} from '@ngrx/store';
 import {Dmp} from '../../domain/dmp';
 
 export enum FormActionTypes {
-  SetForm = '[Form] Set',
-  FormLoaded = '[Form] Loaded',
-  FailedToLoadForm = '[Form] Failed to load',
-  FormDiff = '[Form] Diff'
+  SetForm = '[Form] Set value',
+  FormDiff = '[Form] Diff',
+  ResetForm = '[Form] Reset value'
 }
 
-export const setFormValue = createAction('[Form] Set value', props<{dmp: Dmp}>());
+export const setFormValue = createAction(FormActionTypes.SetForm, props<{ dmp: Dmp }>());
 
-export const formDiff = createAction('[Form] Diff', props<{newDmp: Dmp}>());
+export const formDiff = createAction(FormActionTypes.FormDiff, props<{ newDmp: Dmp }>());
+
+export const resetFormValue = createAction(FormActionTypes.ResetForm);
