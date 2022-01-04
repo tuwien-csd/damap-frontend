@@ -409,7 +409,8 @@ export class FormService {
       publicAccess: [AccessRight.read],
       delete: [false],
       dateOfDeletion: [null],
-      reasonForDeletion: ['', Validators.maxLength(4000)]
+      reasonForDeletion: ['', Validators.maxLength(4000)],
+      retentionPeriod: [null]
     });
   }
 
