@@ -77,6 +77,7 @@ import {StepIntroComponent} from './widgets/intro/step-intro.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatMenuModule} from '@angular/material/menu';
+import {RetentionPeriodComponent} from './dmp/repo/retention-period/retention-period.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -119,6 +120,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     InfoMessageComponent,
     SaveStatusComponent,
     StepIntroComponent,
+    RetentionPeriodComponent,
 
     // Directives
     DragdropDirective,

@@ -68,7 +68,8 @@
   </mat-step>
   <mat-step label="{{'dmp.steps.repositories.label' | translate }}">
     <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
-      <app-dmp-repo [repoStep]="repoStep" [datasets]="datasets"
+      <app-dmp-repo [dmpForm]="dmpForm"
+                    [repoStep]="repoStep" [datasets]="datasets"
                     [loaded]="repositoriesLoaded$ | async"
                     [repositories]="repositories$ | async"
                     (repositoryToAdd)="addRepository($event)"

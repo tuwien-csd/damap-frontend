@@ -1,5 +1,5 @@
-import {Component, Input, OnInit, EventEmitter, Output, ViewChild, OnChanges, SimpleChanges} from '@angular/core';
-import {FormArray} from '@angular/forms';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {FormArray, FormGroup} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {animate, state, style, transition, trigger} from '@angular/animations';
@@ -24,6 +24,7 @@ export class RepoComponent implements OnInit, OnChanges {
   @Input() repositories: Repository[]; // Repo list loaded from backend
   repoList: any = []; // Filtered repo list (repo list minus selected repos)
 
+  @Input() dmpForm: FormGroup;
   @Input() repoStep: FormArray;
   @Input() datasets: FormArray;
 
