@@ -1,6 +1,9 @@
-<div *ngIf="!datasets?.controls.length">
+<div *ngIf="!datasets?.controls.length else retentionPeriod">
   {{'dmps.nodatasets' | translate}}
 </div>
+<ng-template #retentionPeriod>
+  <app-retention-period [dmpForm]="dmpForm" [datasets]="datasets"></app-retention-period>
+</ng-template>
 <!-- SELECTED REPOS-->
 <div *ngIf="repoStep?.controls.length">
   <p translate>dmp.steps.repositories.selected</p>
