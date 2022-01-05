@@ -7,16 +7,13 @@
             DAMAP
           </a>
         </div>
-        <!-- TODO: Language selection -->
-        <!--<div class="languageElement">
-          <a href="/en" title="Aktuelle Sprache DE, wechseln zu EN" hreflang="en-GB" data-lang-active-de="" style="">
-            <span>
-              <span data-label="EN">EN
-                <span class="sr-only">Englisch</span>
-              </span>
-            </span>
-          </a>
-        </div>-->
+        <div class="languageElement">
+          <button mat-button [matMenuTriggerFor]="language">{{lang}}</button>
+          <mat-menu #language="matMenu">
+            <button mat-menu-item (click)="useLanguage('en')">EN</button>
+            <button mat-menu-item (click)="useLanguage('de')">DE</button>
+          </mat-menu>
+        </div>
       </div>
     </div>
     <div id="user" class="dark-theme">
