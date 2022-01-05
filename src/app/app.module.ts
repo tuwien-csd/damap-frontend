@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatListModule} from '@angular/material/list';
@@ -74,6 +74,14 @@ import {EthicalAspectsComponent} from './dmp/legal-ethical-aspects/ethical-aspec
 import {InfoMessageComponent} from './widgets/info-message/info-message.component';
 import {SaveStatusComponent} from './widgets/save-status/save-status.component';
 import {StepIntroComponent} from './widgets/intro/step-intro.component';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {MatMenuModule} from '@angular/material/menu';
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -136,6 +144,16 @@ import {StepIntroComponent} from './widgets/intro/step-intro.component';
       }
     }),
 
+    // NGX Translate
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+
     // Materials
     MatButtonModule,
     MatInputModule,
@@ -166,6 +184,7 @@ import {StepIntroComponent} from './widgets/intro/step-intro.component';
     MatCheckboxModule,
     MatAutocompleteModule,
     MatTreeModule,
+    MatMenuModule,
 
     // Custom
     SharedModule
