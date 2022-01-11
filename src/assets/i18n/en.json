@@ -1,2 +1,11 @@
 {
+  "plans": {
+    "myplans": "My plans",
+    "allplans": "All plans",
+    "create.plan": "Create new plan",
+    "loading": {
+      "load": "Load plans...",
+      "failed": "Your plans could not be loaded!"
+    }
+  }
 }
