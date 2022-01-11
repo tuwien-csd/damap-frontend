@@ -1,4 +1,18 @@
 {
+  "title": "DAMAP",
+  "layout": {
+    "menu": {
+      "home": "Home",
+      "plans": "Plans",
+      "mobile": {
+        "open": "Open page navigation",
+        "close": "Close page navigation"
+      }
+    },
+    "logout": "Logout",
+    "version": "Version",
+    "logo.goback": "Go back to main page"
+  },
   "plans": {
     "myplans": "My plans",
     "allplans": "All plans",
