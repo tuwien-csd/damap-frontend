@@ -37,7 +37,20 @@
         }
       },
       "people": {
-        "label": "People involved in data management"
+        "label": "People involved in data management",
+        "intro": "The search below helps you to provide information on involved persons and their particular roles regarding research data management within this project.",
+        "contributors": "Contributors",
+        "search": "Search for person...",
+        "contributor": {
+          "add": "Add as contributor",
+          "remove": "Remove from contributors"
+        },
+        "contact": {
+          "person": "Contact person",
+          "add": "Set as contact",
+          "remove": "Remove as contact"
+        },
+        "nopeople": "No project members available."
       },
       "data": {
         "specify": {
