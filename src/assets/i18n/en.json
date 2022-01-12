@@ -25,7 +25,16 @@
   "dmp": {
     "steps": {
       "project": {
-        "label": "Choose project from the project data base"
+        "label": "Choose project from the project data base",
+        "search": "Search project...",
+        "select": "Please select the project you want to create a DMP for:",
+        "selected": "You selected",
+        "warning.dmp": "A plan already exists for this project",
+        "noprojects": "No projects are assigned to you.",
+        "loading": {
+          "load": "Load projects...",
+          "failed": "Projects could not be loaded."
+        }
       },
       "people": {
         "label": "People involved in data management"
