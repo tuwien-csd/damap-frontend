@@ -17,7 +17,7 @@ import {HarnessLoader} from '@angular/cdk/testing';
 import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
 import {MatStepperHarness} from '@angular/material/stepper/testing';
 import {selectRepositoriesLoaded} from '../store/selectors/repository.selectors';
-import {StepIntroComponent} from '../widgets/intro/step-intro.component';
+import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
 
 describe('DmpComponent', () => {
   let component: DmpComponent;
@@ -51,12 +51,14 @@ describe('DmpComponent', () => {
     };
     await TestBed.configureTestingModule({
       imports: [
-        ReactiveFormsModule, MatStepperModule, MatButtonModule, NoopAnimationsModule,
+        ReactiveFormsModule, MatStepperModule, MatButtonModule,
+        NoopAnimationsModule,
         RouterTestingModule.withRoutes(
           [/*{path: 'plans', component: PlansComponent}*/]
-        )
+        ),
+        TranslateTestingModule
       ],
-      declarations: [DmpComponent, StepIntroComponent],
+      declarations: [DmpComponent],
       providers: [
         {provide: OAuthService, useValue: oauthSpy},
         {provide: FormService, useValue: formServiceStub},
@@ -103,7 +105,7 @@ describe('DmpComponent', () => {
     const steps = await stepper.getSteps();
     await steps[7].select();
 
-    steps[7].getLabel().then(label => expect(label).toEqual('Specify repositories for publication and preservation'));
+    steps[7].getLabel().then(label => expect(label).toEqual('dmp.steps.repositories'));
     expect(storeSpy).toHaveBeenCalledTimes(1);
 
     (component.dmpForm.get('project') as FormControl).setValue(mockProject);
