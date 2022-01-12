@@ -54,7 +54,34 @@
       },
       "data": {
         "specify": {
-          "label": "Specify research data"
+          "label": "Specify research data",
+          "intro": "Research data comes in all forms and sizes. The table below helps you to describe the data sets (i.e. groups of data with similar properties) you are expecting to create or reuse during the project.",
+          "question": {
+            "kind": "What kinds of research data will you create?",
+            "datasets": "Create names for your datasets",
+            "nodata": "Please explain why you won\\'t create or analyse any research data."
+          },
+          "answer": {
+            "kind": {
+              "unknown": "I don't know yet.",
+              "none": "No data will be created or analysed",
+              "specify": "Specify datasets"
+            }
+          },
+          "tab": {
+            "manual": "Manually",
+            "upload": "Uploading sample data"
+          },
+          "table": {
+            "heading": "Data",
+            "header": {
+              "dataset": "Dataset",
+              "datatype": "Datatype",
+              "size": "Size",
+              "comment": "Comment",
+              "actions": "Actions"
+            }
+          }
         },
         "reuse": {
           "label": "Reuse of data"
