@@ -105,7 +105,7 @@ describe('DmpComponent', () => {
     const steps = await stepper.getSteps();
     await steps[7].select();
 
-    steps[7].getLabel().then(label => expect(label).toEqual('dmp.steps.repositories'));
+    steps[7].getLabel().then(label => expect(label).toEqual('dmp.steps.repositories.label'));
     expect(storeSpy).toHaveBeenCalledTimes(1);
 
     (component.dmpForm.get('project') as FormControl).setValue(mockProject);
