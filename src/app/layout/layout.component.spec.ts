@@ -5,6 +5,9 @@ import {OAuthService} from 'angular-oauth2-oidc';
 import {TranslateService} from '@ngx-translate/core';
 import {MatMenuModule} from '@angular/material/menu';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
@@ -15,7 +18,7 @@ describe('LayoutComponent', () => {
     const translateSpy = jasmine.createSpyObj('TranslateService', ['use']);
     oauthSpy.getIdentityClaims.and.returnValue({name: 'name'});
     await TestBed.configureTestingModule({
-      imports: [MatMenuModule, NoopAnimationsModule],
+      imports: [TranslateTestingModule, MatSidenavModule, MatToolbarModule, MatMenuModule, NoopAnimationsModule],
       declarations: [LayoutComponent],
       providers: [
         {provide: OAuthService, useValue: oauthSpy},
