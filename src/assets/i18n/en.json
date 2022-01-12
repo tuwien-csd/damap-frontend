@@ -24,24 +24,46 @@
   },
   "dmp": {
     "steps": {
-      "project": "Choose project from the project data base",
-      "people": "People involved in data management",
-      "data": {
-        "specify": "Specify research data",
-        "reuse": "Reuse of data"
+      "project": {
+        "label": "Choose project from the project data base"
       },
-      "documentation": "Documentation and data quality",
-      "storage": "Storage and backup during the research process",
-      "legal": "Legal and ethical aspects",
-      "licensing": "Data access and licensing",
-      "repositories": "Specify repositories for publication and preservation",
-      "costs": "Costs",
-      "end": "End"
-    },
-    "button": {
-      "save": "Save changes",
-      "discard": "Discard changes"
+      "people": {
+        "label": "People involved in data management"
+      },
+      "data": {
+        "specify": {
+          "label": "Specify research data"
+        },
+        "reuse": {
+          "label": "Reuse of data"
+        }
+      },
+      "documentation": {
+        "label": "Documentation and data quality"
+      },
+      "storage": {
+        "label": "Storage and backup during the research process"
+      },
+      "legal": {
+        "label": "Legal and ethical aspects"
+      },
+      "licensing": {
+        "label": "Data access and licensing"
+      },
+      "repositories": {
+        "label": "Specify repositories for publication and preservation"
+      },
+      "costs": {
+        "label": "Costs"
+      },
+      "end": {
+        "label": "End"
+      }
     },
     "nodatasets": "Please define datasets first."
+  },
+  "button": {
+    "save": "Save changes",
+    "discard": "Discard changes"
   }
 }
