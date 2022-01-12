@@ -100,7 +100,35 @@
         "label": "Storage and backup during the research process"
       },
       "legal": {
-        "label": "Legal and ethical aspects"
+        "label": "Legal and ethical aspects",
+        "intro": "This step helps you consider potential issues concerning personal data, intellectual property rights and ownership and asks you for basic information on the handling of ethical issues within this project.",
+        "heading": "Legal aspects",
+        "question": {
+          "sensitiveData": {
+            "prefix": "Is your data or part of it sensitive, for example",
+            "link": "sensitive personal data",
+            "suffix": ", politically sensitive information, or trade secrets?"
+          },
+          "dataset": {
+            "sensitiveData": "Please select the datasets containing sensitive data",
+            "personalData": "Please select the datasets containing personal data",
+            "legalRestrictions": "Please select the datasets concerned:"
+          },
+          "personalData": "Will personal data be collected/used as part of the project?",
+          "sensitiveDataSecurity": "What kind of additional security measures will be taken to ensure that stored and transferred sensitive data is safe?",
+          "otherDataSecurityMeasures": "Please specify what other measures are taken:",
+          "sensitiveDataAccess": "Who will be authorised to access sensitive data?",
+          "personalDataCompliance": "How will compliance with data protection be ensured?",
+          "otherPersonalDataCompliance": "Please specify what other measures are taken:",
+          "legalRestrictions": "Are there any other legal restrictions on how data is processed or shared?",
+          "legalRestrictionsComment": "Please specify the legal restrictions:",
+          "legalRestrictionsDocuments": "In which document(s) are these restrictions specified?",
+          "otherLegalRestrictionsDocuments": "Please specify the other documents:",
+          "dataRightsAndAccessControl": "Who has rights to the produced data and who controls access to the data?"
+        },
+        "link": {
+          "sensitiveData": "https://ec.europa.eu/info/law/law-topic/data-protection/reform/rules-business-and-organisations/legal-grounds-processing-data/sensitive-data/what-personal-data-considered-sensitive_en"
+        }
       },
       "licensing": {
         "label": "Data access and licensing"
@@ -120,5 +148,13 @@
   "button": {
     "save": "Save changes",
     "discard": "Discard changes"
+  },
+  "yes": "Yes",
+  "no": "No",
+  "help": {
+    "legal": {
+      "sensitiveDataSecurity": "Referring to physical security, network security, and security of computer systems and files.",
+      "personalDataCompliance": "Make sure you follow the TU Wien guidance on informed consent."
+    }
   }
 }
