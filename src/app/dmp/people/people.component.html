@@ -41,7 +41,7 @@
       <div>
         <form [formGroup]="contributor">
           <mat-form-field appearance="fill">
-            <mat-label>Role</mat-label>
+            <mat-label>{{'dmp.steps.people.contributor.role' | translate}}</mat-label>
             <mat-select formControlName="role">
               <mat-option
                 *ngFor="let role of roles | keyvalue" [value]="role.value">
@@ -54,7 +54,7 @@
       <div class="mat-card-right">
         <button mat-button (click)="changeContactPerson(contributor.value.person)"
                 *ngIf="contactStep.value?.id !== contributor.value.person.id"
-                title="{{'dmp.steps.people.add.contact' | translate}}">
+                title="{{'dmp.steps.people.contact.add' | translate}}">
           <mat-icon>contact_mail</mat-icon>
         </button>
         <button mat-button (click)="removeContributor(i)" title="{{'dmp.steps.people.contributor.remove' | translate}}">
@@ -94,7 +94,7 @@
           <mat-icon>contact_mail</mat-icon>
         </button>
         <button mat-raised-button (click)="addContributor(person.person)"
-                title="{{'dmp.steps.people.add.contributor' | translate}}">
+                title="{{'dmp.steps.people.contributor.add' | translate}}">
           <mat-icon>person_add</mat-icon>
         </button>
       </div>
