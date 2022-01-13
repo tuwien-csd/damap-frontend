@@ -1,6 +1,5 @@
-<button mat-stroked-button label="Add other storage location"
-        (click)="addExternalStorage()" [style]="'margin: 5px;'">
-  Add other storage location
+<button mat-stroked-button (click)="addExternalStorage()" [style]="'margin: 5px;'">
+  {{'dmp.steps.storage.external.add' | translate}}
 </button>
 <section class="external-storage">
   <mat-accordion>
@@ -15,8 +14,9 @@
       </mat-expansion-panel-header>
       <div class="form-row">
         <div class="form-row-group">
-          <app-input-wrapper [label]="'Storage Name'" [control]="getFormControl(i, 'title')"></app-input-wrapper>
-          <button mat-icon-button color="accent" aria-label="Remove external storage"
+          <app-input-wrapper [label]="'dmp.steps.storage.external.question.name'"
+                             [control]="getFormControl(i, 'title')"></app-input-wrapper>
+          <button mat-icon-button color="accent" aria-label="{{'dmp.steps.storage.external.remove' | translate}}"
                   (click)="removeExternalStorage(i)">
             <mat-icon>cancel</mat-icon>
           </button>
@@ -24,15 +24,15 @@
       </div>
       <div class="form-row">
         <div class="form-row-group">
-          <app-input-wrapper [label]="'Storage Location'"
+          <app-input-wrapper [label]="'dmp.steps.storage.external.question.location'"
                              [control]="getFormControl(i, 'storageLocation')"></app-input-wrapper>
-          <app-input-wrapper [label]="'Backup Location'"
+          <app-input-wrapper [label]="'dmp.steps.storage.external.question.backup.location'"
                              [control]="getFormControl(i, 'backupLocation')"></app-input-wrapper>
         </div>
       </div>
       <div class="form-row">
         <div class="form-row-group">
-          <app-input-wrapper [label]="'Backup Frequency'"
+          <app-input-wrapper [label]="'dmp.steps.storage.external.question.frequency'"
                              [control]="getFormControl(i, 'backupFrequency')"></app-input-wrapper>
           <mat-form-field>
             <mat-label>Dataset(s) stored</mat-label>
@@ -47,7 +47,7 @@
     </mat-expansion-panel>
   </mat-accordion>
   <div *ngIf="externalStorageStep?.controls.length" class="storage-textarea" [style]="'margin: 5px;'">
-    <app-textarea-wrapper [label]="'Please explain why institutional storage will not be used'"
+    <app-textarea-wrapper [label]="'dmp.steps.storage.external.question.info'"
                           [control]="externalStorageInfo" [appearance]="'fill'">
     </app-textarea-wrapper>
   </div>
