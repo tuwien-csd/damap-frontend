@@ -1,9 +1,8 @@
-<app-step-intro>This step helps you to think about foreseeable research uses or users of your data sets and what
-  potential reusers require to access your data.
+<app-step-intro>{{'dmp.steps.data.reuse.intro' | translate}}
 </app-step-intro>
 <div [formGroup]="reuseStep">
   <mat-form-field class="full-width" appearance="fill">
-    <mat-label class="wrap-label">Who is the target audience and who could be interested in reusing the data and why?
+    <mat-label class="wrap-label">{{'dmp.steps.data.reuse.question.targetAudience' | translate}}
     </mat-label>
     <input type="text" matInput formControlName="targetAudience" [matAutocomplete]="auto"/>
     <mat-autocomplete #auto="matAutocomplete">
@@ -14,18 +13,17 @@
   </mat-form-field>
 
   <mat-form-field class="full-width" appearance="fill">
-    <mat-label class="wrap-label">Indicate whether potential users need specific tools or software to access and
-      (re-)use the data.
+    <mat-label class="wrap-label">{{'dmp.steps.data.reuse.question.tools' | translate}}
     </mat-label>
     <textarea matInput formControlName="tools"></textarea>
   </mat-form-field>
 
   <ng-container *ngIf="restricted?.length > 0">
-    <article>For the following datasets restricted access was selected:
+    <article>{{'dmp.steps.data.reuse.question.restrictedDataAccess.0' | translate}}
       <span *ngFor="let set of restricted, last as last"> "{{set.title}}"<span *ngIf="!last">, </span> </span>
     </article>
     <mat-form-field class="full-width" appearance="fill">
-      <mat-label class="wrap-label">Explain how others will get access to the data.
+      <mat-label class="wrap-label">{{'dmp.steps.data.reuse.question.restrictedDataAccess.1' | translate}}
       </mat-label>
       <textarea matInput formControlName="restrictedDataAccess"></textarea>
     </mat-form-field>

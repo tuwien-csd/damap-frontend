@@ -100,7 +100,16 @@
           }
         },
         "reuse": {
-          "label": "Reuse of data"
+          "label": "Reuse of data",
+          "intro": "This step helps you to think about foreseeable research uses or users of your data sets and what potential reusers require to access your data.",
+          "question": {
+            "targetAudience": "Who is the target audience and who could be interested in reusing the data and why?",
+            "tools": "Indicate whether potential users need specific tools or software to access and (re-)use the data.",
+            "restrictedDataAccess": [
+              "For the following datasets restricted access was selected:",
+              "Explain how others will get access to the data."
+            ]
+          }
         }
       },
       "documentation": {
