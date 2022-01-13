@@ -183,7 +183,32 @@
         "link5": "mailto:ethics@tuwien.ac.at"
       },
       "licensing": {
-        "label": "Data access and licensing"
+        "label": "Data access and licensing",
+        "intro": "This step helps you to specify the access to your research output in the future: Which of your data sets will be published, which will be provided to interested persons on request only and which need to be under lock and key, for contractual, regulatory, or ethical reasons? It also reminds you to choose a license for your open data that clearly describes the reuse conditions for potential reusers.",
+        "hint": "Please indicate which datasets you plan to keep closed or publish. Select a license for the datasets you want to publish and estimate the release date.",
+        "question": {
+          "dataAccess": "Data Access",
+          "license": "Planned license",
+          "startDate": "Choose a date for publication",
+          "hint": "The release date was set to the project end date. Feel free to modify it.",
+          "restrictedAccessInfo": [
+            "Dataset",
+            "s",
+            " and ",
+            "will have access restrictions. Explain why and clearly describe the access conditions."
+          ],
+          "closedAccessInfo": [
+            "For dataset",
+            "s",
+            " and ",
+            "only the metadata will be published open access.\nExplain why the data will not be accessible (closed access)."
+          ]
+        },
+        "warning": {
+          "personalData": "You indicated in step 6 that this dataset contains sensitive personal data. Do you really want to publish the dataset open, without restrictions?",
+          "pseudonymisation": "Have you considered anonymisation/pseudonymisation?",
+          "legalRestrictions": "You indicated in step 6 that this dataset is subject to legal restrictions. Do you really want to publish the dataset without restrictions?"
+        }
       },
       "repositories": {
         "label": "Specify repositories for publication and preservation"
