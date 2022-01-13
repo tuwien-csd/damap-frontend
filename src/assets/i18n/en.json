@@ -130,6 +130,23 @@
           "sensitiveData": "https://ec.europa.eu/info/law/law-topic/data-protection/reform/rules-business-and-organisations/legal-grounds-processing-data/sensitive-data/what-personal-data-considered-sensitive_en"
         }
       },
+      "ethical": {
+        "heading": "Ethical aspects",
+        "question": {
+          "humanParticipants": "Will you involve human participants in the project and thereby collect or process their personal data?",
+          "ethicalIssues": "Beyond the use of sensitive personal data, are there any other ethical issues associated with your research?",
+          "committeeReviewed": {
+            "prefix": "Was your research plan reviewed by an ethics committee, the ",
+            "link": "TU Wien Pilot Research Ethics Committee",
+            "suffix": ", or a similar body?"
+          }
+        },
+        "link1": "https://www.tuwien.at/en/research/rti-support/research-ethics",
+        "link2": "https://colab.tuwien.ac.at/x/eQEhAw",
+        "link3": "https://www.tuwien.at/research-ethics",
+        "link4": "https://www.tuwien.at/en/research/rti-support/research-ethics/pilot-research-ethics-committee",
+        "link5": "mailto:ethics@tuwien.ac.at"
+      },
       "licensing": {
         "label": "Data access and licensing"
       },
@@ -155,6 +172,25 @@
     "legal": {
       "sensitiveDataSecurity": "Referring to physical security, network security, and security of computer systems and files.",
       "personalDataCompliance": "Make sure you follow the TU Wien guidance on informed consent."
+    },
+    "ethical": {
+      "humanParticipation": "The participation may include activities such as interviews, prototype testing, observations, surveys, etc.",
+      "ethicalIssues": "For example: Your research involves human embryos, foetuses, cells or tissues, animals, activities that may adversely affect the environment or the health and safety of involved persons, artificial intelligence, activities outside the EU, or there are dual use or misuse aspects that must be addressed."
+    }
+  },
+  "info": {
+    "ethical": {
+      "humanParticipants": {
+        "prefix": "An informed consent for participation (in addition to an informed consent to data processing) is required. For more information, contact the ",
+        "link1": "research ethics coordination",
+        "middle": " or consult: "
+      },
+      "ethicalIssues": "Your research plan may require ethical review. Inform yourself by consulting",
+      "committeeReviewed": {
+        "prefix": "Please note that you must address (potential) ethical issues in separate documents according to the requirements of the relevant funding body. The DMP only serves to help identify some ethical issues.\nPlease contact the TU Research Ethics Coordinator (Dr. Marjo Rauhala) at ",
+        "link": "ethics@tuwien.ac.at",
+        "suffix": " for additional information and support. You must do so if your planned research involves any human participation."
+      }
     }
   }
 }
