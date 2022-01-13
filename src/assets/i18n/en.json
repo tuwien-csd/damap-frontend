@@ -98,7 +98,26 @@
         }
       },
       "storage": {
-        "label": "Storage and backup during the research process"
+        "label": "Storage and backup during the research process",
+        "intro": "Choose the best storage option for each dataset.",
+        "link": "More information...",
+        "question": {
+          "datasets": "Select corresponding datasets"
+        },
+        "remove": "Remove storage",
+        "external": {
+          "add": "Add other storage location",
+          "remove": "Remove external storage",
+          "question": {
+            "name": "Storage Name",
+            "location": "Storage Location",
+            "backup": {
+              "location": "Backup Location",
+              "frequency": "Backup Frequency"
+            },
+            "info": "Please explain why institutional storage will not be used"
+          }
+        }
       },
       "legal": {
         "label": "Legal and ethical aspects",

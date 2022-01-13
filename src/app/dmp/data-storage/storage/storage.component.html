@@ -1,4 +1,4 @@
-<app-step-intro>Choose the best storage option for each dataset.</app-step-intro>
+<app-step-intro>{{'dmp.steps.storage.intro' | translate}}</app-step-intro>
 <section class="tu-storage">
   <div class="storage-grid">
     <mat-card *ngFor="let element of (storage | storageFilter: storageStep?.getRawValue())" class="storage-card">
@@ -9,7 +9,8 @@
         <mat-card-title>{{element.title}}</mat-card-title>
       </mat-card-header>
       <ng-container *ngIf="element.url">
-        <mat-card-content><a href="{{element.url}}" target="_blank">More information...</a></mat-card-content>
+        <mat-card-content><a href="{{element.url}}" target="_blank">{{'dmp.steps.storage.link' | translate}}</a>
+        </mat-card-content>
       </ng-container>
     </mat-card>
   </div>
@@ -21,7 +22,7 @@
             <mat-card-title>{{item.value.title}}</mat-card-title>
           </mat-card-header>
           <mat-card-actions>
-            <button mat-icon-button color="accent" aria-label="Remove storage"
+            <button mat-icon-button color="accent" aria-label="{{'dmp.steps.storage.remove' | translate}}"
                     (click)="removeStorage(i)">
               <mat-icon>cancel</mat-icon>
             </button>
@@ -31,7 +32,7 @@
           <div [formGroupName]="i">
             <div class="form-row">
               <mat-form-field>
-                <mat-label>Select corresponding datasets</mat-label>
+                <mat-label>{{'dmp.steps.storage.question.datasets' | translate}}</mat-label>
                 <mat-select multiple formControlName="datasets">
                   <mat-option *ngFor="let dataset of datasets?.controls" [value]="dataset.value.referenceHash">
                     {{dataset.value.title}}
