@@ -84,6 +84,21 @@
             }
           }
         },
+        "access": {
+          "heading": "Set access rights for all datasets",
+          "question": {
+            "dataset": "Dataset",
+            "selected": "for selected project members",
+            "other": "for other project members",
+            "public": "public",
+            "right": "Access right"
+          },
+          "aria": {
+            "selected": "Access right for selected project members for dataset {{dataset}}",
+            "other": "Access right for other project members for dataset {{dataset}}",
+            "public": "Access right for the public for dataset  {{dataset}}"
+          }
+        },
         "reuse": {
           "label": "Reuse of data"
         }
