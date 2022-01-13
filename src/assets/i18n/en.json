@@ -43,7 +43,8 @@
         "search": "Search for person...",
         "contributor": {
           "add": "Add as contributor",
-          "remove": "Remove from contributors"
+          "remove": "Remove from contributors",
+          "role": "Role"
         },
         "contact": {
           "person": "Contact person",
