@@ -20,6 +20,26 @@
     "loading": {
       "load": "Load plans...",
       "failed": "Your plans could not be loaded!"
+    },
+    "table": {
+      "header": {
+        "title": "Title",
+        "created": "Created",
+        "modified": "Last modified",
+        "edit": "Edit",
+        "history": "History",
+        "delete": "Delete"
+      },
+      "expanded": {
+        "duration": "Project duration: {{value}}"
+      },
+      "export": {
+        "json": "Export as JSON",
+        "doc": "Export as document"
+      },
+      "empty": "No plans found",
+      "nodatafilter": "No data matching the filter \"{{value}}\"",
+      "search": "Search dmp"
     }
   },
   "dmp": {
