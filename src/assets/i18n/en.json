@@ -406,5 +406,11 @@
       "saved": "All changes have been saved.",
       "unsaved": "You have unsaved changes."
     }
+  },
+  "upload": {
+    "file": {
+      "choose": "Choose File",
+      "dragdrop": "Drag and drop files here"
+    }
   }
 }
