@@ -562,5 +562,30 @@
     },
     "search": "Search license...",
     "reset": "Reset form"
+  },
+  "http": {
+    "error": {
+      "standard": "Failed to load resource.",
+      "0": "Service can not be reached, please retry later. If the issue persists contact [insert contact for technical issue].",
+      "404": "The requested resource could not be found.",
+      "500": "An error occurred, please contact [insert contact for technical issue].",
+      "503": "Service is currently unavailable, please retry later.",
+      "fileanalysis": "Failed to analyse file.",
+      "repositories": {
+        "search": "Failed to search repositories.",
+        "one": "Failed to load repository details.",
+        "all": "Failed to load repositories."
+      },
+      "projects": "Failed to load projects.",
+      "projectmembers": "Failed to load project members.",
+      "plans": {
+        "load": {
+          "all": "Failed to load plans.",
+          "one": "Failed to load plan."
+        },
+        "save": "Failed to save plan.",
+        "update": "Failed to update plan."
+      }
+    }
   }
 }
