@@ -10,7 +10,7 @@ export const formReducer = createReducer(
 );
 
 export function equals(a, b) {
-  if ((a == null && b != null) || (a == null && b != null)) {
+  if ((a == null && b != null) || (a != null && b == null)) {
     return false;
   }
   if (a == null && b == null) {
