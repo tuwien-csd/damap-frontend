@@ -3,7 +3,7 @@
   <label id="humanParticipants">
     {{'dmp.steps.ethical.question.humanParticipants' | translate}}
   </label>
-  <app-tooltip [tooltip]="'dmp.help.ethical.humanParticipants'"></app-tooltip>
+  <app-tooltip [tooltip]="'help.ethical.humanParticipants'"></app-tooltip>
   <mat-radio-group aria-labelledby="humanParticipants" formControlName="humanParticipants">
     <mat-radio-button class="boolean-mat-radio-button" [value]="true">{{'yes' | translate}}
     </mat-radio-button>
@@ -11,17 +11,17 @@
     </mat-radio-button>
   </mat-radio-group>
   <app-info-message *ngIf="legalEthicalStep.controls.humanParticipants.value">
-    {{'info.ethical.humanParticipation.prefix' | translate}}
+    {{'info.ethical.humanParticipants.prefix' | translate}}
     <a href="{{'dmp.steps.ethical.link1' | translate}}"
-       target="_blank">{{'info.ethical.humanParticipation.link1' | translate}}</a>
-    {{'info.ethical.humanParticipation.middle' | translate}}
+       target="_blank">{{'info.ethical.humanParticipants.link1' | translate}}</a>
+    {{'info.ethical.humanParticipants.middle' | translate}}
     <a href="{{'dmp.steps.ethical.link2' | translate}}" target="_blank">{{'dmp.steps.ethical.link2' | translate}}</a>.
   </app-info-message>
 
   <label id="ethicalIssues">
     {{'dmp.steps.ethical.question.ethicalIssues' | translate}}
   </label>
-  <app-tooltip [tooltip]="'dmp.help.ethical.ethicalIssues'"></app-tooltip>
+  <app-tooltip [tooltip]="'help.ethical.ethicalIssues'"></app-tooltip>
   <mat-radio-group aria-labelledby="ethicalIssues" formControlName="ethicalIssues">
     <mat-radio-button class="boolean-mat-radio-button" [value]="true">Yes
     </mat-radio-button>

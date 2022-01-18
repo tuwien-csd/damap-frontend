@@ -257,7 +257,7 @@
         "search": "Search repository",
         "add": "Add repository",
         "remove": "Remove repository",
-        "selected": "Your selected:",
+        "selected": "You selected:",
         "question": {
           "datasets": "Dataset(s) for deposit",
           "date": "Available until"
@@ -380,7 +380,7 @@
       "personalDataCompliance": "Make sure you follow the TU Wien guidance on informed consent."
     },
     "ethical": {
-      "humanParticipation": "The participation may include activities such as interviews, prototype testing, observations, surveys, etc.",
+      "humanParticipants": "The participation may include activities such as interviews, prototype testing, observations, surveys, etc.",
       "ethicalIssues": "For example: Your research involves human embryos, foetuses, cells or tissues, animals, activities that may adversely affect the environment or the health and safety of involved persons, artificial intelligence, activities outside the EU, or there are dual use or misuse aspects that must be addressed."
     }
   },
