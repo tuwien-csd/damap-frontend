@@ -1,16 +1,18 @@
-<app-step-intro>In this step you are asked to provide a realistic estimation of necessary resources for data management
-  and a clear statement on how these costs will be covered.
+<app-step-intro>{{'dmp.steps.costs.intro' | translate}}
 </app-step-intro>
 <div [formGroup]="costsStep">
   <label id="costsFormGroup">
-    Select the statement which best describes the situation in your project with respect to costs of data management.
+    {{'dmp.steps.costs.question.exist.label' | translate}}
   </label>
   <mat-radio-group aria-labelledby="costsFormGroup" formControlName="exist">
-    <mat-radio-button [value]="false">There are no costs dedicated to data management and ensuring that data will be
-      <a [href]="fairLink" target="_blank">FAIR</a>.
+    <mat-radio-button [value]="false">{{'dmp.steps.costs.question.exist.no.0' | translate}}
+      <a href="{{'dmp.steps.costs.link' | translate}}"
+         target="_blank">{{'dmp.steps.costs.question.exist.no.1' | translate}}</a>.
     </mat-radio-button>
-    <mat-radio-button [value]="true">There are costs dedicated to data management and ensuring that data will be <a
-      [href]="fairLink" target="_blank">FAIR</a> as outlined below.
+    <mat-radio-button [value]="true">{{'dmp.steps.costs.question.exist.yes.0' | translate}}
+      <a href="{{'dmp.steps.costs.link' | translate}}"
+         target="_blank">{{'dmp.steps.costs.question.exist.yes.1' | translate}}</a>
+      {{'dmp.steps.costs.question.exist.yes.2' | translate}}
     </mat-radio-button>
   </mat-radio-group>
 </div>
@@ -33,7 +35,7 @@
         <div [formArrayName]="i">
           <div class="form-row">
             <div class="form-row-group">
-              <app-input-wrapper [label]="'Item'" [control]="getFormControl(i, 'title')">
+              <app-input-wrapper [label]="'dmp.steps.costs.question.title'" [control]="getFormControl(i, 'title')">
               </app-input-wrapper>
               <button mat-icon-button color="accent" aria-label="Remove cost" (click)="removeCost(i)">
                 <mat-icon>cancel</mat-icon>
@@ -42,11 +44,12 @@
           </div>
           <div class="form-row">
             <div class="form-row-group">
-              <app-input-wrapper [label]="'Estimated cost'" [prefix]="'€ &nbsp;'" [placeholder]="'1000.00'"
+              <app-input-wrapper [label]="'dmp.steps.costs.question.value'" [prefix]="'€ &nbsp;'"
+                                 [placeholder]="'1000.00'"
                                  [type]="'number'" [control]="getFormControl(i, 'value')">
               </app-input-wrapper>
               <mat-form-field>
-                <mat-label>Cost Type</mat-label>
+                <mat-label>{{'dmp.steps.costs.question.type' | translate}}</mat-label>
                 <mat-select formControlName="type">
                   <mat-option *ngFor="let type of costType | keyvalue" [value]="type.value">
                     {{type.value}}
@@ -54,7 +57,7 @@
                 </mat-select>
               </mat-form-field>
               <ng-container *ngIf="item.value.type === costType.other">
-                <app-input-wrapper [label]="'Please specify the cost type'" [type]="'text'"
+                <app-input-wrapper [label]="'dmp.steps.costs.question.other'" [type]="'text'"
                                    [control]="getFormControl(i, 'customType')">
                 </app-input-wrapper>
               </ng-container>
@@ -62,7 +65,8 @@
           </div>
           <div class="form-row">
             <div class="form-row-group">
-              <app-textarea-wrapper [label]="'Description'" [control]="getFormControl(i, 'description')">
+              <app-textarea-wrapper [label]="'dmp.steps.costs.question.description'"
+                                    [control]="getFormControl(i, 'description')">
               </app-textarea-wrapper>
             </div>
           </div>
