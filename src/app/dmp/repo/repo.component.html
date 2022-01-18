@@ -18,7 +18,7 @@
         </button>
       </div>
     </div>
-    <form [formGroup]="repo">
+    <div [formGroup]="repo">
       <div class="mat-card-container">
         <mat-form-field>
           <mat-label>{{'dmp.steps.repositories.question.datasets' | translate}}</mat-label>
@@ -30,14 +30,11 @@
         </mat-form-field>
       </div>
       <div class="mat-card-container">
-        <mat-form-field>
-          <mat-label>{{'dmp.steps.repositories.question.date' | translate}}</mat-label>
-          <input matInput [matDatepicker]="picker_i" formControlName="date">
-          <mat-datepicker-toggle matSuffix [for]="picker_i"></mat-datepicker-toggle>
-          <mat-datepicker #picker_i></mat-datepicker>
-        </mat-form-field>
+        <app-error-message *ngIf="getDatasetsMarkedForDeletion(i).length > 0"
+                           [data]="getDatasetsMarkedForDeletionAsString(i)"
+                           [message]="'dmp.steps.repositories.warning.deletion'"></app-error-message>
       </div>
-    </form>
+    </div>
   </mat-card>
 </div>
 
