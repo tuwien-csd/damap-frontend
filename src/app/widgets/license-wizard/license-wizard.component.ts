@@ -1,12 +1,7 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {
-  ccByNcSa, ccBySa, DataLicenses,
-  LicenseDefinitions,
-  odbl,
-  SoftwareLicenses
-} from './license-wizard-list';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ccByNcSa, ccBySa, DataLicenses, LicenseDefinitions, odbl, SoftwareLicenses} from './license-wizard-list';
 import {LicenseDetails} from '../../domain/license-details';
-import {Step, QUESTION_TREE} from './license-wizard-questions';
+import {QUESTION_TREE, Step} from './license-wizard-questions';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {KeyValue} from '@angular/common';
 
@@ -32,8 +27,6 @@ export class LicenseWizardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
       this.selectedLicense.emit(result);
     });
   }
@@ -51,7 +44,6 @@ export class LicenseSelectorDialog {
   licenseList: LicenseDetails[] = [...LicenseDefinitions];
   softwareLicenses: LicenseDetails[] = SoftwareLicenses;
   dataLicenses = DataLicenses;
-  questionTree: Step = QUESTION_TREE;
 
   matrix: string[] = []; // compatible software license codes
   options: LicenseDetails[][] = []; // compatible data licenses
