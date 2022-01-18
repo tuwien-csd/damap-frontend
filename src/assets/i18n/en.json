@@ -401,6 +401,10 @@
       "empty": "Please provide a valid value.",
       "maxlength": "Value must not exceed {{value}} characters.",
       "pattern.currency": "Invalid input, please use the following format: 1234.56"
+    },
+    "changes": {
+      "saved": "All changes have been saved.",
+      "unsaved": "You have unsaved changes."
     }
   }
 }
