@@ -3,21 +3,21 @@
     <div class="warning-icon">
       <mat-icon>error_outline</mat-icon>
     </div>
-    This dataset was chosen for publication. Are you sure it shall be deleted?
+    {{'dmp.steps.data.deletion.warning.published' | translate}}
   </div>
   <div>
-    <p>Does this dataset have to be deleted, e.g. for contractual, regulatory, or ethical reasons?
-      If yes, please add an estimated date for the deletion, the reason for deletion, and a responsible person.</p>
-    <mat-slide-toggle formControlName="delete" color="primary">Mark dataset for deletion</mat-slide-toggle>
+    <p>{{'dmp.steps.data.deletion.question.label' | translate}}</p>
+    <mat-slide-toggle formControlName="delete"
+                      color="primary">{{'dmp.steps.data.deletion.question.delete' | translate}}</mat-slide-toggle>
   </div>
   <div *ngIf="dataset.value.delete">
     <mat-form-field>
-      <mat-label>Date of deletion</mat-label>
+      <mat-label>{{'dmp.steps.data.deletion.question.date' | translate}}</mat-label>
       <input matInput formControlName="dateOfDeletion" [matDatepicker]="picker">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <app-input-wrapper [label]="'Reason for deletion'" [control]="reasonForDeletion">
+    <app-input-wrapper [label]="'dmp.steps.data.deletion.question.reason'" [control]="reasonForDeletion">
     </app-input-wrapper>
   </div>
 </div>

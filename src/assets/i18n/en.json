@@ -110,6 +110,17 @@
               "Explain how others will get access to the data."
             ]
           }
+        },
+        "deletion": {
+          "warning": {
+            "published": "This dataset was chosen for publication. Are you sure it shall be deleted?"
+          },
+          "question": {
+            "label": "Does this dataset have to be deleted, e.g. for contractual, regulatory, or ethical reasons? If yes, please add an estimated date for the deletion, the reason for deletion, and a responsible person.",
+            "delete": "Mark dataset for deletion",
+            "date": "Date of deletion",
+            "reason": "Reason for deletion"
+          }
         }
       },
       "documentation": {
