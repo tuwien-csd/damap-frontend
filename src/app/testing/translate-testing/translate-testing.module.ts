@@ -15,23 +15,30 @@ export class TranslatePipeMock implements PipeTransform {
 
 @Injectable()
 export class TranslateServiceStub {
-  public get<T>(key: T): Observable<T> {
+  public get(key: any): Observable<any> {
     return of(key);
+  }
+
+  public use(key: any): void {
+  }
+
+  public instant(key: any): any {
+    return key;
   }
 }
 
 @NgModule({
   imports: [
     TranslateModule.forRoot({
-      loader: { provide: TranslateLoader, useClass: TranslateFakeLoader }
+      loader: {provide: TranslateLoader, useClass: TranslateFakeLoader}
     })
   ],
   declarations: [
     TranslatePipeMock
   ],
   providers: [
-    { provide: TranslateService, useValue: TranslateServiceStub },
-    { provide: TranslatePipe, useClass: TranslatePipeMock }
+    {provide: TranslateService, useClass: TranslateServiceStub},
+    {provide: TranslatePipe, useClass: TranslatePipeMock}
   ],
   exports: [
     TranslatePipeMock

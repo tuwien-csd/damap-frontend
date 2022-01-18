@@ -9,6 +9,7 @@ import {Repository} from '../domain/repository';
 import {catchError, map, retry, shareReplay} from 'rxjs/operators';
 import {FeedbackService} from './feedback.service';
 import {environment} from '../../environments/environment';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,8 @@ export class BackendService {
 
   constructor(
     private http: HttpClient,
-    private feedbackService: FeedbackService) {
+    private feedbackService: FeedbackService,
+    private translate: TranslateService) {
   }
 
   private static getFilenameFromContentDisposition(contentDisposition: string): string {
@@ -33,14 +35,14 @@ export class BackendService {
   getDmps(): Observable<DmpListItem[]> {
     return this.http.get<DmpListItem[]>(`${this.dmpBackendUrl}/list`).pipe(
       retry(3),
-      catchError(this.handleError('Failed to load plans.'))
+      catchError(this.handleError('http.error.plan.load.all'))
     );
   }
 
   getDmpById(id: number): Observable<Dmp> {
     return this.http.get<Dmp>(`${this.dmpBackendUrl}/${id}`).pipe(
       retry(3),
-      catchError(this.handleError('Failed to load plan.'))
+      catchError(this.handleError('http.error.plan.load.one'))
     );
   }
 
@@ -53,7 +55,7 @@ export class BackendService {
     return this.http.post<Dmp>(this.dmpBackendUrl, dmp, httpOptions)
       .pipe(
         retry(3),
-        catchError(this.handleError('Failed to save plan.'))
+        catchError(this.handleError('http.error.plan.save'))
       );
   }
 
@@ -66,14 +68,14 @@ export class BackendService {
     return this.http.put<Dmp>(`${this.dmpBackendUrl}/${dmp.id}`, dmp, httpOptions)
       .pipe(
         retry(3),
-        catchError(this.handleError('Failed to update plan.'))
+        catchError(this.handleError('http.error.plan.update'))
       );
   }
 
   getSuggestedProjects(): Observable<Project[]> {
     return this.http.get<Project[]>(this.projectBackendUrl).pipe(
       retry(3),
-      catchError(this.handleError('Failed to load projects.')),
+      catchError(this.handleError('http.error.projects')),
       shareReplay(1)
     );
   }
@@ -81,7 +83,7 @@ export class BackendService {
   getProjectMembers(projectId: number): Observable<ProjectMember[]> {
     return this.http.get<ProjectMember[]>(`${this.projectBackendUrl}/${projectId}/staff`).pipe(
       retry(3),
-      catchError(this.handleError('Failed to load project members.'))
+      catchError(this.handleError('http.error.projectmembers'))
     );
 
   }
@@ -89,7 +91,7 @@ export class BackendService {
   getRepositories(): Observable<Repository[]> {
     return this.http.get<Repository[]>(this.repositoryBackendUrl).pipe(
       retry(3),
-      catchError(this.handleError('Failed to load repositories.'))
+      catchError(this.handleError('http.error.repositories.all'))
     );
   }
 
@@ -97,7 +99,7 @@ export class BackendService {
     return this.http.get<any>(`${this.repositoryBackendUrl}/${id}`).pipe(
       map(details => ({id, changes: {info: details.repository[0]}})),
       retry(3),
-      catchError(this.handleError('Failed to load repository details.'))
+      catchError(this.handleError('http.error.repositories.one'))
     );
   }
 
@@ -109,7 +111,7 @@ export class BackendService {
       }
     }
     return this.http.get<Repository[]>(`${this.repositoryBackendUrl}/search`, {params}).pipe(
-      catchError(this.handleError('Failed to search repositories.'))
+      catchError(this.handleError('http.error.repositories.search'))
     );
   }
 
@@ -117,7 +119,7 @@ export class BackendService {
     return this.http.post(`${this.backendUrl}fits/examine`, file,
       {reportProgress: true, observe: 'events'})
       .pipe(
-        catchError(this.handleError('Failed to analyse file.'))
+        catchError(this.handleError('http.error.fileanalysis'))
       );
   }
 
@@ -154,16 +156,17 @@ export class BackendService {
   }
 
 
-  private handleError(message = 'Failed to load resource.') {
+  private handleError(message = 'http.error.standard') {
+    message = this.translate.instant(message);
     return (error: HttpErrorResponse) => {
       if (error.status === 0) {
-        message += '\nService can not be reached, please retry later. If the issue persists contact [insert contact for technical issue].'
+        this.translate.instant('http.error.0');
       } else if (error.status === 404) {
-        message += '\nThe requested resource could not be found.'
+        message += this.translate.instant('http.error.404');
       } else if (error.status === 500) {
-        message += '\nAn error occurred, please contact [insert contact for technical issue].'
+        message += this.translate.instant('http.error.500');
       } else if (error.status === 503) {
-        message += '\nService is currently unavailable, please retry later.'
+        message += this.translate.instant('http.error.503');
       }
       this.feedbackService.error(message);
       return throwError(message);
