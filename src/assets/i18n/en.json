@@ -362,7 +362,11 @@
         }
       }
     },
-    "nodatasets": "Please define datasets first."
+    "nodatasets": "Please define datasets first.",
+    "success": {
+      "update": "Plan was updated!",
+      "save": "Plan was saved!"
+    }
   },
   "button": {
     "save": "Save changes",
