@@ -1,7 +1,7 @@
 <div class="tree-select" #treeselect (focusout)="showTreeSelection()">
   <mat-form-field appearance="fill">
     <mat-label>{{label}}</mat-label>
-    <mat-chip-list #chipList aria-label="Filter selection">
+    <mat-chip-list #chipList [attr.aria-label]="'treeselect.filter' | translate">
       <mat-chip *ngFor="let node of selectionList" (focus)="showTreeSelection()"
                 [selectable]="false"
                 [removable]="true"
@@ -33,7 +33,7 @@
 
       <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding [class.hidden]="!node.visible">
         <button mat-icon-button matTreeNodeToggle
-                [attr.aria-label]="'Toggle ' + node.item.label">
+                [attr.aria-label]="'treeselect.toggle' | translate: {value: node.item.label}">
           <mat-icon class="mat-icon-rtl-mirror">
             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
           </mat-icon>
