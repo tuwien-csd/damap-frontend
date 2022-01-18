@@ -279,6 +279,67 @@
       },
       "end": {
         "label": "End"
+      },
+      "summary": {
+        "title": "Summary of the information you provided:",
+        "table.header": {
+          "step": "Step",
+          "completeness": "Completeness",
+          "status": "Status"
+        },
+        "notspecified": "Not specified yet.",
+        "partially": "Partially filled out.",
+        "noinfo": "No information provided.",
+        "someinfo": "Some information provided.",
+        "allinfo": "All information necessary provided.",
+        "project": {
+          "none": "No project selected yet.",
+          "selected": "Project: {{project}}."
+        },
+        "people": {
+          "contact": {
+            "set": "Contact person set. ",
+            "missing": "Contact person is missing. "
+          },
+          "contributor": {
+            "none": "No contributors selected yet.",
+            "one": "One contributor selected."
+          }
+        },
+        "data": {
+          "specify": {
+            "datasets": {
+              "one": "One dataset defined.",
+              "nonespecified": "No data will be produced.",
+              "missingexplanation": "Explanation is missing.",
+              "none": "No research data specified."
+            }
+          }
+        },
+        "storage": {
+          "nonestored": "No data to be stored.",
+          "nodata": "No data defined yet.",
+          "alldata": "All data are stored.",
+          "missingexplanation": " Usage explanation is missing."
+        },
+        "licensing": {
+          "all": "All datasets have been assigned a license and a start date.",
+          "none": "No dataset has been assigned a license or a start date.",
+          "some": "Some datasets have been assigned a license and a start date."
+        },
+        "repositories": {
+          "nodata": "No data to be deposited.",
+          "nodataspecified": "No data defined yet.",
+          "deposited": {
+            "all": "All data are deposited. ",
+            "none": "No data deposited yet. ",
+            "some": "Some data are deposited. "
+          },
+          "missingexplanation": "Explanation for datasets with restricted/closed access missing."
+        },
+        "costs": {
+          "none": "There are no costs."
+        }
       }
     },
     "nodatasets": "Please define datasets first."
