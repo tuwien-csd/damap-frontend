@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {RepoComponent} from './repo.component';
 import {StepIntroComponent} from '../../widgets/intro/step-intro.component';
+import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
 
 describe('RepoComponent', () => {
   let component: RepoComponent;
@@ -9,6 +10,7 @@ describe('RepoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [TranslateTestingModule],
       declarations: [RepoComponent, StepIntroComponent]
     }).compileComponents();
   });

@@ -220,7 +220,27 @@
         }
       },
       "repositories": {
-        "label": "Specify repositories for publication and preservation"
+        "label": "Specify repositories for publication and preservation",
+        "intro": "Repositories are used for sustainable data management beyond the lifetime of the project and to make data discoverable and reusable to others. If available, use a domain specific repository for your data. The search filter below may help you to find one. Otherwise, you can always use TU Wien Research Data, TU Wiens institutional data repository.",
+        "heading": "Repositories",
+        "search": "Search repository",
+        "add": "Add repository",
+        "remove": "Remove repository",
+        "selected": "Your selected:",
+        "question": {
+          "datasets": "Dataset(s) for deposit",
+          "date": "Available until"
+        },
+        "loading": {
+          "load": "Load repositories...",
+          "failed": "Repositories could not be loaded."
+        },
+        "filter": {
+          "search": "Search Filter"
+        },
+        "table.header.title": "Title",
+        "nodatafilter": "No data matching the filter \"{{value}}\"",
+        "norepositories": "No repositories found."
       },
       "costs": {
         "label": "Costs"
