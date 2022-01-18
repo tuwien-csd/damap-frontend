@@ -26,7 +26,9 @@ export class LicensesComponent implements OnInit {
 
   setLicenseSelectorResult(event, index: number) {
     const dataset = this.datasets.at(index);
-    dataset.patchValue({license: event.url});
+    if (event) {
+      dataset.patchValue({license: event.url});
+    }
   }
 
   get isAnonymisedOrPseudonymised() {
