@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Choose a License</h2>
+<h2 mat-dialog-title>{{'license.wizard.title' | translate}}</h2>
 <mat-dialog-content class="mat-typography">
   <div>
     <div class="ls-steps" *ngFor="let step of steps, let i = index, let last = last">
@@ -8,11 +8,11 @@
       <div class="ls-question" *ngIf="last">
         <button id="ls-reset-button" mat-stroked-button (click)="reset()">
           <mat-icon>replay</mat-icon>
-          Reset form
+          {{'license.wizard.reset' | translate}}
         </button>
-        <h3>{{step.question}}</h3>
+        <h3>{{step.question | translate}}</h3>
         <!-- Software: License Matrix -->
-        <ng-container *ngIf="step.question === 'Select licenses in your code:'">
+        <ng-container *ngIf="step.question === 'license.wizard.question.licenseInteropSoftware'">
           <div *ngFor="let license of softwareLicenses">
             <mat-checkbox *ngIf="license.code"
                           (change)="changeLicenseMatrix(license.code)">
@@ -21,7 +21,7 @@
           </div>
         </ng-container>
         <!-- Data: License Options -->
-        <ng-container *ngIf="step.question === 'Choose licenses present in your dataset:'">
+        <ng-container *ngIf="step.question === 'license.wizard.question.licenseInteropData'">
           <div *ngFor="let licenses of dataLicenses, let j = index" style="align-content: flex-start">
             <mat-checkbox (change)="changeLicenseOptions(j)">
               <ng-container *ngFor="let licence of licenses; last as isLast">
@@ -35,7 +35,8 @@
         <!-- Answers -->
         <div class="ls-answer-buttons">
           <ng-container *ngFor="let item of step.answers | keyvalue: originalOrder">
-            <button mat-raised-button (click)="setNextStep(i, item.value)" color="primary">{{item.key}}</button>
+            <button mat-raised-button (click)="setNextStep(i, item.value)"
+                    color="primary">{{item.key | translate}}</button>
           </ng-container>
         </div>
       </div>
@@ -45,7 +46,7 @@
   <ng-container *ngIf="licenseList?.length">
     <div id="ls-search">
       <mat-form-field>
-        <mat-label>Search license...</mat-label>
+        <mat-label>{{'license.wizard.search' | translate}}</mat-label>
         <input #searchBox type="search" matInput>
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
@@ -53,14 +54,14 @@
     <div class="ls-list">
       <mat-card class="ls-item" *ngFor="let license of (licenseList | licenseFilter:searchBox.value)">
         <div class="ls-item-header">
-          <h3 [mat-dialog-close]="license">{{license.name}}</h3>
+          <h3 [mat-dialog-close]="license">{{license.name | translate}}</h3>
           <div>
-            <a href="{{license.url}}" target="_blank" mat-button >More info</a>
+            <a href="{{license.url}}" target="_blank" mat-button>{{'license.wizard.info' | translate}}</a>
           </div>
         </div>
-          <div class="ls-description" [mat-dialog-close]="license">
-            {{license.description}}
-          </div>
+        <div class="ls-description" [mat-dialog-close]="license">
+          {{license.description | translate}}
+        </div>
       </mat-card>
     </div>
   </ng-container>
