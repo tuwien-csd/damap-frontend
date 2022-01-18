@@ -412,5 +412,9 @@
       "choose": "Choose File",
       "dragdrop": "Drag and drop files here"
     }
+  },
+  "treeselect": {
+    "filter": "Filter selection",
+    "toggle": "Toggle {{value}}"
   }
 }

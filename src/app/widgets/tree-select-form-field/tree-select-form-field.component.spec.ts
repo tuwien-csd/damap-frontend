@@ -3,6 +3,8 @@ import {TreeSelectFormFieldComponent} from './tree-select-form-field.component';
 import {HarnessLoader} from '@angular/cdk/testing';
 import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
 import {MatTreeModule} from '@angular/material/tree';
+import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
+import {MatChipsModule} from '@angular/material/chips';
 
 describe('TreeSelectFormFieldComponent', () => {
   let component: TreeSelectFormFieldComponent;
@@ -12,7 +14,7 @@ describe('TreeSelectFormFieldComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatTreeModule],
+      imports: [MatChipsModule, MatTreeModule, TranslateTestingModule],
       declarations: [TreeSelectFormFieldComponent]
     })
       .compileComponents();
