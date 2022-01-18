@@ -374,5 +374,13 @@
         "suffix": " for additional information and support. You must do so if your planned research involves any human participation."
       }
     }
+  },
+  "form": {
+    "error": {
+      "required": "Please provide a value.",
+      "empty": "Please provide a valid value.",
+      "maxlength": "Value must not exceed {{value}} characters.",
+      "pattern.currency": "Invalid input, please use the following format: 1234.56"
+    }
   }
 }
