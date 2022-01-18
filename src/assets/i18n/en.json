@@ -464,7 +464,7 @@
         "description": "This license is meant to be an international, database-specific equivalent of the public domain. You cannot relicense or sublicense any database under this license because, like the public domain, after dedication you no longer own any rights to the database."
       },
       "ccBy": {
-        "name": "Creative Commons Attribution (CC-BY)",
+        "name": "Creative Commons Attribution (CC BY)",
         "description": "This is the standard creative commons license that gives others maximum freedom to do what they want with your work."
       },
       "odcBy": {
@@ -472,7 +472,7 @@
         "description": ""
       },
       "ccBySa": {
-        "name": "Creative Commons Attribution-ShareAlike (CC-BY-SA)",
+        "name": "Creative Commons Attribution-ShareAlike (CC BY-SA)",
         "description": "This creative commons license is very similar to the regular Attribution license, but requires you to release all derivative works under this same license."
       },
       "odbl": {
@@ -480,19 +480,19 @@
         "description": "A copyleft license used by OpenStreetMap and others with very specific terms designed for databases."
       },
       "ccByNd": {
-        "name": "Creative Commons Attribution-NoDerivs (CC-BY-ND)",
+        "name": "Creative Commons Attribution-NoDerivs (CC BY-ND)",
         "description": "The no derivatives creative commons license is straightforward; you can take a work released under this license and re-distribute it but you cannot change it."
       },
       "ccByNc": {
-        "name": "Creative Commons Attribution-NonCommercial (CC-BY-NC)",
+        "name": "Creative Commons Attribution-NonCommercial (CC BY-NC)",
         "description": "A creative commons license that bans commercial use."
       },
       "ccByNcSa": {
-        "name": "Creative Commons Attribution-NonCommercial-ShareAlike (CC-BY-NC-SA)",
+        "name": "Creative Commons Attribution-NonCommercial-ShareAlike (CC BY-NC-SA)",
         "description": "A creative commons license that bans commercial use and requires you to release any modified works under this license."
       },
       "ccByNcNd": {
-        "name": "Creative Commons Attribution-NonCommercial-NoDerivs (CC-BY-NC-ND)",
+        "name": "Creative Commons Attribution-NonCommercial-NoDerivs (CC BY-NC-ND)",
         "description": "The most restrictive creative commons license. This only allows people to download and share your work for no commercial gain and for no other purposes."
       },
       "perlArtistic1": {
