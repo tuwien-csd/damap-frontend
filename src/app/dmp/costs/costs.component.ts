@@ -15,7 +15,6 @@ export class CostsComponent implements OnInit {
   @Output() costToRemove = new EventEmitter<number>();
 
   costType: any = CostType;
-  fairLink = 'https://www.tuwien.at/en/research/rti-support/research-data/research-data-management/fair-principles';
 
   constructor() {
   }
