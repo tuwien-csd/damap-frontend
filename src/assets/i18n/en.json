@@ -1,0 +1,591 @@
+{
+  "title": "DAMAP",
+  "layout": {
+    "menu": {
+      "home": "Home",
+      "plans": "Plans",
+      "mobile": {
+        "open": "Open page navigation",
+        "close": "Close page navigation"
+      }
+    },
+    "logout": "Logout",
+    "version": "Version",
+    "logo.goback": "Go back to main page"
+  },
+  "plans": {
+    "myplans": "My plans",
+    "allplans": "All plans",
+    "create.plan": "Create new plan",
+    "loading": {
+      "load": "Load plans...",
+      "failed": "Your plans could not be loaded!"
+    },
+    "table": {
+      "header": {
+        "title": "Title",
+        "created": "Created",
+        "modified": "Last modified",
+        "edit": "Edit",
+        "history": "History",
+        "delete": "Delete"
+      },
+      "expanded": {
+        "duration": "Project duration: {{value}}"
+      },
+      "export": {
+        "json": "Export as JSON",
+        "doc": "Export as document"
+      },
+      "empty": "No plans found",
+      "nodatafilter": "No data matching the filter \"{{value}}\"",
+      "search": "Search dmp"
+    }
+  },
+  "dmp": {
+    "steps": {
+      "project": {
+        "label": "Choose project from the project data base",
+        "search": "Search project...",
+        "select": "Please select the project you want to create a DMP for:",
+        "selected": "You selected",
+        "warning.dmp": "A plan already exists for this project",
+        "noprojects": "No projects are assigned to you.",
+        "loading": {
+          "load": "Load projects...",
+          "failed": "Projects could not be loaded."
+        }
+      },
+      "people": {
+        "label": "People involved in data management",
+        "intro": "The search below helps you to provide information on involved persons and their particular roles regarding research data management within this project.",
+        "contributors": "Contributors",
+        "search": "Search for person...",
+        "contributor": {
+          "add": "Add as contributor",
+          "remove": "Remove from contributors",
+          "role": "Role"
+        },
+        "contact": {
+          "person": "Contact person",
+          "add": "Set as contact",
+          "remove": "Remove as contact"
+        },
+        "nopeople": "No project members available."
+      },
+      "data": {
+        "specify": {
+          "label": "Specify research data",
+          "intro": "Research data comes in all forms and sizes. The table below helps you to describe the data sets (i.e. groups of data with similar properties) you are expecting to create or reuse during the project.",
+          "question": {
+            "kind": "What kinds of research data will you create?",
+            "datasets": "Create names for your datasets",
+            "nodata": "Please explain why you won't create or analyse any research data."
+          },
+          "answer": {
+            "kind": {
+              "unknown": "I don't know yet.",
+              "none": "No data will be created or analysed",
+              "specify": "Specify datasets"
+            }
+          },
+          "tab": {
+            "manual": "Manually",
+            "upload": "Uploading sample data"
+          },
+          "table": {
+            "heading": "Data",
+            "header": {
+              "dataset": "Dataset",
+              "datatype": "Datatype",
+              "size": "Size",
+              "comment": "Comment",
+              "actions": "Actions"
+            }
+          }
+        },
+        "access": {
+          "heading": "Set access rights for all datasets",
+          "question": {
+            "dataset": "Dataset",
+            "selected": "for selected project members",
+            "other": "for other project members",
+            "public": "public",
+            "right": "Access right"
+          },
+          "aria": {
+            "selected": "Access right for selected project members for dataset {{dataset}}",
+            "other": "Access right for other project members for dataset {{dataset}}",
+            "public": "Access right for the public for dataset  {{dataset}}"
+          }
+        },
+        "reuse": {
+          "label": "Reuse of data",
+          "intro": "This step helps you to think about foreseeable research uses or users of your data sets and what potential reusers require to access your data.",
+          "question": {
+            "targetAudience": "Who is the target audience and who could be interested in reusing the data and why?",
+            "tools": "Indicate whether potential users need specific tools or software to access and (re-)use the data.",
+            "restrictedDataAccess": "For the following datasets restricted access was selected, explain how others will get access to the data:"
+          }
+        },
+        "deletion": {
+          "warning": {
+            "published": "This dataset was chosen for publication. Are you sure it shall be deleted?"
+          },
+          "question": {
+            "label": "Does this dataset have to be deleted, e.g. for contractual, regulatory, or ethical reasons? If yes, please add an estimated date for the deletion, the reason for deletion, and a responsible person.",
+            "delete": "Mark dataset for deletion",
+            "date": "Date of deletion",
+            "reason": "Reason for deletion"
+          }
+        }
+      },
+      "documentation": {
+        "label": "Documentation and data quality",
+        "intro": "This step helps you to specify the description of your datasets and their generation. This may include information on the methodology used to collect the data, analytical and procedural information, definitions of variables, units of measurement, information on data organisation and so on.",
+        "question": {
+          "metadata": "Please indicate which metadata will be provided to help others identify, discover and reuse the data.",
+          "datageneration": "How will the research data be generated and which methods will be used?",
+          "structure": "How will you structure the data and handle versioning?"
+        }
+      },
+      "storage": {
+        "label": "Storage and backup during the research process",
+        "intro": "Choose the best storage option for each dataset.",
+        "link": "More information...",
+        "question": {
+          "datasets": "Select corresponding datasets"
+        },
+        "remove": "Remove storage",
+        "external": {
+          "add": "Add other storage location",
+          "remove": "Remove external storage",
+          "question": {
+            "name": "Storage Name",
+            "location": "Storage Location",
+            "backup": {
+              "location": "Backup Location",
+              "frequency": "Backup Frequency"
+            },
+            "info": "Please explain why institutional storage will not be used"
+          }
+        }
+      },
+      "legal": {
+        "label": "Legal and ethical aspects",
+        "intro": "This step helps you consider potential issues concerning personal data, intellectual property rights and ownership and asks you for basic information on the handling of ethical issues within this project.",
+        "heading": "Legal aspects",
+        "question": {
+          "sensitiveData": {
+            "prefix": "Is your data or part of it sensitive, for example",
+            "link": "sensitive personal data",
+            "suffix": ", politically sensitive information, or trade secrets?"
+          },
+          "dataset": {
+            "sensitiveData": "Please select the datasets containing sensitive data",
+            "personalData": "Please select the datasets containing personal data",
+            "legalRestrictions": "Please select the datasets concerned:"
+          },
+          "personalData": "Will personal data be collected/used as part of the project?",
+          "sensitiveDataSecurity": "What kind of additional security measures will be taken to ensure that stored and transferred sensitive data is safe?",
+          "otherDataSecurityMeasures": "Please specify what other measures are taken:",
+          "sensitiveDataAccess": "Who will be authorised to access sensitive data?",
+          "personalDataCompliance": "How will compliance with data protection be ensured?",
+          "otherPersonalDataCompliance": "Please specify what other measures are taken:",
+          "legalRestrictions": "Are there any other legal restrictions on how data is processed or shared?",
+          "legalRestrictionsComment": "Please specify the legal restrictions:",
+          "legalRestrictionsDocuments": "In which document(s) are these restrictions specified?",
+          "otherLegalRestrictionsDocuments": "Please specify the other documents:",
+          "dataRightsAndAccessControl": "Who has rights to the produced data and who controls access to the data?"
+        },
+        "link": {
+          "sensitiveData": "https://ec.europa.eu/info/law/law-topic/data-protection/reform/rules-business-and-organisations/legal-grounds-processing-data/sensitive-data/what-personal-data-considered-sensitive_en"
+        }
+      },
+      "ethical": {
+        "heading": "Ethical aspects",
+        "question": {
+          "humanParticipants": "Will you involve human participants in the project and thereby collect or process their personal data?",
+          "ethicalIssues": "Beyond the use of sensitive personal data, are there any other ethical issues associated with your research?",
+          "committeeReviewed": {
+            "prefix": "Was your research plan reviewed by an ethics committee, the ",
+            "researchCommittee": {
+              "text": "TU Wien Pilot Research Ethics Committee",
+              "link": "https://www.tuwien.at/en/research/rti-support/research-ethics/pilot-research-ethics-committee"
+            },
+            "suffix": ", or a similar body?"
+          }
+        }
+      },
+      "licensing": {
+        "label": "Data access and licensing",
+        "intro": "This step helps you to specify the access to your research output in the future: Which of your data sets will be published, which will be provided to interested persons on request only and which need to be under lock and key, for contractual, regulatory, or ethical reasons? It also reminds you to choose a license for your open data that clearly describes the reuse conditions for potential reusers.",
+        "hint": "Please indicate which datasets you plan to keep closed or publish. Select a license for the datasets you want to publish and estimate the release date.",
+        "question": {
+          "dataAccess": "Data Access",
+          "license": "Planned license",
+          "startDate": "Choose a date for publication",
+          "hint": "The release date was set to the project end date. Feel free to modify it.",
+          "restrictedAccessInfo": "The following dataset(s) will have access restrictions, explain why and clearly describe the access conditions:",
+          "closedAccessInfo": "For following dataset(s) only the metadata will be published open access, explain why the data will not be accessible (closed access):"
+        },
+        "warning": {
+          "personalData": "You indicated in step 6 that this dataset contains sensitive personal data. Do you really want to publish the dataset open, without restrictions?",
+          "pseudonymisation": "Have you considered anonymisation/pseudonymisation?",
+          "legalRestrictions": "You indicated in step 6 that this dataset is subject to legal restrictions. Do you really want to publish the dataset without restrictions?"
+        }
+      },
+      "repositories": {
+        "label": "Specify repositories for publication and preservation",
+        "intro": "Repositories are used for sustainable data management beyond the lifetime of the project and to make data discoverable and reusable to others. If available, use a domain specific repository for your data. The search filter below may help you to find one. Otherwise, you can always use TU Wien Research Data, TU Wiens institutional data repository.",
+        "heading": "Repositories",
+        "search": "Search repository",
+        "add": "Add repository",
+        "remove": "Remove repository",
+        "selected": "You selected:",
+        "question": {
+          "datasets": "Dataset(s) for deposit",
+          "date": "Available until"
+        },
+        "loading": {
+          "load": "Load repositories...",
+          "failed": "Repositories could not be loaded."
+        },
+        "filter": {
+          "search": "Search Filter"
+        },
+        "table.header.title": "Title",
+        "nodatafilter": "No data matching the filter \"{{value}}\"",
+        "norepositories": "No repositories found."
+      },
+      "costs": {
+        "label": "Costs",
+        "intro": "In this step you are asked to provide a realistic estimation of necessary resources for data management and a clear statement on how these costs will be covered.",
+        "question": {
+          "exist": {
+            "label": "Select the statement which best describes the situation in your project with respect to costs of data management.",
+            "no": "There are no costs dedicated to data management and ensuring that data will be ",
+            "yes": "As outlined below, there are costs dedicated to data management and ensuring that data will be "
+          },
+          "title": "Item",
+          "value": "Estimated cost",
+          "type": "Cost Type",
+          "other": "Please specify the cost type",
+          "description": "Description"
+        },
+        "link": "https://www.tuwien.at/en/research/rti-support/research-data/research-data-management/fair-principles"
+      },
+      "end": {
+        "label": "End"
+      },
+      "summary": {
+        "title": "Summary of the information you provided:",
+        "table.header": {
+          "step": "Step",
+          "completeness": "Completeness",
+          "status": "Status"
+        },
+        "notspecified": "Not specified yet.",
+        "partially": "Partially filled out.",
+        "noinfo": "No information provided.",
+        "someinfo": "Some information provided.",
+        "allinfo": "All information necessary provided.",
+        "project": {
+          "none": "No project selected yet.",
+          "selected": "Project: {{project}}."
+        },
+        "people": {
+          "contact": {
+            "set": "Contact person set. ",
+            "missing": "Contact person is missing. "
+          },
+          "contributor": {
+            "none": "No contributors selected yet.",
+            "one": "One contributor selected.",
+            "multiple": "Contributors selected: "
+          }
+        },
+        "data": {
+          "specify": {
+            "datasets": {
+              "one": "One dataset defined.",
+              "multiple": "Datasets defined: ",
+              "nonespecified": "No data will be produced.",
+              "missingexplanation": "Explanation is missing.",
+              "none": "No research data specified."
+            }
+          }
+        },
+        "storage": {
+          "nonestored": "No data to be stored.",
+          "nodata": "No data defined yet.",
+          "alldata": "All data are stored.",
+          "missingexplanation": " Usage explanation is missing."
+        },
+        "licensing": {
+          "all": "All datasets have been assigned a license and a start date.",
+          "none": "No dataset has been assigned a license or a start date.",
+          "some": "Some datasets have been assigned a license and a start date."
+        },
+        "repositories": {
+          "nodata": "No data to be deposited.",
+          "nodataspecified": "No data defined yet.",
+          "deposited": {
+            "all": "All data are deposited. ",
+            "none": "No data deposited yet. ",
+            "some": "Some data are deposited. "
+          },
+          "missingexplanation": "Explanation for datasets with restricted/closed access missing."
+        },
+        "costs": {
+          "none": "There are no costs."
+        }
+      }
+    },
+    "nodatasets": "Please define datasets first.",
+    "success": {
+      "update": "Plan was updated!",
+      "save": "Plan was saved!"
+    }
+  },
+  "button": {
+    "save": "Save changes",
+    "discard": "Discard changes"
+  },
+  "yes": "Yes",
+  "no": "No",
+  "fair": "FAIR",
+  "help": {
+    "legal": {
+      "sensitiveDataSecurity": "Referring to physical security, network security, and security of computer systems and files.",
+      "personalDataCompliance": "Make sure you follow the TU Wien guidance on informed consent."
+    },
+    "ethical": {
+      "humanParticipants": "The participation may include activities such as interviews, prototype testing, observations, surveys, etc.",
+      "ethicalIssues": "For example: Your research involves human embryos, foetuses, cells or tissues, animals, activities that may adversely affect the environment or the health and safety of involved persons, artificial intelligence, activities outside the EU, or there are dual use or misuse aspects that must be addressed."
+    }
+  },
+  "info": {
+    "ethical": {
+      "humanParticipants": {
+        "prefix": "An informed consent for participation (in addition to an informed consent to data processing) is required. For more information, contact the ",
+        "researchEthicsCoordination": {
+          "text": "research ethics coordination",
+          "link": "https://www.tuwien.at/en/research/rti-support/research-ethics"
+        },
+        "middle": " or consult: ",
+        "researchEthics": {
+          "link": "https://colab.tuwien.ac.at/x/eQEhAw"
+        }
+      },
+      "ethicalIssues": {
+        "text": "Your research plan may require ethical review. Inform yourself by consulting",
+        "researchEthics": {
+          "text": "www.tuwien.at/research-ethics",
+          "link": "https://www.tuwien.at/research-ethics"
+        }
+      },
+      "committeeReviewed": {
+        "prefix": "Please note that you must address (potential) ethical issues in separate documents according to the requirements of the relevant funding body. The DMP only serves to help identify some ethical issues.\nPlease contact the TU Research Ethics Coordinator (Dr. Marjo Rauhala) at ",
+        "mail": {
+          "text": "ethics@tuwien.ac.at",
+          "link": "mailto:ethics@tuwien.ac.at"
+        },
+        "suffix": " for additional information and support. You must do so if your planned research involves any human participation."
+      }
+    }
+  },
+  "form": {
+    "error": {
+      "required": "Please provide a value.",
+      "empty": "Please provide a valid value.",
+      "maxlength": "Value must not exceed {{value}} characters.",
+      "pattern.currency": "Invalid input, please use the following format: 1234.56"
+    },
+    "changes": {
+      "saved": "All changes have been saved.",
+      "unsaved": "You have unsaved changes."
+    }
+  },
+  "upload": {
+    "file": {
+      "choose": "Choose File",
+      "dragdrop": "Drag and drop files here"
+    }
+  },
+  "treeselect": {
+    "filter": "Filter selection",
+    "toggle": "Toggle {{value}}"
+  },
+  "license.wizard": {
+    "select": "Select license with license selector",
+    "title": "Choose a License",
+    "info": "More info",
+    "question": {
+      "root": "What do you want to deposit?",
+      "data": "Is your data within the scope of copyright and related rights?",
+      "ownIPR": "Do you own copyright and similar rights in your dataset and all its constitutive parts?",
+      "ensureLicensing": "Are all the elements of your dataset licensed under a public license or in the Public Domain?",
+      "cantLicense": "You need additional permission before you can deposit the data!",
+      "licenseInteropData": "Choose licenses present in your dataset:",
+      "allowDerivativeWorks": "Do you allow others to make derivative works?",
+      "shareAlike": "Do you require others to share derivative works based on your data under a compatible license?",
+      "commercialUse": "Do you allow others to make commercial use of you data?",
+      "decideAttribute": "Do you want others to attribute your data to you?",
+      "software": "Is your code based on existing software or is it your original work?",
+      "licenseInteropSoftware": "Select licenses in your code:",
+      "copyleft": "Do you require others who modify your code to release it under a compatible licence?",
+      "strongCopyleft": "Is your code used directly as an executable or are you licensing a library (your code will be linked)?"
+    },
+    "answer": {
+      "data": "Data",
+      "software": "Software",
+      "next": "Next",
+      "licenseInteropSoftware": "Based on existing software",
+      "copyleft": "My own code",
+      "executable": "Executable",
+      "library": "Library"
+    },
+    "license": {
+      "ccPublicDomain": {
+        "name": "Public Domain Mark (PD)",
+        "description": "The work identified as being free of known restrictions under copyright law, including all related and neighboring rights."
+      },
+      "ccZero": {
+        "name": "Public Domain Dedication (CC Zero)",
+        "description": "CC Zero enables scientists, educators, artists and other creators and owners of copyright- or database-protected content to waive those interests in their works and thereby place them as completely as possible in the public domain, so that others may freely build upon, enhance and reuse the works for any purposes without restriction under copyright or database law."
+      },
+      "pddl": {
+        "name": "Open Data Commons Public Domain Dedication and License (PDDL)",
+        "description": "This license is meant to be an international, database-specific equivalent of the public domain. You cannot relicense or sublicense any database under this license because, like the public domain, after dedication you no longer own any rights to the database."
+      },
+      "ccBy": {
+        "name": "Creative Commons Attribution (CC BY)",
+        "description": "This is the standard creative commons license that gives others maximum freedom to do what they want with your work."
+      },
+      "odcBy": {
+        "name": "Open Data Commons Attribution License (ODC-By)",
+        "description": ""
+      },
+      "ccBySa": {
+        "name": "Creative Commons Attribution-ShareAlike (CC BY-SA)",
+        "description": "This creative commons license is very similar to the regular Attribution license, but requires you to release all derivative works under this same license."
+      },
+      "odbl": {
+        "name": "Open Data Commons Open Database License (ODbL)",
+        "description": "A copyleft license used by OpenStreetMap and others with very specific terms designed for databases."
+      },
+      "ccByNd": {
+        "name": "Creative Commons Attribution-NoDerivs (CC BY-ND)",
+        "description": "The no derivatives creative commons license is straightforward; you can take a work released under this license and re-distribute it but you cannot change it."
+      },
+      "ccByNc": {
+        "name": "Creative Commons Attribution-NonCommercial (CC BY-NC)",
+        "description": "A creative commons license that bans commercial use."
+      },
+      "ccByNcSa": {
+        "name": "Creative Commons Attribution-NonCommercial-ShareAlike (CC BY-NC-SA)",
+        "description": "A creative commons license that bans commercial use and requires you to release any modified works under this license."
+      },
+      "ccByNcNd": {
+        "name": "Creative Commons Attribution-NonCommercial-NoDerivs (CC BY-NC-ND)",
+        "description": "The most restrictive creative commons license. This only allows people to download and share your work for no commercial gain and for no other purposes."
+      },
+      "perlArtistic1": {
+        "name": "Artistic License 1.0",
+        "description": "NOTE: This license has been superseded by the Artistic License, Version 2.0. This is a license for software packages with the intent of giving the original copyright holder some measure of control over his software while still remaining open source. It is flexible and allows you to distribute or sell modified versions as long as you fulfill one of various conditions. Look at section 4 in the full text for a better explanation."
+      },
+      "perlArtistic2": {
+        "name": "Artistic License 2.0",
+        "description": "This is a license for software packages with the intent of giving the original copyright holder some measure of control over his software while still remaining open source. It is flexible and allows you to distribute or sell modified versions as long as you fulfill one of various conditions. Look at section 4 in the full text for a better explanation."
+      },
+      "gpl2plus": {
+        "name": "GNU General Public License 2 or later (GPL-2.0)",
+        "description": "You may copy, distribute and modify the software as long as you track changes/dates of in source files and keep all modifications under GPL. You can distribute your application using a GPL library commercially, but you must also disclose the source code."
+      },
+      "gpl2": {
+        "name": "GNU General Public License 2 (GPL-2.0)",
+        "description": "Standard GNU GPL version 2 but without support for later versions i.e. you cannot relicense under GPL 3."
+      },
+      "gpl3": {
+        "name": "GNU General Public License 3 (GPL-3.0)",
+        "description": "You may copy, distribute and modify the software as long as you track changes/dates of in source files and keep modifications under GPL. You can distribute your application using a GPL library commercially, but you must also provide the source code. GPL 3 tries to close some loopholes in GPL 2."
+      },
+      "agpl1": {
+        "name": "Affero General Public License 1 (AGPL-1.0)",
+        "description": "werfds"
+      },
+      "agpl3": {
+        "name": "Affero General Public License 3 (AGPL-3.0)",
+        "description": "The AGPL license differs from the other GNU licenses in that it was built for network software. You can distribute modified versions if you keep track of the changes and the date you made them. As per usual with GNU licenses, you must license derivatives under AGPL. It provides the same restrictions and freedoms as the GPLv3 but with an additional clause which makes it so that source code must be distributed along with web publication. Since web sites and services are never distributed in the traditional sense, the AGPL is the GPL of the web."
+      },
+      "mpl2": {
+        "name": "Mozilla Public License 2.0",
+        "description": "This is a lenient license used by the Mozilla Corporation that allows you a variety of explicit freedoms with the software so long as you keep modifications under this license and distribute the original source code alongside executables. It is a good midway license; it isn’t very strict and has only straightforward requirements."
+      },
+      "lgpl21plus": {
+        "name": "GNU Library or \"Lesser\" General Public License 2.1 or later (LGPL-2.1)",
+        "description": "You may copy, distribute and modify the software provided that modifications are described inside the modified files and licensed for free under LGPL-2.1. Derivatives or non-separate (statically-linked) works of the software must be licensed under LGPL, but separate, parent projects don't have to be."
+      },
+      "lgpl21": {
+        "name": "GNU Library or \"Lesser\" General Public License 2.1 (LGPL-2.1)",
+        "description": "Standard GNU LGPL version 2.1 but without support for later versions i.e. you cannot relicense under LGPL 3."
+      },
+      "lgpl3": {
+        "name": "GNU Library or \"Lesser\" General Public License 3.0 (LGPL-3.0)",
+        "description": "You may copy, distribute and modify the software provided that modifications are described inside the modified files and licensed for free under LGPL-2.1.  Derivatives or non-separate (statically-linked) works of the software must be licensed under LGPL, but separate, parent projects don't have to be. LGPL 3 tries to close some loopholes in LGPL 2.1."
+      },
+      "epl1": {
+        "name": "Eclipse Public License 1.0 (EPL-1.0)",
+        "description": "This license, made and used by the Eclipse Foundation, isn’t all too stringent and gives both copyright and explicit patent rights. Check the full text of the license to see how liability is accorded."
+      },
+      "cddl1": {
+        "name": "Common Development and Distribution License (CDDL-1.0)",
+        "description": "This is a very permissive and popular license made by Sun Microsystems that also includes explicit patent grants. It is relatively simplistic in its conditions, requiring only a small amount of documentation for redistribution (applying to source as well as modified code)."
+      },
+      "mit": {
+        "name": "The MIT License (MIT)",
+        "description": "A short, permissive software license. Basically, you can do whatever you want as long as you include the original copyright and license."
+      },
+      "bsd3c": {
+        "name": "The BSD 3-Clause \"New\" or \"Revised\" License (BSD)",
+        "description": "The BSD 3-clause license allows you almost unlimited freedom with the software so long as you include the BSD copyright notice in it. \"Use trademark\" in this case means you cannot use the names of the original company or its members to endorse derived products."
+      },
+      "bsd2c": {
+        "name": "The BSD 2-Clause \"Simplified\" or \"FreeBSD\" License",
+        "description": "The BSD 2-clause license allows you almost unlimited freedom with the software so long as you include the BSD copyright notice in it."
+      },
+      "apache2": {
+        "name": "Apache License 2",
+        "description": "A license that allows you much freedom with the software, including an explicit right to a patent. \"State changes\" means that you have to include a notice in each file you modified. "
+      }
+    },
+    "search": "Search license...",
+    "reset": "Reset form"
+  },
+  "http": {
+    "error": {
+      "standard": "Failed to load resource.",
+      "0": "Service can not be reached, please retry later. If the issue persists contact [insert contact for technical issue].",
+      "404": "The requested resource could not be found.",
+      "500": "An error occurred, please contact [insert contact for technical issue].",
+      "503": "Service is currently unavailable, please retry later.",
+      "fileanalysis": "Failed to analyse file.",
+      "repositories": {
+        "search": "Failed to search repositories.",
+        "one": "Failed to load repository details.",
+        "all": "Failed to load repositories."
+      },
+      "projects": "Failed to load projects.",
+      "projectmembers": "Failed to load project members.",
+      "plans": {
+        "load": {
+          "all": "Failed to load plans.",
+          "one": "Failed to load plan."
+        },
+        "save": "Failed to save plan.",
+        "update": "Failed to update plan."
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InputWrapperComponent} from './input-wrapper/input-wrapper.component';
 import {TextareaWrapperComponent} from './textarea-wrapper/textarea-wrapper.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {TranslateModule} from '@ngx-translate/core';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
 
     // Materials
     MatInputModule,

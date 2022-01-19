@@ -1,0 +1,48 @@
+import {Injectable, NgModule, Pipe, PipeTransform} from '@angular/core';
+import {TranslateFakeLoader, TranslateLoader, TranslateModule, TranslatePipe, TranslateService} from '@ngx-translate/core';
+import {Observable, of} from 'rxjs';
+
+@Pipe({
+  name: 'translate'
+})
+export class TranslatePipeMock implements PipeTransform {
+  public name = 'translate';
+
+  public transform(value: string): string {
+    return value;
+  }
+}
+
+@Injectable()
+export class TranslateServiceStub {
+  public get(key: any): Observable<any> {
+    return of(key);
+  }
+
+  public use(key: any): void {
+  }
+
+  public instant(key: any): any {
+    return key;
+  }
+}
+
+@NgModule({
+  imports: [
+    TranslateModule.forRoot({
+      loader: {provide: TranslateLoader, useClass: TranslateFakeLoader}
+    })
+  ],
+  declarations: [
+    TranslatePipeMock
+  ],
+  providers: [
+    {provide: TranslateService, useClass: TranslateServiceStub},
+    {provide: TranslatePipe, useClass: TranslatePipeMock}
+  ],
+  exports: [
+    TranslatePipeMock
+  ]
+})
+export class TranslateTestingModule {
+}
