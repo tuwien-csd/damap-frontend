@@ -19,11 +19,10 @@
   </mat-form-field>
 
   <ng-container *ngIf="restricted?.length > 0">
-    <article>{{'dmp.steps.data.reuse.question.restrictedDataAccess.0' | translate}}
-      <span *ngFor="let set of restricted, last as last"> "{{set.title}}"<span *ngIf="!last">, </span> </span>
-    </article>
     <mat-form-field class="full-width" appearance="fill">
-      <mat-label class="wrap-label">{{'dmp.steps.data.reuse.question.restrictedDataAccess.1' | translate}}
+      <mat-label class="wrap-label">
+        {{'dmp.steps.data.reuse.question.restrictedDataAccess' | translate}}
+        <span *ngFor="let set of restricted, last as last"> "{{set.title}}"<span *ngIf="!last">, </span>. </span>
       </mat-label>
       <textarea matInput formControlName="restrictedDataAccess"></textarea>
     </mat-form-field>

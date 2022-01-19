@@ -71,15 +71,11 @@
   <div [formGroup]="dmpForm">
     <ng-container *ngIf="restricted?.length > 0">
       <mat-form-field class="full-width">
-        <!-- TODO -->
-        <mat-label class="wrap-normal-label">{{'dmp.steps.licensing.question.restrictedAccessInfo.0' | translate}}
-          <span
-            *ngIf="restricted.length > 1">{{'dmp.steps.licensing.question.restrictedAccessInfo.1' | translate}}</span>
-          <ng-container *ngFor="let set of restricted, first as first, last as last, index as i">
-            <span *ngIf="last && !first">{{'dmp.steps.licensing.question.restrictedAccessInfo.2' | translate}}</span>
-            "{{set.title}}"<span *ngIf="i < restricted.length-2">, </span>
+        <mat-label
+          class="wrap-normal-label">{{'dmp.steps.licensing.question.restrictedAccessInfo' | translate}}
+          <ng-container *ngFor="let set of restricted, last as last">
+            "{{set.title}}"<span *ngIf="!last">, </span>.
           </ng-container>
-          {{'dmp.steps.licensing.question.restrictedAccessInfo.3' | translate}}
         </mat-label>
         <textarea matInput formControlName="restrictedAccessInfo"></textarea>
       </mat-form-field>
@@ -87,16 +83,10 @@
 
     <ng-container *ngIf="closed?.length > 0">
       <mat-form-field class="full-width">
-        <!-- TODO -->
-        <mat-label class="wrap-normal-label">{{'dmp.steps.licensing.question.closedAccessInfo.0' | translate}}
-          <span *ngIf="restricted.length > 1">
-            {{'dmp.steps.licensing.question.closedAccessInfo.1' | translate}}</span>
-          <span *ngFor="let set of closed, first as first, last as last, index as i">
-            <span *ngIf="last && !first">
-              {{'dmp.steps.licensing.question.closedAccessInfo.2' | translate}}
-            </span> "{{set.title}}"<span *ngIf="i < closed.length-2">, </span>
+        <mat-label class="wrap-normal-label">{{'dmp.steps.licensing.question.closedAccessInfo' | translate}}
+          <span *ngFor="let set of closed, last as last">
+            "{{set.title}}"<span *ngIf="!last">, </span>.
           </span>
-          {{'dmp.steps.licensing.question.closedAccessInfo.3' | translate}}
         </mat-label>
         <textarea matInput formControlName="closedAccessInfo"></textarea>
       </mat-form-field>
