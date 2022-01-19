@@ -5,6 +5,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
 
 describe('TextareaWrapperComponent', () => {
   let component: TextareaWrapperComponent;
@@ -12,7 +13,7 @@ describe('TextareaWrapperComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, NoopAnimationsModule],
+      imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, NoopAnimationsModule, TranslateTestingModule],
       declarations: [TextareaWrapperComponent]
     })
     .compileComponents();

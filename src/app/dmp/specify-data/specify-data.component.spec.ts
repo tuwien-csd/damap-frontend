@@ -5,6 +5,8 @@ import {FormArray, FormControl, FormGroup, ReactiveFormsModule} from '@angular/f
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
 import {StepIntroComponent} from '../../widgets/intro/step-intro.component';
+import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
+import {MatTabsModule} from '@angular/material/tabs';
 
 describe('SpecifyDataComponent', () => {
   let component: SpecifyDataComponent;
@@ -12,7 +14,7 @@ describe('SpecifyDataComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, MatDialogModule, MatRadioModule],
+      imports: [ReactiveFormsModule, MatTabsModule, MatDialogModule, MatRadioModule, TranslateTestingModule],
       declarations: [SpecifyDataComponent, StepIntroComponent]
     }).compileComponents();
   });

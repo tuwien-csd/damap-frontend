@@ -24,6 +24,7 @@ import {OAuthService} from 'angular-oauth2-oidc';
 import {formDiff, resetFormValue, setFormValue} from '../store/actions/form.actions';
 import {selectFormChanged} from '../store/selectors/form.selectors';
 import {LoadDmps} from '../store/actions/dmp.actions';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dmp',
@@ -73,7 +74,8 @@ export class DmpComponent implements OnInit, OnDestroy {
     private backendService: BackendService,
     public store: Store<AppState>,
     private feedbackService: FeedbackService,
-    private location: Location
+    private location: Location,
+    private translate: TranslateService
   ) {
   }
 
@@ -134,7 +136,7 @@ export class DmpComponent implements OnInit, OnDestroy {
         },
         () => {
         },
-        () => this.feedbackService.success('Plan was updated!')
+        () => this.translate.get('dmp.success.update').subscribe(value => this.feedbackService.success(value))
       );
     } else {
       this.backendService.createDmp(dmp).subscribe(
@@ -145,7 +147,8 @@ export class DmpComponent implements OnInit, OnDestroy {
         },
         () => {
         },
-        () => this.feedbackService.success('Plan was saved!'));
+        () => this.translate.get('dmp.success.save').subscribe(value => this.feedbackService.success(value))
+      );
     }
   }
 

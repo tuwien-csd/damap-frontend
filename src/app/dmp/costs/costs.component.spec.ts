@@ -6,6 +6,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatIconModule} from '@angular/material/icon';
 import {StepIntroComponent} from '../../widgets/intro/step-intro.component';
+import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
 
 describe('CostsComponent', () => {
   let component: CostsComponent;
@@ -13,7 +14,7 @@ describe('CostsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, MatExpansionModule, MatRadioModule, MatIconModule],
+      imports: [ReactiveFormsModule, MatExpansionModule, MatRadioModule, MatIconModule, TranslateTestingModule],
       declarations: [CostsComponent, StepIntroComponent]
     })
     .compileComponents();

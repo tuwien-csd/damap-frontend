@@ -1,10 +1,6 @@
-<app-step-intro>This step helps you to specify the access to your research output in the future: Which of your data sets
-  will be published, which will be provided to interested persons on request only and which need to be under lock and
-  key, for contractual, regulatory, or ethical reasons? It also reminds you to choose a license for your open data that
-  clearly describes the reuse conditions for potential reusers.
+<app-step-intro>{{'dmp.steps.licensing.intro' | translate}}
 </app-step-intro>
-<p>Please indicate which datasets you plan to keep closed or publish.
-  Select a license for the datasets you want to publish and estimate the release date.</p>
+<p>{{'dmp.steps.licensing.hint' | translate}}</p>
 <div [formGroup]="dmpForm">
   <ng-container formArrayName="datasets">
     <mat-card *ngFor="let dataset of datasets?.controls; index as i" class="mat-selected">
@@ -15,7 +11,7 @@
           </div>
           <div class="mat-card-right">
             <mat-form-field>
-              <mat-label>Data Access</mat-label>
+              <mat-label>{{'dmp.steps.licensing.question.dataAccess' | translate}}</mat-label>
               <mat-select formControlName="dataAccess">
                 <mat-option *ngFor="let type of accessType | keyvalue" [value]="type.value">
                   {{type.value}}<br/>
@@ -31,23 +27,21 @@
               <mat-icon>error_outline</mat-icon>
             </div>
             <ng-container *ngIf="dataset.value.personalData || dataset.value.sensitiveData">
-              You indicated in step 6 that this dataset contains sensitive/
-              personal data. Do you really want to publish the dataset open, without restrictions?
+              {{'dmp.steps.licensing.warning.personalData' | translate}}
               <ng-container *ngIf="!isAnonymisedOrPseudonymised">
-                Have you considered anonymisation/pseudonymisation?
+                {{'dmp.steps.licensing.warning.pseudonymisation' | translate}}
               </ng-container>
             </ng-container>
             <ng-container *ngIf="dataset.value.legalRestrictions">
-              You indicated in step 6 that this dataset is subject to legal restrictions. Do you really want to publish
-              the dataset without restrictions?
+              {{'dmp.steps.licensing.warning.legalRestrictions' | translate}}
             </ng-container>
           </div>
           <div class="mat-card-container">
             <mat-form-field class="full-width">
-              <mat-label>Planned license</mat-label>
+              <mat-label>{{'dmp.steps.licensing.question.license' | translate}}</mat-label>
               <mat-select formControlName="license">
-                <mat-option *ngFor="let license of licenses" [value]="license.url">
-                  {{license.name}}
+                <mat-option *ngFor="let license of licenses" [value]="license.url | translate">
+                  {{license.name | translate}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -55,13 +49,13 @@
           </div>
           <div class="mat-card-container">
             <mat-form-field class="date-form">
-              <mat-label>Choose a date for publication</mat-label>
+              <mat-label>{{'dmp.steps.licensing.question.startDate' | translate}}</mat-label>
               <input matInput [matDatepicker]="picker_i" formControlName="startDate">
               <mat-datepicker-toggle matSuffix [for]="picker_i"></mat-datepicker-toggle>
               <mat-datepicker #picker_i></mat-datepicker>
               <mat-hint
                 *ngIf="dmpForm.controls.project?.value?.end === dataset.value.startDate">
-                The release date was set to the project end date. Feel free to modify it.
+                {{'dmp.steps.licensing.question.hint' | translate}}
               </mat-hint>
             </mat-form-field>
           </div>
@@ -77,11 +71,11 @@
   <div [formGroup]="dmpForm">
     <ng-container *ngIf="restricted?.length > 0">
       <mat-form-field class="full-width">
-        <mat-label class="wrap-normal-label">Dataset<span *ngIf="restricted.length > 1">s</span>
-          <ng-container *ngFor="let set of restricted, first as first, last as last, index as i">
-            <span *ngIf="last && !first"> and </span> "{{set.title}}"<span *ngIf="i < restricted.length-2">, </span>
+        <mat-label
+          class="wrap-normal-label">{{'dmp.steps.licensing.question.restrictedAccessInfo' | translate}}
+          <ng-container *ngFor="let set of restricted, last as last">
+            "{{set.title}}"<span *ngIf="!last">, </span>.
           </ng-container>
-          will have access restrictions. Explain why and clearly describe the access conditions.
         </mat-label>
         <textarea matInput formControlName="restrictedAccessInfo"></textarea>
       </mat-form-field>
@@ -89,11 +83,10 @@
 
     <ng-container *ngIf="closed?.length > 0">
       <mat-form-field class="full-width">
-        <mat-label class="wrap-normal-label">For dataset<span *ngIf="restricted.length > 1">s</span>
-          <span *ngFor="let set of closed, first as first, last as last, index as i">
-      <span *ngIf="last && !first"> and </span> "{{set.title}}"<span *ngIf="i < closed.length-2">, </span> </span>
-          only the metadata will be published open access.
-          Explain why the data will not be accessible (closed access).
+        <mat-label class="wrap-normal-label">{{'dmp.steps.licensing.question.closedAccessInfo' | translate}}
+          <span *ngFor="let set of closed, last as last">
+            "{{set.title}}"<span *ngIf="!last">, </span>.
+          </span>
         </mat-label>
         <textarea matInput formControlName="closedAccessInfo"></textarea>
       </mat-form-field>
