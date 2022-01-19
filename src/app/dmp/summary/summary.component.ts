@@ -97,7 +97,8 @@ export class SummaryComponent implements OnInit {
       if (this.dmpForm.contributors.length === 1) {
         peopleLevel.status.push('dmp.steps.summary.people.contributor.one');
       } else {
-        peopleLevel.status.push(`${this.dmpForm.contributors.length} contributors selected.`);
+        peopleLevel.status.push('dmp.steps.summary.people.contributor.multiple');
+        peopleLevel.status.push(`${this.dmpForm.contributors.length}`);
       }
     }
 
@@ -108,7 +109,8 @@ export class SummaryComponent implements OnInit {
       if (this.dmpForm.datasets.length === 1) {
         specifyDataLevel.status.push('dmp.steps.summary.data.specify.datasets.one');
       } else {
-        specifyDataLevel.status.push(`${this.dmpForm.datasets.length} datasets defined.`);
+        specifyDataLevel.status.push('dmp.steps.summary.data.specify.datasets.multiple');
+        specifyDataLevel.status.push(`${this.dmpForm.datasets.length}`);
       }
     } else if (this.dmpForm.dataKind === DataKind.NONE) {
       specifyDataLevel.completeness = 50;
@@ -331,7 +333,7 @@ export class SummaryComponent implements OnInit {
       costsLevel.status.push('dmp.steps.summary.notspecified');
     } else if (!this.dmpForm.costsExist) {
       costsLevel.completeness = 100;
-      costsLevel.status.push('dmp.steps.summary.costs.npne');
+      costsLevel.status.push('dmp.steps.summary.costs.none');
     } else {
       costsLevel.completeness = 100;
       costsLevel.status.push(`${this.dmpForm.costs.length} cost items specified.`);
