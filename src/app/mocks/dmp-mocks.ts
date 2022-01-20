@@ -79,7 +79,6 @@ export const completeDmp: Dmp = {
       datasets: [
         '39608knzrof6y', '39608knzrof6x'
       ],
-      date: new Date(),
       hostId: 'r3d100013557',
       id: 94,
       title: 'TU Data'
@@ -186,7 +185,6 @@ export const noDataDmp: Dmp = {
       datasets: [
         '39608knzrof6y'
       ],
-      date: new Date(),
       hostId: 'r3d100013557',
       id: 94,
       title: 'TU Data'
