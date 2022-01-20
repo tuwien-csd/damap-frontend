@@ -409,7 +409,8 @@ export class FormService {
       publicAccess: [AccessRight.read],
       delete: [false],
       dateOfDeletion: [null],
-      reasonForDeletion: ['', Validators.maxLength(4000)]
+      reasonForDeletion: ['', Validators.maxLength(4000)],
+      retentionPeriod: [null]
     });
   }
 
@@ -486,7 +487,6 @@ export class FormService {
       id: [null, {disabled: true}],
       hostId: [null],
       title: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
-      date: [null],
       datasets: [[]]
     });
   }
@@ -497,7 +497,6 @@ export class FormService {
       id: host.id,
       hostId: host.hostId,
       title: host.title || '',
-      date: host.date || null,
       datasets: host.datasets || []
     });
     return formGroup;

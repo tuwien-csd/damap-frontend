@@ -235,6 +235,13 @@
           "legalRestrictions": "You indicated in step 6 that this dataset is subject to legal restrictions. Do you really want to publish the dataset without restrictions?"
         }
       },
+      "retentionPeriod": {
+        "title": "Set retention period for datasets",
+        "question": {
+          "retentionPeriod": "Retention Period"
+        },
+        "years": "Years"
+      },
       "repositories": {
         "label": "Specify repositories for publication and preservation",
         "intro": "Repositories are used for sustainable data management beyond the lifetime of the project and to make data discoverable and reusable to others. If available, use a domain specific repository for your data. The search filter below may help you to find one. Otherwise, you can always use TU Wien Research Data, TU Wiens institutional data repository.",
@@ -246,6 +253,9 @@
         "question": {
           "datasets": "Dataset(s) for deposit",
           "date": "Available until"
+        },
+        "warning": {
+          "deletion": "The following datasets were marked for deletion: {{value}}. Are you sure they shall be preserved in a repository?"
         },
         "loading": {
           "load": "Load repositories...",
