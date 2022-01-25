@@ -1,7 +1,8 @@
-import {Component, Input, EventEmitter, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {DmpListItem} from '../../domain/dmp-list-item';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-dmp-table',
@@ -15,13 +16,15 @@ import {DmpListItem} from '../../domain/dmp-list-item';
     ]),
   ],
 })
-export class DmpTableComponent implements OnInit {
+export class DmpTableComponent implements OnInit, AfterViewInit {
 
   @Input() dmps: DmpListItem[];
   dataSource = new MatTableDataSource();
 
   @Output() createDocument = new EventEmitter<number>();
   @Output() createJsonFile = new EventEmitter<number>();
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   readonly tableHeaders: string[] = ['title', 'created', 'modified', 'edit', 'history', 'remove'];
   expandedElement: DmpListItem | null;
@@ -30,9 +33,13 @@ export class DmpTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataSource.data = this.dmps;
+    this.dataSource.data = this.dmps ?? [];
     this.dataSource.filterPredicate = (data: DmpListItem, filter: string) =>
       data.project?.title?.toLowerCase().includes(filter) || data.title?.toLowerCase().includes(filter);
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(event: Event) {

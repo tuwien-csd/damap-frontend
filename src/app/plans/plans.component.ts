@@ -7,6 +7,7 @@ import {LoadDmps} from '../store/actions/dmp.actions';
 import {DmpListItem} from '../domain/dmp-list-item';
 import {BackendService} from '../services/backend.service';
 import {LoadingState} from '../domain/enum/loading-state.enum';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-plan',
@@ -19,9 +20,12 @@ export class PlansComponent implements OnInit {
   dmpsLoaded$: Observable<LoadingState> = this.store.pipe(select(selectDmpsLoaded));
   LoadingState = LoadingState;
 
+  allDmps$: Observable<DmpListItem[]>;
+
   constructor(
     private store: Store<AppState>,
-    private backendService: BackendService
+    private backendService: BackendService,
+    private authService: AuthService
   ) {
   }
 
@@ -30,11 +34,23 @@ export class PlansComponent implements OnInit {
       if (loaded === LoadingState.NOT_LOADED) {
         this.getDmps();
       }
-    })
+    });
+
+    if (this.authService.isAdmin()) {
+      this.allDmps$ = this.getAllDmps();
+    }
+  }
+
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
   }
 
   getDmps() {
     this.store.dispatch(new LoadDmps());
+  }
+
+  private getAllDmps(): Observable<DmpListItem[]> {
+    return this.backendService.getAllDmps();
   }
 
   getDocument(id: number) {

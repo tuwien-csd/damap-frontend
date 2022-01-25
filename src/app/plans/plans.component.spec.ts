@@ -4,6 +4,9 @@ import {PlansComponent} from './plans.component';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {BackendService} from '../services/backend.service';
 import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
+import {AuthService} from '../auth/auth.service';
+import {MatIconModule} from '@angular/material/icon';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 describe('PlanComponent', () => {
   let component: PlansComponent;
@@ -12,13 +15,15 @@ describe('PlanComponent', () => {
   const initialState = {dmps: {loaded: true}};
 
   beforeEach(async () => {
-    const spy = jasmine.createSpyObj('BackendService', ['getDmpDocument', 'getMaDmpJsonFile']);
+    const backendSpy = jasmine.createSpyObj('BackendService', ['getDmpDocument', 'getMaDmpJsonFile']);
+    const authSpy = jasmine.createSpyObj('AuthService', ['hasValidAccessToken', 'isAdmin']);
     await TestBed.configureTestingModule({
-      imports: [TranslateTestingModule],
+      imports: [MatIconModule, MatProgressBarModule, TranslateTestingModule],
       declarations: [PlansComponent],
       providers: [
         provideMockStore({initialState}),
-        {provide: BackendService, useValue: spy}
+        {provide: BackendService, useValue: backendSpy},
+        {provide: AuthService, useValue: authSpy}
       ]
     })
       .compileComponents();

@@ -39,6 +39,13 @@ export class BackendService {
     );
   }
 
+  getAllDmps(): Observable<DmpListItem[]> {
+    return this.http.get<DmpListItem[]>(`${this.dmpBackendUrl}/all`).pipe(
+      retry(3),
+      catchError(this.handleError('Failed to load all plans.'))
+    );
+  }
+
   getDmpById(id: number): Observable<Dmp> {
     return this.http.get<Dmp>(`${this.dmpBackendUrl}/${id}`).pipe(
       retry(3),
