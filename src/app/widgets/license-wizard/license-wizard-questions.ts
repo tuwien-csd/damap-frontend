@@ -3,7 +3,7 @@ import {ccPublicDomain} from './license-wizard-list';
 
 export interface Step {
   readonly question?: string;
-  readonly answers?: { [key: string]: { step: any, filter?: Filter } }
+  readonly answers?: { [key: string]: { step: any, filter?: Filter } } // set step type as (...[]) => {}
 }
 
 export interface Filter {
@@ -16,14 +16,14 @@ const end: Step = {};
 // Software
 
 const strongCopyleft: Step = {
-  question: 'Is your code used directly as an executable or are you licensing a library (your code will be linked)?',
+  question: 'license.wizard.question.strongCopyleft',
   answers: {
-    Executable: {
+    'license.wizard.answer.executable': {
       step() {
         return end
       }, filter: {include: ['strong']}
     },
-    Library: {
+    'license.wizard.answer.library': {
       step() {
         return end
       }, filter: {include: ['weak']}
@@ -32,9 +32,9 @@ const strongCopyleft: Step = {
 }
 
 const copyleft: Step = {
-  question: 'Do you require others who modify your code to release it under a compatible licence?',
+  question: 'license.wizard.question.copyleft',
   answers: {
-    Yes: {
+    yes: {
       step(list) {
         if (has(list, 'weak') && has(list, 'strong')) {
           return strongCopyleft
@@ -42,7 +42,7 @@ const copyleft: Step = {
         return end
       }, filter: {include: ['copyleft']}
     },
-    No: {
+    no: {
       step() {
         return end
       }, filter: {include: ['permissive'], exclude: ['copyleft']}
@@ -51,9 +51,9 @@ const copyleft: Step = {
 }
 
 const licenseInteropSoftware: Step = {
-  question: 'Select licenses in your code:',
+  question: 'license.wizard.question.licenseInteropSoftware',
   answers: {
-    Next: {
+    'license.wizard.answer.next': {
       step(list: LicenseDetails[]) {
         if (has(list, 'copyleft') && has(list, 'permissive')) {
           return copyleft;
@@ -67,14 +67,14 @@ const licenseInteropSoftware: Step = {
 }
 
 const software: Step = {
-  question: 'Is your code based on existing software or is it your original work?',
+  question: 'license.wizard.question.software',
   answers: {
-    'Based on existing software': {
+    'license.wizard.answer.licenseInteropSoftware': {
       step() {
         return licenseInteropSoftware
       }
     },
-    'My own code': {
+    'license.wizard.answer.copyleft': {
       step() {
         return copyleft
       }
@@ -85,14 +85,14 @@ const software: Step = {
 // Data
 
 const decideAttributes: Step = {
-  question: 'Do you want others to attribute your data to you?',
+  question: 'license.wizard.question.decideAttributes',
   answers: {
-    Yes: {
+    yes: {
       step() {
         return end
       }, filter: {include: ['by']}
     },
-    No: {
+    no: {
       step() {
         return end
       }, filter: {include: ['public-domain']}
@@ -101,9 +101,9 @@ const decideAttributes: Step = {
 }
 
 const commercialUse: Step = {
-  question: 'Do you allow others to make commercial use of you data?',
+  question: 'license.wizard.question.commercialUse',
   answers: {
-    Yes: {
+    yes: {
       step(list) {
         if (only(list, 'by')) {
           return end
@@ -111,7 +111,7 @@ const commercialUse: Step = {
         return decideAttributes
       }, filter: {exclude: ['nc']}
     },
-    No: {
+    no: {
       step() {
         return end
       }, filter: {include: ['nc', 'by']}
@@ -120,9 +120,9 @@ const commercialUse: Step = {
 }
 
 const shareAlike: Step = {
-  question: 'Do you require others to share derivative works based on your data under a compatible license?',
+  question: 'license.wizard.question.shareAlike',
   answers: {
-    Yes: {
+    yes: {
       step(list) {
         if (only(list, 'nc')) {
           return end
@@ -130,7 +130,7 @@ const shareAlike: Step = {
         return commercialUse
       }, filter: {include: ['sa']}
     },
-    No: {
+    no: {
       step(list) {
         if (only(list, 'nc')) {
           return end
@@ -142,14 +142,14 @@ const shareAlike: Step = {
 }
 
 const allowDerivativeWorks: Step = {
-  question: 'Do you allow others to make derivative works?',
+  question: 'license.wizard.question.allowDerivativeWorks',
   answers: {
-    Yes: {
+    yes: {
       step() {
         return shareAlike
       }, filter: {exclude: ['nd']}
     },
-    No: {
+    no: {
       step(list) {
         if (only(list, 'nc')) {
           return end
@@ -161,9 +161,9 @@ const allowDerivativeWorks: Step = {
 }
 
 const licenseInteropData: Step = {
-  question: 'Choose licenses present in your dataset:',
+  question: 'license.wizard.question.licenseInteropData',
   answers: {
-    Next: {
+    'license.wizard.answer.next': {
       step(list: LicenseDetails[], option: string) {
         if (option === 'cantLicense') {
           return cantLicense;
@@ -177,18 +177,18 @@ const licenseInteropData: Step = {
 }
 
 const cantLicense: Step = {
-  question: 'You need additional permission before you can deposit the data!',
+  question: 'license.wizard.question.cantLicense',
 }
 
 const ensureLicensing: Step = {
-  question: 'Are all the elements of your dataset licensed under a public license or in the Public Domain?',
+  question: 'license.wizard.question.ensureLicensing',
   answers: {
-    Yes: {
+    yes: {
       step() {
         return licenseInteropData
       }
     },
-    No: {
+    no: {
       step() {
         return cantLicense
       }, filter: {licenses: []}
@@ -199,12 +199,12 @@ const ensureLicensing: Step = {
 const ownIPR: Step = {
   question: 'Do you own copyright and similar rights in your dataset and all its constitutive parts?',
   answers: {
-    Yes: {
+    yes: {
       step() {
         return allowDerivativeWorks
       }
     },
-    No: {
+    no: {
       step() {
         return ensureLicensing
       }
@@ -213,14 +213,14 @@ const ownIPR: Step = {
 }
 
 const data: Step = {
-  question: 'Is your data within the scope of copyright and related rights?',
+  question: 'license.wizard.question.data',
   answers: {
-    Yes: {
+    yes: {
       step() {
         return ownIPR
       }
     },
-    No: {
+    no: {
       step() {
         return end
       }, filter: {licenses: [ccPublicDomain]}
@@ -229,14 +229,14 @@ const data: Step = {
 }
 
 const root: Step = {
-  question: 'What do you want to deposit?',
+  question: 'license.wizard.question.root',
   answers: {
-    Software: {
+    'license.wizard.answer.software': {
       step() {
         return software
       }, filter: {exclude: ['data']}
     },
-    Data: {
+    'license.wizard.answer.data': {
       step() {
         return data
       }, filter: {exclude: ['software']}

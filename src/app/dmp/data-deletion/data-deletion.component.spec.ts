@@ -3,6 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {DataDeletionComponent} from './data-deletion.component';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {MatSliderModule} from '@angular/material/slider';
+import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
 
 describe('DataDeletionComponent', () => {
   let component: DataDeletionComponent;
@@ -10,7 +11,7 @@ describe('DataDeletionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatSliderModule],
+      imports: [MatSliderModule, TranslateTestingModule],
       declarations: [DataDeletionComponent]
     })
       .compileComponents();

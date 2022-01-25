@@ -20,4 +20,5 @@ export interface Dataset {
   delete: boolean;
   dateOfDeletion: Date;
   reasonForDeletion: string;
+  retentionPeriod: number;
 }

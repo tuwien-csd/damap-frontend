@@ -13,7 +13,7 @@ import {Agreement} from '../../domain/enum/agreement';
 export interface Completeness {
   step: string;
   completeness: number; // 0 - 100
-  status: string;
+  status: string[];
 }
 
 @Component({
@@ -37,11 +37,11 @@ export class SummaryComponent implements OnInit {
   readonly summaryTableHeaders: string[] = ['step', 'completeness', 'status'];
 
   // Get all datasets assigned to any of the form array groups (storage/repository) without duplicates
-  // To check if a storage location/repository is provided for all datasets
+  // To check if a storage/repository is provided for all datasets
   private static getFormArrayDatasets(array: any[]): string[] {
     const datasetsInArray: string[] = [];
-    for (let i = 0; i < array.length; i++) {
-      const datasets = array[i].datasets;
+    for (const entry of array) {
+      const datasets = entry.datasets;
       if (datasets) {
         for (const item of datasets) {
           const index = datasetsInArray.indexOf(item);
@@ -72,59 +72,61 @@ export class SummaryComponent implements OnInit {
     const closedDatasets = this.datasets.find(item => item.dataAccess === DataAccessType.closed) != null;
 
     // Select project
-    const projectsLevel: Completeness = {step: 'Project', completeness: 0, status: undefined};
+    const projectsLevel: Completeness = {step: 'dmp.steps.project.label', completeness: 0, status: []};
     if (!this.dmpForm.project) {
       projectsLevel.completeness = 0;
-      projectsLevel.status = 'No project selected yet.';
+      projectsLevel.status.push('dmp.steps.summary.project.none');
     } else {
       projectsLevel.completeness = 100;
-      projectsLevel.status = `Project: ${this.dmpForm.project.title}.`;
+      projectsLevel.status.push(`Project: ${this.dmpForm.project.title}.`);
     }
 
     // People involved
-    const peopleLevel: Completeness = {step: 'People involved', completeness: 0, status: undefined};
+    const peopleLevel: Completeness = {step: 'dmp.steps.people.label', completeness: 0, status: []};
     if (this.dmpForm.contact) {
       peopleLevel.completeness += 50;
-      peopleLevel.status = 'Contact person set. '
+      peopleLevel.status.push('dmp.steps.summary.people.contact.set');
     } else {
-      peopleLevel.status = 'Contact person is missing. '
+      peopleLevel.status.push('dmp.steps.summary.people.contact.missing');
     }
     if (this.dmpForm.contributors?.length === 0) {
       peopleLevel.completeness = 0;
-      peopleLevel.status = 'No contributors selected yet.';
+      peopleLevel.status.push('dmp.steps.summary.people.contributor.none');
     } else {
       peopleLevel.completeness += 50;
       if (this.dmpForm.contributors.length === 1) {
-        peopleLevel.status += 'One contributor selected.';
+        peopleLevel.status.push('dmp.steps.summary.people.contributor.one');
       } else {
-        peopleLevel.status += `${this.dmpForm.contributors.length} contributors selected.`;
+        peopleLevel.status.push('dmp.steps.summary.people.contributor.multiple');
+        peopleLevel.status.push(`${this.dmpForm.contributors.length}`);
       }
     }
 
     // Specify research data
-    const specifyDataLevel: Completeness = {step: 'Research data', completeness: 0, status: undefined};
+    const specifyDataLevel: Completeness = {step: 'dmp.steps.data.specify.label', completeness: 0, status: []};
     if (this.dmpForm.dataKind === DataKind.SPECIFY) {
       specifyDataLevel.completeness = 100;
       if (this.dmpForm.datasets.length === 1) {
-        specifyDataLevel.status = 'One dataset defined.';
+        specifyDataLevel.status.push('dmp.steps.summary.data.specify.datasets.one');
       } else {
-        specifyDataLevel.status = `${this.dmpForm.datasets.length} datasets defined.`;
+        specifyDataLevel.status.push('dmp.steps.summary.data.specify.datasets.multiple');
+        specifyDataLevel.status.push(`${this.dmpForm.datasets.length}`);
       }
     } else if (this.dmpForm.dataKind === DataKind.NONE) {
       specifyDataLevel.completeness = 50;
-      specifyDataLevel.status = 'No data will be produced.';
+      specifyDataLevel.status.push('dmp.steps.summary.data.specify.datasets.nonespecified');
       if (this.dmpForm.noDataExplanation) {
         specifyDataLevel.completeness += 50;
       } else {
-        specifyDataLevel.status = 'Explanation is missing.';
+        specifyDataLevel.status.push('dmp.steps.summary.data.specify.datasets.missingexplanation');
       }
     } else {
       specifyDataLevel.completeness = 0;
-      specifyDataLevel.status = 'No research data specified.';
+      specifyDataLevel.status.push('dmp.steps.summary.data.specify.datasets.none');
     }
 
     // Documentation and data quality
-    const docDataQualityLevel: Completeness = {step: 'Documentation/data quality', completeness: 0, status: undefined};
+    const docDataQualityLevel: Completeness = {step: 'dmp.steps.documentation.label', completeness: 0, status: []};
     const docPercent = 100 / 3; // 100%/number of questions
     if (this.dmpForm.metadata !== '') {
       docDataQualityLevel.completeness += docPercent;
@@ -136,21 +138,21 @@ export class SummaryComponent implements OnInit {
       docDataQualityLevel.completeness += docPercent;
     }
     if (docDataQualityLevel.completeness === 0) {
-      docDataQualityLevel.status = 'No information provided.';
+      docDataQualityLevel.status.push('dmp.steps.summary.noinfo');
     } else if (docDataQualityLevel.completeness === 100) {
-      docDataQualityLevel.status = 'All information necessary provided.';
+      docDataQualityLevel.status.push('dmp.steps.summary.allinfo');
     } else {
-      docDataQualityLevel.status = 'Partially filled out.'
+      docDataQualityLevel.status.push('dmp.steps.summary.partially');
     }
 
     // Storage
-    const storageLevel: Completeness = {step: 'Storage and backup', completeness: 0, status: undefined};
+    const storageLevel: Completeness = {step: 'dmp.steps.storage.label', completeness: 0, status: []};
     if (this.dmpForm.dataKind === DataKind.NONE) {
       storageLevel.completeness = 100;
-      storageLevel.status = 'No data to be stored.';
+      storageLevel.status.push('dmp.steps.summary.storage.nonestored');
     } else if (this.dmpForm.dataKind === DataKind.UNKNOWN) {
       storageLevel.completeness = 0;
-      storageLevel.status = 'No data defined yet.';
+      storageLevel.status.push('dmp.steps.summary.storage.nodata');
     } else {
       const storage = this.dmpForm.storage;
       const eStorage = this.dmpForm.externalStorage;
@@ -158,25 +160,25 @@ export class SummaryComponent implements OnInit {
         [...new Set([...SummaryComponent.getFormArrayDatasets(storage), ...SummaryComponent.getFormArrayDatasets(eStorage)])];
       if (this.datasets.length <= storageDatasets.length) {
         storageLevel.completeness = 100;
-        storageLevel.status = 'All data are stored. ';
+        storageLevel.status.push('dmp.steps.summary.storage.alldata');
       } else if (storageDatasets.length === 0) {
         storageLevel.completeness = 0;
-        storageLevel.status = 'No information provided. ';
+        storageLevel.status.push('dmp.steps.summary.noinfo');
       } else {
         storageLevel.completeness = 100 * (storageDatasets.length / this.datasets.length);
-        storageLevel.status = 'Some information provided. ';
+        storageLevel.status.push('dmp.steps.summary.someinfo');
       }
       if (eStorage.length && !this.dmpForm.externalStorageInfo) {
         storageLevel.completeness = storageLevel.completeness > 0 ? storageLevel.completeness * 0.5 : 0;
-        storageLevel.status += 'Usage explanation is missing.'
+        storageLevel.status.push('dmp.steps.summary.storage.missingexplanation');
       }
     }
 
     // Legal & ethical aspects
     const legalEthicalAspectsLevel: Completeness = {
-      step: 'Legal and ethical aspects',
+      step: 'dmp.steps.legal.label',
       completeness: 0,
-      status: undefined
+      status: []
     };
     const legalPercent = 100 / 3;
     // Sensitive Data
@@ -238,23 +240,22 @@ export class SummaryComponent implements OnInit {
     }
 
     if (legalEthicalAspectsLevel.completeness === 0) {
-      legalEthicalAspectsLevel.status = 'No information provided.';
+      legalEthicalAspectsLevel.status.push('dmp.steps.summary.noinfo');
     } else if (legalEthicalAspectsLevel.completeness >= 100) {
-      legalEthicalAspectsLevel.status = 'All information necessary provided.';
+      legalEthicalAspectsLevel.status.push('dmp.steps.summary.allinfo');
     } else {
-      legalEthicalAspectsLevel.status = 'Partially filled out.'
+      legalEthicalAspectsLevel.status.push('dmp.steps.summary.partially');
     }
 
     // Licensing
-    const licensesLevel: Completeness = {step: 'Licensing', completeness: 0, status: undefined};
+    const licensesLevel: Completeness = {step: 'dmp.steps.licensing.label', completeness: 0, status: []};
     if (this.dmpForm.dataKind === DataKind.NONE) {
       licensesLevel.completeness = 100;
     } else {
       let publishedCount = 0;
       let licenseCount = 0;
       let dateCount = 0;
-      for (let i = 0; i < this.datasets.length; i++) {
-        const dataset = this.datasets[i];
+      for (const dataset of this.datasets) {
         if (dataset.dataAccess === DataAccessType.open) {
           publishedCount += 1;
           if (dataset.license) {
@@ -267,46 +268,46 @@ export class SummaryComponent implements OnInit {
       }
       if (publishedCount <= licenseCount && publishedCount <= dateCount) {
         licensesLevel.completeness = 100;
-        licensesLevel.status = 'All datasets have been assigned a license and a start date.';
+        licensesLevel.status.push('dmp.steps.summary.licensing.all');
       } else if (publishedCount !== 0 && licenseCount === 0 && dateCount === 0) {
         licensesLevel.completeness = 0;
-        licensesLevel.status = 'No dataset has been assigned a license or a start date.';
+        licensesLevel.status.push('dmp.steps.summary.licensing.none');
       } else {
         licensesLevel.completeness =
           ((50 * (Math.min(licenseCount, publishedCount) + Math.min(dateCount, publishedCount))) / publishedCount);
-        licensesLevel.status = 'Some datasets have been assigned a license and a start date.';
+        licensesLevel.status.push('dmp.steps.summary.licensing.some');
       }
     }
 
     // Repository
-    const repositoriesLevel: Completeness = {step: 'Repositories', completeness: 0, status: undefined};
+    const repositoriesLevel: Completeness = {step: 'dmp.steps.repositories.label', completeness: 0, status: []};
     if (this.dmpForm.dataKind === DataKind.NONE) {
       repositoriesLevel.completeness = 100;
-      repositoriesLevel.status = 'No data to be deposited.';
+      repositoriesLevel.status.push('dmp.steps.summary.repositories.nodata');
     } else if (this.dmpForm.dataKind === DataKind.UNKNOWN) {
       repositoriesLevel.completeness = 0;
-      repositoriesLevel.status = 'No data defined yet.';
+      repositoriesLevel.status.push('dmp.steps.summary.repositories.nodataspecified');
     } else {
       const repos = this.dmpForm.hosts;
       const repoDatasets: string[] = SummaryComponent.getFormArrayDatasets(repos);
       if (this.datasets.length === repoDatasets.length) {
         repositoriesLevel.completeness = 100;
-        repositoriesLevel.status = 'All data are deposited. ';
+        repositoriesLevel.status.push('dmp.steps.summary.repositories.deposited.all');
       } else if (repoDatasets.length === 0) {
         repositoriesLevel.completeness = 0;
-        repositoriesLevel.status = 'No data deposited yet. ';
+        repositoriesLevel.status.push('dmp.steps.summary.repositories.deposited.none');
       } else {
         repositoriesLevel.completeness = 100 * (repoDatasets.length / this.datasets.length);
-        repositoriesLevel.status = 'Some data are deposited. ';
+        repositoriesLevel.status.push('dmp.steps.summary.repositories.deposited.some');
       }
       if ((restrictedDatasets && !this.dmpForm.restrictedAccessInfo) || (closedDatasets && !this.dmpForm.closedAccessInfo)) {
         repositoriesLevel.completeness *= 0.75;
-        repositoriesLevel.status += 'Explanation for datasets with restricted/closed access missing.';
+        repositoriesLevel.status.push('dmp.steps.summary.repositories.missingexplanation');
       }
     }
 
     // Reuse
-    const reuseLevel: Completeness = {step: 'Reuse of data', completeness: 0, status: undefined};
+    const reuseLevel: Completeness = {step: 'dmp.steps.data.reuse.label', completeness: 0, status: []};
     const reusePercent = 100 / (restrictedDatasets ? 3 : 2);
     if (this.dmpForm.targetAudience) {
       reuseLevel.completeness += reusePercent;
@@ -318,27 +319,29 @@ export class SummaryComponent implements OnInit {
       reuseLevel.completeness += reusePercent;
     }
     if (!reuseLevel.completeness) {
-      reuseLevel.status = 'No information provided.';
+      reuseLevel.status.push('dmp.steps.summary.noinfo');
     } else if (reuseLevel.completeness >= 100) {
-      reuseLevel.status = 'All information necessary provided.';
+      reuseLevel.status.push('dmp.steps.summary.allinfo');
     } else {
-      reuseLevel.status = 'Partially filled out.';
+      reuseLevel.status.push('dmp.steps.summary.partially');
     }
 
     // Costs
-    const costsLevel: Completeness = {step: 'Costs', completeness: 0, status: undefined};
+    const costsLevel: Completeness = {step: 'dmp.steps.costs.label', completeness: 0, status: []};
     if (this.dmpForm.costsExist == null) {
       costsLevel.completeness = 0;
-      costsLevel.status = 'Not specified yet.';
+      costsLevel.status.push('dmp.steps.summary.notspecified');
     } else if (!this.dmpForm.costsExist) {
       costsLevel.completeness = 100;
-      costsLevel.status = 'There are no costs.';
+      costsLevel.status.push('dmp.steps.summary.costs.none');
     } else {
       costsLevel.completeness = 100;
-      costsLevel.status = `${this.dmpForm.costs.length} cost items specified.`;
+      costsLevel.status.push(`${this.dmpForm.costs.length} cost items specified.`);
     }
 
     this.dataSource.push(projectsLevel, peopleLevel, specifyDataLevel, docDataQualityLevel, storageLevel,
       legalEthicalAspectsLevel, licensesLevel, repositoriesLevel, reuseLevel, costsLevel);
   }
 }
+
+// blabla pls render

@@ -1,8 +1,8 @@
 <div id="content" style="'max-width: 1440px;'">
-  <h2>Plans</h2>
+  <h2 translate> plans.myplans </h2>
   <button mat-button [routerLink]="'/dmp'" mat-raised-button color="primary">
     <mat-icon>add</mat-icon>
-    Create new plan
+    {{'plans.create.plan' | translate }}
   </button>
 
   <div *ngIf="(dmpsLoaded$ | async) === LoadingState.LOADED">
@@ -10,11 +10,11 @@
                    (createJsonFile)="getJsonFile($event)"></app-dmp-table>
   </div>
   <div *ngIf="(dmpsLoaded$ | async) === LoadingState.LOADING">
-    <p>Load plans...</p>
+    <p translate>plans.loading.load</p>
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
   <div *ngIf="(dmpsLoaded$ | async) === LoadingState.FAILED">
-    <app-error-message [message]="'Your plans could not be loaded!'"></app-error-message>
+    <app-error-message message="{{'plans.loading.failed' | translate }}"></app-error-message>
   </div>
 </div>
 
