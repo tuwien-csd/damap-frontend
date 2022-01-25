@@ -1,8 +1,8 @@
-<!-- TODO: Hint functions? -->
-<p>The search below helps you to provide information on involved persons and their particular roles regarding research data management within this project.</p>
+<app-step-intro>{{'dmp.steps.people.intro' | translate}}
+</app-step-intro>
 <!-- CONTACT -->
 <div *ngIf="contactStep != null && contactStep.value != null">
-  <p>Contact person:</p>
+  <p>{{'dmp.steps.people.contact.person' | translate}}:</p>
   <mat-card class="mat-selected">
     <div class="mat-card-container">
       <div class="mat-card-left">
@@ -13,7 +13,8 @@
         {{contactStep.value.mbox}}
       </div>
       <div class="mat-card-right">
-        <button mat-button (click)="changeContactPerson(null)" title="Remove as contact">
+        <button mat-button (click)="changeContactPerson(null)"
+                title="{{'dmp.steps.people.contact.remove' | translate}}">
           <mat-icon color="white">delete</mat-icon>
         </button>
       </div>
@@ -23,7 +24,7 @@
 
 <!-- CONTRIBUTORS -->
 <div *ngIf="contributorStep != null && contributorStep.length > 0">
-  <p>Contributors:</p>
+  <p>{{'dmp.steps.people.contributors' | translate}}:</p>
   <mat-card *ngFor="let i=index; let contributor of contributorStep.controls" class="mat-selected">
     <div class="mat-card-container">
       <div class="mat-card-left">
@@ -40,7 +41,7 @@
       <div>
         <form [formGroup]="contributor">
           <mat-form-field appearance="fill">
-            <mat-label>Role</mat-label>
+            <mat-label>{{'dmp.steps.people.contributor.role' | translate}}</mat-label>
             <mat-select formControlName="role">
               <mat-option
                 *ngFor="let role of roles | keyvalue" [value]="role.value">
@@ -52,10 +53,11 @@
       </div>
       <div class="mat-card-right">
         <button mat-button (click)="changeContactPerson(contributor.value.person)"
-                *ngIf="contactStep.value?.id !== contributor.value.person.id" title="Set as contact">
+                *ngIf="contactStep.value?.id !== contributor.value.person.id"
+                title="{{'dmp.steps.people.contact.add' | translate}}">
           <mat-icon>contact_mail</mat-icon>
         </button>
-        <button mat-button (click)="removeContributor(i)" title="Remove from contributors">
+        <button mat-button (click)="removeContributor(i)" title="{{'dmp.steps.people.contributor.remove' | translate}}">
           <mat-icon>delete</mat-icon>
         </button>
       </div>
@@ -66,7 +68,7 @@
 <!-- SEARCH -->
 <form class="example-form">
   <mat-form-field class="example-full-width">
-    <mat-label>Search for person...</mat-label>
+    <mat-label>{{'dmp.steps.people.search' | translate}}</mat-label>
     <!--    <span matPrefix>+1 &nbsp;</span>-->
     <input type="search" matInput>
     <mat-icon matSuffix>search</mat-icon>
@@ -88,10 +90,11 @@
       <div class="mat-card-right">
         <button mat-raised-button *ngIf="contactStep.value?.universityId != person.person?.universityId"
                 (click)="changeContactPerson(person.person)"
-                title="Set as contact">
+                title="{{'dmp.steps.people.contact.add' | translate}}">
           <mat-icon>contact_mail</mat-icon>
         </button>
-        <button mat-raised-button (click)="addContributor(person.person)" title="Add as contributor">
+        <button mat-raised-button (click)="addContributor(person.person)"
+                title="{{'dmp.steps.people.contributor.add' | translate}}">
           <mat-icon>person_add</mat-icon>
         </button>
       </div>
@@ -107,5 +110,5 @@
   </mat-card>
 </div>
 <ng-template #empty>
-  No project members available.
+  {{'dmp.steps.people.nopeople' | translate}}
 </ng-template>

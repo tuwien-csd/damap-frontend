@@ -3,6 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {PlansComponent} from './plans.component';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {BackendService} from '../services/backend.service';
+import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
 
 describe('PlanComponent', () => {
   let component: PlansComponent;
@@ -13,6 +14,7 @@ describe('PlanComponent', () => {
   beforeEach(async () => {
     const spy = jasmine.createSpyObj('BackendService', ['getDmpDocument', 'getMaDmpJsonFile']);
     await TestBed.configureTestingModule({
+      imports: [TranslateTestingModule],
       declarations: [PlansComponent],
       providers: [
         provideMockStore({initialState}),

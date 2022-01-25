@@ -4,31 +4,30 @@
       <div class="mm-navbar mm-navbar-size-1">
         <div class="logo">
           <a title="Damap" id="damap-logo" class="mat-focus-indicator" [routerLink]="'/'">
-            DAMAP
+            {{'title'| translate }}
           </a>
         </div>
-        <!-- TODO: Language selection -->
-        <!--<div class="languageElement">
-          <a href="/en" title="Aktuelle Sprache DE, wechseln zu EN" hreflang="en-GB" data-lang-active-de="" style="">
-            <span>
-              <span data-label="EN">EN
-                <span class="sr-only">Englisch</span>
-              </span>
-            </span>
-          </a>
-        </div>-->
+        <div class="languageElement">
+          <button mat-button [matMenuTriggerFor]="language">{{lang}}</button>
+          <mat-menu #language="matMenu">
+            <button mat-menu-item (click)="useLanguage('en')">EN</button>
+            <button mat-menu-item (click)="useLanguage('de')">DE</button>
+          </mat-menu>
+        </div>
       </div>
     </div>
     <div id="user" class="dark-theme">
       <span> {{name}} </span>
     </div>
     <mat-nav-list>
-      <a mat-list-item class="nav-item-mobile" [routerLink]="'/dashboard'" routerLinkActive="active">Home</a>
-      <a mat-list-item class="nav-item-mobile" [routerLink]="'/plans'" routerLinkActive="active">Plans</a>
-      <a mat-list-item (click)="logout()" href="#" aria-label="Logout">Logout</a>
+      <a mat-list-item class="nav-item-mobile" [routerLink]="'/dashboard'"
+         routerLinkActive="active">{{'layout.menu.home' | translate }}</a>
+      <a mat-list-item class="nav-item-mobile" [routerLink]="'/plans'"
+         routerLinkActive="active">{{'layout.menu.plans' | translate }}</a>
+      <a mat-list-item (click)="logout()" href="#" aria-label="Logout">{{'layout.logout' | translate }}</a>
     </mat-nav-list>
     <div class="version-information">
-      Version: {{version}}
+      {{'layout.version' | translate }}: {{version}}
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -36,12 +35,12 @@
       <mat-toolbar-row id="mainHeader" [style]="'padding: 0px;'">
         <!-- MOBILE -->
         <div class="mainHeaderLeft">
-          <button mat-icon-button title="Open page navigation"
+          <button mat-icon-button title="{{'layout.menu.mobile.open'| translate }}"
                   (click)="sidenav.opened = !sidenav.opened"
                   *ngIf="!sidenav.opened">
             <mat-icon>menu</mat-icon>
           </button>
-          <button mat-icon-button title="Close page navigation"
+          <button mat-icon-button title="{{'layout.menu.mobile.close'| translate }}"
                   class="sidenav-btn"
                   (click)="sidenav.opened = !sidenav.opened"
                   *ngIf="sidenav.opened">
@@ -51,14 +50,16 @@
         <!-- MOBILE End -->
         <div class="mainHeaderRight">
           <nav class="mainHeaderNav">
-            <a mat-list-item class="nav-item-desktop" [routerLink]="'/dashboard'" routerLinkActive="active">Home</a>
-            <a mat-list-item class="nav-item-desktop" [routerLink]="'/plans'" routerLinkActive="active">Plans</a>
+            <a mat-list-item class="nav-item-desktop" [routerLink]="'/dashboard'"
+               routerLinkActive="active">{{'layout.menu.home' | translate }}</a>
+            <a mat-list-item class="nav-item-desktop" [routerLink]="'/plans'"
+               routerLinkActive="active">{{'layout.menu.plans' | translate }}</a>
           </nav>
 
         </div>
         <!-- University Logo -->
         <div id="mainHeaderLogo">
-          <a class="mat-focus-indicator" title="Zurück zur Hauptseite" href="https://www.tuwien.at/">
+          <a class="mat-focus-indicator" title="{{'layout.logo.goback' | translate }}" href="https://www.tuwien.at/">
             <img src="assets/logo.svg" alt="Logo" height="75" width="75">
           </a>
         </div>

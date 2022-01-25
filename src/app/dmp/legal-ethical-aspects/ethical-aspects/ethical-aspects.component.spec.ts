@@ -3,6 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {EthicalAspectsComponent} from './ethical-aspects.component';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
+import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
 
 describe('EthicalAspectsComponent', () => {
   let component: EthicalAspectsComponent;
@@ -10,7 +11,7 @@ describe('EthicalAspectsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, MatRadioModule],
+      imports: [ReactiveFormsModule, MatRadioModule, TranslateTestingModule],
       declarations: [EthicalAspectsComponent]
     })
     .compileComponents();

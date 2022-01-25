@@ -8,6 +8,7 @@ import {ProjectMember} from '../domain/project-member';
 import {Dmp} from '../domain/dmp';
 import {completeDmp} from '../mocks/dmp-mocks';
 import {HttpEventType, HttpHeaders} from '@angular/common/http';
+import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
 
 describe('BackendService', () => {
   let service: BackendService;
@@ -18,7 +19,7 @@ describe('BackendService', () => {
   beforeEach(() => {
     const spy = jasmine.createSpyObj('FeedbackService', ['error', 'success']);
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, TranslateTestingModule],
       providers: [{provide: FeedbackService, useValue: spy}]
     });
     service = TestBed.inject(BackendService);

@@ -6,6 +6,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
 import {MatTooltipHarness} from '@angular/material/tooltip/testing';
+import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
 
 describe('TooltipComponent', () => {
   let component: TooltipComponent;
@@ -14,7 +15,7 @@ describe('TooltipComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatTooltipModule, NoopAnimationsModule],
+      imports: [MatTooltipModule, NoopAnimationsModule, TranslateTestingModule],
       declarations: [TooltipComponent]
     }).compileComponents();
     fixture = TestBed.createComponent(TooltipComponent);

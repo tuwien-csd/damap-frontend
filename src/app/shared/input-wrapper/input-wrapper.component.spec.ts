@@ -5,6 +5,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
 
 describe('InputFormFieldWrapperComponent', () => {
   let component: InputWrapperComponent;
@@ -12,7 +13,7 @@ describe('InputFormFieldWrapperComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, NoopAnimationsModule],
+      imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, NoopAnimationsModule, TranslateTestingModule],
       declarations: [InputWrapperComponent]
     })
     .compileComponents();

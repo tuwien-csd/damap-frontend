@@ -5,6 +5,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {provideMockStore} from '@ngrx/store/testing';
 import {selectForm} from '../../store/selectors/form.selectors';
 import {completeDmp} from '../../mocks/dmp-mocks';
+import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
 
 describe('SummaryComponent', () => {
   let component: SummaryComponent;
@@ -15,7 +16,7 @@ describe('SummaryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatTableModule, MatProgressBarModule],
+      imports: [MatTableModule, MatProgressBarModule, TranslateTestingModule],
       declarations: [SummaryComponent],
       providers: [provideMockStore({
         initialState, selectors: [{

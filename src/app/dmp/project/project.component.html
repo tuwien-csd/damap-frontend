@@ -1,6 +1,6 @@
 <!-- Selected project -->
 <div *ngIf="projectStep?.value">
-  <p>You selected:</p>
+  <p>{{'dmp.steps.project.selected' | translate}}:</p>
   <mat-card class="mat-selected">
     <div class="mat-card-container">
       <div class="mat-card-left">
@@ -18,15 +18,14 @@
 </div>
 
 <div *ngIf="loaded === LoadingState.LOADING">
-  <p>Load projects...</p>
+  <p>{{'dmp.steps.project.loading.load' | translate}}</p>
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 <div *ngIf="loaded === LoadingState.LOADED">
-  <p *ngIf="!projectStep?.value && projects?.length">
-    Please select the project you want to create a DMP for:</p>
+  <p *ngIf="!projectStep?.value && projects?.length" translate>dmp.steps.project.select</p>
   <ng-container *ngIf="projects?.length else empty">
     <mat-form-field>
-      <mat-label>Search project...</mat-label>
+      <mat-label translate>dmp.steps.project.search</mat-label>
       <input #searchBox type="search" matInput>
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
@@ -43,7 +42,7 @@
                 {{project.start | date}} - {{project.end | date}}</div>
             </div>
             <div class="mat-card-right">
-              <mat-icon *ngIf="project.dmpExists" matTooltip="A plan already exists for this project"
+              <mat-icon *ngIf="project.dmpExists" matTooltip="{{'dmp.steps.project.warning.dmp' | translate}}"
                         class="dmp-warning">
                 warning
               </mat-icon>
@@ -53,10 +52,8 @@
       </mat-selection-list>
     </div>
   </ng-container>
-  <ng-template #empty>
-    No projects are assigned to you.
-  </ng-template>
+  <ng-template #empty>{{'dmp.steps.project.noprojects' | translate}}</ng-template>
 </div>
 <div *ngIf="loaded === LoadingState.FAILED">
-  <app-error-message [message]="'Projects could not be loaded.'"></app-error-message>
+  <app-error-message [message]="'dmp.steps.project.loading.failed'"></app-error-message>
 </div>

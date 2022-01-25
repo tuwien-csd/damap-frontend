@@ -1,10 +1,11 @@
-import {Component, Input, OnInit, EventEmitter, Output, ViewChild, OnChanges, SimpleChanges} from '@angular/core';
-import {FormArray} from '@angular/forms';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {FormArray, FormGroup} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Repository} from '../../domain/repository';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
+import {Dataset} from '../../domain/dataset';
 
 @Component({
   selector: 'app-dmp-repo',
@@ -24,6 +25,7 @@ export class RepoComponent implements OnInit, OnChanges {
   @Input() repositories: Repository[]; // Repo list loaded from backend
   repoList: any = []; // Filtered repo list (repo list minus selected repos)
 
+  @Input() dmpForm: FormGroup;
   @Input() repoStep: FormArray;
   @Input() datasets: FormArray;
 
@@ -93,4 +95,18 @@ export class RepoComponent implements OnInit, OnChanges {
     this.filterRepos();
   }
 
+  getDatasetsMarkedForDeletion(index: number): Dataset[] {
+    const repo = this.repoStep.at(index);
+    return this.datasets.value.filter(item => item.delete && repo.value.datasets.includes(item.referenceHash));
+  }
+
+  getDatasetsMarkedForDeletionAsString(index: number): string {
+    const datasets: Dataset[] = this.getDatasetsMarkedForDeletion(index);
+    let result = '';
+    for (const [i, item] of datasets.entries()) {
+      result += '\"' + item.title + '\"';
+      result += (i < datasets.length - 1) ? ', ' : '';
+    }
+    return result;
+  }
 }

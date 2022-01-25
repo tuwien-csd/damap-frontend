@@ -17,7 +17,7 @@ import {HarnessLoader} from '@angular/cdk/testing';
 import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
 import {MatStepperHarness} from '@angular/material/stepper/testing';
 import {selectRepositoriesLoaded} from '../store/selectors/repository.selectors';
-import {StepIntroComponent} from '../widgets/intro/step-intro.component';
+import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
 
 describe('DmpComponent', () => {
   let component: DmpComponent;
@@ -45,16 +45,20 @@ describe('DmpComponent', () => {
           data: new FormGroup({kind: new FormControl('SPECIFY')}),
           datasets: new FormArray([])
         })
+      },
+      resetForm() {
       }
     };
     await TestBed.configureTestingModule({
       imports: [
-        ReactiveFormsModule, MatStepperModule, MatButtonModule, NoopAnimationsModule,
+        ReactiveFormsModule, MatStepperModule, MatButtonModule,
+        NoopAnimationsModule,
         RouterTestingModule.withRoutes(
           [/*{path: 'plans', component: PlansComponent}*/]
-        )
+        ),
+        TranslateTestingModule
       ],
-      declarations: [DmpComponent, StepIntroComponent],
+      declarations: [DmpComponent],
       providers: [
         {provide: OAuthService, useValue: oauthSpy},
         {provide: FormService, useValue: formServiceStub},
@@ -101,7 +105,7 @@ describe('DmpComponent', () => {
     const steps = await stepper.getSteps();
     await steps[7].select();
 
-    steps[7].getLabel().then(label => expect(label).toEqual('Specify repositories for publication and preservation'));
+    steps[7].getLabel().then(label => expect(label).toEqual('dmp.steps.repositories.label'));
     expect(storeSpy).toHaveBeenCalledTimes(1);
 
     (component.dmpForm.get('project') as FormControl).setValue(mockProject);
@@ -109,6 +113,18 @@ describe('DmpComponent', () => {
     await steps[1].select();
 
     expect(component.saveDmp).toHaveBeenCalledTimes(1);
+    expect(storeSpy).toHaveBeenCalledTimes(2);
+  });
+
+  it('should reset form and dispatch store calls on destroy', () => {
+    spyOn(component, 'ngOnDestroy');
+    spyOn(formServiceStub, 'resetForm');
+
+    const storeSpy = spyOn(component.store, 'dispatch').and.callThrough();
+
+    fixture.destroy();
+
+    expect(formServiceStub.resetForm).toHaveBeenCalledTimes(1);
     expect(storeSpy).toHaveBeenCalledTimes(2);
   });
 });
