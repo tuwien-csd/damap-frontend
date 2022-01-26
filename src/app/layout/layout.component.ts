@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import pkg from '../../../package.json';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {TranslateService} from '@ngx-translate/core';
@@ -8,7 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent {
 
   public title = 'Data Management Plan';
   public version: string = pkg.version;
@@ -19,9 +19,6 @@ export class LayoutComponent implements OnInit {
   constructor(private auth: OAuthService, private translate: TranslateService) {
     const claims = this.auth.getIdentityClaims();
     this.name = claims['name'];
-  }
-
-  ngOnInit() {
   }
 
   useLanguage(language: string): void {
