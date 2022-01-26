@@ -83,7 +83,7 @@ export class SpecifyDataComponent implements OnInit {
 
     const dataset = this.datasets.at(index) as FormGroup;
 
-    const dialogRef = this.dialog.open(DatasetDialog, {
+    const dialogRef = this.dialog.open(DatasetDialogComponent, {
       width: '600px',
       data: dataset.getRawValue()
     });
@@ -102,12 +102,12 @@ export class SpecifyDataComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dataset-dialog',
+  selector: 'app-dataset-dialog',
   templateUrl: 'dataset-dialog.html',
   styleUrls: ['./specify-data.component.css']
 })
 
-export class DatasetDialog {
+export class DatasetDialogComponent {
 
   readonly FILE_TYPES = FILE_TYPES;
   readonly FILE_SIZES = FILE_SIZES;
@@ -117,7 +117,7 @@ export class DatasetDialog {
   originalOrder = (): number => 0;
 
   constructor(
-    public dialogRef: MatDialogRef<DatasetDialog>,
+    public dialogRef: MatDialogRef<DatasetDialogComponent>,
     private formService: FormService,
     @Inject(MAT_DIALOG_DATA) public data: { title: string, size: number, comment: string, type: string }) {
     this.dataset.patchValue(this.data);

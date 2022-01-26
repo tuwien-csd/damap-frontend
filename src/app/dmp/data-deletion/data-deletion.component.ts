@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
@@ -6,15 +6,12 @@ import {FormControl, FormGroup} from '@angular/forms';
   templateUrl: './data-deletion.component.html',
   styleUrls: ['./data-deletion.component.css']
 })
-export class DataDeletionComponent implements OnInit {
+export class DataDeletionComponent {
 
   @Input() dataset: FormGroup;
   @Input() dmpForm: FormGroup;
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
   get reasonForDeletion(): FormControl {

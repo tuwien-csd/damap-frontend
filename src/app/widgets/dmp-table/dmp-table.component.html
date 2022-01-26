@@ -54,7 +54,7 @@
   <ng-container matColumnDef="expandedDetail">
     <td mat-cell *matCellDef="let element" [attr.colspan]="tableHeaders.length">
       <div class="element-detail"
-           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" *ngIf="element.project">
+           [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'" *ngIf="element.project">
         <mat-divider></mat-divider>
         <div class="project-overview">
           <h4> {{element.project.title}} </h4>
