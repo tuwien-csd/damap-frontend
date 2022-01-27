@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import {FormControl, FormGroup} from '@angular/forms';
   templateUrl: './doc-data-quality.component.html',
   styleUrls: ['./doc-data-quality.component.css']
 })
-export class DocDataQualityComponent implements OnInit {
+export class DocDataQualityComponent {
 
   @Input() docDataStep: FormGroup;
   optionsMetadata: string[] = ['We will be using the following domain specific metadata standards:…', 'As there are no domain specific metadata standards applicable, we will provide a README file with an explanation of all values and terms used [at file level/at dataset level/at project level]'];
@@ -15,9 +15,6 @@ export class DocDataQualityComponent implements OnInit {
 
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
   get metadata(): FormControl {
