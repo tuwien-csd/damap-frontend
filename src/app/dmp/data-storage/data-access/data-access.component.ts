@@ -15,6 +15,8 @@ export class DataAccessComponent {
   accessRight = AccessRight;
   panelOpenState = false;
 
+  translatePrefixEnum = 'enum.accessright.'
+
   constructor() {
   }
 

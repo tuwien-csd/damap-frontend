@@ -16,6 +16,8 @@ export class CostsComponent {
 
   costType: any = CostType;
 
+  translateEnumPrefix = 'enum.costs.'
+
   constructor() {
   }
 

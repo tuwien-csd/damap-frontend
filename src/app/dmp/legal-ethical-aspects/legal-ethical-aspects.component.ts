@@ -15,6 +15,10 @@ export class LegalEthicalAspectsComponent {
   @Input() legalEthicalStep: FormGroup;
   @Input() datasets: FormArray;
 
+  translateAgreementPrefixEnum = 'enum.agreement.'
+  translateCompliancePrefixEnum = 'enum.compliance.'
+  translateSecurityPrefixEnum = 'enum.securitymeasure.'
+
   optionsLinksEthics: string[] = ['Guidelines on Safeguarding Good Scientific Practice'];
 
   questions = [
