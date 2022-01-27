@@ -1,14 +1,14 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import pkg from '../../../package.json';
-import {OAuthService} from 'angular-oauth2-oidc';
 import {TranslateService} from '@ngx-translate/core';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css']
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
 
   public title = 'Data Management Plan';
   public version: string = pkg.version;
@@ -16,9 +16,11 @@ export class LayoutComponent {
   public lang = 'EN';
   public widescreen = () => window.innerWidth >= 1024;
 
-  constructor(private auth: OAuthService, private translate: TranslateService) {
-    const claims = this.auth.getIdentityClaims();
-    this.name = claims['name'];
+  constructor(private auth: AuthService, private translate: TranslateService) {
+  }
+
+  ngOnInit(): void {
+    this.name = this.auth.getName();
   }
 
   useLanguage(language: string): void {
@@ -27,7 +29,7 @@ export class LayoutComponent {
   }
 
   public logout() {
-    this.auth.logOut();
+    this.auth.logout();
   }
 
 }
