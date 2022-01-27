@@ -45,7 +45,7 @@
             <mat-select formControlName="role">
               <mat-option
                 *ngFor="let role of roles | keyvalue" [value]="role.key">
-                {{role.value}}
+                {{translateEnumPrefix + role.value | translate}}
               </mat-option>
             </mat-select>
           </mat-form-field>

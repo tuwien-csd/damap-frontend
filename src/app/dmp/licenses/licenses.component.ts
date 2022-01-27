@@ -19,6 +19,8 @@ export class LicensesComponent {
   licenses: License[] = LicenseDefinitions;
   accessType: any = DataAccessType;
 
+  translateEnumPrefix = 'enum.dataaccess.'
+
   constructor() {
   }
 

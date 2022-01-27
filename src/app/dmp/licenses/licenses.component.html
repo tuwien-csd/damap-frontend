@@ -14,7 +14,7 @@
               <mat-label>{{'dmp.steps.licensing.question.dataAccess' | translate}}</mat-label>
               <mat-select formControlName="dataAccess">
                 <mat-option *ngFor="let type of accessType | keyvalue" [value]="type.key">
-                  {{type.value}}<br/>
+                  {{translateEnumPrefix + type.value | translate}}<br/>
                 </mat-option>
               </mat-select>
             </mat-form-field>

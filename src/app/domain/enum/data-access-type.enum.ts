@@ -1,5 +1,5 @@
 export enum DataAccessType {
-  OPEN = 'Open',
-  RESTRICTED = 'Restricted',
-  CLOSED = 'Closed'
+  OPEN = 'OPEN',
+  RESTRICTED = 'RESTRICTED',
+  CLOSED = 'CLOSED'
 }

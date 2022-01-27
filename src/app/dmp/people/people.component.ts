@@ -15,6 +15,8 @@ export class PeopleComponent {
 
   roles: any = ContributorRole;
 
+  translateEnumPrefix = 'enum.contributor.role.'
+
   @Input() contactStep: FormControl;
   @Input() contributorStep: FormArray;
 
