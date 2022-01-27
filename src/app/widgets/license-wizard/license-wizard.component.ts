@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {ccByNcSa, ccBySa, DataLicenses, LicenseDefinitions, odbl, SoftwareLicenses} from './license-wizard-list';
 import {LicenseDetails} from '../../domain/license-details';
 import {QUESTION_TREE, Step} from './license-wizard-questions';
@@ -11,18 +11,15 @@ import {KeyValue} from '@angular/common';
   templateUrl: './license-wizard.component.html',
   styleUrls: ['./license-wizard.component.css']
 })
-export class LicenseWizardComponent implements OnInit {
+export class LicenseWizardComponent {
 
   @Output() selectedLicense = new EventEmitter<LicenseDetails>();
 
   constructor(public dialog: MatDialog) {
   }
 
-  ngOnInit() {
-  }
-
   openDialog(): void {
-    const dialogRef = this.dialog.open(LicenseSelectorDialog, {
+    const dialogRef = this.dialog.open(LicenseSelectorDialogComponent, {
       width: '800px'
     });
 
@@ -31,15 +28,14 @@ export class LicenseWizardComponent implements OnInit {
     });
   }
 
-
 }
 
 @Component({
-  selector: 'license-wizard-dialog',
+  selector: 'app-license-wizard-dialog',
   templateUrl: 'license-wizard-dialog.html',
   styleUrls: ['./license-wizard.component.css']
 })
-export class LicenseSelectorDialog {
+export class LicenseSelectorDialogComponent {
 
   licenseList: LicenseDetails[] = [...LicenseDefinitions];
   softwareLicenses: LicenseDetails[] = SoftwareLicenses;
@@ -54,7 +50,7 @@ export class LicenseSelectorDialog {
     return 0;
   }
 
-  constructor(public dialogRef: MatDialogRef<LicenseSelectorDialog>) {
+  constructor(public dialogRef: MatDialogRef<LicenseSelectorDialogComponent>) {
   }
 
   setNextStep(currentIndex: number, next: any) {

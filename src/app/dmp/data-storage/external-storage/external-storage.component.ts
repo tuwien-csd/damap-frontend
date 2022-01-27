@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import {FormArray, FormControl, FormGroup} from '@angular/forms';
   templateUrl: './external-storage.component.html',
   styleUrls: ['./external-storage.component.css']
 })
-export class ExternalStorageComponent implements OnInit {
+export class ExternalStorageComponent {
 
   @Input() externalStorageStep: FormArray;
   @Input() datasets: FormArray;
@@ -16,9 +16,6 @@ export class ExternalStorageComponent implements OnInit {
   @Output() externalStorageToRemove = new EventEmitter<number>();
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
   getFormControl(index: number, controlName: string): FormControl {

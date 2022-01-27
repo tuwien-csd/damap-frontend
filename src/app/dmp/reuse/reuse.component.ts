@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {DataAccessType} from '../../domain/enum/data-access-type.enum';
 
@@ -7,22 +7,19 @@ import {DataAccessType} from '../../domain/enum/data-access-type.enum';
   templateUrl: './reuse.component.html',
   styleUrls: ['./reuse.component.css']
 })
-export class ReuseComponent implements OnInit {
+export class ReuseComponent {
 
   @Input() reuseStep: FormGroup;
   @Input() datasets: FormArray;
 
   optionsTargetAudience: string[] = [
-  'Members of the scientific community',
-  'Officers of local/national governments',
-  'Decision makers in industry',
-  'Students and general public',
-  'Others:...'];
+    'Members of the scientific community',
+    'Officers of local/national governments',
+    'Decision makers in industry',
+    'Students and general public',
+    'Others:...'];
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
   get restricted() {

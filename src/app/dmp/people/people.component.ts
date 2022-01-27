@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ContributorRole} from '../../domain/enum/contributor-role.enum';
 import {FormArray, FormControl} from '@angular/forms';
 import {Person} from '../../domain/person';
@@ -9,7 +9,7 @@ import {ProjectMember} from '../../domain/project-member';
   templateUrl: './people.component.html',
   styleUrls: ['./people.component.css']
 })
-export class PeopleComponent implements OnInit {
+export class PeopleComponent {
 
   @Input() projectMembers: ProjectMember[];
 
@@ -24,9 +24,6 @@ export class PeopleComponent implements OnInit {
   @Output() contributorToUpdate = new EventEmitter<any>();
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
   changeContactPerson(contact: Person) {

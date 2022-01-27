@@ -1,7 +1,7 @@
 <app-step-intro>{{'dmp.steps.people.intro' | translate}}
 </app-step-intro>
 <!-- CONTACT -->
-<div *ngIf="contactStep != null && contactStep.value != null">
+<div *ngIf="contactStep?.value">
   <p>{{'dmp.steps.people.contact.person' | translate}}:</p>
   <mat-card class="mat-selected">
     <div class="mat-card-container">
@@ -23,7 +23,7 @@
 </div>
 
 <!-- CONTRIBUTORS -->
-<div *ngIf="contributorStep != null && contributorStep.length > 0">
+<div *ngIf="contributorStep?.length > 0">
   <p>{{'dmp.steps.people.contributors' | translate}}:</p>
   <mat-card *ngFor="let i=index; let contributor of contributorStep.controls" class="mat-selected">
     <div class="mat-card-container">
@@ -88,7 +88,7 @@
         {{person.person?.mbox}}
       </div>
       <div class="mat-card-right">
-        <button mat-raised-button *ngIf="contactStep.value?.universityId != person.person?.universityId"
+        <button mat-raised-button *ngIf="contactStep.value?.universityId !== person.person?.universityId"
                 (click)="changeContactPerson(person.person)"
                 title="{{'dmp.steps.people.contact.add' | translate}}">
           <mat-icon>contact_mail</mat-icon>
