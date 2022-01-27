@@ -6,15 +6,25 @@ import {OAuthService} from 'angular-oauth2-oidc';
 })
 export class AuthService {
 
-  constructor(private oAuthService: OAuthService) { }
+  constructor(private oAuthService: OAuthService) {
+  }
 
-  hasValidAccessToken() {
-    return this.oAuthService.hasValidAccessToken();
+  getName() {
+    const claims = this.oAuthService.getIdentityClaims();
+    return claims['name'];
+  }
+
+  isAuthenticated() {
+    return this.oAuthService.hasValidIdToken() && this.oAuthService.hasValidAccessToken();
   }
 
   isAdmin(): boolean {
     const parts: string[] = this.oAuthService.getAccessToken().split('.');
     const tokenBody: any = JSON.parse('' + atob(parts[1]));
     return tokenBody.realm_access?.roles?.includes('Damap Admin');
+  }
+
+  logout() {
+    this.oAuthService.logOut();
   }
 }
