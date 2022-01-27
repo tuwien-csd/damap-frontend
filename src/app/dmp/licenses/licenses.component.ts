@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {License} from '../../domain/license';
 import {LicenseDefinitions} from '../../widgets/license-wizard/license-wizard-list';
@@ -11,7 +11,7 @@ import {ComplianceType} from '../../domain/enum/compliance-type.enum';
   styleUrls: ['./licenses.component.css'],
 })
 
-export class LicensesComponent implements OnInit {
+export class LicensesComponent {
 
   @Input() dmpForm: FormGroup;
   @Input() datasets: FormArray;
@@ -19,9 +19,7 @@ export class LicensesComponent implements OnInit {
   licenses: License[] = LicenseDefinitions;
   accessType: any = DataAccessType;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
   }
 
   setLicenseSelectorResult(event, index: number) {
