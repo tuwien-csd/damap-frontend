@@ -7,3 +7,5 @@ pipelines:
     stages:
       e2e:
         enabled: false
+      coverage:
+        enabled: false
