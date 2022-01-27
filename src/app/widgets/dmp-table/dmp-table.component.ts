@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {DmpListItem} from '../../domain/dmp-list-item';
@@ -16,7 +16,7 @@ import {MatPaginator} from '@angular/material/paginator';
     ]),
   ],
 })
-export class DmpTableComponent implements OnInit, AfterViewInit {
+export class DmpTableComponent implements AfterViewInit {
 
   @Input() dmps: DmpListItem[];
   dataSource = new MatTableDataSource();
@@ -26,19 +26,15 @@ export class DmpTableComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  readonly tableHeaders: string[] = ['title', 'created', 'modified', 'edit', 'history', 'remove'];
+  readonly tableHeaders: string[] = ['title', 'created', 'modified', 'contact', 'edit', 'history', 'remove'];
   expandedElement: DmpListItem | null;
 
   constructor() {
   }
 
-  ngOnInit(): void {
-    this.dataSource.data = this.dmps ?? [];
+  ngAfterViewInit() {
     this.dataSource.filterPredicate = (data: DmpListItem, filter: string) =>
       data.project?.title?.toLowerCase().includes(filter) || data.title?.toLowerCase().includes(filter);
-  }
-
-  ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
