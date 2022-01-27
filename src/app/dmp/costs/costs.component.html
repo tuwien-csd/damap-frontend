@@ -50,7 +50,7 @@
               <mat-form-field>
                 <mat-label>{{'dmp.steps.costs.question.type' | translate}}</mat-label>
                 <mat-select formControlName="type">
-                  <mat-option *ngFor="let type of costType | keyvalue" [value]="type.value">
+                  <mat-option *ngFor="let type of costType | keyvalue" [value]="type.key">
                     {{type.value}}
                   </mat-option>
                 </mat-select>

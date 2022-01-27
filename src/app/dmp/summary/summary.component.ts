@@ -6,9 +6,9 @@ import {select, Store} from '@ngrx/store';
 import {selectForm} from '../../store/selectors/form.selectors';
 import {Observable} from 'rxjs';
 import {AppState} from '../../store/states/app.state';
-import {SecurityMeasure} from '../../domain/enum/security-measure';
+import {SecurityMeasure} from '../../domain/enum/security-measure.enum';
 import {ComplianceType} from '../../domain/enum/compliance-type.enum';
-import {Agreement} from '../../domain/enum/agreement';
+import {Agreement} from '../../domain/enum/agreement.enum';
 
 export interface Completeness {
   step: string;
@@ -68,8 +68,8 @@ export class SummaryComponent implements OnInit {
     this.dataSource = [];
 
     // General properties
-    const restrictedDatasets = this.datasets.find(item => item.dataAccess === DataAccessType.restricted) != null;
-    const closedDatasets = this.datasets.find(item => item.dataAccess === DataAccessType.closed) != null;
+    const restrictedDatasets = this.datasets.find(item => item.dataAccess === DataAccessType.RESTRICTED) != null;
+    const closedDatasets = this.datasets.find(item => item.dataAccess === DataAccessType.CLOSED) != null;
 
     // Select project
     const projectsLevel: Completeness = {step: 'dmp.steps.project.label', completeness: 0, status: []};
@@ -210,8 +210,8 @@ export class SummaryComponent implements OnInit {
         }
       }
       if (this.dmpForm.personalDataCompliance.length) {
-        if ((this.dmpForm.personalDataCompliance.includes(ComplianceType.Other) && this.dmpForm.otherPersonalDataCompliance)
-          || !this.dmpForm.personalDataCompliance.includes(ComplianceType.Other)) {
+        if ((this.dmpForm.personalDataCompliance.includes(ComplianceType.OTHER) && this.dmpForm.otherPersonalDataCompliance)
+          || !this.dmpForm.personalDataCompliance.includes(ComplianceType.OTHER)) {
           legalEthicalAspectsLevel.completeness += legalPercent / 2;
         }
       }
@@ -256,7 +256,7 @@ export class SummaryComponent implements OnInit {
       let licenseCount = 0;
       let dateCount = 0;
       for (const dataset of this.datasets) {
-        if (dataset.dataAccess === DataAccessType.open) {
+        if (dataset.dataAccess === DataAccessType.OPEN) {
           publishedCount += 1;
           if (dataset.license) {
             licenseCount += 1;

@@ -1,10 +1,10 @@
 import {Dataset} from '../domain/dataset';
 import {DataAccessType} from '../domain/enum/data-access-type.enum';
-import {AccessRight} from '../domain/enum/access-right';
+import {AccessRight} from '../domain/enum/access-right.enum';
 
 export const closedDatasetMock: Dataset = {
   comment: '',
-  dataAccess: DataAccessType.closed,
+  dataAccess: DataAccessType.CLOSED,
   id: 82,
   license: 'https://creativecommons.org/publicdomain/zero/1.0/',
   personalData: true,
@@ -15,9 +15,9 @@ export const closedDatasetMock: Dataset = {
   startDate: null,
   title: 'Dataset 1',
   type: 'STANDARD_OFFICE_DOCUMENTS',
-  selectedProjectMembersAccess: AccessRight.write,
-  otherProjectMembersAccess: AccessRight.read,
-  publicAccess: AccessRight.none,
+  selectedProjectMembersAccess: AccessRight.WRITE,
+  otherProjectMembersAccess: AccessRight.READ,
+  publicAccess: AccessRight.NONE,
   delete: true,
   dateOfDeletion: new Date(20000),
   reasonForDeletion: 'reason1',
@@ -26,7 +26,7 @@ export const closedDatasetMock: Dataset = {
 
 export const restrictedDatasetMock: Dataset = {
   comment: '',
-  dataAccess: DataAccessType.restricted,
+  dataAccess: DataAccessType.RESTRICTED,
   id: 83,
   license: 'https://creativecommons.org/publicdomain/zero/1.0/',
   personalData: true,
@@ -37,9 +37,9 @@ export const restrictedDatasetMock: Dataset = {
   startDate: null,
   title: 'Dataset 1',
   type: 'STANDARD_OFFICE_DOCUMENTS',
-  selectedProjectMembersAccess: AccessRight.write,
-  otherProjectMembersAccess: AccessRight.read,
-  publicAccess: AccessRight.none,
+  selectedProjectMembersAccess: AccessRight.WRITE,
+  otherProjectMembersAccess: AccessRight.READ,
+  publicAccess: AccessRight.NONE,
   delete: false,
   dateOfDeletion: null,
   reasonForDeletion: '',

@@ -1,12 +1,12 @@
 export enum CostType {
-  dataAcquisition = 'Data Aquisition',
-  database = 'Database',
-  filebasedStorage = 'File-based Storage',
-  hardwareAndInfrastructure = 'Hardware and Infrastructure',
-  legalAdvice = 'Legal Advice',
-  personnel = 'Personnel',
-  repository = 'Repository',
-  sofwareLicense = 'Software License',
-  training = 'Training',
-  other = 'Other'
+  DATA_ACQUISITION = 'Data Aquisition',
+  DATABASE = 'Database',
+  FILE_BASED_STORAGE = 'File-based Storage',
+  HARDWARE_AND_INFRASTRUCTURE = 'Hardware and Infrastructure',
+  LEGAL_ADVICE = 'Legal Advice',
+  PERSONNEL = 'Personnel',
+  REPOSITORY = 'Repository',
+  SOFTWARE_LICENSE = 'Software License',
+  TRAINING = 'Training',
+  OTHER = 'Other'
 }

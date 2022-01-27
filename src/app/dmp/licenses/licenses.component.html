@@ -13,14 +13,14 @@
             <mat-form-field>
               <mat-label>{{'dmp.steps.licensing.question.dataAccess' | translate}}</mat-label>
               <mat-select formControlName="dataAccess">
-                <mat-option *ngFor="let type of accessType | keyvalue" [value]="type.value">
+                <mat-option *ngFor="let type of accessType | keyvalue" [value]="type.key">
                   {{type.value}}<br/>
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
         </div>
-        <ng-container *ngIf="dataset.value.dataAccess === accessType.open">
+        <ng-container *ngIf="dataset.value.dataAccess === accessType.OPEN">
           <div class="warning"
                *ngIf="dataset.value.personalData || dataset.value.sensitiveData || dataset.value.legalRestrictions">
             <div class="warning-icon">
@@ -60,7 +60,7 @@
             </mat-form-field>
           </div>
         </ng-container>
-        <ng-container *ngIf="dataset.value.dataAccess === accessType.closed">
+        <ng-container *ngIf="dataset.value.dataAccess === accessType.CLOSED">
           <app-data-deletion [dataset]="getFormGroup(i)" [dmpForm]="dmpForm"></app-data-deletion>
         </ng-container>
       </ng-container>
