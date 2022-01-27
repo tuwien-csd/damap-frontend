@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {ComplianceType} from '../../domain/enum/compliance-type.enum';
 import {SecurityMeasure} from '../../domain/enum/security-measure';
@@ -9,7 +9,7 @@ import {Agreement} from '../../domain/enum/agreement';
   templateUrl: './legal-ethical-aspects.component.html',
   styleUrls: ['./legal-ethical-aspects.component.css']
 })
-export class LegalEthicalAspectsComponent implements OnInit {
+export class LegalEthicalAspectsComponent {
 
   @Input() dmpForm: FormGroup;
   @Input() legalEthicalStep: FormGroup;
@@ -29,9 +29,6 @@ export class LegalEthicalAspectsComponent implements OnInit {
   originalOrder = (): number => 0;
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
   get sensitiveDataAccess(): FormControl {
