@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {ComplianceType} from '../../domain/enum/compliance-type.enum';
-import {SecurityMeasure} from '../../domain/enum/security-measure';
-import {Agreement} from '../../domain/enum/agreement';
+import {SecurityMeasure} from '../../domain/enum/security-measure.enum';
+import {Agreement} from '../../domain/enum/agreement.enum';
 
 @Component({
   selector: 'app-dmp-legal-ethical-aspects',
@@ -56,7 +56,7 @@ export class LegalEthicalAspectsComponent {
   }
 
   get isOtherSelected() {
-    return this.legalEthicalStep?.controls.personalDataCompliance?.value.includes(ComplianceType.Other);
+    return this.legalEthicalStep?.controls.personalDataCompliance?.value.includes(ComplianceType.OTHER);
   }
 
   get isOtherMeasureSelected() {

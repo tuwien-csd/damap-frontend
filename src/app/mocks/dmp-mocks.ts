@@ -4,8 +4,8 @@ import {IdentifierType} from '../domain/enum/identifier-type.enum';
 import {CostType} from '../domain/enum/cost-type.enum';
 import {DataKind} from '../domain/enum/data-kind.enum';
 import {ComplianceType} from '../domain/enum/compliance-type.enum';
-import {SecurityMeasure} from '../domain/enum/security-measure';
-import {Agreement} from '../domain/enum/agreement';
+import {SecurityMeasure} from '../domain/enum/security-measure.enum';
+import {Agreement} from '../domain/enum/agreement.enum';
 import {mockProject} from './project-mocks';
 import {mockContact} from './person-mocks';
 import {closedDatasetMock, restrictedDatasetMock} from './dataset-mocks';
@@ -23,7 +23,7 @@ export const completeDmp: Dmp = {
       id: 84, person: {
         firstName: 'Max', id: 85, lastName: 'Mustermann', mbox: 'm.mustermann@university.ac.at', universityId: '12345', personId: null,
         affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR}
-      }, role: ContributorRole.Editor
+      }, role: ContributorRole.EDITOR
     },
     {
       id: 98,
@@ -39,7 +39,7 @@ export const completeDmp: Dmp = {
         affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR},
         universityId: '23456'
       },
-      role: ContributorRole.ProjectManager
+      role: ContributorRole.PROJECT_MANAGER
     }
   ],
   costs: [
@@ -49,7 +49,7 @@ export const completeDmp: Dmp = {
       description: 'cost description',
       id: 103,
       title: 'New cost',
-      type: CostType.database,
+      type: CostType.DATABASE,
       value: 123
     }
   ],
@@ -92,7 +92,7 @@ export const completeDmp: Dmp = {
   metadata: 'provided metadata',
   noDataExplanation: '',
   personalData: true,
-  personalDataCompliance: ['item1', 'item2', ComplianceType.Other],
+  personalDataCompliance: ['item1', 'item2', ComplianceType.OTHER],
   otherPersonalDataCompliance: 'other measures',
   project: mockProject,
   restrictedAccessInfo: 'info how someone can access restricted data',
@@ -130,7 +130,7 @@ export const noDataDmp: Dmp = {
       id: 84, person: {
         firstName: 'Max', id: 85, lastName: 'Mustermann', mbox: 'm.mustermann@university.ac.at', universityId: '12345', personId: null,
         affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR}
-      }, role: ContributorRole.Editor
+      }, role: ContributorRole.EDITOR
     },
     {
       id: 98,
@@ -146,7 +146,7 @@ export const noDataDmp: Dmp = {
         affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR},
         universityId: '23456'
       },
-      role: ContributorRole.ProjectManager
+      role: ContributorRole.PROJECT_MANAGER
     }
   ],
   costs: [
@@ -156,7 +156,7 @@ export const noDataDmp: Dmp = {
       description: 'cost description',
       id: 103,
       title: 'New cost',
-      type: CostType.database,
+      type: CostType.DATABASE,
       value: 123
     }
   ],

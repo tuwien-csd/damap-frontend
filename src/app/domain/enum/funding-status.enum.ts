@@ -1,7 +1,0 @@
-export enum FundingStatus {
-  PLANNED = 'PLANNED',
-  APPLIED = 'APPLIED',
-  GRANTED = 'GRANTED',
-  REJECTED = 'REJECTED',
-  UNSPECIFIED = 'UNSPECIFIED'
-}

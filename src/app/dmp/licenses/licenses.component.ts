@@ -35,11 +35,11 @@ export class LicensesComponent {
   }
 
   get restricted() {
-    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.restricted);
+    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.RESTRICTED);
   }
 
   get closed() {
-    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.closed);
+    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.CLOSED);
   }
 
   getFormGroup(index: number): FormGroup {

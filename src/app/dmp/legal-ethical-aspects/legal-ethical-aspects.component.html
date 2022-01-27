@@ -86,7 +86,7 @@
         <mat-form-field appearance="fill" [style]="'width: 100%'">
           <mat-label>{{'dmp.steps.legal.question.personalDataCompliance' | translate}}</mat-label>
           <mat-select formControlName="personalDataCompliance" multiple>
-            <mat-option *ngFor="let option of complianceOptions | keyvalue: originalOrder" [value]="option.value">
+            <mat-option *ngFor="let option of complianceOptions | keyvalue: originalOrder" [value]="option.key">
               {{option.value}}
             </mat-option>
           </mat-select>
@@ -124,7 +124,7 @@
       <mat-form-field appearance="fill" [style]="'width: 100%'">
         <mat-label>{{'dmp.steps.legal.question.legalRestrictionsDocuments' | translate}}</mat-label>
         <mat-select formControlName="legalRestrictionsDocuments" multiple>
-          <mat-option *ngFor="let option of agreementOptions | keyvalue: originalOrder" [value]="option.value">
+          <mat-option *ngFor="let option of agreementOptions | keyvalue: originalOrder" [value]="option.key">
             {{option.value}}
           </mat-option>
         </mat-select>

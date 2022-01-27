@@ -44,7 +44,7 @@
             <mat-label>{{'dmp.steps.people.contributor.role' | translate}}</mat-label>
             <mat-select formControlName="role">
               <mat-option
-                *ngFor="let role of roles | keyvalue" [value]="role.value">
+                *ngFor="let role of roles | keyvalue" [value]="role.key">
                 {{role.value}}
               </mat-option>
             </mat-select>

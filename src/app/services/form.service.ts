@@ -8,11 +8,11 @@ import {Person} from '../domain/person';
 import {Cost} from '../domain/cost';
 import {DataAccessType} from '../domain/enum/data-access-type.enum';
 import {Storage} from '../domain/storage';
-import {AccessRight} from '../domain/enum/access-right';
+import {AccessRight} from '../domain/enum/access-right.enum';
 import {DataKind} from '../domain/enum/data-kind.enum';
 import {ComplianceType} from '../domain/enum/compliance-type.enum';
-import {SecurityMeasure} from '../domain/enum/security-measure';
-import {Agreement} from '../domain/enum/agreement';
+import {SecurityMeasure} from '../domain/enum/security-measure.enum';
+import {Agreement} from '../domain/enum/agreement.enum';
 import {notEmptyValidator} from '../validators/not-empty.validator';
 
 @Injectable({
@@ -33,11 +33,11 @@ export class FormService {
   }
 
   private static restrictedDatasets(datasets: Dataset[]): boolean {
-    return datasets.find(item => item.dataAccess === DataAccessType.restricted) != null;
+    return datasets.find(item => item.dataAccess === DataAccessType.RESTRICTED) != null;
   }
 
   private static closedDatasets(datasets: Dataset[]): boolean {
-    return datasets.find(item => item.dataAccess === DataAccessType.closed) != null;
+    return datasets.find(item => item.dataAccess === DataAccessType.CLOSED) != null;
   }
 
   private createDmpForm(): FormGroup {
@@ -216,7 +216,7 @@ export class FormService {
     if (formValue.data.kind === DataKind.SPECIFY) {
       result.datasets = formValue.datasets;
       for (const dataset of result.datasets) {
-        if (dataset.dataAccess !== DataAccessType.closed) {
+        if (dataset.dataAccess !== DataAccessType.CLOSED) {
           dataset.delete = false;
         }
         if (!dataset.delete) {
@@ -250,7 +250,7 @@ export class FormService {
       if (formValue.legal.personalData) {
         result.personalData = true;
         result.personalDataCompliance = formValue.legal.personalDataCompliance;
-        result.otherPersonalDataCompliance = result.personalDataCompliance.includes(ComplianceType.Other) ?
+        result.otherPersonalDataCompliance = result.personalDataCompliance.includes(ComplianceType.OTHER) ?
           formValue.legal.otherPersonalDataCompliance : '';
       } else {
         for (const dataset of result.datasets) {
@@ -402,11 +402,11 @@ export class FormService {
       personalData: [false],
       sensitiveData: [false],
       legalRestrictions: [false],
-      dataAccess: [DataAccessType.open],
+      dataAccess: [DataAccessType.OPEN],
       referenceHash: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
-      selectedProjectMembersAccess: [AccessRight.write],
-      otherProjectMembersAccess: [AccessRight.write],
-      publicAccess: [AccessRight.read],
+      selectedProjectMembersAccess: [AccessRight.WRITE],
+      otherProjectMembersAccess: [AccessRight.WRITE],
+      publicAccess: [AccessRight.READ],
       delete: [false],
       dateOfDeletion: [null],
       reasonForDeletion: ['', Validators.maxLength(4000)],

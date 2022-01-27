@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
-import {AccessRight} from '../../../domain/enum/access-right';
+import {AccessRight} from '../../../domain/enum/access-right.enum';
 
 @Component({
   selector: 'app-data-access',
