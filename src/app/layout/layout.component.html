@@ -24,7 +24,7 @@
          routerLinkActive="active">{{'layout.menu.home' | translate }}</a>
       <a mat-list-item class="nav-item-mobile" [routerLink]="'/plans'"
          routerLinkActive="active">{{'layout.menu.plans' | translate }}</a>
-      <a mat-list-item (click)="logout()" href="#" aria-label="Logout">{{'layout.logout' | translate }}</a>
+      <a mat-list-item (click)="logout()" aria-label="Logout">{{'layout.logout' | translate }}</a>
     </mat-nav-list>
     <div class="version-information">
       {{'layout.version' | translate }}: {{version}}
