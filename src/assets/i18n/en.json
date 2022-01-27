@@ -26,6 +26,7 @@
         "title": "Title",
         "created": "Created",
         "modified": "Last modified",
+        "contact": "Contact",
         "edit": "Edit",
         "history": "History",
         "delete": "Delete"
@@ -39,7 +40,8 @@
       },
       "empty": "No plans found",
       "nodatafilter": "No data matching the filter \"{{value}}\"",
-      "search": "Search dmp"
+      "search": "Search dmp",
+      "nocontact": "No contact defined."
     }
   },
   "dmp": {
@@ -590,7 +592,8 @@
       "projectmembers": "Failed to load project members.",
       "plans": {
         "load": {
-          "all": "Failed to load plans.",
+          "all": "Failed to load all plans.",
+          "yours": "Failed to load your plans.",
           "one": "Failed to load plan."
         },
         "save": "Failed to save plan.",
