@@ -50,7 +50,7 @@ export class ContributorManualComponent {
     return (this.form.controls.personId as FormGroup).controls.identifier as FormControl;
   }
 
-  private resetForm(){
+  resetForm() {
     this.show = false;
     this.form.reset();
     (this.form.controls.personId as FormGroup).controls.type.setValue(IdentifierType.ORCID);

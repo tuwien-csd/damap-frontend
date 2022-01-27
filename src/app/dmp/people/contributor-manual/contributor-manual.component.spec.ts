@@ -1,6 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ContributorManualComponent } from './contributor-manual.component';
+import {ContributorManualComponent} from './contributor-manual.component';
+import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {IdentifierType} from '../../../domain/enum/identifier-type.enum';
 
 describe('ContributorManualComponent', () => {
   let component: ContributorManualComponent;
@@ -8,9 +14,9 @@ describe('ContributorManualComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContributorManualComponent ]
-    })
-    .compileComponents();
+      imports: [MatButtonModule, MatIconModule, MatCardModule, ReactiveFormsModule, TranslateTestingModule],
+      declarations: [ContributorManualComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -22,4 +28,14 @@ describe('ContributorManualComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have orcid set after form reset', () => {
+    component.form.setValue({
+      firstName: 'abc', lastName: 'def', personId: {
+        type: IdentifierType.ORCID, identifier: '1234'
+      }
+    });
+    component.resetForm();
+    expect((component.form.controls.personId as FormGroup).controls.type.value).toBe(IdentifierType.ORCID);
+  })
 });
