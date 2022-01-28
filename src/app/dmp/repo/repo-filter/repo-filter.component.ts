@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {REPO_FILTERS} from '../repo-filters';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../store/states/app.state';
@@ -9,14 +9,11 @@ import {ResetRepositoryFilter, SetRepositoryFilter} from '../../../store/actions
   templateUrl: './repo-filter.component.html',
   styleUrls: ['./repo-filter.component.css']
 })
-export class RepoFilterComponent implements OnInit, OnDestroy {
+export class RepoFilterComponent implements OnDestroy {
 
   filters = REPO_FILTERS;
 
   constructor(private store: Store<AppState>) {
-  }
-
-  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {

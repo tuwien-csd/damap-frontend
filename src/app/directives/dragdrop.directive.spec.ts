@@ -5,7 +5,7 @@ import {By} from '@angular/platform-browser';
 
 @Component({
   template: `
-    <div dragdrop>Drag and drop div</div>
+    <div appDragdrop>Drag and drop div</div>
     <div>Standard div</div>`
 })
 class TestComponent {
@@ -27,7 +27,7 @@ describe('DragdropDirective', () => {
 
     decorated = fixture.debugElement.query(By.directive(DragdropDirective));
 
-    bare = fixture.debugElement.query(By.css('div:not([dragdrop])'));
+    bare = fixture.debugElement.query(By.css('div:not([appDragdrop])'));
   });
 
   it('should create an instance', () => {

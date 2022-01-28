@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {CostType} from '../../domain/enum/cost-type.enum';
 
@@ -7,7 +7,7 @@ import {CostType} from '../../domain/enum/cost-type.enum';
   templateUrl: './costs.component.html',
   styleUrls: ['./costs.component.css']
 })
-export class CostsComponent implements OnInit {
+export class CostsComponent {
 
   @Input() costsStep: FormGroup;
 
@@ -17,9 +17,6 @@ export class CostsComponent implements OnInit {
   costType: any = CostType;
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
   get list() {
