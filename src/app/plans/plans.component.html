@@ -1,5 +1,5 @@
 <div id="content" style="'max-width: 1440px;'">
-  <h2 translate> plans.myplans </h2>
+  <h2 translate>plans.myplans</h2>
   <button mat-button [routerLink]="'/dmp'" mat-raised-button color="primary">
     <mat-icon>add</mat-icon>
     {{'plans.create.plan' | translate }}
@@ -16,5 +16,11 @@
   <div *ngIf="(dmpsLoaded$ | async) === LoadingState.FAILED">
     <app-error-message message="{{'plans.loading.failed' | translate }}"></app-error-message>
   </div>
+
+  <ng-container *ngIf="isAdmin()">
+    <h2 translate>plans.allplans</h2>
+    <app-dmp-table [dmps]="allDmps$ | async" (createDocument)="getDocument($event)"
+                   (createJsonFile)="getJsonFile($event)"></app-dmp-table>
+  </ng-container>
 </div>
 

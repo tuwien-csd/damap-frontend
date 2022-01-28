@@ -35,14 +35,21 @@ export class BackendService {
   getDmps(): Observable<DmpListItem[]> {
     return this.http.get<DmpListItem[]>(`${this.dmpBackendUrl}/list`).pipe(
       retry(3),
-      catchError(this.handleError('http.error.plan.load.all'))
+      catchError(this.handleError('http.error.plans.load.yours'))
+    );
+  }
+
+  getAllDmps(): Observable<DmpListItem[]> {
+    return this.http.get<DmpListItem[]>(`${this.dmpBackendUrl}/all`).pipe(
+      retry(3),
+      catchError(this.handleError('http.error.plans.load.all'))
     );
   }
 
   getDmpById(id: number): Observable<Dmp> {
     return this.http.get<Dmp>(`${this.dmpBackendUrl}/${id}`).pipe(
       retry(3),
-      catchError(this.handleError('http.error.plan.load.one'))
+      catchError(this.handleError('http.error.plans.load.one'))
     );
   }
 
@@ -55,7 +62,7 @@ export class BackendService {
     return this.http.post<Dmp>(this.dmpBackendUrl, dmp, httpOptions)
       .pipe(
         retry(3),
-        catchError(this.handleError('http.error.plan.save'))
+        catchError(this.handleError('http.error.plans.save'))
       );
   }
 
@@ -68,7 +75,7 @@ export class BackendService {
     return this.http.put<Dmp>(`${this.dmpBackendUrl}/${dmp.id}`, dmp, httpOptions)
       .pipe(
         retry(3),
-        catchError(this.handleError('http.error.plan.update'))
+        catchError(this.handleError('http.error.plans.update'))
       );
   }
 

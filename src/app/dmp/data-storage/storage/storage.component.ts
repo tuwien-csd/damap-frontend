@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TU_STORAGE} from './storage-list';
 import {FormArray, FormGroup} from '@angular/forms';
 import {Storage} from '../../../domain/storage';
@@ -8,7 +8,7 @@ import {Storage} from '../../../domain/storage';
   templateUrl: './storage.component.html',
   styleUrls: ['./storage.component.css']
 })
-export class StorageComponent implements OnInit {
+export class StorageComponent {
 
   @Input() dmpForm: FormGroup;
   @Input() storageStep: FormArray;
@@ -20,9 +20,6 @@ export class StorageComponent implements OnInit {
   storage: Storage[] = TU_STORAGE;
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
   addStorage(storage: Storage) {
