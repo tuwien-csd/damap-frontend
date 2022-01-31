@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
@@ -19,7 +19,7 @@ import {Dataset} from '../../domain/dataset';
     ]),
   ],
 })
-export class RepoComponent implements OnInit, OnChanges {
+export class RepoComponent implements OnChanges {
 
   @Input() loaded: LoadingState;
   @Input() repositories: Repository[]; // Repo list loaded from backend
@@ -42,9 +42,6 @@ export class RepoComponent implements OnInit, OnChanges {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges): void {

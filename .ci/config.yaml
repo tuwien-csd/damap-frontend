@@ -3,3 +3,9 @@ pipelines:
     stages:
       deploy:
         enabled: false
+  npm-ci:
+    stages:
+      e2e:
+        enabled: false
+      coverage:
+        enabled: false

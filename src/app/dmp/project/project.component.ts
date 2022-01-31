@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Project} from '../../domain/project';
 import {FormControl} from '@angular/forms';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
@@ -8,7 +8,7 @@ import {LoadingState} from '../../domain/enum/loading-state.enum';
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.css']
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent {
 
   @Input() projects: Project[];
   @Input() loaded: LoadingState;
@@ -19,9 +19,6 @@ export class ProjectComponent implements OnInit {
   LoadingState = LoadingState;
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
   changeProject(project: Project): void {

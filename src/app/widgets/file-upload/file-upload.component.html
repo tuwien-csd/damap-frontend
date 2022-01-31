@@ -1,4 +1,4 @@
-<div class="dropzone" dragdrop (fileDropped)="onFileDropped($event)">
+<div class="dropzone" appDragdrop (fileDropped)="onFileDropped($event)">
   <input type="file" #fileDrop id="fileDrop" multiple (change)="onFileSelected($event)" hidden/>
   <mat-icon>upload_file</mat-icon>
   <span>{{'upload.file.dragdrop' | translate}}</span>

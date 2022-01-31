@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {AccessRight} from '../../../domain/enum/access-right';
 
@@ -7,7 +7,7 @@ import {AccessRight} from '../../../domain/enum/access-right';
   templateUrl: './data-access.component.html',
   styleUrls: ['./data-access.component.css']
 })
-export class DataAccessComponent implements OnInit {
+export class DataAccessComponent {
 
   @Input() dmpForm: FormGroup;
   @Input() datasets: FormArray;
@@ -16,9 +16,6 @@ export class DataAccessComponent implements OnInit {
   panelOpenState = false;
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
 }
