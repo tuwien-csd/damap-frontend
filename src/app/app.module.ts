@@ -78,6 +78,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatMenuModule} from '@angular/material/menu';
 import {RetentionPeriodComponent} from './dmp/repo/retention-period/retention-period.component';
+import {ConsentDialog} from './consent/consent.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -121,6 +122,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SaveStatusComponent,
     StepIntroComponent,
     RetentionPeriodComponent,
+    ConsentDialog,
 
     // Directives
     DragdropDirective,

@@ -155,6 +155,9 @@ export class BackendService {
     );
   }
 
+  getConsentGiven(): Observable<boolean> {
+    return this.http.get<boolean>(`${this.backendUrl}consent`)
+  }
 
   private handleError(message = 'http.error.standard') {
     message = this.translate.instant(message);
