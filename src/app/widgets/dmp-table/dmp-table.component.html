@@ -3,7 +3,7 @@
   <input matInput (keyup)="applyFilter($event)" placeholder="{{'plans.table.search' | translate}}" #input>
 </mat-form-field>
 
-<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+<table mat-table [dataSource]="dmps" multiTemplateDataRows class="mat-elevation-z8">
   <ng-container matColumnDef="title">
     <th mat-header-cell *matHeaderCellDef>{{'plans.table.header.title' | translate}}</th>
     <td mat-cell *matCellDef="let element"><h3>{{element.project?.title || 'DMP ID: ' + element.id}}</h3></td>
@@ -17,6 +17,18 @@
   <ng-container matColumnDef="modified">
     <th mat-header-cell *matHeaderCellDef>{{'plans.table.header.modified' | translate}}</th>
     <td mat-cell *matCellDef="let element">{{element.modified | date}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="contact">
+    <th mat-header-cell *matHeaderCellDef>{{'plans.table.header.contact' | translate}}</th>
+    <td mat-cell *matCellDef="let element">
+      <ng-container *ngIf="element.contact else nocontact">
+        {{element.contact?.firstname + ' ' + element.contact?.lastname}}
+      </ng-container>
+      <ng-template #nocontact>
+        {{'plans.table.nocontact' | translate}}
+      </ng-template>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="edit" style="'width: 10px;'">
@@ -54,7 +66,7 @@
   <ng-container matColumnDef="expandedDetail">
     <td mat-cell *matCellDef="let element" [attr.colspan]="tableHeaders.length">
       <div class="element-detail"
-           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" *ngIf="element.project">
+           [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'" *ngIf="element.project">
         <mat-divider></mat-divider>
         <div class="project-overview">
           <h4> {{element.project.title}} </h4>

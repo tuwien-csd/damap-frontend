@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import {LicenseSelectorDialog, LicenseWizardComponent} from './license-wizard.component';
+import {LicenseSelectorDialogComponent, LicenseWizardComponent} from './license-wizard.component';
 import {HarnessLoader} from '@angular/cdk/testing';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -16,7 +16,7 @@ describe('LicenseWizardComponent', () => {
   beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
       imports: [MatDialogModule, NoopAnimationsModule, TranslateTestingModule],
-      declarations: [LicenseWizardComponent, LicenseSelectorDialog]
+      declarations: [LicenseWizardComponent, LicenseSelectorDialogComponent]
     }).compileComponents();
     fixture = TestBed.createComponent(LicenseWizardComponent);
     component = fixture.componentInstance;

@@ -10,7 +10,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {RouterModule} from '@angular/router';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {PlansComponent} from './plans/plans.component';
-import {PersonsComponent} from './persons/persons.component';
 import {DmpComponent} from './dmp/dmp.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatInputModule} from '@angular/material/input';
@@ -24,7 +23,7 @@ import {environment} from '../environments/environment';
 import {ProjectComponent} from './dmp/project/project.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
-import {DatasetDialog, SpecifyDataComponent} from './dmp/specify-data/specify-data.component';
+import {DatasetDialogComponent, SpecifyDataComponent} from './dmp/specify-data/specify-data.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from '@angular/material/table';
 import {MatChipsModule} from '@angular/material/chips';
@@ -56,7 +55,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {DragdropDirective} from './directives/dragdrop.directive';
 import {FileUploadComponent} from './widgets/file-upload/file-upload.component';
 import {ContributorFilterPipe} from './pipe/contributor-filter.pipe';
-import {LicenseSelectorDialog, LicenseWizardComponent} from './widgets/license-wizard/license-wizard.component';
+import {LicenseSelectorDialogComponent, LicenseWizardComponent} from './widgets/license-wizard/license-wizard.component';
 import {LicenseFilterPipe} from './widgets/license-wizard/license-filter.pipe';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ErrorMessageComponent} from './widgets/error-message/error-message.component';
@@ -91,12 +90,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AppComponent,
     DashboardComponent,
     PlansComponent,
-    PersonsComponent,
     DmpComponent,
     LayoutComponent,
     ProjectComponent,
     SpecifyDataComponent,
-    DatasetDialog,
+    DatasetDialogComponent,
     LegalEthicalAspectsComponent,
     LicensesComponent,
     RepoComponent,
@@ -110,7 +108,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     CostsComponent,
     FileUploadComponent,
     LicenseWizardComponent,
-    LicenseSelectorDialog,
+    LicenseSelectorDialogComponent,
     ErrorMessageComponent,
     TreeSelectFormFieldComponent,
     RepoFilterComponent,

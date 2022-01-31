@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
 @Component({
@@ -6,14 +6,11 @@ import {FormGroup} from '@angular/forms';
   templateUrl: './ethical-aspects.component.html',
   styleUrls: ['./ethical-aspects.component.css']
 })
-export class EthicalAspectsComponent implements OnInit {
+export class EthicalAspectsComponent {
 
   @Input() legalEthicalStep: FormGroup;
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
 }
