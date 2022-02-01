@@ -18,6 +18,7 @@ export class ContributorManualComponent {
   form = new FormGroup({
     firstName: new FormControl('', [notEmptyValidator(), Validators.maxLength(4000)]),
     lastName: new FormControl('', [notEmptyValidator(), Validators.maxLength(4000)]),
+    mbox: new FormControl('', [notEmptyValidator(), Validators.maxLength(4000)]),
     personId: new FormGroup({
       type: new FormControl(IdentifierType.ORCID),
       identifier: new FormControl('', [notEmptyValidator(), Validators.maxLength(255)])
@@ -44,6 +45,10 @@ export class ContributorManualComponent {
 
   lastName(): FormControl {
     return this.form.controls.lastName as FormControl;
+  }
+
+  mbox(): FormControl {
+    return this.form.controls.mbox as FormControl;
   }
 
   identifier(): FormControl {

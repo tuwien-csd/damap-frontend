@@ -31,7 +31,7 @@ describe('ContributorManualComponent', () => {
 
   it('should have orcid set after form reset', () => {
     component.form.setValue({
-      firstName: 'abc', lastName: 'def', personId: {
+      firstName: 'abc', lastName: 'def', mbox: "john.doe@email.com", personId: {
         type: IdentifierType.ORCID, identifier: '1234'
       }
     });
