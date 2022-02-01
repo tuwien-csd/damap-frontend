@@ -61,20 +61,26 @@ export class FormService {
       externalStorageInfo: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       legal: this.formBuilder.group({
         personalData: [false],
+        personalDataCris: [false],
         personalDataCompliance: [[]],
         otherPersonalDataCompliance: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveData: [false],
+        sensitiveDataCris: [false],
         sensitiveDataSecurity: [[], Validators.maxLength(this.TEXT_MAX_LENGTH)],
         otherDataSecurityMeasures: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictions: [false],
+        legalRestrictionsCris: [false],
         legalRestrictionsDocuments: [[]],
         otherLegalRestrictionsDocuments: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictionsComment: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         dataRightsAndAccessControl: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         humanParticipants: [false],
+        humanParticipantsCris: [false],
         ethicalIssues: [false],
-        committeeReviewed: [false]
+        ethicalIssuesCris: [false],
+        committeeReviewed: [false],
+        committeeReviewedCris: [false]
       }),
       hosts: this.formBuilder.array([]),
       reuse: this.formBuilder.group({
@@ -86,6 +92,7 @@ export class FormService {
       closedAccessInfo: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       costs: this.formBuilder.group({
         exist: [null],
+        existCris: [false],
         list: this.formBuilder.array([])
       })
     });
@@ -111,20 +118,26 @@ export class FormService {
       externalStorageInfo: dmp.externalStorageInfo,
       legal: {
         personalData: dmp.personalData,
+        personalDataCris: dmp.personalDataCris,
         personalDataCompliance: dmp.personalDataCompliance,
         otherPersonalDataCompliance: dmp.otherPersonalDataCompliance,
         sensitiveData: dmp.sensitiveData,
+        sensitiveDataCris: dmp.sensitiveDataCris,
         sensitiveDataSecurity: dmp.sensitiveDataSecurity,
         otherDataSecurityMeasures: dmp.otherDataSecurityMeasures,
         sensitiveDataAccess: dmp.sensitiveDataAccess,
         legalRestrictions: dmp.legalRestrictions,
+        legalRestrictionsCris: dmp.legalRestrictionsCris,
         legalRestrictionsDocuments: dmp.legalRestrictionsDocuments,
         otherLegalRestrictionsDocuments: dmp.otherLegalRestrictionsDocument,
         legalRestrictionsComment: dmp.legalRestrictionsComment,
         dataRightsAndAccessControl: dmp.dataRightsAndAccessControl,
         humanParticipants: dmp.humanParticipants,
+        humanParticipantsCris: dmp.humanParticipantsCris,
         ethicalIssues: dmp.ethicalIssuesExist,
+        ethicalIssuesCris: dmp.ethicalIssuesExistCris,
         committeeReviewed: dmp.committeeReviewed,
+        committeeReviewedCris: dmp.committeeReviewedCris,
       },
       reuse: {
         targetAudience: dmp.targetAudience,
@@ -132,7 +145,8 @@ export class FormService {
         restrictedDataAccess: dmp.restrictedDataAccess
       },
       costs: {
-        exist: dmp.costsExist
+        exist: dmp.costsExist,
+        existCris: dmp.costsExistCris
       },
       restrictedAccessInfo: dmp.restrictedAccessInfo,
       closedAccessInfo: dmp.closedAccessInfo,
@@ -171,24 +185,37 @@ export class FormService {
     }
   }
 
+  /**
+   * Export dmp form to a (consistent) DataManagementPlan object.
+   *
+   * In general if no datasets are defined, all related values will be reset to the initial value unless they
+   * were set by the cris system. (Exception: `costsExist` since it doesn't necessarily depend on new datasets.)
+   * E.g. `sensitiveData` will be set to `false` if no datasets are defined, unless the value was set by the cris system
+   * (`sensitiveDataCris == true`), then the given value will be used for this field.
+   */
   public exportFormToDmp(): Dmp {
     const formValue = this.form.getRawValue();
 
     const result: Dmp = {
       closedAccessInfo: '',
-      committeeReviewed: formValue.legal.humanParticipants,
+      committeeReviewed: formValue.legal.committeeReviewedCris ? formValue.legal.committeeReviewed : false,
+      committeeReviewedCris: formValue.legal.committeeReviewedCris,
       contributors: formValue.contributors,
-      costs: formValue.costs?.exist ? formValue.costs.list : [],
-      costsExist: formValue.costs?.exist,
+      costs: formValue.costs.exist ? formValue.costs.list : [],
+      costsExist: formValue.costs.exist,
+      costsExistCris: formValue.costs.existCris,
       dataGeneration: '',
       dataKind: formValue.data.kind,
       datasets: [],
-      ethicalIssuesExist: formValue.legal.ethicalIssues,
+      ethicalIssuesExist: formValue.legal.ethicalIssuesCris ? formValue.legal.ethicalIssues : false,
+      ethicalIssuesExistCris: formValue.legal.ethicalIssuesCris,
       externalStorage: [],
       externalStorageInfo: '',
       hosts: [],
-      humanParticipants: formValue.legal.humanParticipants,
-      legalRestrictions: false,
+      humanParticipants: formValue.legal.humanParticipantsCris ? formValue.legal.humanParticipants : false,
+      humanParticipantsCris: formValue.legal.humanParticipantsCris,
+      legalRestrictions: formValue.legal.legalRestrictionsCris ? formValue.legal.legalRestrictions : false,
+      legalRestrictionsCris: formValue.legal.legalRestrictionsCris,
       legalRestrictionsDocuments: [],
       otherLegalRestrictionsDocument: '',
       legalRestrictionsComment: '',
@@ -196,11 +223,13 @@ export class FormService {
       metadata: '',
       noDataExplanation: '',
       otherPersonalDataCompliance: '',
-      personalData: false,
+      personalData: formValue.legal.personalDataCris ? formValue.legal.personalData : false,
+      personalDataCris: formValue.legal.personalDataCris,
       personalDataCompliance: [],
       restrictedAccessInfo: '',
       restrictedDataAccess: '',
-      sensitiveData: false,
+      sensitiveData: formValue.legal.sensitiveDataCris ? formValue.legal.sensitiveData : false,
+      sensitiveDataCris: formValue.legal.sensitiveDataCris,
       sensitiveDataSecurity: [],
       otherDataSecurityMeasures: '',
       sensitiveDataAccess: '',
