@@ -79,6 +79,7 @@
           "question": {
             "firstname": "First name",
             "lastname": "Last name",
+            "mbox": "e-mail address",
             "orcid": "ORCID ID"
           }
         },
