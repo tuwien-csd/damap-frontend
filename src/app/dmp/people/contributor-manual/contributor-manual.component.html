@@ -1,0 +1,28 @@
+<div>
+<button mat-raised-button (click)="show = !show">
+  <ng-container *ngIf="show">{{'dmp.steps.people.manual.input.hide' | translate}}</ng-container>
+  <ng-container *ngIf="!show">{{'dmp.steps.people.manual.input.show' | translate}}</ng-container>
+</button>
+<mat-card *ngIf="show">
+  <div [formGroup]="form" class="form-row">
+    <app-input-wrapper [label]="'dmp.steps.people.manual.input.question.firstname'"
+                       [control]="firstName()"></app-input-wrapper>
+    <app-input-wrapper [label]="'dmp.steps.people.manual.input.question.lastname'"
+                       [control]="lastName()"></app-input-wrapper>
+    <app-input-wrapper [label]="'dmp.steps.people.manual.input.question.mbox'"
+                       [control]="mbox()"></app-input-wrapper>
+    <app-input-wrapper [label]="'dmp.steps.people.manual.input.question.orcid'"
+                       [control]="identifier()"></app-input-wrapper>
+  </div>
+  <div class="button-row">
+  <button mat-raised-button [disabled]="form.invalid" (click)="changeContactPerson()"
+          title="{{'dmp.steps.people.contact.add' | translate}}" color="primary">
+    <mat-icon>contact_mail</mat-icon>
+  </button>
+  <button mat-raised-button  [disabled]="form.invalid" (click)="addContributor()"
+          title="{{'dmp.steps.people.contributor.add' | translate}}" color="primary">
+    <mat-icon>person_add</mat-icon>
+  </button>
+  </div>
+</mat-card>
+</div>
