@@ -10,6 +10,7 @@ import {catchError, map, retry, shareReplay} from 'rxjs/operators';
 import {FeedbackService} from './feedback.service';
 import {environment} from '../../environments/environment';
 import {TranslateService} from '@ngx-translate/core';
+import {Consent} from '../domain/consent'
 
 @Injectable({
   providedIn: 'root'
@@ -162,8 +163,25 @@ export class BackendService {
     );
   }
 
-  getConsentGiven(): Observable<boolean> {
-    return this.http.get<boolean>(`${this.backendUrl}consent`)
+  getConsentGiven(): Observable<any> {
+    return this.http.get<any>(`${this.backendUrl}consent`).pipe(
+      map(details => details.consentGiven),
+      retry(3),
+      catchError(this.handleError('http.error.consent.one'))
+    );
+  }
+
+  editConsent(consent: Consent): Observable<Consent> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<Consent>(this.dmpBackendUrl, consent, httpOptions)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('http.error.consent.edit'))
+      );
   }
 
   private handleError(message = 'http.error.standard') {
