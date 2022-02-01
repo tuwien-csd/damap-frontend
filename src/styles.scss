@@ -101,6 +101,7 @@ mat-card {
 .form-row {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .form-row-group {
@@ -109,4 +110,10 @@ mat-card {
   flex-grow: 1;
   gap: 1rem;
   align-items: baseline;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }

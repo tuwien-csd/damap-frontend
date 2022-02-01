@@ -112,3 +112,9 @@
 <ng-template #empty>
   {{'dmp.steps.people.nopeople' | translate}}
 </ng-template>
+
+
+<!-- MANUAL INPUT -->
+<app-contributor-manual (contactPerson)="changeContactPerson($event)"
+                        (contributorToAdd)="addContributor($event)">
+</app-contributor-manual>

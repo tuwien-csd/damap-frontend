@@ -23,7 +23,7 @@
     <th mat-header-cell *matHeaderCellDef>{{'plans.table.header.contact' | translate}}</th>
     <td mat-cell *matCellDef="let element">
       <ng-container *ngIf="element.contact else nocontact">
-        {{element.contact?.firstname + ' ' + element.contact?.lastname}}
+        {{element.contact?.firstName + ' ' + element.contact?.lastName}}
       </ng-container>
       <ng-template #nocontact>
         {{'plans.table.nocontact' | translate}}

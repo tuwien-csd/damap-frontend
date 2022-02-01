@@ -73,6 +73,16 @@
           "add": "Set as contact",
           "remove": "Remove as contact"
         },
+        "manual.input": {
+          "show": "Show manual contributor input",
+          "hide": "Hide manual contributor input",
+          "question": {
+            "firstname": "First name",
+            "lastname": "Last name",
+            "mbox": "e-mail address",
+            "orcid": "ORCID ID"
+          }
+        },
         "nopeople": "No project members available."
       },
       "data": {
