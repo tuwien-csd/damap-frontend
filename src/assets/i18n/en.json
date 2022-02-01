@@ -415,7 +415,8 @@
         },
         "suffix": " for additional information and support. You must do so if your planned research involves any human participation."
       }
-    }
+    },
+    "cris": "Preselected based on project information in the CRIS system."
   },
   "form": {
     "error": {
