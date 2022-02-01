@@ -18,6 +18,7 @@ export class LayoutComponent implements OnInit {
   public name: string;
   public lang = 'EN';
   public widescreen = () => window.innerWidth >= 1024;
+  public consentGiven: boolean;
 
   constructor(
     private auth: OAuthService,
@@ -26,24 +27,26 @@ export class LayoutComponent implements OnInit {
     private backendService: BackendService
     ) {
       const claims = this.auth.getIdentityClaims();
+      const consentResponse = this.backendService.getConsentGiven();
+      consentResponse.subscribe(async response => {
+        await (response);
+        console.log(response);
+        if(response) {
+          this.consentGiven = true;
+        }
+      });
       this.name = claims['name'];
-  }
+    }
 
   ngOnInit() {
-    const consentResponse = this.backendService.getConsentGiven()
-    let consentGiven = false;
+    console.log('check consent on init');
+    console.log(this.consentGiven);
+  }
 
-    consentResponse.subscribe(response => {
-                if(response) {
-                  console.log('1true');
-                  const consentGiven = true;
-                }
-                else {console.log('1false');}
-          });
-
-    console.log(consentGiven);
-
-    if (consentGiven === false) {
+  ngAfterContentInit() {
+    console.log('check consent after init');
+    console.log(this.consentGiven);
+    if (this.consentGiven === false) {
       const dialogRef = this.dialog.open(ConsentDialog);
 
       dialogRef.afterClosed().subscribe(result => {
