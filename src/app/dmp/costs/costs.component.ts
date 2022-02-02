@@ -14,6 +14,8 @@ export class CostsComponent {
   @Output() costToAdd = new EventEmitter();
   @Output() costToRemove = new EventEmitter<number>();
 
+  @Output() crisValueChange = new EventEmitter<string>();
+
   costType: any = CostType;
 
   translateEnumPrefix = 'enum.costs.'
@@ -35,5 +37,9 @@ export class CostsComponent {
 
   removeCost(index: number) {
     this.costToRemove.emit(index);
+  }
+
+  changeCrisValue(controlName: string) {
+    this.crisValueChange.emit('costs.' + controlName)
   }
 }

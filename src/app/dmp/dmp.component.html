@@ -55,7 +55,8 @@
     <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
       <app-dmp-legal-ethical-aspects [dmpForm]="dmpForm"
                                      [legalEthicalStep]="legalEthicalStep"
-                                     [datasets]="datasets">
+                                     [datasets]="datasets"
+                                     (crisValueChange)="changeCrisValue($event)">
       </app-dmp-legal-ethical-aspects>
     </ng-container>
   </mat-step>
@@ -86,7 +87,8 @@
   <mat-step label="{{'dmp.steps.costs.label' | translate }}">
     <app-dmp-costs [costsStep]="costsStep"
                    (costToAdd)="addCost()"
-                   (costToRemove)="removeCost($event)">
+                   (costToRemove)="removeCost($event)"
+                   (crisValueChange)="changeCrisValue($event)">
     </app-dmp-costs>
   </mat-step>
   <mat-step label="{{'dmp.steps.end.label' | translate }}">
