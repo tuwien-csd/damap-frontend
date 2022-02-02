@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {ComplianceType} from '../../domain/enum/compliance-type.enum';
 import {SecurityMeasure} from '../../domain/enum/security-measure.enum';
@@ -15,6 +15,8 @@ export class LegalEthicalAspectsComponent {
   @Input() legalEthicalStep: FormGroup;
   @Input() datasets: FormArray;
 
+  @Output() crisValueChange = new EventEmitter<string>();
+
   translateAgreementPrefixEnum = 'enum.agreement.'
   translateCompliancePrefixEnum = 'enum.compliance.'
   translateSecurityPrefixEnum = 'enum.securitymeasure.'
@@ -22,8 +24,8 @@ export class LegalEthicalAspectsComponent {
   optionsLinksEthics: string[] = ['Guidelines on Safeguarding Good Scientific Practice'];
 
   questions = [
-    {label: 'dmp.steps.legal.question.personalData', model: 'personalData'},
-    {label: 'dmp.steps.legal.question.legalRestrictions', model: 'legalRestrictions'}
+    {label: 'dmp.steps.legal.question.personalData', model: 'personalData', cris: 'personalDataCris'},
+    {label: 'dmp.steps.legal.question.legalRestrictions', model: 'legalRestrictions', cris: 'legalRestrictionsCris'}
   ];
 
   complianceOptions: any = ComplianceType;
@@ -69,6 +71,10 @@ export class LegalEthicalAspectsComponent {
 
   get isOtherDocumentSelected() {
     return this.legalEthicalStep.controls.legalRestrictionsDocuments.value?.includes(Agreement.OTHER);
+  }
+
+  changeCrisValue(controlName: string) {
+    this.crisValueChange.emit('legal.' + controlName)
   }
 
 }

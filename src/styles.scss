@@ -97,6 +97,11 @@ mat-card {
   background: #2a2a2a;
 }
 
+.flex-radio {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Form row styling */
 .form-row {
   display: flex;
