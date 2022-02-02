@@ -443,6 +443,17 @@ export class FormService {
     });
   }
 
+  /**
+   * Set CRIS info to false if a value retrieved from the CRIS system is changed.
+   * @param controlName The complete path of the form control to be set to false (e.g. `formGroup.formControl`)
+   */
+  public setCrisInfoToFalse(controlName: string) {
+    const crisControl: FormControl = this.form.get(controlName) as FormControl;
+    if (crisControl.value === true) {
+      crisControl.setValue(false);
+    }
+  }
+
   private mapDatasetToFormGroup(dataset: Dataset): FormGroup {
     const formGroup = this.createDatasetFormGroup(dataset.title);
     formGroup.patchValue(dataset);
