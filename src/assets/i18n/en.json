@@ -715,12 +715,30 @@
     "welcome.message": "Welcome to TU DMP Tool, a service that helps you to create and update the Data Management Plan (DMP) for your project.",
     "dmp": {
       "heading": "What is a DMP?",
-      "text": "A DMP is a structured document that keeps record of what research data is created and what happens to that data during and after a project. It helps with planning the research process, managing your data in accordance with the FAIR Principles, and defining rights and responsibilities in a research project involving several researchers or institutions."
+      "text": {
+        "prefix": "A ",
+        "dmp": {
+          "text": "DMP",
+          "link": "https://www.tuwien.at/en/research/rti-support/research-data/dmp"
+        },
+        "middle": " is a structured document that keeps record of what research data is created and what happens to that data during and after a project. It helps with planning the research process, managing your data in accordance with the ",
+        "fairprinciples": {
+          "text": "FAIR Principles",
+          "link": "https://www.tuwien.at/en/research/rti-support/research-data/research-data-management/fair-principles"
+        },
+        "suffix": ", and defining rights and responsibilities in a research project involving several researchers or institutions."
+      }
     },
     "tool": {
       "heading": "TU DMP Tool",
       "bulletpoints": {
-        "dmp": "guides you step by step through the different sections of a DMP following the Science Europe Practical Guide",
+        "dmp": {
+          "text": "guides you step by step through the different sections of a DMP following the ",
+          "sepg": {
+            "text": "Science Europe Practical Guide",
+            "link": "https://www.scienceeurope.org/our-resources/practical-guide-to-the-international-alignment-of-research-data-management"
+          }
+        },
         "document": "exports a pre-filled DMP as a Word document that you can customize and use for submission to European and national funders, for example FWF and FFG",
         "benefits": {
           "text": "saves you work by",
@@ -728,7 +746,14 @@
           "two": "providing wizards, guidance, and item lists to choose from",
           "three": "suggesting answers that you can either comply with or adjust to your needs"
         },
-        "madmp": "is compatible with the RDA recommendation on machine actionable DMPs."
+        "madmp": {
+          "prefix": "is compatible with the",
+          "rda": {
+            "text": "RDA recommendation on machine actionable DMPs",
+            "link": "https://doi.org/10.15497/rda00039"
+          },
+          "suffix": "."
+        }
       }
     }
   }
