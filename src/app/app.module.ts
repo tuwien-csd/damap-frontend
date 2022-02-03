@@ -8,7 +8,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {RouterModule} from '@angular/router';
-import {DashboardComponent} from './dashboard/dashboard.component';
 import {PlansComponent} from './plans/plans.component';
 import {DmpComponent} from './dmp/dmp.component';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -77,8 +76,9 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatMenuModule} from '@angular/material/menu';
 import {RetentionPeriodComponent} from './dmp/repo/retention-period/retention-period.component';
-import { ContributorManualComponent } from './dmp/people/contributor-manual/contributor-manual.component';
+import {ContributorManualComponent} from './dmp/people/contributor-manual/contributor-manual.component';
 import {CrisTagComponent} from './widgets/cris-tag/cris-tag.component';
+import {DashboardModule} from './dashboard/dashboard.module';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -89,7 +89,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   declarations: [
     // Components
     AppComponent,
-    DashboardComponent,
     PlansComponent,
     DmpComponent,
     LayoutComponent,
@@ -191,7 +190,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatMenuModule,
 
     // Custom
-    SharedModule
+    SharedModule,
+    DashboardModule
   ],
   providers: [{
     provide: APP_INITIALIZER,
