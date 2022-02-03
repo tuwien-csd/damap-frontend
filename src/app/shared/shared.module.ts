@@ -25,7 +25,11 @@ import {TranslateModule} from '@ngx-translate/core';
     FormsModule,
     ReactiveFormsModule,
     InputWrapperComponent,
-    TextareaWrapperComponent
+    TextareaWrapperComponent,
+
+    // Materials
+    MatInputModule,
+    MatAutocompleteModule
   ]
 })
 export class SharedModule {

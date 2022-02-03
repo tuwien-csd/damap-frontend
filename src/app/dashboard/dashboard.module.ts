@@ -10,10 +10,16 @@ import {MatIconModule} from '@angular/material/icon';
   declarations: [DashboardComponent],
   imports: [
     CommonModule, RouterModule, TranslateModule,
-    // Angular Materials
+    // Materials
     MatButtonModule, MatIconModule
   ],
-  exports: [CommonModule, DashboardComponent]
+  exports: [
+    CommonModule,
+    DashboardComponent,
+
+    // Materials
+    MatButtonModule, MatIconModule
+  ]
 })
 export class DashboardModule {
 }
