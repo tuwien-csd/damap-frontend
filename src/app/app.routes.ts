@@ -7,9 +7,10 @@ import {AuthGuard} from './auth/auth.guard';
 
 export const APP_ROUTES: Routes = [
   {path: '', component: LayoutComponent, canActivate: [AuthGuard], children: [
+      {path: '', component: DashboardComponent},
       {path: 'dashboard', component: DashboardComponent},
       {path: 'plans', component: PlansComponent},
       {path: 'dmp', component: DmpComponent},
       {path: 'dmp/:id', component: DmpComponent}
-      ]
+    ]
 }];
