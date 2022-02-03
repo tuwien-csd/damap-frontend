@@ -5,17 +5,14 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {RouterModule} from '@angular/router';
 import {PlansComponent} from './plans/plans.component';
 import {DmpComponent} from './dmp/dmp.component';
 import {MatStepperModule} from '@angular/material/stepper';
-import {MatInputModule} from '@angular/material/input';
 import {AppStoreModule} from './store/app-store.module';
 import {APP_ROUTES} from './app.routes';
 import {LayoutComponent} from './layout/layout.component';
-import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {OAuthModule} from 'angular-oauth2-oidc';
 import {environment} from '../environments/environment';
@@ -63,7 +60,6 @@ import {MatTreeModule} from '@angular/material/tree';
 import {RepoFilterComponent} from './dmp/repo/repo-filter/repo-filter.component';
 import {TooltipComponent} from './widgets/tooltip/tooltip.component';
 import {AuthGuard} from './auth/auth.guard';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ConfigService} from './services/config.service';
 import {DataAccessComponent} from './dmp/data-storage/data-access/data-access.component';
 import {SharedModule} from './shared/shared.module';
@@ -158,13 +154,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
 
     // Materials
-    MatButtonModule,
-    MatInputModule,
     MatListModule,
     MatToolbarModule,
     MatSidenavModule,
     MatStepperModule,
-    MatIconModule,
     MatTabsModule,
     MatTabsModule,
     MatDatepickerModule,
@@ -185,7 +178,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatExpansionModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    MatAutocompleteModule,
     MatTreeModule,
     MatMenuModule,
 
