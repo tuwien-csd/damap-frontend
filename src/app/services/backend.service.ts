@@ -163,8 +163,8 @@ export class BackendService {
     );
   }
 
-  getConsentGiven(): Observable<any> {
-    return this.http.get<any>(`${this.backendUrl}consent`).pipe(
+  getConsentGiven(): Observable<boolean> {
+    return this.http.get<Consent>(`${this.backendUrl}consent`).pipe(
       map(details => details.consentGiven),
       retry(3),
       catchError(this.handleError('http.error.consent.one'))
@@ -172,12 +172,7 @@ export class BackendService {
   }
 
   editConsent(consent: Consent): Observable<Consent> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    return this.http.post<Consent>(this.dmpBackendUrl, consent, httpOptions)
+    return this.http.post<Consent>(`${this.backendUrl}consent`, consent)
       .pipe(
         retry(3),
         catchError(this.handleError('http.error.consent.edit'))

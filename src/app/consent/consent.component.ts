@@ -1,20 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import {OAuthService} from 'angular-oauth2-oidc';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatDialogRef} from '@angular/material/dialog';
 import {TranslateService} from '@ngx-translate/core';
+import {BackendService} from '../services/backend.service';
+import {Consent} from '../domain/consent'
 
 @Component({
-  selector: 'consent-dialog',
-  templateUrl: './consent-dialog.html',
+  selector: 'app-consent',
+  templateUrl: './consent.component.html',
   styleUrls: ['./consent.component.css']
 })
 
-export class ConsentDialog implements OnInit {
+export class ConsentComponent implements OnInit {
   public lang = 'EN';
+  public consent : Consent;
 
-  constructor(public dialogRef: MatDialogRef<ConsentDialog>, private translate: TranslateService,) {}
+  constructor(private backendService: BackendService, public dialogRef: MatDialogRef<ConsentComponent>, private translate: TranslateService) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      if(result) {
+        console.log('true');
+        this.consent.universityId = '39608';
+        this.consent.consentGiven = true;
+        this.consent.givenDate = new Date();
+        this.backendService.editConsent(this.consent).subscribe(Response);
+      }
+    });
+
+  }
 
   useLanguage(language: string): void {
     this.lang = language.toUpperCase();
@@ -23,5 +37,5 @@ export class ConsentDialog implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
-  };
+  }
 }
