@@ -3,8 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../services/backend.service';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {Observable, Subscription} from 'rxjs';
-import {Person} from '../domain/person';
-import {ProjectMember} from '../domain/project-member';
+import {Contributor} from '../domain/contributor';
 import {Project} from '../domain/project';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../store/states/app.state';
@@ -40,7 +39,6 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   // Steps
   projectStep: FormControl;
-  contactStep: FormControl;
   contributorStep: FormArray;
   specifyDataStep: FormGroup;
   datasets: FormArray;
@@ -56,7 +54,7 @@ export class DmpComponent implements OnInit, OnDestroy {
   // Resources
   projectsLoaded$: Observable<LoadingState>;
   projects$: Observable<Project[]>;
-  projectMembers: ProjectMember[];
+  projectMembers: Contributor[];
   repositories: any;
   repositoriesLoaded$: Observable<LoadingState>;
   repositories$: Observable<Repository[]>;
@@ -97,7 +95,6 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formChanged$.subscribe(value => this.formChanged = value);
 
     this.projectStep = this.dmpForm.get('project') as FormControl;
-    this.contactStep = this.dmpForm.get('contact') as FormControl;
     this.contributorStep = this.dmpForm.get('contributors') as FormArray;
     this.specifyDataStep = this.dmpForm.get('data') as FormGroup;
     this.datasets = this.dmpForm.get('datasets') as FormArray;
@@ -154,22 +151,23 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   changeProject(project: Project) {
     if (project != null) {
+      // only set contact if none is selected yet
+      if (!this.formService.getContactPerson()) {
+        this.getProjectMembersAndSetContact(project.universityId);
+      } else {
+        this.getProjectMembers(project.universityId);
+      }
       this.projectStep.setValue(project);
-      this.getProjectMembersAndSetContact(project.universityId);
     } else {
       this.projectStep.reset();
     }
   }
 
-  changeContactPerson(contact: Person) {
-    if (contact != null) {
-      this.contactStep.setValue(contact);
-    } else {
-      this.contactStep.reset();
-    }
+  changeContactPerson(contact: Contributor) {
+    this.formService.changeContactPerson(contact);
   }
 
-  addContributor(contributor: Person) {
+  addContributor(contributor: Contributor) {
     this.formService.addContributorToForm(contributor);
   }
 
@@ -300,8 +298,8 @@ export class DmpComponent implements OnInit, OnDestroy {
       .subscribe(members => {
         this.projectMembers = members;
         for (const member of members) {
-          if (member.projectLeader) {
-            this.changeContactPerson(member.person);
+          if (member.contact) {
+            this.changeContactPerson(member);
             break;
           }
         }

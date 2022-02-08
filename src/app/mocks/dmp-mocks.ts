@@ -1,13 +1,11 @@
 import {Dmp} from '../domain/dmp';
-import {ContributorRole} from '../domain/enum/contributor-role.enum';
-import {IdentifierType} from '../domain/enum/identifier-type.enum';
 import {CostType} from '../domain/enum/cost-type.enum';
 import {DataKind} from '../domain/enum/data-kind.enum';
 import {ComplianceType} from '../domain/enum/compliance-type.enum';
 import {SecurityMeasure} from '../domain/enum/security-measure.enum';
 import {Agreement} from '../domain/enum/agreement.enum';
 import {mockProject} from './project-mocks';
-import {mockContact} from './person-mocks';
+import {mockContact, mockContributor1, mockContributor2} from './contributor-mocks';
 import {closedDatasetMock, restrictedDatasetMock} from './dataset-mocks';
 
 export const completeDmp: Dmp = {
@@ -19,30 +17,10 @@ export const completeDmp: Dmp = {
   closedAccessInfo: 'closed access info',
   committeeReviewed: true,
   committeeReviewedCris: true,
-  contact: mockContact,
   contributors: [
-    {
-      id: 84, person: {
-        firstName: 'Max', id: 85, lastName: 'Mustermann', mbox: 'm.mustermann@university.ac.at', universityId: '12345', personId: null,
-        affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR}
-      }, role: ContributorRole.EDITOR
-    },
-    {
-      id: 98,
-      person: {
-        firstName: 'Anna',
-        id: 99,
-        lastName: 'Musterfrau',
-        mbox: 'm.musterfrau@university.ac.at',
-        personId: {
-          identifier: '0000-0000-0000-xxxx',
-          type: IdentifierType.ORCID
-        },
-        affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR},
-        universityId: '23456'
-      },
-      role: ContributorRole.PROJECT_MANAGER
-    }
+    mockContact,
+    mockContributor1,
+    mockContributor2
   ],
   costs: [
     {
@@ -133,30 +111,10 @@ export const noDataDmp: Dmp = {
   closedAccessInfo: 'closed access info',
   committeeReviewed: true,
   committeeReviewedCris: true,
-  contact: mockContact,
   contributors: [
-    {
-      id: 84, person: {
-        firstName: 'Max', id: 85, lastName: 'Mustermann', mbox: 'm.mustermann@university.ac.at', universityId: '12345', personId: null,
-        affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR}
-      }, role: ContributorRole.EDITOR
-    },
-    {
-      id: 98,
-      person: {
-        firstName: 'Anna',
-        id: 99,
-        lastName: 'Musterfrau',
-        mbox: 'm.musterfrau@university.ac.at',
-        personId: {
-          identifier: '0000-0000-0000-xxxx',
-          type: IdentifierType.ORCID
-        },
-        affiliation: 'TU Wien', affiliationId: {identifier: 'XXX', type: IdentifierType.ROR},
-        universityId: '23456'
-      },
-      role: ContributorRole.PROJECT_MANAGER
-    }
+    mockContact,
+    mockContributor1,
+    mockContributor2
   ],
   costs: [
     {

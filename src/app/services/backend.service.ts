@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {Dmp} from '../domain/dmp';
 import {HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders, HttpParams} from '@angular/common/http';
-import {ProjectMember} from '../domain/project-member';
+import {Contributor} from '../domain/contributor';
 import {Project} from '../domain/project';
 import {DmpListItem} from '../domain/dmp-list-item';
 import {Repository} from '../domain/repository';
@@ -87,8 +87,8 @@ export class BackendService {
     );
   }
 
-  getProjectMembers(projectId: number): Observable<ProjectMember[]> {
-    return this.http.get<ProjectMember[]>(`${this.projectBackendUrl}/${projectId}/staff`).pipe(
+  getProjectMembers(projectId: number): Observable<Contributor[]> {
+    return this.http.get<Contributor[]>(`${this.projectBackendUrl}/${projectId}/staff`).pipe(
       retry(3),
       catchError(this.handleError('http.error.projectmembers'))
     );
