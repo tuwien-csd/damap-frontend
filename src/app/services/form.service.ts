@@ -4,7 +4,6 @@ import {Dmp} from '../domain/dmp';
 import {Contributor} from '../domain/contributor';
 import {Dataset} from '../domain/dataset';
 import {Host} from '../domain/host';
-import {Person} from '../domain/person';
 import {Cost} from '../domain/cost';
 import {DataAccessType} from '../domain/enum/data-access-type.enum';
 import {Storage} from '../domain/storage';
@@ -44,7 +43,6 @@ export class FormService {
     return this.formBuilder.group({
       id: [null],
       project: [null],
-      contact: [null],
       contributors: this.formBuilder.array([]),
       data: this.formBuilder.group({
         kind: [null],
@@ -104,7 +102,6 @@ export class FormService {
     this.form.patchValue({
       id: dmp.id,
       project: dmp.project,
-      contact: dmp.contact,
       data: {
         kind: dmp.dataKind,
         explanation: dmp.noDataExplanation,
@@ -238,8 +235,7 @@ export class FormService {
       targetAudience: '',
       tools: '',
       id: formValue.id,
-      project: formValue.project,
-      contact: formValue.contact
+      project: formValue.project
     };
 
     if (formValue.data.kind === DataKind.SPECIFY) {
@@ -326,9 +322,30 @@ export class FormService {
     (this.form.controls.externalStorage as FormArray).clear();
   }
 
-  public addContributorToForm(contributor: Person) {
+  public getContactPerson(): Contributor {
+    return (this.form.get('contributors') as FormArray).value.find(c => c.contact);
+  }
+
+  public changeContactPerson(contact: Contributor) {
+    // Remove old contact
+    const contributorFormArray = this.form.get('contributors') as FormArray;
+    contributorFormArray.controls.forEach(c => c.patchValue({contact: false}));
+
+    // Add/set new contact
+    if (contact) {
+      const newContact = contributorFormArray.controls.find(c => c.value.universityId === contact.universityId);
+      if (newContact) {
+        newContact.patchValue({contact: true});
+      } else {
+        this.addContributorToForm(contact, true);
+      }
+    }
+  }
+
+  public addContributorToForm(contributor: Contributor, contact = false) {
     const contributorFormGroup = this.createContributorFormGroup();
-    contributorFormGroup.patchValue({person: contributor});
+    contributorFormGroup.patchValue(contributor);
+    contributorFormGroup.patchValue({contact});
     (this.form.get('contributors') as FormArray).push(contributorFormGroup);
   }
 
@@ -463,18 +480,22 @@ export class FormService {
   private createContributorFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
-      person: [null],
-      role: [null]
+      affiliation: [''],
+      affiliationId: [null],
+      contact: [false],
+      firstName: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+      lastName: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+      mbox: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+      personId: [null],
+      role: [null],
+      roleInProject: [''],
+      universityId: [null]
     });
   }
 
   private mapContributorToFormGroup(contributor: Contributor): FormGroup {
     const formGroup = this.createContributorFormGroup();
-    formGroup.setValue({
-      id: contributor.id || null,
-      person: contributor.person,
-      role: contributor.role || null
-    });
+    formGroup.patchValue(contributor);
     return formGroup;
   }
 

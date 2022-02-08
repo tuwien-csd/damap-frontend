@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PeopleComponent} from './people.component';
 import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormArray, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 
@@ -20,6 +20,9 @@ describe('PeopleComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PeopleComponent);
     component = fixture.componentInstance;
+    component.dmpForm = new FormGroup({
+      contributors: new FormArray([])
+    });
     fixture.detectChanges();
   });
 
