@@ -22,7 +22,6 @@ import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {DatasetDialogComponent, SpecifyDataComponent} from './dmp/specify-data/specify-data.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from '@angular/material/table';
-import {MatChipsModule} from '@angular/material/chips';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {LegalEthicalAspectsComponent} from './dmp/legal-ethical-aspects/legal-ethical-aspects.component';
@@ -53,10 +52,7 @@ import {FileUploadComponent} from './widgets/file-upload/file-upload.component';
 import {ContributorFilterPipe} from './pipe/contributor-filter.pipe';
 import {LicenseSelectorDialogComponent, LicenseWizardComponent} from './widgets/license-wizard/license-wizard.component';
 import {LicenseFilterPipe} from './widgets/license-wizard/license-filter.pipe';
-import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ErrorMessageComponent} from './widgets/error-message/error-message.component';
-import {TreeSelectFormFieldComponent} from './widgets/tree-select-form-field/tree-select-form-field.component';
-import {MatTreeModule} from '@angular/material/tree';
 import {RepoFilterComponent} from './dmp/repo/repo-filter/repo-filter.component';
 import {TooltipComponent} from './widgets/tooltip/tooltip.component';
 import {AuthGuard} from './guard/auth.guard';
@@ -78,6 +74,7 @@ import {ConsentGuard} from './guard/consent.guard';
 import {ContributorManualComponent} from './dmp/people/contributor-manual/contributor-manual.component';
 import {CrisTagComponent} from './widgets/cris-tag/cris-tag.component';
 import {DashboardModule} from './dashboard/dashboard.module';
+import {TreeSelectFormFieldModule} from './widgets/tree-select-form-field/tree-select-form-field.module';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -109,7 +106,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     LicenseWizardComponent,
     LicenseSelectorDialogComponent,
     ErrorMessageComponent,
-    TreeSelectFormFieldComponent,
     RepoFilterComponent,
     TooltipComponent,
     DataAccessComponent,
@@ -163,13 +159,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatSidenavModule,
     MatStepperModule,
     MatTabsModule,
-    MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatRippleModule,
     MatRadioModule,
     MatTableModule,
-    MatChipsModule,
     MatDialogModule,
     MatSelectModule,
     MatCardModule,
@@ -181,13 +175,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatTooltipModule,
     MatExpansionModule,
     MatSnackBarModule,
-    MatCheckboxModule,
-    MatTreeModule,
     MatMenuModule,
 
     // Custom
     SharedModule,
-    DashboardModule
+    DashboardModule,
+    TreeSelectFormFieldModule
   ],
   providers: [{
     provide: APP_INITIALIZER,
