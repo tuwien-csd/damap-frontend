@@ -12,3 +12,8 @@ export const selectFormChanged = createSelector(
   selectFormState,
   formState => formState.changed
 );
+
+export const selectFormContact = createSelector(
+  selectFormState,
+  formState => formState.dmp.contributors?.find(c => c.contact)
+);

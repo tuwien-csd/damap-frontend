@@ -1,6 +1,5 @@
 import {Project} from './project';
 import {Contributor} from './contributor';
-import {Person} from './person';
 import {DataKind} from './enum/data-kind.enum';
 import {Dataset} from './dataset';
 import {Host} from './host';
@@ -14,7 +13,6 @@ export interface Dmp {
   title?: string;
   description?: string;
   project: Project;
-  contact: Person;
   contributors: Contributor[];
   dataKind: DataKind;
   noDataExplanation: string;

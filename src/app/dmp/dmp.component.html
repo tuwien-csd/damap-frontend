@@ -8,8 +8,7 @@
   </mat-step>
   <mat-step label="{{'dmp.steps.people.label' | translate }}">
     <app-dmp-people [projectMembers]="projectMembers"
-                    [contactStep]="contactStep"
-                    [contributorStep]="contributorStep"
+                    [dmpForm]="dmpForm"
                     (contactPerson)="changeContactPerson($event)"
                     (contributorToAdd)="addContributor($event)"
                     (contributorToRemove)="removeContributor($event)">

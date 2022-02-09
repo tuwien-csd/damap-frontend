@@ -1,5 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import {ProjectMember} from '../domain/project-member';
+import {Pipe, PipeTransform} from '@angular/core';
 import {Contributor} from '../domain/contributor';
 
 @Pipe({
@@ -7,8 +6,8 @@ import {Contributor} from '../domain/contributor';
 })
 export class ContributorFilterPipe implements PipeTransform {
 
-  transform(projectMembers: ProjectMember[], contributors: Contributor[]): unknown {
-    return projectMembers.filter(e => contributors.find(entry => entry.person.universityId === e.person.universityId) === undefined);
+  transform(projectMembers: Contributor[], contributors: Contributor[]): Contributor[] {
+    return projectMembers.filter(e => contributors.find(entry => entry.universityId === e.universityId) === undefined);
   }
 
 }
