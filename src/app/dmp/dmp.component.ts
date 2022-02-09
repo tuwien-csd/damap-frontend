@@ -12,7 +12,7 @@ import {LoadProjects} from '../store/actions/project.actions';
 import {FormService} from '../services/form.service';
 import {Repository} from '../domain/repository';
 import {selectRepositories, selectRepositoriesLoaded} from '../store/selectors/repository.selectors';
-import {LoadRepositories, LoadRepository} from '../store/actions/repository.actions';
+import {LoadAllRepositories, LoadRepository} from '../store/actions/repository.actions';
 import {StepperSelectionEvent} from '@angular/cdk/stepper';
 import {Storage} from '../domain/storage';
 import {FeedbackService} from '../services/feedback.service';
@@ -309,7 +309,7 @@ export class DmpComponent implements OnInit, OnDestroy {
   private getRepositories() {
     this.repositoriesLoaded$.subscribe(loaded => {
       if (loaded === LoadingState.NOT_LOADED) {
-        this.store.dispatch(new LoadRepositories());
+        this.store.dispatch(new LoadAllRepositories());
       }
     });
   }

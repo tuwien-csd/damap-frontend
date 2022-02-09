@@ -2,9 +2,8 @@ import {repositoryReducer} from './repository.reducer';
 import {initialRepositoryState} from '../states/repository.state';
 import {
   FailedToLoadRepositories,
-  LoadRepositories,
+  LoadAllRepositories,
   RepositoriesLoaded,
-  ResetRepositoryFilter,
   SetRepositoryFilter,
   UpdateRepository
 } from '../actions/repository.actions';
@@ -22,7 +21,7 @@ describe('RepositoryReducer', () => {
   });
 
   it('should return loading state', () => {
-    const state = repositoryReducer(initialRepositoryState, new LoadRepositories());
+    const state = repositoryReducer(initialRepositoryState, new LoadAllRepositories());
 
     expect(state.loaded).toBe(LoadingState.LOADING);
     expect(state.ids).toEqual(initialRepositoryState.ids);
@@ -58,7 +57,7 @@ describe('RepositoryReducer', () => {
     expect(state.entities).toEqual(initialRepositoryState.entities);
     expect(state.filters).toEqual({id: ['orcid']});
 
-    const newState = repositoryReducer(state, new ResetRepositoryFilter());
+    const newState = repositoryReducer(state, new LoadAllRepositories());
 
     expect(newState.ids).toEqual(state.ids);
     expect(newState.entities).toEqual(state.entities);

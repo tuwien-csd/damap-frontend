@@ -3,17 +3,16 @@ import {Repository} from '../../domain/repository';
 import {Update} from '@ngrx/entity';
 
 export enum RepositoryActionTypes {
-  LoadRepositories = '[Repositories] Load all',
+  LoadAllRepositories = '[Repositories] Load all',
   RepositoriesLoaded = '[Repositories] All loaded',
   LoadRepository = '[Repositories] Load one',
   UpdateRepository = '[Repositories] Update one',
   FailedToLoadRepositories = '[Repositories] Failed to load all',
-  SetRepositoryFilter = '[Repositories] Set filter',
-  ResetRepositoryFilter = '[Repositories] Reset filter'
+  SetRepositoryFilter = '[Repositories] Set filter'
 }
 
-export class LoadRepositories implements Action {
-  readonly type = RepositoryActionTypes.LoadRepositories;
+export class LoadAllRepositories implements Action {
+  readonly type = RepositoryActionTypes.LoadAllRepositories;
 }
 
 export class RepositoriesLoaded implements Action {
@@ -48,15 +47,10 @@ export class SetRepositoryFilter implements Action {
   }
 }
 
-export class ResetRepositoryFilter implements Action {
-  readonly type = RepositoryActionTypes.ResetRepositoryFilter;
-}
-
 export type RepositoryActions =
-  LoadRepositories
+  LoadAllRepositories
   | RepositoriesLoaded
   | LoadRepository
   | UpdateRepository
   | FailedToLoadRepositories
-  | SetRepositoryFilter
-  | ResetRepositoryFilter;
+  | SetRepositoryFilter;
