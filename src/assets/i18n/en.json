@@ -438,7 +438,8 @@
   },
   "treeselect": {
     "filter": "Filter selection",
-    "toggle": "Toggle {{value}}"
+    "toggle": "Toggle {{value}}",
+    "options": "Select options"
   },
   "license.wizard": {
     "select": "Select license with license selector",
