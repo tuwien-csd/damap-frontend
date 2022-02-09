@@ -6,9 +6,10 @@ export function repositoryReducer(
   state = initialRepositoryState,
   action: RepositoryActions): RepositoryState {
   switch (action.type) {
-    case RepositoryActionTypes.LoadRepositories:
+    case RepositoryActionTypes.LoadAllRepositories:
       return {
         ...state,
+        filters: null,
         loaded: LoadingState.LOADING
       };
     case RepositoryActionTypes.RepositoriesLoaded: {
@@ -34,12 +35,6 @@ export function repositoryReducer(
           ...state.filters,
           [action.payload.filter.name]: action.payload.filter.value
         }
-      }
-    }
-    case RepositoryActionTypes.ResetRepositoryFilter: {
-      return {
-        ...state,
-        filters: {}
       }
     }
     default: {

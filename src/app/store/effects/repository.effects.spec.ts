@@ -3,13 +3,7 @@ import {provideMockActions} from '@ngrx/effects/testing';
 import {BackendService} from '../../services/backend.service';
 import {RepositoryEffects} from './repository.effects';
 import {of, throwError} from 'rxjs';
-import {
-  FailedToLoadRepositories,
-  LoadRepositories,
-  RepositoriesLoaded,
-  RepositoryActionTypes,
-  UpdateRepository
-} from '../actions/repository.actions';
+import {FailedToLoadRepositories, RepositoriesLoaded, RepositoryActionTypes, UpdateRepository} from '../actions/repository.actions';
 import {mockDetailRepo, mockRepo} from '../../mocks/repository-mocks';
 import {provideMockStore} from '@ngrx/store/testing';
 import {selectFilters} from '../states/repository.state';
@@ -49,7 +43,7 @@ describe('RepositoryEffects', () => {
   });
 
   it('should load and return repositories', () => {
-    actions$ = of({type: RepositoryActionTypes.LoadRepositories});
+    actions$ = of({type: RepositoryActionTypes.LoadAllRepositories});
     backendService.getRepositories.and.returnValue(of([mockRepo]));
 
     effects.loadRepositories$.subscribe(action => {
@@ -83,16 +77,8 @@ describe('RepositoryEffects', () => {
     });
   });
 
-  it('should reset repository filters', () => {
-    actions$ = of({type: RepositoryActionTypes.ResetRepositoryFilter});
-
-    effects.resetRepositoryFilter$.subscribe(action => {
-      expect(action).toEqual(new LoadRepositories());
-    });
-  });
-
   it('should load repositories and fail', () => {
-    actions$ = of({type: RepositoryActionTypes.LoadRepositories});
+    actions$ = of({type: RepositoryActionTypes.LoadAllRepositories});
     backendService.getRepositories.and.returnValue(throwError(new HttpErrorResponse({})));
 
     effects.loadRepositories$.subscribe(action => {

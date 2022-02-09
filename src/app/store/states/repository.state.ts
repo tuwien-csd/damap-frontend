@@ -13,7 +13,7 @@ export const adapter: EntityAdapter<Repository> = createEntityAdapter<Repository
 
 export const initialRepositoryState: RepositoryState = adapter.getInitialState({
   loaded: LoadingState.NOT_LOADED,
-  filters: {}
+  filters: null
 })
 
 export const selectRepositoryState = createFeatureSelector<AppState, RepositoryState>('repositories');

@@ -1,8 +1,9 @@
 import {Component, OnDestroy} from '@angular/core';
 import {REPO_FILTERS} from '../repo-filters';
-import {Store} from '@ngrx/store';
+import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../store/states/app.state';
-import {ResetRepositoryFilter, SetRepositoryFilter} from '../../../store/actions/repository.actions';
+import {LoadAllRepositories, SetRepositoryFilter} from '../../../store/actions/repository.actions';
+import {selectFilters} from '../../../store/states/repository.state';
 
 @Component({
   selector: 'app-repo-filter',
@@ -17,7 +18,11 @@ export class RepoFilterComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.store.dispatch(new ResetRepositoryFilter());
+    this.store.pipe(select(selectFilters)).subscribe(filters => {
+      if (filters) {
+        this.store.dispatch(new LoadAllRepositories());
+      }
+    })
   }
 
   onFilterChange(filterName: string, event: string[]) {

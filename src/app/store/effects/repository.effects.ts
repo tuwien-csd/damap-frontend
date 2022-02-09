@@ -4,11 +4,10 @@ import {catchError, debounceTime, distinctUntilChanged, map, switchMap, takeUnti
 import {BackendService} from '../../services/backend.service';
 import {
   FailedToLoadRepositories,
-  LoadRepositories,
+  LoadAllRepositories,
   LoadRepository,
   RepositoriesLoaded,
   RepositoryActionTypes,
-  ResetRepositoryFilter,
   SetRepositoryFilter,
   UpdateRepository
 } from '../actions/repository.actions';
@@ -21,7 +20,7 @@ import {selectFilters} from '../states/repository.state';
 export class RepositoryEffects {
 
   loadRepositories$ = createEffect(() => this.actions$.pipe(
-    ofType<LoadRepositories>(RepositoryActionTypes.LoadRepositories),
+    ofType<LoadAllRepositories>(RepositoryActionTypes.LoadAllRepositories),
     switchMap(_ => this.backendService.getRepositories().pipe(
       map(repositories => new RepositoriesLoaded({repositories})),
       catchError(() => of(new FailedToLoadRepositories())),
@@ -50,18 +49,12 @@ export class RepositoryEffects {
             return this.backendService.searchRepository(state).pipe(
               map(repositories => new RepositoriesLoaded({repositories})),
               catchError(() => of(new FailedToLoadRepositories())),
-              takeUntil(this.actions$.pipe(ofType(RepositoryActionTypes.ResetRepositoryFilter))))
+              takeUntil(this.actions$.pipe(ofType(RepositoryActionTypes.LoadAllRepositories))))
           }
-          return of(new LoadRepositories());
+        return of(new LoadAllRepositories());
         }
       ),
     ));
-
-  resetRepositoryFilter$ = createEffect(() => this.actions$.pipe(
-    ofType<ResetRepositoryFilter>(RepositoryActionTypes.ResetRepositoryFilter),
-    map(_ => new LoadRepositories()),
-    takeUntil(this.actions$.pipe(ofType(RepositoryActionTypes.SetRepositoryFilter)))
-  ));
 
   constructor(
     private actions$: Actions,
