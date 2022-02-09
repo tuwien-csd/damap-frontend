@@ -48,8 +48,7 @@ export const initialFormState: FormState = {
     targetAudience: '',
     tools: '',
     id: null,
-    project: null,
-    contact: null
+    project: null
   },
   changed: false
 };

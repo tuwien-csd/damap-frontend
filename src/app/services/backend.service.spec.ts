@@ -4,11 +4,11 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {FeedbackService} from './feedback.service';
 import {environment} from '../../environments/environment';
 import {Project} from '../domain/project';
-import {ProjectMember} from '../domain/project-member';
 import {Dmp} from '../domain/dmp';
 import {completeDmp} from '../mocks/dmp-mocks';
 import {HttpEventType, HttpHeaders} from '@angular/common/http';
 import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
+import {Contributor} from '../domain/contributor';
 
 describe('BackendService', () => {
   let service: BackendService;
@@ -131,7 +131,7 @@ describe('BackendService', () => {
 
   it('should get all project members', () => {
     service.getProjectMembers(1234).subscribe(
-      (projectsMember: ProjectMember[]) => {
+      (projectsMember: Contributor[]) => {
         expect(projectsMember).toBeTruthy();
         expect(projectsMember.length).toBe(1);
 
