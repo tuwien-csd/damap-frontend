@@ -97,10 +97,16 @@ mat-card {
   background: #2a2a2a;
 }
 
+.flex-radio {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Form row styling */
 .form-row {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .form-row-group {
@@ -109,4 +115,16 @@ mat-card {
   flex-grow: 1;
   gap: 1rem;
   align-items: baseline;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.button-row-left {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
 }

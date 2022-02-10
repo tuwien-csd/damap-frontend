@@ -4,12 +4,14 @@
 <div [formGroup]="legalEthicalStep">
 
   <!--Sensitive Data-->
-  <div>
-    <mat-label>{{'dmp.steps.legal.question.sensitiveData.prefix' | translate}}
+  <div class="flex-radio">
+    <label id="sensitiveData">{{'dmp.steps.legal.question.sensitiveData.prefix' | translate}}
       <a href="{{'dmp.steps.legal.link.sensitiveData' | translate}}"
          target="_blank">{{'dmp.steps.legal.question.sensitiveData.link' | translate}}</a>{{'dmp.steps.legal.question.sensitiveData.suffix' | translate}}
-    </mat-label>
-    <mat-radio-group formControlName="sensitiveData">
+    </label>
+    <app-cris-tag [cris]="legalEthicalStep?.value.sensitiveDataCris"></app-cris-tag>
+    <mat-radio-group aria-labelledby="sensitiveData" formControlName="sensitiveData"
+                     (change)="changeCrisValue('sensitiveDataCris')">
       <mat-radio-button class="boolean-mat-radio-button" [value]="true">{{'yes' | translate}}
       </mat-radio-button>
       <mat-radio-button class="boolean-mat-radio-button" [value]="false">{{'no' | translate}}
@@ -36,7 +38,7 @@
             </mat-label>
             <mat-select formControlName="sensitiveDataSecurity" multiple>
               <mat-option *ngFor="let option of securityOptions | keyvalue: originalOrder" [value]="option.value">
-                {{option.value}}
+                {{translateSecurityPrefixEnum + option.value | translate}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -57,9 +59,12 @@
     <hr>
   </div>
   <!-- Yes/No Questions-->
-  <div *ngFor="let question of questions, last as last">
-    <mat-label>{{question.label | translate}}</mat-label>
-    <mat-radio-group formControlName="{{question.model}}">
+  <div *ngFor="let question of questions, last as last" class="flex-radio">
+    <label id="{{question.label}}">{{question.label | translate}}</label>
+    <app-cris-tag [cris]="legalEthicalStep.value[question.cris]"></app-cris-tag>
+    <mat-radio-group formControlName="{{question.model}}"
+                     aria-labelledby="{{question.label}}"
+                     (change)="changeCrisValue(question.cris)">
       <mat-radio-button class="boolean-mat-radio-button" [value]="true">{{'yes' | translate}}
       </mat-radio-button>
       <mat-radio-button class="boolean-mat-radio-button" [value]="false">{{'no' | translate}}
@@ -86,8 +91,8 @@
         <mat-form-field appearance="fill" [style]="'width: 100%'">
           <mat-label>{{'dmp.steps.legal.question.personalDataCompliance' | translate}}</mat-label>
           <mat-select formControlName="personalDataCompliance" multiple>
-            <mat-option *ngFor="let option of complianceOptions | keyvalue: originalOrder" [value]="option.value">
-              {{option.value}}
+            <mat-option *ngFor="let option of complianceOptions | keyvalue: originalOrder" [value]="option.key">
+              {{translateCompliancePrefixEnum + option.value | translate}}
             </mat-option>
           </mat-select>
           <mat-hint>{{'help.legal.personalDataCompliance' | translate}}</mat-hint>
@@ -124,8 +129,8 @@
       <mat-form-field appearance="fill" [style]="'width: 100%'">
         <mat-label>{{'dmp.steps.legal.question.legalRestrictionsDocuments' | translate}}</mat-label>
         <mat-select formControlName="legalRestrictionsDocuments" multiple>
-          <mat-option *ngFor="let option of agreementOptions | keyvalue: originalOrder" [value]="option.value">
-            {{option.value}}
+          <mat-option *ngFor="let option of agreementOptions | keyvalue: originalOrder" [value]="option.key">
+            {{translateAgreementPrefixEnum + option.value | translate}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -140,4 +145,5 @@
   </div>
 </div>
 
-<app-ethical-aspects [legalEthicalStep]="legalEthicalStep"></app-ethical-aspects>
+<app-ethical-aspects [legalEthicalStep]="legalEthicalStep"
+                     (crisValueChange)="changeCrisValue($event)"></app-ethical-aspects>

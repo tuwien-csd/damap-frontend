@@ -3,12 +3,13 @@ import {DataKind} from '../../domain/enum/data-kind.enum';
 import {DataAccessType} from '../../domain/enum/data-access-type.enum';
 import {Dmp} from '../../domain/dmp';
 import {select, Store} from '@ngrx/store';
-import {selectForm} from '../../store/selectors/form.selectors';
+import {selectForm, selectFormContact} from '../../store/selectors/form.selectors';
 import {Observable} from 'rxjs';
 import {AppState} from '../../store/states/app.state';
-import {SecurityMeasure} from '../../domain/enum/security-measure';
+import {SecurityMeasure} from '../../domain/enum/security-measure.enum';
 import {ComplianceType} from '../../domain/enum/compliance-type.enum';
-import {Agreement} from '../../domain/enum/agreement';
+import {Agreement} from '../../domain/enum/agreement.enum';
+import {Contributor} from '../../domain/contributor';
 
 export interface Completeness {
   step: string;
@@ -33,6 +34,7 @@ export class SummaryComponent implements OnInit {
   form$: Observable<Dmp>;
   dmpForm: Dmp;
   dataSource;
+  contact: Contributor;
 
   readonly summaryTableHeaders: string[] = ['step', 'completeness', 'status'];
 
@@ -55,6 +57,7 @@ export class SummaryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.pipe(select(selectFormContact)).subscribe(val => this.contact = val);
     this.form$ = this.store.pipe(select(selectForm));
     this.form$.subscribe(value => {
       if (value) {
@@ -68,8 +71,8 @@ export class SummaryComponent implements OnInit {
     this.dataSource = [];
 
     // General properties
-    const restrictedDatasets = this.datasets.find(item => item.dataAccess === DataAccessType.restricted) != null;
-    const closedDatasets = this.datasets.find(item => item.dataAccess === DataAccessType.closed) != null;
+    const restrictedDatasets = this.datasets.find(item => item.dataAccess === DataAccessType.RESTRICTED) != null;
+    const closedDatasets = this.datasets.find(item => item.dataAccess === DataAccessType.CLOSED) != null;
 
     // Select project
     const projectsLevel: Completeness = {step: 'dmp.steps.project.label', completeness: 0, status: []};
@@ -83,7 +86,7 @@ export class SummaryComponent implements OnInit {
 
     // People involved
     const peopleLevel: Completeness = {step: 'dmp.steps.people.label', completeness: 0, status: []};
-    if (this.dmpForm.contact) {
+    if (this.contact) {
       peopleLevel.completeness += 50;
       peopleLevel.status.push('dmp.steps.summary.people.contact.set');
     } else {
@@ -210,8 +213,8 @@ export class SummaryComponent implements OnInit {
         }
       }
       if (this.dmpForm.personalDataCompliance.length) {
-        if ((this.dmpForm.personalDataCompliance.includes(ComplianceType.Other) && this.dmpForm.otherPersonalDataCompliance)
-          || !this.dmpForm.personalDataCompliance.includes(ComplianceType.Other)) {
+        if ((this.dmpForm.personalDataCompliance.includes(ComplianceType.OTHER) && this.dmpForm.otherPersonalDataCompliance)
+          || !this.dmpForm.personalDataCompliance.includes(ComplianceType.OTHER)) {
           legalEthicalAspectsLevel.completeness += legalPercent / 2;
         }
       }
@@ -256,7 +259,7 @@ export class SummaryComponent implements OnInit {
       let licenseCount = 0;
       let dateCount = 0;
       for (const dataset of this.datasets) {
-        if (dataset.dataAccess === DataAccessType.open) {
+        if (dataset.dataAccess === DataAccessType.OPEN) {
           publishedCount += 1;
           if (dataset.license) {
             licenseCount += 1;
@@ -343,5 +346,3 @@ export class SummaryComponent implements OnInit {
       legalEthicalAspectsLevel, licensesLevel, repositoriesLevel, reuseLevel, costsLevel);
   }
 }
-
-// blabla pls render

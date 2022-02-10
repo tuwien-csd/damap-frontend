@@ -1,5 +1,5 @@
 import {DataAccessType} from './enum/data-access-type.enum';
-import {AccessRight} from './enum/access-right';
+import {AccessRight} from './enum/access-right.enum';
 
 export interface Dataset {
   readonly id: number;
