@@ -1,6 +1,46 @@
-<div id="content">
-  <h3>Dashboard</h3>
-  <h4>Welcome, {{name}}!</h4>
-  <p>Username: {{username}}</p>
-  <p>Roles: {{roles | json}}</p>
+<div class="content">
+  <section>
+    <h2 translate>title</h2>
+    <p translate>dashboard.welcome.message</p>
+    <div class="button-row-left">
+      <button mat-raised-button routerLink="/plans" color="primary">{{'plans.myplans' | translate}}</button>
+      <button mat-raised-button routerLink="/dmp" color="primary">
+        <mat-icon>add</mat-icon>
+        {{'plans.create.plan' | translate }}
+      </button>
+    </div>
+    <section>
+      <h3 translate>dashboard.dmp.heading</h3>
+      <p>
+        {{'dashboard.dmp.text.prefix' | translate}}
+        <a [href]="'dashboard.dmp.text.dmp.link' | translate" target="_blank">
+          {{'dashboard.dmp.text.dmp.text' | translate}}</a>{{'dashboard.dmp.text.middle' | translate}}
+        <a [href]="'dashboard.dmp.text.fairprinciples.link' | translate" target="_blank">
+          {{'dashboard.dmp.text.fairprinciples.text' | translate}}</a>{{'dashboard.dmp.text.suffix' | translate}}
+      </p>
+
+    </section>
+    <section>
+      <h3 translate>dashboard.tool.heading</h3>
+      <ul>
+        <li>
+          {{'dashboard.tool.bulletpoints.dmp.text' | translate}}
+          <a [href]="'dashboard.tool.bulletpoints.dmp.sepg.link' | translate" target="_blank">
+            {{'dashboard.tool.bulletpoints.dmp.sepg.text' | translate}}</a>
+        </li>
+        <li translate>dashboard.tool.bulletpoints.document</li>
+        <li translate>dashboard.tool.bulletpoints.benefits.text
+          <ul>
+            <li translate>dashboard.tool.bulletpoints.benefits.one</li>
+            <li translate>dashboard.tool.bulletpoints.benefits.two</li>
+            <li translate>dashboard.tool.bulletpoints.benefits.three</li>
+          </ul>
+        </li>
+        <li>{{'dashboard.tool.bulletpoints.madmp.prefix' | translate}}
+          <a [href]="'dashboard.tool.bulletpoints.madmp.rda.link' | translate" target="_blank">
+            {{'dashboard.tool.bulletpoints.madmp.rda.text' | translate}}</a>{{'dashboard.tool.bulletpoints.madmp.suffix' | translate}}
+        </li>
+      </ul>
+    </section>
+  </section>
 </div>

@@ -1,12 +1,16 @@
 import {IdentifierType} from '../domain/enum/identifier-type.enum';
 import {Project} from '../domain/project';
+import {FundingState} from '../domain/enum/funding-state.enum';
 
 export const mockProject: Project = {
   end: new Date(),
   funding: {
+    fundingName: 'Funding name',
+    fundingProgram: 'Funding program',
     funderId: {
       identifier: '501100004955', type: IdentifierType.FUNDREF
-    }, fundingStatus: 'GRANTED',
+    },
+    fundingStatus: FundingState.GRANTED,
     grantId: {
       identifier: '123456',
       type: null

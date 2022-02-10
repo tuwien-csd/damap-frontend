@@ -1,6 +1,5 @@
 import {Project} from './project';
 import {Contributor} from './contributor';
-import {Person} from './person';
 import {DataKind} from './enum/data-kind.enum';
 import {Dataset} from './dataset';
 import {Host} from './host';
@@ -14,7 +13,6 @@ export interface Dmp {
   title?: string;
   description?: string;
   project: Project;
-  contact: Person;
   contributors: Contributor[];
   dataKind: DataKind;
   noDataExplanation: string;
@@ -26,20 +24,26 @@ export interface Dmp {
   tools: string;
   restrictedDataAccess: string;
   personalData: boolean;
+  personalDataCris: boolean;
   personalDataCompliance: string[];
   otherPersonalDataCompliance: string;
   sensitiveData: boolean;
+  sensitiveDataCris: boolean;
   sensitiveDataSecurity: string[];
   otherDataSecurityMeasures: string;
   sensitiveDataAccess: string;
   legalRestrictions: boolean;
+  legalRestrictionsCris: boolean;
   legalRestrictionsDocuments: string[];
   otherLegalRestrictionsDocument: string;
   legalRestrictionsComment: string;
   dataRightsAndAccessControl: string;
   humanParticipants: boolean;
+  humanParticipantsCris: boolean;
   ethicalIssuesExist: boolean;
+  ethicalIssuesExistCris: boolean;
   committeeReviewed: boolean;
+  committeeReviewedCris: boolean;
   storage: Storage[];
   externalStorage: Storage[];
   externalStorageInfo: string;
@@ -47,5 +51,6 @@ export interface Dmp {
   restrictedAccessInfo: string;
   closedAccessInfo: string;
   costsExist: boolean;
+  costsExistCris: boolean;
   costs: Cost[];
 }

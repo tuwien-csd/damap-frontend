@@ -73,6 +73,16 @@
           "add": "Set as contact",
           "remove": "Remove as contact"
         },
+        "manual.input": {
+          "show": "Show manual contributor input",
+          "hide": "Hide manual contributor input",
+          "question": {
+            "firstname": "First name",
+            "lastname": "Last name",
+            "mbox": "e-mail address",
+            "orcid": "ORCID ID"
+          }
+        },
         "nopeople": "No project members available."
       },
       "data": {
@@ -405,7 +415,8 @@
         },
         "suffix": " for additional information and support. You must do so if your planned research involves any human participation."
       }
-    }
+    },
+    "cris": "Preselected based on project information in the CRIS system."
   },
   "form": {
     "error": {
@@ -577,27 +588,172 @@
   },
   "http": {
     "error": {
-      "standard": "Failed to load resource.",
+      "standard": "Failed to load resource. ",
       "0": "Service can not be reached, please retry later. If the issue persists contact [insert contact for technical issue].",
       "404": "The requested resource could not be found.",
       "500": "An error occurred, please contact [insert contact for technical issue].",
       "503": "Service is currently unavailable, please retry later.",
-      "fileanalysis": "Failed to analyse file.",
+      "fileanalysis": "Failed to analyse file. ",
       "repositories": {
-        "search": "Failed to search repositories.",
-        "one": "Failed to load repository details.",
-        "all": "Failed to load repositories."
+        "search": "Failed to search repositories. ",
+        "one": "Failed to load repository details. ",
+        "all": "Failed to load repositories. "
       },
-      "projects": "Failed to load projects.",
-      "projectmembers": "Failed to load project members.",
+      "projects": "Failed to load projects. ",
+      "projectmembers": "Failed to load project members. ",
       "plans": {
         "load": {
-          "all": "Failed to load all plans.",
-          "yours": "Failed to load your plans.",
-          "one": "Failed to load plan."
+          "all": "Failed to load all plans. ",
+          "yours": "Failed to load your plans. ",
+          "one": "Failed to load plan. "
         },
-        "save": "Failed to save plan.",
-        "update": "Failed to update plan."
+        "save": "Failed to save plan. ",
+        "update": "Failed to update plan. "
+      }
+    }
+  },
+  "enum": {
+    "accessright": {
+      "READ": "reading only",
+      "WRITE": "writing",
+      "NONE": "no access"
+    },
+    "agreement": {
+      "CONSORTIUM_AGREEMENT": "consortium agreement",
+      "DATA_PROCESSING_AGREEMENT": "data processing agreement",
+      "JOINT_CONTROL_AGREEMENT": "joint control agreement",
+      "CONFIDENTIALITY_AGREEMENT": "confidentiality agreement",
+      "OTHER": "other"
+    },
+    "compliance": {
+      "INFORMED_CONSENT": "by gaining informed consent for processing personal data ",
+      "ANONYMISATION": "by anonymisation of personal data for preservation and/or sharing (truly anonymous data are no longer considered personal data) ",
+      "PSEUDONYMISATION": "by pseudonymisation of personal data (the main differences with anonymisation is that pseudonymisation is reversible) ",
+      "ENCRYPTION": "by encryption of personal data (the encryption key must be stored separately from the data, for instance by a trusted third party) ",
+      "OTHER": "other measures"
+    },
+    "contributor.role": {
+      "DATA_COLLECTOR": "Data Collector",
+      "DATA_CURATOR": "Data Curator",
+      "DATA_MANAGER": "Data Manager",
+      "DISTRIBUTOR": "Distributor",
+      "EDITOR": "Editor",
+      "HOSTING_INSTITUTION": "Hosting Institution",
+      "PRODUCER": "Producer",
+      "PROJECT_LEADER": "Project Leader",
+      "PROJECT_MANAGER": "Project Manager",
+      "PROJECT_MEMBER": "Project Member",
+      "REGISTRATION_AGENCY": "Registration Agency",
+      "REGISTRATION_AUTHORITY": "Registration Authority",
+      "RELATED_PERSON": "Related Person",
+      "RESEARCHER": "Researcher",
+      "RESEARCH_GROUP": "Research Group",
+      "RIGHTS_HOLDER": "Rights Holder",
+      "SPONSOR": "Sponsor",
+      "SUPERVISOR": "Supervisor",
+      "WORK_PACKAGE_LEADER": "Work Package Leader",
+      "OTHER": "Other"
+    },
+    "costs": {
+      "DATA_ACQUISITION": "Data Aquisition",
+      "DATABASE": "Database",
+      "FILE_BASED_STORAGE": "File-based Storage",
+      "HARDWARE_AND_INFRASTRUCTURE": "Hardware and Infrastructure",
+      "LEGAL_ADVICE": "Legal Advice",
+      "PERSONNEL": "Personnel",
+      "REPOSITORY": "Repository",
+      "SOFTWARE_LICENSE": "Software License",
+      "TRAINING": "Training",
+      "OTHER": "Other"
+    },
+    "dataaccess": {
+      "OPEN": "Open",
+      "RESTRICTED": "Restricted",
+      "CLOSED": "Closed"
+    },
+    "datakind": {
+      "UNKNOWN": "unknown",
+      "NONE": "none",
+      "SPECIFY": "specify"
+    },
+    "functionrole": {
+      "ADMIN": "ADMIN",
+      "EDITOR": "EDITOR",
+      "GUEST": "GUEST",
+      "OWNER": "OWNER",
+      "SUPPORT": "SUPPORT"
+    },
+    "fundingstate": {
+      "PLANNED": "planned",
+      "APPLIED": "applied",
+      "GRANTED": "granted",
+      "REJECTED": "rejected",
+      "UNSPECIFIED": "unspecified"
+    },
+    "identifier": {
+      "ORCID": "orcid",
+      "ISNI": "isni",
+      "OPENID": "openid",
+      "HANDLE": "handle",
+      "DOI": "doi",
+      "ARK": "ark",
+      "URL": "url",
+      "FUNDREF": "fundref",
+      "ROR": "ror",
+      "OTHER": "other"
+    },
+    "securitymeasure": {
+      "INDIVIDUAL_LOGIN": "individual log-in and password",
+      "ADDITIONAL_LOGIN": "additional log-in for specific applications",
+      "AUTOMATIC_LOCKING_OF_CLIENTS": "automatic locking of clients (timeout)",
+      "ENCRYPTION_OF_SYSTEMS": "encryption of systems",
+      "LOCKED_STORAGE": "keep printouts of sensitive data in locked storage",
+      "OTHER": "other measures"
+    }
+  },
+  "dashboard": {
+    "welcome.message": "Welcome to TU DMP Tool, a service that helps you to create and update the Data Management Plan (DMP) for your project.",
+    "dmp": {
+      "heading": "What is a DMP?",
+      "text": {
+        "prefix": "A ",
+        "dmp": {
+          "text": "DMP",
+          "link": "https://www.tuwien.at/en/research/rti-support/research-data/dmp"
+        },
+        "middle": " is a structured document that keeps record of what research data is created and what happens to that data during and after a project. It helps with planning the research process, managing your data in accordance with the ",
+        "fairprinciples": {
+          "text": "FAIR Principles",
+          "link": "https://www.tuwien.at/en/research/rti-support/research-data/research-data-management/fair-principles"
+        },
+        "suffix": ", and defining rights and responsibilities in a research project involving several researchers or institutions."
+      }
+    },
+    "tool": {
+      "heading": "TU DMP Tool",
+      "bulletpoints": {
+        "dmp": {
+          "text": "guides you step by step through the different sections of a DMP following the ",
+          "sepg": {
+            "text": "Science Europe Practical Guide",
+            "link": "https://www.scienceeurope.org/our-resources/practical-guide-to-the-international-alignment-of-research-data-management"
+          }
+        },
+        "document": "exports a pre-filled DMP as a Word document that you can customize and use for submission to European and national funders, for example FWF and FFG",
+        "benefits": {
+          "text": "saves you work by",
+          "one": "pre-filling content with detailed information from TISS and other systems",
+          "two": "providing wizards, guidance, and item lists to choose from",
+          "three": "suggesting answers that you can either comply with or adjust to your needs"
+        },
+        "madmp": {
+          "prefix": "is compatible with the",
+          "rda": {
+            "text": "RDA recommendation on machine actionable DMPs",
+            "link": "https://doi.org/10.15497/rda00039"
+          },
+          "suffix": "."
+        }
       }
     }
   }
