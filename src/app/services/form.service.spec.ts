@@ -36,7 +36,7 @@ describe('FormService', () => {
     expect(result.hosts).toEqual([]);
     expect(result.restrictedAccessInfo).toEqual('');
     expect(result.closedAccessInfo).toEqual('');
-    expect(result.sensitiveData).toEqual(false);
+    expect(result.sensitiveData).toEqual(true);
     expect(result.sensitiveDataCris).toEqual(false);
     expect(result.sensitiveDataSecurity).toEqual([]);
     expect(result.sensitiveDataAccess).toEqual('');
