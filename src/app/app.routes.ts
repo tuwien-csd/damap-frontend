@@ -3,14 +3,15 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {PlansComponent} from './plans/plans.component';
 import {DmpComponent} from './dmp/dmp.component';
 import {LayoutComponent} from './layout/layout.component';
-import {AuthGuard} from './auth/auth.guard';
+import {AuthGuard} from './guard/auth.guard';
+import {ConsentGuard} from './guard/consent.guard';
 
 export const APP_ROUTES: Routes = [
   {path: '', component: LayoutComponent, canActivate: [AuthGuard], children: [
-      {path: '', component: DashboardComponent},
-      {path: 'dashboard', component: DashboardComponent},
-      {path: 'plans', component: PlansComponent},
-      {path: 'dmp', component: DmpComponent},
-      {path: 'dmp/:id', component: DmpComponent}
+      {path: '', component: DashboardComponent, canActivate: [ConsentGuard]},
+      {path: 'dashboard', component: DashboardComponent, canActivate: [ConsentGuard]},
+      {path: 'plans', component: PlansComponent, canActivate: [ConsentGuard]},
+      {path: 'dmp', component: DmpComponent, canActivate: [ConsentGuard]},
+      {path: 'dmp/:id', component: DmpComponent, canActivate: [ConsentGuard]}
     ]
 }];
