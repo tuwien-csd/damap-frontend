@@ -59,7 +59,8 @@ import {TreeSelectFormFieldComponent} from './widgets/tree-select-form-field/tre
 import {MatTreeModule} from '@angular/material/tree';
 import {RepoFilterComponent} from './dmp/repo/repo-filter/repo-filter.component';
 import {TooltipComponent} from './widgets/tooltip/tooltip.component';
-import {AuthGuard} from './auth/auth.guard';
+import {AuthGuard} from './guard/auth.guard';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ConfigService} from './services/config.service';
 import {DataAccessComponent} from './dmp/data-storage/data-access/data-access.component';
 import {SharedModule} from './shared/shared.module';
@@ -72,6 +73,8 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatMenuModule} from '@angular/material/menu';
 import {RetentionPeriodComponent} from './dmp/repo/retention-period/retention-period.component';
+import {ConsentComponent} from './consent/consent.component';
+import {ConsentGuard} from './guard/consent.guard';
 import {ContributorManualComponent} from './dmp/people/contributor-manual/contributor-manual.component';
 import {CrisTagComponent} from './widgets/cris-tag/cris-tag.component';
 import {DashboardModule} from './dashboard/dashboard.module';
@@ -116,6 +119,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SaveStatusComponent,
     StepIntroComponent,
     RetentionPeriodComponent,
+    ConsentComponent,
     ContributorManualComponent,
     CrisTagComponent,
 
@@ -191,7 +195,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     multi: true,
     deps: [ConfigService]
   },
-    AuthGuard
+    AuthGuard, ConsentGuard
   ],
   bootstrap: [AppComponent]
 })
