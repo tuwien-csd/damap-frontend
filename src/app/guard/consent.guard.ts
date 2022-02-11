@@ -4,37 +4,37 @@ import {AuthService} from '../auth/auth.service';
 import {BackendService} from '../services/backend.service';
 import {ConsentComponent} from '../consent/consent.component';
 import {MatDialog, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
+import {Consent} from '../domain/consent'
 
 @Injectable()
 export class ConsentGuard implements CanActivate {
   public consentGiven: boolean;
+  public consent;
 
   constructor(private backendService: BackendService, private dialog: MatDialog) {
+    this.consentGiven = true;
+  }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const consentResponse = this.backendService.getConsentGiven();
     consentResponse.subscribe(response => {
-      console.log('response');
-      console.log(response);
       if(response) {
         this.consentGiven = true;
       }
       else {
         this.consentGiven = false;
+        let dialogRef = this.dialog.open(ConsentComponent);
+        dialogRef.afterClosed().subscribe(result => {
+          if(result) {
+            this.consentGiven = true;
+            this.consent = {consentGiven: true} //create consentDO object to send
+            this.backendService.editConsent(this.consent).subscribe(Response);
+          }
+        });
       }
     });
-  }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    console.log('can activate');
-    console.log(this.consentGiven);
-    if (!this.consentGiven) {
-      // consent not given yet
-      console.log('consent not yet given');
-      let dialogRef = this.dialog.open(ConsentComponent);
-    }
-    else {
-      // consent given, proceed navigation to routed component
-      console.log('consent already given');
-    }
     return this.consentGiven;
   }
+
 }
