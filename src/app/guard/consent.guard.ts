@@ -28,7 +28,7 @@ export class ConsentGuard implements CanActivate {
           if(result) {
             this.consentGiven = true;
             this.consent = {consentGiven: true} //create consentDO object to send
-            this.backendService.editConsent(this.consent).subscribe(Response);
+            this.backendService.editConsent(this.consent).subscribe();
           }
         });
       }
