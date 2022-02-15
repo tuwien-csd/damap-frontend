@@ -38,7 +38,7 @@ describe('RepositoryReducer', () => {
     expect(state.filters).toEqual(initialRepositoryState.filters);
 
     const newState = repositoryReducer(state, new UpdateRepository(
-      {update: {id: mockRepo.id, changes: {info: mockDetailRepo.info}}}
+      {update: {id: mockRepo.id, changes: mockDetailRepo}}
     ));
 
     expect(newState.loaded).toBe(LoadingState.LOADED);

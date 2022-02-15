@@ -49,7 +49,7 @@ export class RepoComponent implements OnInit {
   }
 
   getRepositoryDetails(repo: Repository) {
-    if (!repo.info) {
+    if (!repo.description) {
       this.store.dispatch(new LoadRepository({id: repo.id}));
     }
   }

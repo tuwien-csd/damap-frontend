@@ -53,15 +53,15 @@ describe('RepositoryEffects', () => {
   });
 
   it('should load and return repository', () => {
-    actions$ = of({type: RepositoryActionTypes.LoadRepository, payload: {id: mockDetailRepo.id}});
+    actions$ = of({type: RepositoryActionTypes.LoadRepository, payload: mockDetailRepo});
     backendService.getRepositoryById.and.returnValue(of({
       id: mockDetailRepo.id,
-      changes: {info: mockDetailRepo.info}
+      changes: mockDetailRepo
     }));
 
     effects.loadRepository$.subscribe(action => {
       expect(backendService.getRepositoryById).toHaveBeenCalledWith(mockDetailRepo.id);
-      expect(action).toEqual(new UpdateRepository({update: {id: mockDetailRepo.id, changes: {info: mockDetailRepo.info}}}));
+      expect(action).toEqual(new UpdateRepository({update: {id: mockDetailRepo.id, changes: mockDetailRepo}}));
     });
   });
 
