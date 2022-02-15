@@ -37,10 +37,10 @@
       <td mat-cell *matCellDef="let element" [attr.colspan]="tableHeaders.length">
         <div class="element-detail"
              [@detailExpand]="element.id === expandedElement ? 'expanded' : 'collapsed'">
-          <ng-container *ngIf="element.info else loading">
+          <ng-container *ngIf="element.description else loading">
             <mat-divider></mat-divider>
-            <h4>{{element.info.additionalName[0]?.value}}</h4>
-            <p>{{element.info.description?.value}}</p>
+            <h4>{{element.name}}</h4>
+            <p>{{element.description}}</p>
           </ng-container>
           <ng-template #loading>
             <mat-progress-bar mode="indeterminate"></mat-progress-bar>

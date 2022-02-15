@@ -52,7 +52,7 @@ export class RepoTableComponent implements OnChanges, AfterViewInit {
 
   expandRow(repo: Repository) {
     this.expandedElement = this.expandedElement === repo.id ? null : repo.id;
-    if (!repo.info) {
+    if (!repo.description) {
       this.getRepoDetails(repo);
     }
   }
