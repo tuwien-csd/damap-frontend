@@ -75,6 +75,7 @@ import {ContributorManualComponent} from './dmp/people/contributor-manual/contri
 import {CrisTagComponent} from './widgets/cris-tag/cris-tag.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {TreeSelectFormFieldModule} from './widgets/tree-select-form-field/tree-select-form-field.module';
+import {RepoTableComponent} from './dmp/repo/repo-table/repo-table.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -118,6 +119,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ConsentComponent,
     ContributorManualComponent,
     CrisTagComponent,
+    RepoTableComponent,
 
     // Directives
     DragdropDirective,

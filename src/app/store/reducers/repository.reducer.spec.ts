@@ -61,6 +61,6 @@ describe('RepositoryReducer', () => {
 
     expect(newState.ids).toEqual(state.ids);
     expect(newState.entities).toEqual(state.entities);
-    expect(newState.filters).toEqual({});
+    expect(newState.filters).toEqual(null);
   });
 })
