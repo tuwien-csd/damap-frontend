@@ -14,6 +14,8 @@ export class RepoFilterComponent implements OnDestroy {
 
   filters = REPO_FILTERS;
 
+  show = false;
+
   constructor(private store: Store<AppState>) {
   }
 

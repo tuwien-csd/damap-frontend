@@ -1,130 +1,56 @@
-<div *ngIf="!datasets?.controls.length else retentionPeriod">
+<div *ngIf="!datasets.controls.length else retentionPeriod">
   {{'dmps.nodatasets' | translate}}
 </div>
 <ng-template #retentionPeriod>
   <app-retention-period [dmpForm]="dmpForm" [datasets]="datasets"></app-retention-period>
 </ng-template>
 <!-- SELECTED REPOS-->
-<div *ngIf="repoStep?.controls.length">
+<h2 translate>dmp.steps.repositories.heading</h2>
+<div *ngIf="repoStep.controls.length" [formGroup]="dmpForm">
   <p translate>dmp.steps.repositories.selected</p>
-  <mat-card *ngFor="let repo of repoStep.controls, let i=index" class="mat-selected">
-    <div class="mat-card-container">
-      <div class="mat-card-left">
-        <h4>{{repo.value.title}}</h4>
-      </div>
-      <div class="mat-card-right">
-        <button mat-icon-button (click)="removeRepository(i)">
-          <mat-icon>cancel</mat-icon>
-        </button>
-      </div>
-    </div>
-    <div [formGroup]="repo">
+  <mat-card *ngFor="let repo of repoStep.controls, index as i" class="mat-selected">
+    <ng-container formArrayName="hosts">
       <div class="mat-card-container">
-        <mat-form-field>
-          <mat-label>{{'dmp.steps.repositories.question.datasets' | translate}}</mat-label>
-          <mat-select multiple formControlName="datasets">
-            <mat-option *ngFor="let dataset of datasets.controls" [value]="dataset.value.referenceHash">
-              {{dataset.value.title}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <div class="mat-card-left">
+          <h4>{{repo.value.title}}</h4>
+        </div>
+        <div class="mat-card-right">
+          <button mat-icon-button (click)="removeRepository(i)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
       </div>
-      <div class="mat-card-container">
-        <app-error-message *ngIf="getDatasetsMarkedForDeletion(i).length > 0"
-                           [data]="getDatasetsMarkedForDeletionAsString(i)"
-                           [message]="'dmp.steps.repositories.warning.deletion'"></app-error-message>
+      <div [formGroupName]="i">
+        <div class="mat-card-container">
+          <mat-form-field>
+            <mat-label>{{'dmp.steps.repositories.question.datasets' | translate}}</mat-label>
+            <mat-select multiple formControlName="datasets">
+              <mat-option *ngFor="let dataset of datasets.controls" [value]="dataset.value.referenceHash">
+                {{dataset.value.title}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="mat-card-container">
+          <app-error-message *ngIf="getDatasetsMarkedForDeletion(i).length > 0"
+                             [data]="getDatasetsMarkedForDeletionAsString(i)"
+                             [message]="'dmp.steps.repositories.warning.deletion'"></app-error-message>
+        </div>
       </div>
-    </div>
+    </ng-container>
   </mat-card>
 </div>
 
 <!-- TABLE -->
 <app-step-intro> {{'dmp.steps.repositories.intro' | translate}}
 </app-step-intro>
-<h2 translate>dmp.steps.repositories.heading</h2>
-<div class="repo-container">
-  <div class="repo-filter">
-    <app-repo-filter></app-repo-filter>
-  </div>
-  <div class="repos">
-    <ng-container *ngIf="loaded === LoadingState.LOADED">
-
-      <mat-form-field>
-        <mat-label>{{'dmp.steps.repositories.search' | translate}}</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Search repository" #input>
-      </mat-form-field>
-
-      <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
-        <ng-container matColumnDef="expand">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let element" (click)="expandRow(element)">
-            <mat-icon *ngIf="element.id === expandedElement" color="primary">expand_less</mat-icon>
-            <mat-icon *ngIf="element.id !== expandedElement" color="primary">expand_more</mat-icon>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="title">
-          <th mat-header-cell *matHeaderCellDef>{{'dmp.steps.repositories.table.header.title' | translate}}</th>
-          <td mat-cell *matCellDef="let element" (click)="expandRow(element)">
-            <h3>{{element.name}}</h3>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="add">
-          <th mat-header-cell *matHeaderCellDef><span
-            class="sr-only">{{'dmp.steps.repositories.add' | translate}}</span></th>
-          <td mat-cell *matCellDef="let element">
-            <div *ngIf="datasets.controls.length">
-              <button mat-icon-button (click)="addRepository(element)">
-                <mat-icon color="primary">add_circle</mat-icon>
-              </button>
-            </div>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="expandedDetail">
-          <td mat-cell *matCellDef="let element" [attr.colspan]="tableHeaders.length">
-            <div class="element-detail"
-                 [@detailExpand]="element.id === expandedElement ? 'expanded' : 'collapsed'">
-              <ng-container *ngIf="element.info else loading">
-                <mat-divider></mat-divider>
-                <h4>{{element.info.additionalName[0]?.value}}</h4>
-                <p>{{element.info.description?.value}}</p>
-              </ng-container>
-              <ng-template #loading>
-                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-              </ng-template>
-            </div>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
-        <tr mat-row *matRowDef="let element; columns: tableHeaders;"
-            class="element-row"
-            [class.expanded-row]="expandedElement === element.id">
-        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row">
-        </tr>
-        <!-- Row shown when there is no matching data. -->
-        <tr class="mat-row" *matNoDataRow>
-          <ng-container *ngIf="input.value.length > 0 else empty">
-            <td class="mat-cell"
-                colspan="4">{{'dmp.steps.repositories.nodatafilter' | translate: {value: input.value} }}"
-            </td>
-          </ng-container>
-          <ng-template #empty>
-            <td class="mat-cell" colspan="4">{{'dmp.steps.repositories.norepositories' | translate}}</td>
-          </ng-template>
-        </tr>
-      </table>
-      <mat-paginator class="mat-elevation-z8" [pageSize]="15" [pageSizeOptions]="[10, 15, 20]"
-                     showFirstLastButtons></mat-paginator>
-    </ng-container>
-    <ng-container *ngIf="loaded === LoadingState.LOADING">
-      <p translate>dmp.steps.repositories.loading.load</p>
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </ng-container>
-    <ng-container *ngIf="loaded === LoadingState.FAILED">
-      <app-error-message message="{{'dmp.steps.repositories.loading.failed' | translate}}"></app-error-message>
-    </ng-container>
-  </div>
+<div class="repos">
+  <h3 translate>dmp.steps.repositories.filter.search</h3>
+  <app-repo-filter></app-repo-filter>
+  <app-repo-table [loaded]="repositoriesLoaded$ | async"
+                  [repositories]="repositories$ | async"
+                  [selectedRepos]="repoStep.value"
+                  [datasets]="datasets.controls.length > 0"
+                  (repositoryToAdd)="addRepository($event)"
+                  (repositoryDetails)="getRepositoryDetails($event)"></app-repo-table>
 </div>

@@ -10,10 +10,6 @@ import {AppState} from '../store/states/app.state';
 import {selectProjects, selectProjectsLoaded} from '../store/selectors/project.selectors';
 import {LoadProjects} from '../store/actions/project.actions';
 import {FormService} from '../services/form.service';
-import {Repository} from '../domain/repository';
-import {selectRepositories, selectRepositoriesLoaded} from '../store/selectors/repository.selectors';
-import {LoadAllRepositories, LoadRepository} from '../store/actions/repository.actions';
-import {StepperSelectionEvent} from '@angular/cdk/stepper';
 import {Storage} from '../domain/storage';
 import {FeedbackService} from '../services/feedback.service';
 import {HttpEventType} from '@angular/common/http';
@@ -55,9 +51,6 @@ export class DmpComponent implements OnInit, OnDestroy {
   projectsLoaded$: Observable<LoadingState>;
   projects$: Observable<Project[]>;
   projectMembers: Contributor[];
-  repositories: any;
-  repositoriesLoaded$: Observable<LoadingState>;
-  repositories$: Observable<Repository[]>;
   formChanged$: Observable<boolean>;
 
   fileUpload: { file: File, progress: number, finalized: boolean }[] = [];
@@ -80,8 +73,6 @@ export class DmpComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.projectsLoaded$ = this.store.pipe(select(selectProjectsLoaded));
     this.projects$ = this.store.pipe(select(selectProjects));
-    this.repositoriesLoaded$ = this.store.pipe(select(selectRepositoriesLoaded));
-    this.repositories$ = this.store.pipe(select(selectRepositories));
     this.formChanged$ = this.store.pipe(select(selectFormChanged));
     this.getDmpById();
     this.getSuggestedProjects();
@@ -114,10 +105,7 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.store.dispatch(new LoadDmps());
   }
 
-  changeStep(event: StepperSelectionEvent) {
-    if (event.selectedIndex === 7) {
-      this.getRepositories();
-    }
+  changeStep() {
     if (this.formChanged) {
       this.saveDmp();
     }
@@ -241,11 +229,11 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formService.removeRepositoryFromForm(index);
   }
 
-  getRepositoryDetails(repo: Repository) {
-    if (!repo.info) {
-      this.store.dispatch(new LoadRepository({id: repo.id}));
-    }
-  }
+  /*  getRepositoryDetails(repo: Repository) {
+      if (!repo.info) {
+        this.store.dispatch(new LoadRepository({id: repo.id}));
+      }
+    }*/
 
   addCost() {
     this.formService.addCostToForm();
@@ -306,13 +294,13 @@ export class DmpComponent implements OnInit, OnDestroy {
       });
   }
 
-  private getRepositories() {
-    this.repositoriesLoaded$.subscribe(loaded => {
-      if (loaded === LoadingState.NOT_LOADED) {
-        this.store.dispatch(new LoadAllRepositories());
-      }
-    });
-  }
+  /*  private getRepositories() {
+      this.repositoriesLoaded$.subscribe(loaded => {
+        if (loaded === LoadingState.NOT_LOADED) {
+          this.store.dispatch(new LoadAllRepositories());
+        }
+      });
+    }*/
 
   // TODO: move to service, add for storage
 

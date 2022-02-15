@@ -278,7 +278,9 @@
         },
         "table.header.title": "Title",
         "nodatafilter": "No data matching the filter \"{{value}}\"",
-        "norepositories": "No repositories found."
+        "norepositories": "No repositories found.",
+        "recommended": "Recommended",
+        "find": "Find repository"
       },
       "costs": {
         "label": "Costs",
