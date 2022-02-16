@@ -3,6 +3,8 @@ import {initialRepositoryState} from '../states/repository.state';
 import {
   failedToLoadRepositories,
   loadAllRepositories,
+  loadRecommendedRepositories,
+  recommendedRepositoriesLoaded,
   repositoriesLoaded,
   setRepositoryFilter,
   updateRepository
@@ -15,6 +17,27 @@ describe('RepositoryReducer', () => {
     const state = repositoryReducer(initialRepositoryState, failedToLoadRepositories);
 
     expect(state.loaded).toBe(LoadingState.FAILED);
+    expect(state.ids).toEqual(initialRepositoryState.ids);
+    expect(state.entities).toEqual(initialRepositoryState.entities);
+    expect(state.filters).toEqual(initialRepositoryState.filters);
+  });
+
+  it('should return recommended loading state', () => {
+    const state = repositoryReducer(initialRepositoryState, recommendedRepositoriesLoaded({repositories: [mockDetailRepo]}));
+
+    expect(state.recommendedLoaded).toBe(LoadingState.LOADED);
+    expect(state.recommended).toEqual([mockDetailRepo]);
+    expect(state.loaded).toBe(initialRepositoryState.loaded);
+    expect(state.ids).toEqual(initialRepositoryState.ids);
+    expect(state.entities).toEqual(initialRepositoryState.entities);
+    expect(state.filters).toEqual(initialRepositoryState.filters);
+  });
+
+  it('should load recommended repositories state', () => {
+    const state = repositoryReducer(initialRepositoryState, loadRecommendedRepositories);
+
+    expect(state.recommendedLoaded).toBe(LoadingState.LOADING);
+    expect(state.loaded).toBe(initialRepositoryState.loaded);
     expect(state.ids).toEqual(initialRepositoryState.ids);
     expect(state.entities).toEqual(initialRepositoryState.entities);
     expect(state.filters).toEqual(initialRepositoryState.filters);

@@ -39,8 +39,7 @@
              [@detailExpand]="element.id === expandedElement ? 'expanded' : 'collapsed'">
           <ng-container *ngIf="element.description else loading">
             <mat-divider></mat-divider>
-            <h4>{{element.name}}</h4>
-            <p>{{element.description}}</p>
+            <app-repo-details [repo]="element"></app-repo-details>
           </ng-container>
           <ng-template #loading>
             <mat-progress-bar mode="indeterminate"></mat-progress-bar>
@@ -71,9 +70,9 @@
                  showFirstLastButtons></mat-paginator>
 </ng-container>
 <ng-container *ngIf="loaded === LoadingState.LOADING">
-  <p translate>dmp.steps.repositories.loading.load</p>
+  <p translate>dmp.steps.repositories.loading.load.all</p>
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-container>
 <ng-container *ngIf="loaded === LoadingState.FAILED">
-  <app-error-message message="{{'dmp.steps.repositories.loading.failed' | translate}}"></app-error-message>
+  <app-error-message message="{{'dmp.steps.repositories.loading.failed.all' | translate}}"></app-error-message>
 </ng-container>

@@ -7,6 +7,16 @@ export const {
 
 export const selectRepositoryState = createFeatureSelector<RepositoryState>('repositories');
 
+export const selectRecommendedRepositories = createSelector(
+  selectRepositoryState,
+  (state: RepositoryState) => state.recommended
+);
+
+export const selectRecommendedRepositoriesLoaded = createSelector(
+  selectRepositoryState,
+  (state: RepositoryState) => state.recommendedLoaded
+);
+
 export const selectRepositoriesLoaded = createSelector(
   selectRepositoryState,
   repositoriesState => repositoriesState.loaded

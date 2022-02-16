@@ -32,13 +32,23 @@ describe('RepositoryEffects', () => {
         [{
           provide: BackendService,
           useValue: jasmine.createSpyObj('BackendService',
-            ['getRepositories', 'getRepositoryById', 'searchRepository'])
+            ['getRecommendedRepositories', 'getRepositories', 'getRepositoryById', 'searchRepository'])
         }]],
     });
     effects = TestBed.inject<RepositoryEffects>(RepositoryEffects);
     backendService = TestBed.inject<BackendService>(BackendService);
     testScheduler = new TestScheduler((actual, expected) => {
       expect(actual).toEqual(expected);
+    });
+  });
+
+  it('should load and return recommended repositories', () => {
+    actions$ = of(RepositoryAction.loadRecommendedRepositories);
+    backendService.getRecommendedRepositories.and.returnValue(of([mockDetailRepo]));
+
+    effects.loadRecommendedRepositories$.subscribe(action => {
+      expect(backendService.getRecommendedRepositories).toHaveBeenCalled();
+      expect(action).toEqual(RepositoryAction.recommendedRepositoriesLoaded({repositories: [mockDetailRepo]}));
     });
   });
 

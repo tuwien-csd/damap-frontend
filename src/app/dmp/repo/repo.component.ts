@@ -7,8 +7,13 @@ import {Dataset} from '../../domain/dataset';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store/states/app.state';
 import {Observable} from 'rxjs';
-import {selectRepositories, selectRepositoriesLoaded} from '../../store/selectors/repository.selectors';
-import {loadAllRepositories, loadRepository} from '../../store/actions/repository.actions';
+import {
+  selectRecommendedRepositories,
+  selectRecommendedRepositoriesLoaded,
+  selectRepositories,
+  selectRepositoriesLoaded
+} from '../../store/selectors/repository.selectors';
+import {loadAllRepositories, loadRecommendedRepositories, loadRepository} from '../../store/actions/repository.actions';
 
 @Component({
   selector: 'app-dmp-repo',
@@ -19,6 +24,8 @@ export class RepoComponent implements OnInit {
 
   repositoriesLoaded$: Observable<LoadingState>;
   repositories$: Observable<Repository[]>; // Repo list loaded from backend
+  recommendedLoaded$: Observable<LoadingState>;
+  recommended$: Observable<Repository[]>;
 
   @Input() dmpForm: FormGroup;
   @Input() repoStep: FormArray;
@@ -37,6 +44,9 @@ export class RepoComponent implements OnInit {
   ngOnInit() {
     this.repositoriesLoaded$ = this.store.pipe(select(selectRepositoriesLoaded));
     this.repositories$ = this.store.pipe(select(selectRepositories));
+    this.recommendedLoaded$ = this.store.pipe(select(selectRecommendedRepositoriesLoaded));
+    this.recommended$ = this.store.pipe(select(selectRecommendedRepositories));
+    this.getRecommendedRepositories();
     this.getRepositories();
   }
 
@@ -67,6 +77,14 @@ export class RepoComponent implements OnInit {
       result += (i < datasets.length - 1) ? ', ' : '';
     }
     return result;
+  }
+
+  private getRecommendedRepositories() {
+    this.recommendedLoaded$.subscribe(loaded => {
+      if (loaded === LoadingState.NOT_LOADED) {
+        this.store.dispatch(loadRecommendedRepositories());
+      }
+    });
   }
 
   private getRepositories() {

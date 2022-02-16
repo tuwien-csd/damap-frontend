@@ -33,7 +33,7 @@ export class RepoTableComponent implements OnChanges, AfterViewInit {
   expandedElement: string | null;
   dataSource = new MatTableDataSource<Repository>();
 
-  LoadingState = LoadingState;
+  readonly LoadingState = LoadingState;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

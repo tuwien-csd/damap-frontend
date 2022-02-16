@@ -6,6 +6,8 @@
 </ng-template>
 <!-- SELECTED REPOS-->
 <h2 translate>dmp.steps.repositories.heading</h2>
+<app-step-intro> {{'dmp.steps.repositories.intro' | translate}}
+</app-step-intro>
 <div *ngIf="repoStep.controls.length" [formGroup]="dmpForm">
   <p translate>dmp.steps.repositories.selected</p>
   <mat-card *ngFor="let repo of repoStep.controls, index as i" class="mat-selected">
@@ -41,16 +43,32 @@
   </mat-card>
 </div>
 
-<!-- TABLE -->
-<app-step-intro> {{'dmp.steps.repositories.intro' | translate}}
-</app-step-intro>
-<div class="repos">
-  <h3 translate>dmp.steps.repositories.filter.search</h3>
-  <app-repo-filter></app-repo-filter>
-  <app-repo-table [loaded]="repositoriesLoaded$ | async"
-                  [repositories]="repositories$ | async"
-                  [selectedRepos]="repoStep.value"
-                  [datasets]="datasets.controls.length > 0"
-                  (repositoryToAdd)="addRepository($event)"
-                  (repositoryDetails)="getRepositoryDetails($event)"></app-repo-table>
-</div>
+<!-- TABS -->
+<mat-tab-group [animationDuration]="'0'">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      {{'dmp.steps.repositories.recommended' | translate}}
+    </ng-template>
+    <app-repo-recommendation [recommended]="recommended$ | async"
+                             [loaded]="recommendedLoaded$ | async"
+                             [selectedRepos]="repoStep.value"
+                             (repositoryToAdd)="addRepository($event)">
+    </app-repo-recommendation>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      {{'dmp.steps.repositories.find' | translate}}
+    </ng-template>
+    <div class="tab-content">
+      <h3 translate>dmp.steps.repositories.filter.search</h3>
+      <app-repo-filter></app-repo-filter>
+      <app-repo-table [loaded]="repositoriesLoaded$ | async"
+                      [repositories]="repositories$ | async"
+                      [selectedRepos]="repoStep.value"
+                      [datasets]="datasets.controls.length > 0"
+                      (repositoryToAdd)="addRepository($event)"
+                      (repositoryDetails)="getRepositoryDetails($event)"></app-repo-table>
+    </div>
+  </mat-tab>
+</mat-tab-group>
