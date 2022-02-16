@@ -2,36 +2,28 @@ import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {catchError, debounceTime, distinctUntilChanged, map, switchMap, takeUntil, withLatestFrom} from 'rxjs/operators';
 import {BackendService} from '../../services/backend.service';
-import {
-  FailedToLoadRepositories,
-  LoadAllRepositories,
-  LoadRepository,
-  RepositoriesLoaded,
-  RepositoryActionTypes,
-  SetRepositoryFilter,
-  UpdateRepository
-} from '../actions/repository.actions';
+import * as RepositoryAction from '../actions/repository.actions';
 import {asyncScheduler, of} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {AppState} from '../states/app.state';
-import {selectFilters} from '../states/repository.state';
+import {selectFilters} from '../selectors/repository.selectors';
 
 @Injectable()
 export class RepositoryEffects {
 
   loadRepositories$ = createEffect(() => this.actions$.pipe(
-    ofType<LoadAllRepositories>(RepositoryActionTypes.LoadAllRepositories),
+    ofType(RepositoryAction.loadAllRepositories),
     switchMap(_ => this.backendService.getRepositories().pipe(
-      map(repositories => new RepositoriesLoaded({repositories})),
-      catchError(() => of(new FailedToLoadRepositories())),
-      takeUntil(this.actions$.pipe(ofType(RepositoryActionTypes.SetRepositoryFilter)))
+      map(repositories => RepositoryAction.repositoriesLoaded({repositories})),
+      catchError(() => of(RepositoryAction.failedToLoadRepositories)),
+      takeUntil(this.actions$.pipe(ofType(RepositoryAction.setRepositoryFilter)))
     )),
   ));
 
   loadRepository$ = createEffect(() => this.actions$.pipe(
-    ofType<LoadRepository>(RepositoryActionTypes.LoadRepository),
-    switchMap(action => this.backendService.getRepositoryById(action.payload.id).pipe(
-      map(update => new UpdateRepository({update}))
+    ofType(RepositoryAction.loadRepository),
+    switchMap(action => this.backendService.getRepositoryById(action.id).pipe(
+      map(update => RepositoryAction.updateRepository({update}))
     )),
   ));
 
@@ -39,19 +31,19 @@ export class RepositoryEffects {
     ({ // assign default values so they can be overwritten for tests
        debounce = 1500, scheduler = asyncScheduler
      } = {}) => this.actions$.pipe(
-      ofType<SetRepositoryFilter>(RepositoryActionTypes.SetRepositoryFilter),
+      ofType(RepositoryAction.setRepositoryFilter),
       debounceTime(debounce, scheduler),
       distinctUntilChanged(),
       withLatestFrom(this.store$.select(selectFilters)),
       switchMap(([_, state]) => {
-          const filters = Object.keys(state)?.find(item => state[item]?.length);
-          if (filters) {
-            return this.backendService.searchRepository(state).pipe(
-              map(repositories => new RepositoriesLoaded({repositories})),
-              catchError(() => of(new FailedToLoadRepositories())),
-              takeUntil(this.actions$.pipe(ofType(RepositoryActionTypes.LoadAllRepositories))))
+        const filters = Object.keys(state)?.find(item => state[item]?.length);
+        if (filters) {
+          return this.backendService.searchRepository(state).pipe(
+            map(repositories => RepositoryAction.repositoriesLoaded({repositories})),
+            catchError(() => of(RepositoryAction.failedToLoadRepositories)),
+            takeUntil(this.actions$.pipe(ofType(RepositoryAction.loadAllRepositories))))
           }
-        return of(new LoadAllRepositories());
+        return of(RepositoryAction.loadAllRepositories);
         }
       ),
     ));

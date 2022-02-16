@@ -8,7 +8,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store/states/app.state';
 import {Observable} from 'rxjs';
 import {selectRepositories, selectRepositoriesLoaded} from '../../store/selectors/repository.selectors';
-import {LoadAllRepositories, LoadRepository} from '../../store/actions/repository.actions';
+import {loadAllRepositories, loadRepository} from '../../store/actions/repository.actions';
 
 @Component({
   selector: 'app-dmp-repo',
@@ -50,7 +50,7 @@ export class RepoComponent implements OnInit {
 
   getRepositoryDetails(repo: Repository) {
     if (!repo.description) {
-      this.store.dispatch(new LoadRepository({id: repo.id}));
+      this.store.dispatch(loadRepository({id: repo.id}));
     }
   }
 
@@ -70,10 +70,9 @@ export class RepoComponent implements OnInit {
   }
 
   private getRepositories() {
-    console.log('repo init load');
     this.repositoriesLoaded$.subscribe(loaded => {
       if (loaded === LoadingState.NOT_LOADED) {
-        this.store.dispatch(new LoadAllRepositories());
+        this.store.dispatch(loadAllRepositories());
       }
     });
   }

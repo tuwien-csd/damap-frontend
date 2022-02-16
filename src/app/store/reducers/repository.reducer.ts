@@ -1,48 +1,23 @@
-import {adapter, initialRepositoryState, RepositoryState} from '../states/repository.state';
-import {RepositoryActions, RepositoryActionTypes} from '../actions/repository.actions';
+import {adapter, initialRepositoryState} from '../states/repository.state';
+import * as RepositoryAction from '../actions/repository.actions';
+import {createReducer, on} from '@ngrx/store';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
 
-export function repositoryReducer(
-  state = initialRepositoryState,
-  action: RepositoryActions): RepositoryState {
-  switch (action.type) {
-    case RepositoryActionTypes.LoadAllRepositories:
-      return {
-        ...state,
-        filters: null,
-        loaded: LoadingState.LOADING
-      };
-    case RepositoryActionTypes.RepositoriesLoaded: {
-      return adapter.setAll(action.payload.repositories, {
-        ...state,
-        loaded: LoadingState.LOADED
-      });
-    }
-    case RepositoryActionTypes.UpdateRepository: {
-      return adapter.updateOne(action.payload.update, state);
-    }
-    case RepositoryActionTypes.FailedToLoadRepositories: {
-      return {
-        ...state,
-        loaded: LoadingState.FAILED
-      }
-    }
-    case RepositoryActionTypes.SetRepositoryFilter: {
-      return {
-        ...state,
-        loaded: LoadingState.LOADING,
-        filters: {
-          ...state.filters,
-          [action.payload.filter.name]: action.payload.filter.value
-        }
-      }
-    }
-    default: {
-      return state;
-    }
-  }
-}
+export const repositoryReducer = createReducer(
+  initialRepositoryState,
+  on(RepositoryAction.loadAllRepositories, state => ({...state, filters: null, loaded: LoadingState.LOADING})),
+  on(RepositoryAction.repositoriesLoaded, (state, {repositories}) => {
+    return adapter.setAll(repositories, {...state, loaded: LoadingState.LOADED})
+  }),
+  on(RepositoryAction.failedToLoadRepositories, state => ({...state, loaded: LoadingState.FAILED})),
+  on(RepositoryAction.updateRepository, (state, {update}) => {
+    return adapter.updateOne(update, state)
+  }),
+  on(RepositoryAction.setRepositoryFilter, (state, {filter}) => ({
+    ...state, filters: {
+      ...state.filters,
+      [filter.name]: filter.value
+    }, loaded: LoadingState.LOADING
+  })),
+);
 
-export const {
-  selectAll
-} = adapter.getSelectors();
