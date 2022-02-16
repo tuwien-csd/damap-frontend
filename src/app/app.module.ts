@@ -76,6 +76,9 @@ import {CrisTagComponent} from './widgets/cris-tag/cris-tag.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {TreeSelectFormFieldModule} from './widgets/tree-select-form-field/tree-select-form-field.module';
 import {RepoTableComponent} from './dmp/repo/repo-table/repo-table.component';
+import {RepoDetailsComponent} from './dmp/repo/repo-details/repo-details.component';
+import {RepoRecommendationComponent} from './dmp/repo/repo-recommendation/repo-recommendation.component';
+import {RepoPipe} from './pipe/repo.pipe';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -120,6 +123,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ContributorManualComponent,
     CrisTagComponent,
     RepoTableComponent,
+    RepoDetailsComponent,
+    RepoRecommendationComponent,
 
     // Directives
     DragdropDirective,
@@ -130,6 +135,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     BytePipe,
     ContributorFilterPipe,
     LicenseFilterPipe,
+    RepoPipe,
   ],
   imports: [
     BrowserModule,

@@ -270,8 +270,14 @@
           "deletion": "The following datasets were marked for deletion: {{value}}. Are you sure they shall be preserved in a repository?"
         },
         "loading": {
-          "load": "Load repositories...",
-          "failed": "Repositories could not be loaded."
+          "load": {
+            "all": "Load repositories...",
+            "recommended": "Load recommended repositories..."
+          },
+          "failed": {
+            "all": "Recommended repositories could not be loaded.",
+            "recommended": "Recommended repositories could not be loaded."
+          }
         },
         "filter": {
           "search": "Search Filter"
@@ -599,6 +605,7 @@
       "fileanalysis": "Failed to analyse file. ",
       "repositories": {
         "search": "Failed to search repositories. ",
+        "recommended": "Failed to load recommended repositories. ",
         "one": "Failed to load repository details. ",
         "all": "Failed to load repositories. "
       },
@@ -759,5 +766,8 @@
         }
       }
     }
-  }
+  },
+  "languages": "Languages",
+  "contenttypes": "Content types",
+  "metadatastandards": "Metadata standards"
 }

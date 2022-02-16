@@ -11,6 +11,14 @@ import {selectFilters} from '../selectors/repository.selectors';
 @Injectable()
 export class RepositoryEffects {
 
+  loadRecommendedRepositories$ = createEffect(() => this.actions$.pipe(
+    ofType(RepositoryAction.loadRecommendedRepositories),
+    switchMap(_ => this.backendService.getRecommendedRepositories().pipe(
+      map(repositories => RepositoryAction.recommendedRepositoriesLoaded({repositories})),
+      catchError(() => of(RepositoryAction.failedToLoadRecommendedRepositories))
+    ))
+  ));
+
   loadRepositories$ = createEffect(() => this.actions$.pipe(
     ofType(RepositoryAction.loadAllRepositories),
     switchMap(_ => this.backendService.getRepositories().pipe(
