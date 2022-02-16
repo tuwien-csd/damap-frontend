@@ -103,6 +103,13 @@ export class BackendService {
     );
   }
 
+  getRecommendedRepositories(): Observable<Repository[]> {
+    return this.http.get<Repository[]>(`${this.repositoryBackendUrl}/recommended`).pipe(
+      retry(3),
+      catchError(this.handleError('http.error.repositories.recommended'))
+    );
+  }
+
   getRepositoryById(id: string): Observable<{ id: string, changes: Repository }> {
     return this.http.get<Repository>(`${this.repositoryBackendUrl}/${id}`).pipe(
       map(repo => ({id, changes: repo})),

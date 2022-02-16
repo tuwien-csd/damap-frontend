@@ -1,56 +1,15 @@
-import {Action} from '@ngrx/store';
+import {createAction, props} from '@ngrx/store';
 import {Repository} from '../../domain/repository';
 import {Update} from '@ngrx/entity';
 
-export enum RepositoryActionTypes {
-  LoadAllRepositories = '[Repositories] Load all',
-  RepositoriesLoaded = '[Repositories] All loaded',
-  LoadRepository = '[Repositories] Load one',
-  UpdateRepository = '[Repositories] Update one',
-  FailedToLoadRepositories = '[Repositories] Failed to load all',
-  SetRepositoryFilter = '[Repositories] Set filter'
-}
+export const loadAllRepositories = createAction('[Repositories] Load all');
 
-export class LoadAllRepositories implements Action {
-  readonly type = RepositoryActionTypes.LoadAllRepositories;
-}
+export const repositoriesLoaded = createAction('[Repositories] All loaded', props<{ repositories: Repository[] }>());
 
-export class RepositoriesLoaded implements Action {
-  readonly type = RepositoryActionTypes.RepositoriesLoaded;
+export const loadRepository = createAction('[Repositories] Load one', props<{ id: string }>());
 
-  constructor(public payload: { repositories: Repository[] }) {
-  }
-}
+export const updateRepository = createAction('[Repositories] Update one', props<{ update: Update<Repository> }>());
 
-export class LoadRepository implements Action {
-  readonly type = RepositoryActionTypes.LoadRepository;
+export const failedToLoadRepositories = createAction('[Repositories] Failed to load all');
 
-  constructor(public payload: { id: string }) {
-  }
-}
-
-export class UpdateRepository implements Action {
-  readonly type = RepositoryActionTypes.UpdateRepository;
-
-  constructor(public payload: { update: Update<Repository> }) {
-  }
-}
-
-export class FailedToLoadRepositories implements Action {
-  readonly type = RepositoryActionTypes.FailedToLoadRepositories;
-}
-
-export class SetRepositoryFilter implements Action {
-  readonly type = RepositoryActionTypes.SetRepositoryFilter;
-
-  constructor(public payload: { filter: { name: string, value: string [] } }) {
-  }
-}
-
-export type RepositoryActions =
-  LoadAllRepositories
-  | RepositoriesLoaded
-  | LoadRepository
-  | UpdateRepository
-  | FailedToLoadRepositories
-  | SetRepositoryFilter;
+export const setRepositoryFilter = createAction('[Repositories] Set filter', props<{ filter: { name: string, value: string [] } }>());

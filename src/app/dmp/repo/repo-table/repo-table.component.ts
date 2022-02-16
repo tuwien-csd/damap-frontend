@@ -40,7 +40,7 @@ export class RepoTableComponent implements OnChanges, AfterViewInit {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.repositories) {
+    if (changes.repositories || changes.selectedRepos) {
       // Timeout needed for paginator init
       setTimeout(_ => this.filterRepos(), 1);
     }

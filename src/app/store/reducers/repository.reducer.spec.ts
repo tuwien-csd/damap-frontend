@@ -1,18 +1,18 @@
 import {repositoryReducer} from './repository.reducer';
 import {initialRepositoryState} from '../states/repository.state';
 import {
-  FailedToLoadRepositories,
-  LoadAllRepositories,
-  RepositoriesLoaded,
-  SetRepositoryFilter,
-  UpdateRepository
+  failedToLoadRepositories,
+  loadAllRepositories,
+  repositoriesLoaded,
+  setRepositoryFilter,
+  updateRepository
 } from '../actions/repository.actions';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
 import {mockDetailRepo, mockRepo} from '../../mocks/repository-mocks';
 
 describe('RepositoryReducer', () => {
   it('should return failed loading state', () => {
-    const state = repositoryReducer(initialRepositoryState, new FailedToLoadRepositories());
+    const state = repositoryReducer(initialRepositoryState, failedToLoadRepositories);
 
     expect(state.loaded).toBe(LoadingState.FAILED);
     expect(state.ids).toEqual(initialRepositoryState.ids);
@@ -21,7 +21,7 @@ describe('RepositoryReducer', () => {
   });
 
   it('should return loading state', () => {
-    const state = repositoryReducer(initialRepositoryState, new LoadAllRepositories());
+    const state = repositoryReducer(initialRepositoryState, loadAllRepositories);
 
     expect(state.loaded).toBe(LoadingState.LOADING);
     expect(state.ids).toEqual(initialRepositoryState.ids);
@@ -30,14 +30,14 @@ describe('RepositoryReducer', () => {
   });
 
   it('should return loaded and updated repositories', () => {
-    const state = repositoryReducer(initialRepositoryState, new RepositoriesLoaded({repositories: [mockRepo]}));
+    const state = repositoryReducer(initialRepositoryState, repositoriesLoaded({repositories: [mockRepo]}));
 
     expect(state.loaded).toBe(LoadingState.LOADED);
     expect(state.ids).toEqual(['r3d100013557']);
     expect(state.entities).toEqual({r3d100013557: mockRepo});
     expect(state.filters).toEqual(initialRepositoryState.filters);
 
-    const newState = repositoryReducer(state, new UpdateRepository(
+    const newState = repositoryReducer(state, updateRepository(
       {update: {id: mockRepo.id, changes: mockDetailRepo}}
     ));
 
@@ -49,7 +49,7 @@ describe('RepositoryReducer', () => {
 
   it('should return set and reset repository filters', () => {
     const state = repositoryReducer(initialRepositoryState,
-      new SetRepositoryFilter({filter: {name: 'id', value: ['orcid']}})
+      setRepositoryFilter({filter: {name: 'id', value: ['orcid']}})
     );
 
     expect(state.loaded).toBe(LoadingState.LOADING);
@@ -57,7 +57,7 @@ describe('RepositoryReducer', () => {
     expect(state.entities).toEqual(initialRepositoryState.entities);
     expect(state.filters).toEqual({id: ['orcid']});
 
-    const newState = repositoryReducer(state, new LoadAllRepositories());
+    const newState = repositoryReducer(state, loadAllRepositories);
 
     expect(newState.ids).toEqual(state.ids);
     expect(newState.entities).toEqual(state.entities);
