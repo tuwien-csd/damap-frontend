@@ -1,5 +1,5 @@
 <app-save-status [saved]="!formChanged"></app-save-status>
-<mat-vertical-stepper [linear]="false" (selectionChange)="changeStep($event)">
+<mat-vertical-stepper [linear]="false" (selectionChange)="changeStep()">
   <mat-step label="{{'dmp.steps.project.label' | translate }}">
     <app-dmp-project [projects]="projects$ | async"
                      [loaded]="projectsLoaded$ | async"
@@ -8,8 +8,7 @@
   </mat-step>
   <mat-step label="{{'dmp.steps.people.label' | translate }}">
     <app-dmp-people [projectMembers]="projectMembers"
-                    [contactStep]="contactStep"
-                    [contributorStep]="contributorStep"
+                    [dmpForm]="dmpForm"
                     (contactPerson)="changeContactPerson($event)"
                     (contributorToAdd)="addContributor($event)"
                     (contributorToRemove)="removeContributor($event)">
@@ -55,7 +54,8 @@
     <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
       <app-dmp-legal-ethical-aspects [dmpForm]="dmpForm"
                                      [legalEthicalStep]="legalEthicalStep"
-                                     [datasets]="datasets">
+                                     [datasets]="datasets"
+                                     (crisValueChange)="changeCrisValue($event)">
       </app-dmp-legal-ethical-aspects>
     </ng-container>
   </mat-step>
@@ -70,11 +70,8 @@
     <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
       <app-dmp-repo [dmpForm]="dmpForm"
                     [repoStep]="repoStep" [datasets]="datasets"
-                    [loaded]="repositoriesLoaded$ | async"
-                    [repositories]="repositories$ | async"
                     (repositoryToAdd)="addRepository($event)"
-                    (repositoryToRemove)="removeRepository($event)"
-                    (repositoryDetails)="getRepositoryDetails($event)">
+                    (repositoryToRemove)="removeRepository($event)">
       </app-dmp-repo>
     </ng-container>
   </mat-step>
@@ -86,7 +83,8 @@
   <mat-step label="{{'dmp.steps.costs.label' | translate }}">
     <app-dmp-costs [costsStep]="costsStep"
                    (costToAdd)="addCost()"
-                   (costToRemove)="removeCost($event)">
+                   (costToRemove)="removeCost($event)"
+                   (crisValueChange)="changeCrisValue($event)">
     </app-dmp-costs>
   </mat-step>
   <mat-step label="{{'dmp.steps.end.label' | translate }}">

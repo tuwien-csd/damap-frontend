@@ -1,8 +1,21 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
-import * as fromRepositories from '../reducers/repository.reducer';
-import {RepositoryState} from '../states/repository.state';
+import {adapter, RepositoryState} from '../states/repository.state';
+
+export const {
+  selectAll
+} = adapter.getSelectors();
 
 export const selectRepositoryState = createFeatureSelector<RepositoryState>('repositories');
+
+export const selectRecommendedRepositories = createSelector(
+  selectRepositoryState,
+  (state: RepositoryState) => state.recommended
+);
+
+export const selectRecommendedRepositoriesLoaded = createSelector(
+  selectRepositoryState,
+  (state: RepositoryState) => state.recommendedLoaded
+);
 
 export const selectRepositoriesLoaded = createSelector(
   selectRepositoryState,
@@ -11,5 +24,10 @@ export const selectRepositoriesLoaded = createSelector(
 
 export const selectRepositories = createSelector(
   selectRepositoryState,
-  fromRepositories.selectAll
+  selectAll
+);
+
+export const selectFilters = createSelector(
+  selectRepositoryState,
+  (state: RepositoryState) => state.filters
 );

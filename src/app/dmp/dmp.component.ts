@@ -3,18 +3,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../services/backend.service';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {Observable, Subscription} from 'rxjs';
-import {Person} from '../domain/person';
-import {ProjectMember} from '../domain/project-member';
+import {Contributor} from '../domain/contributor';
 import {Project} from '../domain/project';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../store/states/app.state';
 import {selectProjects, selectProjectsLoaded} from '../store/selectors/project.selectors';
 import {LoadProjects} from '../store/actions/project.actions';
 import {FormService} from '../services/form.service';
-import {Repository} from '../domain/repository';
-import {selectRepositories, selectRepositoriesLoaded} from '../store/selectors/repository.selectors';
-import {LoadRepositories, LoadRepository} from '../store/actions/repository.actions';
-import {StepperSelectionEvent} from '@angular/cdk/stepper';
 import {Storage} from '../domain/storage';
 import {FeedbackService} from '../services/feedback.service';
 import {HttpEventType} from '@angular/common/http';
@@ -40,7 +35,6 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   // Steps
   projectStep: FormControl;
-  contactStep: FormControl;
   contributorStep: FormArray;
   specifyDataStep: FormGroup;
   datasets: FormArray;
@@ -56,10 +50,7 @@ export class DmpComponent implements OnInit, OnDestroy {
   // Resources
   projectsLoaded$: Observable<LoadingState>;
   projects$: Observable<Project[]>;
-  projectMembers: ProjectMember[];
-  repositories: any;
-  repositoriesLoaded$: Observable<LoadingState>;
-  repositories$: Observable<Repository[]>;
+  projectMembers: Contributor[];
   formChanged$: Observable<boolean>;
 
   fileUpload: { file: File, progress: number, finalized: boolean }[] = [];
@@ -82,8 +73,6 @@ export class DmpComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.projectsLoaded$ = this.store.pipe(select(selectProjectsLoaded));
     this.projects$ = this.store.pipe(select(selectProjects));
-    this.repositoriesLoaded$ = this.store.pipe(select(selectRepositoriesLoaded));
-    this.repositories$ = this.store.pipe(select(selectRepositories));
     this.formChanged$ = this.store.pipe(select(selectFormChanged));
     this.getDmpById();
     this.getSuggestedProjects();
@@ -97,7 +86,6 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formChanged$.subscribe(value => this.formChanged = value);
 
     this.projectStep = this.dmpForm.get('project') as FormControl;
-    this.contactStep = this.dmpForm.get('contact') as FormControl;
     this.contributorStep = this.dmpForm.get('contributors') as FormArray;
     this.specifyDataStep = this.dmpForm.get('data') as FormGroup;
     this.datasets = this.dmpForm.get('datasets') as FormArray;
@@ -117,10 +105,7 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.store.dispatch(new LoadDmps());
   }
 
-  changeStep(event: StepperSelectionEvent) {
-    if (event.selectedIndex === 7) {
-      this.getRepositories();
-    }
+  changeStep() {
     if (this.formChanged) {
       this.saveDmp();
     }
@@ -154,22 +139,23 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   changeProject(project: Project) {
     if (project != null) {
+      // only set contact if none is selected yet
+      if (!this.formService.getContactPerson()) {
+        this.getProjectMembersAndSetContact(project.universityId);
+      } else {
+        this.getProjectMembers(project.universityId);
+      }
       this.projectStep.setValue(project);
-      this.getProjectMembersAndSetContact(project.universityId);
     } else {
       this.projectStep.reset();
     }
   }
 
-  changeContactPerson(contact: Person) {
-    if (contact != null) {
-      this.contactStep.setValue(contact);
-    } else {
-      this.contactStep.reset();
-    }
+  changeContactPerson(contact: Contributor) {
+    this.formService.changeContactPerson(contact);
   }
 
-  addContributor(contributor: Person) {
+  addContributor(contributor: Contributor) {
     this.formService.addContributorToForm(contributor);
   }
 
@@ -243,11 +229,11 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formService.removeRepositoryFromForm(index);
   }
 
-  getRepositoryDetails(repo: Repository) {
-    if (!repo.info) {
-      this.store.dispatch(new LoadRepository({id: repo.id}));
-    }
-  }
+  /*  getRepositoryDetails(repo: Repository) {
+      if (!repo.info) {
+        this.store.dispatch(new LoadRepository({id: repo.id}));
+      }
+    }*/
 
   addCost() {
     this.formService.addCostToForm();
@@ -255,6 +241,10 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   removeCost(index: number) {
     this.formService.removeCostFromForm(index);
+  }
+
+  changeCrisValue(controlName: string) {
+    this.formService.setCrisInfoToFalse(controlName);
   }
 
   private getDmpById() {
@@ -296,21 +286,21 @@ export class DmpComponent implements OnInit, OnDestroy {
       .subscribe(members => {
         this.projectMembers = members;
         for (const member of members) {
-          if (member.projectLeader) {
-            this.changeContactPerson(member.person);
+          if (member.contact) {
+            this.changeContactPerson(member);
             break;
           }
         }
       });
   }
 
-  private getRepositories() {
-    this.repositoriesLoaded$.subscribe(loaded => {
-      if (loaded === LoadingState.NOT_LOADED) {
-        this.store.dispatch(new LoadRepositories());
-      }
-    });
-  }
+  /*  private getRepositories() {
+      this.repositoriesLoaded$.subscribe(loaded => {
+        if (loaded === LoadingState.NOT_LOADED) {
+          this.store.dispatch(new LoadAllRepositories());
+        }
+      });
+    }*/
 
   // TODO: move to service, add for storage
 

@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ContributorRole} from '../../domain/enum/contributor-role.enum';
-import {FormArray, FormControl} from '@angular/forms';
-import {Person} from '../../domain/person';
-import {ProjectMember} from '../../domain/project-member';
+import {FormArray, FormGroup} from '@angular/forms';
+import {Contributor} from '../../domain/contributor';
 
 @Component({
   selector: 'app-dmp-people',
@@ -11,12 +10,13 @@ import {ProjectMember} from '../../domain/project-member';
 })
 export class PeopleComponent {
 
-  @Input() projectMembers: ProjectMember[];
+  @Input() projectMembers: Contributor[];
 
   roles: any = ContributorRole;
 
-  @Input() contactStep: FormControl;
-  @Input() contributorStep: FormArray;
+  translateEnumPrefix = 'enum.contributor.role.'
+
+  @Input() dmpForm: FormGroup;
 
   @Output() contactPerson = new EventEmitter<any>();
   @Output() contributorToAdd = new EventEmitter<any>();
@@ -26,11 +26,11 @@ export class PeopleComponent {
   constructor() {
   }
 
-  changeContactPerson(contact: Person) {
+  changeContactPerson(contact: Contributor) {
     this.contactPerson.emit(contact);
   }
 
-  addContributor(contributor: Person) {
+  addContributor(contributor: Contributor) {
     this.contributorToAdd.emit(contributor);
   }
 
@@ -38,10 +38,8 @@ export class PeopleComponent {
     this.contributorToRemove.emit(index);
   }
 
-  updateContributorRoles(index: number, role: ContributorRole, event: any) {
-    if (event.source.selected) {
-      this.contributorToUpdate.emit({index, role});
-    }
+  get contributors(): FormArray {
+    return this.dmpForm.get('contributors') as FormArray;
   }
 
 }

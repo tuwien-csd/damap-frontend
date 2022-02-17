@@ -8,7 +8,7 @@ describe('RepoFilterComponent', () => {
   let component: RepoFilterComponent;
   let fixture: ComponentFixture<RepoFilterComponent>;
   let store: MockStore;
-  const initialState = { filters: {} };
+  const initialState = {filters: null};
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
