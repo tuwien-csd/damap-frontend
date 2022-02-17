@@ -1,29 +1,31 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
-import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
-import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Repository} from '../../domain/repository';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
 import {Dataset} from '../../domain/dataset';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../store/states/app.state';
+import {Observable} from 'rxjs';
+import {
+  selectRecommendedRepositories,
+  selectRecommendedRepositoriesLoaded,
+  selectRepositories,
+  selectRepositoriesLoaded
+} from '../../store/selectors/repository.selectors';
+import {loadAllRepositories, loadRecommendedRepositories, loadRepository} from '../../store/actions/repository.actions';
 
 @Component({
   selector: 'app-dmp-repo',
   templateUrl: './repo.component.html',
   styleUrls: ['./repo.component.css'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
 })
-export class RepoComponent implements OnChanges {
+export class RepoComponent implements OnInit {
 
-  @Input() loaded: LoadingState;
-  @Input() repositories: Repository[]; // Repo list loaded from backend
-  repoList: any = []; // Filtered repo list (repo list minus selected repos)
+  repositoriesLoaded$: Observable<LoadingState>;
+  repositories$: Observable<Repository[]>; // Repo list loaded from backend
+  recommendedLoaded$: Observable<LoadingState>;
+  recommended$: Observable<Repository[]>;
 
   @Input() dmpForm: FormGroup;
   @Input() repoStep: FormArray;
@@ -31,65 +33,35 @@ export class RepoComponent implements OnChanges {
 
   @Output() repositoryToAdd = new EventEmitter<any>();
   @Output() repositoryToRemove = new EventEmitter<any>();
-  @Output() repositoryDetails = new EventEmitter<any>();
-
-  readonly tableHeaders: string[] = ['expand', 'title', 'add'];
-  expandedElement: any | null;
-  dataSource = new MatTableDataSource<Repository>();
 
   LoadingState = LoadingState;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor() {
+  constructor(public store: Store<AppState>) {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.repositories) {
-      // Timeout needed for paginator init
-      setTimeout(_ => this.filterRepos(), 1);
-    }
-  }
-
-  expandRow(repo: Repository) {
-    this.expandedElement = this.expandedElement === repo.id ? null : repo.id;
-    if (!repo.info) {
-      this.getRepoDetails(repo);
-    }
-  }
-
-  private getRepoDetails(repo: Repository) {
-    this.repositoryDetails.emit(repo);
-  }
-
-  // Filter selected repos from repo list
-  private filterRepos(): void {
-    this.repoList = Object.assign([], this.repositories);
-    for (const entry of this.repoStep.controls) {
-      this.repoList = this.repoList.filter(e => !(e.id === entry.value.hostId));
-    }
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.data = this.repoList;
-  }
-
-  // Table Search Filter
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  ngOnInit() {
+    this.repositoriesLoaded$ = this.store.pipe(select(selectRepositoriesLoaded));
+    this.repositories$ = this.store.pipe(select(selectRepositories));
+    this.recommendedLoaded$ = this.store.pipe(select(selectRecommendedRepositoriesLoaded));
+    this.recommended$ = this.store.pipe(select(selectRecommendedRepositories));
+    this.getRecommendedRepositories();
+    this.getRepositories();
   }
 
   addRepository(repo: Repository) {
     this.repositoryToAdd.emit(repo);
-    this.filterRepos();
   }
 
   removeRepository(index: number): void {
     this.repositoryToRemove.emit(index);
-    this.filterRepos();
+  }
+
+  getRepositoryDetails(repo: Repository) {
+    if (!repo.description) {
+      this.store.dispatch(loadRepository({id: repo.id}));
+    }
   }
 
   getDatasetsMarkedForDeletion(index: number): Dataset[] {
@@ -105,5 +77,21 @@ export class RepoComponent implements OnChanges {
       result += (i < datasets.length - 1) ? ', ' : '';
     }
     return result;
+  }
+
+  private getRecommendedRepositories() {
+    this.recommendedLoaded$.subscribe(loaded => {
+      if (loaded === LoadingState.NOT_LOADED) {
+        this.store.dispatch(loadRecommendedRepositories());
+      }
+    });
+  }
+
+  private getRepositories() {
+    this.repositoriesLoaded$.subscribe(loaded => {
+      if (loaded === LoadingState.NOT_LOADED) {
+        this.store.dispatch(loadAllRepositories());
+      }
+    });
   }
 }

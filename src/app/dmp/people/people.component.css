@@ -10,3 +10,9 @@
   max-height: 300px;
   overflow: auto;
 }
+
+.mat-icon-contact {
+  vertical-align: middle;
+  font-size: 1.3em;
+  padding-left: 0.5rem;
+}

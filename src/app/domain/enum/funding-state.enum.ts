@@ -1,4 +1,4 @@
-export enum FundingStatus {
+export enum FundingState {
   PLANNED = 'PLANNED',
   APPLIED = 'APPLIED',
   GRANTED = 'GRANTED',

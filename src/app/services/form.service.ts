@@ -4,15 +4,14 @@ import {Dmp} from '../domain/dmp';
 import {Contributor} from '../domain/contributor';
 import {Dataset} from '../domain/dataset';
 import {Host} from '../domain/host';
-import {Person} from '../domain/person';
 import {Cost} from '../domain/cost';
 import {DataAccessType} from '../domain/enum/data-access-type.enum';
 import {Storage} from '../domain/storage';
-import {AccessRight} from '../domain/enum/access-right';
+import {AccessRight} from '../domain/enum/access-right.enum';
 import {DataKind} from '../domain/enum/data-kind.enum';
 import {ComplianceType} from '../domain/enum/compliance-type.enum';
-import {SecurityMeasure} from '../domain/enum/security-measure';
-import {Agreement} from '../domain/enum/agreement';
+import {SecurityMeasure} from '../domain/enum/security-measure.enum';
+import {Agreement} from '../domain/enum/agreement.enum';
 import {notEmptyValidator} from '../validators/not-empty.validator';
 
 @Injectable({
@@ -33,18 +32,17 @@ export class FormService {
   }
 
   private static restrictedDatasets(datasets: Dataset[]): boolean {
-    return datasets.find(item => item.dataAccess === DataAccessType.restricted) != null;
+    return datasets.find(item => item.dataAccess === DataAccessType.RESTRICTED) != null;
   }
 
   private static closedDatasets(datasets: Dataset[]): boolean {
-    return datasets.find(item => item.dataAccess === DataAccessType.closed) != null;
+    return datasets.find(item => item.dataAccess === DataAccessType.CLOSED) != null;
   }
 
   private createDmpForm(): FormGroup {
     return this.formBuilder.group({
       id: [null],
       project: [null],
-      contact: [null],
       contributors: this.formBuilder.array([]),
       data: this.formBuilder.group({
         kind: [null],
@@ -61,20 +59,26 @@ export class FormService {
       externalStorageInfo: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       legal: this.formBuilder.group({
         personalData: [false],
+        personalDataCris: [false],
         personalDataCompliance: [[]],
         otherPersonalDataCompliance: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveData: [false],
+        sensitiveDataCris: [false],
         sensitiveDataSecurity: [[], Validators.maxLength(this.TEXT_MAX_LENGTH)],
         otherDataSecurityMeasures: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictions: [false],
+        legalRestrictionsCris: [false],
         legalRestrictionsDocuments: [[]],
         otherLegalRestrictionsDocuments: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictionsComment: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         dataRightsAndAccessControl: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         humanParticipants: [false],
+        humanParticipantsCris: [false],
         ethicalIssues: [false],
-        committeeReviewed: [false]
+        ethicalIssuesCris: [false],
+        committeeReviewed: [false],
+        committeeReviewedCris: [false]
       }),
       hosts: this.formBuilder.array([]),
       reuse: this.formBuilder.group({
@@ -86,6 +90,7 @@ export class FormService {
       closedAccessInfo: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       costs: this.formBuilder.group({
         exist: [null],
+        existCris: [false],
         list: this.formBuilder.array([])
       })
     });
@@ -97,7 +102,6 @@ export class FormService {
     this.form.patchValue({
       id: dmp.id,
       project: dmp.project,
-      contact: dmp.contact,
       data: {
         kind: dmp.dataKind,
         explanation: dmp.noDataExplanation,
@@ -111,20 +115,26 @@ export class FormService {
       externalStorageInfo: dmp.externalStorageInfo,
       legal: {
         personalData: dmp.personalData,
+        personalDataCris: dmp.personalDataCris,
         personalDataCompliance: dmp.personalDataCompliance,
         otherPersonalDataCompliance: dmp.otherPersonalDataCompliance,
         sensitiveData: dmp.sensitiveData,
+        sensitiveDataCris: dmp.sensitiveDataCris,
         sensitiveDataSecurity: dmp.sensitiveDataSecurity,
         otherDataSecurityMeasures: dmp.otherDataSecurityMeasures,
         sensitiveDataAccess: dmp.sensitiveDataAccess,
         legalRestrictions: dmp.legalRestrictions,
+        legalRestrictionsCris: dmp.legalRestrictionsCris,
         legalRestrictionsDocuments: dmp.legalRestrictionsDocuments,
         otherLegalRestrictionsDocuments: dmp.otherLegalRestrictionsDocument,
         legalRestrictionsComment: dmp.legalRestrictionsComment,
         dataRightsAndAccessControl: dmp.dataRightsAndAccessControl,
         humanParticipants: dmp.humanParticipants,
+        humanParticipantsCris: dmp.humanParticipantsCris,
         ethicalIssues: dmp.ethicalIssuesExist,
+        ethicalIssuesCris: dmp.ethicalIssuesExistCris,
         committeeReviewed: dmp.committeeReviewed,
+        committeeReviewedCris: dmp.committeeReviewedCris,
       },
       reuse: {
         targetAudience: dmp.targetAudience,
@@ -132,7 +142,8 @@ export class FormService {
         restrictedDataAccess: dmp.restrictedDataAccess
       },
       costs: {
-        exist: dmp.costsExist
+        exist: dmp.costsExist,
+        existCris: dmp.costsExistCris
       },
       restrictedAccessInfo: dmp.restrictedAccessInfo,
       closedAccessInfo: dmp.closedAccessInfo,
@@ -171,24 +182,37 @@ export class FormService {
     }
   }
 
+  /**
+   * Export dmp form to a (consistent) DataManagementPlan object.
+   *
+   * In general if no datasets are defined, all related values will be reset to the initial value unless they
+   * were set by the cris system. (Exception: `costsExist` since it doesn't necessarily depend on new datasets.)
+   * E.g. `sensitiveData` will be set to `false` if no datasets are defined, unless the value was set by the cris system
+   * (`sensitiveDataCris == true`), then the given value will be used for this field.
+   */
   public exportFormToDmp(): Dmp {
     const formValue = this.form.getRawValue();
 
     const result: Dmp = {
       closedAccessInfo: '',
-      committeeReviewed: formValue.legal.humanParticipants,
+      committeeReviewed: formValue.legal.committeeReviewed,
+      committeeReviewedCris: formValue.legal.committeeReviewedCris,
       contributors: formValue.contributors,
-      costs: formValue.costs?.exist ? formValue.costs.list : [],
-      costsExist: formValue.costs?.exist,
+      costs: formValue.costs.exist ? formValue.costs.list : [],
+      costsExist: formValue.costs.exist,
+      costsExistCris: formValue.costs.existCris,
       dataGeneration: '',
       dataKind: formValue.data.kind,
       datasets: [],
       ethicalIssuesExist: formValue.legal.ethicalIssues,
+      ethicalIssuesExistCris: formValue.legal.ethicalIssuesCris,
       externalStorage: [],
       externalStorageInfo: '',
       hosts: [],
       humanParticipants: formValue.legal.humanParticipants,
-      legalRestrictions: false,
+      humanParticipantsCris: formValue.legal.humanParticipantsCris,
+      legalRestrictions: formValue.legal.legalRestrictions,
+      legalRestrictionsCris: formValue.legal.legalRestrictionsCris,
       legalRestrictionsDocuments: [],
       otherLegalRestrictionsDocument: '',
       legalRestrictionsComment: '',
@@ -196,11 +220,13 @@ export class FormService {
       metadata: '',
       noDataExplanation: '',
       otherPersonalDataCompliance: '',
-      personalData: false,
+      personalData: formValue.legal.personalData,
+      personalDataCris: formValue.legal.personalDataCris,
       personalDataCompliance: [],
       restrictedAccessInfo: '',
       restrictedDataAccess: '',
-      sensitiveData: false,
+      sensitiveData: formValue.legal.sensitiveData,
+      sensitiveDataCris: formValue.legal.sensitiveDataCris,
       sensitiveDataSecurity: [],
       otherDataSecurityMeasures: '',
       sensitiveDataAccess: '',
@@ -209,14 +235,13 @@ export class FormService {
       targetAudience: '',
       tools: '',
       id: formValue.id,
-      project: formValue.project,
-      contact: formValue.contact
+      project: formValue.project
     };
 
     if (formValue.data.kind === DataKind.SPECIFY) {
       result.datasets = formValue.datasets;
       for (const dataset of result.datasets) {
-        if (dataset.dataAccess !== DataAccessType.closed) {
+        if (dataset.dataAccess !== DataAccessType.CLOSED) {
           dataset.delete = false;
         }
         if (!dataset.delete) {
@@ -250,7 +275,7 @@ export class FormService {
       if (formValue.legal.personalData) {
         result.personalData = true;
         result.personalDataCompliance = formValue.legal.personalDataCompliance;
-        result.otherPersonalDataCompliance = result.personalDataCompliance.includes(ComplianceType.Other) ?
+        result.otherPersonalDataCompliance = result.personalDataCompliance.includes(ComplianceType.OTHER) ?
           formValue.legal.otherPersonalDataCompliance : '';
       } else {
         for (const dataset of result.datasets) {
@@ -297,9 +322,30 @@ export class FormService {
     (this.form.controls.externalStorage as FormArray).clear();
   }
 
-  public addContributorToForm(contributor: Person) {
+  public getContactPerson(): Contributor {
+    return (this.form.get('contributors') as FormArray).value.find(c => c.contact);
+  }
+
+  public changeContactPerson(contact: Contributor) {
+    // Remove old contact
+    const contributorFormArray = this.form.get('contributors') as FormArray;
+    contributorFormArray.controls.forEach(c => c.patchValue({contact: false}));
+
+    // Add/set new contact
+    if (contact) {
+      const newContact = contributorFormArray.controls.find(c => c.value.universityId === contact.universityId);
+      if (newContact) {
+        newContact.patchValue({contact: true});
+      } else {
+        this.addContributorToForm(contact, true);
+      }
+    }
+  }
+
+  public addContributorToForm(contributor: Contributor, contact = false) {
     const contributorFormGroup = this.createContributorFormGroup();
-    contributorFormGroup.patchValue({person: contributor});
+    contributorFormGroup.patchValue(contributor);
+    contributorFormGroup.patchValue({contact});
     (this.form.get('contributors') as FormArray).push(contributorFormGroup);
   }
 
@@ -402,16 +448,27 @@ export class FormService {
       personalData: [false],
       sensitiveData: [false],
       legalRestrictions: [false],
-      dataAccess: [DataAccessType.open],
+      dataAccess: [DataAccessType.OPEN],
       referenceHash: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
-      selectedProjectMembersAccess: [AccessRight.write],
-      otherProjectMembersAccess: [AccessRight.write],
-      publicAccess: [AccessRight.read],
+      selectedProjectMembersAccess: [AccessRight.WRITE],
+      otherProjectMembersAccess: [AccessRight.WRITE],
+      publicAccess: [AccessRight.READ],
       delete: [false],
       dateOfDeletion: [null],
       reasonForDeletion: ['', Validators.maxLength(4000)],
       retentionPeriod: [null]
     });
+  }
+
+  /**
+   * Set CRIS info to false if a value retrieved from the CRIS system is changed.
+   * @param controlName The complete path of the form control to be set to false (e.g. `formGroup.formControl`)
+   */
+  public setCrisInfoToFalse(controlName: string) {
+    const crisControl: FormControl = this.form.get(controlName) as FormControl;
+    if (crisControl.value === true) {
+      crisControl.setValue(false);
+    }
   }
 
   private mapDatasetToFormGroup(dataset: Dataset): FormGroup {
@@ -423,18 +480,22 @@ export class FormService {
   private createContributorFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
-      person: [null],
-      role: [null]
+      affiliation: [''],
+      affiliationId: [null],
+      contact: [false],
+      firstName: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+      lastName: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+      mbox: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+      personId: [null],
+      role: [null],
+      roleInProject: [''],
+      universityId: [null]
     });
   }
 
   private mapContributorToFormGroup(contributor: Contributor): FormGroup {
     const formGroup = this.createContributorFormGroup();
-    formGroup.setValue({
-      id: contributor.id || null,
-      person: contributor.person,
-      role: contributor.role || null
-    });
+    formGroup.patchValue(contributor);
     return formGroup;
   }
 

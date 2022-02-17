@@ -5,18 +5,14 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {RouterModule} from '@angular/router';
-import {DashboardComponent} from './dashboard/dashboard.component';
 import {PlansComponent} from './plans/plans.component';
 import {DmpComponent} from './dmp/dmp.component';
 import {MatStepperModule} from '@angular/material/stepper';
-import {MatInputModule} from '@angular/material/input';
 import {AppStoreModule} from './store/app-store.module';
 import {APP_ROUTES} from './app.routes';
 import {LayoutComponent} from './layout/layout.component';
-import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {OAuthModule} from 'angular-oauth2-oidc';
 import {environment} from '../environments/environment';
@@ -26,7 +22,6 @@ import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {DatasetDialogComponent, SpecifyDataComponent} from './dmp/specify-data/specify-data.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from '@angular/material/table';
-import {MatChipsModule} from '@angular/material/chips';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {LegalEthicalAspectsComponent} from './dmp/legal-ethical-aspects/legal-ethical-aspects.component';
@@ -57,13 +52,10 @@ import {FileUploadComponent} from './widgets/file-upload/file-upload.component';
 import {ContributorFilterPipe} from './pipe/contributor-filter.pipe';
 import {LicenseSelectorDialogComponent, LicenseWizardComponent} from './widgets/license-wizard/license-wizard.component';
 import {LicenseFilterPipe} from './widgets/license-wizard/license-filter.pipe';
-import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ErrorMessageComponent} from './widgets/error-message/error-message.component';
-import {TreeSelectFormFieldComponent} from './widgets/tree-select-form-field/tree-select-form-field.component';
-import {MatTreeModule} from '@angular/material/tree';
 import {RepoFilterComponent} from './dmp/repo/repo-filter/repo-filter.component';
 import {TooltipComponent} from './widgets/tooltip/tooltip.component';
-import {AuthGuard} from './auth/auth.guard';
+import {AuthGuard} from './guard/auth.guard';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ConfigService} from './services/config.service';
 import {DataAccessComponent} from './dmp/data-storage/data-access/data-access.component';
@@ -77,6 +69,16 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatMenuModule} from '@angular/material/menu';
 import {RetentionPeriodComponent} from './dmp/repo/retention-period/retention-period.component';
+import {ConsentComponent} from './consent/consent.component';
+import {ConsentGuard} from './guard/consent.guard';
+import {ContributorManualComponent} from './dmp/people/contributor-manual/contributor-manual.component';
+import {CrisTagComponent} from './widgets/cris-tag/cris-tag.component';
+import {DashboardModule} from './dashboard/dashboard.module';
+import {TreeSelectFormFieldModule} from './widgets/tree-select-form-field/tree-select-form-field.module';
+import {RepoTableComponent} from './dmp/repo/repo-table/repo-table.component';
+import {RepoDetailsComponent} from './dmp/repo/repo-details/repo-details.component';
+import {RepoRecommendationComponent} from './dmp/repo/repo-recommendation/repo-recommendation.component';
+import {RepoPipe} from './pipe/repo.pipe';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -87,7 +89,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   declarations: [
     // Components
     AppComponent,
-    DashboardComponent,
     PlansComponent,
     DmpComponent,
     LayoutComponent,
@@ -109,7 +110,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     LicenseWizardComponent,
     LicenseSelectorDialogComponent,
     ErrorMessageComponent,
-    TreeSelectFormFieldComponent,
     RepoFilterComponent,
     TooltipComponent,
     DataAccessComponent,
@@ -119,6 +119,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SaveStatusComponent,
     StepIntroComponent,
     RetentionPeriodComponent,
+    ConsentComponent,
+    ContributorManualComponent,
+    CrisTagComponent,
+    RepoTableComponent,
+    RepoDetailsComponent,
+    RepoRecommendationComponent,
 
     // Directives
     DragdropDirective,
@@ -129,6 +135,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     BytePipe,
     ContributorFilterPipe,
     LicenseFilterPipe,
+    RepoPipe,
   ],
   imports: [
     BrowserModule,
@@ -155,21 +162,16 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
 
     // Materials
-    MatButtonModule,
-    MatInputModule,
     MatListModule,
     MatToolbarModule,
     MatSidenavModule,
     MatStepperModule,
-    MatIconModule,
-    MatTabsModule,
     MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatRippleModule,
     MatRadioModule,
     MatTableModule,
-    MatChipsModule,
     MatDialogModule,
     MatSelectModule,
     MatCardModule,
@@ -181,13 +183,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatTooltipModule,
     MatExpansionModule,
     MatSnackBarModule,
-    MatCheckboxModule,
-    MatAutocompleteModule,
-    MatTreeModule,
     MatMenuModule,
 
     // Custom
-    SharedModule
+    SharedModule,
+    DashboardModule,
+    TreeSelectFormFieldModule
   ],
   providers: [{
     provide: APP_INITIALIZER,
@@ -195,7 +196,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     multi: true,
     deps: [ConfigService]
   },
-    AuthGuard
+    AuthGuard, ConsentGuard
   ],
   bootstrap: [AppComponent]
 })

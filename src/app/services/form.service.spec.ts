@@ -25,7 +25,7 @@ describe('FormService', () => {
     expect(service.exportFormToDmp()).toEqual(completeDmp);
   })
 
-  it('should not export dataset related fields when no datasets are defined', () => {
+  it('should not export dataset related fields when no datasets are defined unless values are set by the cris system', () => {
     service.mapDmpToForm(noDataDmp);
     const result = service.exportFormToDmp();
     expect(result.dataKind).toEqual(DataKind.NONE);
@@ -36,16 +36,26 @@ describe('FormService', () => {
     expect(result.hosts).toEqual([]);
     expect(result.restrictedAccessInfo).toEqual('');
     expect(result.closedAccessInfo).toEqual('');
-    expect(result.sensitiveData).toEqual(false);
+    expect(result.sensitiveData).toEqual(true);
+    expect(result.sensitiveDataCris).toEqual(false);
     expect(result.sensitiveDataSecurity).toEqual([]);
     expect(result.sensitiveDataAccess).toEqual('');
-    expect(result.personalData).toEqual(false);
+    expect(result.personalData).toEqual(true);
+    expect(result.personalDataCris).toEqual(true);
     expect(result.personalDataCompliance).toEqual([]);
     expect(result.otherPersonalDataCompliance).toEqual('');
-    expect(result.legalRestrictions).toEqual(false);
+    expect(result.legalRestrictions).toEqual(true);
+    expect(result.legalRestrictionsCris).toEqual(true);
     expect(result.legalRestrictionsComment).toEqual('');
     expect(result.legalRestrictionsDocuments).toEqual([]);
     expect(result.otherLegalRestrictionsDocument).toEqual('');
-    expect(result.humanParticipants).toEqual(false);
+    expect(result.humanParticipants).toEqual(true);
+    expect(result.humanParticipantsCris).toEqual(true);
+    expect(result.costsExist).toEqual(true);
+    expect(result.costsExistCris).toEqual(false);
+    expect(result.committeeReviewed).toEqual(true);
+    expect(result.committeeReviewedCris).toEqual(true);
+    expect(result.ethicalIssuesExist).toEqual(false);
+    expect(result.ethicalIssuesExistCris).toEqual(false);
   })
 });

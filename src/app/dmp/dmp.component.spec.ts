@@ -16,7 +16,6 @@ import {mockProject} from '../mocks/project-mocks';
 import {HarnessLoader} from '@angular/cdk/testing';
 import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
 import {MatStepperHarness} from '@angular/material/stepper/testing';
-import {selectRepositoriesLoaded} from '../store/selectors/repository.selectors';
 import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
 
 describe('DmpComponent', () => {
@@ -30,8 +29,7 @@ describe('DmpComponent', () => {
   let feedbackSpy;
   const initialState = {
     form: {dmp: null, changed: false},
-    projects: {projects: [], loaded: LoadingState.LOADED},
-    repositories: {ids: [], entities: {}, filters: [], loaded: LoadingState.LOADED}
+    projects: {projects: [], loaded: LoadingState.LOADED}
   };
 
   beforeEach(async () => {
@@ -62,13 +60,7 @@ describe('DmpComponent', () => {
       providers: [
         {provide: OAuthService, useValue: oauthSpy},
         {provide: FormService, useValue: formServiceStub},
-        provideMockStore({
-          initialState,
-          selectors: [{
-            selector: selectRepositoriesLoaded,
-            value: LoadingState.NOT_LOADED
-          }]
-        }),
+        provideMockStore({initialState}),
         {provide: ActivatedRoute, useValue: {snapshot: {paramMap: {get: (id: number) => null}}}},
         {provide: BackendService, useValue: backendSpy},
         {provide: FeedbackService, useValue: feedbackSpy}
@@ -105,15 +97,12 @@ describe('DmpComponent', () => {
     const steps = await stepper.getSteps();
     await steps[7].select();
 
-    steps[7].getLabel().then(label => expect(label).toEqual('dmp.steps.repositories.label'));
-    expect(storeSpy).toHaveBeenCalledTimes(1);
-
     (component.dmpForm.get('project') as FormControl).setValue(mockProject);
     component.formChanged = true;
     await steps[1].select();
 
     expect(component.saveDmp).toHaveBeenCalledTimes(1);
-    expect(storeSpy).toHaveBeenCalledTimes(2);
+    expect(storeSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should reset form and dispatch store calls on destroy', () => {

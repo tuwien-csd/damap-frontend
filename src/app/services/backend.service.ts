@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {Dmp} from '../domain/dmp';
 import {HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders, HttpParams} from '@angular/common/http';
-import {ProjectMember} from '../domain/project-member';
+import {Contributor} from '../domain/contributor';
 import {Project} from '../domain/project';
 import {DmpListItem} from '../domain/dmp-list-item';
 import {Repository} from '../domain/repository';
@@ -10,6 +10,7 @@ import {catchError, map, retry, shareReplay} from 'rxjs/operators';
 import {FeedbackService} from './feedback.service';
 import {environment} from '../../environments/environment';
 import {TranslateService} from '@ngx-translate/core';
+import {Consent} from '../domain/consent'
 
 @Injectable({
   providedIn: 'root'
@@ -87,8 +88,8 @@ export class BackendService {
     );
   }
 
-  getProjectMembers(projectId: number): Observable<ProjectMember[]> {
-    return this.http.get<ProjectMember[]>(`${this.projectBackendUrl}/${projectId}/staff`).pipe(
+  getProjectMembers(projectId: number): Observable<Contributor[]> {
+    return this.http.get<Contributor[]>(`${this.projectBackendUrl}/${projectId}/staff`).pipe(
       retry(3),
       catchError(this.handleError('http.error.projectmembers'))
     );
@@ -102,9 +103,16 @@ export class BackendService {
     );
   }
 
-  getRepositoryById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.repositoryBackendUrl}/${id}`).pipe(
-      map(details => ({id, changes: {info: details.repository[0]}})),
+  getRecommendedRepositories(): Observable<Repository[]> {
+    return this.http.get<Repository[]>(`${this.repositoryBackendUrl}/recommended`).pipe(
+      retry(3),
+      catchError(this.handleError('http.error.repositories.recommended'))
+    );
+  }
+
+  getRepositoryById(id: string): Observable<{ id: string, changes: Repository }> {
+    return this.http.get<Repository>(`${this.repositoryBackendUrl}/${id}`).pipe(
+      map(repo => ({id, changes: repo})),
       retry(3),
       catchError(this.handleError('http.error.repositories.one'))
     );
@@ -162,6 +170,21 @@ export class BackendService {
     );
   }
 
+  getConsentGiven(): Observable<boolean> {
+    return this.http.get<Consent>(`${this.backendUrl}consent`).pipe(
+      map(details => details.consentGiven),
+      retry(3),
+      catchError(this.handleError('http.error.consent.one'))
+    );
+  }
+
+  editConsent(consent: Consent): Observable<Consent> {
+    return this.http.post<Consent>(`${this.backendUrl}consent`, consent)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('http.error.consent.edit'))
+      );
+  }
 
   private handleError(message = 'http.error.standard') {
     message = this.translate.instant(message);

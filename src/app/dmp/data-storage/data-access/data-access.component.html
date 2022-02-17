@@ -31,8 +31,8 @@
                 <mat-select
                   aria-label="{{'dmp.steps.data.access.aria.selected' | translate: {dataset: dataset.value.title} }}"
                   formControlName="selectedProjectMembersAccess">
-                  <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.value">
-                    {{right.value}}
+                  <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.key">
+                    {{translatePrefixEnum + right.value | translate}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -41,8 +41,8 @@
                 <mat-select
                   aria-label="{{'dmp.steps.data.access.aria.other' | translate: {dataset: dataset.value.title} }}"
                   formControlName="otherProjectMembersAccess">
-                  <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.value">
-                    {{right.value}}
+                  <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.key">
+                    {{translatePrefixEnum + right.value | translate}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -51,8 +51,8 @@
                 <mat-select
                   aria-label="{{'dmp.steps.data.access.aria.public' | translate: {dataset: dataset.value.title} }}"
                   formControlName="publicAccess">
-                  <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.value">
-                    {{right.value}}
+                  <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.key">
+                    {{translatePrefixEnum + right.value | translate}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>

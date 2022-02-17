@@ -1,7 +1,7 @@
 import {DmpListItem} from '../domain/dmp-list-item';
 import {FunctionRole} from '../domain/enum/function-role.enum';
 import {mockProject} from './project-mocks';
-import {mockContact} from './person-mocks';
+import {mockContact} from './contributor-mocks';
 
 export const mockDmpList: DmpListItem[] = [
   {
