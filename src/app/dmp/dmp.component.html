@@ -1,5 +1,5 @@
 <app-save-status [saved]="!formChanged"></app-save-status>
-<mat-vertical-stepper [linear]="false" (selectionChange)="changeStep($event)">
+<mat-vertical-stepper [linear]="false" (selectionChange)="changeStep()">
   <mat-step label="{{'dmp.steps.project.label' | translate }}">
     <app-dmp-project [projects]="projects$ | async"
                      [loaded]="projectsLoaded$ | async"
@@ -70,11 +70,8 @@
     <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
       <app-dmp-repo [dmpForm]="dmpForm"
                     [repoStep]="repoStep" [datasets]="datasets"
-                    [loaded]="repositoriesLoaded$ | async"
-                    [repositories]="repositories$ | async"
                     (repositoryToAdd)="addRepository($event)"
-                    (repositoryToRemove)="removeRepository($event)"
-                    (repositoryDetails)="getRepositoryDetails($event)">
+                    (repositoryToRemove)="removeRepository($event)">
       </app-dmp-repo>
     </ng-container>
   </mat-step>

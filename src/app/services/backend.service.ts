@@ -103,9 +103,16 @@ export class BackendService {
     );
   }
 
-  getRepositoryById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.repositoryBackendUrl}/${id}`).pipe(
-      map(details => ({id, changes: {info: details.repository[0]}})),
+  getRecommendedRepositories(): Observable<Repository[]> {
+    return this.http.get<Repository[]>(`${this.repositoryBackendUrl}/recommended`).pipe(
+      retry(3),
+      catchError(this.handleError('http.error.repositories.recommended'))
+    );
+  }
+
+  getRepositoryById(id: string): Observable<{ id: string, changes: Repository }> {
+    return this.http.get<Repository>(`${this.repositoryBackendUrl}/${id}`).pipe(
+      map(repo => ({id, changes: repo})),
       retry(3),
       catchError(this.handleError('http.error.repositories.one'))
     );

@@ -1,5 +1,11 @@
 export interface Repository {
   readonly id: string;
-  name: string;
-  info: any;
+  readonly name: string;
+  repositoryIdentifier?: string[];
+  repositoryURL?: string;
+  repositoryLanguages?: string[];
+  description?: string;
+  versioning?: boolean;
+  contentTypes?: string[];
+  metadataStandards?: string[];
 }

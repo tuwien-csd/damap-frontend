@@ -1,9 +1,18 @@
-import {Component, ElementRef, Injectable, Input, OnInit, Output, ViewChild, EventEmitter} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Injectable, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {SelectionModel} from '@angular/cdk/collections';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+
+/**
+ * Tree data
+ */
+export class TreeData {
+  id: string;
+  label: string;
+  children?: TreeData[];
+}
 
 /**
  * Tree node
@@ -39,7 +48,7 @@ export class TreeDatabase {
   constructor() {
   }
 
-  initialize(TREE_DATA: any) {
+  initialize(TREE_DATA: TreeData[]) {
     // Build the tree nodes from Json object. The result is a list of `TreeNode` with nested
     //     file node as children.
     const data = this.buildFileTree(TREE_DATA, 0);
@@ -52,14 +61,14 @@ export class TreeDatabase {
    * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
    * The return value is the list of `TreeNode`.
    */
-  buildFileTree(obj: { [key: string]: { id: string, label: string, children?: any } }, level: number): TreeNode[] {
-    return Object.keys(obj).reduce<TreeNode[]>((accumulator, key) => {
+  buildFileTree(data: TreeData[], level: number): TreeNode[] {
+    return Object.keys(data).reduce<TreeNode[]>((accumulator, key) => {
       const node = new TreeNode();
-      node.item = {id: obj[key].id, label: obj[key].label};
+      node.item = {id: data[key].id, label: data[key].label};
       node.visible = true;
 
-      if (obj[key].children) {
-        node.children = this.buildFileTree(obj[key].children, level + 1);
+      if (data[key].children) {
+        node.children = this.buildFileTree(data[key].children, level + 1);
       }
 
       return accumulator.concat(node);
@@ -97,7 +106,7 @@ export class TreeSelectFormFieldComponent implements OnInit {
   searchFilter: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   @Input() label: string;
-  @Input() treeData: any;
+  @Input() treeData: TreeData[];
 
   @Output() params = new EventEmitter<string[]>();
 
