@@ -44,31 +44,45 @@
 </div>
 
 <!-- TABS -->
-<mat-tab-group [animationDuration]="'0'">
-  <mat-tab>
-    <ng-template mat-tab-label>
-      {{'dmp.steps.repositories.recommended' | translate}}
-    </ng-template>
-    <app-repo-recommendation [recommended]="recommended$ | async"
-                             [loaded]="recommendedLoaded$ | async"
-                             [selectedRepos]="repoStep.value"
-                             (repositoryToAdd)="addRepository($event)">
-    </app-repo-recommendation>
-  </mat-tab>
+<ng-container *ngIf="recommended$ | async as recommended">
+  <ng-container *ngIf="recommended.length > 0 else noRecommended">
+    <mat-tab-group [animationDuration]="'0'">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          {{'dmp.steps.repositories.recommended' | translate}}
+        </ng-template>
+        <app-repo-recommendation [recommended]="recommended"
+                                 [loaded]="recommendedLoaded$ | async"
+                                 [selectedRepos]="repoStep.value"
+                                 (repositoryToAdd)="addRepository($event)">
+        </app-repo-recommendation>
+      </mat-tab>
 
-  <mat-tab>
-    <ng-template mat-tab-label>
-      {{'dmp.steps.repositories.find' | translate}}
-    </ng-template>
-    <div class="tab-content">
-      <h3 translate>dmp.steps.repositories.filter.search</h3>
-      <app-repo-filter></app-repo-filter>
-      <app-repo-table [loaded]="repositoriesLoaded$ | async"
-                      [repositories]="repositories$ | async"
-                      [selectedRepos]="repoStep.value"
-                      [datasets]="datasets.controls.length > 0"
-                      (repositoryToAdd)="addRepository($event)"
-                      (repositoryDetails)="getRepositoryDetails($event)"></app-repo-table>
-    </div>
-  </mat-tab>
-</mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          {{'dmp.steps.repositories.find' | translate}}
+        </ng-template>
+        <div class="tab-content">
+          <ng-container *ngTemplateOutlet="findRepo"></ng-container>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </ng-container>
+</ng-container>
+
+<ng-template #noRecommended>
+  <ng-container *ngTemplateOutlet="findRepo"></ng-container>
+</ng-template>
+
+<!-- Find Repository template-->
+<ng-template #findRepo>
+  <h3 translate>dmp.steps.repositories.filter.search</h3>
+  <app-repo-filter></app-repo-filter>
+  <app-repo-table [loaded]="repositoriesLoaded$ | async"
+                  [repositories]="repositories$ | async"
+                  [selectedRepos]="repoStep.value"
+                  [datasets]="datasets.controls.length > 0"
+                  (repositoryToAdd)="addRepository($event)"
+                  (repositoryDetails)="getRepositoryDetails($event)"></app-repo-table>
+
+</ng-template>
