@@ -1,62 +1,21 @@
-import {Action} from '@ngrx/store';
+import {createAction, props} from '@ngrx/store';
 import {Repository} from '../../domain/repository';
 import {Update} from '@ngrx/entity';
 
-export enum RepositoryActionTypes {
-  LoadRepositories = '[Repositories] Load all',
-  RepositoriesLoaded = '[Repositories] All loaded',
-  LoadRepository = '[Repositories] Load one',
-  UpdateRepository = '[Repositories] Update one',
-  FailedToLoadRepositories = '[Repositories] Failed to load all',
-  SetRepositoryFilter = '[Repositories] Set filter',
-  ResetRepositoryFilter = '[Repositories] Reset filter'
-}
+export const loadRecommendedRepositories = createAction('[Repositories] Load recommended');
 
-export class LoadRepositories implements Action {
-  readonly type = RepositoryActionTypes.LoadRepositories;
-}
+export const recommendedRepositoriesLoaded = createAction('[Repositories] Recommended loaded', props<{ repositories: Repository[] }>());
 
-export class RepositoriesLoaded implements Action {
-  readonly type = RepositoryActionTypes.RepositoriesLoaded;
+export const failedToLoadRecommendedRepositories = createAction('[Repositories] Failed to load recommended');
 
-  constructor(public payload: { repositories: Repository[] }) {
-  }
-}
+export const loadAllRepositories = createAction('[Repositories] Load all');
 
-export class LoadRepository implements Action {
-  readonly type = RepositoryActionTypes.LoadRepository;
+export const repositoriesLoaded = createAction('[Repositories] All loaded', props<{ repositories: Repository[] }>());
 
-  constructor(public payload: { id: string }) {
-  }
-}
+export const loadRepository = createAction('[Repositories] Load one', props<{ id: string }>());
 
-export class UpdateRepository implements Action {
-  readonly type = RepositoryActionTypes.UpdateRepository;
+export const updateRepository = createAction('[Repositories] Update one', props<{ update: Update<Repository> }>());
 
-  constructor(public payload: { update: Update<Repository> }) {
-  }
-}
+export const failedToLoadRepositories = createAction('[Repositories] Failed to load all');
 
-export class FailedToLoadRepositories implements Action {
-  readonly type = RepositoryActionTypes.FailedToLoadRepositories;
-}
-
-export class SetRepositoryFilter implements Action {
-  readonly type = RepositoryActionTypes.SetRepositoryFilter;
-
-  constructor(public payload: { filter: { name: string, value: string [] } }) {
-  }
-}
-
-export class ResetRepositoryFilter implements Action {
-  readonly type = RepositoryActionTypes.ResetRepositoryFilter;
-}
-
-export type RepositoryActions =
-  LoadRepositories
-  | RepositoriesLoaded
-  | LoadRepository
-  | UpdateRepository
-  | FailedToLoadRepositories
-  | SetRepositoryFilter
-  | ResetRepositoryFilter;
+export const setRepositoryFilter = createAction('[Repositories] Set filter', props<{ filter: { name: string, value: string [] } }>());

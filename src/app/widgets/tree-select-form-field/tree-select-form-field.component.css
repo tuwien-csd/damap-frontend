@@ -1,19 +1,6 @@
 mat-form-field {
   width: 100%;
 }
-
-.tree-select-list{
-  margin-top: -1.4rem;
-  position: absolute;
-  background-color: white;
-  z-index: 1;
-  min-width: 100%;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  max-height: 300px;
-  overflow-y: auto;
-  padding-right: 1.5rem;
-}
-
 .tree-select {
   margin-bottom: -0.5rem;
   position: relative;

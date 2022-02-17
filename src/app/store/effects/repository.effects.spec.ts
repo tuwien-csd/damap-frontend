@@ -3,16 +3,10 @@ import {provideMockActions} from '@ngrx/effects/testing';
 import {BackendService} from '../../services/backend.service';
 import {RepositoryEffects} from './repository.effects';
 import {of, throwError} from 'rxjs';
-import {
-  FailedToLoadRepositories,
-  LoadRepositories,
-  RepositoriesLoaded,
-  RepositoryActionTypes,
-  UpdateRepository
-} from '../actions/repository.actions';
+import * as RepositoryAction from '../actions/repository.actions';
 import {mockDetailRepo, mockRepo} from '../../mocks/repository-mocks';
 import {provideMockStore} from '@ngrx/store/testing';
-import {selectFilters} from '../states/repository.state';
+import {selectFilters} from '../selectors/repository.selectors';
 import {IdentifierType} from '../../domain/enum/identifier-type.enum';
 import {TestScheduler} from 'rxjs/testing';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -38,7 +32,7 @@ describe('RepositoryEffects', () => {
         [{
           provide: BackendService,
           useValue: jasmine.createSpyObj('BackendService',
-            ['getRepositories', 'getRepositoryById', 'searchRepository'])
+            ['getRecommendedRepositories', 'getRepositories', 'getRepositoryById', 'searchRepository'])
         }]],
     });
     effects = TestBed.inject<RepositoryEffects>(RepositoryEffects);
@@ -48,56 +42,58 @@ describe('RepositoryEffects', () => {
     });
   });
 
+  it('should load and return recommended repositories', () => {
+    actions$ = of(RepositoryAction.loadRecommendedRepositories);
+    backendService.getRecommendedRepositories.and.returnValue(of([mockDetailRepo]));
+
+    effects.loadRecommendedRepositories$.subscribe(action => {
+      expect(backendService.getRecommendedRepositories).toHaveBeenCalled();
+      expect(action).toEqual(RepositoryAction.recommendedRepositoriesLoaded({repositories: [mockDetailRepo]}));
+    });
+  });
+
   it('should load and return repositories', () => {
-    actions$ = of({type: RepositoryActionTypes.LoadRepositories});
+    actions$ = of(RepositoryAction.loadAllRepositories);
     backendService.getRepositories.and.returnValue(of([mockRepo]));
 
     effects.loadRepositories$.subscribe(action => {
       expect(backendService.getRepositories).toHaveBeenCalled();
-      expect(action).toEqual(new RepositoriesLoaded({repositories: [mockRepo]}));
+      expect(action).toEqual(RepositoryAction.repositoriesLoaded({repositories: [mockRepo]}));
     });
   });
 
   it('should load and return repository', () => {
-    actions$ = of({type: RepositoryActionTypes.LoadRepository, payload: {id: mockDetailRepo.id}});
+    actions$ = of(RepositoryAction.loadRepository(mockDetailRepo));
     backendService.getRepositoryById.and.returnValue(of({
       id: mockDetailRepo.id,
-      changes: {info: mockDetailRepo.info}
+      changes: mockDetailRepo
     }));
 
     effects.loadRepository$.subscribe(action => {
       expect(backendService.getRepositoryById).toHaveBeenCalledWith(mockDetailRepo.id);
-      expect(action).toEqual(new UpdateRepository({update: {id: mockDetailRepo.id, changes: {info: mockDetailRepo.info}}}));
+      expect(action).toEqual(RepositoryAction.updateRepository({update: {id: mockDetailRepo.id, changes: mockDetailRepo}}));
     });
   });
 
   it('should search repositories by query', () => {
-    actions$ = of({type: RepositoryActionTypes.SetRepositoryFilter});
+    actions$ = of(RepositoryAction.setRepositoryFilter);
     backendService.searchRepository.and.returnValue(of([mockRepo]));
 
     effects.searchRepositoriesByQuery$({
       debounce: 10, scheduler: testScheduler,
     }).subscribe(action => {
       expect(backendService.searchRepository).toHaveBeenCalledWith({identifier: [IdentifierType.ORCID]});
-      expect(action).toEqual(new RepositoriesLoaded({repositories: [mockRepo]}));
-    });
-  });
-
-  it('should reset repository filters', () => {
-    actions$ = of({type: RepositoryActionTypes.ResetRepositoryFilter});
-
-    effects.resetRepositoryFilter$.subscribe(action => {
-      expect(action).toEqual(new LoadRepositories());
+      expect(action).toEqual(RepositoryAction.repositoriesLoaded({repositories: [mockRepo]}));
     });
   });
 
   it('should load repositories and fail', () => {
-    actions$ = of({type: RepositoryActionTypes.LoadRepositories});
+    actions$ = of(RepositoryAction.loadAllRepositories);
     backendService.getRepositories.and.returnValue(throwError(new HttpErrorResponse({})));
 
     effects.loadRepositories$.subscribe(action => {
       expect(backendService.getRepositories).toHaveBeenCalled();
-      expect(action).toEqual(new FailedToLoadRepositories());
+      expect(action).toEqual(RepositoryAction.failedToLoadRepositories);
     });
   });
 });

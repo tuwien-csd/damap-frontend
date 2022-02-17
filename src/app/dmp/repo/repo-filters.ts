@@ -1,6 +1,7 @@
 import {FILE_TYPES} from '../specify-data/data-specs';
+import {TreeData} from '../../widgets/tree-select-form-field/tree-select-form-field.component';
 
-export const REPO_FILTERS = {
+export const REPO_FILTERS: { [key: string]: TreeData[] } = {
   dataAccessTypes: [
     {
       id: 'open',

@@ -1,0 +1,20 @@
+.tag {
+  margin: 0.2rem;
+  padding: 3px 4px;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.content-types{
+  background-color: lightblue;
+}
+
+.metadata-standards{
+  background-color: antiquewhite;
+}
+
+.lang{
+  background-color: palegoldenrod;
+}
