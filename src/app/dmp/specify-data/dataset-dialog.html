@@ -8,8 +8,8 @@
         <mat-label>Estimated type</mat-label>
         <mat-select formControlName="type" required>
           <mat-option class="type-selection" *ngFor="let type of FILE_TYPES | keyvalue: originalOrder"
-                      [value]="type.value.label">
-            {{type.value.label}} <br/>
+                      [value]="type.value.id">
+            {{type.value.id}} <br/>
             <span class="type-description" *ngIf="type.value.description"> [{{type.value.description}}]</span>
           </mat-option>
         </mat-select>
