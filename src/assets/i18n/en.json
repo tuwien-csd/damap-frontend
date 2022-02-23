@@ -158,7 +158,9 @@
         "question": {
           "metadata": "Please indicate which metadata will be provided to help others identify, discover and reuse the data.",
           "datageneration": "How will the research data be generated and which methods and software will be used?",
-          "structure": "How will you structure the data and handle versioning?"
+          "structure": "How will you structure the data and handle versioning?",
+          "dataQuality": "How will the consistency and quality of data collection be controlled and documented?",
+          "otherDataQuality": "Please specify what other measures are taken:"
         }
       },
       "storage": {
@@ -685,6 +687,15 @@
       "UNKNOWN": "unknown",
       "NONE": "none",
       "SPECIFY": "specify"
+    },
+    "dataquality": {
+      "CALIBRATION": "calibration",
+      "REPEATED_SAMPLES_OR_MEASUREMENTS": "repeated samples or measurements",
+      "STANDARDISED_DATA_CAPTURE": "standardised data capture",
+      "DATA_ENTRY_VALIDATION": "data entry validation",
+      "PEER_REVIEW_OF_DATA": "peer review of data",
+      "REPRESENTATION_WITH_CONTROLLED_VOCABULARIES": "representation with controlled vocabularies",
+      "OTHERS": "others"
     },
     "functionrole": {
       "ADMIN": "ADMIN",
