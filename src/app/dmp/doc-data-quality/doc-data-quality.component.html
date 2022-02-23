@@ -9,12 +9,13 @@
   [label]="'dmp.steps.documentation.question.structure'"
   [control]="structure" [autocompleteOptions]="optionsStructureAndVersioning">
 </app-textarea-wrapper>
-
-<app-textarea-wrapper
-  [label]="'dmp.steps.documentation.question.metadata'"
-  [control]="metadata" [autocompleteOptions]="optionsMetadata">
-</app-textarea-wrapper>
-
+<div class="form-field-hint">
+  <app-textarea-wrapper
+    [label]="'dmp.steps.documentation.question.metadata'"
+    [control]="metadata" [autocompleteOptions]="optionsMetadata">
+  </app-textarea-wrapper>
+  <app-tooltip [tooltip]="'info.documentation.metadata'"></app-tooltip>
+</div>
 <mat-form-field appearance="fill" [style]="'width: 100%'" [formGroup]="docDataStep">
   <mat-label>{{'dmp.steps.documentation.question.dataQuality' | translate}}
   </mat-label>
