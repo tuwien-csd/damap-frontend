@@ -12,7 +12,7 @@ export const repositoryReducer = createReducer(
     recommended: repositories
   })),
   on(RepositoryAction.failedToLoadRecommendedRepositories, state => ({...state, recommendedLoaded: LoadingState.FAILED})),
-  on(RepositoryAction.loadAllRepositories, state => ({...state, filters: null, loaded: LoadingState.LOADING})),
+  on(RepositoryAction.loadAllRepositories, state => ({...state, filters: {}, loaded: LoadingState.LOADING})),
   on(RepositoryAction.repositoriesLoaded, (state, {repositories}) => {
     return adapter.setAll(repositories, {...state, loaded: LoadingState.LOADED})
   }),

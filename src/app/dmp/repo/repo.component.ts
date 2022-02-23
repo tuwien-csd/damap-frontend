@@ -22,8 +22,8 @@ import {loadAllRepositories, loadRecommendedRepositories, loadRepository} from '
 })
 export class RepoComponent implements OnInit {
 
-  repositoriesLoaded$: Observable<LoadingState>;
-  repositories$: Observable<Repository[]>; // Repo list loaded from backend
+  repositoriesLoaded: LoadingState;
+  repositories: Repository[]; // Repo list loaded from backend
   recommendedLoaded$: Observable<LoadingState>;
   recommended$: Observable<Repository[]>;
 
@@ -42,8 +42,8 @@ export class RepoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.repositoriesLoaded$ = this.store.pipe(select(selectRepositoriesLoaded));
-    this.repositories$ = this.store.pipe(select(selectRepositories));
+    this.store.pipe(select(selectRepositoriesLoaded)).subscribe(val => this.repositoriesLoaded = val);
+    this.store.pipe(select(selectRepositories)).subscribe(val => this.repositories = val);
     this.recommendedLoaded$ = this.store.pipe(select(selectRecommendedRepositoriesLoaded));
     this.recommended$ = this.store.pipe(select(selectRecommendedRepositories));
     this.getRecommendedRepositories();
@@ -88,10 +88,8 @@ export class RepoComponent implements OnInit {
   }
 
   private getRepositories() {
-    this.repositoriesLoaded$.subscribe(loaded => {
-      if (loaded === LoadingState.NOT_LOADED) {
-        this.store.dispatch(loadAllRepositories());
-      }
-    });
+    if (this.repositoriesLoaded === LoadingState.NOT_LOADED) {
+      this.store.dispatch(loadAllRepositories());
+    }
   }
 }
