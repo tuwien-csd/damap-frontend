@@ -51,7 +51,7 @@ export class RepositoryEffects {
             catchError(() => of(RepositoryAction.failedToLoadRepositories)),
             takeUntil(this.actions$.pipe(ofType(RepositoryAction.loadAllRepositories))))
           }
-        return of(RepositoryAction.loadAllRepositories);
+        return of(RepositoryAction.loadAllRepositories());
         }
       ),
     ));
