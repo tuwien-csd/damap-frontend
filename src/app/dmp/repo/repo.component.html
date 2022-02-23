@@ -78,8 +78,8 @@
 <ng-template #findRepo>
   <h3 translate>dmp.steps.repositories.filter.search</h3>
   <app-repo-filter></app-repo-filter>
-  <app-repo-table [loaded]="repositoriesLoaded$ | async"
-                  [repositories]="repositories$ | async"
+  <app-repo-table [loaded]="repositoriesLoaded"
+                  [repositories]="repositories"
                   [selectedRepos]="repoStep.value"
                   [datasets]="datasets.controls.length > 0"
                   (repositoryToAdd)="addRepository($event)"
