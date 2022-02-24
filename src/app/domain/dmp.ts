@@ -5,6 +5,7 @@ import {Dataset} from './dataset';
 import {Host} from './host';
 import {Cost} from './cost';
 import {Storage} from './storage';
+import {DataQualityType} from './enum/data-quality-type.enum';
 
 export interface Dmp {
   readonly created?: Date;
@@ -19,6 +20,8 @@ export interface Dmp {
   datasets: Dataset[];
   metadata: string;
   dataGeneration: string;
+  dataQuality: DataQualityType[];
+  otherDataQuality: string;
   structure: string;
   targetAudience: string;
   tools: string;
