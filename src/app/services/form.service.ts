@@ -52,7 +52,9 @@ export class FormService {
       documentation: this.formBuilder.group({
         metadata: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         dataGeneration: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-        structure: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
+        structure: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        dataQuality: [[]],
+        otherDataQuality: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
       }),
       storage: this.formBuilder.array([]),
       externalStorage: this.formBuilder.array([]),
@@ -110,7 +112,8 @@ export class FormService {
         metadata: dmp.metadata,
         dataGeneration: dmp.dataGeneration,
         structure: dmp.structure,
-        targetAudience: dmp.targetAudience
+        dataQuality: dmp.dataQuality,
+        otherDataQuality: dmp.otherDataQuality
       },
       externalStorageInfo: dmp.externalStorageInfo,
       legal: {
@@ -203,6 +206,7 @@ export class FormService {
       costsExistCris: formValue.costs.existCris,
       dataGeneration: '',
       dataKind: formValue.data.kind,
+      dataQuality: formValue.documentation.dataQuality,
       datasets: [],
       ethicalIssuesExist: formValue.legal.ethicalIssues,
       ethicalIssuesExistCris: formValue.legal.ethicalIssuesCris,
@@ -219,6 +223,7 @@ export class FormService {
       dataRightsAndAccessControl: '',
       metadata: '',
       noDataExplanation: '',
+      otherDataQuality: formValue.documentation.otherDataQuality,
       otherPersonalDataCompliance: '',
       personalData: formValue.legal.personalData,
       personalDataCris: formValue.legal.personalDataCris,
