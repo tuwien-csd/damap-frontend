@@ -436,7 +436,8 @@
       "required": "Please provide a value.",
       "empty": "Please provide a valid value.",
       "maxlength": "Value must not exceed {{value}} characters.",
-      "pattern.currency": "Invalid input, please use the following format: 1234.56"
+      "pattern.currency": "Invalid input, please use the following format: 1234.56",
+      "orcid": "Invalid ORCID iD."
     },
     "changes": {
       "saved": "All changes have been saved.",
