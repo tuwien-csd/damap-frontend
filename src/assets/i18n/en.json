@@ -784,5 +784,9 @@
   },
   "languages": "Languages",
   "contenttypes": "Content types",
-  "metadatastandards": "Metadata standards"
+  "metadatastandards": "Metadata standards",
+  "env": {
+    "title": "Test environment",
+    "text": "This application instance is for development and testing purposes only. Content may be deleted at any point in time without prior notification."
+  }
 }

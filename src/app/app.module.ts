@@ -28,7 +28,6 @@ import {LegalEthicalAspectsComponent} from './dmp/legal-ethical-aspects/legal-et
 import {LicensesComponent} from './dmp/licenses/licenses.component';
 import {RepoComponent} from './dmp/repo/repo.component';
 import {DocDataQualityComponent} from './dmp/doc-data-quality/doc-data-quality.component';
-import {MatCardModule} from '@angular/material/card';
 import {PeopleComponent} from './dmp/people/people.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -56,7 +55,6 @@ import {ErrorMessageComponent} from './widgets/error-message/error-message.compo
 import {RepoFilterComponent} from './dmp/repo/repo-filter/repo-filter.component';
 import {TooltipComponent} from './widgets/tooltip/tooltip.component';
 import {AuthGuard} from './guard/auth.guard';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ConfigService} from './services/config.service';
 import {DataAccessComponent} from './dmp/data-storage/data-access/data-access.component';
 import {SharedModule} from './shared/shared.module';
@@ -79,6 +77,7 @@ import {RepoTableComponent} from './dmp/repo/repo-table/repo-table.component';
 import {RepoDetailsComponent} from './dmp/repo/repo-details/repo-details.component';
 import {RepoRecommendationComponent} from './dmp/repo/repo-recommendation/repo-recommendation.component';
 import {RepoPipe} from './pipe/repo.pipe';
+import {EnvBannerModule} from './widgets/env-banner/env-banner.module';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -174,7 +173,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatTableModule,
     MatDialogModule,
     MatSelectModule,
-    MatCardModule,
     MatGridListModule,
     MatPaginatorModule,
     MatProgressBarModule,
@@ -188,7 +186,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     // Custom
     SharedModule,
     DashboardModule,
-    TreeSelectFormFieldModule
+    TreeSelectFormFieldModule,
+    EnvBannerModule
   ],
   providers: [{
     provide: APP_INITIALIZER,
