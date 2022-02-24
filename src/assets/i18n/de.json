@@ -21,5 +21,9 @@
       "load": "Pläne laden...",
       "failed": "Deine Pläne konnten nicht geladen werden!"
     }
+  },
+  "env": {
+    "title": "Test Umgebung",
+    "text": "Diese Instanz dient zum Entwickeln und Testen der Webanwendung. Inhalte können jederzeit und ohne vorherige Benachrichtigung geändert oder gelöscht werden."
   }
 }
