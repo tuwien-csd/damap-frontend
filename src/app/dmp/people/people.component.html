@@ -10,16 +10,22 @@
         <div class="mat-card-container">
           <div class="mat-card-left">
             <div>
-              <div>
-                <mat-icon class="mat-icon-style">person</mat-icon>
-                {{contributor.value.firstName}} {{contributor.value.lastName}}
-                <mat-icon *ngIf="contributor.value.contact" class="mat-icon-contact" color="primary">
-                  contact_mail
-                </mat-icon>
-                <span class="sr-only">{{'dmp.steps.people.contact.person' | translate}}</span>
-              </div>
-              <mat-icon class="mat-icon-style">mail_outline</mat-icon>
-              {{contributor.value.mbox}}
+              <mat-icon class="mat-icon-style">person</mat-icon>
+              {{contributor.value.firstName}} {{contributor.value.lastName}}
+              <mat-icon *ngIf="contributor.value.contact" class="mat-icon-contact" color="primary">
+                contact_mail
+              </mat-icon>
+              <span class="sr-only">{{'dmp.steps.people.contact.person' | translate}}</span>
+            </div>
+            <mat-icon class="mat-icon-style">mail_outline</mat-icon>
+            {{contributor.value.mbox}}
+            <div class="orcid-id">
+              <a *ngIf="contributor.value.personId?.type === identifierType.ORCID"
+                 [href]="'https://orcid.org/' + contributor.value.personId?.identifier"
+                 target="_blank">
+                <img alt="ORCID logo" src="assets/ORCIDiD_iconvector.svg"
+                     width="16" height="16"/>https://orcid.org/{{contributor.value.personId?.identifier}}
+              </a>
             </div>
           </div>
           <div [formGroupName]="i">
