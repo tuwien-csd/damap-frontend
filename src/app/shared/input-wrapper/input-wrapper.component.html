@@ -17,6 +17,9 @@
     {{'form.error.pattern.currency' | translate}}
     <!-- { "pattern": { "requiredPattern": "^[0-9]*.?[0-9]{0,2}$", "actualValue": "123,345" } } false -->
   </mat-error>
+  <mat-error *ngIf="control?.errors?.orcid">
+    {{'form.error.orcid' | translate}}
+  </mat-error>
 </mat-form-field>
 <!--{{control.errors | json}}-->
 <!--{{control.valid}}-->
