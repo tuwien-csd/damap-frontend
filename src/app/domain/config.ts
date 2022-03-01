@@ -3,4 +3,5 @@ export interface Config {
   readonly authClient: string;
   readonly authScope: string;
   readonly authUser: string;
+  readonly env: string;
 }

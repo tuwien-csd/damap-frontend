@@ -70,6 +70,7 @@
       </mat-toolbar-row>
 
     </mat-toolbar>
+    <app-env-banner *ngIf="env === 'DEV'"></app-env-banner>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

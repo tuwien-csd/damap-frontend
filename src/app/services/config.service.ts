@@ -9,6 +9,8 @@ import {AuthConfig, OAuthService} from 'angular-oauth2-oidc';
 })
 export class ConfigService {
 
+  private config: Config;
+
   constructor(private http: HttpClient,
               private oauthService: OAuthService) {
   }
@@ -27,6 +29,7 @@ export class ConfigService {
           console.error('Config is missing!');
           return new Promise<boolean>(_ => false);
         } else {
+          this.config = config;
           const authConfig: AuthConfig = {
             issuer: config.authUrl,
             clientId: config.authClient,
@@ -50,6 +53,10 @@ export class ConfigService {
         console.error(error);
         return new Promise(_ => false);
       });
+  }
+
+  public getEnvironment() {
+    return this.config.env;
   }
 
   private loadConfig(): Observable<Config> {
