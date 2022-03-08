@@ -47,7 +47,7 @@
   "dmp": {
     "steps": {
       "project": {
-        "label": "Choose project from the project data base",
+        "label": "Choose project from the project database",
         "search": "Search project...",
         "select": "Please select the project you want to create a DMP for:",
         "selected": "You selected",
