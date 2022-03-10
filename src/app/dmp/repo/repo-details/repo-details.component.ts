@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Repository} from '../../../domain/repository';
+import {RepositoryDetails} from '../../../domain/repository-details';
 
 @Component({
   selector: 'app-repo-details',
@@ -8,7 +8,7 @@ import {Repository} from '../../../domain/repository';
 })
 export class RepoDetailsComponent {
 
-  @Input() repo: Repository;
+  @Input() repo: RepositoryDetails;
 
   constructor() { }
 

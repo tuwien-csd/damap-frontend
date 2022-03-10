@@ -22,7 +22,7 @@ export const initialFormState: FormState = {
     ethicalIssuesExistCris: false,
     externalStorage: [],
     externalStorageInfo: '',
-    hosts: [],
+    repositories: [],
     humanParticipants: false,
     humanParticipantsCris: false,
     legalRestrictions: false,
