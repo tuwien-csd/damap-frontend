@@ -8,6 +8,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {ProjectEffects} from './effects/project.effects';
 import {DmpEffects} from './effects/dmp.effects';
 import {RepositoryEffects} from './effects/repository.effects';
+import {InternalStorageEffects} from './effects/internal-storage.effects';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import {RepositoryEffects} from './effects/repository.effects';
   imports: [
     CommonModule,
     StoreModule.forRoot(reducers, config),
-    EffectsModule.forRoot([DmpEffects, ProjectEffects, RepositoryEffects]),
+    EffectsModule.forRoot([DmpEffects, ProjectEffects, InternalStorageEffects, RepositoryEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ]
 })
