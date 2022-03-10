@@ -18,7 +18,7 @@ describe('RepoRecommendationComponent', () => {
     fixture = TestBed.createComponent(RepoRecommendationComponent);
     component = fixture.componentInstance;
     component.recommended = [mockDetailRepo];
-    component.selectedRepos = [{id: -1, hostId: 'r3d', title: 'MockHost'}]
+    component.selectedRepos = [{id: -1, repositoryId: 'r3d', title: 'MockHost'}]
     fixture.detectChanges();
   });
 
