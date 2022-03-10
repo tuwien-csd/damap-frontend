@@ -11,6 +11,7 @@ import {FeedbackService} from './feedback.service';
 import {environment} from '../../environments/environment';
 import {TranslateService} from '@ngx-translate/core';
 import {Consent} from '../domain/consent'
+import {InternalStorage} from '../domain/internal-storage';
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +96,15 @@ export class BackendService {
     );
 
   }
+
+  getInternalStorages(): Observable<InternalStorage[]> {
+    const langCode = 'eng'; // TODO: Replace with template lang in the future
+    return this.http.get<InternalStorage[]>(`${this.backendUrl}storages/${langCode}`).pipe(
+      retry(3),
+      catchError(this.handleError('http.error.storages'))
+    );
+  }
+
 
   getRepositories(): Observable<Repository[]> {
     return this.http.get<Repository[]>(this.repositoryBackendUrl).pipe(

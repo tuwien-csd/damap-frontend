@@ -625,7 +625,8 @@
         },
         "save": "Failed to save plan. ",
         "update": "Failed to update plan. "
-      }
+      },
+      "storages": "Failed to load storages. "
     }
   },
   "enum": {
