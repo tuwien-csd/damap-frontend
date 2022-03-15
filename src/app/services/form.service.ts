@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Dmp} from '../domain/dmp';
 import {Contributor} from '../domain/contributor';
 import {Dataset} from '../domain/dataset';
@@ -15,6 +15,7 @@ import {notEmptyValidator} from '../validators/not-empty.validator';
 import {ExternalStorage} from '../domain/external-storage';
 import {Repository} from '../domain/repository';
 import {InternalStorage} from '../domain/internal-storage';
+import {currencyValidator} from '../validators/currency.validator';
 
 @Injectable({
   providedIn: 'root'
@@ -575,7 +576,7 @@ export class FormService {
       id: [null, {disabled: true}],
       title: ['New cost', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       currencyCode: ['EUR', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
-      value: [null, Validators.pattern(/^\d+[,.]?\d{0,2}$/)], // validate currency format
+      value: [null, currencyValidator()], // validate currency format
       type: [null],
       customType: [null],
       description: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
