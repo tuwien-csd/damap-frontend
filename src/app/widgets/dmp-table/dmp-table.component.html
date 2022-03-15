@@ -66,17 +66,15 @@
   <ng-container matColumnDef="expandedDetail">
     <td mat-cell *matCellDef="let element" [attr.colspan]="tableHeaders.length">
       <div class="element-detail"
-           [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'" *ngIf="element.project">
+           [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
         <mat-divider></mat-divider>
-        <div class="project-overview">
-          <h4> {{element.project.title}} </h4>
-          <div> {{'plans.table.expanded.duration' | translate: {value: element.project.start | date:'d.M.y'} }}
-            - {{element.project.end | date:'d.M.y'}}</div>
-        </div>
-        <div class="project-description">
-          {{element.description}}
-          <span> tbd </span>
-        </div>
+        <ng-container *ngIf="element.project">
+          <div class="project-overview">
+            <h4> {{element.project.title}} </h4>
+            <div> {{'plans.table.expanded.duration' | translate: {value: element.project.start | date:'d.M.y'} }}
+              - {{element.project.end | date:'d.M.y'}}</div>
+          </div>
+        </ng-container>
         <div id="dmp-actions">
           <button mat-raised-button color="primary" (click)="getJsonFile(element.id)">
             <mat-icon color="white">code</mat-icon>
