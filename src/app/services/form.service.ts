@@ -576,7 +576,7 @@ export class FormService {
       id: [null, {disabled: true}],
       title: ['New cost', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       currencyCode: ['EUR', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
-      value: [null, currencyValidator()], // validate currency format
+      value: [0, currencyValidator()], // validate currency format
       type: [null],
       customType: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       description: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
@@ -589,9 +589,9 @@ export class FormService {
       id: cost.id || null,
       title: cost.title,
       currencyCode: cost.currencyCode || 'EUR',
-      value: cost.value || null,
+      value: cost.value,
       type: cost.type || null,
-      customType: cost.customType || null,
+      customType: cost.customType || '',
       description: cost.description || ''
     });
     return formGroup;

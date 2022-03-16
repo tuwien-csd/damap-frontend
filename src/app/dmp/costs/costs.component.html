@@ -26,7 +26,7 @@
     <mat-accordion formArrayName="list">
       <mat-expansion-panel *ngFor="let item of list.controls; let i = index">
         <mat-expansion-panel-header>
-          <mat-panel-title>
+          <mat-panel-title [class.form-error]="item.invalid">
             {{item.value.title}}
           </mat-panel-title>
           <mat-panel-description>
