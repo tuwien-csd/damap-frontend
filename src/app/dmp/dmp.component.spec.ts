@@ -41,7 +41,15 @@ describe('DmpComponent', () => {
         return new FormGroup({
           project: new FormControl(),
           data: new FormGroup({kind: new FormControl('SPECIFY')}),
-          datasets: new FormArray([])
+          datasets: new FormArray([]),
+          documentation: new FormGroup({}),
+          legal: new FormGroup({}),
+          storage: new FormArray([]),
+          externalStorage: new FormArray([]),
+          externalStorageInfo: new FormControl(),
+          repositories: new FormArray([]),
+          reuse: new FormGroup({}),
+          costs: new FormGroup({})
         })
       },
       resetForm() {
