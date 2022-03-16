@@ -69,7 +69,7 @@ export class FormService {
         otherPersonalDataCompliance: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveData: [false],
         sensitiveDataCris: [false],
-        sensitiveDataSecurity: [[], Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        sensitiveDataSecurity: [[]],
         otherDataSecurityMeasures: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictions: [false],
@@ -463,7 +463,7 @@ export class FormService {
       publicAccess: [AccessRight.READ],
       delete: [false],
       dateOfDeletion: [null],
-      reasonForDeletion: ['', Validators.maxLength(4000)],
+      reasonForDeletion: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       retentionPeriod: [null]
     });
   }
@@ -488,12 +488,12 @@ export class FormService {
   private createContributorFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
-      affiliation: [''],
+      affiliation: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       affiliationId: [null],
       contact: [false],
-      firstName: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-      lastName: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-      mbox: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+      firstName: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
+      lastName: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
+      mbox: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       personId: [null],
       role: [null],
       roleInProject: [''],
@@ -578,7 +578,7 @@ export class FormService {
       currencyCode: ['EUR', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
       value: [null, currencyValidator()], // validate currency format
       type: [null],
-      customType: [null],
+      customType: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       description: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
     });
   }

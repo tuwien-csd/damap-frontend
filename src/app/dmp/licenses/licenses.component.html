@@ -77,7 +77,7 @@
             "{{set.title}}"<span *ngIf="!last">, </span>.
           </ng-container>
         </mat-label>
-        <textarea matInput formControlName="restrictedAccessInfo"></textarea>
+        <textarea matInput formControlName="restrictedAccessInfo" [maxLength]="4000"></textarea>
       </mat-form-field>
     </ng-container>
 
@@ -88,7 +88,7 @@
             "{{set.title}}"<span *ngIf="!last">, </span>.
           </span>
         </mat-label>
-        <textarea matInput formControlName="closedAccessInfo"></textarea>
+        <textarea matInput formControlName="closedAccessInfo" [maxLength]="4000"></textarea>
       </mat-form-field>
     </ng-container>
   </div>

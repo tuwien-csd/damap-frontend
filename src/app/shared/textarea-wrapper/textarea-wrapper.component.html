@@ -1,7 +1,9 @@
 <mat-form-field [appearance]="appearance">
   <mat-label class="wrap-label">{{label | translate}}</mat-label>
   <ng-template #standard>
-    <textarea matInput [formControl]="control" [placeholder]="placeholder" type="text" [required]="required"></textarea>
+    <textarea matInput [formControl]="control" [placeholder]="placeholder" type="text"
+              [required]="required" [maxLength]="maxLength">
+    </textarea>
   </ng-template>
 
   <!-- AUTOCOMPLETE -->
