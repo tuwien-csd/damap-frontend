@@ -27,7 +27,7 @@ export const completeDmp: Dmp = {
   costs: [
     {
       currencyCode: 'EUR',
-      customType: null,
+      customType: '',
       description: 'cost description',
       id: 103,
       title: 'New cost',
@@ -115,7 +115,7 @@ export const noDataDmp: Dmp = {
   costs: [
     {
       currencyCode: 'EUR',
-      customType: null,
+      customType: '',
       description: 'cost description',
       id: 103,
       title: 'New cost',

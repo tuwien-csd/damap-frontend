@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Dmp} from '../domain/dmp';
 import {Contributor} from '../domain/contributor';
 import {Dataset} from '../domain/dataset';
@@ -15,6 +15,7 @@ import {notEmptyValidator} from '../validators/not-empty.validator';
 import {ExternalStorage} from '../domain/external-storage';
 import {Repository} from '../domain/repository';
 import {InternalStorage} from '../domain/internal-storage';
+import {currencyValidator} from '../validators/currency.validator';
 
 @Injectable({
   providedIn: 'root'
@@ -68,7 +69,7 @@ export class FormService {
         otherPersonalDataCompliance: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveData: [false],
         sensitiveDataCris: [false],
-        sensitiveDataSecurity: [[], Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        sensitiveDataSecurity: [[]],
         otherDataSecurityMeasures: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictions: [false],
@@ -462,7 +463,7 @@ export class FormService {
       publicAccess: [AccessRight.READ],
       delete: [false],
       dateOfDeletion: [null],
-      reasonForDeletion: ['', Validators.maxLength(4000)],
+      reasonForDeletion: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       retentionPeriod: [null]
     });
   }
@@ -487,12 +488,12 @@ export class FormService {
   private createContributorFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
-      affiliation: [''],
+      affiliation: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       affiliationId: [null],
       contact: [false],
-      firstName: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-      lastName: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-      mbox: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+      firstName: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
+      lastName: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
+      mbox: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       personId: [null],
       role: [null],
       roleInProject: [''],
@@ -575,9 +576,9 @@ export class FormService {
       id: [null, {disabled: true}],
       title: ['New cost', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       currencyCode: ['EUR', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
-      value: [null, Validators.pattern(/^\d+[,.]?\d{0,2}$/)], // validate currency format
+      value: [0, currencyValidator()], // validate currency format
       type: [null],
-      customType: [null],
+      customType: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       description: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
     });
   }
@@ -588,9 +589,9 @@ export class FormService {
       id: cost.id || null,
       title: cost.title,
       currencyCode: cost.currencyCode || 'EUR',
-      value: cost.value || null,
+      value: cost.value,
       type: cost.type || null,
-      customType: cost.customType || null,
+      customType: cost.customType || '',
       description: cost.description || ''
     });
     return formGroup;
