@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import {Repository} from '../../../domain/repository';
+import {RepositoryDetails} from '../../../domain/repository-details';
 import {LoadingState} from '../../../domain/enum/loading-state.enum';
 import {MatPaginator} from '@angular/material/paginator';
-import {Host} from '../../../domain/host';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Repository} from '../../../domain/repository';
 
 @Component({
   selector: 'app-repo-table',
@@ -21,9 +21,9 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class RepoTableComponent implements OnChanges, AfterViewInit {
 
   @Input() datasets: boolean;
-  @Input() selectedRepos: Host[];
+  @Input() selectedRepos: Repository[];
   @Input() loaded: LoadingState;
-  @Input() repositories: Repository[]; // Repo list loaded from backend
+  @Input() repositories: RepositoryDetails[]; // Repo list loaded from backend
   repoList: any = []; // Filtered repo list (repo list minus selected repos)
 
   @Output() repositoryToAdd = new EventEmitter<any>();
@@ -31,7 +31,7 @@ export class RepoTableComponent implements OnChanges, AfterViewInit {
 
   readonly tableHeaders: string[] = ['expand', 'title', 'add'];
   expandedElement: string | null;
-  dataSource = new MatTableDataSource<Repository>();
+  dataSource = new MatTableDataSource<RepositoryDetails>();
 
   readonly LoadingState = LoadingState;
 
@@ -50,14 +50,14 @@ export class RepoTableComponent implements OnChanges, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  expandRow(repo: Repository) {
+  expandRow(repo: RepositoryDetails) {
     this.expandedElement = this.expandedElement === repo.id ? null : repo.id;
     if (!repo.description) {
       this.getRepoDetails(repo);
     }
   }
 
-  addRepository(repo: Repository) {
+  addRepository(repo: RepositoryDetails) {
     this.repositoryToAdd.emit(repo);
   }
 
@@ -71,7 +71,7 @@ export class RepoTableComponent implements OnChanges, AfterViewInit {
     }
   }
 
-  private getRepoDetails(repo: Repository) {
+  private getRepoDetails(repo: RepositoryDetails) {
     this.repositoryDetails.emit(repo);
   }
 
@@ -79,7 +79,7 @@ export class RepoTableComponent implements OnChanges, AfterViewInit {
   private filterRepos(): void {
     this.repoList = Object.assign([], this.repositories);
     for (const entry of this.selectedRepos) {
-      this.repoList = this.repoList.filter(e => !(e.id === entry.hostId));
+      this.repoList = this.repoList.filter(e => !(e.id === entry.repositoryId));
     }
     this.dataSource.paginator = this.paginator;
     this.dataSource.data = this.repoList;

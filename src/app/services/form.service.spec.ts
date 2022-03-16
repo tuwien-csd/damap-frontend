@@ -33,7 +33,7 @@ describe('FormService', () => {
     expect(result.noDataExplanation).toEqual('');
     expect(result.storage).toEqual([]);
     expect(result.externalStorage).toEqual([]);
-    expect(result.hosts).toEqual([]);
+    expect(result.repositories).toEqual([]);
     expect(result.restrictedAccessInfo).toEqual('');
     expect(result.closedAccessInfo).toEqual('');
     expect(result.sensitiveData).toEqual(true);

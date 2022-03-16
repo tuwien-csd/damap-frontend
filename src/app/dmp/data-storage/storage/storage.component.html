@@ -1,7 +1,8 @@
 <app-step-intro>{{'dmp.steps.storage.intro' | translate}}</app-step-intro>
 <section class="tu-storage">
   <div class="storage-grid">
-    <mat-card *ngFor="let element of (storage | storageFilter: storageStep?.getRawValue())" class="storage-card">
+    <mat-card *ngFor="let element of (internalStorages | storageFilter: storageStep?.getRawValue())"
+              class="storage-card">
       <mat-card-header (click)="addStorage(element)">
         <div mat-card-avatar>
           <mat-icon>folder_open</mat-icon>

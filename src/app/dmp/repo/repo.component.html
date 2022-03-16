@@ -11,7 +11,7 @@
 <div *ngIf="repoStep.controls.length" [formGroup]="dmpForm">
   <p translate>dmp.steps.repositories.selected</p>
   <mat-card *ngFor="let repo of repoStep.controls, index as i" class="mat-selected">
-    <ng-container formArrayName="hosts">
+    <ng-container formArrayName="repositories">
       <div class="mat-card-container">
         <div class="mat-card-left">
           <h4>{{repo.value.title}}</h4>

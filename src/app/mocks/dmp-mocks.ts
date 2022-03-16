@@ -8,6 +8,7 @@ import {mockProject} from './project-mocks';
 import {mockContact, mockContributor1, mockContributor2} from './contributor-mocks';
 import {closedDatasetMock, restrictedDatasetMock} from './dataset-mocks';
 import {DataQualityType} from '../domain/enum/data-quality-type.enum';
+import {mockStorage} from './storage-mocks';
 
 export const completeDmp: Dmp = {
   dataRightsAndAccessControl: 'access control',
@@ -58,12 +59,12 @@ export const completeDmp: Dmp = {
     }*/
   ],
   externalStorageInfo: 'because',
-  hosts: [
+  repositories: [
     {
       datasets: [
         '39608knzrof6y', '39608knzrof6x'
       ],
-      hostId: 'r3d100013557',
+      repositoryId: 'r3d100013557',
       id: 94,
       title: 'TU Data'
     },
@@ -88,15 +89,7 @@ export const completeDmp: Dmp = {
   sensitiveDataCris: true,
   sensitiveDataSecurity: [SecurityMeasure.OTHER],
   storage: [
-    {
-      datasets: [
-        '39608knzrof6y', '39608knzrof6x'
-      ],
-      hostId: '0',
-      id: 97,
-      title: 'TUfiles',
-      // url: 'it.tuwien.ac.at'
-    }
+    mockStorage
   ],
   structure: 'VCS',
   targetAudience: 'students',
@@ -140,7 +133,6 @@ export const noDataDmp: Dmp = {
   ethicalIssuesExistCris: false,
   externalStorage: [
     {
-      hostId: 'TU Files',
       backupFrequency: 'Wien',
       backupLocation: null,
       datasets: [
@@ -153,12 +145,12 @@ export const noDataDmp: Dmp = {
     }
   ],
   externalStorageInfo: 'because',
-  hosts: [
+  repositories: [
     {
       datasets: [
         '39608knzrof6y'
       ],
-      hostId: 'r3d100013557',
+      repositoryId: 'r3d100013557',
       id: 94,
       title: 'TU Data'
     },
@@ -181,15 +173,7 @@ export const noDataDmp: Dmp = {
   sensitiveDataCris: false,
   sensitiveDataSecurity: [SecurityMeasure.OTHER],
   storage: [
-    {
-      datasets: [
-        '39608knzrof6y'
-      ],
-      hostId: '0',
-      id: 97,
-      title: 'TUfiles',
-      // url: 'it.tuwien.ac.at'
-    }
+    mockStorage
   ],
   structure: 'VCS',
   targetAudience: 'students',
