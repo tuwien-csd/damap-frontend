@@ -133,3 +133,13 @@ mat-card {
 .form-field-hint {
   display: flex;
 }
+
+.form-error {
+  color: red;
+}
+
+.form-error::before {
+  font-family: "Material Icons", sans-serif;
+  content: "warning";
+  padding-right: 0.5rem;
+}

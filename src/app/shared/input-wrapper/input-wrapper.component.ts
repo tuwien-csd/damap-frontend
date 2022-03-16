@@ -15,6 +15,7 @@ export class InputWrapperComponent implements OnInit {
   @Input() type: string;
   @Input() placeholder: string;
   @Input() appearance: MatFormFieldAppearance = 'standard';
+  @Input() maxLength: number = 255;
 
   required = false;
 

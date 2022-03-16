@@ -2,7 +2,7 @@
   <mat-label class="wrap-label">{{label | translate}}</mat-label>
   <span matPrefix>{{prefix}}</span>
   <input matInput [formControl]="control" [placeholder]="placeholder" [type]="type || 'text'" [required]="required"
-         [step]="type === 'number' ? 0.01 : null">
+         [step]="type === 'number' ? 0.01 : null" [maxLength]="maxLength">
   <mat-error *ngIf="!control?.errors?.required && control?.errors?.empty">
     {{'form.error.empty' | translate}}
   </mat-error>
@@ -13,9 +13,8 @@
     {{'form.error.maxlength' | translate: {value: control.errors.maxlength?.requiredLength} }}
     <!-- "maxlength": { "requiredLength": 255, "actualLength": 273 } -->
   </mat-error>
-  <mat-error *ngIf="control?.errors?.pattern">
+  <mat-error *ngIf="control?.errors?.currency">
     {{'form.error.pattern.currency' | translate}}
-    <!-- { "pattern": { "requiredPattern": "^[0-9]*.?[0-9]{0,2}$", "actualValue": "123,345" } } false -->
   </mat-error>
   <mat-error *ngIf="control?.errors?.orcid">
     {{'form.error.orcid' | translate}}

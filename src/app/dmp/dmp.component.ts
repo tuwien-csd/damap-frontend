@@ -112,28 +112,30 @@ export class DmpComponent implements OnInit, OnDestroy {
   }
 
   saveDmp(): void {
-    const dmp = this.formService.exportFormToDmp();
-    if (this.dmpForm.value.id) {
-      this.backendService.editDmp(dmp).subscribe(
-        response => {
-          this.formService.mapDmpToForm(response);
-          this.store.dispatch(setFormValue({dmp: response}));
-        },
-        () => {
-        },
-        () => this.translate.get('dmp.success.update').subscribe(value => this.feedbackService.success(value))
-      );
-    } else {
-      this.backendService.createDmp(dmp).subscribe(
-        response => {
-          this.location.replaceState(`dmp/${response.id}`);
-          this.formService.mapDmpToForm(response);
-          this.store.dispatch(setFormValue({dmp: response}));
-        },
-        () => {
-        },
-        () => this.translate.get('dmp.success.save').subscribe(value => this.feedbackService.success(value))
-      );
+    if (this.dmpForm.valid) {
+      const dmp = this.formService.exportFormToDmp();
+      if (this.dmpForm.value.id) {
+        this.backendService.editDmp(dmp).subscribe(
+          response => {
+            this.formService.mapDmpToForm(response);
+            this.store.dispatch(setFormValue({dmp: response}));
+          },
+          () => {
+          },
+          () => this.translate.get('dmp.success.update').subscribe(value => this.feedbackService.success(value))
+        );
+      } else {
+        this.backendService.createDmp(dmp).subscribe(
+          response => {
+            this.location.replaceState(`dmp/${response.id}`);
+            this.formService.mapDmpToForm(response);
+            this.store.dispatch(setFormValue({dmp: response}));
+          },
+          () => {
+          },
+          () => this.translate.get('dmp.success.save').subscribe(value => this.feedbackService.success(value))
+        );
+      }
     }
   }
 

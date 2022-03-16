@@ -14,7 +14,8 @@
                     (contributorToRemove)="removeContributor($event)">
     </app-dmp-people>
   </mat-step>
-  <mat-step label="{{'dmp.steps.data.specify.label' | translate }}">
+  <mat-step label="{{'dmp.steps.data.specify.label' | translate }}"
+            [hasError]="specifyDataStep.invalid || datasets.invalid">
     <app-dmp-specify-data [specifyDataStep]="specifyDataStep"
                           [datasets]="datasets"
                           [fileUpload]="fileUpload"
@@ -25,10 +26,11 @@
                           (removeDataset)="removeDataset($event)">
     </app-dmp-specify-data>
   </mat-step>
-  <mat-step label="{{'dmp.steps.documentation.label' | translate }}">
+  <mat-step label="{{'dmp.steps.documentation.label' | translate }}" [hasError]="docDataStep.invalid">
     <app-dmp-doc-data-quality [docDataStep]="docDataStep"></app-dmp-doc-data-quality>
   </mat-step>
-  <mat-step label="{{'dmp.steps.storage.label' | translate }}">
+  <mat-step label="{{'dmp.steps.storage.label' | translate }}"
+            [hasError]="storageStep.invalid || externalStorageStep.invalid || externalStorageInfo.invalid">
     <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
       <app-step-intro>This step helps you to document who is allowed to see or edit your data in the project phase and
         to find good storage and backup solutions for your data.
@@ -50,7 +52,7 @@
     </ng-container>
   </mat-step>
 
-  <mat-step label="{{'dmp.steps.legal.label' | translate }}">
+  <mat-step label="{{'dmp.steps.legal.label' | translate }}" [hasError]="legalEthicalStep.invalid">
     <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
       <app-dmp-legal-ethical-aspects [dmpForm]="dmpForm"
                                      [legalEthicalStep]="legalEthicalStep"
@@ -59,14 +61,14 @@
       </app-dmp-legal-ethical-aspects>
     </ng-container>
   </mat-step>
-  <mat-step label="{{'dmp.steps.licensing.label' | translate }}">
+  <mat-step label="{{'dmp.steps.licensing.label' | translate }}" [hasError]="datasets.invalid">
     <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
       <app-dmp-licenses [dmpForm]="dmpForm"
                         [datasets]="datasets">
       </app-dmp-licenses>
     </ng-container>
   </mat-step>
-  <mat-step label="{{'dmp.steps.repositories.label' | translate }}">
+  <mat-step label="{{'dmp.steps.repositories.label' | translate }}" [hasError]="repoStep.invalid">
     <ng-container *ngIf="specifyDataStep.value.kind === 'SPECIFY' && datasets.length else noDatasets">
       <app-dmp-repo [dmpForm]="dmpForm"
                     [repoStep]="repoStep" [datasets]="datasets"
@@ -75,12 +77,12 @@
       </app-dmp-repo>
     </ng-container>
   </mat-step>
-  <mat-step label="{{'dmp.steps.data.reuse.label' | translate }}">
+  <mat-step label="{{'dmp.steps.data.reuse.label' | translate }}" [hasError]="reuseStep.invalid">
     <app-dmp-reuse [reuseStep]="reuseStep"
                    [datasets]="datasets">
     </app-dmp-reuse>
   </mat-step>
-  <mat-step label="{{'dmp.steps.costs.label' | translate }}">
+  <mat-step label="{{'dmp.steps.costs.label' | translate }}" [hasError]="costsStep.invalid">
     <app-dmp-costs [costsStep]="costsStep"
                    (costToAdd)="addCost()"
                    (costToRemove)="removeCost($event)"
