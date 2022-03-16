@@ -6,13 +6,15 @@ import {projectReducer} from './reducers/project.reducer';
 import {dmpReducer} from './reducers/dmp.reducer';
 import {repositoryReducer} from './reducers/repository.reducer';
 import {formReducer} from './reducers/form.reducer';
+import {internalStorageReducer} from './reducers/internal-storage.reducer';
 
 export const reducers: ActionReducerMap<AppState> = {
   login: fromLogin.reducer,
   form: formReducer,
   dmps: dmpReducer,
   projects: projectReducer,
-  repositories: repositoryReducer
+  repositories: repositoryReducer,
+  internalStorages: internalStorageReducer
 };
 
 export const config = {

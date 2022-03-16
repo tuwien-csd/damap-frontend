@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Host} from '../domain/host';
+import {RepositoryDetails} from '../domain/repository-details';
 import {Repository} from '../domain/repository';
 
 @Pipe({
@@ -7,8 +7,8 @@ import {Repository} from '../domain/repository';
 })
 export class RepoPipe implements PipeTransform {
 
-  transform(repos: Repository[], selected: Host[]): Repository[] {
-    return repos.filter(e => selected.find(entry => entry.hostId === e.id) === undefined);
+  transform(repos: RepositoryDetails[], selected: Repository[]): RepositoryDetails[] {
+    return repos.filter((e: RepositoryDetails) => selected.find((entry: Repository) => entry.repositoryId === e.id) === undefined);
   }
 
 }
