@@ -19,7 +19,7 @@ export class DataDeletionComponent {
   }
 
   get willBePublished(): boolean {
-    return this.dmpForm.value.hosts.filter(item =>
+    return this.dmpForm.value.repositories.filter(item =>
       item.datasets.includes(this.dataset.value.referenceHash)).length;
   }
 

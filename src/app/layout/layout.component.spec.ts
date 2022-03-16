@@ -7,6 +7,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {ConfigService} from '../services/config.service';
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
@@ -15,14 +16,17 @@ describe('LayoutComponent', () => {
   beforeEach(async () => {
     const oauthSpy = jasmine.createSpyObj('OAuthService', ['getIdentityClaims']);
     oauthSpy.getIdentityClaims.and.returnValue({name: 'name'});
+    const configSpy = jasmine.createSpyObj('ConfigService', ['getEnvironment']);
+    configSpy.getEnvironment.and.returnValue('DEV');
+
     await TestBed.configureTestingModule({
       imports: [TranslateTestingModule, MatSidenavModule, MatToolbarModule, MatMenuModule, NoopAnimationsModule, TranslateTestingModule],
       declarations: [LayoutComponent],
       providers: [
-        {provide: OAuthService, useValue: oauthSpy}
+        {provide: OAuthService, useValue: oauthSpy},
+        {provide: ConfigService, useValue: configSpy}
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

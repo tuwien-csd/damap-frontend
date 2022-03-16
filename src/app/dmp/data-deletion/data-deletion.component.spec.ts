@@ -26,7 +26,7 @@ describe('DataDeletionComponent', () => {
       reasonForDeletion: new FormControl('reason')
     });
     component.dmpForm = new FormGroup({
-      hosts: new FormArray([])
+      repositories: new FormArray([])
     });
     fixture.detectChanges();
   });

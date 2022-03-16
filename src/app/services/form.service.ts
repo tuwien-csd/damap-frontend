@@ -3,7 +3,6 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import {Dmp} from '../domain/dmp';
 import {Contributor} from '../domain/contributor';
 import {Dataset} from '../domain/dataset';
-import {Host} from '../domain/host';
 import {Cost} from '../domain/cost';
 import {DataAccessType} from '../domain/enum/data-access-type.enum';
 import {Storage} from '../domain/storage';
@@ -13,6 +12,10 @@ import {ComplianceType} from '../domain/enum/compliance-type.enum';
 import {SecurityMeasure} from '../domain/enum/security-measure.enum';
 import {Agreement} from '../domain/enum/agreement.enum';
 import {notEmptyValidator} from '../validators/not-empty.validator';
+import {ExternalStorage} from '../domain/external-storage';
+import {Repository} from '../domain/repository';
+import {InternalStorage} from '../domain/internal-storage';
+import {currencyValidator} from '../validators/currency.validator';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +55,9 @@ export class FormService {
       documentation: this.formBuilder.group({
         metadata: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         dataGeneration: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-        structure: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
+        structure: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        dataQuality: [[]],
+        otherDataQuality: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
       }),
       storage: this.formBuilder.array([]),
       externalStorage: this.formBuilder.array([]),
@@ -64,7 +69,7 @@ export class FormService {
         otherPersonalDataCompliance: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveData: [false],
         sensitiveDataCris: [false],
-        sensitiveDataSecurity: [[], Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        sensitiveDataSecurity: [[]],
         otherDataSecurityMeasures: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictions: [false],
@@ -80,7 +85,7 @@ export class FormService {
         committeeReviewed: [false],
         committeeReviewedCris: [false]
       }),
-      hosts: this.formBuilder.array([]),
+      repositories: this.formBuilder.array([]),
       reuse: this.formBuilder.group({
         targetAudience: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         tools: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
@@ -110,7 +115,8 @@ export class FormService {
         metadata: dmp.metadata,
         dataGeneration: dmp.dataGeneration,
         structure: dmp.structure,
-        targetAudience: dmp.targetAudience
+        dataQuality: dmp.dataQuality,
+        otherDataQuality: dmp.otherDataQuality
       },
       externalStorageInfo: dmp.externalStorageInfo,
       legal: {
@@ -149,7 +155,7 @@ export class FormService {
       closedAccessInfo: dmp.closedAccessInfo,
     });
 
-    // Contributors, datasets, hosts, costs
+    // Contributors, datasets, repositories, costs
     if (dmp.contributors) {
       for (const contributor of dmp.contributors) {
         (this.form.controls.contributors as FormArray).push(this.mapContributorToFormGroup(contributor));
@@ -160,9 +166,9 @@ export class FormService {
         (this.form.controls.datasets as FormArray).push(this.mapDatasetToFormGroup(dataset));
       }
     }
-    if (dmp.hosts) {
-      for (const host of dmp.hosts) {
-        (this.form.controls.hosts as FormArray).push(this.mapHostToFormGroup(host));
+    if (dmp.repositories) {
+      for (const repo of dmp.repositories) {
+        (this.form.controls.repositories as FormArray).push(this.mapRepositoryToFormGroup(repo));
       }
     }
     if (dmp.costs) {
@@ -203,12 +209,13 @@ export class FormService {
       costsExistCris: formValue.costs.existCris,
       dataGeneration: '',
       dataKind: formValue.data.kind,
+      dataQuality: formValue.documentation.dataQuality,
       datasets: [],
       ethicalIssuesExist: formValue.legal.ethicalIssues,
       ethicalIssuesExistCris: formValue.legal.ethicalIssuesCris,
       externalStorage: [],
       externalStorageInfo: '',
-      hosts: [],
+      repositories: [],
       humanParticipants: formValue.legal.humanParticipants,
       humanParticipantsCris: formValue.legal.humanParticipantsCris,
       legalRestrictions: formValue.legal.legalRestrictions,
@@ -219,6 +226,7 @@ export class FormService {
       dataRightsAndAccessControl: '',
       metadata: '',
       noDataExplanation: '',
+      otherDataQuality: formValue.documentation.otherDataQuality,
       otherPersonalDataCompliance: '',
       personalData: formValue.legal.personalData,
       personalDataCris: formValue.legal.personalDataCris,
@@ -249,7 +257,7 @@ export class FormService {
           dataset.reasonForDeletion = ''
         }
       }
-      result.hosts = formValue.hosts;
+      result.repositories = formValue.repositories;
       result.storage = formValue.storage;
       result.externalStorage = formValue.externalStorage;
 
@@ -316,7 +324,7 @@ export class FormService {
     this.form.reset();
     (this.form.controls.contributors as FormArray).clear();
     (this.form.controls.datasets as FormArray).clear();
-    (this.form.controls.hosts as FormArray).clear();
+    (this.form.controls.repositories as FormArray).clear();
     (this.form.controls.costs.get('list') as FormArray).clear();
     (this.form.controls.storage as FormArray).clear();
     (this.form.controls.externalStorage as FormArray).clear();
@@ -381,9 +389,9 @@ export class FormService {
     (this.form.get('datasets') as FormArray).push(formGroup);
   }
 
-  public addStorageToForm(storage: Storage) {
+  public addStorageToForm(storage: InternalStorage) {
     const storageFormGroup = this.createStorageFormGroup();
-    storageFormGroup.patchValue({hostId: storage.hostId, title: storage.title});
+    storageFormGroup.patchValue({internalStorageId: storage.id, title: storage.title});
     (this.form.get('storage') as FormArray).push(storageFormGroup);
   }
 
@@ -415,16 +423,16 @@ export class FormService {
   }
 
   public addRepositoryToForm(repo: { id: string, name: string }) {
-    const hostFormGroup = this.createHostFormGroup();
-    hostFormGroup.patchValue({
-      hostId: repo.id,
+    const repoFormGroup = this.createRepositoryFormGroup();
+    repoFormGroup.patchValue({
+      repositoryId: repo.id,
       title: repo.name
     });
-    (this.form.get('hosts') as FormArray).push(hostFormGroup);
+    (this.form.get('repositories') as FormArray).push(repoFormGroup);
   }
 
   public removeRepositoryFromForm(index: number) {
-    (this.form.get('hosts') as FormArray).removeAt(index);
+    (this.form.get('repositories') as FormArray).removeAt(index);
   }
 
   public addCostToForm() {
@@ -455,7 +463,7 @@ export class FormService {
       publicAccess: [AccessRight.READ],
       delete: [false],
       dateOfDeletion: [null],
-      reasonForDeletion: ['', Validators.maxLength(4000)],
+      reasonForDeletion: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       retentionPeriod: [null]
     });
   }
@@ -480,12 +488,12 @@ export class FormService {
   private createContributorFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
-      affiliation: [''],
+      affiliation: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       affiliationId: [null],
       contact: [false],
-      firstName: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-      lastName: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-      mbox: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+      firstName: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
+      lastName: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
+      mbox: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       personId: [null],
       role: [null],
       roleInProject: [''],
@@ -502,7 +510,7 @@ export class FormService {
   private createStorageFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
-      hostId: [null, {disabled: true}],
+      internalStorageId: [null, {disabled: true}],
       title: ['', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       datasets: [[]]
     });
@@ -512,7 +520,7 @@ export class FormService {
     const formGroup = this.createStorageFormGroup();
     formGroup.patchValue({
       id: storage.id,
-      hostId: storage.hostId || null,
+      internalStorageId: storage.internalStorageId,
       title: storage.title,
       datasets: storage.datasets || []
     });
@@ -530,7 +538,7 @@ export class FormService {
     });
   }
 
-  private mapExternalStorageToFormGroup(externalStorage: Storage): FormGroup {
+  private mapExternalStorageToFormGroup(externalStorage: ExternalStorage): FormGroup {
     const formGroup = this.createExternalStorageFormGroup();
     formGroup.setValue({
       id: externalStorage.id,
@@ -543,22 +551,22 @@ export class FormService {
     return formGroup;
   }
 
-  private createHostFormGroup(): FormGroup {
+  private createRepositoryFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
-      hostId: [null],
+      repositoryId: [null],
       title: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       datasets: [[]]
     });
   }
 
-  private mapHostToFormGroup(host: Host): FormGroup {
-    const formGroup = this.createHostFormGroup();
+  private mapRepositoryToFormGroup(repo: Repository): FormGroup {
+    const formGroup = this.createRepositoryFormGroup();
     formGroup.patchValue({
-      id: host.id,
-      hostId: host.hostId,
-      title: host.title || '',
-      datasets: host.datasets || []
+      id: repo.id,
+      repositoryId: repo.repositoryId,
+      title: repo.title || '',
+      datasets: repo.datasets || []
     });
     return formGroup;
   }
@@ -568,9 +576,9 @@ export class FormService {
       id: [null, {disabled: true}],
       title: ['New cost', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       currencyCode: ['EUR', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
-      value: [null, Validators.pattern(/^\d+[,.]?\d{0,2}$/)], // validate currency format
+      value: [0, currencyValidator()], // validate currency format
       type: [null],
-      customType: [null],
+      customType: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       description: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
     });
   }
@@ -581,9 +589,9 @@ export class FormService {
       id: cost.id || null,
       title: cost.title,
       currencyCode: cost.currencyCode || 'EUR',
-      value: cost.value || null,
+      value: cost.value,
       type: cost.type || null,
-      customType: cost.customType || null,
+      customType: cost.customType || '',
       description: cost.description || ''
     });
     return formGroup;
@@ -601,7 +609,7 @@ export class FormService {
     this.removeDatasetReferenceInFormArray(eStorageStep, dataset);
 
     // Repositories
-    const repoStep = this.form.get('hosts') as FormArray;
+    const repoStep = this.form.get('repositories') as FormArray;
     this.removeDatasetReferenceInFormArray(repoStep, dataset);
   }
 

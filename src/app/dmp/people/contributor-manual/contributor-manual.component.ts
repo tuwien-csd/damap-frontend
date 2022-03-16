@@ -2,6 +2,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {notEmptyValidator} from '../../../validators/not-empty.validator';
 import {IdentifierType} from '../../../domain/enum/identifier-type.enum';
+import {orcidValidator} from '../../../validators/orcid.validator';
 
 @Component({
   selector: 'app-contributor-manual',
@@ -21,7 +22,7 @@ export class ContributorManualComponent {
     mbox: new FormControl('', [notEmptyValidator(), Validators.maxLength(4000)]),
     personId: new FormGroup({
       type: new FormControl(IdentifierType.ORCID),
-      identifier: new FormControl('', [notEmptyValidator(), Validators.maxLength(255)])
+      identifier: new FormControl('', [orcidValidator(), Validators.maxLength(19)])
     })
   })
 

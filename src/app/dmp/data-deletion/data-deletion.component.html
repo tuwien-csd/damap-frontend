@@ -17,7 +17,8 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <app-input-wrapper [label]="'dmp.steps.data.deletion.question.reason'" [control]="reasonForDeletion">
+    <app-input-wrapper [label]="'dmp.steps.data.deletion.question.reason'" [control]="reasonForDeletion"
+                       [maxLength]="4000">
     </app-input-wrapper>
   </div>
 </div>

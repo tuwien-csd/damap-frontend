@@ -2,9 +2,11 @@ import {Project} from './project';
 import {Contributor} from './contributor';
 import {DataKind} from './enum/data-kind.enum';
 import {Dataset} from './dataset';
-import {Host} from './host';
 import {Cost} from './cost';
 import {Storage} from './storage';
+import {DataQualityType} from './enum/data-quality-type.enum';
+import {Repository} from './repository';
+import {ExternalStorage} from './external-storage';
 
 export interface Dmp {
   readonly created?: Date;
@@ -19,6 +21,8 @@ export interface Dmp {
   datasets: Dataset[];
   metadata: string;
   dataGeneration: string;
+  dataQuality: DataQualityType[];
+  otherDataQuality: string;
   structure: string;
   targetAudience: string;
   tools: string;
@@ -45,9 +49,9 @@ export interface Dmp {
   committeeReviewed: boolean;
   committeeReviewedCris: boolean;
   storage: Storage[];
-  externalStorage: Storage[];
+  externalStorage: ExternalStorage[];
   externalStorageInfo: string;
-  hosts: Host[];
+  repositories: Repository[];
   restrictedAccessInfo: string;
   closedAccessInfo: string;
   costsExist: boolean;

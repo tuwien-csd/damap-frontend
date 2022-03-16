@@ -1,11 +1,5 @@
-export interface Repository {
-  readonly id: string;
-  readonly name: string;
-  repositoryIdentifier?: string[];
-  repositoryURL?: string;
-  repositoryLanguages?: string[];
-  description?: string;
-  versioning?: boolean;
-  contentTypes?: string[];
-  metadataStandards?: string[];
+import {Host} from './host';
+
+export interface Repository extends Host {
+  readonly repositoryId: string;
 }

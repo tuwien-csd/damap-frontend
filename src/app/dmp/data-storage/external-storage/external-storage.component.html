@@ -5,7 +5,7 @@
   <mat-accordion>
     <mat-expansion-panel *ngFor="let item of externalStorageStep?.controls; let i = index">
       <mat-expansion-panel-header>
-        <mat-panel-title>
+        <mat-panel-title [class.form-error]="item.invalid">
           {{item.value.title}}
         </mat-panel-title>
         <mat-panel-description>

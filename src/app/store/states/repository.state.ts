@@ -1,15 +1,15 @@
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
-import {Repository} from '../../domain/repository';
+import {RepositoryDetails} from '../../domain/repository-details';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
 
-export interface RepositoryState extends EntityState<Repository> {
+export interface RepositoryState extends EntityState<RepositoryDetails> {
   loaded: LoadingState;
   filters: { [key: string]: string[] }
-  recommended: Repository[];
+  recommended: RepositoryDetails[];
   recommendedLoaded: LoadingState;
 }
 
-export const adapter: EntityAdapter<Repository> = createEntityAdapter<Repository>();
+export const adapter: EntityAdapter<RepositoryDetails> = createEntityAdapter<RepositoryDetails>();
 
 export const initialRepositoryState: RepositoryState = adapter.getInitialState({
   loaded: LoadingState.NOT_LOADED,
