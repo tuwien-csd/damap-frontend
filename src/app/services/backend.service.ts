@@ -5,12 +5,13 @@ import {HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders, HttpParams} from 
 import {Contributor} from '../domain/contributor';
 import {Project} from '../domain/project';
 import {DmpListItem} from '../domain/dmp-list-item';
-import {Repository} from '../domain/repository';
+import {RepositoryDetails} from '../domain/repository-details';
 import {catchError, map, retry, shareReplay} from 'rxjs/operators';
 import {FeedbackService} from './feedback.service';
 import {environment} from '../../environments/environment';
 import {TranslateService} from '@ngx-translate/core';
 import {Consent} from '../domain/consent'
+import {InternalStorage} from '../domain/internal-storage';
 
 @Injectable({
   providedIn: 'root'
@@ -96,36 +97,44 @@ export class BackendService {
 
   }
 
-  getRepositories(): Observable<Repository[]> {
-    return this.http.get<Repository[]>(this.repositoryBackendUrl).pipe(
+  getInternalStorages(): Observable<InternalStorage[]> {
+    const langCode = 'eng'; // TODO: Replace with template lang in the future
+    return this.http.get<InternalStorage[]>(`${this.backendUrl}storages/${langCode}`).pipe(
+      retry(3),
+      catchError(this.handleError('http.error.storages'))
+    );
+  }
+
+  getRepositories(): Observable<RepositoryDetails[]> {
+    return this.http.get<RepositoryDetails[]>(this.repositoryBackendUrl).pipe(
       retry(3),
       catchError(this.handleError('http.error.repositories.all'))
     );
   }
 
-  getRecommendedRepositories(): Observable<Repository[]> {
-    return this.http.get<Repository[]>(`${this.repositoryBackendUrl}/recommended`).pipe(
+  getRecommendedRepositories(): Observable<RepositoryDetails[]> {
+    return this.http.get<RepositoryDetails[]>(`${this.repositoryBackendUrl}/recommended`).pipe(
       retry(3),
       catchError(this.handleError('http.error.repositories.recommended'))
     );
   }
 
-  getRepositoryById(id: string): Observable<{ id: string, changes: Repository }> {
-    return this.http.get<Repository>(`${this.repositoryBackendUrl}/${id}`).pipe(
+  getRepositoryById(id: string): Observable<{ id: string, changes: RepositoryDetails }> {
+    return this.http.get<RepositoryDetails>(`${this.repositoryBackendUrl}/${id}`).pipe(
       map(repo => ({id, changes: repo})),
       retry(3),
       catchError(this.handleError('http.error.repositories.one'))
     );
   }
 
-  searchRepository(filters: any): Observable<Repository[]> {
+  searchRepository(filters: any): Observable<RepositoryDetails[]> {
     let params = new HttpParams();
     for (const key in filters) {
       if (filters.hasOwnProperty(key)) {
         filters[key]?.forEach(item => params = params.append(key, item));
       }
     }
-    return this.http.get<Repository[]>(`${this.repositoryBackendUrl}/search`, {params}).pipe(
+    return this.http.get<RepositoryDetails[]>(`${this.repositoryBackendUrl}/search`, {params}).pipe(
       catchError(this.handleError('http.error.repositories.search'))
     );
   }

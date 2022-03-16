@@ -10,7 +10,6 @@ import {AppState} from '../store/states/app.state';
 import {selectProjects, selectProjectsLoaded} from '../store/selectors/project.selectors';
 import {LoadProjects} from '../store/actions/project.actions';
 import {FormService} from '../services/form.service';
-import {Storage} from '../domain/storage';
 import {FeedbackService} from '../services/feedback.service';
 import {HttpEventType} from '@angular/common/http';
 import {Location} from '@angular/common';
@@ -20,6 +19,7 @@ import {formDiff, resetFormValue, setFormValue} from '../store/actions/form.acti
 import {selectFormChanged} from '../store/selectors/form.selectors';
 import {LoadDmps} from '../store/actions/dmp.actions';
 import {TranslateService} from '@ngx-translate/core';
+import {InternalStorage} from '../domain/internal-storage';
 
 @Component({
   selector: 'app-dmp',
@@ -94,7 +94,7 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.storageStep = this.dmpForm.get('storage') as FormArray;
     this.externalStorageStep = this.dmpForm.get('externalStorage') as FormArray;
     this.externalStorageInfo = this.dmpForm.get('externalStorageInfo') as FormControl;
-    this.repoStep = this.dmpForm.get('hosts') as FormArray;
+    this.repoStep = this.dmpForm.get('repositories') as FormArray;
     this.reuseStep = this.dmpForm.get('reuse') as FormGroup;
     this.costsStep = this.dmpForm.get('costs') as FormGroup;
   }
@@ -112,28 +112,30 @@ export class DmpComponent implements OnInit, OnDestroy {
   }
 
   saveDmp(): void {
-    const dmp = this.formService.exportFormToDmp();
-    if (this.dmpForm.value.id) {
-      this.backendService.editDmp(dmp).subscribe(
-        response => {
-          this.formService.mapDmpToForm(response);
-          this.store.dispatch(setFormValue({dmp: response}));
-        },
-        () => {
-        },
-        () => this.translate.get('dmp.success.update').subscribe(value => this.feedbackService.success(value))
-      );
-    } else {
-      this.backendService.createDmp(dmp).subscribe(
-        response => {
-          this.location.replaceState(`dmp/${response.id}`);
-          this.formService.mapDmpToForm(response);
-          this.store.dispatch(setFormValue({dmp: response}));
-        },
-        () => {
-        },
-        () => this.translate.get('dmp.success.save').subscribe(value => this.feedbackService.success(value))
-      );
+    if (this.dmpForm.valid) {
+      const dmp = this.formService.exportFormToDmp();
+      if (this.dmpForm.value.id) {
+        this.backendService.editDmp(dmp).subscribe(
+          response => {
+            this.formService.mapDmpToForm(response);
+            this.store.dispatch(setFormValue({dmp: response}));
+          },
+          () => {
+          },
+          () => this.translate.get('dmp.success.update').subscribe(value => this.feedbackService.success(value))
+        );
+      } else {
+        this.backendService.createDmp(dmp).subscribe(
+          response => {
+            this.location.replaceState(`dmp/${response.id}`);
+            this.formService.mapDmpToForm(response);
+            this.store.dispatch(setFormValue({dmp: response}));
+          },
+          () => {
+          },
+          () => this.translate.get('dmp.success.save').subscribe(value => this.feedbackService.success(value))
+        );
+      }
     }
   }
 
@@ -205,7 +207,7 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formService.removeDatasetFromForm(index);
   }
 
-  addStorage(storage: Storage) {
+  addStorage(storage: InternalStorage) {
     this.formService.addStorageToForm(storage);
   }
 
@@ -228,12 +230,6 @@ export class DmpComponent implements OnInit, OnDestroy {
   removeRepository(index: number): void {
     this.formService.removeRepositoryFromForm(index);
   }
-
-  /*  getRepositoryDetails(repo: Repository) {
-      if (!repo.info) {
-        this.store.dispatch(new LoadRepository({id: repo.id}));
-      }
-    }*/
 
   addCost() {
     this.formService.addCostToForm();
@@ -293,14 +289,6 @@ export class DmpComponent implements OnInit, OnDestroy {
         }
       });
   }
-
-  /*  private getRepositories() {
-      this.repositoriesLoaded$.subscribe(loaded => {
-        if (loaded === LoadingState.NOT_LOADED) {
-          this.store.dispatch(new LoadAllRepositories());
-        }
-      });
-    }*/
 
   // TODO: move to service, add for storage
 

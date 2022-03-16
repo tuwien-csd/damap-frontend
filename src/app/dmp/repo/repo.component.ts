@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {MatPaginator} from '@angular/material/paginator';
-import {Repository} from '../../domain/repository';
+import {RepositoryDetails} from '../../domain/repository-details';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
 import {Dataset} from '../../domain/dataset';
 import {select, Store} from '@ngrx/store';
@@ -23,9 +23,9 @@ import {loadAllRepositories, loadRecommendedRepositories, loadRepository} from '
 export class RepoComponent implements OnInit {
 
   repositoriesLoaded: LoadingState;
-  repositories: Repository[]; // Repo list loaded from backend
+  repositories: RepositoryDetails[]; // Repo list loaded from backend
   recommendedLoaded$: Observable<LoadingState>;
-  recommended$: Observable<Repository[]>;
+  recommended$: Observable<RepositoryDetails[]>;
 
   @Input() dmpForm: FormGroup;
   @Input() repoStep: FormArray;
@@ -50,7 +50,7 @@ export class RepoComponent implements OnInit {
     this.getRepositories();
   }
 
-  addRepository(repo: Repository) {
+  addRepository(repo: RepositoryDetails) {
     this.repositoryToAdd.emit(repo);
   }
 
@@ -58,7 +58,7 @@ export class RepoComponent implements OnInit {
     this.repositoryToRemove.emit(index);
   }
 
-  getRepositoryDetails(repo: Repository) {
+  getRepositoryDetails(repo: RepositoryDetails) {
     if (!repo.description) {
       this.store.dispatch(loadRepository({id: repo.id}));
     }

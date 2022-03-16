@@ -41,6 +41,7 @@ export class SummaryComponent implements OnInit {
   // Get all datasets assigned to any of the form array groups (storage/repository) without duplicates
   // To check if a storage/repository is provided for all datasets
   private static getFormArrayDatasets(array: any[]): string[] {
+    if (!array) return [];
     const datasetsInArray: string[] = [];
     for (const entry of array) {
       const datasets = entry.datasets;
@@ -291,7 +292,7 @@ export class SummaryComponent implements OnInit {
       repositoriesLevel.completeness = 0;
       repositoriesLevel.status.push('dmp.steps.summary.repositories.nodataspecified');
     } else {
-      const repos = this.dmpForm.hosts;
+      const repos = this.dmpForm.repositories;
       const repoDatasets: string[] = SummaryComponent.getFormArrayDatasets(repos);
       if (this.datasets.length === repoDatasets.length) {
         repositoriesLevel.completeness = 100;

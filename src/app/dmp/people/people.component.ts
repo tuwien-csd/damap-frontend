@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ContributorRole} from '../../domain/enum/contributor-role.enum';
 import {FormArray, FormGroup} from '@angular/forms';
 import {Contributor} from '../../domain/contributor';
+import {IdentifierType} from '../../domain/enum/identifier-type.enum';
 
 @Component({
   selector: 'app-dmp-people',
@@ -12,9 +13,10 @@ export class PeopleComponent {
 
   @Input() projectMembers: Contributor[];
 
-  roles: any = ContributorRole;
+  readonly roles: any = ContributorRole;
+  readonly identifierType = IdentifierType;
 
-  translateEnumPrefix = 'enum.contributor.role.'
+  readonly translateEnumPrefix = 'enum.contributor.role.'
 
   @Input() dmpForm: FormGroup;
 

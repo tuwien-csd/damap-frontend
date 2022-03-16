@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import pkg from '../../../package.json';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthService} from '../auth/auth.service';
+import {ConfigService} from '../services/config.service';
 
 @Component({
   selector: 'app-layout',
@@ -16,7 +17,12 @@ export class LayoutComponent implements OnInit {
   public lang = 'EN';
   public widescreen = () => window.innerWidth >= 1024;
 
-  constructor(private auth: AuthService, private translate: TranslateService) {
+  readonly env: string;
+
+  constructor(private auth: AuthService,
+              private translate: TranslateService,
+              private configService: ConfigService) {
+    this.env = this.configService.getEnvironment();
   }
 
   ngOnInit(): void {

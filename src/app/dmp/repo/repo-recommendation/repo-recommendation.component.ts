@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Repository} from '../../../domain/repository';
-import {Host} from '../../../domain/host';
+import {RepositoryDetails} from '../../../domain/repository-details';
 import {LoadingState} from '../../../domain/enum/loading-state.enum';
+import {Repository} from '../../../domain/repository';
 
 @Component({
   selector: 'app-repo-recommendation',
@@ -10,9 +10,9 @@ import {LoadingState} from '../../../domain/enum/loading-state.enum';
 })
 export class RepoRecommendationComponent {
 
-  @Input() recommended: Repository[];
+  @Input() recommended: RepositoryDetails[];
   @Input() loaded: LoadingState;
-  @Input() selectedRepos: Host[];
+  @Input() selectedRepos: Repository[];
 
   readonly LoadingState = LoadingState;
 
@@ -21,7 +21,7 @@ export class RepoRecommendationComponent {
   constructor() {
   }
 
-  addRepository(repo: Repository) {
+  addRepository(repo: RepositoryDetails) {
     this.repositoryToAdd.emit(repo);
   }
 
