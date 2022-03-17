@@ -3,7 +3,7 @@
   "layout": {
     "menu": {
       "home": "Home",
-      "plans": "Plans",
+      "plans": "DMPs",
       "mobile": {
         "open": "Open page navigation",
         "close": "Close page navigation"
@@ -11,15 +11,19 @@
     },
     "logout": "Logout",
     "version": "Version",
-    "logo.goback": "Go back to main page"
+    "logo.goback": "Go back to main page",
+    "dataprotection": {
+      "link": "#",
+      "text": "Data Protection Declaration"
+    }
   },
   "plans": {
-    "myplans": "My plans",
-    "allplans": "All plans",
-    "create.plan": "Create new plan",
+    "mydmps": "My DMPs",
+    "alldmps": "All DMPs",
+    "create.dmp": "Create new DMP",
     "loading": {
-      "load": "Load plans...",
-      "failed": "Your plans could not be loaded!"
+      "load": "Load DMPs...",
+      "failed": "Your DMPs could not be loaded!"
     },
     "table": {
       "header": {
@@ -38,9 +42,9 @@
         "json": "Export as JSON",
         "doc": "Export as document"
       },
-      "empty": "No plans found",
+      "empty": "No DMPs found",
       "nodatafilter": "No data matching the filter \"{{value}}\"",
-      "search": "Search dmp",
+      "search": "Search DMP",
       "nocontact": "No contact defined."
     }
   },
@@ -51,7 +55,7 @@
         "search": "Search project...",
         "select": "Please select the project you want to create a DMP for:",
         "selected": "You selected",
-        "warning.dmp": "A plan already exists for this project",
+        "warning.dmp": "A DMP already exists for this project",
         "noprojects": "No projects are assigned to you.",
         "loading": {
           "load": "Load projects...",
@@ -376,8 +380,8 @@
     },
     "nodatasets": "Please define datasets first.",
     "success": {
-      "update": "Plan was updated!",
-      "save": "Plan was saved!"
+      "update": "DMP was updated!",
+      "save": "DMP was saved!"
     }
   },
   "button": {
@@ -619,12 +623,12 @@
       "projectmembers": "Failed to load project members. ",
       "plans": {
         "load": {
-          "all": "Failed to load all plans. ",
-          "yours": "Failed to load your plans. ",
-          "one": "Failed to load plan. "
+          "all": "Failed to load all DMPs. ",
+          "yours": "Failed to load your DMPs. ",
+          "one": "Failed to load DMPs. "
         },
-        "save": "Failed to save plan. ",
-        "update": "Failed to update plan. "
+        "save": "Failed to save DMP. ",
+        "update": "Failed to update DMP. "
       },
       "storages": "Failed to load storages. "
     }
@@ -738,7 +742,7 @@
     }
   },
   "dashboard": {
-    "welcome.message": "Welcome to TU DMP Tool, a service that helps you to create and update the Data Management Plan (DMP) for your project.",
+    "welcome.message": "Welcome to DAMAP, a service that helps you to create and update the Data Management Plan (DMP) for your project.",
     "dmp": {
       "heading": "What is a DMP?",
       "text": {
@@ -756,7 +760,7 @@
       }
     },
     "tool": {
-      "heading": "TU DMP Tool",
+      "heading": "DAMAP",
       "bulletpoints": {
         "dmp": {
           "text": "guides you step by step through the different sections of a DMP following the ",
