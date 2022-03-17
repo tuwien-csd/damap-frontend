@@ -3,7 +3,7 @@
   "layout": {
     "menu": {
       "home": "Home",
-      "plans": "Pläne",
+      "plans": "DMPs",
       "mobile": {
         "open": "Seitennavigation öffnen",
         "close": "Seitennavigation schließen"
@@ -11,15 +11,19 @@
     },
     "logout": "Ausloggen",
     "version": "Version",
-    "logo.goback": "Zurück zur Hauptseite"
+    "logo.goback": "Zurück zur Hauptseite",
+    "dataprotection": {
+      "link": "#",
+      "text": "Datenschutzerklärung"
+    }
   },
   "plans": {
-    "myplans": "Meine Pläne",
-    "allplans": "Alle Pläne",
-    "create.plan": "Neuen Plan erstellen",
+    "mydmps": "Meine DMPs",
+    "alldmps": "Alle DMPs",
+    "create.dmp": "Neuen DMP erstellen",
     "loading": {
-      "load": "Pläne laden...",
-      "failed": "Deine Pläne konnten nicht geladen werden!"
+      "load": "DMPs werden geladen...",
+      "failed": "Deine DMPs konnten nicht geladen werden!"
     }
   },
   "env": {
