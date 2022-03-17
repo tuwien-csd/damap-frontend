@@ -1,5 +1,10 @@
 .mat-sidenav-container {
   min-height: calc(100% - 50px);
+  overflow: clip;
+}
+
+.mat-sidenav-content {
+  overflow: visible;
 }
 
 .footer {
@@ -261,17 +266,7 @@ svg {
   .nav-item-desktop {
     display: block;
   }
-
-  /*  .active {
-      background-color: transparent;
-      padding-left: 15px;
-      border-left: none;
-      font-weight: 700;
-      border-bottom: 3px solid var(--main-color);
-    }*/
-  /*  .nav-item-mobile {
-      display: none !important;
-    }*/
+  
   .sidenav-btn {
     display: none;
   }
