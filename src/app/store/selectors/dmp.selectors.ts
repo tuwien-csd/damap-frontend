@@ -1,6 +1,9 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {DmpState} from '../states/dmp.state';
-import * as fromDmps from '../reducers/dmp.reducer';
+import {adapter, DmpState} from '../states/dmp.state';
+
+export const {
+  selectAll
+} = adapter.getSelectors();
 
 export const selectDmpsState = createFeatureSelector<DmpState>('dmps');
 
@@ -11,5 +14,10 @@ export const selectDmpsLoaded = createSelector(
 
 export const selectDmps = createSelector(
   selectDmpsState,
-  fromDmps.selectAll
+  selectAll
 );
+
+export const selectDmpById = (props: { id: number }) => createSelector(
+  selectDmpsState,
+  (state) => state.entities[props.id]
+)
