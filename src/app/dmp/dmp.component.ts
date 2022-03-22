@@ -17,7 +17,7 @@ import {LoadingState} from '../domain/enum/loading-state.enum';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {formDiff, resetFormValue, setFormValue} from '../store/actions/form.actions';
 import {selectFormChanged} from '../store/selectors/form.selectors';
-import {LoadDmps} from '../store/actions/dmp.actions';
+import {loadDmps} from '../store/actions/dmp.actions';
 import {TranslateService} from '@ngx-translate/core';
 import {InternalStorage} from '../domain/internal-storage';
 
@@ -102,7 +102,7 @@ export class DmpComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.formService.resetForm();
     this.store.dispatch(resetFormValue());
-    this.store.dispatch(new LoadDmps());
+    this.store.dispatch(loadDmps(false));
   }
 
   changeStep() {

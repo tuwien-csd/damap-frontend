@@ -3,7 +3,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../store/states/app.state';
 import {selectDmps, selectDmpsLoaded} from '../store/selectors/dmp.selectors';
 import {Observable} from 'rxjs';
-import {LoadDmps} from '../store/actions/dmp.actions';
+import {loadDmps} from '../store/actions/dmp.actions';
 import {DmpListItem} from '../domain/dmp-list-item';
 import {BackendService} from '../services/backend.service';
 import {LoadingState} from '../domain/enum/loading-state.enum';
@@ -46,7 +46,7 @@ export class PlansComponent implements OnInit {
   }
 
   getDmps() {
-    this.store.dispatch(new LoadDmps());
+    this.store.dispatch(loadDmps(false));
   }
 
   private getAllDmps(): Observable<DmpListItem[]> {
