@@ -630,7 +630,11 @@
         "save": "Failed to save DMP. ",
         "update": "Failed to update DMP. "
       },
-      "storages": "Failed to load storages. "
+      "storages": "Failed to load storages. ",
+      "versions": {
+        "load": "Failed to load DMP versions. ",
+        "save": "Failed to save DMP version. "
+      }
     }
   },
   "enum": {
