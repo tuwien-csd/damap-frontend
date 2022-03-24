@@ -8,7 +8,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {RouterModule} from '@angular/router';
 import {PlansComponent} from './plans/plans.component';
-import {DmpComponent} from './dmp/dmp.component';
+import {DmpComponent, SaveVersionDialogComponent} from './dmp/dmp.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {AppStoreModule} from './store/app-store.module';
 import {APP_ROUTES} from './app.routes';
@@ -21,7 +21,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {DatasetDialogComponent, SpecifyDataComponent} from './dmp/specify-data/specify-data.component';
 import {MatRadioModule} from '@angular/material/radio';
-import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {LegalEthicalAspectsComponent} from './dmp/legal-ethical-aspects/legal-ethical-aspects.component';
@@ -43,8 +42,6 @@ import {StorageFilterPipe} from './dmp/data-storage/storage/storage-filter.pipe'
 import {ExternalStorageComponent} from './dmp/data-storage/external-storage/external-storage.component';
 import {ReuseComponent} from './dmp/reuse/reuse.component';
 import {CostsComponent} from './dmp/costs/costs.component';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {BytePipe} from './pipe/byte.pipe';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {DragdropDirective} from './directives/dragdrop.directive';
 import {FileUploadComponent} from './widgets/file-upload/file-upload.component';
@@ -78,6 +75,10 @@ import {RepoDetailsComponent} from './dmp/repo/repo-details/repo-details.compone
 import {RepoRecommendationComponent} from './dmp/repo/repo-recommendation/repo-recommendation.component';
 import {RepoPipe} from './pipe/repo.pipe';
 import {EnvBannerModule} from './widgets/env-banner/env-banner.module';
+import {VersionModule} from './version/version.module';
+import {OrcidModule} from './widgets/orcid/orcid.module';
+import {TagModule} from './widgets/tag/tag.module';
+import {ByteModule} from './pipe/byte/byte.module';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -124,6 +125,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     RepoTableComponent,
     RepoDetailsComponent,
     RepoRecommendationComponent,
+    SaveVersionDialogComponent,
 
     // Directives
     DragdropDirective,
@@ -131,7 +133,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     // Pipes
     ProjectFilterPipe,
     StorageFilterPipe,
-    BytePipe,
     ContributorFilterPipe,
     LicenseFilterPipe,
     RepoPipe,
@@ -170,7 +171,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatNativeDateModule,
     MatRippleModule,
     MatRadioModule,
-    MatTableModule,
     MatDialogModule,
     MatSelectModule,
     MatGridListModule,
@@ -179,15 +179,18 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatSlideToggleModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
-    MatExpansionModule,
     MatSnackBarModule,
     MatMenuModule,
 
     // Custom
     SharedModule,
     DashboardModule,
+    VersionModule,
     TreeSelectFormFieldModule,
-    EnvBannerModule
+    EnvBannerModule,
+    OrcidModule,
+    TagModule,
+    ByteModule,
   ],
   providers: [{
     provide: APP_INITIALIZER,
@@ -199,6 +202,5 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   ],
   bootstrap: [AppComponent]
 })
-
 export class AppModule {
 }
