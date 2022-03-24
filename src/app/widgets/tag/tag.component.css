@@ -1,0 +1,7 @@
+.tag {
+  display: inline-block;
+  padding: 5px 7px;
+  border-radius: 4px;
+  font-size: 10pt;
+  margin: 0.5rem;
+}

@@ -10,16 +10,14 @@ import {AppState} from '../store/states/app.state';
 import {selectProjects, selectProjectsLoaded} from '../store/selectors/project.selectors';
 import {LoadProjects} from '../store/actions/project.actions';
 import {FormService} from '../services/form.service';
-import {FeedbackService} from '../services/feedback.service';
 import {HttpEventType} from '@angular/common/http';
-import {Location} from '@angular/common';
 import {LoadingState} from '../domain/enum/loading-state.enum';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {formDiff, resetFormValue, setFormValue} from '../store/actions/form.actions';
 import {selectFormChanged} from '../store/selectors/form.selectors';
-import {loadDmps} from '../store/actions/dmp.actions';
-import {TranslateService} from '@ngx-translate/core';
+import {createDmp, loadDmps, saveDmpVersion, updateDmp} from '../store/actions/dmp.actions';
 import {InternalStorage} from '../domain/internal-storage';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dmp',
@@ -64,9 +62,7 @@ export class DmpComponent implements OnInit, OnDestroy {
     private router: Router,
     private backendService: BackendService,
     public store: Store<AppState>,
-    private feedbackService: FeedbackService,
-    private location: Location,
-    private translate: TranslateService
+    public dialog: MatDialog
   ) {
   }
 
@@ -111,32 +107,27 @@ export class DmpComponent implements OnInit, OnDestroy {
     }
   }
 
-  saveDmp(): void {
+  saveDmp() {
     if (this.dmpForm.valid) {
       const dmp = this.formService.exportFormToDmp();
       if (this.dmpForm.value.id) {
-        this.backendService.editDmp(dmp).subscribe(
-          response => {
-            this.formService.mapDmpToForm(response);
-            this.store.dispatch(setFormValue({dmp: response}));
-          },
-          () => {
-          },
-          () => this.translate.get('dmp.success.update').subscribe(value => this.feedbackService.success(value))
-        );
+        this.store.dispatch(updateDmp({dmp}));
       } else {
-        this.backendService.createDmp(dmp).subscribe(
-          response => {
-            this.location.replaceState(`dmp/${response.id}`);
-            this.formService.mapDmpToForm(response);
-            this.store.dispatch(setFormValue({dmp: response}));
-          },
-          () => {
-          },
-          () => this.translate.get('dmp.success.save').subscribe(value => this.feedbackService.success(value))
-        );
+        this.store.dispatch(createDmp({dmp}));
       }
     }
+  }
+
+  saveDmpVersion(): void {
+    const dialogRef = this.dialog.open(SaveVersionDialogComponent, {
+      width: '350px'
+    });
+
+    dialogRef.afterClosed().subscribe(versionName => {
+      if (versionName) {
+        this.store.dispatch(saveDmpVersion({dmp: this.formService.exportFormToDmp(), versionName}));
+      }
+    });
   }
 
   changeProject(project: Project) {
@@ -295,4 +286,22 @@ export class DmpComponent implements OnInit, OnDestroy {
   private generateReferenceHash(): string {
     return this.username + (+new Date()).toString(36);
   }
+}
+
+@Component({
+  selector: 'app-save-version-dialog',
+  templateUrl: 'save-version-dialog.html'
+})
+export class SaveVersionDialogComponent {
+
+  versionName = '';
+
+  constructor(
+    public dialogRef: MatDialogRef<SaveVersionDialogComponent>) {
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }
