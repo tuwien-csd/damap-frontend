@@ -16,7 +16,7 @@
     "ci:e2e": "ng e2e",
     "ci:coverage": "ng test --browsers ChromeHeadless --watch=false --code-coverage",
     "ci:audit": "npm audit",
-    "ci:install": "npm install && npm install -g @angular/cli@12.2.1"
+    "ci:install": "npm install"
   },
   "private": true,
   "dependencies": {
