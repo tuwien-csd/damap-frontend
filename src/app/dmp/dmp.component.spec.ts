@@ -1,5 +1,5 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {DmpComponent} from './dmp.component';
+import {DmpComponent, SaveVersionDialogComponent} from './dmp.component';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {ActivatedRoute} from '@angular/router';
@@ -17,6 +17,7 @@ import {HarnessLoader} from '@angular/cdk/testing';
 import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
 import {MatStepperHarness} from '@angular/material/stepper/testing';
 import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
+import {MatDialogModule} from '@angular/material/dialog';
 
 describe('DmpComponent', () => {
   let component: DmpComponent;
@@ -57,14 +58,14 @@ describe('DmpComponent', () => {
     };
     await TestBed.configureTestingModule({
       imports: [
-        ReactiveFormsModule, MatStepperModule, MatButtonModule,
+        ReactiveFormsModule, MatStepperModule, MatButtonModule, MatDialogModule,
         NoopAnimationsModule,
         RouterTestingModule.withRoutes(
           [/*{path: 'plans', component: PlansComponent}*/]
         ),
         TranslateTestingModule
       ],
-      declarations: [DmpComponent],
+      declarations: [DmpComponent, SaveVersionDialogComponent],
       providers: [
         {provide: OAuthService, useValue: oauthSpy},
         {provide: FormService, useValue: formServiceStub},

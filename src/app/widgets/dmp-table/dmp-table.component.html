@@ -45,7 +45,7 @@
   <ng-container matColumnDef="history">
     <th mat-header-cell *matHeaderCellDef><span class="sr-only">{{'plans.table.header.history' | translate}}</span></th>
     <td mat-cell *matCellDef="let element">
-      <a routerLink="/dmp/history/{{element.id}}">
+      <a routerLink="/dmp/{{element.id}}/version">
         <button mat-icon-button>
           <mat-icon color="accent">history</mat-icon>
         </button>
