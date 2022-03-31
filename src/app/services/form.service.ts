@@ -321,24 +321,12 @@ export class FormService {
   public addExternalStorageToForm() {
     const externalStorageFormGroup = this.createExternalStorageFormGroup();
     const storage = this.form.get('externalStorage') as FormArray;
-    const storageInfo = this.form.get('externalStorageInfo') as FormControl;
     storage.push(externalStorageFormGroup);
-
-    if (storage.controls.length === 1) {
-      storageInfo.addValidators(Validators.required);
-    }
-    storageInfo.updateValueAndValidity();
   }
 
   public removeExternalStorageFromForm(index: number) {
     const storage = this.form.get('externalStorage') as FormArray;
     storage.removeAt(index);
-    const storageInfo = this.form.get('externalStorageInfo') as FormControl;
-
-    if (storage.controls.length === 0) {
-      storageInfo.removeValidators(Validators.required);
-    }
-    storageInfo.updateValueAndValidity();
   }
 
   public addRepositoryToForm(repo: { id: string, name: string }) {
