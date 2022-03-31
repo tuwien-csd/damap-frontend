@@ -70,7 +70,7 @@ export class DmpEffects {
       this.backendService.saveDmpVersion(version).pipe(
         map(() => {
           this.formService.mapDmpToForm(dmp);
-          this.feedbackService.success('version.success.save');
+          this.feedbackService.success('dmp.success.version.save');
           this.store$.dispatch(setFormValue({dmp}));
           return DmpAction.loadDmps(true)
         }),
