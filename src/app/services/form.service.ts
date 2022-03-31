@@ -186,11 +186,6 @@ export class FormService {
     }
   }
 
-  /**
-   * Export dmp form to a DataManagementPlan object.
-   *
-   * Might be inconsistent!
-   */
   public exportFormToDmp(): Dmp {
     const formValue = this.form.getRawValue();
 
