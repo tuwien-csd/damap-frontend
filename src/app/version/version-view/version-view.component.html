@@ -5,7 +5,7 @@
       <mat-icon>chevron_left</mat-icon>
       {{'versions.view.button.versions' | translate}}</button>
     <button mat-raised-button color="primary"
-            [routerLink]="'/dmp/' + id">{{'versions.view.button.edit.current.version' | translate}}</button>
+            [routerLink]="'/dmp/' + id">{{'versions.view.button.goto.latest' | translate}}</button>
   </div>
 
   <h2 *ngIf="versions$ | async as versions">{{getVersionName(versions)}}</h2>

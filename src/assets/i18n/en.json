@@ -400,7 +400,7 @@
     "revisionNumber": "Revision",
     "view": {
       "button": {
-        "edit.current.version": "Edit current version",
+        "goto.latest": "Go to living document",
         "versions": "Go back to version overview",
         "expand": "Expand all",
         "collapse": "Collapse all"
