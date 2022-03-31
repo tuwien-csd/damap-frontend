@@ -381,7 +381,8 @@
     "nodatasets": "Please define datasets first.",
     "success": {
       "update": "DMP was updated!",
-      "save": "DMP was saved!"
+      "save": "DMP was saved!",
+      "version.save": "Version was saved!"
     },
     "dialog": {
       "title": "Save new version",
