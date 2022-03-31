@@ -1,7 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { FeedbackService } from './feedback.service';
+import {FeedbackService} from './feedback.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
 
 describe('FeedbackService', () => {
   let service: FeedbackService;
@@ -12,7 +13,8 @@ describe('FeedbackService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: MatSnackBar, useValue: mockMatSnackBar },]
+      imports: [TranslateTestingModule],
+      providers: [{provide: MatSnackBar, useValue: mockMatSnackBar},]
     });
     service = TestBed.inject(FeedbackService);
     matSnackBar = TestBed.inject(MatSnackBar);

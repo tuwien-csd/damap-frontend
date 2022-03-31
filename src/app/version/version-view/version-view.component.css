@@ -1,0 +1,27 @@
+.action-buttons {
+  padding-bottom: 20px;
+}
+
+.action-buttons > button {
+  margin-right: 1rem;
+}
+
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+::ng-deep hr {
+  opacity: 0.5;
+  size: 1px;
+}
+
+::ng-deep .headings {
+  font-weight: bolder;
+}
+

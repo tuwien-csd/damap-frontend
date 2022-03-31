@@ -101,7 +101,7 @@
           "answer": {
             "kind": {
               "unknown": "I don't know yet.",
-              "none": "No data will be created or analysed",
+              "none": "No data will be created or analysed.",
               "specify": "Specify datasets"
             }
           },
@@ -382,11 +382,126 @@
     "success": {
       "update": "DMP was updated!",
       "save": "DMP was saved!"
+    },
+    "dialog": {
+      "title": "Save new version",
+      "description": "Please enter a version name",
+      "label": "Version name",
+      "button": {
+        "cancel": "Cancel",
+        "save": "Save"
+      }
+    }
+  },
+  "versions": {
+    "versionId": "Version",
+    "versionName": "Name",
+    "versionDate": "Date",
+    "revisionNumber": "Revision",
+    "view": {
+      "button": {
+        "goto.latest": "Go to living document",
+        "versions": "Go back to version overview",
+        "expand": "Expand all",
+        "collapse": "Collapse all"
+      },
+      "project": {
+        "heading": "Project"
+      },
+      "contributors": {
+        "heading": "People involved"
+      },
+      "datasets": {
+        "heading": "Datasets",
+        "size": "Size",
+        "comment": "Comment",
+        "license": "License",
+        "retention.period": "Retention period",
+        "data.none": "Why no data will be created or analysed",
+        "data.unknown": "Not yet known if data will be created.",
+        "restrictions": {
+          "label": "Restrictions",
+          "sensitive": "Contains sensitive data",
+          "personal": "Contains personal data",
+          "legal": "Legal restrictions on data processing or sharing"
+        },
+        "data.access": {
+          "label": "Data access",
+          "public": "Public",
+          "selected": "For selected project members",
+          "other": "For other project members"
+        },
+        "deletion": {
+          "date": "Date of deletion",
+          "reason": "Reason for deletion"
+        }
+      },
+      "documentation": {
+        "heading": "Documentation and data quality",
+        "data.generation": "Research data generation and methods and software used",
+        "structure": "Data structure and versioning",
+        "metadata": "Metadata that will be provided",
+        "data.quality": "Control and documentation of data consistency and quality"
+      },
+      "legal": {
+        "heading": "Legal and ethical aspects",
+        "sensitive.data": {
+          "present": "Data or part of it is sensitive",
+          "security": "Security measures to ensure data safety",
+          "other.security": "Other security measures",
+          "access": "Authorised to access sensitive data"
+        },
+        "personal.data": {
+          "present": "Personal data will be collected/used",
+          "compliance": "Compliance with data protection will be ensured by",
+          "other.compliance": "Other measures"
+        },
+        "restrictions": {
+          "present": "There are legal restrictions on data processing/sharing",
+          "comment": "Restrictions",
+          "documents": "Documents specifying restrictions",
+          "other.documents": "Other documents",
+          "data.rights.access": "Rights and control over access to produced data"
+        }
+      },
+      "ethical": {
+        "human.participants": "Human participants are involved",
+        "issues": "Other ethical issues are associated with the research",
+        "committee.reviewed": "Research plan was reviewed by an ethics committee"
+      },
+      "storage": {
+        "heading": "Storage",
+        "datasets": "Datasets",
+        "url": "URL",
+        "location": "Storage location",
+        "backup": {
+          "location": "Backup location",
+          "frequency": "Backup frequency"
+        }
+      },
+      "reuse": {
+        "heading": "Reuse",
+        "target.audience": "Target audience",
+        "tools": "Tools or software needed to access data",
+        "restricted.data.access": "Restricted data access",
+        "access.info": {
+          "restricted": "Why some datasets have access restrictions",
+          "closed": "Why some datasets are closed and not accessible"
+        }
+      },
+      "repositories": {
+        "heading": "Repositories",
+        "datasets": "Datasets"
+      },
+      "costs": {
+        "heading": "Costs"
+      }
     }
   },
   "button": {
     "save": "Save changes",
-    "discard": "Discard changes"
+    "discard": "Discard changes",
+    "version": "Save new version"
   },
   "yes": "Yes",
   "no": "No",
@@ -630,7 +745,11 @@
         "save": "Failed to save DMP. ",
         "update": "Failed to update DMP. "
       },
-      "storages": "Failed to load storages. "
+      "storages": "Failed to load storages. ",
+      "versions": {
+        "load": "Failed to load DMP versions. ",
+        "save": "Failed to save DMP version. "
+      }
     }
   },
   "enum": {
@@ -676,7 +795,7 @@
       "OTHER": "Other"
     },
     "costs": {
-      "DATA_ACQUISITION": "Data Aquisition",
+      "DATA_ACQUISITION": "Data Acquisition",
       "DATABASE": "Database",
       "FILE_BASED_STORAGE": "File-based Storage",
       "HARDWARE_AND_INFRASTRUCTURE": "Hardware and Infrastructure",
@@ -705,6 +824,22 @@
       "PEER_REVIEW_OF_DATA": "peer review of data",
       "REPRESENTATION_WITH_CONTROLLED_VOCABULARIES": "representation with controlled vocabularies",
       "OTHERS": "others"
+    },
+    "dataset.type": {
+      "STANDARD_OFFICE_DOCUMENTS": "STANDARD OFFICE DOCUMENTS",
+      "NETWORKBASED_DATA": "NETWORKBASED DATA",
+      "DATABASES": "DATABASES",
+      "IMAGES": "IMAGES",
+      "STRUCTURED_GRAPHICS": "STRUCTURED GRAPHICS",
+      "AUDIOVISUAL_DATA": "AUDIOVISUAL DATA",
+      "SCIENTIFIC_STATISTICAL_DATA": "SCIENTIFIC STATISTICAL DATA",
+      "PLAIN_TEXT": "PLAIN TEXT",
+      "STRUCTURED_TEXT": "STRUCTURED TEXT",
+      "ARCHIVED_DATA": "ARCHIVED DATA",
+      "SOFTWARE_APPLICATIONS": "SOFTWARE APPLICATIONS",
+      "SOURCE_CODE": "SOURCE CODE",
+      "CONFIGURATION_DATA": "CONFIGURATION DATA",
+      "OTHER": "OTHER"
     },
     "functionrole": {
       "ADMIN": "ADMIN",

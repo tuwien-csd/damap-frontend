@@ -1,0 +1,16 @@
+<ng-container *ngIf="costsExist else noCosts">
+  {{'dmp.steps.costs.question.exist.yes' | translate}}
+  <a href="{{'dmp.steps.costs.link' | translate}}" target="_blank">{{'fair' | translate}}</a>.
+  <div *ngFor="let cost of costs">
+    <hr>
+    <h3>{{cost.title}}</h3>
+    <div>{{cost.description}}</div>
+    {{'enum.costs.' + cost.type | translate}}:
+    <ng-container *ngIf="cost.type === costType.OTHER"> {{cost.customType}}</ng-container>
+    {{cost.value | currency: cost.currencyCode}}
+  </div>
+</ng-container>
+
+<ng-template #noCosts>{{'dmp.steps.costs.question.exist.no' | translate}}
+  <a href="{{'dmp.steps.costs.link' | translate}}" target="_blank">{{'fair' | translate}}</a>.
+</ng-template>

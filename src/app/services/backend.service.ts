@@ -12,6 +12,7 @@ import {environment} from '../../environments/environment';
 import {TranslateService} from '@ngx-translate/core';
 import {Consent} from '../domain/consent'
 import {InternalStorage} from '../domain/internal-storage';
+import {Version} from '../domain/version';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class BackendService {
 
   private backendUrl = !environment.production ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`
   private dmpBackendUrl = this.backendUrl + 'dmps'
+  private versionBackendUrl = this.backendUrl + 'versions'
   private projectBackendUrl = this.backendUrl + 'projects';
   private repositoryBackendUrl = this.backendUrl + 'repositories';
 
@@ -79,6 +81,32 @@ export class BackendService {
         retry(3),
         catchError(this.handleError('http.error.plans.update'))
       );
+  }
+
+  getDmpByIdAndRevision(id: number, revision: number): Observable<Dmp> {
+    return this.http.get<Dmp>(`${this.dmpBackendUrl}/${id}/${revision}`).pipe(
+      retry(3),
+      catchError(this.handleError('http.error.versions.revision'))
+    );
+  }
+
+  getDmpVersions(id: number): Observable<Version[]> {
+    return this.http.get<Version[]>(`${this.versionBackendUrl}/list/${id}`).pipe(
+      retry(3),
+      catchError(this.handleError('http.error.versions.load'))
+    );
+  }
+
+  saveDmpVersion(version: Version): Observable<Version> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put<Version>(this.versionBackendUrl, version, httpOptions).pipe(
+      retry(3),
+      catchError(this.handleError('http.error.versions.save'))
+    );
   }
 
   getSuggestedProjects(): Observable<Project[]> {
