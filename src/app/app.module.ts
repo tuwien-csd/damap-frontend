@@ -21,7 +21,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {DatasetDialogComponent, SpecifyDataComponent} from './dmp/specify-data/specify-data.component';
 import {MatRadioModule} from '@angular/material/radio';
-import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {LegalEthicalAspectsComponent} from './dmp/legal-ethical-aspects/legal-ethical-aspects.component';
 import {LicensesComponent} from './dmp/licenses/licenses.component';
@@ -46,8 +45,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {DragdropDirective} from './directives/dragdrop.directive';
 import {FileUploadComponent} from './widgets/file-upload/file-upload.component';
 import {ContributorFilterPipe} from './pipe/contributor-filter.pipe';
-import {LicenseSelectorDialogComponent, LicenseWizardComponent} from './widgets/license-wizard/license-wizard.component';
-import {LicenseFilterPipe} from './widgets/license-wizard/license-filter.pipe';
 import {ErrorMessageComponent} from './widgets/error-message/error-message.component';
 import {RepoFilterComponent} from './dmp/repo/repo-filter/repo-filter.component';
 import {TooltipComponent} from './widgets/tooltip/tooltip.component';
@@ -79,6 +76,7 @@ import {VersionModule} from './version/version.module';
 import {OrcidModule} from './widgets/orcid/orcid.module';
 import {TagModule} from './widgets/tag/tag.module';
 import {ByteModule} from './pipe/byte/byte.module';
+import {LicenseWizardModule} from './widgets/license-wizard/license-wizard.module';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -107,8 +105,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ReuseComponent,
     CostsComponent,
     FileUploadComponent,
-    LicenseWizardComponent,
-    LicenseSelectorDialogComponent,
     ErrorMessageComponent,
     RepoFilterComponent,
     TooltipComponent,
@@ -134,7 +130,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ProjectFilterPipe,
     StorageFilterPipe,
     ContributorFilterPipe,
-    LicenseFilterPipe,
     RepoPipe,
   ],
   imports: [
@@ -171,7 +166,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatNativeDateModule,
     MatRippleModule,
     MatRadioModule,
-    MatDialogModule,
     MatSelectModule,
     MatGridListModule,
     MatPaginatorModule,
@@ -191,6 +185,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     OrcidModule,
     TagModule,
     ByteModule,
+    LicenseWizardModule
   ],
   providers: [{
     provide: APP_INITIALIZER,

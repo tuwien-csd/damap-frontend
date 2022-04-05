@@ -579,6 +579,7 @@
     "select": "Select license with license selector",
     "title": "Choose a License",
     "info": "More info",
+    "none.found": "No license found",
     "question": {
       "root": "What do you want to deposit?",
       "data": "Is your data within the scope of copyright and related rights?",
