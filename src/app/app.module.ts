@@ -27,36 +27,25 @@ import {LicensesComponent} from './dmp/licenses/licenses.component';
 import {RepoComponent} from './dmp/repo/repo.component';
 import {DocDataQualityComponent} from './dmp/doc-data-quality/doc-data-quality.component';
 import {PeopleComponent} from './dmp/people/people.component';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatPaginatorModule} from '@angular/material/paginator';
 import {SummaryComponent} from './dmp/summary/summary.component';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {ProjectFilterPipe} from './dmp/project/project-filter.pipe';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {DmpTableComponent} from './widgets/dmp-table/dmp-table.component';
 import {StorageComponent} from './dmp/data-storage/storage/storage.component';
 import {StorageFilterPipe} from './dmp/data-storage/storage/storage-filter.pipe';
 import {ExternalStorageComponent} from './dmp/data-storage/external-storage/external-storage.component';
 import {ReuseComponent} from './dmp/reuse/reuse.component';
 import {CostsComponent} from './dmp/costs/costs.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {DragdropDirective} from './directives/dragdrop.directive';
-import {FileUploadComponent} from './widgets/file-upload/file-upload.component';
 import {ContributorFilterPipe} from './pipe/contributor-filter.pipe';
-import {ErrorMessageComponent} from './widgets/error-message/error-message.component';
 import {RepoFilterComponent} from './dmp/repo/repo-filter/repo-filter.component';
-import {TooltipComponent} from './widgets/tooltip/tooltip.component';
 import {AuthGuard} from './guard/auth.guard';
 import {ConfigService} from './services/config.service';
 import {DataAccessComponent} from './dmp/data-storage/data-access/data-access.component';
 import {SharedModule} from './shared/shared.module';
 import {DataDeletionComponent} from './dmp/data-deletion/data-deletion.component';
 import {EthicalAspectsComponent} from './dmp/legal-ethical-aspects/ethical-aspects/ethical-aspects.component';
-import {InfoMessageComponent} from './widgets/info-message/info-message.component';
-import {SaveStatusComponent} from './widgets/save-status/save-status.component';
-import {StepIntroComponent} from './widgets/intro/step-intro.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatMenuModule} from '@angular/material/menu';
@@ -64,7 +53,6 @@ import {RetentionPeriodComponent} from './dmp/repo/retention-period/retention-pe
 import {ConsentComponent} from './consent/consent.component';
 import {ConsentGuard} from './guard/consent.guard';
 import {ContributorManualComponent} from './dmp/people/contributor-manual/contributor-manual.component';
-import {CrisTagComponent} from './widgets/cris-tag/cris-tag.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {TreeSelectFormFieldModule} from './widgets/tree-select-form-field/tree-select-form-field.module';
 import {RepoTableComponent} from './dmp/repo/repo-table/repo-table.component';
@@ -77,6 +65,14 @@ import {OrcidModule} from './widgets/orcid/orcid.module';
 import {TagModule} from './widgets/tag/tag.module';
 import {ByteModule} from './pipe/byte/byte.module';
 import {LicenseWizardModule} from './widgets/license-wizard/license-wizard.module';
+import {StepIntroModule} from './widgets/step-intro/step-intro.module';
+import {CrisTagModule} from './widgets/cris-tag/cris-tag.module';
+import {InfoMessageModule} from './widgets/info-message/info-message.module';
+import {SaveStatusModule} from './widgets/save-status/save-status.module';
+import {TooltipModule} from './widgets/tooltip/tooltip.module';
+import {FileUploadModule} from './widgets/file-upload/file-upload.module';
+import {DmpTableModule} from './widgets/dmp-table/dmp-table.module';
+import {ErrorMessageModule} from './widgets/error-message/error-message.module';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -99,32 +95,21 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     DocDataQualityComponent,
     PeopleComponent,
     SummaryComponent,
-    DmpTableComponent,
     StorageComponent,
     ExternalStorageComponent,
     ReuseComponent,
     CostsComponent,
-    FileUploadComponent,
-    ErrorMessageComponent,
     RepoFilterComponent,
-    TooltipComponent,
     DataAccessComponent,
     DataDeletionComponent,
     EthicalAspectsComponent,
-    InfoMessageComponent,
-    SaveStatusComponent,
-    StepIntroComponent,
     RetentionPeriodComponent,
     ConsentComponent,
     ContributorManualComponent,
-    CrisTagComponent,
     RepoTableComponent,
     RepoDetailsComponent,
     RepoRecommendationComponent,
     SaveVersionDialogComponent,
-
-    // Directives
-    DragdropDirective,
 
     // Pipes
     ProjectFilterPipe,
@@ -167,9 +152,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatRippleModule,
     MatRadioModule,
     MatSelectModule,
-    MatGridListModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
@@ -185,7 +167,15 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     OrcidModule,
     TagModule,
     ByteModule,
-    LicenseWizardModule
+    LicenseWizardModule,
+    StepIntroModule,
+    CrisTagModule,
+    InfoMessageModule,
+    ErrorMessageModule,
+    SaveStatusModule,
+    TooltipModule,
+    FileUploadModule,
+    DmpTableModule
   ],
   providers: [{
     provide: APP_INITIALIZER,

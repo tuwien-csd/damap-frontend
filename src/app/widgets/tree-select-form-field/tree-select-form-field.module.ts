@@ -31,6 +31,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
   ],
   exports: [
     CommonModule,
+    TranslateModule,
     TreeSelectFormFieldComponent,
 
     // Materials
