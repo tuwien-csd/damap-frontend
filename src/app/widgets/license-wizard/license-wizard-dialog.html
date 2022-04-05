@@ -16,7 +16,7 @@
           <div *ngFor="let license of softwareLicenses">
             <mat-checkbox *ngIf="license.code"
                           (change)="changeLicenseMatrix(license.code)">
-              {{license.name}}
+              {{license.name | translate}}
             </mat-checkbox>
           </div>
         </ng-container>
@@ -24,11 +24,10 @@
         <ng-container *ngIf="step.question === 'license.wizard.question.licenseInteropData'">
           <div *ngFor="let licenses of dataLicenses, let j = index" style="align-content: flex-start">
             <mat-checkbox (change)="changeLicenseOptions(j)">
-              <ng-container *ngFor="let licence of licenses; last as isLast">
-                {{licence.name}}
+              <ng-container *ngFor="let license of licenses; last as isLast">
+                {{license.name | translate}}
                 <ng-container *ngIf="!isLast">,</ng-container>
               </ng-container>
-              {{licenses.name}}
             </mat-checkbox>
           </div>
         </ng-container>
