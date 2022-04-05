@@ -5,6 +5,6 @@ import {CommonModule} from '@angular/common';
 @NgModule({
   declarations: [OrcidComponent],
   imports: [CommonModule],
-  exports: [OrcidComponent]
+  exports: [CommonModule, OrcidComponent]
 })
 export class OrcidModule{}
