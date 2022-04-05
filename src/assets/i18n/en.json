@@ -589,7 +589,7 @@
       "allowDerivativeWorks": "Do you allow others to make derivative works?",
       "shareAlike": "Do you require others to share derivative works based on your data under a compatible license?",
       "commercialUse": "Do you allow others to make commercial use of you data?",
-      "decideAttribute": "Do you want others to attribute your data to you?",
+      "decideAttributes": "Do you want others to attribute your data to you?",
       "software": "Is your code based on existing software or is it your original work?",
       "licenseInteropSoftware": "Select licenses in your code:",
       "copyleft": "Do you require others who modify your code to release it under a compatible licence?",
