@@ -21,7 +21,6 @@ import {ConfigService} from './services/config.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatMenuModule} from '@angular/material/menu';
-import {ConsentComponent} from './consent/consent.component';
 import {ConsentGuard} from './guard/consent.guard';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {EnvBannerModule} from './widgets/env-banner/env-banner.module';
@@ -29,6 +28,7 @@ import {VersionModule} from './version/version.module';
 import {DmpTableModule} from './widgets/dmp-table/dmp-table.module';
 import {DmpModule} from './dmp/dmp.module';
 import {PlansModule} from './plans/plans.module';
+import {ConsentModule} from './consent/consent.module';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -40,7 +40,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     // Components
     AppComponent,
     LayoutComponent,
-    ConsentComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +78,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     // Modules
     DashboardModule,
     EnvBannerModule,
+    ConsentModule,
     DmpModule,
     PlansModule,
     VersionModule,
