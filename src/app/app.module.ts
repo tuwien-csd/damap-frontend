@@ -7,7 +7,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {RouterModule} from '@angular/router';
 import {PlansComponent} from './plans/plans.component';
-import {DmpComponent, SaveVersionDialogComponent} from './dmp/dmp.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {AppStoreModule} from './store/app-store.module';
 import {APP_ROUTES} from './app.routes';
@@ -28,22 +27,8 @@ import {ConsentGuard} from './guard/consent.guard';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {EnvBannerModule} from './widgets/env-banner/env-banner.module';
 import {VersionModule} from './version/version.module';
-import {TagModule} from './widgets/tag/tag.module';
-import {InfoMessageModule} from './widgets/info-message/info-message.module';
-import {SaveStatusModule} from './widgets/save-status/save-status.module';
 import {DmpTableModule} from './widgets/dmp-table/dmp-table.module';
-import {CostsModule} from './dmp/costs/costs.module';
-import {DataDeletionModule} from './dmp/data-deletion/data-deletion.module';
-import {DataStorageModule} from './dmp/data-storage/data-storage.module';
-import {DocDataQualityModule} from './dmp/doc-data-quality/doc-data-quality.module';
-import {LegalEthicalAspectsModule} from './dmp/legal-ethical-aspects/legal-ethical-aspects.module';
-import {LicensesModule} from './dmp/licenses/licenses.module';
-import {PeopleModule} from './dmp/people/people.module';
-import {ProjectModule} from './dmp/project/project.module';
-import {RepoModule} from './dmp/repo/repo.module';
-import {ReuseModule} from './dmp/reuse/reuse.module';
-import {SpecifyDataModule} from './dmp/specify-data/specify-data.module';
-import {SummaryModule} from './dmp/summary/summary.module';
+import {DmpModule} from './dmp/dmp.module';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -55,10 +40,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     // Components
     AppComponent,
     PlansComponent,
-    DmpComponent,
     LayoutComponent,
     ConsentComponent,
-    SaveVersionDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,26 +77,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatSnackBarModule,
     MatMenuModule,
 
-    // Custom
+    // Modules
     DashboardModule,
-    VersionModule,
     EnvBannerModule,
-    TagModule,
-    InfoMessageModule,
-    SaveStatusModule,
+    DmpModule,
+    VersionModule,
     DmpTableModule,
-    CostsModule,
-    DataDeletionModule,
-    DataStorageModule,
-    DocDataQualityModule,
-    LegalEthicalAspectsModule,
-    LicensesModule,
-    PeopleModule,
-    ProjectModule,
-    RepoModule,
-    ReuseModule,
-    SpecifyDataModule,
-    SummaryModule
   ],
   providers: [{
     provide: APP_INITIALIZER,
