@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {RepositoryDetails} from '../domain/repository-details';
-import {Repository} from '../domain/repository';
+import {RepositoryDetails} from '../../domain/repository-details';
+import {Repository} from '../../domain/repository';
 
 @Pipe({
   name: 'repo'

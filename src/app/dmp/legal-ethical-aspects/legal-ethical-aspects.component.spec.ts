@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {LegalEthicalAspectsComponent} from './legal-ethical-aspects.component';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
-import {StepIntroComponent} from '../../widgets/intro/step-intro.component';
+import {StepIntroComponent} from '../../widgets/step-intro/step-intro.component';
 import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
 
 describe('LegalEthicalAspectsComponent', () => {

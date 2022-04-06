@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {BackendService} from '../services/backend.service';
 import {Consent} from '../domain/consent'
 
 @Component({

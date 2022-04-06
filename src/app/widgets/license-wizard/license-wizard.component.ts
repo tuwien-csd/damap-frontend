@@ -1,9 +1,8 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {ccByNcSa, ccBySa, DataLicenses, LicenseDefinitions, odbl, SoftwareLicenses} from './license-wizard-list';
 import {LicenseDetails} from '../../domain/license-details';
-import {QUESTION_TREE, Step} from './license-wizard-questions';
+import {Filter, QUESTION_TREE, Step} from './license-wizard-questions';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {KeyValue} from '@angular/common';
 
 
 @Component({
@@ -45,15 +44,10 @@ export class LicenseSelectorDialogComponent {
   options: LicenseDetails[][] = []; // compatible data licenses
   steps: Step[] = [QUESTION_TREE];
 
-  // Keyvalue Compare Function
-  originalOrder = (a: KeyValue<string, object>, b: KeyValue<string, object>): number => {
-    return 0;
-  }
-
   constructor(public dialogRef: MatDialogRef<LicenseSelectorDialogComponent>) {
   }
 
-  setNextStep(currentIndex: number, next: any) {
+  setNextStep(currentIndex: number, next: { step: (...[]) => Step, filter?: Filter }) {
     if (next.filter?.licenses) {
       this.licenseList = next.filter.licenses;
     }
@@ -79,7 +73,6 @@ export class LicenseSelectorDialogComponent {
     } else {
       this.matrix = this.matrix.filter(item => item !== licenseCode);
     }
-    console.log(this.matrix);
   }
 
   changeLicenseOptions(i: number) {
@@ -88,7 +81,6 @@ export class LicenseSelectorDialogComponent {
     } else {
       this.options = this.options.filter(item => item !== this.dataLicenses[i]);
     }
-    console.log(this.options);
   }
 
   reset() {
