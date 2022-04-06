@@ -6,7 +6,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {RouterModule} from '@angular/router';
-import {PlansComponent} from './plans/plans.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {AppStoreModule} from './store/app-store.module';
 import {APP_ROUTES} from './app.routes';
@@ -29,6 +28,7 @@ import {EnvBannerModule} from './widgets/env-banner/env-banner.module';
 import {VersionModule} from './version/version.module';
 import {DmpTableModule} from './widgets/dmp-table/dmp-table.module';
 import {DmpModule} from './dmp/dmp.module';
+import {PlansModule} from './plans/plans.module';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -39,7 +39,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   declarations: [
     // Components
     AppComponent,
-    PlansComponent,
     LayoutComponent,
     ConsentComponent,
   ],
@@ -81,6 +80,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     DashboardModule,
     EnvBannerModule,
     DmpModule,
+    PlansModule,
     VersionModule,
     DmpTableModule,
   ],
