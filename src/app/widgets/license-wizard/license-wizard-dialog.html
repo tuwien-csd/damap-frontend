@@ -2,9 +2,6 @@
 <mat-dialog-content class="mat-typography">
   <div>
     <div class="ls-steps" *ngFor="let step of steps, let i = index, let last = last">
-      <!--<button mat-icon-button color="primary" aria-label="Example icon button with a heart icon">
-        <mat-icon>looks_{{i == 0 ? 'one' : (i == 1 ? 'two' : i + 1)}}</mat-icon>
-      </button>-->
       <div class="ls-question" *ngIf="last">
         <button id="ls-reset-button" mat-stroked-button (click)="reset()">
           <mat-icon>replay</mat-icon>
@@ -16,7 +13,7 @@
           <div *ngFor="let license of softwareLicenses">
             <mat-checkbox *ngIf="license.code"
                           (change)="changeLicenseMatrix(license.code)">
-              {{license.name}}
+              {{license.name | translate}}
             </mat-checkbox>
           </div>
         </ng-container>
@@ -24,26 +21,25 @@
         <ng-container *ngIf="step.question === 'license.wizard.question.licenseInteropData'">
           <div *ngFor="let licenses of dataLicenses, let j = index" style="align-content: flex-start">
             <mat-checkbox (change)="changeLicenseOptions(j)">
-              <ng-container *ngFor="let licence of licenses; last as isLast">
-                {{licence.name}}
+              <ng-container *ngFor="let license of licenses; last as isLast">
+                {{license.name | translate}}
                 <ng-container *ngIf="!isLast">,</ng-container>
               </ng-container>
-              {{licenses.name}}
             </mat-checkbox>
           </div>
         </ng-container>
         <!-- Answers -->
         <div class="ls-answer-buttons">
-          <ng-container *ngFor="let item of step.answers | keyvalue: originalOrder">
-            <button mat-raised-button (click)="setNextStep(i, item.value)"
-                    color="primary">{{item.key | translate}}</button>
+          <ng-container *ngFor="let item of step.answers">
+            <button mat-raised-button (click)="setNextStep(i, item.next)"
+                    color="primary">{{item.label | translate}}</button>
           </ng-container>
         </div>
       </div>
     </div>
   </div>
   <!-- List of licenses -->
-  <ng-container *ngIf="licenseList?.length">
+  <ng-container *ngIf="(licenseList | licenseFilter: '')?.length else noLicense">
     <div id="ls-search">
       <mat-form-field>
         <mat-label>{{'license.wizard.search' | translate}}</mat-label>
@@ -65,4 +61,7 @@
       </mat-card>
     </div>
   </ng-container>
+  <ng-template #noLicense>
+    {{'license.wizard.none.found' | translate}}
+  </ng-template>
 </mat-dialog-content>

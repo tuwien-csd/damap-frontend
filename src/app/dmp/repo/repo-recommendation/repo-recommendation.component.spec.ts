@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {RepoRecommendationComponent} from './repo-recommendation.component';
-import {RepoPipe} from '../../../pipe/repo.pipe';
+import {RepoPipe} from '../repo.pipe';
 import {mockDetailRepo} from '../../../mocks/repository-mocks';
 
 describe('RepoRecommendationComponent', () => {

@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DocDataQualityComponent} from './doc-data-quality.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {StepIntroComponent} from '../../widgets/intro/step-intro.component';
+import {StepIntroComponent} from '../../widgets/step-intro/step-intro.component';
 import {TextareaWrapperComponent} from '../../shared/textarea-wrapper/textarea-wrapper.component';
 import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
 import {FormControl, FormGroup} from '@angular/forms';

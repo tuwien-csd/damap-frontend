@@ -22,6 +22,7 @@ import {TranslateModule} from '@ngx-translate/core';
   ],
   exports: [
     CommonModule,
+    TranslateModule,
     FormsModule,
     ReactiveFormsModule,
     InputWrapperComponent,

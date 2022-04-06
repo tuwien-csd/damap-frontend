@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Contributor} from '../domain/contributor';
+import {Contributor} from '../../domain/contributor';
 
 @Pipe({
   name: 'contributorFilter'
