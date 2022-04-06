@@ -9,7 +9,6 @@ import {RouterModule} from '@angular/router';
 import {MatStepperModule} from '@angular/material/stepper';
 import {AppStoreModule} from './store/app-store.module';
 import {APP_ROUTES} from './app.routes';
-import {LayoutComponent} from './layout/layout.component';
 import {OAuthModule} from 'angular-oauth2-oidc';
 import {environment} from '../environments/environment';
 import {MatRippleModule} from '@angular/material/core';
@@ -29,6 +28,7 @@ import {DmpTableModule} from './widgets/dmp-table/dmp-table.module';
 import {DmpModule} from './dmp/dmp.module';
 import {PlansModule} from './plans/plans.module';
 import {ConsentModule} from './consent/consent.module';
+import {LayoutModule} from './layout/layout.module';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -36,11 +36,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [
-    // Components
-    AppComponent,
-    LayoutComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     RouterModule,
@@ -76,6 +72,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatMenuModule,
 
     // Modules
+    LayoutModule,
     DashboardModule,
     EnvBannerModule,
     ConsentModule,
