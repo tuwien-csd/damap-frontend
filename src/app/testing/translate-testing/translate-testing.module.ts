@@ -15,6 +15,10 @@ export class TranslatePipeMock implements PipeTransform {
 
 @Injectable()
 export class TranslateServiceStub {
+  get currentLang(): string {
+    return 'en';
+  }
+
   public get(key: any): Observable<any> {
     return of(key);
   }
@@ -24,6 +28,10 @@ export class TranslateServiceStub {
 
   public instant(key: any): any {
     return key;
+  }
+
+  public getBrowserLang(): any {
+    return 'en';
   }
 }
 
