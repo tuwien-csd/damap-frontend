@@ -1,16 +1,16 @@
-# Adaptation
+# Customization
+
+The damap-frontend is customized by forking this repository and adding graphic, 
+and custom styling, as well as editing the translations to the contain the 
+information necessary for your institution.
+Thus adapting the configuration for your environment.
 
 ## Configuration 
 
-The frontend only contains one config information, which is the addresss of the backend. 
+The frontend only contains one config information, which is the address of the backend. 
 There it will fetch the config information in file app.module.ts and config.service.ts.
 
 For details on the backend project, refer to [damap-backend]().
-
-## Run the project with docker
-
-For running the project in conjunction with the backend in a dockerized setup,
-please refer to the [damap-backend]() project.
 
 ## Customization
 

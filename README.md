@@ -1,6 +1,6 @@
 # DAMAP
 
-##Introduction
+## Introduction
 
 DAMAP is a tool that is currently being developed by TU Wien and TU Graz as part of the
 [FAIR Data Austria](https://forschungsdaten.at/fda/) project.
@@ -32,3 +32,8 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Run the project with docker
+
+For running the project in conjunction with the backend in a dockerized setup,
+please refer to the [damap-backend]() project.
