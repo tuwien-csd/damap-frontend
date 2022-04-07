@@ -22,17 +22,15 @@ import {MatMenuModule} from '@angular/material/menu';
 import {ConsentGuard} from './guard/consent.guard';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {EnvBannerModule} from './widgets/env-banner/env-banner.module';
-import {VersionModule} from './version/version.module';
 import {DmpTableModule} from './widgets/dmp-table/dmp-table.module';
-import {DmpModule} from './dmp/dmp.module';
 import {PlansModule} from './plans/plans.module';
 import {ConsentModule} from './consent/consent.module';
 import {LayoutModule} from './layout/layout.module';
 import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
+import {ReactiveFormsModule} from '@angular/forms';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
-  console.log('translate loader')
   return new MultiTranslateHttpLoader(http, [
     {prefix: './assets/i18n/', suffix: '.json'},
     {prefix: './assets/i18n/consent/', suffix: '.json'}
@@ -45,6 +43,7 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
     BrowserModule,
     RouterModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(APP_ROUTES),
     BrowserAnimationsModule,
     AppStoreModule,
@@ -80,9 +79,7 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
     DashboardModule,
     EnvBannerModule,
     ConsentModule,
-    DmpModule,
     PlansModule,
-    VersionModule,
     DmpTableModule,
   ],
   providers: [{
