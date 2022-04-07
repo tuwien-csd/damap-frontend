@@ -6,14 +6,14 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        TranslateModule,
+  imports: [
+    CommonModule,
+    TranslateModule,
 
-        // Materials
-        MatDialogModule,
-        MatButtonModule
-    ],
+    // Materials
+    MatDialogModule,
+    MatButtonModule
+  ],
   declarations: [ConsentComponent],
   exports: [
     CommonModule,
