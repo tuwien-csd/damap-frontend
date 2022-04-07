@@ -8,11 +8,12 @@ import {Consent} from '../domain/consent'
   styleUrls: ['./consent.component.css']
 })
 
-export class ConsentComponent{
+export class ConsentComponent {
   public lang = 'EN';
-  public consent : Consent;
+  public consent: Consent;
 
-  constructor(private translate: TranslateService) {}
+  constructor(private translate: TranslateService) {
+  }
 
   useLanguage(language: string): void {
     this.lang = language.toUpperCase();

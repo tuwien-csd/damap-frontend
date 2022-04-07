@@ -27,6 +27,9 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.name = this.auth.getName();
+    const browserLang = this.translate.getBrowserLang();
+    this.translate.use((browserLang.match(/en|de/) ? browserLang : 'en'));
+    this.lang = this.translate.currentLang.toUpperCase();
   }
 
   useLanguage(language: string): void {
