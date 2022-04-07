@@ -10,7 +10,7 @@ Thus adapting the configuration for your environment.
 The frontend only contains one config information, which is the address of the backend. 
 There it will fetch the config information in file app.module.ts and config.service.ts.
 
-For details on the backend project, refer to [damap-backend]().
+For details on the backend project, refer to [damap-backend](https://github.com/tuwien-csd/damap-backend).
 
 ## Customization
 
