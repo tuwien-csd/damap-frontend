@@ -18,7 +18,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AuthGuard} from './guard/auth.guard';
 import {ConfigService} from './services/config.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatMenuModule} from '@angular/material/menu';
 import {ConsentGuard} from './guard/consent.guard';
 import {DashboardModule} from './dashboard/dashboard.module';
@@ -29,10 +28,15 @@ import {DmpModule} from './dmp/dmp.module';
 import {PlansModule} from './plans/plans.module';
 import {ConsentModule} from './consent/consent.module';
 import {LayoutModule} from './layout/layout.module';
+import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
 
 // required for AOT compilation
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http);
+export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
+  console.log('translate loader')
+  return new MultiTranslateHttpLoader(http, [
+    {prefix: './assets/i18n/', suffix: '.json'},
+    {prefix: './assets/i18n/consent/', suffix: '.json'}
+  ]);
 }
 
 @NgModule({
