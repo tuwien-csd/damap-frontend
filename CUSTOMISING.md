@@ -1,4 +1,4 @@
-# Customization
+# Customisation
 
 The damap-frontend is customized by forking this repository and adding graphic, 
 and custom styling, as well as editing the translations to the contain the 
@@ -12,7 +12,7 @@ There it will fetch the config information in file app.module.ts and config.serv
 
 For details on the backend project, refer to [damap-backend](https://github.com/tuwien-csd/damap-backend).
 
-## Customization
+## What to change
 
 In order to customize this project you will need to adapt some files.
 

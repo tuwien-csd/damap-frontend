@@ -17,28 +17,32 @@ and is compatible with the [RDA recommendation on machine actionable DMPs](https
 
 For a showcase of some of the tools functions see the [demo video](https://youtu.be/IxQzqy26ZO4).
 
-# Damap Project and Documentation
+## Damap Project and Documentation
 
 For an overview and instructions for running the whole damap package (backend and frontend), 
 refer to the [damap-backend](https://github.com/tuwien-csd/damap-backend) project.
 
-# DamapFrontend
+## DamapFrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
 
-## Development server
+### Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Build
+### Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+### Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Run the project with docker
+### Run the project with docker
 
 For running the project in conjunction with the backend in a dockerized setup,
 please refer to the [damap-backend](https://github.com/tuwien-csd/damap-backend) project.
+
+###Customising
+
+please refer to the [CUSTOMISING.md](CUSTOMISING.md) page.
