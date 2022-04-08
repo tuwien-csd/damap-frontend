@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
-import {AuthService} from '../auth/auth.service';
 import {BackendService} from '../services/backend.service';
 import {ConsentComponent} from '../consent/consent.component';
-import {MatDialog, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
-import {Consent} from '../domain/consent'
+import {MatDialog} from '@angular/material/dialog';
 
 @Injectable()
 export class ConsentGuard implements CanActivate {
@@ -23,7 +21,7 @@ export class ConsentGuard implements CanActivate {
       }
       else {
         this.consentGiven = false;
-        let dialogRef = this.dialog.open(ConsentComponent);
+        let dialogRef = this.dialog.open(ConsentComponent, {disableClose: true});
         dialogRef.afterClosed().subscribe(result => {
           if(result) {
             this.consentGiven = true;

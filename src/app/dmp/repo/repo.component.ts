@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
-import {MatPaginator} from '@angular/material/paginator';
 import {RepositoryDetails} from '../../domain/repository-details';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
 import {Dataset} from '../../domain/dataset';
@@ -35,8 +34,6 @@ export class RepoComponent implements OnInit {
   @Output() repositoryToRemove = new EventEmitter<any>();
 
   LoadingState = LoadingState;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(public store: Store<AppState>) {
   }

@@ -1,28 +1,15 @@
-import {Action} from '@ngrx/store';
+import {createAction, props} from '@ngrx/store';
 import {DmpListItem} from '../../domain/dmp-list-item';
+import {Dmp} from '../../domain/dmp';
 
-export enum DmpActionTypes {
-  LoadDmps = '[Dmps] Load all',
-  DmpsLoaded = '[Dmps] All loaded',
-  FailedToLoadDmps = '[Dmps] Failed to load all'
-}
+export const loadDmps = createAction('[Dmps] Load all', (skipIfPresent: boolean = true) => ({skipIfPresent}));
 
-export class LoadDmps implements Action {
-  readonly type = DmpActionTypes.LoadDmps;
-}
+export const dmpsLoaded = createAction('[Dmps] All loaded', props<{ dmps: DmpListItem[] }>());
 
-export class DmpsLoaded implements Action {
-  readonly type = DmpActionTypes.DmpsLoaded;
+export const failedToLoadDmps = createAction('[Dmps] Failed to load all');
 
-  constructor(public payload: { dmps: DmpListItem[] }) {
-  }
-}
+export const createDmp = createAction('[Dmps] Create new dmp', props<{ dmp: Dmp }>());
 
-export class FailedToLoadDmps implements Action {
-  readonly type = DmpActionTypes.FailedToLoadDmps;
-}
+export const updateDmp = createAction('[Dmps] Update dmp', props<{ dmp: Dmp }>());
 
-export type DmpActions =
-  LoadDmps
-  | DmpsLoaded
-  | FailedToLoadDmps;
+export const saveDmpVersion = createAction('[Dmps] Save new version', props<{ dmp: Dmp, versionName: string }>());

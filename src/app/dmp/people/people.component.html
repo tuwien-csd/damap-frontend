@@ -19,14 +19,9 @@
             </div>
             <mat-icon class="mat-icon-style">mail_outline</mat-icon>
             {{contributor.value.mbox}}
-            <div class="orcid-id">
-              <a *ngIf="contributor.value.personId?.type === identifierType.ORCID"
-                 [href]="'https://orcid.org/' + contributor.value.personId?.identifier"
-                 target="_blank">
-                <img alt="ORCID logo" src="assets/ORCIDiD_iconvector.svg"
-                     width="16" height="16"/>https://orcid.org/{{contributor.value.personId?.identifier}}
-              </a>
-            </div>
+            <app-orcid
+              *ngIf="contributor.value.personId?.identifier && (contributor.value.personId?.type === identifierType.ORCID)"
+              [orcidId]="contributor.value.personId?.identifier"></app-orcid>
           </div>
           <div [formGroupName]="i">
             <mat-form-field appearance="fill">

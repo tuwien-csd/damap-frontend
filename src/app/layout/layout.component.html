@@ -17,23 +17,21 @@
       </div>
     </div>
     <div id="user" class="dark-theme">
-      <span> {{name}} </span>
+      <div> {{name}} </div>
+      <button mat-icon-button [attr.aria-label]="'logout' | translate" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
     </div>
     <mat-nav-list>
       <a mat-list-item class="nav-item-mobile" [routerLink]="'/dashboard'"
          routerLinkActive="active">{{'layout.menu.home' | translate }}</a>
       <a mat-list-item class="nav-item-mobile" [routerLink]="'/plans'"
          routerLinkActive="active">{{'layout.menu.plans' | translate }}</a>
-      <a mat-list-item (click)="logout()" aria-label="Logout">{{'layout.logout' | translate }}</a>
     </mat-nav-list>
-    <div class="version-information">
-      {{'layout.version' | translate }}: {{version}}
-    </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
       <mat-toolbar-row id="mainHeader" [style]="'padding: 0px;'">
-        <!-- MOBILE -->
         <div class="mainHeaderLeft">
           <button mat-icon-button title="{{'layout.menu.mobile.open'| translate }}"
                   (click)="sidenav.opened = !sidenav.opened"
@@ -47,15 +45,7 @@
             <mat-icon>close</mat-icon>
           </button>
         </div>
-        <!-- MOBILE End -->
         <div class="mainHeaderRight">
-          <nav class="mainHeaderNav">
-            <a mat-list-item class="nav-item-desktop" [routerLink]="'/dashboard'"
-               routerLinkActive="active">{{'layout.menu.home' | translate }}</a>
-            <a mat-list-item class="nav-item-desktop" [routerLink]="'/plans'"
-               routerLinkActive="active">{{'layout.menu.plans' | translate }}</a>
-          </nav>
-
         </div>
         <!-- University Logo -->
         <div id="mainHeaderLogo">
@@ -66,7 +56,7 @@
         <!-- University Logo End -->
       </mat-toolbar-row>
       <mat-toolbar-row>
-        <h1>{{title}}</h1>
+        <h1 translate>title</h1>
       </mat-toolbar-row>
 
     </mat-toolbar>
@@ -74,4 +64,13 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+<div class="footer">
+  <div class="version-information">
+    {{'layout.version' | translate }}: {{version}}
+  </div>
+  <div>
+    <a [href]="'layout.dataprotection.link' | translate"
+       target="_blank">{{'layout.dataprotection.text' | translate}}</a>
+  </div>
+</div>
 
