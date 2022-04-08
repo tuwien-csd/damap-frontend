@@ -228,8 +228,8 @@
           "committeeReviewed": {
             "prefix": "Was your research plan reviewed by an ethics committee, the ",
             "researchCommittee": {
-              "text": "TU Wien Pilot Research Ethics Committee",
-              "link": "https://www.tuwien.at/en/research/rti-support/research-ethics/pilot-research-ethics-committee"
+              "text": "Ethics Committee of your institution",
+              "link": "https://www.link.example"
             },
             "suffix": ", or a similar body?"
           }
@@ -262,7 +262,7 @@
       },
       "repositories": {
         "label": "Specify repositories for publication and preservation",
-        "intro": "Repositories are used for sustainable data management beyond the lifetime of the project and to make data discoverable and reusable to others. If available, use a domain specific repository for your data. The search filter below may help you to find one. Otherwise, you can always use TU Wien Research Data, TU Wiens institutional data repository.",
+        "intro": "Repositories are used for sustainable data management beyond the lifetime of the project and to make data discoverable and reusable to others. If available, use a domain specific repository for your data. The search filter below may help you to find one.",
         "heading": "Repositories",
         "search": "Search repository",
         "add": "Add repository",
@@ -309,7 +309,7 @@
           "other": "Please specify the cost type",
           "description": "Description"
         },
-        "link": "https://www.tuwien.at/en/research/rti-support/research-data/research-data-management/fair-principles"
+        "link": "https://www.link.example"
       },
       "end": {
         "label": "End"
@@ -510,7 +510,7 @@
   "help": {
     "legal": {
       "sensitiveDataSecurity": "Referring to physical security, network security, and security of computer systems and files.",
-      "personalDataCompliance": "Make sure you follow the TU Wien guidance on informed consent."
+      "personalDataCompliance": "Make sure you follow your institutions guidance on informed consent."
     },
     "ethical": {
       "humanParticipants": "The participation may include activities such as interviews, prototype testing, observations, surveys, etc.",
@@ -523,25 +523,25 @@
         "prefix": "An informed consent for participation (in addition to an informed consent to data processing) is required. For more information, contact the ",
         "researchEthicsCoordination": {
           "text": "research ethics coordination",
-          "link": "https://www.tuwien.at/en/research/rti-support/research-ethics"
+          "link": "https://www.link.example"
         },
         "middle": " or consult: ",
         "researchEthics": {
-          "link": "https://colab.tuwien.ac.at/x/eQEhAw"
+          "link": "https://www.link.example"
         }
       },
       "ethicalIssues": {
         "text": "Your research plan may require ethical review. Inform yourself by consulting",
         "researchEthics": {
-          "text": "www.tuwien.at/research-ethics",
-          "link": "https://www.tuwien.at/research-ethics"
+          "text": "https://www.link.example",
+          "link": "https://www.link.example"
         }
       },
       "committeeReviewed": {
-        "prefix": "Please note that you must address (potential) ethical issues in separate documents according to the requirements of the relevant funding body. The DMP only serves to help identify some ethical issues.\nPlease contact the TU Research Ethics Coordinator (Dr. Marjo Rauhala) at ",
+        "prefix": "Please note that you must address (potential) ethical issues in separate documents according to the requirements of the relevant funding body. The DMP only serves to help identify some ethical issues.\nPlease contact your responsible Ethics Coordinator at ",
         "mail": {
-          "text": "ethics@tuwien.ac.at",
-          "link": "mailto:ethics@tuwien.ac.at"
+          "text": "mail@address.example",
+          "link": "mail@address.example"
         },
         "suffix": " for additional information and support. You must do so if your planned research involves any human participation."
       }
@@ -886,12 +886,12 @@
         "prefix": "A ",
         "dmp": {
           "text": "DMP",
-          "link": "https://www.tuwien.at/en/research/rti-support/research-data/dmp"
+          "link": "https://www.link.example"
         },
         "middle": " is a structured document that keeps record of what research data is created and what happens to that data during and after a project. It helps with planning the research process, managing your data in accordance with the ",
         "fairprinciples": {
           "text": "FAIR Principles",
-          "link": "https://www.tuwien.at/en/research/rti-support/research-data/research-data-management/fair-principles"
+          "link": "https://www.link.example"
         },
         "suffix": ", and defining rights and responsibilities in a research project involving several researchers or institutions."
       }
@@ -909,7 +909,7 @@
         "document": "exports a pre-filled DMP as a Word document that you can customize and use for submission to European and national funders, for example FWF and FFG",
         "benefits": {
           "text": "saves you work by",
-          "one": "pre-filling content with detailed information from TISS and other systems",
+          "one": "pre-filling content with detailed information from your CRIS application and other systems",
           "two": "providing wizards, guidance, and item lists to choose from",
           "three": "suggesting answers that you can either comply with or adjust to your needs"
         },
