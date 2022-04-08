@@ -3,7 +3,7 @@
   "layout": {
     "menu": {
       "home": "Home",
-      "plans": "Plans",
+      "plans": "DMPs",
       "mobile": {
         "open": "Open page navigation",
         "close": "Close page navigation"
@@ -11,15 +11,19 @@
     },
     "logout": "Logout",
     "version": "Version",
-    "logo.goback": "Go back to main page"
+    "logo.goback": "Go back to main page",
+    "dataprotection": {
+      "link": "#",
+      "text": "Data Protection Declaration"
+    }
   },
   "plans": {
-    "myplans": "My plans",
-    "allplans": "All plans",
-    "create.plan": "Create new plan",
+    "mydmps": "My DMPs",
+    "alldmps": "All DMPs",
+    "create.dmp": "Create new DMP",
     "loading": {
-      "load": "Load plans...",
-      "failed": "Your plans could not be loaded!"
+      "load": "Load DMPs...",
+      "failed": "Your DMPs could not be loaded!"
     },
     "table": {
       "header": {
@@ -38,9 +42,9 @@
         "json": "Export as JSON",
         "doc": "Export as document"
       },
-      "empty": "No plans found",
+      "empty": "No DMPs found",
       "nodatafilter": "No data matching the filter \"{{value}}\"",
-      "search": "Search dmp",
+      "search": "Search DMP",
       "nocontact": "No contact defined."
     }
   },
@@ -51,7 +55,7 @@
         "search": "Search project...",
         "select": "Please select the project you want to create a DMP for:",
         "selected": "You selected",
-        "warning.dmp": "A plan already exists for this project",
+        "warning.dmp": "A DMP already exists for this project",
         "noprojects": "No projects are assigned to you.",
         "loading": {
           "load": "Load projects...",
@@ -97,7 +101,7 @@
           "answer": {
             "kind": {
               "unknown": "I don't know yet.",
-              "none": "No data will be created or analysed",
+              "none": "No data will be created or analysed.",
               "specify": "Specify datasets"
             }
           },
@@ -224,8 +228,8 @@
           "committeeReviewed": {
             "prefix": "Was your research plan reviewed by an ethics committee, the ",
             "researchCommittee": {
-              "text": "TU Wien Pilot Research Ethics Committee",
-              "link": "https://www.tuwien.at/en/research/rti-support/research-ethics/pilot-research-ethics-committee"
+              "text": "Ethics Committee of your institution",
+              "link": "https://www.link.example"
             },
             "suffix": ", or a similar body?"
           }
@@ -258,7 +262,7 @@
       },
       "repositories": {
         "label": "Specify repositories for publication and preservation",
-        "intro": "Repositories are used for sustainable data management beyond the lifetime of the project and to make data discoverable and reusable to others. If available, use a domain specific repository for your data. The search filter below may help you to find one. Otherwise, you can always use TU Wien Research Data, TU Wiens institutional data repository.",
+        "intro": "Repositories are used for sustainable data management beyond the lifetime of the project and to make data discoverable and reusable to others. If available, use a domain specific repository for your data. The search filter below may help you to find one.",
         "heading": "Repositories",
         "search": "Search repository",
         "add": "Add repository",
@@ -305,7 +309,7 @@
           "other": "Please specify the cost type",
           "description": "Description"
         },
-        "link": "https://www.tuwien.at/en/research/rti-support/research-data/research-data-management/fair-principles"
+        "link": "https://www.link.example"
       },
       "end": {
         "label": "End"
@@ -376,13 +380,129 @@
     },
     "nodatasets": "Please define datasets first.",
     "success": {
-      "update": "Plan was updated!",
-      "save": "Plan was saved!"
+      "update": "DMP was updated!",
+      "save": "DMP was saved!",
+      "version.save": "Version was saved!"
+    },
+    "dialog": {
+      "title": "Save new version",
+      "description": "Please enter a version name",
+      "label": "Version name",
+      "button": {
+        "cancel": "Cancel",
+        "save": "Save"
+      }
+    }
+  },
+  "versions": {
+    "versionId": "Version",
+    "versionName": "Name",
+    "versionDate": "Date",
+    "revisionNumber": "Revision",
+    "view": {
+      "button": {
+        "goto.latest": "Go to living document",
+        "versions": "Go back to version overview",
+        "expand": "Expand all",
+        "collapse": "Collapse all"
+      },
+      "project": {
+        "heading": "Project"
+      },
+      "contributors": {
+        "heading": "People involved"
+      },
+      "datasets": {
+        "heading": "Datasets",
+        "size": "Size",
+        "comment": "Comment",
+        "license": "License",
+        "retention.period": "Retention period",
+        "data.none": "Why no data will be created or analysed",
+        "data.unknown": "Not yet known if data will be created.",
+        "restrictions": {
+          "label": "Restrictions",
+          "sensitive": "Contains sensitive data",
+          "personal": "Contains personal data",
+          "legal": "Legal restrictions on data processing or sharing"
+        },
+        "data.access": {
+          "label": "Data access",
+          "public": "Public",
+          "selected": "For selected project members",
+          "other": "For other project members"
+        },
+        "deletion": {
+          "date": "Date of deletion",
+          "reason": "Reason for deletion"
+        }
+      },
+      "documentation": {
+        "heading": "Documentation and data quality",
+        "data.generation": "Research data generation and methods and software used",
+        "structure": "Data structure and versioning",
+        "metadata": "Metadata that will be provided",
+        "data.quality": "Control and documentation of data consistency and quality"
+      },
+      "legal": {
+        "heading": "Legal and ethical aspects",
+        "sensitive.data": {
+          "present": "Data or part of it is sensitive",
+          "security": "Security measures to ensure data safety",
+          "other.security": "Other security measures",
+          "access": "Authorised to access sensitive data"
+        },
+        "personal.data": {
+          "present": "Personal data will be collected/used",
+          "compliance": "Compliance with data protection will be ensured by",
+          "other.compliance": "Other measures"
+        },
+        "restrictions": {
+          "present": "There are legal restrictions on data processing/sharing",
+          "comment": "Restrictions",
+          "documents": "Documents specifying restrictions",
+          "other.documents": "Other documents",
+          "data.rights.access": "Rights and control over access to produced data"
+        }
+      },
+      "ethical": {
+        "human.participants": "Human participants are involved",
+        "issues": "Other ethical issues are associated with the research",
+        "committee.reviewed": "Research plan was reviewed by an ethics committee"
+      },
+      "storage": {
+        "heading": "Storage",
+        "datasets": "Datasets",
+        "url": "URL",
+        "location": "Storage location",
+        "backup": {
+          "location": "Backup location",
+          "frequency": "Backup frequency"
+        }
+      },
+      "reuse": {
+        "heading": "Reuse",
+        "target.audience": "Target audience",
+        "tools": "Tools or software needed to access data",
+        "restricted.data.access": "Restricted data access",
+        "access.info": {
+          "restricted": "Why some datasets have access restrictions",
+          "closed": "Why some datasets are closed and not accessible"
+        }
+      },
+      "repositories": {
+        "heading": "Repositories",
+        "datasets": "Datasets"
+      },
+      "costs": {
+        "heading": "Costs"
+      }
     }
   },
   "button": {
     "save": "Save changes",
-    "discard": "Discard changes"
+    "discard": "Discard changes",
+    "version": "Save new version"
   },
   "yes": "Yes",
   "no": "No",
@@ -390,7 +510,7 @@
   "help": {
     "legal": {
       "sensitiveDataSecurity": "Referring to physical security, network security, and security of computer systems and files.",
-      "personalDataCompliance": "Make sure you follow the TU Wien guidance on informed consent."
+      "personalDataCompliance": "Make sure you follow your institutions guidance on informed consent."
     },
     "ethical": {
       "humanParticipants": "The participation may include activities such as interviews, prototype testing, observations, surveys, etc.",
@@ -403,25 +523,25 @@
         "prefix": "An informed consent for participation (in addition to an informed consent to data processing) is required. For more information, contact the ",
         "researchEthicsCoordination": {
           "text": "research ethics coordination",
-          "link": "https://www.tuwien.at/en/research/rti-support/research-ethics"
+          "link": "https://www.link.example"
         },
         "middle": " or consult: ",
         "researchEthics": {
-          "link": "https://colab.tuwien.ac.at/x/eQEhAw"
+          "link": "https://www.link.example"
         }
       },
       "ethicalIssues": {
         "text": "Your research plan may require ethical review. Inform yourself by consulting",
         "researchEthics": {
-          "text": "www.tuwien.at/research-ethics",
-          "link": "https://www.tuwien.at/research-ethics"
+          "text": "https://www.link.example",
+          "link": "https://www.link.example"
         }
       },
       "committeeReviewed": {
-        "prefix": "Please note that you must address (potential) ethical issues in separate documents according to the requirements of the relevant funding body. The DMP only serves to help identify some ethical issues.\nPlease contact the TU Research Ethics Coordinator (Dr. Marjo Rauhala) at ",
+        "prefix": "Please note that you must address (potential) ethical issues in separate documents according to the requirements of the relevant funding body. The DMP only serves to help identify some ethical issues.\nPlease contact your responsible Ethics Coordinator at ",
         "mail": {
-          "text": "ethics@tuwien.ac.at",
-          "link": "mailto:ethics@tuwien.ac.at"
+          "text": "mail@address.example",
+          "link": "mail@address.example"
         },
         "suffix": " for additional information and support. You must do so if your planned research involves any human participation."
       }
@@ -459,6 +579,7 @@
     "select": "Select license with license selector",
     "title": "Choose a License",
     "info": "More info",
+    "none.found": "No license found",
     "question": {
       "root": "What do you want to deposit?",
       "data": "Is your data within the scope of copyright and related rights?",
@@ -469,7 +590,7 @@
       "allowDerivativeWorks": "Do you allow others to make derivative works?",
       "shareAlike": "Do you require others to share derivative works based on your data under a compatible license?",
       "commercialUse": "Do you allow others to make commercial use of you data?",
-      "decideAttribute": "Do you want others to attribute your data to you?",
+      "decideAttributes": "Do you want others to attribute your data to you?",
       "software": "Is your code based on existing software or is it your original work?",
       "licenseInteropSoftware": "Select licenses in your code:",
       "copyleft": "Do you require others who modify your code to release it under a compatible licence?",
@@ -619,14 +740,18 @@
       "projectmembers": "Failed to load project members. ",
       "plans": {
         "load": {
-          "all": "Failed to load all plans. ",
-          "yours": "Failed to load your plans. ",
-          "one": "Failed to load plan. "
+          "all": "Failed to load all DMPs. ",
+          "yours": "Failed to load your DMPs. ",
+          "one": "Failed to load DMPs. "
         },
-        "save": "Failed to save plan. ",
-        "update": "Failed to update plan. "
+        "save": "Failed to save DMP. ",
+        "update": "Failed to update DMP. "
       },
-      "storages": "Failed to load storages. "
+      "storages": "Failed to load storages. ",
+      "versions": {
+        "load": "Failed to load DMP versions. ",
+        "save": "Failed to save DMP version. "
+      }
     }
   },
   "enum": {
@@ -672,7 +797,7 @@
       "OTHER": "Other"
     },
     "costs": {
-      "DATA_ACQUISITION": "Data Aquisition",
+      "DATA_ACQUISITION": "Data Acquisition",
       "DATABASE": "Database",
       "FILE_BASED_STORAGE": "File-based Storage",
       "HARDWARE_AND_INFRASTRUCTURE": "Hardware and Infrastructure",
@@ -701,6 +826,22 @@
       "PEER_REVIEW_OF_DATA": "peer review of data",
       "REPRESENTATION_WITH_CONTROLLED_VOCABULARIES": "representation with controlled vocabularies",
       "OTHERS": "others"
+    },
+    "dataset.type": {
+      "STANDARD_OFFICE_DOCUMENTS": "STANDARD OFFICE DOCUMENTS",
+      "NETWORKBASED_DATA": "NETWORKBASED DATA",
+      "DATABASES": "DATABASES",
+      "IMAGES": "IMAGES",
+      "STRUCTURED_GRAPHICS": "STRUCTURED GRAPHICS",
+      "AUDIOVISUAL_DATA": "AUDIOVISUAL DATA",
+      "SCIENTIFIC_STATISTICAL_DATA": "SCIENTIFIC STATISTICAL DATA",
+      "PLAIN_TEXT": "PLAIN TEXT",
+      "STRUCTURED_TEXT": "STRUCTURED TEXT",
+      "ARCHIVED_DATA": "ARCHIVED DATA",
+      "SOFTWARE_APPLICATIONS": "SOFTWARE APPLICATIONS",
+      "SOURCE_CODE": "SOURCE CODE",
+      "CONFIGURATION_DATA": "CONFIGURATION DATA",
+      "OTHER": "OTHER"
     },
     "functionrole": {
       "ADMIN": "ADMIN",
@@ -738,25 +879,25 @@
     }
   },
   "dashboard": {
-    "welcome.message": "Welcome to TU DMP Tool, a service that helps you to create and update the Data Management Plan (DMP) for your project.",
+    "welcome.message": "Welcome to DAMAP, a service that helps you to create and update the Data Management Plan (DMP) for your project.",
     "dmp": {
       "heading": "What is a DMP?",
       "text": {
         "prefix": "A ",
         "dmp": {
           "text": "DMP",
-          "link": "https://www.tuwien.at/en/research/rti-support/research-data/dmp"
+          "link": "https://www.link.example"
         },
         "middle": " is a structured document that keeps record of what research data is created and what happens to that data during and after a project. It helps with planning the research process, managing your data in accordance with the ",
         "fairprinciples": {
           "text": "FAIR Principles",
-          "link": "https://www.tuwien.at/en/research/rti-support/research-data/research-data-management/fair-principles"
+          "link": "https://www.link.example"
         },
         "suffix": ", and defining rights and responsibilities in a research project involving several researchers or institutions."
       }
     },
     "tool": {
-      "heading": "TU DMP Tool",
+      "heading": "DAMAP",
       "bulletpoints": {
         "dmp": {
           "text": "guides you step by step through the different sections of a DMP following the ",
@@ -768,7 +909,7 @@
         "document": "exports a pre-filled DMP as a Word document that you can customize and use for submission to European and national funders, for example FWF and FFG",
         "benefits": {
           "text": "saves you work by",
-          "one": "pre-filling content with detailed information from TISS and other systems",
+          "one": "pre-filling content with detailed information from your CRIS application and other systems",
           "two": "providing wizards, guidance, and item lists to choose from",
           "three": "suggesting answers that you can either comply with or adjust to your needs"
         },

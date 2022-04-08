@@ -7,10 +7,6 @@ import {Cost} from '../domain/cost';
 import {DataAccessType} from '../domain/enum/data-access-type.enum';
 import {Storage} from '../domain/storage';
 import {AccessRight} from '../domain/enum/access-right.enum';
-import {DataKind} from '../domain/enum/data-kind.enum';
-import {ComplianceType} from '../domain/enum/compliance-type.enum';
-import {SecurityMeasure} from '../domain/enum/security-measure.enum';
-import {Agreement} from '../domain/enum/agreement.enum';
 import {notEmptyValidator} from '../validators/not-empty.validator';
 import {ExternalStorage} from '../domain/external-storage';
 import {Repository} from '../domain/repository';
@@ -25,20 +21,22 @@ export class FormService {
   private TEXT_MAX_LENGTH = 4000;
   private TEXT_SHORT_LENGTH = 255;
   private readonly form: FormGroup;
+  private initialFormValue;
 
   constructor(private formBuilder: FormBuilder) {
     this.form = this.createDmpForm();
+    this.initialFormValue = this.form.getRawValue();
   }
 
   get dmpForm(): FormGroup {
     return this.form;
   }
 
-  private static restrictedDatasets(datasets: Dataset[]): boolean {
+  public static restrictedDatasets(datasets: Dataset[]): boolean {
     return datasets.find(item => item.dataAccess === DataAccessType.RESTRICTED) != null;
   }
 
-  private static closedDatasets(datasets: Dataset[]): boolean {
+  public static closedDatasets(datasets: Dataset[]): boolean {
     return datasets.find(item => item.dataAccess === DataAccessType.CLOSED) != null;
   }
 
@@ -188,136 +186,55 @@ export class FormService {
     }
   }
 
-  /**
-   * Export dmp form to a (consistent) DataManagementPlan object.
-   *
-   * In general if no datasets are defined, all related values will be reset to the initial value unless they
-   * were set by the cris system. (Exception: `costsExist` since it doesn't necessarily depend on new datasets.)
-   * E.g. `sensitiveData` will be set to `false` if no datasets are defined, unless the value was set by the cris system
-   * (`sensitiveDataCris == true`), then the given value will be used for this field.
-   */
   public exportFormToDmp(): Dmp {
     const formValue = this.form.getRawValue();
 
-    const result: Dmp = {
-      closedAccessInfo: '',
+    return {
+      closedAccessInfo: formValue.closedAccessInfo,
       committeeReviewed: formValue.legal.committeeReviewed,
       committeeReviewedCris: formValue.legal.committeeReviewedCris,
       contributors: formValue.contributors,
       costs: formValue.costs.exist ? formValue.costs.list : [],
       costsExist: formValue.costs.exist,
       costsExistCris: formValue.costs.existCris,
-      dataGeneration: '',
+      dataGeneration: formValue.documentation.dataGeneration,
       dataKind: formValue.data.kind,
-      dataQuality: formValue.documentation.dataQuality,
-      datasets: [],
+      dataQuality: formValue.documentation.dataQuality || [],
+      datasets: formValue.datasets,
       ethicalIssuesExist: formValue.legal.ethicalIssues,
       ethicalIssuesExistCris: formValue.legal.ethicalIssuesCris,
-      externalStorage: [],
-      externalStorageInfo: '',
-      repositories: [],
+      externalStorage: formValue.externalStorage,
+      externalStorageInfo: formValue.externalStorageInfo,
+      repositories: formValue.repositories,
       humanParticipants: formValue.legal.humanParticipants,
       humanParticipantsCris: formValue.legal.humanParticipantsCris,
       legalRestrictions: formValue.legal.legalRestrictions,
       legalRestrictionsCris: formValue.legal.legalRestrictionsCris,
-      legalRestrictionsDocuments: [],
-      otherLegalRestrictionsDocument: '',
-      legalRestrictionsComment: '',
-      dataRightsAndAccessControl: '',
-      metadata: '',
-      noDataExplanation: '',
+      legalRestrictionsDocuments: formValue.legal.legalRestrictionsDocuments || [],
+      otherLegalRestrictionsDocument: formValue.legal.otherLegalRestrictionsDocuments,
+      legalRestrictionsComment: formValue.legal.legalRestrictionsComment,
+      dataRightsAndAccessControl: formValue.legal.dataRightsAndAccessControl,
+      metadata: formValue.documentation.metadata,
+      noDataExplanation: formValue.data.explanation,
       otherDataQuality: formValue.documentation.otherDataQuality,
-      otherPersonalDataCompliance: '',
+      otherPersonalDataCompliance: formValue.legal.otherPersonalDataCompliance,
       personalData: formValue.legal.personalData,
       personalDataCris: formValue.legal.personalDataCris,
-      personalDataCompliance: [],
-      restrictedAccessInfo: '',
-      restrictedDataAccess: '',
+      personalDataCompliance: formValue.legal.personalDataCompliance || [],
+      restrictedAccessInfo: formValue.restrictedAccessInfo,
+      restrictedDataAccess: formValue.reuse.restrictedDataAccess,
       sensitiveData: formValue.legal.sensitiveData,
       sensitiveDataCris: formValue.legal.sensitiveDataCris,
-      sensitiveDataSecurity: [],
-      otherDataSecurityMeasures: '',
-      sensitiveDataAccess: '',
-      storage: [],
-      structure: '',
-      targetAudience: '',
-      tools: '',
+      sensitiveDataSecurity: formValue.legal.sensitiveDataSecurity || [],
+      otherDataSecurityMeasures: formValue.legal.otherDataSecurityMeasures,
+      sensitiveDataAccess: formValue.legal.sensitiveDataAccess,
+      storage: formValue.storage,
+      structure: formValue.documentation.structure,
+      targetAudience: formValue.reuse.targetAudience,
+      tools: formValue.reuse.tools,
       id: formValue.id,
       project: formValue.project
     };
-
-    if (formValue.data.kind === DataKind.SPECIFY) {
-      result.datasets = formValue.datasets;
-      for (const dataset of result.datasets) {
-        if (dataset.dataAccess !== DataAccessType.CLOSED) {
-          dataset.delete = false;
-        }
-        if (!dataset.delete) {
-          dataset.dateOfDeletion = null;
-          dataset.reasonForDeletion = ''
-        }
-      }
-      result.repositories = formValue.repositories;
-      result.storage = formValue.storage;
-      result.externalStorage = formValue.externalStorage;
-
-      result.metadata = formValue.documentation.metadata;
-      result.dataGeneration = formValue.documentation.dataGeneration;
-      result.structure = formValue.documentation.structure;
-      result.externalStorageInfo = formValue.externalStorageInfo;
-
-      // Legal
-      if (formValue.legal.sensitiveData) {
-        result.sensitiveData = true;
-        result.sensitiveDataSecurity = formValue.legal.sensitiveDataSecurity;
-        result.sensitiveDataAccess = formValue.legal.sensitiveDataAccess;
-        if (result.sensitiveDataSecurity.includes(SecurityMeasure.OTHER)) {
-          result.otherDataSecurityMeasures = formValue.legal.otherDataSecurityMeasures;
-        }
-      } else {
-        for (const dataset of result.datasets) {
-          dataset.sensitiveData = false;
-        }
-      }
-
-      if (formValue.legal.personalData) {
-        result.personalData = true;
-        result.personalDataCompliance = formValue.legal.personalDataCompliance;
-        result.otherPersonalDataCompliance = result.personalDataCompliance.includes(ComplianceType.OTHER) ?
-          formValue.legal.otherPersonalDataCompliance : '';
-      } else {
-        for (const dataset of result.datasets) {
-          dataset.personalData = false;
-        }
-      }
-
-      if (formValue.legal.legalRestrictions) {
-        result.legalRestrictions = true;
-        result.legalRestrictionsDocuments = formValue.legal.legalRestrictionsDocuments;
-        result.dataRightsAndAccessControl = formValue.legal.dataRightsAndAccessControl;
-        if (result.legalRestrictionsDocuments.includes(Agreement.OTHER)) {
-          result.otherLegalRestrictionsDocument = formValue.legal.otherLegalRestrictionsDocuments;
-        }
-        result.legalRestrictionsComment = formValue.legal.legalRestrictionsComment;
-      } else {
-        for (const dataset of result.datasets) {
-          dataset.legalRestrictions = false;
-        }
-      }
-
-      // Reuse
-      result.targetAudience = formValue.reuse.targetAudience;
-      result.restrictedDataAccess = formValue.reuse.restrictedDataAccess;
-      result.tools = formValue.reuse.tools;
-
-      // Licensing
-      result.restrictedAccessInfo = FormService.restrictedDatasets(result.datasets) ? formValue.restrictedAccessInfo : '';
-      result.closedAccessInfo = FormService.closedDatasets(result.datasets) ? formValue.closedAccessInfo : '';
-    } else {
-      result.noDataExplanation = formValue.data.kind === DataKind.NONE ? formValue.data.explanation : '';
-    }
-
-    return result;
   }
 
   public resetForm(): void {
@@ -328,6 +245,8 @@ export class FormService {
     (this.form.controls.costs.get('list') as FormArray).clear();
     (this.form.controls.storage as FormArray).clear();
     (this.form.controls.externalStorage as FormArray).clear();
+
+    this.form.setValue(this.initialFormValue);
   }
 
   public getContactPerson(): Contributor {
@@ -402,24 +321,12 @@ export class FormService {
   public addExternalStorageToForm() {
     const externalStorageFormGroup = this.createExternalStorageFormGroup();
     const storage = this.form.get('externalStorage') as FormArray;
-    const storageInfo = this.form.get('externalStorageInfo') as FormControl;
     storage.push(externalStorageFormGroup);
-
-    if (storage.controls.length === 1) {
-      storageInfo.addValidators(Validators.required);
-    }
-    storageInfo.updateValueAndValidity();
   }
 
   public removeExternalStorageFromForm(index: number) {
     const storage = this.form.get('externalStorage') as FormArray;
     storage.removeAt(index);
-    const storageInfo = this.form.get('externalStorageInfo') as FormControl;
-
-    if (storage.controls.length === 0) {
-      storageInfo.removeValidators(Validators.required);
-    }
-    storageInfo.updateValueAndValidity();
   }
 
   public addRepositoryToForm(repo: { id: string, name: string }) {
@@ -531,6 +438,7 @@ export class FormService {
     return this.formBuilder.group({
       id: [null, {disabled: true}],
       title: ['Other', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
+      url: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       storageLocation: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       backupLocation: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       backupFrequency: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
@@ -543,6 +451,7 @@ export class FormService {
     formGroup.setValue({
       id: externalStorage.id,
       title: externalStorage.title,
+      url: externalStorage.url || null,
       storageLocation: externalStorage.storageLocation || null,
       backupLocation: externalStorage.backupLocation || null,
       backupFrequency: externalStorage.backupFrequency || null,

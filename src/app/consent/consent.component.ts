@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {BackendService} from '../services/backend.service';
 import {Consent} from '../domain/consent'
 
 @Component({
@@ -9,11 +8,12 @@ import {Consent} from '../domain/consent'
   styleUrls: ['./consent.component.css']
 })
 
-export class ConsentComponent{
+export class ConsentComponent {
   public lang = 'EN';
-  public consent : Consent;
+  public consent: Consent;
 
-  constructor(private translate: TranslateService) {}
+  constructor(private translate: TranslateService) {
+  }
 
   useLanguage(language: string): void {
     this.lang = language.toUpperCase();
