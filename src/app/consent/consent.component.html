@@ -1,0 +1,25 @@
+<mat-dialog-content class="mat-typography">
+
+  <h2 translate>heading</h2>
+
+  <p>
+    {{'information.text' | translate}}
+  <ul>
+    <li>{{'information.purpose.registration.label' | translate}}
+      <ul>
+        <li translate>information.purpose.registration.name</li>
+        <li translate>information.purpose.registration.mail</li>
+        <li translate>information.purpose.registration.id</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p translate>duration</p>
+  <p translate>agreement</p>
+  <p translate>withdrawal</p>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>{{'accept' | translate}}</button>
+</mat-dialog-actions>
