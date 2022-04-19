@@ -26,7 +26,9 @@ import {VersionModule} from '../version/version.module';
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
   return new MultiTranslateHttpLoader(http, [
-    {prefix: './assets/i18n/templates/', suffix: '.json'}
+    {prefix: './assets/i18n/templates/', suffix: '.json'},
+    {prefix: './assets/i18n/help/', suffix: '.json'},
+    {prefix: './assets/i18n/info/', suffix: '.json'}
   ]);
 }
 
