@@ -1,0 +1,12 @@
+<form>
+  <mat-form-field>
+    <mat-label>{{'dmp.steps.people.search' | translate}}</mat-label>
+    <input #searchBox type="search" matInput [matAutocomplete]="auto" (input)="search(searchBox.value)">
+    <mat-icon matSuffix>search</mat-icon>
+    <mat-autocomplete #auto="matAutocomplete" class="search-result">
+      <mat-option *ngFor="let person of result" (onSelectionChange)="selectPerson(person)">
+        {{person.firstName}} {{person.lastName}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

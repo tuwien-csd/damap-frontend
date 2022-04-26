@@ -70,6 +70,7 @@
         "one": "Failed to load repository details. ",
         "all": "Failed to load repositories. "
       },
+      "person.search": "Failed to find person. ",
       "projects": "Failed to load projects. ",
       "projectmembers": "Failed to load project members. ",
       "plans": {

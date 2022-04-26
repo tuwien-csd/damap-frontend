@@ -22,6 +22,7 @@ import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
 import {DMP_ROUTES} from './dmp.routes';
 import {DmpStoreModule} from './dmp-store.module';
 import {VersionModule} from '../version/version.module';
+import {FormsModule} from '@angular/forms';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
@@ -36,6 +37,7 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
   imports: [
     CommonModule,
     RouterModule.forChild(DMP_ROUTES),
+    FormsModule,
     TranslateModule.forChild({
       defaultLanguage: 'en',
       loader: {provide: TranslateLoader, useFactory: HttpLoaderFactory, deps: [HttpClient]},

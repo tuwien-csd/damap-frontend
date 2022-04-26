@@ -125,6 +125,12 @@ export class BackendService {
 
   }
 
+  searchPerson(term: string): Observable<Contributor[]> {
+    return this.http.get<Contributor[]>(`${this.backendUrl}persons/search?q=${term}`).pipe(
+      catchError(this.handleError('http.error.person.search'))
+    )
+  }
+
   getInternalStorages(): Observable<InternalStorage[]> {
     const langCode = 'eng'; // TODO: Replace with template lang in the future
     return this.http.get<InternalStorage[]>(`${this.backendUrl}storages/${langCode}`).pipe(

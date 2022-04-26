@@ -7,7 +7,7 @@ import {Contributor} from '../../domain/contributor';
 export class ContributorFilterPipe implements PipeTransform {
 
   transform(projectMembers: Contributor[], contributors: Contributor[]): Contributor[] {
-    return projectMembers.filter(e => contributors.find(entry => entry.universityId === e.universityId) === undefined);
+    return projectMembers?.filter(e => contributors.find(entry => entry.universityId === e.universityId) === undefined);
   }
 
 }
