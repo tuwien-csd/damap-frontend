@@ -17,43 +17,32 @@
   </mat-card>
 </div>
 
-<div *ngIf="loaded === LoadingState.LOADING">
-  <p>{{'dmp.steps.project.loading.load' | translate}}</p>
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</div>
-<div *ngIf="loaded === LoadingState.LOADED">
-  <p *ngIf="!projectStep?.value && projects?.length" translate>dmp.steps.project.select</p>
-  <ng-container *ngIf="projects?.length else empty">
-    <mat-form-field>
-      <mat-label translate>dmp.steps.project.search</mat-label>
-      <input #searchBox type="search" matInput>
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-    <div class="list-container">
-      <mat-selection-list [multiple]="false" style="'height: 500px; overflow:scroll'">
-        <mat-list-option *ngFor="let project of (projects | projectFilter:searchBox.value)"
-                         [style]="'height: auto;'"
-                         [selected]="project.universityId === projectStep?.value?.universityId">
-          <mat-list-item (click)="changeProject(project)">
-            <div class="mat-card-left">
-              <div mat-line><b>{{project.title}}</b></div>
-              <div mat-line>
-                <mat-icon class="mat-icon-style">date_range</mat-icon>
-                {{project.start | date}} - {{project.end | date}}</div>
-            </div>
-            <div class="mat-card-right">
-              <mat-icon *ngIf="project.dmpExists" matTooltip="{{'dmp.steps.project.warning.dmp' | translate}}"
-                        class="dmp-warning">
-                warning
-              </mat-icon>
-            </div>
-          </mat-list-item>
-        </mat-list-option>
-      </mat-selection-list>
+<mat-tab-group #tabGroup mat-align-tabs="start" animationDuration="0ms">
+
+  <!-- Project list -->
+  <mat-tab label="{{'dmp.steps.project.list' | translate}}">
+    <div *ngIf="loaded === LoadingState.LOADING">
+      <p>{{'dmp.steps.project.loading.load' | translate}}</p>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>
-  </ng-container>
-  <ng-template #empty>{{'dmp.steps.project.noprojects' | translate}}</ng-template>
-</div>
-<div *ngIf="loaded === LoadingState.FAILED">
-  <app-error-message [message]="'dmp.steps.project.loading.failed'"></app-error-message>
-</div>
+    <div *ngIf="loaded === LoadingState.LOADED">
+      <div>
+        <app-project-list [selectedProject]="projectStep?.value" [projects]="projects"
+                          (projectToSet)="changeProject($event)"></app-project-list>
+      </div>
+      <button mat-raised-button color="primary" *ngIf="!projects?.length"
+              (click)="changeTab(1)">{{'dmp.steps.project.manual.input' | translate}}</button>
+    </div>
+    <div *ngIf="loaded === LoadingState.FAILED">
+      <app-error-message [message]="'dmp.steps.project.loading.failed'"></app-error-message>
+    </div>
+  </mat-tab>
+
+  <!-- Manual project input -->
+  <mat-tab label="{{'dmp.steps.project.manual.input' | translate}}">
+    <app-manual-project-input [project]="projectStep?.value"
+                              (projectUpdate)="changeProject($event)"></app-manual-project-input>
+  </mat-tab>
+</mat-tab-group>
+
+
