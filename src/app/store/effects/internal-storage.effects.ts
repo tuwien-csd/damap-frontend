@@ -12,7 +12,7 @@ export class InternalStorageEffects {
     ofType(InternalStorageAction.loadInternalStorages),
     switchMap(_ => this.backendService.getInternalStorages().pipe(
       map(internalStorages => InternalStorageAction.internalStoragesLoaded({internalStorages})),
-      catchError(() => of(InternalStorageAction.failedToLoadInternalStorages))
+      catchError(() => of(InternalStorageAction.failedToLoadInternalStorages()))
     ))
   ));
 

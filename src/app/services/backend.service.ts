@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, throwError} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Dmp} from '../domain/dmp';
 import {HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Contributor} from '../domain/contributor';
@@ -242,7 +242,7 @@ export class BackendService {
         message += this.translate.instant('http.error.503');
       }
       this.feedbackService.error(message);
-      return throwError(message);
+      throw new HttpErrorResponse({statusText: message});
     };
   }
 }

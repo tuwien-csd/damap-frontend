@@ -8,6 +8,7 @@ import {mockDmpList} from '../../mocks/dmp-list-mocks';
 import {provideMockStore} from '@ngrx/store/testing';
 import {FormService} from '../../services/form.service';
 import {FeedbackService} from '../../services/feedback.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 describe('DmpEffects', () => {
   let actions$;
@@ -54,11 +55,11 @@ describe('DmpEffects', () => {
 
   it('should load dmps and fail', () => {
     actions$ = of(loadDmps(false));
-    backendService.getDmps.and.returnValue(throwError(new Error('')));
+    backendService.getDmps.and.returnValue(throwError(() => new HttpErrorResponse({})));
 
     effects.loadDmps$.subscribe(action => {
       expect(backendService.getDmps).toHaveBeenCalledTimes(1);
-      expect(action).toEqual(failedToLoadDmps);
+      expect(action).toEqual(failedToLoadDmps());
     });
   });
 
