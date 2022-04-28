@@ -57,7 +57,6 @@ export class SpecifyDataComponent implements OnInit {
   }
 
   add(event: MatChipInputEvent): void {
-    const input = event.input;
     const value = event.value;
 
     // Add dataset
@@ -66,9 +65,7 @@ export class SpecifyDataComponent implements OnInit {
     }
 
     // Reset the input value
-    if (input) {
-      input.value = '';
-    }
+    event.chipInput!.clear();
   }
 
   remove(index: number): void {

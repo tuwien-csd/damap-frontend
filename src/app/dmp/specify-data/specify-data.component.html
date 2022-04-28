@@ -56,7 +56,11 @@
       <ng-container matColumnDef="datatype">
         <th mat-header-cell *matHeaderCellDef>{{'dmp.steps.data.specify.table.header.datatype' | translate}}</th>
         <td mat-cell *matCellDef="let dataset">
-          <div>{{dataset.value.type}}
+          <div>
+            <ng-container *ngFor="let type of dataset.value.type, last as last">
+              {{'enum.dataset.type.' + type | translate}}
+              <ng-container *ngIf="!last">,</ng-container>
+            </ng-container>
           </div>
         </td>
       </ng-container>

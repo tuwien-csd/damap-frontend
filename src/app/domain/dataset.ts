@@ -1,10 +1,11 @@
 import {DataAccessType} from './enum/data-access-type.enum';
 import {AccessRight} from './enum/access-right.enum';
+import {DataType} from './enum/data-type.enum';
 
 export interface Dataset {
   readonly id: number;
   title: string;
-  type: any;
+  type: DataType[];
   size: number;
   comment: string;
   personalData: boolean;

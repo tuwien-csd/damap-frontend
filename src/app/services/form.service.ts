@@ -357,7 +357,7 @@ export class FormService {
       title: [title, [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       license: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       startDate: [null],
-      type: [null],
+      type: [[]],
       size: [null],
       comment: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       personalData: [false],
