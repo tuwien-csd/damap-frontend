@@ -7,6 +7,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {BackendService} from '../../services/backend.service';
 import {ContributorFilterPipe} from './contributor-filter.pipe';
+import {MatDialogModule} from '@angular/material/dialog';
 
 describe('PeopleComponent', () => {
   let component: PeopleComponent;
@@ -15,7 +16,7 @@ describe('PeopleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranslateTestingModule, MatCardModule, MatIconModule, ReactiveFormsModule],
+      imports: [TranslateTestingModule, MatCardModule, MatIconModule, MatDialogModule, ReactiveFormsModule],
       declarations: [PeopleComponent, ContributorFilterPipe],
       providers: [{provide: BackendService, useValue: backendSpy}]
     }).compileComponents();

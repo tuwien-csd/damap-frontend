@@ -371,6 +371,7 @@ export class FormService {
       delete: [false],
       dateOfDeletion: [null],
       reasonForDeletion: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+      deletionPerson: [null],
       retentionPeriod: [null]
     });
   }
