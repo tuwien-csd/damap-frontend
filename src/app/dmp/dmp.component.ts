@@ -232,10 +232,6 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formService.removeCostFromForm(index);
   }
 
-  changeCrisValue(controlName: string) {
-    this.formService.setCrisInfoToFalse(controlName);
-  }
-
   private getDmpById() {
     const id = +this.route.snapshot.paramMap.get('id');
     if (id) {

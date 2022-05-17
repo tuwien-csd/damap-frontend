@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Dmp} from '../domain/dmp';
 import {Contributor} from '../domain/contributor';
 import {Dataset} from '../domain/dataset';
@@ -62,26 +62,26 @@ export class FormService {
       externalStorageInfo: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       legal: this.formBuilder.group({
         personalData: [false],
-        personalDataCris: [false],
+        personalDataCris: [null],
         personalDataCompliance: [[]],
         otherPersonalDataCompliance: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveData: [false],
-        sensitiveDataCris: [false],
+        sensitiveDataCris: [null],
         sensitiveDataSecurity: [[]],
         otherDataSecurityMeasures: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         sensitiveDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictions: [false],
-        legalRestrictionsCris: [false],
+        legalRestrictionsCris: [null],
         legalRestrictionsDocuments: [[]],
         otherLegalRestrictionsDocuments: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictionsComment: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         dataRightsAndAccessControl: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         humanParticipants: [false],
-        humanParticipantsCris: [false],
+        humanParticipantsCris: [null],
         ethicalIssues: [false],
-        ethicalIssuesCris: [false],
+        ethicalIssuesCris: [null],
         committeeReviewed: [false],
-        committeeReviewedCris: [false]
+        committeeReviewedCris: [null]
       }),
       repositories: this.formBuilder.array([]),
       reuse: this.formBuilder.group({
@@ -93,7 +93,7 @@ export class FormService {
       closedAccessInfo: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       costs: this.formBuilder.group({
         exist: [null],
-        existCris: [false],
+        existCris: [null],
         list: this.formBuilder.array([])
       })
     });
@@ -357,7 +357,7 @@ export class FormService {
       title: [title, [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       license: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       startDate: [null],
-      type: [null],
+      type: [[]],
       size: [null],
       comment: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       personalData: [false],
@@ -373,17 +373,6 @@ export class FormService {
       reasonForDeletion: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       retentionPeriod: [null]
     });
-  }
-
-  /**
-   * Set CRIS info to false if a value retrieved from the CRIS system is changed.
-   * @param controlName The complete path of the form control to be set to false (e.g. `formGroup.formControl`)
-   */
-  public setCrisInfoToFalse(controlName: string) {
-    const crisControl: FormControl = this.form.get(controlName) as FormControl;
-    if (crisControl.value === true) {
-      crisControl.setValue(false);
-    }
   }
 
   private mapDatasetToFormGroup(dataset: Dataset): FormGroup {

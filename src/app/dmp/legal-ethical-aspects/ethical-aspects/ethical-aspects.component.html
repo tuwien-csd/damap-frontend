@@ -6,8 +6,7 @@
   <app-tooltip [tooltip]="'help.ethical.humanParticipants'"></app-tooltip>
   <div class="flex-radio">
     <app-cris-tag [cris]="legalEthicalStep?.value.humanParticipantsCris"></app-cris-tag>
-    <mat-radio-group aria-labelledby="humanParticipants" formControlName="humanParticipants"
-                     (change)="changeCrisValue('humanParticipantsCris')">
+    <mat-radio-group aria-labelledby="humanParticipants" formControlName="humanParticipants">
       <mat-radio-button class="boolean-mat-radio-button" [value]="true">{{'yes' | translate}}
       </mat-radio-button>
       <mat-radio-button class="boolean-mat-radio-button" [value]="false">{{'no' | translate}}
@@ -28,9 +27,8 @@
   </label>
   <app-tooltip [tooltip]="'help.ethical.ethicalIssues'"></app-tooltip>
   <div class="flex-radio">
-    <mat-radio-group aria-labelledby="ethicalIssues" formControlName="ethicalIssues"
-                     (change)="changeCrisValue('ethicalIssuesCris')">
-      <app-cris-tag [cris]="legalEthicalStep?.value.ethicalIssuesCris"></app-cris-tag>
+    <mat-radio-group aria-labelledby="ethicalIssues" formControlName="ethicalIssues">
+      <app-cris-tag [cris]="legalEthicalStep?.value.ethicalIssuesCriss"></app-cris-tag>
       <mat-radio-button class="boolean-mat-radio-button" [value]="true">Yes
       </mat-radio-button>
       <mat-radio-button class="boolean-mat-radio-button" [value]="false">No
@@ -42,7 +40,7 @@
     <a href="{{'info.ethical.ethicalIssues.researchEthics.link' | translate}}"
        target="_blank">{{'info.ethical.ethicalIssues.researchEthics.text' | translate}}</a>.
   </app-info-message>
-  
+
   <label id="committeeReviewed">
     {{'dmp.steps.ethical.question.committeeReviewed.prefix' | translate}}
     <a href="{{'dmp.steps.ethical.question.committeeReviewed.researchCommittee.link' | translate}}"
@@ -50,8 +48,7 @@
   </label>
   <div class="flex-radio">
     <app-cris-tag [cris]="legalEthicalStep?.value.committeeReviewedCris"></app-cris-tag>
-    <mat-radio-group aria-labelledby="committeeReviewed" formControlName="committeeReviewed"
-                     (change)="changeCrisValue('committeeReviewedCris')">
+    <mat-radio-group aria-labelledby="committeeReviewed" formControlName="committeeReviewed">
       <mat-radio-button class="boolean-mat-radio-button" [value]="true">Yes
       </mat-radio-button>
       <mat-radio-button class="boolean-mat-radio-button" [value]="false">No

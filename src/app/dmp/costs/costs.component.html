@@ -4,8 +4,7 @@
   <label id="costsFormGroup">
     {{'dmp.steps.costs.question.exist.label' | translate}}
   </label>
-  <mat-radio-group aria-labelledby="costsFormGroup" formControlName="exist"
-                   (change)="changeCrisValue('existCris')">
+  <mat-radio-group aria-labelledby="costsFormGroup" formControlName="exist">
     <app-cris-tag [cris]="costsStep.value.existCris"></app-cris-tag>
     <mat-radio-button [value]="false">{{'dmp.steps.costs.question.exist.no' | translate}}
       <a href="{{'dmp.steps.costs.link' | translate}}"
