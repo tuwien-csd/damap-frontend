@@ -22,9 +22,6 @@ export class ProjectComponent {
   LoadingState = LoadingState;
   selectedIndex: number = 0;
 
-  constructor() {
-  }
-
   changeProject(project: Project): void {
     this.project.emit(project);
   }

@@ -20,9 +20,6 @@ export class ManualProjectInputComponent implements OnChanges {
     end: new FormControl(null)
   })
 
-  constructor() {
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.project && !this.project?.universityId) {
       this.form.patchValue(this.project);

@@ -13,8 +13,6 @@ export class ProjectListComponent {
   @Input() projects: Project[];
   @Output() projectToSet = new EventEmitter<Project>();
 
-  constructor() { }
-
   changeProject(event: MatSelectionListChange): void {
     this.projectToSet.emit(event.source.selectedOptions.selected[0]?.value);
   }
