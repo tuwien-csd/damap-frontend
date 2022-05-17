@@ -565,7 +565,8 @@
         },
         "deletion": {
           "date": "Date of deletion",
-          "reason": "Reason for deletion"
+          "reason": "Reason for deletion",
+          "person": "Person responsible for deletion"
         }
       },
       "documentation": {
