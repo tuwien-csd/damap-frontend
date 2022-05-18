@@ -13,6 +13,6 @@
     </mat-form-field>
   </div>
   <app-textarea-wrapper [control]="description" label="dmp.steps.project.input.description"></app-textarea-wrapper>
-  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" (click)="updateProject()">
+  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="updateProject()">
     {{'dmp.steps.project.input.button' | translate}}</button>
 </form>
