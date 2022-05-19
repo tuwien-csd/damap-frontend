@@ -2,6 +2,7 @@ import {Dataset} from '../domain/dataset';
 import {DataAccessType} from '../domain/enum/data-access-type.enum';
 import {AccessRight} from '../domain/enum/access-right.enum';
 import {DataType} from '../domain/enum/data-type.enum';
+import {mockContributor1} from './contributor-mocks';
 
 export const closedDatasetMock: Dataset = {
   comment: '',
@@ -21,6 +22,7 @@ export const closedDatasetMock: Dataset = {
   publicAccess: AccessRight.NONE,
   delete: true,
   dateOfDeletion: new Date(20000),
+  deletionPerson: mockContributor1,
   reasonForDeletion: 'reason1',
   retentionPeriod: 10
 }
@@ -43,6 +45,7 @@ export const restrictedDatasetMock: Dataset = {
   publicAccess: AccessRight.NONE,
   delete: false,
   dateOfDeletion: null,
+  deletionPerson: null,
   reasonForDeletion: '',
   retentionPeriod: null
 }

@@ -38,7 +38,15 @@
             "orcid": "ORCID ID"
           }
         },
-        "nopeople": "No project members available."
+        "nopeople": "No project members available.",
+        "confirm.dialog": {
+          "heading": "Remove contributor",
+          "question": "Are you sure you want to remove this contributor?\n  They are responsible for the deletion of the following datasets:",
+          "button": {
+            "confirm": "Confirm",
+            "cancel": "Cancel"
+          }
+        }
       },
       "data": {
         "specify": {
@@ -103,7 +111,8 @@
             "label": "Does this dataset have to be deleted, e.g. for contractual, regulatory, or ethical reasons? If yes, please add an estimated date for the deletion, the reason for deletion, and a responsible person.",
             "delete": "Mark dataset for deletion",
             "date": "Date of deletion",
-            "reason": "Reason for deletion"
+            "reason": "Reason for deletion",
+            "person": "Person responsible for deletion"
           }
         }
       },
@@ -556,7 +565,8 @@
         },
         "deletion": {
           "date": "Date of deletion",
-          "reason": "Reason for deletion"
+          "reason": "Reason for deletion",
+          "person": "Person responsible for deletion"
         }
       },
       "documentation": {

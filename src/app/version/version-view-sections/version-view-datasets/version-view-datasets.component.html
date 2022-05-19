@@ -8,8 +8,12 @@
       <div><span class="headings">{{'versions.view.datasets.retention.period' | translate}}:</span> {{dataset.retentionPeriod}}</div>
       </div>
     <div *ngIf="dataset.dataAccess === dataAccessType.CLOSED && dataset.delete">
-      <div><span class="headings">{{'versions.view.datasets.deletion.date' | translate}}:</span> {{dataset.dateOfDeletion | date}}</div>
-      <div><span class="headings">{{'versions.view.datasets.deletion.reason' | translate}}:</span> {{dataset.reasonForDeletion}}</div>
+      <div><span class="headings">{{'versions.view.datasets.deletion.date' | translate}}:</span>
+        {{dataset.dateOfDeletion | date}}</div>
+      <div><span class="headings">{{'versions.view.datasets.deletion.reason' | translate}}:</span>
+        {{dataset.reasonForDeletion}}</div>
+      <div><span class="headings">{{'versions.view.datasets.deletion.person' | translate}}:</span>
+        {{dataset.deletionPerson?.firstName}} {{dataset.deletionPerson?.lastName}}</div>
     </div>
     <div><span class="headings">{{'versions.view.datasets.restrictions.label' | translate}}:</span>
       <ul>
