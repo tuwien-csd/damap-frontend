@@ -21,5 +21,17 @@ export const mockProject: Project = {
   title: 'Project title',
   universityId: 1234,
   description: '',
-  dmpExists: false
+  dmpExists: true
 };
+
+export const mockManualProject: Project = {
+  end: new Date(),
+  funding: undefined,
+  id: 78,
+  start: new Date(),
+  title: 'Project title 2',
+  universityId: undefined,
+  description: '',
+  dmpExists: undefined
+};
+

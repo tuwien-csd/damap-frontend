@@ -2,7 +2,14 @@
   "dmp": {
     "steps": {
       "project": {
-        "label": "Choose project from the project database",
+        "input": {
+          "title": "Project title",
+          "description": "Project description",
+          "button": "Update project"
+        },
+        "manual.input": "Input project manually",
+        "list": "Choose project from the project database",
+        "label": "Choose project",
         "search": "Search project...",
         "select": "Please select the project you want to create a DMP for:",
         "selected": "You selected",

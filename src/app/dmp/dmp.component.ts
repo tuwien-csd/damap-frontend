@@ -132,11 +132,13 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   changeProject(project: Project) {
     if (project != null) {
-      // only set contact if none is selected yet
-      if (!this.formService.getContactPerson()) {
-        this.getProjectMembersAndSetContact(project.universityId);
-      } else {
-        this.getProjectMembers(project.universityId);
+      if (project.universityId) {
+        // only set contact if none is selected yet
+        if (!this.formService.getContactPerson()) {
+          this.getProjectMembersAndSetContact(project.universityId);
+        } else {
+          this.getProjectMembers(project.universityId);
+        }
       }
       this.projectStep.setValue(project);
     } else {
@@ -230,10 +232,6 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formService.removeCostFromForm(index);
   }
 
-  changeCrisValue(controlName: string) {
-    this.formService.setCrisInfoToFalse(controlName);
-  }
-
   private getDmpById() {
     const id = +this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -245,7 +243,7 @@ export class DmpComponent implements OnInit, OnDestroy {
             this.store.dispatch(setFormValue({dmp}));
             if (dmp.project) {
               this.projects$.subscribe(projects => projects.filter(e => {
-                if (e.title === dmp.project.title) {
+                if (e.title === dmp.project.title && dmp.project.universityId) {
                   this.getProjectMembers(e.universityId);
                 }
               }))

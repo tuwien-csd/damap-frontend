@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 
 @Component({
@@ -9,15 +9,5 @@ import {FormGroup} from '@angular/forms';
 export class EthicalAspectsComponent {
 
   @Input() legalEthicalStep: FormGroup;
-
-  @Output() crisValueChange = new EventEmitter<string>();
-
-  constructor() {
-  }
-
-  changeCrisValue(controlName: string) {
-    this.crisValueChange.emit(controlName);
-  }
-
 
 }

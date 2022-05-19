@@ -11,11 +11,17 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {ManualProjectInputComponent} from './manual-project-input/manual-project-input.component';
+import {SharedModule} from '../../shared/shared.module';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {ProjectListComponent} from './project-list/project-list.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   imports: [CommonModule,
     TranslateModule,
     ErrorMessageModule,
+    SharedModule,
 
     // Materials
     MatCardModule,
@@ -24,13 +30,16 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatTabsModule,
   ],
-  declarations: [ProjectComponent, ProjectFilterPipe],
+  declarations: [ProjectComponent, ProjectFilterPipe, ManualProjectInputComponent, ProjectListComponent],
   exports: [
     CommonModule,
     TranslateModule,
     ErrorMessageModule,
+    SharedModule,
     ProjectComponent,
 
     // Materials
@@ -40,7 +49,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatFormFieldModule,
     MatInputModule,
     MatListModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDatepickerModule,
+    MatTabsModule,
   ]
 })
 export class ProjectModule {

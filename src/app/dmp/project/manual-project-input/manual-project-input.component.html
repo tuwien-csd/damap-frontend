@@ -1,0 +1,18 @@
+<form>
+  <div class="form-row">
+    <app-input-wrapper [control]="title" label="dmp.steps.project.input.title"></app-input-wrapper>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+        <input matStartDate formControlName="start" placeholder="Start date">
+        <input matEndDate formControlName="end" placeholder="End date">
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+  </div>
+  <app-textarea-wrapper [control]="description" label="dmp.steps.project.input.description"></app-textarea-wrapper>
+  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="updateProject()">
+    {{'dmp.steps.project.input.button' | translate}}</button>
+</form>

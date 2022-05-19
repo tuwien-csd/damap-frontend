@@ -7,12 +7,14 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatOptionModule} from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [PersonSearchComponent],
   imports: [
     CommonModule,
     TranslateModule,
+    FormsModule,
 
     // Materials
     MatFormFieldModule,
@@ -21,9 +23,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatAutocompleteModule,
     MatOptionModule
   ],
-  exports:[
+  exports: [
     CommonModule,
     TranslateModule,
+    FormsModule,
     PersonSearchComponent,
 
     // Materials
