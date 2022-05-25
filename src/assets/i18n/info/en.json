@@ -1,0 +1,36 @@
+{
+  "info": {
+    "ethical": {
+      "humanParticipants": {
+        "prefix": "An informed consent for participation (in addition to an informed consent to data processing) is required. For more information, contact the ",
+        "researchEthicsCoordination": {
+          "text": "research ethics coordination",
+          "link": "https://www.link.example"
+        },
+        "middle": " or consult: ",
+        "researchEthics": {
+          "link": "https://www.link.example"
+        }
+      },
+      "ethicalIssues": {
+        "text": "Your research plan may require ethical review. Inform yourself by consulting",
+        "researchEthics": {
+          "text": "https://www.link.example",
+          "link": "https://www.link.example"
+        }
+      },
+      "committeeReviewed": {
+        "prefix": "Please note that you must address (potential) ethical issues in separate documents according to the requirements of the relevant funding body. The DMP only serves to help identify some ethical issues.\nPlease contact your responsible Ethics Coordinator at ",
+        "mail": {
+          "text": "mail@address.example",
+          "link": "mail@address.example"
+        },
+        "suffix": " for additional information and support. You must do so if your planned research involves any human participation."
+      }
+    },
+    "cris": "Option currently selected in the CRIS system: {{value}}.",
+    "documentation": {
+      "metadata": "In archives, metadata is used to create consistent and structured descriptions of resources and their characteristics. Metadata is independent and can either be stored together with the resources it describes or separately. Metadata plays a key role in the future of your stored research data: it contains important information which for example enables you and others to search for and find your data.\nA metadata set consists mainly of descriptive categories, the so-called elements and their values. To facilitate communication with other systems, predefined standards are used for the elements and controlled vocabularies for the values."
+    }
+  }
+}

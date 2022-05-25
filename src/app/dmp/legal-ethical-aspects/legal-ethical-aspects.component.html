@@ -9,9 +9,9 @@
       <a href="{{'dmp.steps.legal.link.sensitiveData' | translate}}"
          target="_blank">{{'dmp.steps.legal.question.sensitiveData.link' | translate}}</a>{{'dmp.steps.legal.question.sensitiveData.suffix' | translate}}
     </label>
-    <app-cris-tag [cris]="legalEthicalStep?.value.sensitiveDataCris"></app-cris-tag>
-    <mat-radio-group aria-labelledby="sensitiveData" formControlName="sensitiveData"
-                     (change)="changeCrisValue('sensitiveDataCris')">
+    <app-cris-tag
+      [cris]="legalEthicalStep?.value.sensitiveDataCris"></app-cris-tag>
+    <mat-radio-group aria-labelledby="sensitiveData" formControlName="sensitiveData">
       <mat-radio-button class="boolean-mat-radio-button" [value]="true">{{'yes' | translate}}
       </mat-radio-button>
       <mat-radio-button class="boolean-mat-radio-button" [value]="false">{{'no' | translate}}
@@ -63,8 +63,7 @@
     <label id="{{question.label}}">{{question.label | translate}}</label>
     <app-cris-tag [cris]="legalEthicalStep.value[question.cris]"></app-cris-tag>
     <mat-radio-group formControlName="{{question.model}}"
-                     aria-labelledby="{{question.label}}"
-                     (change)="changeCrisValue(question.cris)">
+                     aria-labelledby="{{question.label}}">
       <mat-radio-button class="boolean-mat-radio-button" [value]="true">{{'yes' | translate}}
       </mat-radio-button>
       <mat-radio-button class="boolean-mat-radio-button" [value]="false">{{'no' | translate}}
@@ -145,5 +144,4 @@
   </div>
 </div>
 
-<app-ethical-aspects [legalEthicalStep]="legalEthicalStep"
-                     (crisValueChange)="changeCrisValue($event)"></app-ethical-aspects>
+<app-ethical-aspects [legalEthicalStep]="legalEthicalStep"></app-ethical-aspects>

@@ -1,0 +1,36 @@
+<p *ngIf="!selectedProject && projects?.length" translate>dmp.steps.project.select</p>
+<ng-container *ngIf="projects?.length else empty">
+  <mat-form-field>
+    <mat-label translate>dmp.steps.project.search</mat-label>
+    <input #searchBox type="search" matInput>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <div class="list-container">
+    <mat-selection-list [multiple]="false" style="'height: 500px; overflow:scroll'" (selectionChange)="changeProject($event)">
+      <mat-list-option *ngFor="let project of (projects | projectFilter:searchBox.value)"
+                       [style]="'height: auto;'"
+                       [selected]="project.universityId === selectedProject?.universityId"
+                       [value]="project">
+        <mat-list-item>
+          <div class="mat-card-left">
+            <div mat-line><strong>{{project.title}}</strong></div>
+            <div mat-line>
+              <mat-icon class="mat-icon-style">date_range</mat-icon>
+              {{project.start | date}} - {{project.end | date}}</div>
+          </div>
+          <div class="mat-card-right">
+            <mat-icon *ngIf="project.dmpExists" matTooltip="{{'dmp.steps.project.warning.dmp' | translate}}"
+                      class="dmp-warning">
+              warning
+            </mat-icon>
+          </div>
+        </mat-list-item>
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+</ng-container>
+<ng-template #empty>
+  <p>{{'dmp.steps.project.noprojects' | translate}}</p>
+</ng-template>
+
+

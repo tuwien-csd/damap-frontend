@@ -15,7 +15,7 @@ export class RepositoryEffects {
     ofType(RepositoryAction.loadRecommendedRepositories),
     switchMap(_ => this.backendService.getRecommendedRepositories().pipe(
       map(repositories => RepositoryAction.recommendedRepositoriesLoaded({repositories})),
-      catchError(() => of(RepositoryAction.failedToLoadRecommendedRepositories))
+      catchError(() => of(RepositoryAction.failedToLoadRecommendedRepositories()))
     ))
   ));
 
@@ -23,7 +23,7 @@ export class RepositoryEffects {
     ofType(RepositoryAction.loadAllRepositories),
     switchMap(_ => this.backendService.getRepositories().pipe(
       map(repositories => RepositoryAction.repositoriesLoaded({repositories})),
-      catchError(() => of(RepositoryAction.failedToLoadRepositories)),
+      catchError(() => of(RepositoryAction.failedToLoadRepositories())),
       takeUntil(this.actions$.pipe(ofType(RepositoryAction.setRepositoryFilter)))
     )),
   ));
@@ -48,7 +48,7 @@ export class RepositoryEffects {
         if (filters) {
           return this.backendService.searchRepository(state).pipe(
             map(repositories => RepositoryAction.repositoriesLoaded({repositories})),
-            catchError(() => of(RepositoryAction.failedToLoadRepositories)),
+            catchError(() => of(RepositoryAction.failedToLoadRepositories())),
             takeUntil(this.actions$.pipe(ofType(RepositoryAction.loadAllRepositories))))
           }
         return of(RepositoryAction.loadAllRepositories());

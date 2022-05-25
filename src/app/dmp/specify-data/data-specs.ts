@@ -25,7 +25,7 @@ export const FILE_TYPES = {
   },
   SOURCE_CODE: {id: 'SOURCE_CODE', label: 'Source code', description: 'scripting, Java, C, C++, Fortran, etc.'},
   CONFIGURATION_DATA: {id: 'CONFIGURATION_DATA', label: 'Configuration data', description: 'parameter settings, logs, library files'},
-  OTHER: {id: 'OTHER', label: 'other', description: ''}
+  OTHER: {id: 'OTHER', label: 'Other', description: ''}
 };
 
 export const FILE_SIZES = [

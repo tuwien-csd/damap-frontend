@@ -52,14 +52,9 @@
 </div>
 
 <!-- SEARCH -->
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-label>{{'dmp.steps.people.search' | translate}}</mat-label>
-    <!--    <span matPrefix>+1 &nbsp;</span>-->
-    <input type="search" matInput>
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
-</form>
+<app-person-search [result]="(searchResult$ | async) | contributorFilter: dmpForm.controls.contributors.value"
+                   (termToSearch)="searchContributor($event)" (personToAdd)="addContributor($event)">
+</app-person-search>
 
 <!-- LIST OF PEOPLE -->
 <div class="list-container" *ngIf="projectMembers?.length > 0 else empty">

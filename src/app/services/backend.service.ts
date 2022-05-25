@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, throwError} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Dmp} from '../domain/dmp';
 import {HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Contributor} from '../domain/contributor';
@@ -125,6 +125,12 @@ export class BackendService {
 
   }
 
+  searchPerson(term: string): Observable<Contributor[]> {
+    return this.http.get<Contributor[]>(`${this.backendUrl}persons/search?q=${term}`).pipe(
+      catchError(this.handleError('http.error.person.search'))
+    )
+  }
+
   getInternalStorages(): Observable<InternalStorage[]> {
     const langCode = 'eng'; // TODO: Replace with template lang in the future
     return this.http.get<InternalStorage[]>(`${this.backendUrl}storages/${langCode}`).pipe(
@@ -236,7 +242,7 @@ export class BackendService {
         message += this.translate.instant('http.error.503');
       }
       this.feedbackService.error(message);
-      return throwError(message);
+      throw new HttpErrorResponse({statusText: message});
     };
   }
 }

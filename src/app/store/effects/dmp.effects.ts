@@ -19,7 +19,7 @@ export class DmpEffects {
     switchMap(_ => this.backendService.getDmps()
       .pipe(
         map(dmps => DmpAction.dmpsLoaded({dmps})),
-        catchError(() => of(DmpAction.failedToLoadDmps))
+        catchError(() => of(DmpAction.failedToLoadDmps()))
       )
     )
   ));

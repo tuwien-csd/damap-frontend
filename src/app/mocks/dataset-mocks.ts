@@ -1,6 +1,8 @@
 import {Dataset} from '../domain/dataset';
 import {DataAccessType} from '../domain/enum/data-access-type.enum';
 import {AccessRight} from '../domain/enum/access-right.enum';
+import {DataType} from '../domain/enum/data-type.enum';
+import {mockContributor1} from './contributor-mocks';
 
 export const closedDatasetMock: Dataset = {
   comment: '',
@@ -14,12 +16,13 @@ export const closedDatasetMock: Dataset = {
   size: 0,
   startDate: null,
   title: 'Dataset 1',
-  type: 'STANDARD_OFFICE_DOCUMENTS',
+  type: [DataType.ARCHIVED_DATA],
   selectedProjectMembersAccess: AccessRight.WRITE,
   otherProjectMembersAccess: AccessRight.READ,
   publicAccess: AccessRight.NONE,
   delete: true,
   dateOfDeletion: new Date(20000),
+  deletionPerson: mockContributor1,
   reasonForDeletion: 'reason1',
   retentionPeriod: 10
 }
@@ -36,12 +39,13 @@ export const restrictedDatasetMock: Dataset = {
   size: 0,
   startDate: null,
   title: 'Dataset 1',
-  type: 'STANDARD_OFFICE_DOCUMENTS',
+  type: [DataType.ARCHIVED_DATA],
   selectedProjectMembersAccess: AccessRight.WRITE,
   otherProjectMembersAccess: AccessRight.READ,
   publicAccess: AccessRight.NONE,
   delete: false,
   dateOfDeletion: null,
+  deletionPerson: null,
   reasonForDeletion: '',
   retentionPeriod: null
 }

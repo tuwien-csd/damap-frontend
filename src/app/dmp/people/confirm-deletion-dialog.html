@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{'dmp.steps.people.confirm.dialog.heading' | translate}}</h2>
+<mat-dialog-content>
+  {{'dmp.steps.people.confirm.dialog.question' | translate}}
+  <ul>
+    <li *ngFor="let dataset of data">
+      {{dataset.title}}
+    </li>
+  </ul>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="false">{{'dmp.steps.people.confirm.dialog.button.cancel' | translate}}</button>
+  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial>{{'dmp.steps.people.confirm.dialog.button.confirm' | translate}}</button>
+</mat-dialog-actions>

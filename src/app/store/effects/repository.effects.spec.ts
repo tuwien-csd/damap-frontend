@@ -89,11 +89,11 @@ describe('RepositoryEffects', () => {
 
   it('should load repositories and fail', () => {
     actions$ = of(RepositoryAction.loadAllRepositories);
-    backendService.getRepositories.and.returnValue(throwError(new HttpErrorResponse({})));
+    backendService.getRepositories.and.returnValue(throwError(() => new HttpErrorResponse({})));
 
     effects.loadRepositories$.subscribe(action => {
       expect(backendService.getRepositories).toHaveBeenCalled();
-      expect(action).toEqual(RepositoryAction.failedToLoadRepositories);
+      expect(action).toEqual(RepositoryAction.failedToLoadRepositories());
     });
   });
 });

@@ -7,8 +7,6 @@ import {Component, Input} from '@angular/core';
 })
 export class CrisTagComponent {
 
-  @Input() cris = false;
-
-  constructor() { }
+  @Input() cris = null;
 
 }

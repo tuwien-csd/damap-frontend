@@ -6,6 +6,7 @@ import {InputWrapperComponent} from './input-wrapper/input-wrapper.component';
 import {TextareaWrapperComponent} from './textarea-wrapper/textarea-wrapper.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {TranslateModule} from '@ngx-translate/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import {TranslateModule} from '@ngx-translate/core';
     TranslateModule,
 
     // Materials
+    MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule
   ],
@@ -29,6 +31,7 @@ import {TranslateModule} from '@ngx-translate/core';
     TextareaWrapperComponent,
 
     // Materials
+    MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule
   ]

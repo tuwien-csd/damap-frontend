@@ -1,10 +1,12 @@
 import {DataAccessType} from './enum/data-access-type.enum';
 import {AccessRight} from './enum/access-right.enum';
+import {DataType} from './enum/data-type.enum';
+import {Contributor} from './contributor';
 
 export interface Dataset {
   readonly id: number;
   title: string;
-  type: any;
+  type: DataType[];
   size: number;
   comment: string;
   personalData: boolean;
@@ -20,5 +22,6 @@ export interface Dataset {
   delete: boolean;
   dateOfDeletion: Date;
   reasonForDeletion: string;
+  deletionPerson: Contributor;
   retentionPeriod: number;
 }

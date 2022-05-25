@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Project} from '../../domain/project';
 import {FormControl} from '@angular/forms';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
+import {MatTabGroup} from '@angular/material/tabs';
 
 @Component({
   selector: 'app-dmp-project',
@@ -16,12 +17,16 @@ export class ProjectComponent {
 
   @Output() project = new EventEmitter<any>();
 
-  LoadingState = LoadingState;
+  @ViewChild('tabGroup') tabGroup: MatTabGroup;
 
-  constructor() {
-  }
+  LoadingState = LoadingState;
+  selectedIndex: number = 0;
 
   changeProject(project: Project): void {
     this.project.emit(project);
+  }
+
+  changeTab(index: number): void {
+    this.tabGroup.selectedIndex = index;
   }
 }
