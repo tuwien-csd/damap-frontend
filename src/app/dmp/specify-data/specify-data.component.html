@@ -1,109 +1,18 @@
-<div [formGroup]="specifyDataStep">
-  <mat-label id="example-radio-group-label">{{'dmp.steps.data.specify.question.kind' | translate}}</mat-label>
-  <mat-radio-group aria-label="Select an option" formControlName="kind">
-    <mat-radio-button class="mat-radio-button"
-                      [value]="unknown">{{'dmp.steps.data.specify.answer.kind.unknown' | translate}}</mat-radio-button>
-    <mat-radio-button class="mat-radio-button"
-                      [value]="none">{{'dmp.steps.data.specify.answer.kind.none' | translate}}</mat-radio-button>
-    <mat-radio-button class="mat-radio-button"
-                      [value]="specify">{{'dmp.steps.data.specify.answer.kind.specify' | translate}}</mat-radio-button>
-  </mat-radio-group>
+<!-- CREATED DATASETS -->
+<div>
+  <app-created-data [specifyDataStep]="specifyDataStep"
+                    [datasets]="datasets"
+                    [fileUpload]="fileUpload"
+                    (createDataset)="create($event)"
+                    (updateDataset)="update($event)"
+                    (removeDataset)="remove($event)"
+                    (fileToAnalyse)="analyseFile($event)"
+                    (uploadToCancel)="cancelUpload($event)"></app-created-data>
+
+  <!-- REUSED DATASETS -->
+  <app-reused-data [specifyDataStep]="specifyDataStep"
+                   [datasets]="datasets"
+                   (datasetToAdd)="add($event)"
+                   (updateDataset)="update($event)"
+                   (removeDataset)="remove($event)"></app-reused-data>
 </div>
-
-<ng-container *ngIf="specifyDataStep.value.kind === specify">
-  <mat-tab-group dynamicHeight>
-    <mat-tab label="{{'dmp.steps.data.specify.tab.manual' | translate}}">
-      <mat-form-field class="dataset-tags-chips" [style]="'width:100%;'">
-        <mat-chip-list #chipList aria-label="{{'dmp.steps.data.specify.question.datasets' | translate}}">
-          <ng-container *ngFor="let dataset of datasets?.controls; let i=index">
-            <mat-chip *ngIf="dataset.value.title" [selectable]="true"
-                      removable="true" (removed)="remove(i)">
-              {{dataset.value.title}}
-              <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-          </ng-container>
-          <input placeholder="{{'dmp.steps.data.specify.question.datasets' | translate}}"
-                 [matChipInputFor]="chipList"
-                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                 [matChipInputAddOnBlur]="true"
-                 (matChipInputTokenEnd)="add($event)">
-        </mat-chip-list>
-      </mat-form-field>
-    </mat-tab>
-    <mat-tab label="{{'dmp.steps.data.specify.tab.upload' | translate}}">
-      <app-file-upload [fileUpload]="fileUpload"
-                       (fileToUpload)="analyseFile($event)"
-                       (uploadToCancel)="cancelUpload($event)">
-      </app-file-upload>
-    </mat-tab>
-  </mat-tab-group>
-
-  <!-- TABLE -->
-  <div *ngIf="datasets.controls.length">
-    <app-step-intro>{{'dmp.steps.data.specify.intro' | translate}}
-    </app-step-intro>
-    <h2>{{'dmp.steps.data.specify.table.heading' | translate}}</h2>
-
-    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-      <ng-container matColumnDef="dataset">
-        <th mat-header-cell *matHeaderCellDef>{{'dmp.steps.data.specify.table.header.dataset' | translate}}</th>
-        <td mat-cell *matCellDef="let dataset">
-          <div>{{dataset.value.title}}
-          </div>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="datatype">
-        <th mat-header-cell *matHeaderCellDef>{{'dmp.steps.data.specify.table.header.datatype' | translate}}</th>
-        <td mat-cell *matCellDef="let dataset">
-          <div>
-            <ng-container *ngFor="let type of dataset.value.type, last as last">
-              {{'enum.dataset.type.' + type | translate}}
-              <ng-container *ngIf="!last">,</ng-container>
-            </ng-container>
-          </div>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="size">
-        <th mat-header-cell *matHeaderCellDef>{{'dmp.steps.data.specify.table.header.size' | translate}}</th>
-        <td mat-cell *matCellDef="let dataset">
-          <div>{{dataset.value.size | byte}}
-          </div>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="comment">
-        <th mat-header-cell *matHeaderCellDef>{{'dmp.steps.data.specify.table.header.comment' | translate}}</th>
-        <td mat-cell *matCellDef="let dataset">
-          <div>{{dataset.value.comment}}
-          </div>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef><span
-          class="sr-only">{{'dmp.steps.data.specify.table.header.actions' | translate}}</span></th>
-        <td mat-cell *matCellDef="let element" [style]="'text-align: right'">
-          <button mat-icon-button>
-            <mat-icon color="primary" (click)="openDatasetDialog(dataSource.data.indexOf(element))">edit</mat-icon>
-          </button>
-          <button mat-icon-button>
-            <mat-icon color="primary" (click)="remove(dataSource.data.indexOf(element))">delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
-      <tr mat-row *matRowDef="let element; columns: tableHeaders;"
-          class="element-row">
-    </table>
-  </div>
-</ng-container>
-
-<!-- NO DATA -->
-<ng-container *ngIf="specifyDataStep.value.kind === none">
-  <app-textarea-wrapper [label]="'dmp.steps.data.specify.question.nodata'"
-                        [control]="explanation">
-  </app-textarea-wrapper>
-</ng-container>

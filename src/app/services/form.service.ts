@@ -12,6 +12,7 @@ import {ExternalStorage} from '../domain/external-storage';
 import {Repository} from '../domain/repository';
 import {InternalStorage} from '../domain/internal-storage';
 import {currencyValidator} from '../validators/currency.validator';
+import {DataSource} from '../domain/enum/data-source.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class FormService {
   private TEXT_MAX_LENGTH = 4000;
   private TEXT_SHORT_LENGTH = 255;
   private readonly form: FormGroup;
-  private initialFormValue;
+  private readonly initialFormValue;
 
   constructor(private formBuilder: FormBuilder) {
     this.form = this.createDmpForm();
@@ -48,6 +49,7 @@ export class FormService {
       data: this.formBuilder.group({
         kind: [null],
         explanation: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        reusedKind: [null]
       }),
       datasets: this.formBuilder.array([]),
       documentation: this.formBuilder.group({
@@ -107,6 +109,7 @@ export class FormService {
       project: dmp.project,
       data: {
         kind: dmp.dataKind,
+        reusedKind: dmp.reusedDataKind,
         explanation: dmp.noDataExplanation,
       },
       documentation: {
@@ -199,6 +202,7 @@ export class FormService {
       costsExistCris: formValue.costs.existCris,
       dataGeneration: formValue.documentation.dataGeneration,
       dataKind: formValue.data.kind,
+      reusedDataKind: formValue.data.reusedKind,
       dataQuality: formValue.documentation.dataQuality || [],
       datasets: formValue.datasets,
       ethicalIssuesExist: formValue.legal.ethicalIssues,
@@ -290,9 +294,15 @@ export class FormService {
     (this.form.get('datasets') as FormArray).push(formGroup);
   }
 
-  public updateDatasetOfForm(index: number, update: FormGroup) {
+  public addReusedDatasetToForm(dataset: Dataset) {
+    const formGroup = this.createDatasetFormGroup('Reused dataset');
+    formGroup.patchValue(dataset);
+    (this.form.get('datasets') as FormArray).push(formGroup);
+  }
+
+  public updateDatasetOfForm(index: number, update: Dataset) {
     const dataset = (this.form.get('datasets') as FormArray).at(index);
-    dataset.patchValue(update.getRawValue());
+    dataset.patchValue(update);
   }
 
   public removeDatasetFromForm(index: number) {
@@ -359,7 +369,7 @@ export class FormService {
       startDate: [null],
       type: [[]],
       size: [null],
-      comment: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+      description: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       personalData: [false],
       sensitiveData: [false],
       legalRestrictions: [false],
@@ -372,7 +382,9 @@ export class FormService {
       dateOfDeletion: [null],
       reasonForDeletion: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       deletionPerson: [null],
-      retentionPeriod: [null]
+      retentionPeriod: [null],
+      source: [DataSource.NEW, Validators.required],
+      datasetId: [null]
     });
   }
 

@@ -17,6 +17,7 @@ export interface Dmp {
   project: Project;
   contributors: Contributor[];
   dataKind: DataKind;
+  reusedDataKind: DataKind;
   noDataExplanation: string;
   datasets: Dataset[];
   metadata: string;

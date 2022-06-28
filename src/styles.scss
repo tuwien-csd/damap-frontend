@@ -94,7 +94,7 @@ mat-card {
 }
 
 .full-width {
-  width: 100%;
+  flex: 1;
 }
 
 .wrap-normal-label {
@@ -118,6 +118,9 @@ mat-card {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+  flex-direction: row;
+  align-items: baseline;
+  flex: 1;
 }
 
 .form-row-group {
@@ -153,4 +156,9 @@ mat-card {
   font-family: "Material Icons", sans-serif;
   content: "warning";
   padding-right: 0.5rem;
+}
+
+/* Mat Tab styling */
+.mat-tab-body-wrapper {
+  padding: 1rem 0 !important;
 }

@@ -1,0 +1,11 @@
+<form>
+  <mat-label id="example-radio-group-label">{{questionLabel | translate}}</mat-label>
+  <mat-radio-group aria-label="Select an option" [formControl]="control">
+    <mat-radio-button class="mat-radio-button"
+                      [value]="dataKind.UNKNOWN">{{'dmp.steps.data.specify.answer.kind.unknown' | translate}}</mat-radio-button>
+    <mat-radio-button class="mat-radio-button"
+                      [value]="dataKind.NONE">{{answerLabelNone | translate}}</mat-radio-button>
+    <mat-radio-button class="mat-radio-button"
+                      [value]="dataKind.SPECIFY">{{'dmp.steps.data.specify.answer.kind.specify' | translate}}</mat-radio-button>
+  </mat-radio-group>
+</form>

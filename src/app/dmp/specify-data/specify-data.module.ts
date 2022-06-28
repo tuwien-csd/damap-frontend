@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
 import {ReactiveFormsModule} from '@angular/forms';
-import {DatasetDialogComponent, SpecifyDataComponent} from './specify-data.component';
+import {SpecifyDataComponent} from './specify-data.component';
 import {FileUploadModule} from '../../widgets/file-upload/file-upload.module';
 import {StepIntroModule} from '../../widgets/step-intro/step-intro.module';
 import {ByteModule} from '../../pipe/byte/byte.module';
@@ -13,6 +13,13 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatTableModule} from '@angular/material/table';
+import {ReusedDataComponent} from './reused-data/reused-data.component';
+import {CreatedDataComponent} from './created-data/created-data.component';
+import {DoiSearchModule} from '../../widgets/doi-search/doi-search.module';
+import {DatasetSourceModule} from '../../src/app/pipe/dataset-source/dataset-source.module';
+import {DatasetDialogComponent} from '../../src/app/dmp/specify-data/dataset-dialog/dataset-dialog.component';
+import {DatasetTableComponent} from '../../src/app/dmp/specify-data/dataset-table/dataset-table.component';
+import {DataMcComponent} from '../../src/app/dmp/specify-data/data-mc/data-mc.component';
 
 @NgModule({
   imports: [
@@ -23,6 +30,8 @@ import {MatTableModule} from '@angular/material/table';
     StepIntroModule,
     ByteModule,
     SharedModule,
+    DatasetSourceModule,
+    DoiSearchModule,
 
     // Materials
     MatDialogModule,
@@ -32,7 +41,14 @@ import {MatTableModule} from '@angular/material/table';
     MatChipsModule,
     MatTableModule,
   ],
-  declarations: [SpecifyDataComponent, DatasetDialogComponent],
+  declarations: [
+    SpecifyDataComponent,
+    DatasetDialogComponent,
+    CreatedDataComponent,
+    ReusedDataComponent,
+    DatasetTableComponent,
+    DataMcComponent,
+  ],
   exports: [
     CommonModule,
     TranslateModule,
@@ -42,6 +58,7 @@ import {MatTableModule} from '@angular/material/table';
     ByteModule,
     SharedModule,
     SpecifyDataComponent,
+    DoiSearchModule,
 
     // Materials
     MatDialogModule,

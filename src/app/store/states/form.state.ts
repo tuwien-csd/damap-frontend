@@ -39,6 +39,7 @@ export const initialFormState: FormState = {
     personalDataCompliance: [],
     restrictedAccessInfo: '',
     restrictedDataAccess: '',
+    reusedDataKind: null,
     sensitiveData: false,
     sensitiveDataCris: undefined,
     sensitiveDataSecurity: [],
