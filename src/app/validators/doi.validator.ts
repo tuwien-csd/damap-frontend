@@ -9,7 +9,7 @@ export function doiValidator(): ValidatorFn {
     if (!control.value || control.value.length === 0) {
       return null;
     }
-    const regex = /^(doi:|https:\/\/doi\.org\/)?(10[.][0-9]{4,}\S*)$/;
+    const regex = /^(doi:|https:\/\/doi\.org\/)?(10\.\S*)$/;
     const doi = regex.test(control.value.trim());
     return doi ? null : {doi: true};
   };

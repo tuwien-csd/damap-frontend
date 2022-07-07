@@ -4,7 +4,7 @@
   <h2>{{tableHeading | translate}}</h2>
 
   <table mat-table [dataSource]="datasets.value | datasetSource: sourceType" multiTemplateDataRows
-         class="mat-elevation-z8">
+         class="mat-elevation-z8" aria-label="{{tableHeading | translate}}">
     <ng-container matColumnDef="dataset">
       <th mat-header-cell *matHeaderCellDef>{{'dmp.steps.data.specify.table.header.dataset' | translate}}</th>
       <td mat-cell *matCellDef="let dataset">
