@@ -3,6 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {CreatedDataComponent} from './created-data.component';
 import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
 import {FormControl, FormGroup} from '@angular/forms';
+import {DataKind} from '../../../domain/enum/data-kind.enum';
 
 describe('CreatedDataComponent', () => {
   let component: CreatedDataComponent;
@@ -20,7 +21,7 @@ describe('CreatedDataComponent', () => {
     fixture = TestBed.createComponent(CreatedDataComponent);
     component = fixture.componentInstance;
     component.specifyDataStep = new FormGroup({
-      kind: new FormControl(undefined),
+      kind: new FormControl(DataKind.NONE),
       explanation: new FormControl('')
     });
     fixture.detectChanges();
@@ -28,5 +29,18 @@ describe('CreatedDataComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit file to analyse', () => {
+    spyOn(component.fileToAnalyse, 'emit');
+    const file = new File([], 'test.txt');
+    component.analyseFile(file);
+    expect(component.fileToAnalyse.emit).toHaveBeenCalledOnceWith(file);
+  });
+
+  it('should cancel file upload', () => {
+    spyOn(component.uploadToCancel, 'emit');
+    component.cancelUpload(0);
+    expect(component.uploadToCancel.emit).toHaveBeenCalledOnceWith(0);
   });
 });

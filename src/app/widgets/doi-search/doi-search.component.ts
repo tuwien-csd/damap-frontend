@@ -22,10 +22,10 @@ export class DoiSearchComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.loading) {
-      if (this.loading == LoadingState.LOADED) {
+      if (this.loading === LoadingState.LOADED) {
         this.doi.setValue('');
       }
-      if (this.loading == LoadingState.LOADING) {
+      if (this.loading === LoadingState.LOADING) {
         this.doi.disable();
       } else {
         this.doi.enable();
