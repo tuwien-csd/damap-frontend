@@ -576,7 +576,7 @@
       "datasets": {
         "heading": "Datasets",
         "size": "Size",
-        "comment": "Comment",
+        "description": "Description",
         "license": "License",
         "retention.period": "Retention period",
         "data.none": "Why no data will be created or analysed",

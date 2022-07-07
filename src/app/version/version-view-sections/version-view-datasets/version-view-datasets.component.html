@@ -1,12 +1,18 @@
 <div *ngIf="dataKind === dataKindType.SPECIFY">
   <div *ngFor="let dataset of datasets, last as last">
-    <div><span class="title">{{dataset.title}}</span> <app-tag> {{dataset.dataAccess | translate}}</app-tag></div>
+    <div>
+      <span class="title">{{dataset.title}}</span>
+      <app-tag> {{dataset.dataAccess | translate}}</app-tag>
+      <app-tag [background]="'palegoldenrod'"> {{dataset.source | translate}}</app-tag>
+    </div>
     <div><span class="headings">{{'versions.view.datasets.size' | translate}}:</span> {{dataset.size | byte}}</div>
-    <div><span class="headings">{{'versions.view.datasets.comment' | translate}}:</span> {{dataset.comment}}</div>
+    <div><span class="headings">{{'versions.view.datasets.description' | translate}}:</span> {{dataset.description}}
+    </div>
     <div *ngIf="dataset.dataAccess !== dataAccessType.CLOSED">
       <div><span class="headings">{{'versions.view.datasets.license' | translate}}:</span> {{dataset.license}}</div>
-      <div><span class="headings">{{'versions.view.datasets.retention.period' | translate}}:</span> {{dataset.retentionPeriod}}</div>
-      </div>
+      <div><span class="headings">{{'versions.view.datasets.retention.period' | translate}}
+        :</span> {{dataset.retentionPeriod}}</div>
+    </div>
     <div *ngIf="dataset.dataAccess === dataAccessType.CLOSED && dataset.delete">
       <div><span class="headings">{{'versions.view.datasets.deletion.date' | translate}}:</span>
         {{dataset.dateOfDeletion | date}}</div>
@@ -31,6 +37,11 @@
         <li>{{'versions.view.datasets.data.access.other' | translate}}:
           {{'enum.accessright.' + dataset.otherProjectMembersAccess | translate}}</li>
       </ul>
+    </div>
+    <div *ngIf="dataset.datasetId">
+      <app-tag *ngIf="dataset.datasetId.type"
+               [background]="'lavender'"> {{dataset.datasetId.type | translate}}</app-tag>
+      {{dataset.datasetId.identifier}}
     </div>
     <div>
       <app-tag *ngFor="let type of dataset.type"> {{'enum.dataset.type.' + type | translate}}</app-tag>
