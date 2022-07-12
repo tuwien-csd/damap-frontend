@@ -19,6 +19,10 @@ export class SpecifyDataComponent extends AbstractBaseDataComponent {
     super();
   }
 
+  get dataGeneration(): FormControl {
+    return this.specifyDataStep.get('dataGeneration') as FormControl;
+  }
+
   get explanation(): FormControl {
     return this.specifyDataStep.get('explanation') as FormControl;
   }

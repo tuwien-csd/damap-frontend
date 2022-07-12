@@ -49,12 +49,12 @@ export class FormService {
       data: this.formBuilder.group({
         kind: [null],
         explanation: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-        reusedKind: [null]
+        reusedKind: [null],
+        dataGeneration: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
       }),
       datasets: this.formBuilder.array([]),
       documentation: this.formBuilder.group({
         metadata: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-        dataGeneration: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         structure: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         dataQuality: [[]],
         otherDataQuality: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
@@ -111,10 +111,10 @@ export class FormService {
         kind: dmp.dataKind,
         reusedKind: dmp.reusedDataKind,
         explanation: dmp.noDataExplanation,
+        dataGeneration: dmp.dataGeneration,
       },
       documentation: {
         metadata: dmp.metadata,
-        dataGeneration: dmp.dataGeneration,
         structure: dmp.structure,
         dataQuality: dmp.dataQuality,
         otherDataQuality: dmp.otherDataQuality
@@ -200,7 +200,7 @@ export class FormService {
       costs: formValue.costs.exist ? formValue.costs.list : [],
       costsExist: formValue.costs.exist,
       costsExistCris: formValue.costs.existCris,
-      dataGeneration: formValue.documentation.dataGeneration,
+      dataGeneration: formValue.data.dataGeneration,
       dataKind: formValue.data.kind,
       reusedDataKind: formValue.data.reusedKind,
       dataQuality: formValue.documentation.dataQuality || [],

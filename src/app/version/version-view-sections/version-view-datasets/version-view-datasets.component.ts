@@ -12,6 +12,7 @@ export class VersionViewDatasetsComponent {
 
   @Input() dataKind: DataKind;
   @Input() reusedDataKind: DataKind;
+  @Input() dataGeneration: string;
   @Input() noDataExplanation: string;
   @Input() datasets: Dataset[];
 

@@ -1,5 +1,5 @@
 <div *ngIf="dataKind === dataKindType.SPECIFY || reusedDataKind === dataKindType.SPECIFY">
-  <div *ngFor="let dataset of datasets, last as last">
+  <div *ngFor="let dataset of datasets">
     <div>
       <span class="title">{{dataset.title}}</span>
       <app-tag> {{dataset.dataAccess | translate}}</app-tag>
@@ -46,8 +46,10 @@
     <div>
       <app-tag *ngFor="let type of dataset.type"> {{'enum.dataset.type.' + type | translate}}</app-tag>
     </div>
-    <hr *ngIf="!last">
+    <hr>
   </div>
+  <div><span class="headings">{{'versions.view.documentation.data.generation' | translate}}:</span>
+    {{dataGeneration}}</div>
 </div>
 
 <div *ngIf="dataKind === dataKindType.NONE && reusedDataKind === dataKindType.NONE">
