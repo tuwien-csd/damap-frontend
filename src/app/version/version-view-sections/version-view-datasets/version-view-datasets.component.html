@@ -1,4 +1,4 @@
-<div *ngIf="dataKind === dataKindType.SPECIFY">
+<div *ngIf="dataKind === dataKindType.SPECIFY || reusedDataKind === dataKindType.SPECIFY">
   <div *ngFor="let dataset of datasets, last as last">
     <div>
       <span class="title">{{dataset.title}}</span>
@@ -50,11 +50,12 @@
   </div>
 </div>
 
-<div *ngIf="dataKind === dataKindType.NONE">
+<div *ngIf="dataKind === dataKindType.NONE && reusedDataKind === dataKindType.NONE">
   <div><span class="headings">{{'versions.view.datasets.data.none' | translate}}:</span></div>
   {{noDataExplanation}}
 </div>
 
-<div *ngIf="dataKind === dataKindType.UNKNOWN">
+<div *ngIf="(dataKind === dataKindType.UNKNOWN && reusedDataKind !== dataKindType.SPECIFY)
+|| (dataKind !== dataKindType.SPECIFY && reusedDataKind === dataKindType.UNKNOWN)">
   {{'versions.view.datasets.data.unknown' | translate}}
 </div>

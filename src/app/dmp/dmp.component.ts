@@ -19,6 +19,7 @@ import {createDmp, loadDmps, saveDmpVersion, updateDmp} from '../store/actions/d
 import {InternalStorage} from '../domain/internal-storage';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Dataset} from '../domain/dataset';
+import {DataKind} from '../domain/enum/data-kind.enum';
 
 @Component({
   selector: 'app-dmp',
@@ -100,6 +101,10 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formService.resetForm();
     this.store.dispatch(resetFormValue());
     this.store.dispatch(loadDmps(false));
+  }
+
+  get showStep() {
+    return (this.specifyDataStep.value.kind === DataKind.SPECIFY || this.specifyDataStep.value.reusedKind === DataKind.SPECIFY) && this.datasets.length
   }
 
   changeStep() {

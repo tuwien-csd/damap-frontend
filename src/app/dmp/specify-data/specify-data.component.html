@@ -1,5 +1,5 @@
-<!-- CREATED DATASETS -->
 <div>
+  <!-- CREATED DATASETS -->
   <app-created-data [specifyDataStep]="specifyDataStep"
                     [datasets]="datasets"
                     [fileUpload]="fileUpload"
@@ -15,4 +15,12 @@
                    (datasetToAdd)="add($event)"
                    (updateDataset)="update($event)"
                    (removeDataset)="remove($event)"></app-reused-data>
+
+  <!-- NO DATA -->
+  <ng-container
+    *ngIf="specifyDataStep.value.kind === dataKind.NONE && specifyDataStep.value.reusedKind === dataKind.NONE">
+    <app-textarea-wrapper [label]="'dmp.steps.data.specify.question.nodata'"
+                          [control]="explanation">
+    </app-textarea-wrapper>
+  </ng-container>
 </div>

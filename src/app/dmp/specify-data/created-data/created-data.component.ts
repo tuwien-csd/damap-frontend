@@ -44,10 +44,6 @@ export class CreatedDataComponent extends AbstractBaseDataComponent {
     return this.specifyDataStep.get('kind') as FormControl;
   }
 
-  get explanation(): FormControl {
-    return this.specifyDataStep.get('explanation') as FormControl;
-  }
-
   analyseFile(file: File) {
     this.fileToAnalyse.emit(file);
   }

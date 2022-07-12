@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {AbstractBaseDataComponent} from './abstract-base-data.component';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-dmp-specify-data',
@@ -14,10 +15,12 @@ export class SpecifyDataComponent extends AbstractBaseDataComponent {
   @Output() fileToAnalyse = new EventEmitter<File>();
   @Output() uploadToCancel = new EventEmitter<number>();
 
-  readonly tableHeaders: string[] = ['dataset', 'datatype', 'size', 'description', 'actions'];
-
   constructor() {
     super();
+  }
+
+  get explanation(): FormControl {
+    return this.specifyDataStep.get('explanation') as FormControl;
   }
 
   analyseFile(file: File) {

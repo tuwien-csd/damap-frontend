@@ -11,6 +11,7 @@ import {DataAccessType} from '../../../domain/enum/data-access-type.enum';
 export class VersionViewDatasetsComponent {
 
   @Input() dataKind: DataKind;
+  @Input() reusedDataKind: DataKind;
   @Input() noDataExplanation: string;
   @Input() datasets: Dataset[];
 

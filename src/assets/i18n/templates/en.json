@@ -580,7 +580,7 @@
         "license": "License",
         "retention.period": "Retention period",
         "data.none": "Why no data will be created or analysed",
-        "data.unknown": "Not yet known if data will be created.",
+        "data.unknown": "Not yet known if data will be created or analysed.",
         "restrictions": {
           "label": "Restrictions",
           "sensitive": "Contains sensitive data",

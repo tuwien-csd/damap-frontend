@@ -38,10 +38,3 @@
 
   </app-dataset-table>
 </ng-container>
-
-<!-- NO DATA -->
-<ng-container *ngIf="kind.value === dataKind.NONE">
-  <app-textarea-wrapper [label]="'dmp.steps.data.specify.question.nodata'"
-                        [control]="explanation">
-  </app-textarea-wrapper>
-</ng-container>
