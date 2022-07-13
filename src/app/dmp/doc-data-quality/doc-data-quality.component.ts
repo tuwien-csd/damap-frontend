@@ -26,10 +26,6 @@ export class DocDataQualityComponent {
     return this.docDataStep.get('metadata') as FormControl;
   }
 
-  get dataGeneration(): FormControl {
-    return this.docDataStep.get('dataGeneration') as FormControl;
-  }
-
   get structure(): FormControl {
     return this.docDataStep.get('structure') as FormControl;
   }

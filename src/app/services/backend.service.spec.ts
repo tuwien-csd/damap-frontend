@@ -9,6 +9,7 @@ import {completeDmp} from '../mocks/dmp-mocks';
 import {HttpEventType, HttpHeaders} from '@angular/common/http';
 import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
 import {Contributor} from '../domain/contributor';
+import {closedDatasetMock} from '../mocks/dataset-mocks';
 
 describe('BackendService', () => {
   let service: BackendService;
@@ -180,6 +181,18 @@ describe('BackendService', () => {
       type: HttpEventType.Response, body: {title: 'file'}, status: 200, headers: new HttpHeaders(),
       statusText: 'OK', url: '', ok: true, clone: null
     });
+  });
+
+  it('should search dataset by doi', () => {
+    const doi = '10.1234/test';
+    service.searchDataset(doi).subscribe(value => {
+      expect(value).toBeTruthy();
+      expect(value).toBe(closedDatasetMock);
+    });
+
+    const req = httpTestingController.expectOne(`${backendUrl}openaire?doi=${doi}`);
+    expect(req.request.method).toBe('GET');
+    req.flush(closedDatasetMock);
   });
 
   it('should get dmp document', () => {

@@ -3,9 +3,11 @@ import {DataAccessType} from '../domain/enum/data-access-type.enum';
 import {AccessRight} from '../domain/enum/access-right.enum';
 import {DataType} from '../domain/enum/data-type.enum';
 import {mockContributor1} from './contributor-mocks';
+import {DataSource} from '../domain/enum/data-source.enum';
+import {IdentifierType} from '../domain/enum/identifier-type.enum';
 
 export const closedDatasetMock: Dataset = {
-  comment: '',
+  description: '',
   dataAccess: DataAccessType.CLOSED,
   id: 82,
   license: 'https://creativecommons.org/publicdomain/zero/1.0/',
@@ -24,11 +26,16 @@ export const closedDatasetMock: Dataset = {
   dateOfDeletion: new Date(20000),
   deletionPerson: mockContributor1,
   reasonForDeletion: 'reason1',
-  retentionPeriod: 10
+  retentionPeriod: 10,
+  source: DataSource.REUSED,
+  datasetId: {
+    identifier: 'XXXXX',
+    type: IdentifierType.DOI
+  }
 }
 
 export const restrictedDatasetMock: Dataset = {
-  comment: '',
+  description: '',
   dataAccess: DataAccessType.RESTRICTED,
   id: 83,
   license: 'https://creativecommons.org/publicdomain/zero/1.0/',
@@ -47,5 +54,7 @@ export const restrictedDatasetMock: Dataset = {
   dateOfDeletion: null,
   deletionPerson: null,
   reasonForDeletion: '',
-  retentionPeriod: null
+  retentionPeriod: null,
+  source: DataSource.NEW,
+  datasetId: null
 }

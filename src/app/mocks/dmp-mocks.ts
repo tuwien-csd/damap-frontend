@@ -11,6 +11,7 @@ import {DataQualityType} from '../domain/enum/data-quality-type.enum';
 import {mockStorage} from './storage-mocks';
 
 export const completeDmp: Dmp = {
+  reusedDataKind: DataKind.SPECIFY,
   dataRightsAndAccessControl: 'access control',
   humanParticipants: true,
   humanParticipantsCris: true,
@@ -97,6 +98,7 @@ export const completeDmp: Dmp = {
 };
 
 export const noDataDmp: Dmp = {
+  reusedDataKind: DataKind.NONE,
   dataRightsAndAccessControl: 'access control',
   humanParticipants: true,
   humanParticipantsCris: true,

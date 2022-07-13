@@ -13,6 +13,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {Consent} from '../domain/consent'
 import {InternalStorage} from '../domain/internal-storage';
 import {Version} from '../domain/version';
+import {Dataset} from '../domain/dataset';
 
 @Injectable({
   providedIn: 'root'
@@ -179,6 +180,13 @@ export class BackendService {
       .pipe(
         catchError(this.handleError('http.error.fileanalysis'))
       );
+  }
+
+  searchDataset(term: string): Observable<Dataset> {
+    return this.http.get<Dataset>(`${this.backendUrl}openaire?doi=${term}`).pipe(
+      retry(3),
+      catchError(this.handleError('http.error.openaire'))
+    );
   }
 
   getDmpDocument(id: number) {

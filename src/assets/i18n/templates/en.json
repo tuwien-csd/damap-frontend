@@ -58,32 +58,54 @@
       "data": {
         "specify": {
           "label": "Specify research data",
-          "intro": "Research data comes in all forms and sizes. The table below helps you to describe the data sets (i.e. groups of data with similar properties) you are expecting to create or reuse during the project.",
+          "intro": {
+            "default": "Research data comes in all forms and sizes. The table below helps you to describe the data sets (i.e. groups of data with similar properties) you are expecting to create during the project.",
+            "reused": "Research data comes in all forms and sizes. The table below helps you to describe the data sets (i.e. groups of data with similar properties) you are expecting to reuse during the project."
+          },
           "question": {
             "kind": "What kinds of research data will you create?",
             "datasets": "Create names for your datasets",
-            "nodata": "Please explain why you won't create or analyse any research data."
+            "nodata": "Please explain why you won't create or analyse any research data.",
+            "reused": "What kinds of research data will you reuse?"
           },
           "answer": {
             "kind": {
               "unknown": "I don't know yet.",
               "none": "No data will be created or analysed.",
-              "specify": "Specify datasets"
+              "reuse.none": "No data will be reused.",
+              "specify": "Specify datasets."
             }
           },
           "tab": {
             "manual": "Manually",
-            "upload": "Uploading sample data"
+            "upload": "Upload sample data",
+            "doi": "Enter DOI"
+          },
+          "button": {
+            "add": {
+              "manual": "Add dataset manually",
+              "doi": "Find dataset"
+            }
           },
           "table": {
-            "heading": "Data",
+            "heading": {
+              "default": "Data",
+              "reused": "Reused data",
+              "new": "New data"
+            },
             "header": {
               "dataset": "Dataset",
               "datatype": "Datatype",
               "size": "Size",
               "comment": "Comment",
-              "actions": "Actions"
+              "actions": "Actions",
+              "description": "Description",
+              "pid": "PID"
             }
+          },
+          "doi": {
+            "search": "Enter DOI...",
+            "not.found": "No dataset found."
           }
         },
         "access": {
@@ -372,7 +394,8 @@
       "empty": "Please provide a valid value.",
       "maxlength": "Value must not exceed {{value}} characters.",
       "pattern.currency": "Invalid input, please use the following format: 1234.56",
-      "orcid": "Invalid ORCID iD."
+      "orcid": "Invalid ORCID iD.",
+      "doi": "Invalid DOI. Must be formatted as 10.1234/56789 or https://doi.org/10.1234/56789 or doi:10.1234/56789"
     },
     "changes": {
       "saved": "All changes have been saved.",
@@ -553,11 +576,11 @@
       "datasets": {
         "heading": "Datasets",
         "size": "Size",
-        "comment": "Comment",
+        "description": "Description",
         "license": "License",
         "retention.period": "Retention period",
         "data.none": "Why no data will be created or analysed",
-        "data.unknown": "Not yet known if data will be created.",
+        "data.unknown": "Not yet known if data will be created or analysed.",
         "restrictions": {
           "label": "Restrictions",
           "sensitive": "Contains sensitive data",
@@ -764,5 +787,6 @@
     }
   },
   "contenttypes": "Content types",
-  "metadatastandards": "Metadata standards"
+  "metadatastandards": "Metadata standards",
+  "or": "or"
 }

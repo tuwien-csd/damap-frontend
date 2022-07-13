@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {Dmp} from '../../domain/dmp';
 import {MatAccordion} from '@angular/material/expansion';
 import {Version} from '../../domain/version';
+import {DataKind} from '../../domain/enum/data-kind.enum';
 
 @Component({
   selector: 'app-version-view',
@@ -19,6 +20,8 @@ export class VersionViewComponent implements OnInit {
   dmp$: Observable<Dmp>;
   id: number;
   revision: number;
+
+  readonly dataKind = DataKind;
 
   constructor(private route: ActivatedRoute,
               private backendService: BackendService) {

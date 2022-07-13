@@ -1,0 +1,40 @@
+<app-data-mc [control]="kind"></app-data-mc>
+
+<ng-container *ngIf="kind.value === dataKind.SPECIFY">
+  <mat-tab-group dynamicHeight>
+    <mat-tab label="{{'dmp.steps.data.specify.tab.manual' | translate}}">
+      <mat-form-field class="dataset-tags-chips" [style]="'width:100%;'">
+        <mat-chip-list #chipList aria-label="{{'dmp.steps.data.specify.question.datasets' | translate}}">
+          <ng-container *ngFor="let dataset of datasets.value | datasetSource: datasetSource.NEW; let i=index">
+            <mat-chip *ngIf="dataset.title" [selectable]="true"
+                      removable="true" (removed)="remove(i)">
+              {{dataset.title}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </ng-container>
+          <input placeholder="{{'dmp.steps.data.specify.question.datasets' | translate}}"
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="true"
+                 (matChipInputTokenEnd)="addDataset($event)">
+        </mat-chip-list>
+      </mat-form-field>
+    </mat-tab>
+    <mat-tab label="{{'dmp.steps.data.specify.tab.upload' | translate}}">
+      <app-file-upload [fileUpload]="fileUpload"
+                       (fileToUpload)="analyseFile($event)"
+                       (uploadToCancel)="cancelUpload($event)">
+      </app-file-upload>
+    </mat-tab>
+  </mat-tab-group>
+
+  <!-- TABLE -->
+  <app-dataset-table *ngIf="datasets.controls.length"
+                     [datasets]="datasets"
+                     tableHeading="dmp.steps.data.specify.table.heading.new"
+                     [tableHeaders]="tableHeaders"
+                     (updateDataset)="update($event)"
+                     (removeDataset)="remove($event)">
+
+  </app-dataset-table>
+</ng-container>

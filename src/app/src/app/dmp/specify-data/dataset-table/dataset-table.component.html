@@ -1,0 +1,69 @@
+<div *ngIf="(datasets.value | datasetSource: sourceType).length">
+  <app-step-intro>{{ tableIntro | translate}}
+  </app-step-intro>
+  <h2>{{tableHeading | translate}}</h2>
+
+  <table mat-table [dataSource]="datasets.value | datasetSource: sourceType" multiTemplateDataRows
+         class="mat-elevation-z8" aria-label="{{tableHeading | translate}}">
+    <ng-container matColumnDef="dataset">
+      <th mat-header-cell *matHeaderCellDef>{{'dmp.steps.data.specify.table.header.dataset' | translate}}</th>
+      <td mat-cell *matCellDef="let dataset">
+        <div>{{dataset.title}}
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="datatype">
+      <th mat-header-cell *matHeaderCellDef>{{'dmp.steps.data.specify.table.header.datatype' | translate}}</th>
+      <td mat-cell *matCellDef="let dataset">
+        <div>
+          <ng-container *ngFor="let type of dataset.type, last as last">
+            {{'enum.dataset.type.' + type | translate}}
+            <ng-container *ngIf="!last">,</ng-container>
+          </ng-container>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef>{{'dmp.steps.data.specify.table.header.size' | translate}}</th>
+      <td mat-cell *matCellDef="let dataset">
+        <div>{{dataset.size | byte}}
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>{{'dmp.steps.data.specify.table.header.description' | translate}}</th>
+      <td mat-cell *matCellDef="let dataset">
+        <div>{{dataset.description}}
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pid">
+      <th mat-header-cell *matHeaderCellDef>{{'dmp.steps.data.specify.table.header.pid' | translate}}</th>
+      <td mat-cell *matCellDef="let dataset">
+        <div>{{dataset.datasetId?.type}} {{dataset.datasetId?.identifier}}
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef><span
+        class="sr-only">{{'dmp.steps.data.specify.table.header.actions' | translate}}</span></th>
+      <td mat-cell *matCellDef="let element" [style]="'text-align: right'">
+        <button mat-icon-button>
+          <mat-icon color="primary" (click)="openDatasetDialog(element)">edit</mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon color="primary" (click)="remove(element)">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
+    <tr mat-row *matRowDef="let element; columns: tableHeaders;"
+        class="element-row">
+  </table>
+</div>

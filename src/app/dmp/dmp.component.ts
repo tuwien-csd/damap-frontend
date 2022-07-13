@@ -18,6 +18,8 @@ import {selectFormChanged} from '../store/selectors/form.selectors';
 import {createDmp, loadDmps, saveDmpVersion, updateDmp} from '../store/actions/dmp.actions';
 import {InternalStorage} from '../domain/internal-storage';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {Dataset} from '../domain/dataset';
+import {DataKind} from '../domain/enum/data-kind.enum';
 
 @Component({
   selector: 'app-dmp',
@@ -101,6 +103,10 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.store.dispatch(loadDmps(false));
   }
 
+  get showStep() {
+    return (this.specifyDataStep.value.kind === DataKind.SPECIFY || this.specifyDataStep.value.reusedKind === DataKind.SPECIFY) && this.datasets.length
+  }
+
   changeStep() {
     if (this.formChanged) {
       this.saveDmp();
@@ -158,11 +164,16 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formService.removeContributorFromForm(index);
   }
 
-  addDataset(title: string) {
+  createDataset(title: string) {
     this.formService.addDatasetToForm(this.generateReferenceHash(), title);
   }
 
-  updateDataset(event: { index: number, update: FormGroup }) {
+  addDataset(dataset: Dataset) {
+    dataset.referenceHash = this.generateReferenceHash();
+    this.formService.addReusedDatasetToForm(dataset);
+  }
+
+  updateDataset(event: { index: number, update: Dataset }) {
     this.formService.updateDatasetOfForm(event.index, event.update);
   }
 
@@ -174,19 +185,21 @@ export class DmpComponent implements OnInit, OnDestroy {
     const upload = {file: event, progress: 0, finalized: false};
     this.fileUpload.push(upload);
     const uploadSub = this.backendService.analyseFileData(formData)
-      .subscribe((response) => {
-          if (response.type === HttpEventType.UploadProgress) {
-            upload.progress = Math.round(100 * (response.loaded / response.total));
-          }
-          if (response.type === HttpEventType.Response) {
-            const dataset = response.body;
-            dataset.title = filename;
-            dataset.referenceHash = reference;
-            this.formService.addFileAnalysisAsDatasetToForm(dataset);
-          }
-        },
-        _ => upload.finalized = true,
-        () => upload.finalized = true
+      .subscribe({
+          next: (response) => {
+            if (response.type === HttpEventType.UploadProgress) {
+              upload.progress = Math.round(100 * (response.loaded / response.total));
+            }
+            if (response.type === HttpEventType.Response) {
+              const dataset = response.body;
+              dataset.title = filename;
+              dataset.referenceHash = reference;
+              this.formService.addFileAnalysisAsDatasetToForm(dataset);
+            }
+          },
+          error: _ => upload.finalized = true,
+          complete: () => upload.finalized = true
+        }
       );
     this.fileUploadSubscription.push(uploadSub);
   }
