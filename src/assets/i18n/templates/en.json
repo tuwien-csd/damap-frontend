@@ -301,7 +301,7 @@
         "link": "https://www.link.example"
       },
       "end": {
-        "label": "End"
+        "label": "Summary"
       },
       "summary": {
         "title": "Summary of the information you provided:",
@@ -310,6 +310,7 @@
           "completeness": "Completeness",
           "status": "Status"
         },
+        "nodatasets": "No datasets defined",
         "notspecified": "Not specified yet.",
         "partially": "Partially filled out.",
         "noinfo": "No information provided.",
@@ -333,32 +334,38 @@
         "data": {
           "specify": {
             "datasets": {
-              "one": "One dataset defined.",
-              "multiple": "Datasets defined: ",
-              "nonespecified": "No data will be produced.",
+              "produced": "Produced datasets: ",
+              "reused": "Reused datasets: ",
+              "unknown": {
+                "produced": "Not yet known if data will be produced.",
+                "reused": "Not yet known if data will be reused."
+              },
+              "none": {
+                "produced": "No data will be produced.",
+                "reused": "No data will be reused.",
+                "none": "No research data specified."
+              },
               "missingexplanation": "Explanation is missing.",
-              "none": "No research data specified."
+              "datageneration": "Data generation info missing."
             }
           }
         },
         "storage": {
-          "nonestored": "No data to be stored.",
+          "nonestored": "No (produced) datasets to be stored.",
           "nodata": "No data defined yet.",
-          "alldata": "All data are stored.",
+          "alldata": "All (produced) datasets are stored.",
           "missingexplanation": " Usage explanation is missing."
         },
         "licensing": {
-          "all": "All datasets have been assigned a license and a start date.",
-          "none": "No dataset has been assigned a license or a start date.",
-          "some": "Some datasets have been assigned a license and a start date."
+          "complete": "All information necessary provided.",
+          "incomplete": "Some information is missing."
         },
         "repositories": {
           "nodata": "No data to be deposited.",
           "nodataspecified": "No data defined yet.",
           "deposited": {
-            "all": "All data are deposited. ",
-            "none": "No data deposited yet. ",
-            "some": "Some data are deposited. "
+            "incomplete": "Not all data deposited yet.",
+            "complete": "All data are deposited."
           },
           "missingexplanation": "Explanation for datasets with restricted/closed access missing."
         },
@@ -786,6 +793,9 @@
       "OTHER": "other measures"
     }
   },
+  "yes": "Yes",
+  "no": "No",
+  "fair": "FAIR",
   "contenttypes": "Content types",
   "metadatastandards": "Metadata standards",
   "or": "or"

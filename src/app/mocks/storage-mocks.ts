@@ -1,5 +1,6 @@
 import {InternalStorage} from '../domain/internal-storage';
 import {Storage} from '../domain/storage';
+import {closedDatasetMock, restrictedDatasetMock} from './dataset-mocks';
 
 export const mockInternalStorage: InternalStorage = {
   id: -1,
@@ -13,7 +14,7 @@ export const mockInternalStorage: InternalStorage = {
 }
 
 export const mockStorage: Storage = {
-  datasets: ['39608knzrof6y', '39608knzrof6x'],
+  datasets: [closedDatasetMock.referenceHash, restrictedDatasetMock.referenceHash],
   id: -2,
   internalStorageId: -1,
   title: 'Internal storage mock'
