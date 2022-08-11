@@ -38,9 +38,4 @@ describe('SummaryComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should produce a complete summary', () => {
-    for (const item of component.dataSource) {
-      expect(item.completeness).toBeGreaterThanOrEqual(100);
-    }
-  });
 });

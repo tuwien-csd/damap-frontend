@@ -6,7 +6,7 @@ import {SecurityMeasure} from '../domain/enum/security-measure.enum';
 import {Agreement} from '../domain/enum/agreement.enum';
 import {mockProject} from './project-mocks';
 import {mockContact, mockContributor1, mockContributor2} from './contributor-mocks';
-import {closedDatasetMock, restrictedDatasetMock} from './dataset-mocks';
+import {closedDatasetMock, openDatasetMock, restrictedDatasetMock} from './dataset-mocks';
 import {DataQualityType} from '../domain/enum/data-quality-type.enum';
 import {mockStorage} from './storage-mocks';
 
@@ -63,7 +63,7 @@ export const completeDmp: Dmp = {
   repositories: [
     {
       datasets: [
-        '39608knzrof6y', '39608knzrof6x'
+        closedDatasetMock.referenceHash, restrictedDatasetMock.referenceHash
       ],
       repositoryId: 'r3d100013557',
       id: 94,
@@ -150,7 +150,7 @@ export const noDataDmp: Dmp = {
   repositories: [
     {
       datasets: [
-        '39608knzrof6y'
+        openDatasetMock.referenceHash
       ],
       repositoryId: 'r3d100013557',
       id: 94,
