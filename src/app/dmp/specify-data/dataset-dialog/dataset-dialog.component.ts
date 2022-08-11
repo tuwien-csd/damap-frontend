@@ -2,11 +2,11 @@ import {Component, Inject} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FILE_SIZES, FILE_TYPES} from 'src/app/dmp/specify-data/data-specs';
-import {FormService} from '../../../../../services/form.service';
-import {Dataset} from '../../../../../domain/dataset';
-import {DataSource} from '../../../../../domain/enum/data-source.enum';
-import {IdentifierType} from '../../../../../domain/enum/identifier-type.enum';
-import {Identifier} from '../../../../../domain/identifier';
+import {FormService} from '../../../services/form.service';
+import {Dataset} from '../../../domain/dataset';
+import {DataSource} from '../../../domain/enum/data-source.enum';
+import {IdentifierType} from '../../../domain/enum/identifier-type.enum';
+import {Identifier} from '../../../domain/identifier';
 
 @Component({
   selector: 'app-dataset-dialog',

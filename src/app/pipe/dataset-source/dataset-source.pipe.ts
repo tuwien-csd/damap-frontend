@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Dataset} from '../../../domain/dataset';
-import {DataSource} from '../../../domain/enum/data-source.enum';
+import {Dataset} from '../../domain/dataset';
+import {DataSource} from '../../domain/enum/data-source.enum';
 
 @Pipe({
   name: 'datasetSource'

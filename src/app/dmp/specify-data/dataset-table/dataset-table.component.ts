@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
-import {DataSource} from '../../../../../domain/enum/data-source.enum';
+import {DataSource} from '../../../domain/enum/data-source.enum';
 import {DatasetDialogComponent} from '../dataset-dialog/dataset-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {Dataset} from '../../../../../domain/dataset';
+import {Dataset} from '../../../domain/dataset';
 
 @Component({
   selector: 'app-dataset-table',

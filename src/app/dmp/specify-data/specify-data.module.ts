@@ -16,10 +16,10 @@ import {MatTableModule} from '@angular/material/table';
 import {ReusedDataComponent} from './reused-data/reused-data.component';
 import {CreatedDataComponent} from './created-data/created-data.component';
 import {DoiSearchModule} from '../../widgets/doi-search/doi-search.module';
-import {DatasetSourceModule} from '../../src/app/pipe/dataset-source/dataset-source.module';
-import {DatasetDialogComponent} from '../../src/app/dmp/specify-data/dataset-dialog/dataset-dialog.component';
-import {DatasetTableComponent} from '../../src/app/dmp/specify-data/dataset-table/dataset-table.component';
-import {DataMcComponent} from '../../src/app/dmp/specify-data/data-mc/data-mc.component';
+import {DatasetSourceModule} from '../../pipe/dataset-source/dataset-source.module';
+import {DatasetDialogComponent} from './dataset-dialog/dataset-dialog.component';
+import {DatasetTableComponent} from './dataset-table/dataset-table.component';
+import {DataMcComponent} from './data-mc/data-mc.component';
 
 @NgModule({
   imports: [
