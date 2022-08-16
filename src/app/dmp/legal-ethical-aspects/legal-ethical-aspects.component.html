@@ -137,11 +137,11 @@
         <app-input-wrapper [label]="'dmp.steps.legal.question.otherLegalRestrictionsDocuments'" [maxLength]="4000"
                            appearance="fill" [control]="otherLegalRestrictionsDocuments"></app-input-wrapper>
       </ng-container>
-      <app-input-wrapper [label]="'dmp.steps.legal.question.dataRightsAndAccessControl'" [maxLength]="4000"
-                         appearance="fill" [control]="dataRightsAndAccessControl"></app-input-wrapper>
     </ng-container>
     <hr *ngIf="!last">
   </div>
+  <app-input-wrapper [label]="'dmp.steps.legal.question.dataRightsAndAccessControl'" [maxLength]="4000"
+                           appearance="fill" [control]="dataRightsAndAccessControl"></app-input-wrapper>
 </div>
 
 <app-ethical-aspects [legalEthicalStep]="legalEthicalStep"></app-ethical-aspects>
