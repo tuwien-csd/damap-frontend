@@ -27,8 +27,8 @@
           <mat-form-field>
             <mat-label>{{'dmp.steps.repositories.question.datasets' | translate}}</mat-label>
             <mat-select multiple formControlName="datasets">
-              <mat-option *ngFor="let dataset of datasets.controls" [value]="dataset.value.referenceHash">
-                {{dataset.value.title}}
+              <mat-option *ngFor="let dataset of datasets.value | datasetSource: datasetSource.NEW" [value]="dataset.referenceHash">
+                {{dataset.title}}
               </mat-option>
             </mat-select>
           </mat-form-field>

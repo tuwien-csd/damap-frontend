@@ -13,6 +13,7 @@ import {
   selectRepositoriesLoaded
 } from '../../store/selectors/repository.selectors';
 import {loadAllRepositories, loadRecommendedRepositories, loadRepository} from '../../store/actions/repository.actions';
+import {DataSource} from '../../domain/enum/data-source.enum';
 
 @Component({
   selector: 'app-dmp-repo',
@@ -34,6 +35,7 @@ export class RepoComponent implements OnInit {
   @Output() repositoryToRemove = new EventEmitter<any>();
 
   LoadingState = LoadingState;
+  readonly datasetSource: any = DataSource;
 
   constructor(public store: Store<AppState>) {
   }

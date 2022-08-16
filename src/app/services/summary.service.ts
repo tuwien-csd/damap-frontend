@@ -274,7 +274,7 @@ export class SummaryService {
 
     const repoDatasets: string[] = [...new Set([...this.getAllHostDatasets(dmp.repositories)])];
     const newDatasets = dmp.datasets.filter(d => d.source === DataSource.NEW && d.dataAccess === DataAccessType.OPEN);
-    const undepositedDataset = newDatasets.find(d => repoDatasets.includes(d.referenceHash)) === undefined;
+    const undepositedDataset = newDatasets.find(d => !repoDatasets.includes(d.referenceHash));
 
     if (newDatasets.length && undepositedDataset) {
       repositoriesLevel.completeness = 0;

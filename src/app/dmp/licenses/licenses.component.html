@@ -2,8 +2,8 @@
 </app-step-intro>
 <p>{{'dmp.steps.licensing.hint' | translate}}</p>
 <div [formGroup]="dmpForm">
-  <ng-container formArrayName="datasets">
-    <mat-card *ngFor="let dataset of datasets?.controls; index as i" class="mat-selected">
+  <ng-container formArrayName="datasets" *ngFor="let dataset of datasets?.controls; index as i">
+    <mat-card *ngIf="dataset.value.source === datasetSource.NEW" class="mat-selected">
       <ng-container [formGroupName]="i">
         <div class="mat-card-container">
           <div class="mat-card-left">
