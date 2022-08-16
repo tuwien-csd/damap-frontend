@@ -191,32 +191,22 @@ export class BackendService {
 
   getDmpDocument(id: number) {
     return this.http.get(this.backendUrl + 'document/' + id,
-      {responseType: 'blob', observe: 'response'}).subscribe(
-      response => {
-        const a = document.createElement('a');
-        const url = URL || webkitURL;
-        const contentDisposition = response.headers.get('content-disposition');
-        a.href = url.createObjectURL(response.body);
-        a.download = BackendService.getFilenameFromContentDisposition(contentDisposition);
-        // start download
-        a.click();
-        url.revokeObjectURL(a.href);
+      {responseType: 'blob', observe: 'response'}).pipe(
+      catchError(this.handleError('http.error.document'))
+    ).subscribe(
+      {
+        next: response => this.downloadFile(response),
       }
     );
   }
 
   getMaDmpJsonFile(id: number) {
     return this.http.get(this.backendUrl + 'madmp/file/' + id,
-      {responseType: 'blob', observe: 'response'}).subscribe(
-      response => {
-        const a = document.createElement('a');
-        const url = URL || webkitURL;
-        const contentDisposition = response.headers.get('content-disposition')
-        a.href = url.createObjectURL(response.body);
-        a.download = BackendService.getFilenameFromContentDisposition(contentDisposition);
-        // start download
-        a.click();
-        url.revokeObjectURL(a.href);
+      {responseType: 'blob', observe: 'response'}).pipe(
+      catchError(this.handleError('http.error.document'))
+    ).subscribe(
+      {
+        next: response => this.downloadFile(response)
       }
     );
   }
@@ -252,5 +242,16 @@ export class BackendService {
       this.feedbackService.error(message);
       throw new HttpErrorResponse({statusText: message});
     };
+  }
+
+  private downloadFile(response: any) {
+    const a = document.createElement('a');
+    const url = URL || webkitURL;
+    const contentDisposition = response.headers.get('content-disposition')
+    a.href = url.createObjectURL(response.body);
+    a.download = BackendService.getFilenameFromContentDisposition(contentDisposition);
+    // start download
+    a.click();
+    url.revokeObjectURL(a.href);
   }
 }

@@ -92,7 +92,8 @@
         "save": "Failed to save DMP version. ",
         "revision": "Failed to load DMP revision. "
       },
-      "openaire": "Failed to get dataset information from OpenAIRE, please retry later."
+      "openaire": "Failed to get dataset information from OpenAIRE, please retry later.",
+      "document": "An unexpected error occurred while generating your document. If the issue persists contact [insert contact for technical issue]."
     }
   },
   "dashboard": {
