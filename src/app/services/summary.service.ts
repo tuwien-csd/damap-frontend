@@ -197,7 +197,7 @@ export class SummaryService {
 
   static evaluateLegalStep(dmp: Dmp): Completeness {
     const legalEthicalAspectsLevel: Completeness = {step: 'dmp.steps.legal.label', completeness: 0, status: []};
-    const legalPercent = 100 / 3;
+    const legalPercent = 25;
     // Sensitive Data
     if (dmp.sensitiveData) {
       legalEthicalAspectsLevel.completeness +=
@@ -221,10 +221,14 @@ export class SummaryService {
     if (dmp.legalRestrictions) {
       legalEthicalAspectsLevel.completeness +=
         this.conditionalInfo(dmp, 'legalRestrictions', dmp.legalRestrictionsDocuments, Agreement.OTHER, dmp.otherLegalRestrictionsDocument) * legalPercent / 3;
-      if (dmp.legalRestrictionsComment && dmp.dataRightsAndAccessControl) {
+      if (dmp.legalRestrictionsComment) {
         legalEthicalAspectsLevel.completeness += legalPercent / 3;
       }
     } else {
+      legalEthicalAspectsLevel.completeness += legalPercent;
+    }
+
+    if (dmp.dataRightsAndAccessControl) {
       legalEthicalAspectsLevel.completeness += legalPercent;
     }
 
@@ -274,7 +278,7 @@ export class SummaryService {
 
     const repoDatasets: string[] = [...new Set([...this.getAllHostDatasets(dmp.repositories)])];
     const newDatasets = dmp.datasets.filter(d => d.source === DataSource.NEW && d.dataAccess === DataAccessType.OPEN);
-    const undepositedDataset = newDatasets.find(d => repoDatasets.includes(d.referenceHash)) === undefined;
+    const undepositedDataset = newDatasets.find(d => !repoDatasets.includes(d.referenceHash));
 
     if (newDatasets.length && undepositedDataset) {
       repositoriesLevel.completeness = 0;
@@ -289,7 +293,7 @@ export class SummaryService {
 
   static evaluateReuseStep(dmp: Dmp): Completeness {
     const reuseLevel: Completeness = {step: 'dmp.steps.data.reuse.label', completeness: 0, status: []};
-    const restrictedDatasets = !!dmp.datasets.filter(d => d.dataAccess === DataAccessType.RESTRICTED).length;
+    const restrictedDatasets = !!dmp.datasets.filter(d => d.dataAccess === DataAccessType.RESTRICTED && d.source === DataSource.NEW).length;
     const reusePercent = 100 / (restrictedDatasets ? 3 : 2);
     if (dmp.targetAudience) {
       reuseLevel.completeness += reusePercent;

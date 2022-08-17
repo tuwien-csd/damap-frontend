@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DatasetTableComponent} from './dataset-table.component';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {TranslateTestingModule} from '../../../../../testing/translate-testing/translate-testing.module';
+import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
 import {DatasetSourceModule} from '../../../pipe/dataset-source/dataset-source.module';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';

@@ -2,15 +2,15 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DatasetDialogComponent} from './dataset-dialog.component';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {closedDatasetMock} from '../../../../../mocks/dataset-mocks';
-import {FormService} from '../../../../../services/form.service';
+import {closedDatasetMock} from '../../../mocks/dataset-mocks';
+import {FormService} from '../../../services/form.service';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DataSource} from '../../../../../domain/enum/data-source.enum';
+import {DataSource} from '../../../domain/enum/data-source.enum';
 import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import {IdentifierType} from '../../../../../domain/enum/identifier-type.enum';
+import {IdentifierType} from '../../../domain/enum/identifier-type.enum';
 
 describe('DatasetDialogComponent', () => {
   let component: DatasetDialogComponent;

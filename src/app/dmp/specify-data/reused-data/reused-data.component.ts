@@ -5,7 +5,7 @@ import {Dataset} from '../../../domain/dataset';
 import {BackendService} from '../../../services/backend.service';
 import {LoadingState} from '../../../domain/enum/loading-state.enum';
 import {AbstractBaseDataComponent} from '../abstract-base-data.component';
-import {DatasetDialogComponent} from '../../../src/app/dmp/specify-data/dataset-dialog/dataset-dialog.component';
+import {DatasetDialogComponent} from '../dataset-dialog/dataset-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({

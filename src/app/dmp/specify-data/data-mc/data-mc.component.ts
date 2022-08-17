@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {DataKind} from '../../../../../domain/enum/data-kind.enum';
+import {DataKind} from '../../../domain/enum/data-kind.enum';
 
 @Component({
   selector: 'app-data-mc',

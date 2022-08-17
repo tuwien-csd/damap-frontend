@@ -4,6 +4,7 @@ import {License} from '../../domain/license';
 import {LicenseDefinitions} from '../../widgets/license-wizard/license-wizard-list';
 import {DataAccessType} from '../../domain/enum/data-access-type.enum';
 import {ComplianceType} from '../../domain/enum/compliance-type.enum';
+import {DataSource} from '../../domain/enum/data-source.enum';
 
 @Component({
   selector: 'app-dmp-licenses',
@@ -20,9 +21,7 @@ export class LicensesComponent {
   accessType: any = DataAccessType;
 
   translateEnumPrefix = 'enum.dataaccess.'
-
-  constructor() {
-  }
+  readonly datasetSource: any = DataSource;
 
   setLicenseSelectorResult(event, index: number) {
     const dataset = this.datasets.at(index);
@@ -37,11 +36,11 @@ export class LicensesComponent {
   }
 
   get restricted() {
-    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.RESTRICTED);
+    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.RESTRICTED && item.source === DataSource.NEW);
   }
 
   get closed() {
-    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.CLOSED);
+    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.CLOSED && item.source === DataSource.NEW);
   }
 
   getFormGroup(index: number): FormGroup {

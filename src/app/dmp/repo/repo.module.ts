@@ -24,6 +24,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {TreeSelectFormFieldModule} from '../../widgets/tree-select-form-field/tree-select-form-field.module';
+import {DatasetSourceModule} from '../../pipe/dataset-source/dataset-source.module';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import {TreeSelectFormFieldModule} from '../../widgets/tree-select-form-field/tr
     MatProgressBarModule,
     MatPaginatorModule,
     MatExpansionModule,
+    DatasetSourceModule,
   ],
   declarations: [RepoDetailsComponent, RepoFilterComponent, RepoRecommendationComponent,
     RepoTableComponent, RetentionPeriodComponent, RepoComponent, RepoPipe],

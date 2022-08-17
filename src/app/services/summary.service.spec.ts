@@ -149,8 +149,11 @@ describe('SummaryService', () => {
 
   it('should test legal and ethical step', () => {
     let summary = SummaryService.evaluateLegalStep(dmp);
-    expect(summary.completeness).toEqual(100);
-    expect(summary.status).toEqual(['dmp.steps.summary.allinfo']);
+    expect(summary.completeness).toBeLessThan(100);
+
+    dmp.dataRightsAndAccessControl = 'access control';
+    summary = SummaryService.evaluateLegalStep(dmp);
+    expect(summary.completeness).toBeGreaterThanOrEqual(100);
 
     dmp.personalData = true;
     summary = SummaryService.evaluateLegalStep(dmp);
@@ -160,6 +163,7 @@ describe('SummaryService', () => {
     dmp.personalDataCompliance = [ComplianceType.ANONYMISATION];
     summary = SummaryService.evaluateLegalStep(dmp);
     expect(summary.completeness).toEqual(100);
+    expect(summary.status).toEqual(['dmp.steps.summary.allinfo']);
 
     dmp.personalDataCompliance = [ComplianceType.OTHER];
     summary = SummaryService.evaluateLegalStep(dmp);
@@ -181,11 +185,8 @@ describe('SummaryService', () => {
     dmp.legalRestrictionsDocuments = [Agreement.CONFIDENTIALITY_AGREEMENT];
     dmp.legalRestrictionsComment = 'comment';
     summary = SummaryService.evaluateLegalStep(dmp);
-    expect(summary.completeness).toBeLessThan(100);
+    expect(summary.completeness).toEqual(100);
 
-    dmp.dataRightsAndAccessControl = 'access control';
-    summary = SummaryService.evaluateLegalStep(dmp);
-    expect(summary.completeness).toBeGreaterThanOrEqual(100);
   });
 
   it('should test license step', () => {
