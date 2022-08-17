@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {DataAccessType} from '../../domain/enum/data-access-type.enum';
+import {DataSource} from '../../domain/enum/data-source.enum';
 
 @Component({
   selector: 'app-dmp-reuse',
@@ -23,6 +24,6 @@ export class ReuseComponent {
   }
 
   get restricted() {
-    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.RESTRICTED);
+    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.RESTRICTED && item.source === DataSource.NEW);
   }
 }

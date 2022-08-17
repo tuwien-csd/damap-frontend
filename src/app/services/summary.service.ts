@@ -293,7 +293,7 @@ export class SummaryService {
 
   static evaluateReuseStep(dmp: Dmp): Completeness {
     const reuseLevel: Completeness = {step: 'dmp.steps.data.reuse.label', completeness: 0, status: []};
-    const restrictedDatasets = !!dmp.datasets.filter(d => d.dataAccess === DataAccessType.RESTRICTED).length;
+    const restrictedDatasets = !!dmp.datasets.filter(d => d.dataAccess === DataAccessType.RESTRICTED && d.source === DataSource.NEW).length;
     const reusePercent = 100 / (restrictedDatasets ? 3 : 2);
     if (dmp.targetAudience) {
       reuseLevel.completeness += reusePercent;
