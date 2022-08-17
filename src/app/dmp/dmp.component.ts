@@ -20,6 +20,7 @@ import {InternalStorage} from '../domain/internal-storage';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Dataset} from '../domain/dataset';
 import {DataKind} from '../domain/enum/data-kind.enum';
+import {LoggerService} from '../services/logger.service';
 
 @Component({
   selector: 'app-dmp',
@@ -58,6 +59,7 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   // TODO: Manage editability based on accessType (role)
   constructor(
+    private logger: LoggerService,
     private auth: OAuthService,
     private formService: FormService,
     private route: ActivatedRoute,
@@ -77,8 +79,8 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.username = this.auth.getIdentityClaims()['preferred_username'];
 
     this.dmpForm.valueChanges.subscribe(value => {
-      console.log('DMPform Update');
-      console.log(value);
+      this.logger.debug('DMPform Update');
+      this.logger.debug(value);
       this.store.dispatch(formDiff({newDmp: value}));
     });
     this.formChanged$.subscribe(value => this.formChanged = value);
@@ -248,7 +250,7 @@ export class DmpComponent implements OnInit, OnDestroy {
   private getDmpById() {
     const id = +this.route.snapshot.paramMap.get('id');
     if (id) {
-      console.log('Get DMP with ID: ' + id);
+      this.logger.debug('Get DMP with ID: ' + id);
       this.backendService.getDmpById(id).subscribe(
         dmp => {
           if (dmp != null) {
