@@ -63,6 +63,10 @@
       "404": "The requested resource could not be found.",
       "500": "An error occurred, please contact [insert contact for technical issue].",
       "503": "Service is currently unavailable, please retry later.",
+      "consent": {
+        "edit": "Failed to update consent preferences.",
+        "one": "Failed to retrieve consent preferences."
+      },
       "fileanalysis": "Failed to analyse file. ",
       "repositories": {
         "search": "Failed to search repositories. ",
@@ -85,8 +89,11 @@
       "storages": "Failed to load storages. ",
       "versions": {
         "load": "Failed to load DMP versions. ",
-        "save": "Failed to save DMP version. "
-      }
+        "save": "Failed to save DMP version. ",
+        "revision": "Failed to load DMP revision. "
+      },
+      "openaire": "Failed to get dataset information from OpenAIRE, please retry later.",
+      "document": "An unexpected error occurred while generating your document. If the issue persists contact [insert contact for technical issue]."
     }
   },
   "dashboard": {
