@@ -1,0 +1,9 @@
+<app-save-status [saved]="!formChanged"></app-save-status>
+<div id="save-dmp">
+  <button mat-button color="primary" [routerLink]="'/plans'" [disabled]="!this.formChanged"
+          routerLinkActive="active">{{'button.discard' | translate }}</button>
+  <button mat-raised-button color="primary" (click)="saveDmp()"
+          [disabled]="dmpForm.invalid || !this.formChanged">{{'button.save' | translate }}</button>
+  <button mat-raised-button color="primary" (click)="saveDmpVersion()"
+          [disabled]="dmpForm.invalid">{{'button.version' | translate }}</button>
+</div>

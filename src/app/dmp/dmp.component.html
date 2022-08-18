@@ -1,4 +1,4 @@
-<mat-vertical-stepper [linear]="false" (selectionChange)="changeStep()">
+<mat-vertical-stepper [linear]="false" (selectionChange)="changeStep($event)">
   <mat-step label="{{'dmp.steps.project.label' | translate }}">
     <app-dmp-project [projects]="projects$ | async"
                      [loaded]="projectsLoaded$ | async"
@@ -102,14 +102,5 @@
   {{'dmp.nodatasets' | translate }}
 </ng-template>
 
-<div class="dmp-actions">
-  <app-save-status [saved]="!formChanged"></app-save-status>
-  <div id="save-dmp">
-    <button mat-button color="primary" [routerLink]="'/plans'"
-            routerLinkActive="active">{{'button.discard' | translate }}</button>
-    <button mat-raised-button color="primary" (click)="saveDmp()"
-            [disabled]="dmpForm.invalid">{{'button.save' | translate }}</button>
-    <button mat-raised-button color="primary" (click)="saveDmpVersion()"
-            [disabled]="dmpForm.invalid">{{'button.version' | translate }}</button>
-  </div>
-</div>
+<app-actions class="dmp-actions" [stepChanged$]="stepChanged$">
+</app-actions>

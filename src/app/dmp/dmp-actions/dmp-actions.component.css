@@ -1,0 +1,11 @@
+#save-dmp {
+  position: relative;
+  float: right;
+  display: flex;
+  justify-content: space-around;
+  padding-right: 2rem;
+}
+
+#save-dmp > button {
+  margin: 0 0.5rem;
+}

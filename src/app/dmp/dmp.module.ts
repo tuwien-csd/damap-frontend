@@ -1,12 +1,11 @@
 import {NgModule} from '@angular/core';
-import {DmpComponent, SaveVersionDialogComponent} from './dmp.component';
+import {DmpComponent} from './dmp.component';
 import {CommonModule} from '@angular/common';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {MatStepperModule} from '@angular/material/stepper';
 import {RouterModule} from '@angular/router';
 import {ReuseModule} from './reuse/reuse.module';
 import {SummaryModule} from './summary/summary.module';
-import {SaveStatusModule} from '../widgets/save-status/save-status.module';
 import {CostsModule} from './costs/costs.module';
 import {DataDeletionModule} from './data-deletion/data-deletion.module';
 import {DataStorageModule} from './data-storage/data-storage.module';
@@ -23,6 +22,7 @@ import {DMP_ROUTES} from './dmp.routes';
 import {DmpStoreModule} from './dmp-store.module';
 import {VersionModule} from '../version/version.module';
 import {FormsModule} from '@angular/forms';
+import {DmpActionsModule} from './dmp-actions/dmp-actions.module';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
@@ -47,9 +47,6 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
     DmpStoreModule,
     VersionModule,
 
-    // Widgets
-    SaveStatusModule,
-
     // Steps
     ProjectModule,
     PeopleModule,
@@ -66,8 +63,9 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
 
     // Materials
     MatStepperModule,
+    DmpActionsModule,
   ],
-  declarations: [DmpComponent, SaveVersionDialogComponent]
+  declarations: [DmpComponent]
 })
 export class DmpModule {
 }

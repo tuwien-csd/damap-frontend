@@ -5,20 +5,34 @@ import {FormService} from '../../services/form.service';
 @Injectable()
 export class FormServiceStub {
 
-  dmpForm = new FormGroup({
-    project: new FormControl(),
-    data: new FormGroup({kind: new FormControl('SPECIFY')}),
-    datasets: new FormArray([]),
-    hosts: new FormArray([])
-  });
+  get dmpForm() {
+    return new FormGroup({
+      id: new FormControl(null),
+      project: new FormControl(),
+      data: new FormGroup({kind: new FormControl('SPECIFY')}),
+      datasets: new FormArray([]),
+      documentation: new FormGroup({}),
+      legal: new FormGroup({}),
+      storage: new FormArray([]),
+      externalStorage: new FormArray([]),
+      externalStorageInfo: new FormControl(),
+      repositories: new FormArray([]),
+      reuse: new FormGroup({}),
+      costs: new FormGroup({})
+    });
+  }
 
   resetForm() {
+  }
+
+  exportFormToDmp() {
+    return {};
   }
 }
 
 @NgModule({
   providers: [
-    {provide: FormService, useValue: FormServiceStub},
+    {provide: FormService, useClass: FormServiceStub},
   ]
 })
 export class FormTestingModule {
