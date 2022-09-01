@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Project} from '../../domain/project';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
 import {MatTabGroup} from '@angular/material/tabs';
 
@@ -13,7 +13,7 @@ export class ProjectComponent {
 
   @Input() projects: Project[];
   @Input() loaded: LoadingState;
-  @Input() projectStep: FormControl;
+  @Input() projectStep: UntypedFormControl;
 
   @Output() project = new EventEmitter<any>();
 

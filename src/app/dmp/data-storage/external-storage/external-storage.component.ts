@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-dmp-external-storage',
@@ -8,9 +8,9 @@ import {FormArray, FormControl, FormGroup} from '@angular/forms';
 })
 export class ExternalStorageComponent {
 
-  @Input() externalStorageStep: FormArray;
-  @Input() datasets: FormArray;
-  @Input() externalStorageInfo: FormControl = new FormControl();
+  @Input() externalStorageStep: UntypedFormArray;
+  @Input() datasets: UntypedFormArray;
+  @Input() externalStorageInfo: UntypedFormControl = new UntypedFormControl();
 
   @Output() externalStorageToAdd = new EventEmitter();
   @Output() externalStorageToRemove = new EventEmitter<number>();
@@ -18,8 +18,8 @@ export class ExternalStorageComponent {
   constructor() {
   }
 
-  getFormControl(index: number, controlName: string): FormControl {
-    return (this.externalStorageStep?.at(index) as FormGroup)?.controls[controlName] as FormControl;
+  getFormControl(index: number, controlName: string): UntypedFormControl {
+    return (this.externalStorageStep?.at(index) as UntypedFormGroup)?.controls[controlName] as UntypedFormControl;
   }
 
   addExternalStorage() {

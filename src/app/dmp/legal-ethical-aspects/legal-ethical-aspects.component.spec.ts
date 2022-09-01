@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {LegalEthicalAspectsComponent} from './legal-ethical-aspects.component';
-import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import {StepIntroComponent} from '../../widgets/step-intro/step-intro.component';
 import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
@@ -21,15 +21,15 @@ describe('LegalEthicalAspectsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LegalEthicalAspectsComponent);
     component = fixture.componentInstance;
-    component.legalEthicalStep = new FormGroup({
-      sensitiveData: new FormControl(true),
-      sensitiveDataAccess: new FormControl(''),
-      personalData: new FormControl(true),
-      otherPersonalDataCompliance: new FormControl([]),
-      otherDataSecurityMeasures: new FormControl(''),
-      legalRestrictions: new FormControl(true),
-      legalRestrictionsComment: new FormControl(''),
-      otherLegalRestrictionsDocuments: new FormControl(''),
+    component.legalEthicalStep = new UntypedFormGroup({
+      sensitiveData: new UntypedFormControl(true),
+      sensitiveDataAccess: new UntypedFormControl(''),
+      personalData: new UntypedFormControl(true),
+      otherPersonalDataCompliance: new UntypedFormControl([]),
+      otherDataSecurityMeasures: new UntypedFormControl(''),
+      legalRestrictions: new UntypedFormControl(true),
+      legalRestrictionsComment: new UntypedFormControl(''),
+      otherLegalRestrictionsDocuments: new UntypedFormControl(''),
     });
     fixture.detectChanges();
   });

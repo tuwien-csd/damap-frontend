@@ -4,15 +4,15 @@ import {DatasetTableComponent} from './dataset-table.component';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
 import {DatasetSourceModule} from '../../../pipe/dataset-source/dataset-source.module';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {of} from 'rxjs';
 
 describe('DatasetTableComponent', () => {
   let component: DatasetTableComponent;
   let fixture: ComponentFixture<DatasetTableComponent>;
-  let formGroup1: FormGroup;
-  let formGroup2: FormGroup;
+  let formGroup1: UntypedFormGroup;
+  let formGroup2: UntypedFormGroup;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -24,15 +24,15 @@ describe('DatasetTableComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DatasetTableComponent);
     component = fixture.componentInstance;
-    formGroup1 = new FormGroup({
-      id: new FormControl(0),
-      referenceHash: new FormControl('abc'),
+    formGroup1 = new UntypedFormGroup({
+      id: new UntypedFormControl(0),
+      referenceHash: new UntypedFormControl('abc'),
     });
-    formGroup2 = new FormGroup({
-      id: new FormControl(1),
-      referenceHash: new FormControl('xyz'),
+    formGroup2 = new UntypedFormGroup({
+      id: new UntypedFormControl(1),
+      referenceHash: new UntypedFormControl('xyz'),
     });
-    component.datasets = new FormArray([formGroup1, formGroup2]);
+    component.datasets = new UntypedFormArray([formGroup1, formGroup2]);
     fixture.detectChanges();
   });
 

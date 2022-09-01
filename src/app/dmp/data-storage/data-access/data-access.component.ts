@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormGroup} from '@angular/forms';
 import {AccessRight} from '../../../domain/enum/access-right.enum';
 
 @Component({
@@ -9,8 +9,8 @@ import {AccessRight} from '../../../domain/enum/access-right.enum';
 })
 export class DataAccessComponent {
 
-  @Input() dmpForm: FormGroup;
-  @Input() datasets: FormArray;
+  @Input() dmpForm: UntypedFormGroup;
+  @Input() datasets: UntypedFormArray;
 
   accessRight = AccessRight;
   panelOpenState = false;

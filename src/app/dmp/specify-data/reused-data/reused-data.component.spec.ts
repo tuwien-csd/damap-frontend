@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ReusedDataComponent} from './reused-data.component';
 import {BackendService} from '../../../services/backend.service';
 import {MatDialogModule} from '@angular/material/dialog';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {restrictedDatasetMock} from '../../../mocks/dataset-mocks';
 import {of} from 'rxjs';
 
@@ -26,8 +26,8 @@ describe('ReusedDataComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ReusedDataComponent);
     component = fixture.componentInstance;
-    component.specifyDataStep = new FormGroup({
-      reusedKind: new FormControl(undefined)
+    component.specifyDataStep = new UntypedFormGroup({
+      reusedKind: new UntypedFormControl(undefined)
     });
     fixture.detectChanges();
   });

@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DataDeletionComponent} from './data-deletion.component';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {MatSliderModule} from '@angular/material/slider';
 import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
 import {mockContributor1, mockContributor2} from '../../mocks/contributor-mocks';
@@ -21,13 +21,13 @@ describe('DataDeletionComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DataDeletionComponent);
     component = fixture.componentInstance;
-    component.dataset = new FormGroup({
-      delete: new FormControl(true),
-      dateOfDeletion: new FormControl(null),
-      reasonForDeletion: new FormControl('reason')
+    component.dataset = new UntypedFormGroup({
+      delete: new UntypedFormControl(true),
+      dateOfDeletion: new UntypedFormControl(null),
+      reasonForDeletion: new UntypedFormControl('reason')
     });
-    component.dmpForm = new FormGroup({
-      repositories: new FormArray([])
+    component.dmpForm = new UntypedFormGroup({
+      repositories: new UntypedFormArray([])
     });
     fixture.detectChanges();
   });
@@ -44,21 +44,21 @@ describe('DataDeletionComponent', () => {
   });
 
   it('should check if dataset will be published', () => {
-    component.dmpForm = new FormGroup({
-      repositories: new FormArray([
-        new FormControl({datasets: ['ref1']}),
-        new FormControl({datasets: ['ref1']})
+    component.dmpForm = new UntypedFormGroup({
+      repositories: new UntypedFormArray([
+        new UntypedFormControl({datasets: ['ref1']}),
+        new UntypedFormControl({datasets: ['ref1']})
       ])
     });
-    component.dataset = new FormGroup({
-      referenceHash: new FormControl('ref1')
+    component.dataset = new UntypedFormGroup({
+      referenceHash: new UntypedFormControl('ref1')
     });
 
     expect(component.willBePublished).toBe(true);
 
 
-    component.dataset = new FormGroup({
-      referenceHash: new FormControl('ref2')
+    component.dataset = new UntypedFormGroup({
+      referenceHash: new UntypedFormControl('ref2')
     });
 
     expect(component.willBePublished).toBe(false);

@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {EthicalAspectsComponent} from './ethical-aspects.component';
-import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
 
@@ -20,10 +20,10 @@ describe('EthicalAspectsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EthicalAspectsComponent);
     component = fixture.componentInstance;
-    component.legalEthicalStep = new FormGroup({
-      humanParticipants: new FormControl(false),
-      ethicalIssues: new FormControl(false),
-      committeeReviewed: new FormControl(false)
+    component.legalEthicalStep = new UntypedFormGroup({
+      humanParticipants: new UntypedFormControl(false),
+      ethicalIssues: new UntypedFormControl(false),
+      committeeReviewed: new UntypedFormControl(false)
     });
     fixture.detectChanges();
   });

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {CostType} from '../../domain/enum/cost-type.enum';
 
 @Component({
@@ -9,7 +9,7 @@ import {CostType} from '../../domain/enum/cost-type.enum';
 })
 export class CostsComponent {
 
-  @Input() costsStep: FormGroup;
+  @Input() costsStep: UntypedFormGroup;
 
   @Output() costToAdd = new EventEmitter();
   @Output() costToRemove = new EventEmitter<number>();
@@ -19,11 +19,11 @@ export class CostsComponent {
   translateEnumPrefix = 'enum.costs.'
 
   get list() {
-    return this.costsStep?.get('list') as FormArray;
+    return this.costsStep?.get('list') as UntypedFormArray;
   }
 
-  getFormControl(index: number, controlName: string): FormControl {
-    return (this.list.at(index) as FormGroup)?.controls[controlName] as FormControl;
+  getFormControl(index: number, controlName: string): UntypedFormControl {
+    return (this.list.at(index) as UntypedFormGroup)?.controls[controlName] as UntypedFormControl;
   }
 
   addCost() {

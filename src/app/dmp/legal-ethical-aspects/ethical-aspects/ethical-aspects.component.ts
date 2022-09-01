@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {UntypedFormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-ethical-aspects',
@@ -8,6 +8,6 @@ import {FormGroup} from '@angular/forms';
 })
 export class EthicalAspectsComponent {
 
-  @Input() legalEthicalStep: FormGroup;
+  @Input() legalEthicalStep: UntypedFormGroup;
 
 }

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {notEmptyValidator} from '../../../validators/not-empty.validator';
 import {IdentifierType} from '../../../domain/enum/identifier-type.enum';
 import {orcidValidator} from '../../../validators/orcid.validator';
@@ -16,13 +16,13 @@ export class ContributorManualComponent {
 
   show = false;
 
-  form = new FormGroup({
-    firstName: new FormControl('', [notEmptyValidator(), Validators.maxLength(4000)]),
-    lastName: new FormControl('', [notEmptyValidator(), Validators.maxLength(4000)]),
-    mbox: new FormControl('', [notEmptyValidator(), Validators.maxLength(4000)]),
-    personId: new FormGroup({
-      type: new FormControl(IdentifierType.ORCID),
-      identifier: new FormControl('', [orcidValidator(), Validators.maxLength(19)])
+  form = new UntypedFormGroup({
+    firstName: new UntypedFormControl('', [notEmptyValidator(), Validators.maxLength(4000)]),
+    lastName: new UntypedFormControl('', [notEmptyValidator(), Validators.maxLength(4000)]),
+    mbox: new UntypedFormControl('', [notEmptyValidator(), Validators.maxLength(4000)]),
+    personId: new UntypedFormGroup({
+      type: new UntypedFormControl(IdentifierType.ORCID),
+      identifier: new UntypedFormControl('', [orcidValidator(), Validators.maxLength(19)])
     })
   })
 
@@ -40,26 +40,26 @@ export class ContributorManualComponent {
     this.resetForm();
   }
 
-  firstName(): FormControl {
-    return this.form.controls.firstName as FormControl;
+  firstName(): UntypedFormControl {
+    return this.form.controls.firstName as UntypedFormControl;
   }
 
-  lastName(): FormControl {
-    return this.form.controls.lastName as FormControl;
+  lastName(): UntypedFormControl {
+    return this.form.controls.lastName as UntypedFormControl;
   }
 
-  mbox(): FormControl {
-    return this.form.controls.mbox as FormControl;
+  mbox(): UntypedFormControl {
+    return this.form.controls.mbox as UntypedFormControl;
   }
 
-  identifier(): FormControl {
-    return (this.form.controls.personId as FormGroup).controls.identifier as FormControl;
+  identifier(): UntypedFormControl {
+    return (this.form.controls.personId as UntypedFormGroup).controls.identifier as UntypedFormControl;
   }
 
   resetForm() {
     this.show = false;
     this.form.reset();
-    (this.form.controls.personId as FormGroup).controls.type.setValue(IdentifierType.ORCID);
+    (this.form.controls.personId as UntypedFormGroup).controls.type.setValue(IdentifierType.ORCID);
   }
 
 }

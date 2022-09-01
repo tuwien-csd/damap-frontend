@@ -6,7 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 import {BackendService} from '../services/backend.service';
 import {FeedbackService} from '../services/feedback.service';
-import {FormControl, ReactiveFormsModule} from '@angular/forms';
+import {UntypedFormControl, ReactiveFormsModule} from '@angular/forms';
 import {LoadingState} from '../domain/enum/loading-state.enum';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
@@ -89,7 +89,7 @@ describe('DmpComponent', () => {
   it('should test showStep', () => {
     expect(component.showStep).toBeFalsy();
 
-    component.datasets.push(new FormControl({}));
+    component.datasets.push(new UntypedFormControl({}));
     expect(component.showStep).toBeTruthy();
   });
 

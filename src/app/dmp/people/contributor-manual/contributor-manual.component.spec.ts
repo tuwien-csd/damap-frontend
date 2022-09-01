@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ContributorManualComponent} from './contributor-manual.component';
 import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
-import {FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {UntypedFormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
@@ -36,6 +36,6 @@ describe('ContributorManualComponent', () => {
       }
     });
     component.resetForm();
-    expect((component.form.controls.personId as FormGroup).controls.type.value).toBe(IdentifierType.ORCID);
+    expect((component.form.controls.personId as UntypedFormGroup).controls.type.value).toBe(IdentifierType.ORCID);
   })
 });

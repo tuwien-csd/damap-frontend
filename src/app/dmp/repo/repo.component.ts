@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormGroup} from '@angular/forms';
 import {RepositoryDetails} from '../../domain/repository-details';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
 import {Dataset} from '../../domain/dataset';
@@ -27,9 +27,9 @@ export class RepoComponent implements OnInit {
   recommendedLoaded$: Observable<LoadingState>;
   recommended$: Observable<RepositoryDetails[]>;
 
-  @Input() dmpForm: FormGroup;
-  @Input() repoStep: FormArray;
-  @Input() datasets: FormArray;
+  @Input() dmpForm: UntypedFormGroup;
+  @Input() repoStep: UntypedFormArray;
+  @Input() datasets: UntypedFormArray;
 
   @Output() repositoryToAdd = new EventEmitter<any>();
   @Output() repositoryToRemove = new EventEmitter<any>();

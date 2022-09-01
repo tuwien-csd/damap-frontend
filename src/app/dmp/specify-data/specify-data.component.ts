@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {AbstractBaseDataComponent} from './abstract-base-data.component';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-dmp-specify-data',
@@ -19,12 +19,12 @@ export class SpecifyDataComponent extends AbstractBaseDataComponent {
     super();
   }
 
-  get dataGeneration(): FormControl {
-    return this.specifyDataStep.get('dataGeneration') as FormControl;
+  get dataGeneration(): UntypedFormControl {
+    return this.specifyDataStep.get('dataGeneration') as UntypedFormControl;
   }
 
-  get explanation(): FormControl {
-    return this.specifyDataStep.get('explanation') as FormControl;
+  get explanation(): UntypedFormControl {
+    return this.specifyDataStep.get('explanation') as UntypedFormControl;
   }
 
   analyseFile(file: File) {

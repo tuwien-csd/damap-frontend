@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormGroup} from '@angular/forms';
 import {DataSource} from '../../../domain/enum/data-source.enum';
 import {DatasetDialogComponent} from '../dataset-dialog/dataset-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -12,7 +12,7 @@ import {Dataset} from '../../../domain/dataset';
 })
 export class DatasetTableComponent {
 
-  @Input() datasets: FormArray;
+  @Input() datasets: UntypedFormArray;
   @Input() sourceType: DataSource = DataSource.NEW;
 
   @Input() tableHeaders: string[] = ['dataset', 'actions'];
@@ -30,7 +30,7 @@ export class DatasetTableComponent {
   openDatasetDialog(dataset: Dataset) {
 
     const index = this.findFormArrayIndex(dataset);
-    const datasetGroup = this.datasets.at(index) as FormGroup;
+    const datasetGroup = this.datasets.at(index) as UntypedFormGroup;
     const dialogRef = this.dialog.open(DatasetDialogComponent, {
       width: '75%',
       maxWidth: '800px',

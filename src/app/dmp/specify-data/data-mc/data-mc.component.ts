@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {DataKind} from '../../../domain/enum/data-kind.enum';
 
 @Component({
@@ -9,7 +9,7 @@ import {DataKind} from '../../../domain/enum/data-kind.enum';
 })
 export class DataMcComponent {
 
-  @Input() control: FormControl;
+  @Input() control: UntypedFormControl;
   @Input() questionLabel = 'dmp.steps.data.specify.question.kind';
   @Input() answerLabelNone = 'dmp.steps.data.specify.answer.kind.none';
 

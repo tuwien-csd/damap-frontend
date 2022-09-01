@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {ComplianceType} from '../../domain/enum/compliance-type.enum';
 import {SecurityMeasure} from '../../domain/enum/security-measure.enum';
 import {Agreement} from '../../domain/enum/agreement.enum';
@@ -11,9 +11,9 @@ import {Agreement} from '../../domain/enum/agreement.enum';
 })
 export class LegalEthicalAspectsComponent {
 
-  @Input() dmpForm: FormGroup;
-  @Input() legalEthicalStep: FormGroup;
-  @Input() datasets: FormArray;
+  @Input() dmpForm: UntypedFormGroup;
+  @Input() legalEthicalStep: UntypedFormGroup;
+  @Input() datasets: UntypedFormArray;
 
   translateAgreementPrefixEnum = 'enum.agreement.'
   translateCompliancePrefixEnum = 'enum.compliance.'
@@ -32,28 +32,28 @@ export class LegalEthicalAspectsComponent {
 
   originalOrder = (): number => 0;
 
-  get sensitiveDataAccess(): FormControl {
-    return this.legalEthicalStep.get('sensitiveDataAccess') as FormControl;
+  get sensitiveDataAccess(): UntypedFormControl {
+    return this.legalEthicalStep.get('sensitiveDataAccess') as UntypedFormControl;
   }
 
-  get otherPersonalDataCompliance(): FormControl {
-    return this.legalEthicalStep?.get('otherPersonalDataCompliance') as FormControl;
+  get otherPersonalDataCompliance(): UntypedFormControl {
+    return this.legalEthicalStep?.get('otherPersonalDataCompliance') as UntypedFormControl;
   }
 
-  get otherDataSecurityMeasures(): FormControl {
-    return this.legalEthicalStep.get('otherDataSecurityMeasures') as FormControl;
+  get otherDataSecurityMeasures(): UntypedFormControl {
+    return this.legalEthicalStep.get('otherDataSecurityMeasures') as UntypedFormControl;
   }
 
-  get legalRestrictionsComment(): FormControl {
-    return this.legalEthicalStep?.get('legalRestrictionsComment') as FormControl;
+  get legalRestrictionsComment(): UntypedFormControl {
+    return this.legalEthicalStep?.get('legalRestrictionsComment') as UntypedFormControl;
   }
 
-  get otherLegalRestrictionsDocuments(): FormControl {
-    return this.legalEthicalStep.get('otherLegalRestrictionsDocuments') as FormControl;
+  get otherLegalRestrictionsDocuments(): UntypedFormControl {
+    return this.legalEthicalStep.get('otherLegalRestrictionsDocuments') as UntypedFormControl;
   }
 
-  get dataRightsAndAccessControl(): FormControl {
-    return this.legalEthicalStep.get('dataRightsAndAccessControl') as FormControl;
+  get dataRightsAndAccessControl(): UntypedFormControl {
+    return this.legalEthicalStep.get('dataRightsAndAccessControl') as UntypedFormControl;
   }
 
   get isOtherSelected() {

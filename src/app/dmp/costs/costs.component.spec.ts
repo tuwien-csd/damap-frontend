@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {CostsComponent} from './costs.component';
-import {FormArray, FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatIconModule} from '@angular/material/icon';
@@ -23,9 +23,9 @@ describe('CostsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CostsComponent);
     component = fixture.componentInstance;
-    component.costsStep = new FormGroup({
-      exist: new FormControl(true),
-      list: new FormArray([])
+    component.costsStep = new UntypedFormGroup({
+      exist: new UntypedFormControl(true),
+      list: new UntypedFormArray([])
     });
     fixture.detectChanges();
   });

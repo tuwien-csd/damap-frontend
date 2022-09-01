@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {Subject, Subscription, switchMap} from 'rxjs';
 import {Dataset} from '../../../domain/dataset';
 import {BackendService} from '../../../services/backend.service';
@@ -52,8 +52,8 @@ export class ReusedDataComponent extends AbstractBaseDataComponent implements On
     this.searchResult.unsubscribe();
   }
 
-  get reusedKind(): FormControl {
-    return this.specifyDataStep.get('reusedKind') as FormControl;
+  get reusedKind(): UntypedFormControl {
+    return this.specifyDataStep.get('reusedKind') as UntypedFormControl;
   }
 
   searchDataset(term: string): void {

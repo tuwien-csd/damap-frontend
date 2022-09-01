@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PeopleComponent} from './people.component';
 import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
-import {FormArray, FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {BackendService} from '../../services/backend.service';
@@ -28,11 +28,11 @@ describe('PeopleComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PeopleComponent);
     component = fixture.componentInstance;
-    component.dmpForm = new FormGroup({
-      datasets: new FormArray([]),
-      contributors: new FormArray([
-        new FormGroup({
-          role: new FormControl(undefined)
+    component.dmpForm = new UntypedFormGroup({
+      datasets: new UntypedFormArray([]),
+      contributors: new UntypedFormArray([
+        new UntypedFormGroup({
+          role: new UntypedFormControl(undefined)
         })
       ])
     });

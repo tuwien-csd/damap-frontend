@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {TextareaWrapperComponent} from './textarea-wrapper.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {FormControl, ReactiveFormsModule} from '@angular/forms';
+import {UntypedFormControl, ReactiveFormsModule} from '@angular/forms';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
 
@@ -23,7 +23,7 @@ describe('TextareaWrapperComponent', () => {
     fixture = TestBed.createComponent(TextareaWrapperComponent);
     component = fixture.componentInstance;
     component.label = 'Label';
-    component.control = new FormControl();
+    component.control = new UntypedFormControl();
     fixture.detectChanges();
   });
 

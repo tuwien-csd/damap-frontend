@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormGroup} from '@angular/forms';
 import {DataAccessType} from '../../domain/enum/data-access-type.enum';
 import {DataSource} from '../../domain/enum/data-source.enum';
 
@@ -10,8 +10,8 @@ import {DataSource} from '../../domain/enum/data-source.enum';
 })
 export class ReuseComponent {
 
-  @Input() reuseStep: FormGroup;
-  @Input() datasets: FormArray;
+  @Input() reuseStep: UntypedFormGroup;
+  @Input() datasets: UntypedFormArray;
 
   optionsTargetAudience: string[] = [
     'Members of the scientific community',
