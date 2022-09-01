@@ -5,7 +5,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {StepIntroComponent} from '../../widgets/step-intro/step-intro.component';
 import {TextareaWrapperComponent} from '../../shared/textarea-wrapper/textarea-wrapper.component';
 import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {DataQualityType} from '../../domain/enum/data-quality-type.enum';
 
 describe('DocDataQualityComponent', () => {
@@ -22,12 +22,12 @@ describe('DocDataQualityComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DocDataQualityComponent);
     component = fixture.componentInstance;
-    component.docDataStep = new FormGroup({
-      metadata: new FormControl(''),
-      dataGeneration: new FormControl(''),
-      structure: new FormControl(''),
-      dataQuality: new FormControl([DataQualityType.OTHERS]),
-      otherDataQuality: new FormControl(''),
+    component.docDataStep = new UntypedFormGroup({
+      metadata: new UntypedFormControl(''),
+      dataGeneration: new UntypedFormControl(''),
+      structure: new UntypedFormControl(''),
+      dataQuality: new UntypedFormControl([DataQualityType.OTHERS]),
+      otherDataQuality: new UntypedFormControl(''),
     })
     fixture.detectChanges();
   });

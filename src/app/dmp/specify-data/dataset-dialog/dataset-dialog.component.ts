@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FILE_SIZES, FILE_TYPES} from 'src/app/dmp/specify-data/data-specs';
 import {FormService} from '../../../services/form.service';
@@ -21,7 +21,7 @@ export class DatasetDialogComponent {
   readonly identifierType: any = IdentifierType;
 
   mode: string = 'add';
-  dataset: FormGroup = this.formService.createDatasetFormGroup(this.data.dataset.title);
+  dataset: UntypedFormGroup = this.formService.createDatasetFormGroup(this.data.dataset.title);
   datasetId: Identifier = {
     identifier: undefined,
     type: undefined
@@ -40,12 +40,12 @@ export class DatasetDialogComponent {
     }
   }
 
-  get title(): FormControl {
-    return this.dataset.get('title') as FormControl;
+  get title(): UntypedFormControl {
+    return this.dataset.get('title') as UntypedFormControl;
   }
 
-  get description(): FormControl {
-    return this.dataset.get('description') as FormControl;
+  get description(): UntypedFormControl {
+    return this.dataset.get('description') as UntypedFormControl;
   }
 
   onNoClick(): void {

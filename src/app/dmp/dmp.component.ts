@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../services/backend.service';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {Observable, Subject, Subscription} from 'rxjs';
 import {Contributor} from '../domain/contributor';
 import {Project} from '../domain/project';
@@ -28,21 +28,22 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   username: string;
 
-  dmpForm: FormGroup = this.formService.dmpForm;
+  dmpForm: UntypedFormGroup = this.formService.dmpForm;
+  formChanged: boolean;
 
   // Steps
-  projectStep: FormControl;
-  contributorStep: FormArray;
-  specifyDataStep: FormGroup;
-  datasets: FormArray;
-  docDataStep: FormGroup;
-  legalEthicalStep: FormGroup;
-  storageStep: FormArray;
-  externalStorageStep: FormArray;
-  externalStorageInfo: FormControl;
-  repoStep: FormArray;
-  reuseStep: FormGroup;
-  costsStep: FormGroup;
+  projectStep: UntypedFormControl;
+  contributorStep: UntypedFormArray;
+  specifyDataStep: UntypedFormGroup;
+  datasets: UntypedFormArray;
+  docDataStep: UntypedFormGroup;
+  legalEthicalStep: UntypedFormGroup;
+  storageStep: UntypedFormArray;
+  externalStorageStep: UntypedFormArray;
+  externalStorageInfo: UntypedFormControl;
+  repoStep: UntypedFormArray;
+  reuseStep: UntypedFormGroup;
+  costsStep: UntypedFormGroup;
 
   // Resources
   projectsLoaded$: Observable<LoadingState>;
@@ -77,18 +78,18 @@ export class DmpComponent implements OnInit, OnDestroy {
       this.store.dispatch(formDiff({newDmp: value}));
     });
 
-    this.projectStep = this.dmpForm.get('project') as FormControl;
-    this.contributorStep = this.dmpForm.get('contributors') as FormArray;
-    this.specifyDataStep = this.dmpForm.get('data') as FormGroup;
-    this.datasets = this.dmpForm.get('datasets') as FormArray;
-    this.docDataStep = this.dmpForm.get('documentation') as FormGroup;
-    this.legalEthicalStep = this.dmpForm.get('legal') as FormGroup;
-    this.storageStep = this.dmpForm.get('storage') as FormArray;
-    this.externalStorageStep = this.dmpForm.get('externalStorage') as FormArray;
-    this.externalStorageInfo = this.dmpForm.get('externalStorageInfo') as FormControl;
-    this.repoStep = this.dmpForm.get('repositories') as FormArray;
-    this.reuseStep = this.dmpForm.get('reuse') as FormGroup;
-    this.costsStep = this.dmpForm.get('costs') as FormGroup;
+    this.projectStep = this.dmpForm.get('project') as UntypedFormControl;
+    this.contributorStep = this.dmpForm.get('contributors') as UntypedFormArray;
+    this.specifyDataStep = this.dmpForm.get('data') as UntypedFormGroup;
+    this.datasets = this.dmpForm.get('datasets') as UntypedFormArray;
+    this.docDataStep = this.dmpForm.get('documentation') as UntypedFormGroup;
+    this.legalEthicalStep = this.dmpForm.get('legal') as UntypedFormGroup;
+    this.storageStep = this.dmpForm.get('storage') as UntypedFormArray;
+    this.externalStorageStep = this.dmpForm.get('externalStorage') as UntypedFormArray;
+    this.externalStorageInfo = this.dmpForm.get('externalStorageInfo') as UntypedFormControl;
+    this.repoStep = this.dmpForm.get('repositories') as UntypedFormArray;
+    this.reuseStep = this.dmpForm.get('reuse') as UntypedFormGroup;
+    this.costsStep = this.dmpForm.get('costs') as UntypedFormGroup;
   }
 
   ngOnDestroy() {

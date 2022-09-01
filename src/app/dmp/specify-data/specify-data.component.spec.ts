@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {SpecifyDataComponent} from './specify-data.component';
-import {FormArray, FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import {StepIntroComponent} from '../../widgets/step-intro/step-intro.component';
 import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
@@ -22,11 +22,11 @@ describe('SpecifyDataComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SpecifyDataComponent);
     component = fixture.componentInstance;
-    component.specifyDataStep = new FormGroup({
-      kind: new FormControl(null),
-      explanation: new FormControl('')
+    component.specifyDataStep = new UntypedFormGroup({
+      kind: new UntypedFormControl(null),
+      explanation: new UntypedFormControl('')
     });
-    component.datasets = new FormArray([]);
+    component.datasets = new UntypedFormArray([]);
     fixture.detectChanges();
   });
 

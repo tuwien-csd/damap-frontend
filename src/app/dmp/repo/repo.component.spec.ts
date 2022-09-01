@@ -6,7 +6,7 @@ import {TranslateTestingModule} from '../../testing/translate-testing/translate-
 import {provideMockStore} from '@ngrx/store/testing';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
 import {selectRepositoriesLoaded} from '../../store/selectors/repository.selectors';
-import {FormArray} from '@angular/forms';
+import {UntypedFormArray} from '@angular/forms';
 
 describe('RepoComponent', () => {
   let component: RepoComponent;
@@ -35,8 +35,8 @@ describe('RepoComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RepoComponent);
     component = fixture.componentInstance;
-    component.repoStep = new FormArray([]);
-    component.datasets = new FormArray([]);
+    component.repoStep = new UntypedFormArray([]);
+    component.datasets = new UntypedFormArray([]);
     fixture.detectChanges();
   });
 

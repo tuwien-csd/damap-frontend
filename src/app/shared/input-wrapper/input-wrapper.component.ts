@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {UntypedFormControl, Validators} from '@angular/forms';
 import {MatFormFieldAppearance} from '@angular/material/form-field';
 
 @Component({
@@ -10,7 +10,7 @@ import {MatFormFieldAppearance} from '@angular/material/form-field';
 export class InputWrapperComponent implements OnInit {
 
   @Input() label: string;
-  @Input() control: FormControl;
+  @Input() control: UntypedFormControl;
   @Input() prefix: string;
   @Input() type: string;
   @Input() placeholder: string;

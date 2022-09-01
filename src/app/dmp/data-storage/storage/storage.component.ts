@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormGroup} from '@angular/forms';
 import {InternalStorage} from '../../../domain/internal-storage';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../store/states/app.state';
@@ -14,9 +14,9 @@ import {loadInternalStorages} from '../../../store/actions/internal-storage.acti
 })
 export class StorageComponent implements OnInit {
 
-  @Input() dmpForm: FormGroup;
-  @Input() storageStep: FormArray;
-  @Input() datasets: FormArray;
+  @Input() dmpForm: UntypedFormGroup;
+  @Input() storageStep: UntypedFormArray;
+  @Input() datasets: UntypedFormArray;
 
   @Output() storageToAdd = new EventEmitter<InternalStorage>();
   @Output() storageToRemove = new EventEmitter<number>();

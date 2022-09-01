@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormGroup} from '@angular/forms';
 import {License} from '../../domain/license';
 import {LicenseDefinitions} from '../../widgets/license-wizard/license-wizard-list';
 import {DataAccessType} from '../../domain/enum/data-access-type.enum';
@@ -14,8 +14,8 @@ import {DataSource} from '../../domain/enum/data-source.enum';
 
 export class LicensesComponent {
 
-  @Input() dmpForm: FormGroup;
-  @Input() datasets: FormArray;
+  @Input() dmpForm: UntypedFormGroup;
+  @Input() datasets: UntypedFormArray;
 
   licenses: License[] = LicenseDefinitions;
   accessType: any = DataAccessType;
@@ -43,7 +43,7 @@ export class LicensesComponent {
     return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.CLOSED && item.source === DataSource.NEW);
   }
 
-  getFormGroup(index: number): FormGroup {
-    return this.datasets.at(index) as FormGroup;
+  getFormGroup(index: number): UntypedFormGroup {
+    return this.datasets.at(index) as UntypedFormGroup;
   }
 }

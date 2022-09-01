@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {Contributor} from '../../domain/contributor';
 
 @Component({
@@ -9,8 +9,8 @@ import {Contributor} from '../../domain/contributor';
 })
 export class DataDeletionComponent {
 
-  @Input() dataset: FormGroup;
-  @Input() dmpForm: FormGroup;
+  @Input() dataset: UntypedFormGroup;
+  @Input() dmpForm: UntypedFormGroup;
 
   constructor() {
   }
@@ -21,8 +21,8 @@ export class DataDeletionComponent {
     return this.dmpForm.get('contributors')?.value;
   }
 
-  get reasonForDeletion(): FormControl {
-    return this.dataset.controls.reasonForDeletion as FormControl;
+  get reasonForDeletion(): UntypedFormControl {
+    return this.dataset.controls.reasonForDeletion as UntypedFormControl;
   }
 
   get willBePublished(): boolean {

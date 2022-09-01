@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Dataset} from '../../domain/dataset';
 import {DataSource} from '../../domain/enum/data-source.enum';
-import {FormArray, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormGroup} from '@angular/forms';
 import {DataKind} from '../../domain/enum/data-kind.enum';
 
 /* Tested in specify-data.component.spec.ts */
@@ -10,8 +10,8 @@ import {DataKind} from '../../domain/enum/data-kind.enum';
   template: ''
 })
 export abstract class AbstractBaseDataComponent {
-  @Input() specifyDataStep: FormGroup;
-  @Input() datasets: FormArray;
+  @Input() specifyDataStep: UntypedFormGroup;
+  @Input() datasets: UntypedFormArray;
 
   @Output() datasetToAdd = new EventEmitter<Dataset>();
   @Output() updateDataset = new EventEmitter<{ index: number, update: Dataset }>();

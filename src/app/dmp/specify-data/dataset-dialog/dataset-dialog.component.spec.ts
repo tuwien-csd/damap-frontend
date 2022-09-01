@@ -4,7 +4,7 @@ import {DatasetDialogComponent} from './dataset-dialog.component';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {closedDatasetMock} from '../../../mocks/dataset-mocks';
 import {FormService} from '../../../services/form.service';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DataSource} from '../../../domain/enum/data-source.enum';
 import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
@@ -19,13 +19,13 @@ describe('DatasetDialogComponent', () => {
 
   beforeEach(async () => {
     formServiceStub = {
-      createDatasetFormGroup(title: string): FormGroup {
-        return new FormGroup({
-          title: new FormControl(title),
-          source: new FormControl(DataSource.REUSED),
-          type: new FormControl([]),
-          size: new FormControl(0),
-          datasetId: new FormControl({
+      createDatasetFormGroup(title: string): UntypedFormGroup {
+        return new UntypedFormGroup({
+          title: new UntypedFormControl(title),
+          source: new UntypedFormControl(DataSource.REUSED),
+          type: new UntypedFormControl([]),
+          size: new UntypedFormControl(0),
+          datasetId: new UntypedFormControl({
             identifier: 'XXXXX',
             type: IdentifierType.DOI
           })

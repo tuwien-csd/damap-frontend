@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormGroup} from '@angular/forms';
 import {DataSource} from '../../../domain/enum/data-source.enum';
 
 @Component({
@@ -9,8 +9,8 @@ import {DataSource} from '../../../domain/enum/data-source.enum';
 })
 export class RetentionPeriodComponent {
 
-  @Input() dmpForm: FormGroup;
-  @Input() datasets: FormArray;
+  @Input() dmpForm: UntypedFormGroup;
+  @Input() datasets: UntypedFormArray;
 
   options: number[] = [10, 25, 100];
   readonly datasetSource: any = DataSource;

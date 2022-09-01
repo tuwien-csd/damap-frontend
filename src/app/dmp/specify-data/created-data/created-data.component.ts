@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {DataKind} from '../../../domain/enum/data-kind.enum';
 import {AbstractBaseDataComponent} from '../abstract-base-data.component';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -40,8 +40,8 @@ export class CreatedDataComponent extends AbstractBaseDataComponent {
     event.chipInput!.clear();
   }
 
-  get kind(): FormControl {
-    return this.specifyDataStep.get('kind') as FormControl;
+  get kind(): UntypedFormControl {
+    return this.specifyDataStep.get('kind') as UntypedFormControl;
   }
 
   analyseFile(file: File) {

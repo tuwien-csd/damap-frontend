@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {ContributorRole} from '../../domain/enum/contributor-role.enum';
-import {FormArray, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormGroup} from '@angular/forms';
 import {Contributor} from '../../domain/contributor';
 import {IdentifierType} from '../../domain/enum/identifier-type.enum';
 import {Observable, Subject, switchMap} from 'rxjs';
@@ -23,7 +23,7 @@ export class PeopleComponent implements OnInit {
 
   readonly translateEnumPrefix = 'enum.contributor.role.'
 
-  @Input() dmpForm: FormGroup;
+  @Input() dmpForm: UntypedFormGroup;
 
   @Output() contactPerson = new EventEmitter<any>();
   @Output() contributorToAdd = new EventEmitter<any>();
@@ -54,7 +54,7 @@ export class PeopleComponent implements OnInit {
   }
 
   removeContributor(index: number): void {
-    const contributor = (this.dmpForm.controls.contributors as FormArray).at(index).value;
+    const contributor = (this.dmpForm.controls.contributors as UntypedFormArray).at(index).value;
     const datasets = this.getDatasetsForContributor(contributor);
     if (!datasets.length) {
       this.contributorToRemove.emit(index);
@@ -72,8 +72,8 @@ export class PeopleComponent implements OnInit {
     this.searchTerms.next(term);
   }
 
-  get contributors(): FormArray {
-    return this.dmpForm.get('contributors') as FormArray;
+  get contributors(): UntypedFormArray {
+    return this.dmpForm.get('contributors') as UntypedFormArray;
   }
 
   private getDatasetsForContributor(contributor: Contributor): Dataset[] {
