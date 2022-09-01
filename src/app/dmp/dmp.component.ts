@@ -14,7 +14,6 @@ import {HttpEventType} from '@angular/common/http';
 import {LoadingState} from '../domain/enum/loading-state.enum';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {formDiff, resetFormValue, setFormValue} from '../store/actions/form.actions';
-import {loadDmps} from '../store/actions/dmp.actions';
 import {InternalStorage} from '../domain/internal-storage';
 import {Dataset} from '../domain/dataset';
 import {DataKind} from '../domain/enum/data-kind.enum';
@@ -95,7 +94,6 @@ export class DmpComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.formService.resetForm();
     this.store.dispatch(resetFormValue());
-    this.store.dispatch(loadDmps(false));
   }
 
   get showStep() {

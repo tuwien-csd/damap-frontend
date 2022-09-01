@@ -1,10 +1,6 @@
 .dmp-actions {
-  background-color: var(--secondary-color-light);
   position: -webkit-sticky;
   position: sticky;
   bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   z-index: 10;
 }

@@ -9,3 +9,10 @@
 #save-dmp > button {
   margin: 0 0.5rem;
 }
+
+.actions-bar {
+  background-color: var(--secondary-color-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

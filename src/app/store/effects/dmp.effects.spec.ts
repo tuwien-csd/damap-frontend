@@ -9,25 +9,31 @@ import {provideMockStore} from '@ngrx/store/testing';
 import {FormService} from '../../services/form.service';
 import {FeedbackService} from '../../services/feedback.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {LoadingState} from '../../domain/enum/loading-state.enum';
 
 describe('DmpEffects', () => {
   let actions$;
   let effects;
   let backendService;
+  let formService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         DmpEffects,
         provideMockActions(() => actions$),
-        provideMockStore(),
-        {provide: BackendService, useValue: jasmine.createSpyObj('BackendService', ['getDmps', 'createDmp', 'editDmp', 'saveDmpVersion'])},
+        provideMockStore({initialState: {dmps: {dmps: [], loaded: LoadingState.LOADED}}}),
+        {
+          provide: BackendService,
+          useValue: jasmine.createSpyObj('BackendService', ['getDmps', 'createDmp', 'editDmp', 'saveDmpVersion'])
+        },
         {provide: FormService, useValue: jasmine.createSpyObj('FormService', ['mapDmpToForm'])},
         {provide: FeedbackService, useValue: jasmine.createSpyObj('FeedbackService', ['success'])},
       ]
     });
     effects = TestBed.inject<DmpEffects>(DmpEffects);
     backendService = TestBed.inject<BackendService>(BackendService);
+    formService = TestBed.inject<FormService>(FormService);
   });
 
   it('should load and return dmps', () => {
@@ -43,14 +49,9 @@ describe('DmpEffects', () => {
   it('should not load dmps', () => {
     actions$ = of(loadDmps());
 
-    effects.loadDmps$.subscribe(
-      _ => {
-      },
-      () => {
-      },
-      () => {
-        expect(backendService.getDmps).toHaveBeenCalledTimes(0);
-      });
+    effects.loadDmps$.subscribe({
+      complete: () => expect(backendService.getDmps).toHaveBeenCalledTimes(0)
+    });
   });
 
   it('should load dmps and fail', () => {

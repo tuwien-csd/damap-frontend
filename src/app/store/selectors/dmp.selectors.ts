@@ -21,3 +21,8 @@ export const selectDmpById = (props: { id: number }) => createSelector(
   selectDmpsState,
   (state) => state.entities[props.id]
 )
+
+export const selectDmpSaving = createSelector(
+  selectDmpsState,
+  dmpsState => dmpsState.saving
+);

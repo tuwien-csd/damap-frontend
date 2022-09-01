@@ -83,6 +83,6 @@ describe('DmpComponent', () => {
 
     fixture.destroy();
 
-    expect(storeSpy).toHaveBeenCalledTimes(2);
+    expect(storeSpy).toHaveBeenCalledTimes(1);
   });
 });

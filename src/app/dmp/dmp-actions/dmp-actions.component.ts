@@ -7,6 +7,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store/states/app.state';
 import {Observable, Subject, Subscription} from 'rxjs';
 import {selectFormChanged} from '../../store/selectors/form.selectors';
+import {selectDmpSaving} from '../../store/selectors/dmp.selectors';
 
 @Component({
   selector: 'app-actions',
@@ -19,6 +20,8 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
   dmpForm: FormGroup = this.formService.dmpForm;
   formChanged$: Observable<boolean>;
   formChanged: boolean;
+  savingDmp$: Observable<boolean>;
+  savingDmp: boolean;
 
   private subscriptions: Subscription[] = [];
 
@@ -29,7 +32,9 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.formChanged$ = this.store.pipe(select(selectFormChanged));
+    this.savingDmp$ = this.store.pipe(select(selectDmpSaving));
     this.subscriptions.push(this.formChanged$.subscribe(value => this.formChanged = value));
+    this.subscriptions.push(this.savingDmp$.subscribe(value => this.savingDmp = value));
     this.subscriptions.push(this.stepChanged$.subscribe(_ => this.saveDmp()));
   }
 
@@ -38,7 +43,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
   }
 
   saveDmp() {
-    if (this.dmpForm.valid && this.formChanged) {
+    if (this.dmpForm.valid && this.formChanged && !this.savingDmp) {
       const dmp = this.formService.exportFormToDmp();
       if (this.dmpForm.value.id) {
         this.store.dispatch(updateDmp({dmp}));

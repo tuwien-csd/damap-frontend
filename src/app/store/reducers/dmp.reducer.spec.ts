@@ -21,10 +21,12 @@ describe('DmpReducer', () => {
     expect(state.entities).toEqual(initialDmpState.entities);
   });
 
-  it('should return not loaded state', () => {
-    const state = dmpReducer(initialDmpState, loadDmps(true));
+  it('should return loaded state', () => {
+    const newState = {...initialDmpState};
+    newState.loaded = LoadingState.LOADED;
+    const state = dmpReducer(newState, loadDmps(true));
 
-    expect(state.loaded).toBe(LoadingState.NOT_LOADED);
+    expect(state.loaded).toBe(LoadingState.LOADED);
     expect(state.ids).toEqual(initialDmpState.ids);
     expect(state.entities).toEqual(initialDmpState.entities);
   });
