@@ -9,10 +9,17 @@ import {FormTestingModule} from '../../testing/form-testing/form-testing.module'
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {Subject} from 'rxjs';
 import {Dmp} from '../../domain/dmp';
+import {HarnessLoader} from '@angular/cdk/testing';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {MatDialogHarness} from '@angular/material/dialog/testing';
+import {MatInputHarness} from '@angular/material/input/testing';
+import {MatButtonHarness} from '@angular/material/button/testing';
+import {FormsModule} from '@angular/forms';
 
 describe('ActionsComponent', () => {
   let component: DmpActionsComponent;
   let fixture: ComponentFixture<DmpActionsComponent>;
+  let loader: HarnessLoader;
   let store: MockStore<{
     form: { dmp: Dmp, changed: boolean },
     dmps: { saving: boolean }
@@ -26,6 +33,7 @@ describe('ActionsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         MatButtonModule, MatDialogModule,
+        FormsModule,
         NoopAnimationsModule,
         TranslateTestingModule,
         FormTestingModule
@@ -43,6 +51,7 @@ describe('ActionsComponent', () => {
     component = fixture.componentInstance;
     component.stepChanged$ = new Subject<any>();
     fixture.detectChanges();
+    loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   });
 
   it('should create', () => {
@@ -62,6 +71,38 @@ describe('ActionsComponent', () => {
     component.stepChanged$.next(null);
 
     expect(component.saveDmp).toHaveBeenCalledTimes(2);
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
+  });
+
+  it('should dispatch save dmp version action', async () => {
+    spyOn(store, 'dispatch');
+
+    let dialogs = await loader.getAllHarnesses(MatDialogHarness);
+    expect(dialogs.length).toBe(0);
+
+    component.saveDmpVersion();
+    dialogs = await loader.getAllHarnesses(MatDialogHarness);
+    expect(dialogs.length).toBe(1);
+
+    const inputs = await loader.getAllHarnesses(MatInputHarness);
+    expect(inputs.length).toBe(1);
+
+    await inputs[0].setValue('test');
+    const buttons = await loader.getAllHarnesses(MatButtonHarness);
+    expect(buttons.length).toBe(6);
+    expect(await buttons[5].getText()).toBe('dmp.dialog.button.save');
+    expect(await buttons[5].isDisabled()).toBe(false);
+
+    await buttons[5].click();
+    dialogs = await loader.getAllHarnesses(MatDialogHarness);
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(dialogs.length).toBe(0);
+  });
+
+  it('should dispatch export dmp action', () => {
+    spyOn(store, 'dispatch');
+    component.exportDmp();
+
     expect(store.dispatch).toHaveBeenCalledTimes(1);
   });
 });

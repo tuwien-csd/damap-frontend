@@ -73,7 +73,8 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
 
 @Component({
   selector: 'app-save-version-dialog',
-  templateUrl: 'save-version-dialog.html'
+  templateUrl: 'save-version-dialog.html',
+  styleUrls: ['./dmp-actions.component.css']
 })
 export class SaveVersionDialogComponent {
 

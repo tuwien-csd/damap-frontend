@@ -16,3 +16,8 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.mat-dialog-actions {
+  display: flex;
+  justify-content: end;
+}

@@ -6,7 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 import {BackendService} from '../services/backend.service';
 import {FeedbackService} from '../services/feedback.service';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {LoadingState} from '../domain/enum/loading-state.enum';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
@@ -85,4 +85,12 @@ describe('DmpComponent', () => {
 
     expect(storeSpy).toHaveBeenCalledTimes(1);
   });
+
+  it('should test showStep', () => {
+    expect(component.showStep).toBeFalsy();
+
+    component.datasets.push(new FormControl({}));
+    expect(component.showStep).toBeTruthy();
+  });
+
 });

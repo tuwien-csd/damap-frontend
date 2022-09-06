@@ -3,7 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {of, throwError} from 'rxjs';
 import {BackendService} from '../../services/backend.service';
 import {DmpEffects} from './dmp.effects';
-import {dmpsLoaded, exportDmp, failedToLoadDmps, loadDmps} from '../actions/dmp.actions';
+import {createDmp, dmpsLoaded, exportDmp, failedToLoadDmps, loadDmps} from '../actions/dmp.actions';
 import {mockDmpList} from '../../mocks/dmp-list-mocks';
 import {provideMockStore} from '@ngrx/store/testing';
 import {FormService} from '../../services/form.service';
@@ -67,6 +67,23 @@ describe('DmpEffects', () => {
     });
   });
 
+  it('should create dmp', () => {
+    actions$ = of(createDmp({dmp: completeDmp}));
+    backendService.createDmp.and.returnValue(of(completeDmp));
+    const storeSpy = spyOn(effects.store$, 'dispatch').and.callThrough();
+
+    effects.createDmp$.subscribe({
+        next: action => {
+          expect(action).toEqual(loadDmps(false));
+        },
+        complete: () => {
+          expect(backendService.createDmp).toHaveBeenCalledOnceWith(completeDmp);
+          expect(formService.mapDmpToForm).toHaveBeenCalledTimes(1);
+          expect(storeSpy).toHaveBeenCalledTimes(2);
+        }
+      }
+    );
+  });
 
   it('should save and export dmp', () => {
     actions$ = of(exportDmp({dmp: completeDmp}));
@@ -81,7 +98,6 @@ describe('DmpEffects', () => {
       }
     );
   });
-
 
   it('should export dmp without saving', () => {
     effects.store$.setState({dmps: {dmps: [], loaded: LoadingState.LOADED}, form: {changed: true}});
@@ -100,7 +116,6 @@ describe('DmpEffects', () => {
       }
     );
   });
-
 
   it('should fail to save and export dmp', () => {
     effects.store$.setState({dmps: {dmps: [], loaded: LoadingState.LOADED}, form: {changed: true}});

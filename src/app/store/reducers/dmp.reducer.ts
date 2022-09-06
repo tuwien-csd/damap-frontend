@@ -12,14 +12,8 @@ export const dmpReducer = createReducer(
     return adapter.setAll(dmps, {...state, loaded: LoadingState.LOADED})
   }),
   on(DmpAction.failedToLoadDmps, state => ({...state, loaded: LoadingState.FAILED})),
-  on(DmpAction.createDmp, (state, _) => {
+  on(DmpAction.createDmp, DmpAction.updateDmp, DmpAction.exportDmp, (state, _) => {
     return ({...state, saving: true})
   }),
-  on(DmpAction.updateDmp, (state, _) => {
-    return ({...state, saving: true})
-  }),
-  on(DmpAction.dmpSaved, state => ({...state, saving: false})),
-  on(DmpAction.failedToSaveDmp, state => ({...state, saving: false})),
-  on(DmpAction.exportDmp, (state, _) => ({...state, saving: true})),
-  on(DmpAction.dmpExported, state => ({...state, saving: false}))
+  on(DmpAction.dmpSaved, DmpAction.failedToSaveDmp, DmpAction.dmpExported, state => ({...state, saving: false}))
 );
