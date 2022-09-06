@@ -189,19 +189,19 @@ export class BackendService {
     );
   }
 
-  getDmpDocument(id: number) {
-    return this.http.get(this.backendUrl + 'document/' + id,
+  getDmpDocument(id: number): void {
+    this.http.get(this.backendUrl + 'document/' + id,
       {responseType: 'blob', observe: 'response'}).pipe(
       catchError(this.handleError('http.error.document'))
     ).subscribe(
       {
-        next: response => this.downloadFile(response),
+        next: response => this.downloadFile(response)
       }
     );
   }
 
-  getMaDmpJsonFile(id: number) {
-    return this.http.get(this.backendUrl + 'madmp/file/' + id,
+  getMaDmpJsonFile(id: number): void {
+    this.http.get(this.backendUrl + 'madmp/file/' + id,
       {responseType: 'blob', observe: 'response'}).pipe(
       catchError(this.handleError('http.error.document'))
     ).subscribe(

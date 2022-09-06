@@ -1,0 +1,23 @@
+#save-dmp {
+  position: relative;
+  float: right;
+  display: flex;
+  justify-content: space-around;
+  padding-right: 2rem;
+}
+
+#save-dmp > button {
+  margin: 0 0.5rem;
+}
+
+.actions-bar {
+  background-color: var(--secondary-color-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  justify-content: end;
+}

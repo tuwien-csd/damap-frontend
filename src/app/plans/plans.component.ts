@@ -30,13 +30,9 @@ export class PlansComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dmpsLoaded$.subscribe(loaded => {
-      if (loaded === LoadingState.NOT_LOADED) {
-        this.getDmps();
-      }
-    });
+    this.getDmps();
 
-    if (this.authService.isAdmin()) {
+    if (this.isAdmin()) {
       this.allDmps$ = this.getAllDmps();
     }
   }
@@ -46,7 +42,7 @@ export class PlansComponent implements OnInit {
   }
 
   getDmps() {
-    this.store.dispatch(loadDmps(false));
+    this.store.dispatch(loadDmps(true));
   }
 
   private getAllDmps(): Observable<DmpListItem[]> {

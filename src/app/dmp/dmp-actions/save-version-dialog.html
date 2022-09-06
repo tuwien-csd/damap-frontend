@@ -6,7 +6,8 @@
     <input matInput [(ngModel)]="versionName">
   </mat-form-field>
 </div>
-<div mat-dialog-actions [align]="'end'">
+<div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">{{'dmp.dialog.button.cancel' | translate}}</button>
-  <button mat-raised-button color="primary" [disabled]="!versionName" [mat-dialog-close]="versionName">{{'dmp.dialog.button.save' | translate}}</button>
+  <button mat-raised-button color="primary" [disabled]="!versionName"
+          [mat-dialog-close]="versionName">{{'dmp.dialog.button.save' | translate}}</button>
 </div>

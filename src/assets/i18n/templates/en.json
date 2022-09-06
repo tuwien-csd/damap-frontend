@@ -393,7 +393,8 @@
   "button": {
     "save": "Save changes",
     "discard": "Discard changes",
-    "version": "Save new version"
+    "version": "Save new version",
+    "export": "Export document"
   },
   "form": {
     "error": {

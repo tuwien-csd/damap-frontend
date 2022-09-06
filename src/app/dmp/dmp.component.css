@@ -1,22 +1,6 @@
-#save-dmp {
-  position: relative;
-  float: right;
-  display: flex;
-  justify-content: space-around;
-  padding-right: 2rem;
-}
-
-#save-dmp > button {
-  margin: 0 0.5rem;
-}
-
 .dmp-actions {
-  background-color: var(--secondary-color-light);
   position: -webkit-sticky;
   position: sticky;
   bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   z-index: 10;
 }

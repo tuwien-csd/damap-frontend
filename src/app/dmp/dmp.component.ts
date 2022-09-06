@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../services/backend.service';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
-import {Observable, Subscription} from 'rxjs';
+import {Observable, Subject, Subscription} from 'rxjs';
 import {Contributor} from '../domain/contributor';
 import {Project} from '../domain/project';
 import {select, Store} from '@ngrx/store';
@@ -14,10 +14,7 @@ import {HttpEventType} from '@angular/common/http';
 import {LoadingState} from '../domain/enum/loading-state.enum';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {formDiff, resetFormValue, setFormValue} from '../store/actions/form.actions';
-import {selectFormChanged} from '../store/selectors/form.selectors';
-import {createDmp, loadDmps, saveDmpVersion, updateDmp} from '../store/actions/dmp.actions';
 import {InternalStorage} from '../domain/internal-storage';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Dataset} from '../domain/dataset';
 import {DataKind} from '../domain/enum/data-kind.enum';
 import {LoggerService} from '../services/logger.service';
@@ -32,7 +29,6 @@ export class DmpComponent implements OnInit, OnDestroy {
   username: string;
 
   dmpForm: FormGroup = this.formService.dmpForm;
-  formChanged: boolean;
 
   // Steps
   projectStep: FormControl;
@@ -52,12 +48,11 @@ export class DmpComponent implements OnInit, OnDestroy {
   projectsLoaded$: Observable<LoadingState>;
   projects$: Observable<Project[]>;
   projectMembers: Contributor[];
-  formChanged$: Observable<boolean>;
+  stepChanged$ = new Subject();
 
   fileUpload: { file: File, progress: number, finalized: boolean }[] = [];
   fileUploadSubscription: Subscription[] = [];
 
-  // TODO: Manage editability based on accessType (role)
   constructor(
     private logger: LoggerService,
     private auth: OAuthService,
@@ -66,14 +61,12 @@ export class DmpComponent implements OnInit, OnDestroy {
     private router: Router,
     private backendService: BackendService,
     public store: Store<AppState>,
-    public dialog: MatDialog
   ) {
   }
 
   ngOnInit() {
     this.projectsLoaded$ = this.store.pipe(select(selectProjectsLoaded));
     this.projects$ = this.store.pipe(select(selectProjects));
-    this.formChanged$ = this.store.pipe(select(selectFormChanged));
     this.getDmpById();
     this.getSuggestedProjects();
     this.username = this.auth.getIdentityClaims()['preferred_username'];
@@ -83,7 +76,6 @@ export class DmpComponent implements OnInit, OnDestroy {
       this.logger.debug(value);
       this.store.dispatch(formDiff({newDmp: value}));
     });
-    this.formChanged$.subscribe(value => this.formChanged = value);
 
     this.projectStep = this.dmpForm.get('project') as FormControl;
     this.contributorStep = this.dmpForm.get('contributors') as FormArray;
@@ -102,40 +94,14 @@ export class DmpComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.formService.resetForm();
     this.store.dispatch(resetFormValue());
-    this.store.dispatch(loadDmps(false));
   }
 
   get showStep() {
-    return (this.specifyDataStep.value.kind === DataKind.SPECIFY || this.specifyDataStep.value.reusedKind === DataKind.SPECIFY) && this.datasets.length
+    return (this.specifyDataStep.value.kind === DataKind.SPECIFY || this.specifyDataStep.value.reusedKind === DataKind.SPECIFY) && this.datasets.length;
   }
 
-  changeStep() {
-    if (this.formChanged) {
-      this.saveDmp();
-    }
-  }
-
-  saveDmp() {
-    if (this.dmpForm.valid) {
-      const dmp = this.formService.exportFormToDmp();
-      if (this.dmpForm.value.id) {
-        this.store.dispatch(updateDmp({dmp}));
-      } else {
-        this.store.dispatch(createDmp({dmp}));
-      }
-    }
-  }
-
-  saveDmpVersion(): void {
-    const dialogRef = this.dialog.open(SaveVersionDialogComponent, {
-      width: '350px'
-    });
-
-    dialogRef.afterClosed().subscribe(versionName => {
-      if (versionName) {
-        this.store.dispatch(saveDmpVersion({dmp: this.formService.exportFormToDmp(), versionName}));
-      }
-    });
+  changeStep($event) {
+    this.stepChanged$.next($event);
   }
 
   changeProject(project: Project) {
@@ -299,22 +265,4 @@ export class DmpComponent implements OnInit, OnDestroy {
   private generateReferenceHash(): string {
     return this.username + (+new Date()).toString(36);
   }
-}
-
-@Component({
-  selector: 'app-save-version-dialog',
-  templateUrl: 'save-version-dialog.html'
-})
-export class SaveVersionDialogComponent {
-
-  versionName = '';
-
-  constructor(
-    public dialogRef: MatDialogRef<SaveVersionDialogComponent>) {
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
 }
