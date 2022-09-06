@@ -19,5 +19,7 @@ export const dmpReducer = createReducer(
     return ({...state, saving: true})
   }),
   on(DmpAction.dmpSaved, state => ({...state, saving: false})),
-  on(DmpAction.failedToSaveDmp, state => ({...state, saving: false}))
+  on(DmpAction.failedToSaveDmp, state => ({...state, saving: false})),
+  on(DmpAction.exportDmp, (state, _) => ({...state, saving: true})),
+  on(DmpAction.dmpExported, state => ({...state, saving: false}))
 );

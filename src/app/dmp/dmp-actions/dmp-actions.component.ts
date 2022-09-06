@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {FormService} from '../../services/form.service';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {createDmp, saveDmpVersion, updateDmp} from '../../store/actions/dmp.actions';
+import {createDmp, exportDmp, saveDmpVersion, updateDmp} from '../../store/actions/dmp.actions';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store/states/app.state';
 import {Observable, Subject, Subscription} from 'rxjs';
@@ -63,6 +63,10 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
         this.store.dispatch(saveDmpVersion({dmp: this.formService.exportFormToDmp(), versionName}));
       }
     });
+  }
+
+  exportDmp(): void {
+    this.store.dispatch(exportDmp({dmp: this.formService.exportFormToDmp()}));
   }
 
 }

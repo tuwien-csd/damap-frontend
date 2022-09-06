@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import * as DmpAction from '../actions/dmp.actions';
-import {catchError, filter, map, switchMap, withLatestFrom} from 'rxjs/operators';
+import {catchError, filter, map, switchMap, tap, withLatestFrom} from 'rxjs/operators';
 import {BackendService} from '../../services/backend.service';
 import {of} from 'rxjs';
 import {Store} from '@ngrx/store';
@@ -11,6 +11,7 @@ import {FeedbackService} from '../../services/feedback.service';
 import {setFormValue} from '../actions/form.actions';
 import {selectDmpsLoaded} from '../selectors/dmp.selectors';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
+import {selectFormChanged} from '../selectors/form.selectors';
 
 @Injectable()
 export class DmpEffects {
@@ -87,6 +88,27 @@ export class DmpEffects {
         }),
       ))
   ));
+
+  exportDmp$ = createEffect(() => this.actions$.pipe(
+    ofType(DmpAction.exportDmp),
+    withLatestFrom(this.store$.select(selectFormChanged)),
+    switchMap(([action, changed]) => {
+      if (changed) {
+        let http$ = action.dmp.id ? this.backendService.editDmp(action.dmp) : this.backendService.createDmp(action.dmp);
+        return http$.pipe(
+          tap(dmp => {
+            this.formService.mapDmpToForm(dmp);
+            this.store$.dispatch(setFormValue({dmp}));
+            this.backendService.getDmpDocument(dmp.id);
+            this.store$.dispatch(DmpAction.dmpExported());
+          }),
+          catchError(() => of(DmpAction.failedToSaveDmp()))
+        );
+      }
+      this.backendService.getDmpDocument(action.dmp.id);
+      this.store$.dispatch(DmpAction.dmpExported());
+      return of(action);
+    })), {dispatch: false});
 
   constructor(
     private actions$: Actions,

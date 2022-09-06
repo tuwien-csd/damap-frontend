@@ -8,5 +8,7 @@
             [disabled]="dmpForm.invalid || !this.formChanged || this.savingDmp">{{'button.save' | translate }}</button>
     <button mat-raised-button color="primary" (click)="saveDmpVersion()"
             [disabled]="dmpForm.invalid || this.savingDmp">{{'button.version' | translate }}</button>
+    <button mat-raised-button color="primary" (click)="exportDmp()"
+            [disabled]="dmpForm.invalid || this.savingDmp">{{'button.export' | translate }}</button>
   </div>
 </div>

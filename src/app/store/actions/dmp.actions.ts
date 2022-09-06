@@ -17,3 +17,7 @@ export const saveDmpVersion = createAction('[Dmps] Save new version', props<{ dm
 export const dmpSaved = createAction('[Dmps] Dmp saved');
 
 export const failedToSaveDmp = createAction('[Dmps] Failed to save dmp');
+
+export const exportDmp = createAction('[Dmps] Export dmp', props<{ dmp: Dmp }>());
+
+export const dmpExported = createAction('[Dmps] Dmp exported');
