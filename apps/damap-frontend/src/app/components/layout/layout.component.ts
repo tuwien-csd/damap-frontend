@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import pkg from '../../../../../../package.json';
 import {TranslateService} from '@ngx-translate/core';
-import {AuthService} from '../../auth/auth.service';
+import {AuthService} from '@damap/core';
 import {ConfigService} from '../../services/config.service';
 
 @Component({

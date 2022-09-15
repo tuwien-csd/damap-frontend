@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
-import {BackendService} from '../services/backend.service';
+import {BackendService} from '@damap/core';
 import {ConsentComponent} from '../components/consent/consent.component';
 import {MatDialog} from '@angular/material/dialog';
 
@@ -16,14 +16,13 @@ export class ConsentGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const consentResponse = this.backendService.getConsentGiven();
     consentResponse.subscribe(response => {
-      if(response) {
+      if (response) {
         this.consentGiven = true;
-      }
-      else {
+      } else {
         this.consentGiven = false;
         let dialogRef = this.dialog.open(ConsentComponent, {disableClose: true});
         dialogRef.afterClosed().subscribe(result => {
-          if(result) {
+          if (result) {
             this.consentGiven = true;
             this.consent = {consentGiven: true} //create consentDO object to send
             this.backendService.editConsent(this.consent).subscribe();

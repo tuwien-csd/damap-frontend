@@ -69,7 +69,5 @@
       }
     }
   ],
-  "plugins": [
-    "@nrwl/nx"
-  ]
+  "plugins": ["@typescript-eslint", "@nrwl/nx", "@angular-eslint"]
 }

@@ -1,0 +1,13 @@
+{
+  "dmp": {
+    "steps": {
+      "project": {
+        "input": {
+          "title": "Projekt Titel",
+          "description": "Projektbeschreibung",
+          "button": "Projekt updaten"
+        }
+      }
+    }
+  }
+}

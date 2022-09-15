@@ -1,0 +1,15 @@
+{
+  "plans": {
+    "mydmps": "Meine DMPs",
+    "alldmps": "Alle DMPs",
+    "create.dmp": "Neuen DMP erstellen",
+    "loading": {
+      "load": "DMPs werden geladen...",
+      "failed": "Deine DMPs konnten nicht geladen werden!"
+    }
+  },
+  "env": {
+    "title": "Test Umgebung",
+    "text": "Diese Instanz dient zum Entwickeln und Testen der Webanwendung. Inhalte können jederzeit und ohne vorherige Benachrichtigung geändert oder gelöscht werden."
+  }
+}

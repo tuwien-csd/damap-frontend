@@ -4,10 +4,10 @@ import {LayoutComponent} from './layout.component';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {MatMenuModule} from '@angular/material/menu';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
+import {TranslateTestingModule} from '@damap/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {ConfigService} from '../services/config.service';
+import {ConfigService} from '../../services/config.service';
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
