@@ -1,22 +1,4 @@
 {
-  "title": "DAMAP",
-  "layout": {
-    "menu": {
-      "home": "Home",
-      "plans": "DMPs",
-      "mobile": {
-        "open": "Seitennavigation öffnen",
-        "close": "Seitennavigation schließen"
-      }
-    },
-    "logout": "Ausloggen",
-    "version": "Version",
-    "logo.goback": "Zurück zur Hauptseite",
-    "dataprotection": {
-      "link": "#",
-      "text": "Datenschutzerklärung"
-    }
-  },
   "plans": {
     "mydmps": "Meine DMPs",
     "alldmps": "Alle DMPs",
@@ -25,9 +7,5 @@
       "load": "DMPs werden geladen...",
       "failed": "Deine DMPs konnten nicht geladen werden!"
     }
-  },
-  "env": {
-    "title": "Test Umgebung",
-    "text": "Diese Instanz dient zum Entwickeln und Testen der Webanwendung. Inhalte können jederzeit und ohne vorherige Benachrichtigung geändert oder gelöscht werden."
   }
 }

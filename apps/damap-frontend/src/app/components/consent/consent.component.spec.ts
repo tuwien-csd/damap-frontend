@@ -1,7 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
-import { ConsentComponent } from './consent.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {TranslateTestingModule} from '@damap/core';
+import {ConsentComponent} from './consent.component';
 
 describe('ConsentComponent', () => {
   let component: ConsentComponent;
@@ -10,9 +9,9 @@ describe('ConsentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TranslateTestingModule],
-      declarations: [ ConsentComponent ]
+      declarations: [ConsentComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

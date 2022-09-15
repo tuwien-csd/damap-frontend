@@ -1,7 +1,7 @@
 import {Injectable, isDevMode} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Config} from '../domain/config';
+import {Config} from '@damap/core';
 import {AuthConfig, OAuthService} from 'angular-oauth2-oidc';
 
 @Injectable({

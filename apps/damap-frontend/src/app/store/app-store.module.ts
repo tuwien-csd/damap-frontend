@@ -1,24 +1,27 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {StoreModule} from '@ngrx/store';
-import {config, reducers} from './main';
+import {EffectsModule} from '@ngrx/effects';
 import {environment} from '../../environments/environment';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-import {EffectsModule} from '@ngrx/effects';
-import {ProjectEffects} from './effects/project.effects';
-import {DmpEffects} from './effects/dmp.effects';
-import {RepositoryEffects} from './effects/repository.effects';
-import {InternalStorageEffects} from './effects/internal-storage.effects';
-
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot(reducers, config),
-    EffectsModule.forRoot([DmpEffects, ProjectEffects, InternalStorageEffects, RepositoryEffects]),
-    !environment.production ? StoreDevtoolsModule.instrument() : []
+    StoreModule.forRoot(
+      {},
+      {
+        metaReducers: !environment.production ? [] : [],
+        runtimeChecks: {
+          strictActionImmutability: true,
+          strictStateImmutability: true,
+        },
+      }
+    ),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
   ]
 })
-
-export class AppStoreModule { }
+export class AppStoreModule {
+}

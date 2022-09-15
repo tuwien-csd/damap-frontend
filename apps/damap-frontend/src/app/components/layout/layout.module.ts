@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
 import {LayoutComponent} from './layout.component';
-import {EnvBannerModule} from '../../widgets/env-banner/env-banner.module';
+import {EnvBannerModule} from '@damap/core';
 import {RouterModule} from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';

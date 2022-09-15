@@ -1,19 +1,12 @@
 import {Routes} from '@angular/router';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {PlansComponent} from './components/plans/plans.component';
 import {LayoutComponent} from './components/layout/layout.component';
-import {AuthGuard} from './guard/auth.guard';
+import {AuthGuard} from '@damap/core';
 import {ConsentGuard} from './guard/consent.guard';
+import {environment} from '../environments/environment';
 
 export const APP_ROUTES: Routes = [
   {
     path: '', component: LayoutComponent, canActivate: [AuthGuard, ConsentGuard], children: [
-      {path: '', component: DashboardComponent},
-      {path: 'dashboard', component: DashboardComponent},
-      {path: 'plans', component: PlansComponent},
-      {
-        path: 'dmp',
-        loadChildren: () => import('./components/dmp/dmp.module').then(m => m.DmpModule)
-      },
+      {path: '', loadChildren: () => import('@damap/core').then(m => m.DamapModule.forRoot(environment.production).ngModule)}
     ]
   }];

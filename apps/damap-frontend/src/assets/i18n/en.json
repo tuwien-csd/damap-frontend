@@ -1,22 +1,4 @@
 {
-  "title": "DAMAP",
-  "layout": {
-    "menu": {
-      "home": "Home",
-      "plans": "DMPs",
-      "mobile": {
-        "open": "Open page navigation",
-        "close": "Close page navigation"
-      }
-    },
-    "logout": "Logout",
-    "version": "Version",
-    "logo.goback": "Go back to main page",
-    "dataprotection": {
-      "link": "#",
-      "text": "Data Protection Declaration"
-    }
-  },
   "plans": {
     "mydmps": "My DMPs",
     "alldmps": "All DMPs",
@@ -143,10 +125,6 @@
     }
   },
   "languages": "Languages",
-  "env": {
-    "title": "Test environment",
-    "text": "This application instance is for development and testing purposes only. Content may be deleted at any point in time without prior notification."
-  },
   "dmp": {
     "success": {
       "update": "DMP was updated!",

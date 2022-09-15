@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {Consent} from '../../domain/consent'
+import {Consent} from '@damap/core'
 
 @Component({
   selector: 'app-consent',

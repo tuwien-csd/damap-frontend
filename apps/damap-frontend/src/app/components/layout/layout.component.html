@@ -18,7 +18,7 @@
     </div>
     <div id="user" class="dark-theme">
       <div> {{name}} </div>
-      <button mat-icon-button [attr.aria-label]="'logout' | translate" (click)="logout()">
+      <button mat-icon-button [attr.aria-label]="'layout.logout' | translate" (click)="logout()">
         <mat-icon>logout</mat-icon>
       </button>
     </div>
@@ -49,7 +49,8 @@
         </div>
         <!-- University Logo -->
         <div id="mainHeaderLogo">
-          <a class="mat-focus-indicator" title="{{'layout.logo.goback' | translate }}" href="https://www.tuwien.at/">
+          <a class="mat-focus-indicator" title="{{'layout.logo.text' | translate }}"
+             [href]="'layout.logo.link' | translate" rel="noopener">
             <img src="assets/logo.svg" alt="Logo" height="75" width="75">
           </a>
         </div>
@@ -69,7 +70,7 @@
     {{'layout.version' | translate }}: {{version}}
   </div>
   <div>
-    <a [href]="'layout.dataprotection.link' | translate"
+    <a [href]="'layout.dataprotection.link' | translate" rel="noopener"
        target="_blank">{{'layout.dataprotection.text' | translate}}</a>
   </div>
 </div>
