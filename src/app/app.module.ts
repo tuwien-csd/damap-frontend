@@ -50,7 +50,7 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
     AppStoreModule,
     OAuthModule.forRoot({
       resourceServer: {
-        allowedUrls: [!environment.production ? 'http://localhost:8085/api/' : `${window.location.origin}/api/`],
+        allowedUrls: [!environment.production ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`],
         sendAccessToken: true
       }
     }),
