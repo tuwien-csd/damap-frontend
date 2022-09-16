@@ -1,15 +1,17 @@
-import {NgModule} from '@angular/core';
-import {DmpTableComponent} from './dmp-table.component';
-import {CommonModule} from '@angular/common';
-import {TranslateModule} from '@ngx-translate/core';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatTableModule} from '@angular/material/table';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {RouterModule} from '@angular/router';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { CommonModule } from '@angular/common';
+import { DmpTableComponent } from './dmp-table.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -22,7 +24,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSelectModule,
+    MatSortModule
   ],
   declarations: [DmpTableComponent],
   exports: [
@@ -35,8 +39,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSelectModule,
+    MatSortModule
   ]
 })
+
 export class DmpTableModule {
 }
