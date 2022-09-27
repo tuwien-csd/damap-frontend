@@ -16,8 +16,8 @@ export class DatasetTableComponent {
   @Input() sourceType: DataSource = DataSource.NEW;
 
   @Input() tableHeaders: string[] = ['dataset', 'actions'];
-  @Input() tableHeading: string = 'dmp.steps.data.specify.table.heading.default';
-  @Input() tableIntro: string = 'dmp.steps.data.specify.intro.default';
+  @Input() tableHeading: 'dmp.steps.data.specify.table.heading.default';
+  @Input() tableIntro: 'dmp.steps.data.specify.intro.default';
 
   @Output() removeDataset = new EventEmitter<number>();
   @Output() updateDataset = new EventEmitter<{ index: number, update: Dataset }>();

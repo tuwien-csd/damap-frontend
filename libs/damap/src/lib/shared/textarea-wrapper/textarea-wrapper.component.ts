@@ -14,7 +14,7 @@ export class TextareaWrapperComponent implements OnInit {
   @Input() placeholder: string;
   @Input() autocompleteOptions: string[];
   @Input() appearance: MatFormFieldAppearance = 'fill';
-  @Input() maxLength: number = 4000;
+  @Input() maxLength: 4000;
 
   required = false;
 
