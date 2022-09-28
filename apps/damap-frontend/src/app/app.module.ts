@@ -3,18 +3,14 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatSidenavModule} from '@angular/material/sidenav';
 import {RouterModule} from '@angular/router';
 import {APP_ROUTES} from './app.routes';
 import {OAuthModule} from 'angular-oauth2-oidc';
 import {environment} from '../environments/environment';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AuthGuard, EnvBannerModule} from '@damap/core';
 import {ConfigService} from './services/config.service';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {MatMenuModule} from '@angular/material/menu';
 import {ConsentGuard} from './guard/consent.guard';
 import {ConsentModule} from './components/consent/consent.module';
 import {LayoutModule} from './components/layout/layout.module';
@@ -35,7 +31,6 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot(APP_ROUTES),
@@ -63,17 +58,12 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
     }),
 
     // Materials
-    MatToolbarModule,
-    MatSidenavModule,
-    MatSlideToggleModule,
     MatSnackBarModule,
-    MatMenuModule,
 
     // Modules
     LayoutModule,
     EnvBannerModule,
     ConsentModule,
-
   ],
   providers: [
     {
