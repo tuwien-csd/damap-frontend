@@ -8,7 +8,6 @@ import {TranslateTestingModule} from '../../../testing/translate-testing/transla
 import {FormTestingModule} from '../../../testing/form-testing/form-testing.module';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {Subject} from 'rxjs';
-import {Dmp} from '../../../domain/dmp';
 import {HarnessLoader} from '@angular/cdk/testing';
 import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
 import {MatDialogHarness} from '@angular/material/dialog/testing';
@@ -16,17 +15,16 @@ import {MatInputHarness} from '@angular/material/input/testing';
 import {MatButtonHarness} from '@angular/material/button/testing';
 import {FormsModule} from '@angular/forms';
 
-describe('ActionsComponent', () => {
+describe('DmpActionsComponent', () => {
   let component: DmpActionsComponent;
   let fixture: ComponentFixture<DmpActionsComponent>;
   let loader: HarnessLoader;
-  let store: MockStore<{
-    form: { dmp: Dmp, changed: boolean },
-    dmps: { saving: boolean }
-  }>;
+  let store: MockStore;
   const initialState = {
-    form: {dmp: null, changed: false},
-    dmps: {saving: false}
+    damap: {
+      form: {dmp: null, changed: false},
+      dmps: {saving: false}
+    }
   };
 
   beforeEach(async () => {

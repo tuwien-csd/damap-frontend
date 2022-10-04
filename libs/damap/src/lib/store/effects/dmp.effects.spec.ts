@@ -17,7 +17,12 @@ describe('DmpEffects', () => {
   let effects;
   let backendService;
   let formService;
-  let initialState = {dmps: {dmps: [], loaded: LoadingState.LOADED}, form: {changed: false}}
+  let initialState = {
+    damap: {
+      dmps: {dmps: [], loaded: LoadingState.LOADED},
+      form: {dmp: undefined, changed: false}
+    }
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -100,7 +105,7 @@ describe('DmpEffects', () => {
   });
 
   it('should export dmp without saving', () => {
-    effects.store$.setState({dmps: {dmps: [], loaded: LoadingState.LOADED}, form: {changed: true}});
+    effects.store$.setState({damap: {dmps: {dmps: [], loaded: LoadingState.LOADED}, form: {changed: true}}});
 
     actions$ = of(exportDmp({dmp: completeDmp}));
     backendService.editDmp.and.returnValue(of(completeDmp));
@@ -118,7 +123,7 @@ describe('DmpEffects', () => {
   });
 
   it('should fail to save and export dmp', () => {
-    effects.store$.setState({dmps: {dmps: [], loaded: LoadingState.LOADED}, form: {changed: true}});
+    effects.store$.setState({damap: {dmps: {dmps: [], loaded: LoadingState.LOADED}, form: {changed: true}}});
 
     actions$ = of(exportDmp({dmp: completeDmp}));
     backendService.editDmp.and.returnValue(throwError(() => new HttpErrorResponse({})));
