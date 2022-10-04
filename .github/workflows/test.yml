@@ -85,6 +85,6 @@ jobs:
             -Dsonar.projectKey=tuwien-csd_damap-frontend
             -Dsonar.sources=.
             -Dsonar.sourceEncoding=UTF-8
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.javascript.lcov.reportPaths=**/lcov.info
             -Dsonar.coverage.exclusions=**/*.spec.ts,**/karma.conf.js,src/environments/*.ts,src/main.ts,src/test.ts,
 
