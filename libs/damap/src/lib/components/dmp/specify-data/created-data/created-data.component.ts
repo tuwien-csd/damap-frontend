@@ -35,7 +35,7 @@ export class CreatedDataComponent extends AbstractBaseDataComponent {
     }
 
     // Reset the input value
-    event.chipInput!.clear();
+    event.chipInput?.clear();
   }
 
   get kind(): UntypedFormControl {

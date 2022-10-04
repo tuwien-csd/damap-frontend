@@ -20,7 +20,7 @@ export class DatasetDialogComponent {
   readonly datasetSource: any = DataSource;
   readonly identifierType: any = IdentifierType;
 
-  mode: string = 'add';
+  mode = 'add';
   dataset: UntypedFormGroup = this.formService.createDatasetFormGroup(this.data.dataset.title);
   datasetId: Identifier = {
     identifier: undefined,

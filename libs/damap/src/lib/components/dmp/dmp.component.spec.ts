@@ -26,8 +26,10 @@ describe('DmpComponent', () => {
   let backendSpy;
   let feedbackSpy;
   const initialState = {
-    form: {dmp: null, changed: false},
-    projects: {projects: [], loaded: LoadingState.LOADED}
+    damap: {
+      form: {dmp: null, changed: false},
+      projects: {projects: [], loaded: LoadingState.LOADED}
+    }
   };
 
   beforeEach(async () => {

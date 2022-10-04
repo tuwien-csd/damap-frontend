@@ -7,7 +7,7 @@ import {Component, Input} from '@angular/core';
 })
 export class TagComponent {
 
-  @Input() background: string = 'aliceblue';
+  @Input() background: 'aliceblue';
 
   constructor() { }
 

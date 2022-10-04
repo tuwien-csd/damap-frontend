@@ -20,7 +20,7 @@ export class ProjectComponent {
   @ViewChild('tabGroup') tabGroup: MatTabGroup;
 
   LoadingState = LoadingState;
-  selectedIndex: number = 0;
+  selectedIndex = 0;
 
   changeProject(project: Project): void {
     this.project.emit(project);
