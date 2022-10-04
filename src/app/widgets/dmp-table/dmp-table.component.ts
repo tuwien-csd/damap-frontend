@@ -1,8 +1,10 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {DmpListItem} from '../../domain/dmp-list-item';
-import {MatPaginator} from '@angular/material/paginator';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+
+import { DmpListItem } from '../../domain/dmp-list-item';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-dmp-table',
@@ -10,8 +12,8 @@ import {MatPaginator} from '@angular/material/paginator';
   styleUrls: ['./dmp-table.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
@@ -25,6 +27,7 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
   @Output() createJsonFile = new EventEmitter<number>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   readonly tableHeaders: string[] = ['title', 'created', 'modified', 'contact', 'edit', 'history', 'remove'];
   expandedElement: DmpListItem | null;
@@ -44,6 +47,14 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
       || data.title?.toLowerCase().includes(filter)
       || data.id.toString().includes(filter);
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = (item: DmpListItem, property: string) => {
+      switch (property) {
+        case 'title': return item.project?.title || 'DMP ID: ' + item.id;
+        case 'contact': return item.contact?.firstName + ' ' + item.contact?.lastName;
+        default: return item[property];
+      }
+    }
   }
 
   applyFilter(event: Event) {
@@ -62,5 +73,5 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
   getJsonFile(id: number) {
     this.createJsonFile.emit(id);
   }
-
+  
 }
