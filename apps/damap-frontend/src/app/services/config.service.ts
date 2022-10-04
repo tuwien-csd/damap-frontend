@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Config} from '@damap/core';
 import {AuthConfig, OAuthService} from 'angular-oauth2-oidc';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,6 @@ export class ConfigService {
 
   constructor(private http: HttpClient,
               private oauthService: OAuthService) {
-  }
-
-  private static getHost(): string {
-    if (isDevMode()) {
-      return 'http://localhost:8080/api';
-    }
-    return `${window.location.origin}/api`;
   }
 
   public initializeApp(): Promise<boolean> {
@@ -49,7 +43,7 @@ export class ConfigService {
     )
       .catch(error => {
         console.error('Failed to load config - please make sure your backend is up and running!');
-        console.log('Backend: ' + ConfigService.getHost());
+        console.log('Backend: ' + environment.backendurl);
         console.error(error);
         return new Promise(_ => false);
       });
@@ -60,7 +54,7 @@ export class ConfigService {
   }
 
   private loadConfig(): Observable<Config> {
-    const host = ConfigService.getHost();
-    return this.http.get<Config>(`${host}/config`);
+    const host = environment.backendurl;
+    return this.http.get<Config>(`${host}config`);
   }
 }

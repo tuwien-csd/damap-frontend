@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Route, RouterModule} from '@angular/router';
 import {DashboardModule} from './components/dashboard/dashboard.module';
@@ -7,6 +7,7 @@ import {PlansComponent} from './components/plans/plans.component';
 import {PlansModule} from './components/plans/plans.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {DamapStoreModule} from './store/damap-store.module';
+import {APP_ENV} from './constants';
 
 export const DAMAP_ROUTES: Route[] = [
   {path: '', component: DashboardComponent},
@@ -27,13 +28,15 @@ const MODULES = [DashboardModule, PlansModule];
     TranslateModule,
     RouterModule.forChild(DAMAP_ROUTES),
     ...MODULES
-  ],
+  ]
 })
 export class DamapModule {
-  static forRoot(production: boolean) {
-    // service for production property
+  static forRoot(env: { production: boolean, backendurl: string }): ModuleWithProviders<DamapModule> {
     return {
-      ngModule: DamapModule
+      ngModule: DamapModule,
+      providers: [
+        {provide: APP_ENV, useValue: env}
+      ]
     };
   }
 }

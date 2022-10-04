@@ -2,7 +2,6 @@ import {TestBed} from '@angular/core/testing';
 import {BackendService} from './backend.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {FeedbackService} from './feedback.service';
-// import {environment} from '../../../../../apps/damap-frontend/src/environments/environment';
 import {Project} from '../domain/project';
 import {Dmp} from '../domain/dmp';
 import {completeDmp} from '../mocks/dmp-mocks';
@@ -10,12 +9,12 @@ import {HttpEventType, HttpHeaders} from '@angular/common/http';
 import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
 import {Contributor} from '../domain/contributor';
 import {closedDatasetMock} from '../mocks/dataset-mocks';
+import {APP_ENV} from '../constants';
 
 describe('BackendService', () => {
   let service: BackendService;
   let httpTestingController: HttpTestingController;
-  // const backendUrl = !environment.production ? 'http://localhost:8080/api/' : `${window.location.origin}/api/` FIXME
-  const backendUrl = 'http://localhost:8080/api/';
+  const backendUrl = APP_ENV.backendurl;
   let feedbackServiceSpy: jasmine.SpyObj<FeedbackService>
 
   beforeEach(() => {

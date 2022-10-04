@@ -7,6 +7,6 @@ import {environment} from '../environments/environment';
 export const APP_ROUTES: Routes = [
   {
     path: '', component: LayoutComponent, canActivate: [AuthGuard, ConsentGuard], children: [
-      {path: '', loadChildren: () => import('@damap/core').then(m => m.DamapModule.forRoot(environment.production).ngModule)}
+      {path: '', loadChildren: () => import('@damap/core').then(m => m.DamapModule.forRoot(environment).ngModule)}
     ]
   }];

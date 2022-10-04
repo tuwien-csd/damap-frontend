@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-
-// import {environment} from '../../environments/environment';
+import {APP_ENV} from '../constants';
 
 export enum LogLevel {
   DEBUG = 0,
@@ -15,8 +14,7 @@ export enum LogLevel {
 export class LoggerService {
 
   get prod() {
-    // return environment.production; FIXME
-    return false;
+    return APP_ENV.production;
   }
 
   debug(message: any): void {

@@ -1,12 +1,12 @@
 import {ActionReducerMap} from '@ngrx/store';
 import * as fromLogin from './reducers/login.reducer';
-// import {environment} from '../../../../../apps/damap-frontend/src/environments/environment';
 import {AppState} from './states/app.state';
 import {projectReducer} from './reducers/project.reducer';
 import {dmpReducer} from './reducers/dmp.reducer';
 import {repositoryReducer} from './reducers/repository.reducer';
 import {formReducer} from './reducers/form.reducer';
 import {internalStorageReducer} from './reducers/internal-storage.reducer';
+import {APP_ENV} from '../constants';
 
 export const reducers: ActionReducerMap<AppState> = {
   login: fromLogin.reducer,
@@ -18,8 +18,7 @@ export const reducers: ActionReducerMap<AppState> = {
 };
 
 export const config = {
-  // metaReducers: !environment.production ? [] : [], FIXME
-  metaReducers: [],
+  metaReducers: !APP_ENV.production ? [] : [],
   runtimeChecks: {
     strictStateImmutability: true,
     strictActionImmutability: true,

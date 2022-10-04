@@ -8,20 +8,19 @@ import {DmpListItem} from '../domain/dmp-list-item';
 import {RepositoryDetails} from '../domain/repository-details';
 import {catchError, map, retry, shareReplay} from 'rxjs/operators';
 import {FeedbackService} from './feedback.service';
-// import {environment} from '../../environments/environment';
 import {TranslateService} from '@ngx-translate/core';
 import {Consent} from '../domain/consent'
 import {InternalStorage} from '../domain/internal-storage';
 import {Version} from '../domain/version';
 import {Dataset} from '../domain/dataset';
+import {APP_ENV} from '../constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
 
-  // private backendUrl = !environment.production ? 'http://localhost:8080/api/' : `${window.location.origin}/api/`; FIXME
-  private backendUrl = 'http://localhost:8080/api/';
+  private backendUrl = APP_ENV.backendurl;
   private dmpBackendUrl = this.backendUrl + 'dmps';
   private versionBackendUrl = this.backendUrl + 'versions';
   private projectBackendUrl = this.backendUrl + 'projects';
