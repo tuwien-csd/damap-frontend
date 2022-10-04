@@ -21,9 +21,13 @@ import {AppStoreModule} from './store/app-store.module';
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
   return new MultiTranslateHttpLoader(http, [
-    {prefix: './assets/i18n/', suffix: '.json'},
     {prefix: './assets/i18n/layout/', suffix: '.json'},
-    {prefix: './assets/i18n/consent/', suffix: '.json'}
+    {prefix: './assets/i18n/consent/', suffix: '.json'},
+    {prefix: './assets/damap-core/i18n/dashboard/', suffix: '.json'},
+    {prefix: './assets/damap-core/i18n/plans/', suffix: '.json'},
+    {prefix: './assets/damap-core/i18n/http/', suffix: '.json'},
+    {prefix: './assets/damap-core/i18n/', suffix: '.json'},
+    {prefix: './assets/i18n/', suffix: '.json'}
   ]);
 }
 

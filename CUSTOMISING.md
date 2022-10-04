@@ -23,7 +23,10 @@ conflicts.
 `libs/damap` contains the core functionality of DAMAP and should not be modified in your personal project.
 
 The frontend only contains one config information, which is the address of the backend from where it will fetch the
-necessary config data.
+necessary config data. It is stored in [environment.ts](apps/damap-frontend/src/environments/environment.ts) (
+and [environment.prod.ts](apps/damap-frontend/src/environments/environment.prod.ts) respectively)
+and can be changed. However, you should **NOT** change the keys (`production` and `backendurl`) as the library depends
+on them.
 
 This happens in the following section:
 
@@ -59,11 +62,7 @@ of [AppModule](apps/damap-frontend/src/app/app.module.ts):
 ```typescript
   OAuthModule.forRoot({
   resourceServer: {
-    allowedUrls: [
-      !environment.production
-        ? 'http://localhost:8080/api/'
-        : `${window.location.origin}/api/`,
-    ],
+    allowedUrls: [environment.backendurl],
     sendAccessToken: true,
   },
 })
@@ -85,6 +84,8 @@ Your can change this file to adapt the layout to your needs, however, you should
 in the template.
 
 * Logo: Provide your [logo](src/assets/logo.svg) as src/assets/logo.svg
+* Logo link: You can change the link of your logo by setting the translation key `layout.logo.text`
+  in [i18n/layout/en.json](apps/damap-frontend/src/assets/i18n/layout/en.json)
 * Theme: to customize the theme adapt the files
   * [custom-theme.scss](apps/damap-frontend/src/themes/custom-theme.scss) and
   * [custom-palettes.scss](apps/damap-frontend/src/themes/custom-palettes.scss)
@@ -97,36 +98,44 @@ https://material.angular.io/guide/theming & https://github.com/angular/component
 
 ### Translations
 
-We use [NGX Translate](https://github.com/ngx-translate/core) for translations. It is configured in the import section
-of [AppModule](apps/damap-frontend/src/app/app.module.ts):
+We use [NGX Translate](https://github.com/ngx-translate/core) for translations.
+Notice that when you change the language in the application, this only affects the UI part.
+The language of the form is defined by the exported template's language and cannot be changed independently.
+For this reason we use two independent `TranslateModule`s, one for the UI (template independent parts) and one for the
+DMP form.
 
-```typescript
-TranslateModule.forRoot({
-  defaultLanguage: 'en',
-  loader: {
-    provide: TranslateLoader,
-    useFactory: HttpLoaderFactory,
-    deps: [HttpClient],
-  },
-})
-```
+Translation files for the UI are configured in [AppModule](apps/damap-frontend/src/app/app.module.ts), those for the DMP
+form in [DmpModule](libs/damap/src/lib/components/dmp/dmp.module.ts).
 
-The `HttpLoaderFactory` defines in which folders the translations are located.
+In each module the `HttpLoaderFactory` defines in which folders the translations are located.
 
 ```typescript
 export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
   return new MultiTranslateHttpLoader(http, [
-    {prefix: './assets/i18n/', suffix: '.json'},
     {prefix: './assets/i18n/layout/', suffix: '.json'},
-    {prefix: './assets/i18n/consent/', suffix: '.json'}
+    {prefix: './assets/i18n/consent/', suffix: '.json'},
+    {prefix: './assets/i18n/', suffix: '.json'}
   ]);
 }
 ```
 
-You can add or remove folders here as you need or change the translations in the respective files. The content of those
-files will overwrite those of the library, so if you want to change a translation, you can just specify a new
-translation using the translation key of the one you want to overwrite. Translation files used in the library are
-defined in [DmpModule](libs/damap/src/lib/components/dmp/dmp.module.ts).
+You can modify the translations for the dmp form in [assets/i18n/en.json](apps/damap-frontend/src/assets/i18n/en.json).
+The content of this file will override that of the library, so if you want to change a translation, you can just specify
+a new one using the translation key of the one you want to override, e.g.:
+
+```json
+{
+  "title": "My new title"
+}
+```
+
+Please only use this file for modifications and do
+not change the files used in the library to prevent issues with future updates. In case you do not need to modify any
+translation just leave it empty (but keep the curly bracket `{}`).
+To modify the translations for the UI, you can use the files in `assets/i18n/*/` or specify a new one and override the
+existing keys (or simply use [assets/i18n/en.json](apps/damap-frontend/src/assets/i18n/en.json)).
+Note that you'll also need to add the new file to the `HttpLoaderFactory` in the `AppModule` and make sure that it's
+loaded last.
 
 ### Consent Popup
 

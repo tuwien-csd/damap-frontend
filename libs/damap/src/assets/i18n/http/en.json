@@ -1,0 +1,42 @@
+{
+  "http": {
+    "error": {
+      "standard": "Failed to load resource. ",
+      "0": "Service can not be reached, please retry later. If the issue persists contact [insert contact for technical issue].",
+      "404": "The requested resource could not be found.",
+      "500": "An error occurred, please contact [insert contact for technical issue].",
+      "503": "Service is currently unavailable, please retry later.",
+      "consent": {
+        "edit": "Failed to update consent preferences.",
+        "one": "Failed to retrieve consent preferences."
+      },
+      "fileanalysis": "Failed to analyse file. ",
+      "repositories": {
+        "search": "Failed to search repositories. ",
+        "recommended": "Failed to load recommended repositories. ",
+        "one": "Failed to load repository details. ",
+        "all": "Failed to load repositories. "
+      },
+      "person.search": "Failed to find person. ",
+      "projects": "Failed to load projects. ",
+      "projectmembers": "Failed to load project members. ",
+      "plans": {
+        "load": {
+          "all": "Failed to load all DMPs. ",
+          "yours": "Failed to load your DMPs. ",
+          "one": "Failed to load DMPs. "
+        },
+        "save": "Failed to save DMP. ",
+        "update": "Failed to update DMP. "
+      },
+      "storages": "Failed to load storages. ",
+      "versions": {
+        "load": "Failed to load DMP versions. ",
+        "save": "Failed to save DMP version. ",
+        "revision": "Failed to load DMP revision. "
+      },
+      "openaire": "Failed to get dataset information from OpenAIRE, please retry later.",
+      "document": "An unexpected error occurred while generating your document. If the issue persists contact [insert contact for technical issue]."
+    }
+  }
+}

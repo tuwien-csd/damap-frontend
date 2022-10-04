@@ -29,7 +29,8 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
     {prefix: './assets/damap-core/i18n/', suffix: '.json'},
     {prefix: './assets/damap-core/i18n/templates/', suffix: '.json'},
     {prefix: './assets/damap-core/i18n/help/', suffix: '.json'},
-    {prefix: './assets/damap-core/i18n/info/', suffix: '.json'}
+    {prefix: './assets/damap-core/i18n/info/', suffix: '.json'},
+    {prefix: './assets/i18n/', suffix: '.json'}
   ]);
 }
 

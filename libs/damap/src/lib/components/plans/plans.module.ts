@@ -20,7 +20,6 @@ import {MatTableModule} from '@angular/material/table';
     RouterModule,
     DmpTableModule,
     ErrorMessageModule,
-    MatPaginatorModule,
 
     // Materials
     MatIconModule,
@@ -28,6 +27,7 @@ import {MatTableModule} from '@angular/material/table';
     MatProgressBarModule,
     MatSortModule,
     MatTableModule,
+    MatPaginatorModule,
     MatSelectModule
   ],
   declarations: [PlansComponent],
@@ -38,7 +38,6 @@ import {MatTableModule} from '@angular/material/table';
     DmpTableModule,
     ErrorMessageModule,
     PlansComponent,
-    MatPaginatorModule,
 
     // Materials
     MatIconModule,
@@ -46,6 +45,7 @@ import {MatTableModule} from '@angular/material/table';
     MatProgressBarModule,
     MatSortModule,
     MatTableModule,
+    MatPaginatorModule,
     MatSelectModule
   ]
 })
