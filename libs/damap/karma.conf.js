@@ -11,6 +11,12 @@ module.exports = function (config) {
     coverageReporter: {
       ...baseConfig.coverageReporter,
       dir: join(__dirname, '../../coverage/libs/damap'),
+      subdir: '.',
+      reporters: [
+        { type: 'html' },
+        { type: 'text-summary' },
+        { type: 'lcov' }
+      ],
     },
   });
 };
