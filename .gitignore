@@ -53,3 +53,5 @@ src/themes/*
 
 # Testreports
 /reports
+
+.angular
