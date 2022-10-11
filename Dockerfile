@@ -23,13 +23,15 @@ COPY . /app
 ENV PATH="$PATH:/app/node_modules/@angular/cli/bin/"
 
 # install and build the application on the builder container
-RUN npm install && ng build
+RUN npm install -g nx && \
+    npm install
+RUN npx nx build damap-frontend
 
 ARG APP=damap-frontend
 
 # create a second container running a webserver and holding the built frontend application
 FROM nginxinc/nginx-unprivileged as runner
 
-COPY --from=deps --chown=1001:0 /app/dist/damap-frontend/ /usr/share/nginx/html/
+COPY --from=deps --chown=1001:0 /app/dist/apps/damap-frontend/ /usr/share/nginx/html/
 
 
