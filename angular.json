@@ -56,6 +56,10 @@
                 {
                   "replace": "apps/damap-frontend/src/environments/environment.ts",
                   "with": "apps/damap-frontend/src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "libs/damap/src/lib/constants.ts",
+                  "with": "libs/damap/src/lib/constants.prod.ts"
                 }
               ]
             },
