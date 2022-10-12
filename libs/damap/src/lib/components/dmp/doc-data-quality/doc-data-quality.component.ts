@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
-import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
-import {DataQualityType} from '../../../domain/enum/data-quality-type.enum';
+import { Component, Input } from '@angular/core';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { DataQualityType } from '../../../domain/enum/data-quality-type.enum';
 
 @Component({
   selector: 'app-dmp-doc-data-quality',
@@ -14,7 +14,7 @@ export class DocDataQualityComponent {
   optionsDataGeneration: string[] = ['Specific software will be used to process the raw data', 'Specific software will be used to conduct statistics', 'Specific software will be used to create graphical representations', 'Specific software will be used to make drawings'];
   optionsStructureAndVersioning: string[] = ['The filenames will follow the projects naming convention as defined in [add document name] and include a timestamp of creation. Version control is automated.', 'The respective work package leader will handle the structure and versioning of the research data.'];
 
-  readonly translateDataQualityPrefixEnum = 'enum.dataquality.'
+  readonly translateDataQualityPrefixEnum = 'enum.dataquality.';
   readonly dataQualityOptions: any = DataQualityType;
 
   originalOrder = (): number => 0;
@@ -24,6 +24,10 @@ export class DocDataQualityComponent {
 
   get metadata(): UntypedFormControl {
     return this.docDataStep.get('metadata') as UntypedFormControl;
+  }
+
+  get documentation(): UntypedFormControl {
+    return this.docDataStep.get('documentation') as UntypedFormControl;
   }
 
   get structure(): UntypedFormControl {

@@ -1,12 +1,12 @@
-import {Project} from './project';
-import {Contributor} from './contributor';
-import {DataKind} from './enum/data-kind.enum';
-import {Dataset} from './dataset';
-import {Cost} from './cost';
-import {Storage} from './storage';
-import {DataQualityType} from './enum/data-quality-type.enum';
-import {Repository} from './repository';
-import {ExternalStorage} from './external-storage';
+import { Project } from './project';
+import { Contributor } from './contributor';
+import { DataKind } from './enum/data-kind.enum';
+import { Dataset } from './dataset';
+import { Cost } from './cost';
+import { Storage } from './storage';
+import { DataQualityType } from './enum/data-quality-type.enum';
+import { Repository } from './repository';
+import { ExternalStorage } from './external-storage';
 
 export interface Dmp {
   readonly created?: Date;
@@ -22,6 +22,7 @@ export interface Dmp {
   datasets: Dataset[];
   metadata: string;
   dataGeneration: string;
+  documentation: string;
   dataQuality: DataQualityType[];
   otherDataQuality: string;
   structure: string;

@@ -1,14 +1,14 @@
-import {Dmp} from '../domain/dmp';
-import {CostType} from '../domain/enum/cost-type.enum';
-import {DataKind} from '../domain/enum/data-kind.enum';
-import {ComplianceType} from '../domain/enum/compliance-type.enum';
-import {SecurityMeasure} from '../domain/enum/security-measure.enum';
-import {Agreement} from '../domain/enum/agreement.enum';
-import {mockProject} from './project-mocks';
-import {mockContact, mockContributor1, mockContributor2} from './contributor-mocks';
-import {closedDatasetMock, openDatasetMock, restrictedDatasetMock} from './dataset-mocks';
-import {DataQualityType} from '../domain/enum/data-quality-type.enum';
-import {mockStorage} from './storage-mocks';
+import { Dmp } from '../domain/dmp';
+import { CostType } from '../domain/enum/cost-type.enum';
+import { DataKind } from '../domain/enum/data-kind.enum';
+import { ComplianceType } from '../domain/enum/compliance-type.enum';
+import { SecurityMeasure } from '../domain/enum/security-measure.enum';
+import { Agreement } from '../domain/enum/agreement.enum';
+import { mockProject } from './project-mocks';
+import { mockContact, mockContributor1, mockContributor2 } from './contributor-mocks';
+import { closedDatasetMock, openDatasetMock, restrictedDatasetMock } from './dataset-mocks';
+import { DataQualityType } from '../domain/enum/data-quality-type.enum';
+import { mockStorage } from './storage-mocks';
 
 export const completeDmp: Dmp = {
   reusedDataKind: DataKind.SPECIFY,
@@ -42,6 +42,7 @@ export const completeDmp: Dmp = {
   dataKind: DataKind.SPECIFY,
   dataQuality: [DataQualityType.CALIBRATION, DataQualityType.PEER_REVIEW_OF_DATA],
   datasets: [closedDatasetMock, restrictedDatasetMock],
+  documentation: 'documentation',
   ethicalIssuesExist: true,
   ethicalIssuesExistCris: true,
   externalStorage: [
@@ -68,7 +69,7 @@ export const completeDmp: Dmp = {
       repositoryId: 'r3d100013557',
       id: 94,
       title: 'TU Data'
-    },
+    }
   ],
   id: 76,
   legalRestrictions: true,
@@ -131,6 +132,7 @@ export const noDataDmp: Dmp = {
   dataKind: DataKind.NONE,
   dataQuality: [DataQualityType.REPRESENTATION_WITH_CONTROLLED_VOCABULARIES, DataQualityType.DATA_ENTRY_VALIDATION],
   datasets: [closedDatasetMock, restrictedDatasetMock],
+  documentation: 'documentation',
   ethicalIssuesExist: false,
   ethicalIssuesExistCris: false,
   externalStorage: [
@@ -155,7 +157,7 @@ export const noDataDmp: Dmp = {
       repositoryId: 'r3d100013557',
       id: 94,
       title: 'TU Data'
-    },
+    }
   ],
   id: 76,
   legalRestrictions: true,
