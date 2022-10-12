@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {UntypedFormControl, Validators} from '@angular/forms';
-import {MatFormFieldAppearance} from '@angular/material/form-field';
+import { Component, Input, OnInit } from '@angular/core';
+import { UntypedFormControl, Validators } from '@angular/forms';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-input-wrapper [label] [control]',
@@ -15,7 +15,7 @@ export class InputWrapperComponent implements OnInit {
   @Input() type: string;
   @Input() placeholder: string;
   @Input() appearance: MatFormFieldAppearance = 'standard';
-  @Input() maxLength: 255;
+  @Input() maxLength = 255;
 
   required = false;
 
