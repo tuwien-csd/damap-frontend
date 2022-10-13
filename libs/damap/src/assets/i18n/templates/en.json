@@ -22,7 +22,7 @@
       },
       "people": {
         "label": "People involved in data management",
-        "intro": "The search below helps you to provide information on involved persons and their particular roles regarding research data management within this project.",
+        "intro": "This step helps you to provide information on involved persons and their particular roles regarding research data management within this project. Based on the information provided in the Project Database, we have already entered the name of the Project Leader and marked her/him as the contact person for questions related to data management and the DMP (icon with person and envelope). You can change the preset information if needed and add more contributors via the search (start typing the name) and manually.",
         "contributors": "Contributors",
         "search": "Search for person...",
         "contributor": {
