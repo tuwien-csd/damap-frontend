@@ -125,7 +125,7 @@ export class SummaryService {
         datasetLevel.completeness -= 50;
         datasetLevel.status.push('dmp.steps.summary.data.specify.datasets.missingexplanation');
       }
-    } else if (dmp.dataKind === DataKind.SPECIFY) {
+    } else if (dmp.dataKind === DataKind.SPECIFY || dmp.reusedDataKind === DataKind.SPECIFY) {
       if (!dmp.dataGeneration) {
         datasetLevel.completeness = datasetLevel.completeness >= 20 ? datasetLevel.completeness - 20 : datasetLevel.completeness;
         datasetLevel.status.push('dmp.steps.summary.data.specify.datasets.datageneration');
