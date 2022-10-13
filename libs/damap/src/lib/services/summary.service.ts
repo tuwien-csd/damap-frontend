@@ -1,16 +1,16 @@
-import {Injectable} from '@angular/core';
-import {Dmp} from '../domain/dmp';
-import {Project} from '../domain/project';
-import {Contributor} from '../domain/contributor';
-import {DataKind} from '../domain/enum/data-kind.enum';
-import {Dataset} from '../domain/dataset';
-import {DataSource} from '../domain/enum/data-source.enum';
-import {Host} from '../domain/host';
-import {SecurityMeasure} from '../domain/enum/security-measure.enum';
-import {ComplianceType} from '../domain/enum/compliance-type.enum';
-import {Agreement} from '../domain/enum/agreement.enum';
-import {DataAccessType} from '../domain/enum/data-access-type.enum';
-import {DataQualityType} from '../domain/enum/data-quality-type.enum';
+import { Injectable } from '@angular/core';
+import { Dmp } from '../domain/dmp';
+import { Project } from '../domain/project';
+import { Contributor } from '../domain/contributor';
+import { DataKind } from '../domain/enum/data-kind.enum';
+import { Dataset } from '../domain/dataset';
+import { DataSource } from '../domain/enum/data-source.enum';
+import { Host } from '../domain/host';
+import { SecurityMeasure } from '../domain/enum/security-measure.enum';
+import { ComplianceType } from '../domain/enum/compliance-type.enum';
+import { Agreement } from '../domain/enum/agreement.enum';
+import { DataAccessType } from '../domain/enum/data-access-type.enum';
+import { DataQualityType } from '../domain/enum/data-quality-type.enum';
 
 export interface Completeness {
   step: string;
@@ -55,7 +55,7 @@ export class SummaryService {
   }
 
   static evaluateProjectStep(project: Project): Completeness {
-    const projectsLevel: Completeness = {step: 'dmp.steps.project.label', completeness: 0, status: []};
+    const projectsLevel: Completeness = { step: 'dmp.steps.project.label', completeness: 0, status: [] };
 
     if (!project) {
       projectsLevel.completeness = 0;
@@ -69,7 +69,7 @@ export class SummaryService {
   }
 
   static evaluatePeopleStep(contributors: Contributor[]): Completeness {
-    const peopleLevel: Completeness = {step: 'dmp.steps.people.label', completeness: 0, status: []};
+    const peopleLevel: Completeness = { step: 'dmp.steps.people.label', completeness: 0, status: [] };
     const contact = contributors.find(c => c.contact);
 
     if (contact) {
@@ -96,7 +96,7 @@ export class SummaryService {
   }
 
   static evaluateDataStep(dmp: Dmp): Completeness {
-    const datasetLevel: Completeness = {step: 'dmp.steps.data.specify.label', completeness: 0, status: []};
+    const datasetLevel: Completeness = { step: 'dmp.steps.data.specify.label', completeness: 0, status: [] };
 
     const kinds = ['dataKind', 'reusedDataKind'];
 
@@ -125,7 +125,7 @@ export class SummaryService {
         datasetLevel.completeness -= 50;
         datasetLevel.status.push('dmp.steps.summary.data.specify.datasets.missingexplanation');
       }
-    } else if (dmp.dataKind === DataKind.SPECIFY) {
+    } else if (dmp.dataKind === DataKind.SPECIFY || dmp.reusedDataKind === DataKind.SPECIFY) {
       if (!dmp.dataGeneration) {
         datasetLevel.completeness = datasetLevel.completeness >= 20 ? datasetLevel.completeness - 20 : datasetLevel.completeness;
         datasetLevel.status.push('dmp.steps.summary.data.specify.datasets.datageneration');
@@ -138,12 +138,15 @@ export class SummaryService {
   }
 
   static evaluateDocumentationStep(dmp: Dmp): Completeness {
-    const docDataQualityLevel: Completeness = {step: 'dmp.steps.documentation.label', completeness: 0, status: []};
-    const docPercent = 100 / 3;
+    const docDataQualityLevel: Completeness = { step: 'dmp.steps.documentation.label', completeness: 0, status: [] };
+    const docPercent = 100 / 4;
     if (dmp.metadata) {
       docDataQualityLevel.completeness += docPercent;
     }
     if (dmp.structure) {
+      docDataQualityLevel.completeness += docPercent;
+    }
+    if (dmp.documentation) {
       docDataQualityLevel.completeness += docPercent;
     }
     if (dmp.dataQuality.length > 0) {
@@ -164,7 +167,7 @@ export class SummaryService {
   }
 
   static evaluateStorageStep(dmp: Dmp): Completeness {
-    const storageLevel: Completeness = {step: 'dmp.steps.storage.label', completeness: 0, status: []};
+    const storageLevel: Completeness = { step: 'dmp.steps.storage.label', completeness: 0, status: [] };
     const datasets = this.getDatasetsBySource(dmp.datasets, DataSource.NEW);
     if (datasets.length == 0) {
       storageLevel.completeness = 100;
@@ -196,7 +199,7 @@ export class SummaryService {
   }
 
   static evaluateLegalStep(dmp: Dmp): Completeness {
-    const legalEthicalAspectsLevel: Completeness = {step: 'dmp.steps.legal.label', completeness: 0, status: []};
+    const legalEthicalAspectsLevel: Completeness = { step: 'dmp.steps.legal.label', completeness: 0, status: [] };
     const legalPercent = 25;
     // Sensitive Data
     if (dmp.sensitiveData) {
@@ -243,7 +246,7 @@ export class SummaryService {
   }
 
   static evaluateLicenseStep(dmp: Dmp): Completeness {
-    const licensesLevel: Completeness = {step: 'dmp.steps.licensing.label', completeness: 100, status: []};
+    const licensesLevel: Completeness = { step: 'dmp.steps.licensing.label', completeness: 100, status: [] };
 
     const newDatasets = this.getDatasetsBySource(dmp.datasets, DataSource.NEW);
     const publishedDatasets = newDatasets.filter(d => d.dataAccess === DataAccessType.OPEN);
@@ -253,7 +256,7 @@ export class SummaryService {
 
     const incompleteDataset = publishedDatasets.find(d => !d.license || !d.startDate);
     if (incompleteDataset) {
-      licensesLevel.completeness -= 30
+      licensesLevel.completeness -= 30;
     }
 
     if ((restrictedCount && !dmp.restrictedAccessInfo) || (closedCount && !dmp.closedAccessInfo)) {
@@ -274,7 +277,7 @@ export class SummaryService {
   }
 
   static evaluateRepositoryStep(dmp: Dmp): Completeness {
-    const repositoriesLevel: Completeness = {step: 'dmp.steps.repositories.label', completeness: 0, status: []};
+    const repositoriesLevel: Completeness = { step: 'dmp.steps.repositories.label', completeness: 0, status: [] };
 
     const repoDatasets: string[] = [...new Set([...this.getAllHostDatasets(dmp.repositories)])];
     const newDatasets = dmp.datasets.filter(d => d.source === DataSource.NEW && d.dataAccess === DataAccessType.OPEN);
@@ -292,7 +295,7 @@ export class SummaryService {
   }
 
   static evaluateReuseStep(dmp: Dmp): Completeness {
-    const reuseLevel: Completeness = {step: 'dmp.steps.data.reuse.label', completeness: 0, status: []};
+    const reuseLevel: Completeness = { step: 'dmp.steps.data.reuse.label', completeness: 0, status: [] };
     const restrictedDatasets = !!dmp.datasets.filter(d => d.dataAccess === DataAccessType.RESTRICTED && d.source === DataSource.NEW).length;
     const reusePercent = 100 / (restrictedDatasets ? 3 : 2);
     if (dmp.targetAudience) {
@@ -315,7 +318,7 @@ export class SummaryService {
   }
 
   static evaluateCostStep(dmp: Dmp): Completeness {
-    const costsLevel: Completeness = {step: 'dmp.steps.costs.label', completeness: 0, status: []};
+    const costsLevel: Completeness = { step: 'dmp.steps.costs.label', completeness: 0, status: [] };
     if (dmp.costsExist == null) {
       costsLevel.completeness = 0;
       costsLevel.status.push('dmp.steps.summary.notspecified');
@@ -331,14 +334,14 @@ export class SummaryService {
 
   private static noDatasetsSummary(): Completeness[] {
     let summary = [
-      {step: 'dmp.steps.documentation.label', completeness: 0, status: []},
-      {step: 'dmp.steps.storage.label', completeness: 0, status: []},
-      {step: 'dmp.steps.legal.label', completeness: 0, status: []},
-      {step: 'dmp.steps.licensing.label', completeness: 0, status: []},
-      {step: 'dmp.steps.repositories.label', completeness: 0, status: []},
-      {step: 'dmp.steps.data.reuse.label', completeness: 0, status: []},
-      {step: 'dmp.steps.costs.label', completeness: 0, status: []}
-    ]
+      { step: 'dmp.steps.documentation.label', completeness: 0, status: [] },
+      { step: 'dmp.steps.storage.label', completeness: 0, status: [] },
+      { step: 'dmp.steps.legal.label', completeness: 0, status: [] },
+      { step: 'dmp.steps.licensing.label', completeness: 0, status: [] },
+      { step: 'dmp.steps.repositories.label', completeness: 0, status: [] },
+      { step: 'dmp.steps.data.reuse.label', completeness: 0, status: [] },
+      { step: 'dmp.steps.costs.label', completeness: 0, status: [] }
+    ];
     for (const step of summary) {
       step.status = ['dmp.steps.summary.nodatasets'];
     }

@@ -1,4 +1,4 @@
-import {Dmp} from '../../domain/dmp';
+import { Dmp } from '../../domain/dmp';
 
 export interface FormState {
   dmp: Dmp;
@@ -18,6 +18,7 @@ export const initialFormState: FormState = {
     dataKind: null,
     dataQuality: [],
     datasets: [],
+    documentation: '',
     ethicalIssuesExist: false,
     ethicalIssuesExistCris: undefined,
     externalStorage: [],

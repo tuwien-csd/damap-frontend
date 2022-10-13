@@ -1,18 +1,18 @@
-import {Injectable} from '@angular/core';
-import {UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
-import {Dmp} from '../domain/dmp';
-import {Contributor} from '../domain/contributor';
-import {Dataset} from '../domain/dataset';
-import {Cost} from '../domain/cost';
-import {DataAccessType} from '../domain/enum/data-access-type.enum';
-import {Storage} from '../domain/storage';
-import {AccessRight} from '../domain/enum/access-right.enum';
-import {notEmptyValidator} from '../validators/not-empty.validator';
-import {ExternalStorage} from '../domain/external-storage';
-import {Repository} from '../domain/repository';
-import {InternalStorage} from '../domain/internal-storage';
-import {currencyValidator} from '../validators/currency.validator';
-import {DataSource} from '../domain/enum/data-source.enum';
+import { Injectable } from '@angular/core';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Dmp } from '../domain/dmp';
+import { Contributor } from '../domain/contributor';
+import { Dataset } from '../domain/dataset';
+import { Cost } from '../domain/cost';
+import { DataAccessType } from '../domain/enum/data-access-type.enum';
+import { Storage } from '../domain/storage';
+import { AccessRight } from '../domain/enum/access-right.enum';
+import { notEmptyValidator } from '../validators/not-empty.validator';
+import { ExternalStorage } from '../domain/external-storage';
+import { Repository } from '../domain/repository';
+import { InternalStorage } from '../domain/internal-storage';
+import { currencyValidator } from '../validators/currency.validator';
+import { DataSource } from '../domain/enum/data-source.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +56,7 @@ export class FormService {
       documentation: this.formBuilder.group({
         metadata: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         structure: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        documentation: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         dataQuality: [[]],
         otherDataQuality: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
       }),
@@ -111,11 +112,12 @@ export class FormService {
         kind: dmp.dataKind,
         reusedKind: dmp.reusedDataKind,
         explanation: dmp.noDataExplanation,
-        dataGeneration: dmp.dataGeneration,
+        dataGeneration: dmp.dataGeneration
       },
       documentation: {
         metadata: dmp.metadata,
         structure: dmp.structure,
+        documentation: dmp.documentation,
         dataQuality: dmp.dataQuality,
         otherDataQuality: dmp.otherDataQuality
       },
@@ -141,7 +143,7 @@ export class FormService {
         ethicalIssues: dmp.ethicalIssuesExist,
         ethicalIssuesCris: dmp.ethicalIssuesExistCris,
         committeeReviewed: dmp.committeeReviewed,
-        committeeReviewedCris: dmp.committeeReviewedCris,
+        committeeReviewedCris: dmp.committeeReviewedCris
       },
       reuse: {
         targetAudience: dmp.targetAudience,
@@ -153,7 +155,7 @@ export class FormService {
         existCris: dmp.costsExistCris
       },
       restrictedAccessInfo: dmp.restrictedAccessInfo,
-      closedAccessInfo: dmp.closedAccessInfo,
+      closedAccessInfo: dmp.closedAccessInfo
     });
 
     // Contributors, datasets, repositories, costs
@@ -204,6 +206,7 @@ export class FormService {
       dataKind: formValue.data.kind,
       reusedDataKind: formValue.data.reusedKind,
       dataQuality: formValue.documentation.dataQuality || [],
+      documentation: formValue.documentation.documentation,
       datasets: formValue.datasets,
       ethicalIssuesExist: formValue.legal.ethicalIssues,
       ethicalIssuesExistCris: formValue.legal.ethicalIssuesCris,
@@ -260,13 +263,13 @@ export class FormService {
   public changeContactPerson(contact: Contributor) {
     // Remove old contact
     const contributorFormArray = this.form.get('contributors') as UntypedFormArray;
-    contributorFormArray.controls.forEach(c => c.patchValue({contact: false}));
+    contributorFormArray.controls.forEach(c => c.patchValue({ contact: false }));
 
     // Add/set new contact
     if (contact) {
       const newContact = contributorFormArray.controls.find(c => c.value.universityId === contact.universityId);
       if (newContact) {
-        newContact.patchValue({contact: true});
+        newContact.patchValue({ contact: true });
       } else {
         this.addContributorToForm(contact, true);
       }
@@ -276,7 +279,7 @@ export class FormService {
   public addContributorToForm(contributor: Contributor, contact = false) {
     const contributorFormGroup = this.createContributorFormGroup();
     contributorFormGroup.patchValue(contributor);
-    contributorFormGroup.patchValue({contact});
+    contributorFormGroup.patchValue({ contact });
     (this.form.get('contributors') as UntypedFormArray).push(contributorFormGroup);
   }
 
@@ -289,7 +292,7 @@ export class FormService {
     formGroup.patchValue({
       referenceHash: reference,
       startDate: this.form.value.project?.end || null,
-      dateOfDeletion: this.form.value.project?.end || null,
+      dateOfDeletion: this.form.value.project?.end || null
     });
     (this.form.get('datasets') as UntypedFormArray).push(formGroup);
   }
@@ -320,7 +323,7 @@ export class FormService {
 
   public addStorageToForm(storage: InternalStorage) {
     const storageFormGroup = this.createStorageFormGroup();
-    storageFormGroup.patchValue({internalStorageId: storage.id, title: storage.title});
+    storageFormGroup.patchValue({ internalStorageId: storage.id, title: storage.title });
     (this.form.get('storage') as UntypedFormArray).push(storageFormGroup);
   }
 
@@ -363,7 +366,7 @@ export class FormService {
 
   public createDatasetFormGroup(title: string): UntypedFormGroup {
     return this.formBuilder.group({
-      id: [null, {disabled: true}],
+      id: [null, { disabled: true }],
       title: [title, [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       license: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       startDate: [null],
@@ -396,7 +399,7 @@ export class FormService {
 
   private createContributorFormGroup(): UntypedFormGroup {
     return this.formBuilder.group({
-      id: [null, {disabled: true}],
+      id: [null, { disabled: true }],
       affiliation: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       affiliationId: [null],
       contact: [false],
@@ -418,8 +421,8 @@ export class FormService {
 
   private createStorageFormGroup(): UntypedFormGroup {
     return this.formBuilder.group({
-      id: [null, {disabled: true}],
-      internalStorageId: [null, {disabled: true}],
+      id: [null, { disabled: true }],
+      internalStorageId: [null, { disabled: true }],
       title: ['', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       datasets: [[]]
     });
@@ -438,7 +441,7 @@ export class FormService {
 
   private createExternalStorageFormGroup(): UntypedFormGroup {
     return this.formBuilder.group({
-      id: [null, {disabled: true}],
+      id: [null, { disabled: true }],
       title: ['Other', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       url: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       storageLocation: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
@@ -464,7 +467,7 @@ export class FormService {
 
   private createRepositoryFormGroup(): UntypedFormGroup {
     return this.formBuilder.group({
-      id: [null, {disabled: true}],
+      id: [null, { disabled: true }],
       repositoryId: [null],
       title: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       datasets: [[]]
@@ -484,7 +487,7 @@ export class FormService {
 
   private createCostFormGroup(): UntypedFormGroup {
     return this.formBuilder.group({
-      id: [null, {disabled: true}],
+      id: [null, { disabled: true }],
       title: ['New cost', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       currencyCode: ['EUR', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
       value: [0, currencyValidator()], // validate currency format
@@ -528,7 +531,7 @@ export class FormService {
     for (let i = 0; i < array.controls?.length; i++) {
       const item = array.at(i);
       const datasets = item.value.datasets.filter(entry => entry !== dataset.value.referenceHash);
-      item.patchValue({datasets});
+      item.patchValue({ datasets });
     }
   }
 }

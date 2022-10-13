@@ -25,7 +25,8 @@
   </ng-container>
 
   <!-- DATA GENERATION -->
-  <ng-container *ngIf="specifyDataStep.value.kind === dataKind.SPECIFY">
+  <ng-container
+    *ngIf='specifyDataStep.value.kind === dataKind.SPECIFY || specifyDataStep.value.reusedKind === dataKind.SPECIFY '>
     <app-textarea-wrapper [label]="'dmp.steps.documentation.question.datageneration'"
                           [control]="dataGeneration">
     </app-textarea-wrapper>

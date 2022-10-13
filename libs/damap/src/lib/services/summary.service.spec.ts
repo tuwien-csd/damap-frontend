@@ -1,19 +1,19 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {SummaryService} from './summary.service';
-import {Dmp} from '../domain/dmp';
-import {mockContact, mockContributor1} from '../mocks/contributor-mocks';
-import {DataKind} from '../domain/enum/data-kind.enum';
-import {closedDatasetMock, openDatasetMock, restrictedDatasetMock} from '../mocks/dataset-mocks';
-import {DataQualityType} from '../domain/enum/data-quality-type.enum';
-import {ComplianceType} from '../domain/enum/compliance-type.enum';
-import {SecurityMeasure} from '../domain/enum/security-measure.enum';
-import {Agreement} from '../domain/enum/agreement.enum';
-import {completeDmp, noDataDmp} from '../mocks/dmp-mocks';
-import {CostType} from '../domain/enum/cost-type.enum';
-import {mockStorage} from '../mocks/storage-mocks';
-import {ExternalStorage} from '../domain/external-storage';
-import {DataSource} from '../domain/enum/data-source.enum';
+import { SummaryService } from './summary.service';
+import { Dmp } from '../domain/dmp';
+import { mockContact, mockContributor1 } from '../mocks/contributor-mocks';
+import { DataKind } from '../domain/enum/data-kind.enum';
+import { closedDatasetMock, openDatasetMock, restrictedDatasetMock } from '../mocks/dataset-mocks';
+import { DataQualityType } from '../domain/enum/data-quality-type.enum';
+import { ComplianceType } from '../domain/enum/compliance-type.enum';
+import { SecurityMeasure } from '../domain/enum/security-measure.enum';
+import { Agreement } from '../domain/enum/agreement.enum';
+import { completeDmp, noDataDmp } from '../mocks/dmp-mocks';
+import { CostType } from '../domain/enum/cost-type.enum';
+import { mockStorage } from '../mocks/storage-mocks';
+import { ExternalStorage } from '../domain/external-storage';
+import { DataSource } from '../domain/enum/data-source.enum';
 
 describe('SummaryService', () => {
   let service: SummaryService;
@@ -22,7 +22,7 @@ describe('SummaryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(SummaryService);
-    dmp = {...baseDmp};
+    dmp = { ...baseDmp };
   });
 
   it('should be created', () => {
@@ -39,7 +39,7 @@ describe('SummaryService', () => {
       start: undefined,
       title: '',
       universityId: 0
-    }
+    };
     let summary = SummaryService.evaluateProjectStep(null);
     expect(summary.completeness).toEqual(0);
     expect(summary.status).toEqual(['dmp.steps.summary.project.none']);
@@ -84,7 +84,7 @@ describe('SummaryService', () => {
     );
 
     dmp.dataKind = DataKind.SPECIFY;
-    dmp.datasets = [{...restrictedDatasetMock}];
+    dmp.datasets = [{ ...restrictedDatasetMock }];
     summary = SummaryService.evaluateDataStep(dmp);
     expect(summary.completeness).toEqual(80);
     expect(summary.status.includes('dmp.steps.summary.data.specify.datasets.produced')).toBeTrue();
@@ -111,6 +111,10 @@ describe('SummaryService', () => {
     summary = SummaryService.evaluateDocumentationStep(dmp);
     expect(summary.status).toEqual(['dmp.steps.summary.partially']);
 
+    dmp.documentation = 'documentation';
+    summary = SummaryService.evaluateDocumentationStep(dmp);
+    expect(summary.status).toEqual(['dmp.steps.summary.partially']);
+
     dmp.structure = 'structure';
     dmp.dataQuality = [DataQualityType.OTHERS];
     summary = SummaryService.evaluateDocumentationStep(dmp);
@@ -124,11 +128,11 @@ describe('SummaryService', () => {
 
   it('should test storage step', () => {
 
-    dmp.datasets = [{...openDatasetMock}];
+    dmp.datasets = [{ ...openDatasetMock }];
     let summary = SummaryService.evaluateStorageStep(dmp);
     expect(summary.completeness).toEqual(0);
 
-    let storage = {...mockStorage};
+    let storage = { ...mockStorage };
     storage.datasets = [openDatasetMock.referenceHash];
     dmp.storage = [storage];
     summary = SummaryService.evaluateStorageStep(dmp);
@@ -160,7 +164,7 @@ describe('SummaryService', () => {
     summary = SummaryService.evaluateLegalStep(dmp);
     expect(summary.completeness).toBeLessThan(100);
 
-    dmp.datasets = [{...restrictedDatasetMock}];
+    dmp.datasets = [{ ...restrictedDatasetMock }];
     dmp.personalDataCompliance = [ComplianceType.ANONYMISATION];
     summary = SummaryService.evaluateLegalStep(dmp);
     expect(summary.completeness).toEqual(100);
@@ -196,7 +200,7 @@ describe('SummaryService', () => {
     expect(summary.status).toEqual(['dmp.steps.summary.licensing.complete']);
 
     // Open dataset
-    let dataset = {...openDatasetMock};
+    let dataset = { ...openDatasetMock };
     dmp.datasets = [dataset];
     summary = SummaryService.evaluateLicenseStep(dmp);
     expect(summary.completeness).toBeLessThan(100);
@@ -206,7 +210,7 @@ describe('SummaryService', () => {
     expect(summary.completeness).toEqual(100);
 
     // Restricted dataset
-    dataset = {...restrictedDatasetMock};
+    dataset = { ...restrictedDatasetMock };
     dmp.datasets = [dataset];
     summary = SummaryService.evaluateLicenseStep(dmp);
     expect(summary.completeness).toBeLessThan(100);
@@ -216,7 +220,7 @@ describe('SummaryService', () => {
     expect(summary.completeness).toEqual(100);
 
     // Closed dataset
-    dataset = {...closedDatasetMock};
+    dataset = { ...closedDatasetMock };
     dataset.source = DataSource.NEW;
     dmp.datasets = [dataset];
     summary = SummaryService.evaluateLicenseStep(dmp);
@@ -239,11 +243,11 @@ describe('SummaryService', () => {
 
   it('should test repository step', () => {
 
-    dmp.datasets = [{...openDatasetMock}];
+    dmp.datasets = [{ ...openDatasetMock }];
     let summary = SummaryService.evaluateRepositoryStep(dmp);
     expect(summary.completeness).toEqual(0);
 
-    dmp.repositories = [{...noDataDmp.repositories[0]}];
+    dmp.repositories = [{ ...noDataDmp.repositories[0] }];
     summary = SummaryService.evaluateRepositoryStep(dmp);
     expect(summary.completeness).toEqual(100);
   });
@@ -258,7 +262,7 @@ describe('SummaryService', () => {
     summary = SummaryService.evaluateReuseStep(dmp);
     expect(summary.completeness).toEqual(100);
 
-    dmp.datasets = [{...restrictedDatasetMock}];
+    dmp.datasets = [{ ...restrictedDatasetMock }];
     summary = SummaryService.evaluateReuseStep(dmp);
     expect(summary.completeness).toBeLessThan(100);
 
@@ -334,6 +338,7 @@ describe('SummaryService', () => {
     dataQuality: [],
     dataRightsAndAccessControl: '',
     datasets: [],
+    documentation: '',
     ethicalIssuesExist: false,
     ethicalIssuesExistCris: false,
     externalStorage: [],
@@ -367,5 +372,5 @@ describe('SummaryService', () => {
     structure: '',
     targetAudience: '',
     tools: ''
-  }
+  };
 });
