@@ -1,0 +1,95 @@
+<app-step-intro>{{'dmp.steps.licensing.intro' | translate}}
+</app-step-intro>
+<p>{{'dmp.steps.licensing.hint' | translate}}</p>
+<div [formGroup]="dmpForm">
+  <ng-container formArrayName="datasets" *ngFor="let dataset of datasets?.controls; index as i">
+    <mat-card *ngIf="dataset.value.source === datasetSource.NEW" class="mat-selected">
+      <ng-container [formGroupName]="i">
+        <div class="mat-card-container">
+          <div class="mat-card-left">
+            <h4>{{dataset.value.title}}</h4>
+          </div>
+          <div class="mat-card-right">
+            <mat-form-field>
+              <mat-label>{{'dmp.steps.licensing.question.dataAccess' | translate}}</mat-label>
+              <mat-select formControlName="dataAccess">
+                <mat-option *ngFor="let type of accessType | keyvalue" [value]="type.key">
+                  {{translateEnumPrefix + type.value | translate}}<br/>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <ng-container *ngIf="dataset.value.dataAccess === accessType.OPEN">
+          <div class="warning"
+               *ngIf="dataset.value.personalData || dataset.value.sensitiveData || dataset.value.legalRestrictions">
+            <div class="warning-icon">
+              <mat-icon>error_outline</mat-icon>
+            </div>
+            <ng-container *ngIf="dataset.value.personalData || dataset.value.sensitiveData">
+              {{'dmp.steps.licensing.warning.personalData' | translate}}
+              <ng-container *ngIf="!isAnonymisedOrPseudonymised">
+                {{'dmp.steps.licensing.warning.pseudonymisation' | translate}}
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="dataset.value.legalRestrictions">
+              {{'dmp.steps.licensing.warning.legalRestrictions' | translate}}
+            </ng-container>
+          </div>
+          <div class="mat-card-container">
+            <mat-form-field class="full-width">
+              <mat-label>{{'dmp.steps.licensing.question.license' | translate}}</mat-label>
+              <mat-select formControlName="license">
+                <mat-option *ngFor="let license of licenses" [value]="license.url | translate">
+                  {{license.name | translate}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <app-license-wizard (selectedLicense)="setLicenseSelectorResult($event, i)"></app-license-wizard>
+          </div>
+          <div class="mat-card-container">
+            <mat-form-field class="date-form">
+              <mat-label>{{'dmp.steps.licensing.question.startDate' | translate}}</mat-label>
+              <input matInput [matDatepicker]="picker_i" formControlName="startDate">
+              <mat-datepicker-toggle matSuffix [for]="picker_i"></mat-datepicker-toggle>
+              <mat-datepicker #picker_i></mat-datepicker>
+              <mat-hint
+                *ngIf="dmpForm.controls.project?.value?.end === dataset.value.startDate">
+                {{'dmp.steps.licensing.question.hint' | translate}}
+              </mat-hint>
+            </mat-form-field>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="dataset.value.dataAccess === accessType.CLOSED">
+          <app-data-deletion [dataset]="getFormGroup(i)" [dmpForm]="dmpForm"></app-data-deletion>
+        </ng-container>
+      </ng-container>
+    </mat-card>
+  </ng-container>
+</div>
+<div [style.margin.px]="'5'">
+  <div [formGroup]="dmpForm">
+    <ng-container *ngIf="restricted?.length > 0">
+      <mat-form-field class="full-width">
+        <mat-label
+          class="wrap-normal-label">{{'dmp.steps.licensing.question.restrictedAccessInfo' | translate}}
+          <ng-container *ngFor="let set of restricted, last as last">
+            "{{set.title}}"<span *ngIf="!last">, </span>.
+          </ng-container>
+        </mat-label>
+        <textarea matInput formControlName="restrictedAccessInfo" [maxLength]="4000"></textarea>
+      </mat-form-field>
+    </ng-container>
+
+    <ng-container *ngIf="closed?.length > 0">
+      <mat-form-field class="full-width">
+        <mat-label class="wrap-normal-label">{{'dmp.steps.licensing.question.closedAccessInfo' | translate}}
+          <span *ngFor="let set of closed, last as last">
+            "{{set.title}}"<span *ngIf="!last">, </span>.
+          </span>
+        </mat-label>
+        <textarea matInput formControlName="closedAccessInfo" [maxLength]="4000"></textarea>
+      </mat-form-field>
+    </ng-container>
+  </div>
+</div>

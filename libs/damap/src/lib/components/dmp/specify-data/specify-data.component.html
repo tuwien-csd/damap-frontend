@@ -1,0 +1,34 @@
+<div>
+  <!-- CREATED DATASETS -->
+  <app-created-data [specifyDataStep]="specifyDataStep"
+                    [datasets]="datasets"
+                    [fileUpload]="fileUpload"
+                    (createDataset)="create($event)"
+                    (updateDataset)="update($event)"
+                    (removeDataset)="remove($event)"
+                    (fileToAnalyse)="analyseFile($event)"
+                    (uploadToCancel)="cancelUpload($event)"></app-created-data>
+
+  <!-- REUSED DATASETS -->
+  <app-reused-data [specifyDataStep]="specifyDataStep"
+                   [datasets]="datasets"
+                   (datasetToAdd)="add($event)"
+                   (updateDataset)="update($event)"
+                   (removeDataset)="remove($event)"></app-reused-data>
+
+  <!-- NO DATA -->
+  <ng-container
+    *ngIf="specifyDataStep.value.kind === dataKind.NONE && specifyDataStep.value.reusedKind === dataKind.NONE">
+    <app-textarea-wrapper [label]="'dmp.steps.data.specify.question.nodata'"
+                          [control]="explanation">
+    </app-textarea-wrapper>
+  </ng-container>
+
+  <!-- DATA GENERATION -->
+  <ng-container
+    *ngIf='specifyDataStep.value.kind === dataKind.SPECIFY || specifyDataStep.value.reusedKind === dataKind.SPECIFY '>
+    <app-textarea-wrapper [label]="'dmp.steps.documentation.question.datageneration'"
+                          [control]="dataGeneration">
+    </app-textarea-wrapper>
+  </ng-container>
+</div>

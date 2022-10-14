@@ -37,6 +37,8 @@ speed-measure-plugin*.json
 /.sass-cache
 /connect.lock
 /coverage
+/apps/damap-frontend/coverage
+/apps/damap-frontend/reports
 /libpeerconnection.log
 npm-debug.log
 yarn-error.log
@@ -53,3 +55,5 @@ src/themes/*
 
 # Testreports
 /reports
+
+.angular

@@ -1,0 +1,27 @@
+<app-data-mc [control]="reusedKind"
+             questionLabel="dmp.steps.data.specify.question.reused"
+             answerLabelNone="dmp.steps.data.specify.answer.kind.reuse.none">
+</app-data-mc>
+
+<ng-container *ngIf="reusedKind.value === dataKind.SPECIFY">
+  <button mat-raised-button color="primary" (click)="openDatasetDialog()">
+    {{'dmp.steps.data.specify.button.add.manual' | translate}}
+  </button>
+  <p translate>or</p>
+  <app-doi-search [result]="result" [loading]="loading"
+                  (termToSearch)="searchDataset($event)"
+                  (datasetToAdd)="add($event)"></app-doi-search>
+
+  <!-- TABLE -->
+  <app-dataset-table *ngIf="datasets.controls.length"
+                     [datasets]="datasets"
+                     tableHeading="dmp.steps.data.specify.table.heading.reused"
+                     tableIntro="dmp.steps.data.specify.intro.reused"
+                     [tableHeaders]="tableHeaders"
+                     [sourceType]="datasetSource.REUSED"
+                     (updateDataset)="update($event)"
+                     (removeDataset)="remove($event)">
+
+  </app-dataset-table>
+</ng-container>
+

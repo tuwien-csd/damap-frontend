@@ -1,0 +1,26 @@
+<div id="content" style="max-width: 1440px;">
+  <h2 translate>plans.mydmps</h2>
+  <button mat-button [routerLink]="'/dmp'" mat-raised-button color="primary">
+    <mat-icon>add</mat-icon>
+    {{'plans.create.dmp' | translate }}
+  </button>
+
+  <div *ngIf="(dmpsLoaded$ | async) === LoadingState.LOADED">
+    <app-dmp-table [dmps]="dmps$ | async" (createDocument)="getDocument($event)"
+                   (createJsonFile)="getJsonFile($event)"></app-dmp-table>
+  </div>
+  <div *ngIf="(dmpsLoaded$ | async) === LoadingState.LOADING">
+    <p translate>plans.loading.load</p>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <div *ngIf="(dmpsLoaded$ | async) === LoadingState.FAILED">
+    <app-error-message message="{{'plans.loading.failed' | translate }}"></app-error-message>
+  </div>
+
+  <ng-container *ngIf="isAdmin()">
+    <h2 translate>plans.alldmps</h2>
+    <app-dmp-table [dmps]="allDmps$ | async" (createDocument)="getDocument($event)"
+                   (createJsonFile)="getJsonFile($event)"></app-dmp-table>
+  </ng-container>
+</div>
+

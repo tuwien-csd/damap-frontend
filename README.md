@@ -16,36 +16,41 @@ This saves DMP authors from having to enter the same data several times.
 Finally DAMAP delivers both a DMP that can be read and edited as a Word document, and an maDMP whose
 information can be used at machine level. The current content of DAMAP is based on
 [Science Europe’s Practical Guide to the International Alignment of Research Data Management](https://www.tuwien.at/fileadmin/Assets/forschung/Zentrum_Forschungsdatenmanagement/pdf-Sammlung/se_rdm_practical_guide_extended_final_2021.pdf)
-and is compatible with the [RDA recommendation on machine actionable DMPs](https://zenodo.org/record/4036060#.Yk20vjWxVaR).
+and is compatible with
+the [RDA recommendation on machine actionable DMPs](https://zenodo.org/record/4036060#.Yk20vjWxVaR).
 
 For a showcase of some of the tools functions see the [demo video](https://youtu.be/IxQzqy26ZO4).
 
 ## Damap Project and Documentation
 
-For an overview and instructions for running the whole damap package (backend and frontend), 
+For an overview and instructions for running the whole damap package (backend and frontend),
 refer to the [damap-backend](https://github.com/tuwien-csd/damap-backend) project.
 
 ## DamapFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
+This repository contains the source code for the frontend of DAMAP and need to be run
+with [damap-backend](https://github.com/tuwien-csd/damap-backend).
+The project is based on [Angular](https://angular.io/) and uses [NX](https://nx.dev/) as a build system.
 
 ### Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `nx serve damap-frontend` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload
+if you change any of the source files.
 
 ### Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `nx build damap-frontend` to build the project. The build artifacts will be stored in the `dist/` directory. Use
+the `--prod` flag for a production build.
 
 ### Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `nx test damap` to execute the unit tests for the library and `nx test damap-frontend` for the application.
 
 ### Run the project with docker
 
 For running the project in conjunction with the backend in a dockerized setup,
 please refer to the [damap-backend](https://github.com/tuwien-csd/damap-backend) project.
 
-###Customising
+### Customising
 
-please refer to the [CUSTOMISING.md](CUSTOMISING.md) page.
+Please refer to the [CUSTOMISING](CUSTOMISING.md) page.

@@ -1,0 +1,31 @@
+<app-step-intro>{{'dmp.steps.documentation.intro' | translate}}
+</app-step-intro>
+
+<app-textarea-wrapper
+  [label]="'dmp.steps.documentation.question.structure'"
+  [control]='structure' [autocompleteOptions]='optionsStructureAndVersioning'>
+</app-textarea-wrapper>
+<div class='form-field-hint'>
+  <app-textarea-wrapper
+    [label]="'dmp.steps.documentation.question.metadata'"
+    [control]='metadata' [autocompleteOptions]='optionsMetadata'>
+  </app-textarea-wrapper>
+  <app-tooltip [tooltip]="'info.documentation.metadata'"></app-tooltip>
+</div>
+<app-textarea-wrapper
+  [label]="'dmp.steps.documentation.question.documentation'"
+  [control]='documentation'>
+</app-textarea-wrapper>
+<mat-form-field appearance='fill' [style]="'width: 100%'" [formGroup]='docDataStep'>
+  <mat-label>{{'dmp.steps.documentation.question.dataQuality' | translate}}
+  </mat-label>
+  <mat-select formControlName='dataQuality' multiple>
+    <mat-option *ngFor='let option of dataQualityOptions | keyvalue: originalOrder' [value]='option.key'>
+      {{translateDataQualityPrefixEnum + option.value | translate}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<app-input-wrapper *ngIf='isOtherDataQualitySelected' appearance='fill' [maxLength]='4000'
+                   [label]="'dmp.steps.documentation.question.otherDataQuality'"
+                   [control]='otherDataQuality'></app-input-wrapper>

@@ -1,0 +1,48 @@
+/* Table Styles */
+
+table {
+  width: 100%;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.distribution-overview {
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.distribution-detail {
+  flex-direction: column;
+}
+
+.distribution-action {
+  display: flex;
+}
+
+/*th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+  width: 80%;
+}*/
+
+/* End Table Styles */

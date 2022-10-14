@@ -1,0 +1,48 @@
+{
+  "dashboard": {
+    "welcome.message": "Welcome to DAMAP, a service that helps you to create and update the Data Management Plan (DMP) for your project.",
+    "dmp": {
+      "heading": "What is a DMP?",
+      "text": {
+        "prefix": "A ",
+        "dmp": {
+          "text": "DMP",
+          "link": "https://www.link.example"
+        },
+        "middle": " is a structured document that keeps record of what research data is created and what happens to that data during and after a project. It helps with planning the research process, managing your data in accordance with the ",
+        "fairprinciples": {
+          "text": "FAIR Principles",
+          "link": "https://www.link.example"
+        },
+        "suffix": ", and defining rights and responsibilities in a research project involving several researchers or institutions."
+      }
+    },
+    "tool": {
+      "heading": "DAMAP",
+      "bulletpoints": {
+        "dmp": {
+          "text": "guides you step by step through the different sections of a DMP following the ",
+          "sepg": {
+            "text": "Science Europe Practical Guide",
+            "link": "https://www.scienceeurope.org/our-resources/practical-guide-to-the-international-alignment-of-research-data-management"
+          }
+        },
+        "document": "exports a pre-filled DMP as a Word document that you can customize and use for submission to European and national funders, for example FWF and FFG",
+        "benefits": {
+          "text": "saves you work by",
+          "one": "pre-filling content with detailed information from your CRIS application and other systems",
+          "two": "providing wizards, guidance, and item lists to choose from",
+          "three": "suggesting answers that you can either comply with or adjust to your needs"
+        },
+        "madmp": {
+          "prefix": "is compatible with the",
+          "rda": {
+            "text": "RDA recommendation on machine actionable DMPs",
+            "link": "https://doi.org/10.15497/rda00039"
+          },
+          "suffix": "."
+        }
+      }
+    }
+  }
+}

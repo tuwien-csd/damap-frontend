@@ -1,0 +1,88 @@
+<div *ngIf="!datasets.controls.length else retentionPeriod">
+  {{'dmps.nodatasets' | translate}}
+</div>
+<ng-template #retentionPeriod>
+  <app-retention-period [dmpForm]="dmpForm" [datasets]="datasets"></app-retention-period>
+</ng-template>
+<!-- SELECTED REPOS-->
+<h2 translate>dmp.steps.repositories.heading</h2>
+<app-step-intro> {{'dmp.steps.repositories.intro' | translate}}
+</app-step-intro>
+<div *ngIf="repoStep.controls.length" [formGroup]="dmpForm">
+  <p translate>dmp.steps.repositories.selected</p>
+  <mat-card *ngFor="let repo of repoStep.controls, index as i" class="mat-selected">
+    <ng-container formArrayName="repositories">
+      <div class="mat-card-container">
+        <div class="mat-card-left">
+          <h4>{{repo.value.title}}</h4>
+        </div>
+        <div class="mat-card-right">
+          <button mat-icon-button (click)="removeRepository(i)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div [formGroupName]="i">
+        <div class="mat-card-container">
+          <mat-form-field>
+            <mat-label>{{'dmp.steps.repositories.question.datasets' | translate}}</mat-label>
+            <mat-select multiple formControlName="datasets">
+              <mat-option *ngFor="let dataset of datasets.value | datasetSource: datasetSource.NEW" [value]="dataset.referenceHash">
+                {{dataset.title}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="mat-card-container">
+          <app-error-message *ngIf="getDatasetsMarkedForDeletion(i).length > 0"
+                             [data]="getDatasetsMarkedForDeletionAsString(i)"
+                             [message]="'dmp.steps.repositories.warning.deletion'"></app-error-message>
+        </div>
+      </div>
+    </ng-container>
+  </mat-card>
+</div>
+
+<!-- TABS -->
+<ng-container *ngIf="recommended$ | async as recommended">
+  <ng-container *ngIf="recommended.length > 0 else noRecommended">
+    <mat-tab-group [animationDuration]="'0'">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          {{'dmp.steps.repositories.recommended' | translate}}
+        </ng-template>
+        <app-repo-recommendation [recommended]="recommended"
+                                 [loaded]="recommendedLoaded$ | async"
+                                 [selectedRepos]="repoStep.value"
+                                 (repositoryToAdd)="addRepository($event)">
+        </app-repo-recommendation>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          {{'dmp.steps.repositories.find' | translate}}
+        </ng-template>
+        <div class="tab-content">
+          <ng-container *ngTemplateOutlet="findRepo"></ng-container>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </ng-container>
+</ng-container>
+
+<ng-template #noRecommended>
+  <ng-container *ngTemplateOutlet="findRepo"></ng-container>
+</ng-template>
+
+<!-- Find Repository template-->
+<ng-template #findRepo>
+  <h3 translate>dmp.steps.repositories.filter.search</h3>
+  <app-repo-filter></app-repo-filter>
+  <app-repo-table [loaded]="repositoriesLoaded"
+                  [repositories]="repositories"
+                  [selectedRepos]="repoStep.value"
+                  [datasets]="datasets.controls.length > 0"
+                  (repositoryToAdd)="addRepository($event)"
+                  (repositoryDetails)="getRepositoryDetails($event)"></app-repo-table>
+
+</ng-template>

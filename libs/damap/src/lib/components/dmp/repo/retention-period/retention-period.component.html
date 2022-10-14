@@ -1,0 +1,26 @@
+<div [formGroup]="dmpForm">
+  <mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'dmp.steps.retentionPeriod.title' | translate}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-container *ngFor="let dataset of datasets.controls, index as i">
+        <ng-container *ngIf="dataset.value.source === datasetSource.NEW">
+          <div formArrayName="datasets">
+            {{dataset.value.title}}
+            <mat-form-field appearance="fill" [formGroupName]="i">
+              <mat-label>{{'dmp.steps.retentionPeriod.question.retentionPeriod' | translate}}</mat-label>
+              <mat-select formControlName="retentionPeriod">
+                <mat-option *ngFor="let option of options" [value]="option">
+                  {{option}} {{'dmp.steps.retentionPeriod.years' | translate}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </ng-container>
+      </ng-container>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

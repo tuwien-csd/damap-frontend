@@ -1,0 +1,33 @@
+{
+  "plans": {
+    "mydmps": "My DMPs",
+    "alldmps": "All DMPs",
+    "create.dmp": "Create new DMP",
+    "loading": {
+      "load": "Load DMPs...",
+      "failed": "Your DMPs could not be loaded!"
+    },
+    "table": {
+      "header": {
+        "title": "Title",
+        "created": "Created",
+        "modified": "Last modified",
+        "contact": "Contact",
+        "edit": "Edit",
+        "history": "History",
+        "delete": "Delete"
+      },
+      "expanded": {
+        "duration": "Project duration: {{value}}"
+      },
+      "export": {
+        "json": "Export as JSON",
+        "doc": "Export as document"
+      },
+      "empty": "No DMPs found",
+      "nodatafilter": "No data matching the filter \"{{value}}\"",
+      "search": "Search DMP",
+      "nocontact": "No contact defined."
+    }
+  }
+}

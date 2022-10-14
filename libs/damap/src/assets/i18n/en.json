@@ -1,0 +1,22 @@
+{
+  "yes": "Yes",
+  "no": "No",
+  "fair": "FAIR",
+  "treeselect": {
+    "filter": "Filter selection",
+    "toggle": "Toggle {{value}}",
+    "options": "Select options"
+  },
+  "languages": "Languages",
+  "env": {
+    "title": "Test environment",
+    "text": "This application instance is for development and testing purposes only. Content may be deleted at any point in time without prior notification."
+  },
+  "dmp": {
+    "success": {
+      "update": "DMP was updated!",
+      "save": "DMP was saved!",
+      "version.save": "Version was saved!"
+    }
+  }
+}

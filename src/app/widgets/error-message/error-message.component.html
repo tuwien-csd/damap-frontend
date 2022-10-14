@@ -1,6 +1,0 @@
-<div class="error-message" *ngIf="data else nodata">
-  <mat-icon>error_outline</mat-icon>&nbsp;{{message | translate: {value: data}  }}
-</div>
-<ng-template #nodata class="error-message">
-  <mat-icon>error_outline</mat-icon>&nbsp;{{message | translate}}
-</ng-template>
