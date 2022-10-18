@@ -1,26 +1,27 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Dmp} from '../domain/dmp';
 import {HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Contributor} from '../domain/contributor';
-import {Project} from '../domain/project';
-import {DmpListItem} from '../domain/dmp-list-item';
-import {RepositoryDetails} from '../domain/repository-details';
 import {catchError, map, retry, shareReplay} from 'rxjs/operators';
-import {FeedbackService} from './feedback.service';
-import {TranslateService} from '@ngx-translate/core';
-import {Consent} from '../domain/consent'
-import {InternalStorage} from '../domain/internal-storage';
-import {Version} from '../domain/version';
-import {Dataset} from '../domain/dataset';
+
 import {APP_ENV} from '../constants';
 import { Access } from "../domain/access";
+import {Consent} from '../domain/consent'
+import {Contributor} from '../domain/contributor';
+import {Dataset} from '../domain/dataset';
+import {Dmp} from '../domain/dmp';
+import {DmpListItem} from '../domain/dmp-list-item';
+import {FeedbackService} from './feedback.service';
+import {Injectable} from '@angular/core';
+import {InternalStorage} from '../domain/internal-storage';
+import {Observable} from 'rxjs';
+import {Project} from '../domain/project';
+import {RepositoryDetails} from '../domain/repository-details';
+import {TranslateService} from '@ngx-translate/core';
+import {Version} from '../domain/version';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BackendService {
-
+ 
   private backendUrl = APP_ENV.backendurl;
   private dmpBackendUrl = this.backendUrl + 'dmps';
   private versionBackendUrl = this.backendUrl + 'versions';
@@ -30,59 +31,63 @@ export class BackendService {
   constructor(
     private http: HttpClient,
     private feedbackService: FeedbackService,
-    private translate: TranslateService) {
-  }
+    private translate: TranslateService
+  ) {}
 
-  private static getFilenameFromContentDisposition(contentDisposition: string): string {
+  private static getFilenameFromContentDisposition(
+    contentDisposition: string
+  ): string {
     const start = contentDisposition.lastIndexOf('filename=');
     return contentDisposition.substring(start + 9);
   }
 
   getDmps(): Observable<DmpListItem[]> {
-    return this.http.get<DmpListItem[]>(`${this.dmpBackendUrl}/list`).pipe(
-      retry(3),
-      catchError(this.handleError('http.error.plans.load.yours'))
-    );
+    return this.http
+      .get<DmpListItem[]>(`${this.dmpBackendUrl}/list`)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('http.error.plans.load.yours'))
+      );
   }
 
   getAllDmps(): Observable<DmpListItem[]> {
-    return this.http.get<DmpListItem[]>(`${this.dmpBackendUrl}/all`).pipe(
-      retry(3),
-      catchError(this.handleError('http.error.plans.load.all'))
-    );
+    return this.http
+      .get<DmpListItem[]>(`${this.dmpBackendUrl}/all`)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('http.error.plans.load.all'))
+      );
   }
 
   getDmpById(id: number): Observable<Dmp> {
-    return this.http.get<Dmp>(`${this.dmpBackendUrl}/${id}`).pipe(
-      retry(3),
-      catchError(this.handleError('http.error.plans.load.one'))
-    );
+    return this.http
+      .get<Dmp>(`${this.dmpBackendUrl}/${id}`)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('http.error.plans.load.one'))
+      );
   }
 
   createDmp(dmp: Dmp): Observable<Dmp> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+        'Content-Type': 'application/json',
+      }),
     };
-    return this.http.post<Dmp>(this.dmpBackendUrl, dmp, httpOptions)
-      .pipe(
-        retry(3),
-        catchError(this.handleError('http.error.plans.save'))
-      );
+    return this.http
+      .post<Dmp>(this.dmpBackendUrl, dmp, httpOptions)
+      .pipe(retry(3), catchError(this.handleError('http.error.plans.save')));
   }
 
   editDmp(dmp: Dmp): Observable<Dmp> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+        'Content-Type': 'application/json',
+      }),
     };
-    return this.http.put<Dmp>(`${this.dmpBackendUrl}/${dmp.id}`, dmp, httpOptions)
-      .pipe(
-        retry(3),
-        catchError(this.handleError('http.error.plans.update'))
-      );
+    return this.http
+      .put<Dmp>(`${this.dmpBackendUrl}/${dmp.id}`, dmp, httpOptions)
+      .pipe(retry(3), catchError(this.handleError('http.error.plans.update')));
   }
 
   deleteDmp(id: number): Observable<Dmp> {
@@ -93,29 +98,29 @@ export class BackendService {
   }
 
   getDmpByIdAndRevision(id: number, revision: number): Observable<Dmp> {
-    return this.http.get<Dmp>(`${this.dmpBackendUrl}/${id}/${revision}`).pipe(
-      retry(3),
-      catchError(this.handleError('http.error.versions.revision'))
-    );
+    return this.http
+      .get<Dmp>(`${this.dmpBackendUrl}/${id}/${revision}`)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('http.error.versions.revision'))
+      );
   }
 
   getDmpVersions(id: number): Observable<Version[]> {
-    return this.http.get<Version[]>(`${this.versionBackendUrl}/list/${id}`).pipe(
-      retry(3),
-      catchError(this.handleError('http.error.versions.load'))
-    );
+    return this.http
+      .get<Version[]>(`${this.versionBackendUrl}/list/${id}`)
+      .pipe(retry(3), catchError(this.handleError('http.error.versions.load')));
   }
 
   saveDmpVersion(version: Version): Observable<Version> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+        'Content-Type': 'application/json',
+      }),
     };
-    return this.http.put<Version>(this.versionBackendUrl, version, httpOptions).pipe(
-      retry(3),
-      catchError(this.handleError('http.error.versions.save'))
-    );
+    return this.http
+      .put<Version>(this.versionBackendUrl, version, httpOptions)
+      .pipe(retry(3), catchError(this.handleError('http.error.versions.save')));
   }
 
   getAccess(dmpId: number): Observable<Access[]> {
@@ -145,55 +150,67 @@ export class BackendService {
   }
 
   getSuggestedProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.projectBackendUrl).pipe(
-      retry(3),
-      catchError(this.handleError('http.error.projects')),
-      shareReplay(1)
-    );
+    return this.http
+      .get<Project[]>(this.projectBackendUrl)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('http.error.projects')),
+        shareReplay(1)
+      );
   }
 
   getProjectMembers(projectId: number): Observable<Contributor[]> {
-    return this.http.get<Contributor[]>(`${this.projectBackendUrl}/${projectId}/staff`).pipe(
-      retry(3),
-      catchError(this.handleError('http.error.projectmembers'))
-    );
-
+    return this.http
+      .get<Contributor[]>(`${this.projectBackendUrl}/${projectId}/staff`)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('http.error.projectmembers'))
+      );
   }
 
-  searchPerson(term: string): Observable<Contributor[]> {
-    return this.http.get<Contributor[]>(`${this.backendUrl}persons/search?q=${term}`).pipe(
-      catchError(this.handleError('http.error.person.search'))
-    )
-  }
-
+  getPersonSearchResult(searchTerm: string, serviceType: string): Observable<Contributor[]> {
+      return this.http
+        .get<Contributor[]>(
+          `${this.backendUrl}persons/search?q=${searchTerm}&searchService=${serviceType}`
+        )
+        .pipe(catchError(this.handleError('http.error.repositories.one')));
+    }
+  
   getInternalStorages(): Observable<InternalStorage[]> {
     const langCode = 'eng'; // TODO: Replace with template lang in the future
-    return this.http.get<InternalStorage[]>(`${this.backendUrl}storages/${langCode}`).pipe(
-      retry(3),
-      catchError(this.handleError('http.error.storages'))
-    );
+    return this.http
+      .get<InternalStorage[]>(`${this.backendUrl}storages/${langCode}`)
+      .pipe(retry(3), catchError(this.handleError('http.error.storages')));
   }
 
   getRepositories(): Observable<RepositoryDetails[]> {
-    return this.http.get<RepositoryDetails[]>(this.repositoryBackendUrl).pipe(
-      retry(3),
-      catchError(this.handleError('http.error.repositories.all'))
-    );
+    return this.http
+      .get<RepositoryDetails[]>(this.repositoryBackendUrl)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('http.error.repositories.all'))
+      );
   }
 
   getRecommendedRepositories(): Observable<RepositoryDetails[]> {
-    return this.http.get<RepositoryDetails[]>(`${this.repositoryBackendUrl}/recommended`).pipe(
-      retry(3),
-      catchError(this.handleError('http.error.repositories.recommended'))
-    );
+    return this.http
+      .get<RepositoryDetails[]>(`${this.repositoryBackendUrl}/recommended`)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('http.error.repositories.recommended'))
+      );
   }
 
-  getRepositoryById(id: string): Observable<{ id: string, changes: RepositoryDetails }> {
-    return this.http.get<RepositoryDetails>(`${this.repositoryBackendUrl}/${id}`).pipe(
-      map(repo => ({id, changes: repo})),
-      retry(3),
-      catchError(this.handleError('http.error.repositories.one'))
-    );
+  getRepositoryById(
+    id: string
+  ): Observable<{ id: string; changes: RepositoryDetails }> {
+    return this.http
+      .get<RepositoryDetails>(`${this.repositoryBackendUrl}/${id}`)
+      .pipe(
+        map((repo) => ({ id, changes: repo })),
+        retry(3),
+        catchError(this.handleError('http.error.repositories.one'))
+      );
   }
 
   searchRepository(filters: { [key: string]: {id: string, label: string}[] }): Observable<RepositoryDetails[]> {
@@ -203,62 +220,64 @@ export class BackendService {
         filters[key]?.forEach(item => params = params.append(key, item.id));
       }
     }
-    return this.http.get<RepositoryDetails[]>(`${this.repositoryBackendUrl}/search`, {params}).pipe(
-      catchError(this.handleError('http.error.repositories.search'))
-    );
+    return this.http
+      .get<RepositoryDetails[]>(`${this.repositoryBackendUrl}/search`, {
+        params,
+      })
+      .pipe(catchError(this.handleError('http.error.repositories.search')));
   }
 
   analyseFileData(file: FormData): Observable<HttpEvent<any>> {
-    return this.http.post(`${this.backendUrl}fits/examine`, file,
-      {reportProgress: true, observe: 'events'})
-      .pipe(
-        catchError(this.handleError('http.error.fileanalysis'))
-      );
+    return this.http
+      .post(`${this.backendUrl}fits/examine`, file, {
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe(catchError(this.handleError('http.error.fileanalysis')));
   }
 
   searchDataset(term: string): Observable<Dataset> {
-    return this.http.get<Dataset>(`${this.backendUrl}openaire?doi=${term}`).pipe(
-      retry(3),
-      catchError(this.handleError('http.error.openaire'))
-    );
+    return this.http
+      .get<Dataset>(`${this.backendUrl}openaire?doi=${term}`)
+      .pipe(retry(3), catchError(this.handleError('http.error.openaire')));
   }
 
   getDmpDocument(id: number): void {
-    this.http.get(this.backendUrl + 'document/' + id,
-      {responseType: 'blob', observe: 'response'}).pipe(
-      catchError(this.handleError('http.error.document'))
-    ).subscribe(
-      {
-        next: response => this.downloadFile(response)
-      }
-    );
+    this.http
+      .get(this.backendUrl + 'document/' + id, {
+        responseType: 'blob',
+        observe: 'response',
+      })
+      .pipe(catchError(this.handleError('http.error.document')))
+      .subscribe({
+        next: (response) => this.downloadFile(response),
+      });
   }
 
   getMaDmpJsonFile(id: number): void {
-    this.http.get(this.backendUrl + 'madmp/file/' + id,
-      {responseType: 'blob', observe: 'response'}).pipe(
-      catchError(this.handleError('http.error.document'))
-    ).subscribe(
-      {
-        next: response => this.downloadFile(response)
-      }
-    );
+    this.http
+      .get(this.backendUrl + 'madmp/file/' + id, {
+        responseType: 'blob',
+        observe: 'response',
+      })
+      .pipe(catchError(this.handleError('http.error.document')))
+      .subscribe({
+        next: (response) => this.downloadFile(response),
+      });
   }
 
   getConsentGiven(): Observable<boolean> {
     return this.http.get<Consent>(`${this.backendUrl}consent`).pipe(
-      map(details => details.consentGiven),
+      map((details) => details.consentGiven),
       retry(3),
       catchError(this.handleError('http.error.consent.one'))
     );
   }
 
   editConsent(consent: Consent): Observable<Consent> {
-    return this.http.post<Consent>(`${this.backendUrl}consent`, consent)
-      .pipe(
-        retry(3),
-        catchError(this.handleError('http.error.consent.edit'))
-      );
+    return this.http
+      .post<Consent>(`${this.backendUrl}consent`, consent)
+      .pipe(retry(3), catchError(this.handleError('http.error.consent.edit')));
   }
 
   private handleError(message = 'http.error.standard') {
@@ -274,16 +293,17 @@ export class BackendService {
         message += this.translate.instant('http.error.503');
       }
       this.feedbackService.error(message);
-      throw new HttpErrorResponse({statusText: message});
+      throw new HttpErrorResponse({ statusText: message });
     };
   }
 
   private downloadFile(response: any) {
     const a = document.createElement('a');
     const url = URL || webkitURL;
-    const contentDisposition = response.headers.get('content-disposition')
+    const contentDisposition = response.headers.get('content-disposition');
     a.href = url.createObjectURL(response.body);
-    a.download = BackendService.getFilenameFromContentDisposition(contentDisposition);
+    a.download =
+      BackendService.getFilenameFromContentDisposition(contentDisposition);
     // start download
     a.click();
     url.revokeObjectURL(a.href);

@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+
 import {Contributor} from '../../domain/contributor';
+import { ServiceType } from '../../domain/enum/search-service-type.enum';
 
 @Component({
   selector: 'app-person-search',
