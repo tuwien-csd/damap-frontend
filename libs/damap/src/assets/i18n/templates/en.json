@@ -103,6 +103,21 @@
               "pid": "PID"
             }
           },
+          "dialog": {
+            "add": "Add dataset",
+            "edit": "Edit dataset",
+            "title": "Dataset title",
+            "type": "Estimated type",
+            "size": "Estimated size",
+            "description": "Description",
+            "source": "Source",
+            "identifier": "Identifier",
+            "button": {
+              "add": "Add",
+              "update": "Update",
+              "cancel": "Cancel"
+            }
+          },
           "doi": {
             "search": "Enter DOI...",
             "not.found": "No dataset found."
