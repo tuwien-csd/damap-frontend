@@ -8,7 +8,7 @@
       "sourceRoot": "apps/damap-frontend/src",
       "targets": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "executor": "@angular-devkit/build-angular:browser",
           "options": {
             "assets": [
               "apps/damap-frontend/src/favicon.ico",
@@ -96,7 +96,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "executor": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "damap-frontend:build"
           },
@@ -111,13 +111,13 @@
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "executor": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "damap-frontend:build"
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "executor": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "apps/damap-frontend/src/test.ts",
             "polyfills": "apps/damap-frontend/src/polyfills.ts",
@@ -135,12 +135,44 @@
           }
         },
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/damap-frontend/src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [
+              "apps/damap-frontend/src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
+    },
+    "damap-frontend-e2e": {
+      "root": "apps/damap-frontend-e2e",
+      "sourceRoot": "apps/damap-frontend-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/damap-frontend-e2e/cypress.config.ts",
+            "devServerTarget": "damap-frontend:serve:development",
+            "testingType": "e2e"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "damap-frontend:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/damap-frontend-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["damap-frontend"]
     }
   }
 }
