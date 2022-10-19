@@ -108,12 +108,7 @@ export class DmpComponent implements OnInit, OnDestroy {
   changeProject(project: Project) {
     if (project != null) {
       if (project.universityId) {
-        // only set contact if none is selected yet
-        if (!this.formService.getContactPerson()) {
-          this.getProjectMembersAndSetContact(project.universityId);
-        } else {
-          this.getProjectMembers(project.universityId);
-        }
+        this.getProjectMembers(project.universityId);
       }
       this.projectStep.setValue(project);
     } else {
@@ -247,21 +242,6 @@ export class DmpComponent implements OnInit, OnDestroy {
         this.projectMembers = members;
       });
   }
-
-  private getProjectMembersAndSetContact(projectId: number) {
-    this.backendService.getProjectMembers(projectId)
-      .subscribe(members => {
-        this.projectMembers = members;
-        for (const member of members) {
-          if (member.contact) {
-            this.changeContactPerson(member);
-            break;
-          }
-        }
-      });
-  }
-
-  // TODO: move to service, add for storage
 
   private generateReferenceHash(): string {
     return this.username + (+new Date()).toString(36);

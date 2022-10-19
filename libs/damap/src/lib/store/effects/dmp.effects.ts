@@ -93,7 +93,7 @@ export class DmpEffects {
     ofType(DmpAction.exportDmp),
     withLatestFrom(this.store$.select(selectFormChanged)),
     switchMap(([action, changed]) => {
-      if (changed) {
+      if (changed !== false) {
         let http$ = action.dmp.id ? this.backendService.editDmp(action.dmp) : this.backendService.createDmp(action.dmp);
         return http$.pipe(
           tap(dmp => {

@@ -7,6 +7,7 @@ import {TranslateTestingModule} from '../../testing/translate-testing/translate-
 import {AuthService} from '../../auth/auth.service';
 import {MatIconModule} from '@angular/material/icon';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatDialogModule} from "@angular/material/dialog";
 
 describe('PlanComponent', () => {
   let component: PlansComponent;
@@ -18,7 +19,7 @@ describe('PlanComponent', () => {
     const backendSpy = jasmine.createSpyObj('BackendService', ['getDmpDocument', 'getMaDmpJsonFile']);
     const authSpy = jasmine.createSpyObj('AuthService', ['hasValidAccessToken', 'isAdmin']);
     await TestBed.configureTestingModule({
-      imports: [MatIconModule, MatProgressBarModule, TranslateTestingModule],
+      imports: [MatIconModule, MatProgressBarModule, MatDialogModule, TranslateTestingModule],
       declarations: [PlansComponent],
       providers: [
         provideMockStore({initialState}),

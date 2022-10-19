@@ -14,6 +14,7 @@ import {MatDialogHarness} from '@angular/material/dialog/testing';
 import {MatInputHarness} from '@angular/material/input/testing';
 import {MatButtonHarness} from '@angular/material/button/testing';
 import {FormsModule} from '@angular/forms';
+import {ExportWarningDialogComponent} from "../../../widgets/export-warning-dialog/export-warning-dialog.component";
 
 describe('DmpActionsComponent', () => {
   let component: DmpActionsComponent;
@@ -30,6 +31,7 @@ describe('DmpActionsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        ExportWarningDialogComponent,
         MatButtonModule, MatDialogModule,
         FormsModule,
         NoopAnimationsModule,
@@ -97,9 +99,16 @@ describe('DmpActionsComponent', () => {
     expect(dialogs.length).toBe(0);
   });
 
-  it('should dispatch export dmp action', () => {
+  it('should dispatch export dmp action', async () => {
     spyOn(store, 'dispatch');
     component.exportDmp();
+
+    let dialogs = await loader.getAllHarnesses(MatDialogHarness);
+    expect(dialogs.length).toBe(1);
+    await dialogs[0].close();
+
+    dialogs = await loader.getAllHarnesses(MatDialogHarness);
+    expect(dialogs.length).toBe(0);
 
     expect(store.dispatch).toHaveBeenCalledTimes(1);
   });

@@ -11,6 +11,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {IdentifierType} from '../../../../domain/enum/identifier-type.enum';
+import {TranslateTestingModule} from "@damap/core";
 
 describe('DatasetDialogComponent', () => {
   let component: DatasetDialogComponent;
@@ -33,7 +34,7 @@ describe('DatasetDialogComponent', () => {
       }
     };
     await TestBed.configureTestingModule({
-      imports: [MatDialogModule, MatSelectModule, MatInputModule, MatButtonModule, FormsModule, ReactiveFormsModule, NoopAnimationsModule],
+      imports: [MatDialogModule, MatSelectModule, MatInputModule, MatButtonModule, FormsModule, ReactiveFormsModule, TranslateTestingModule, NoopAnimationsModule],
       declarations: [DatasetDialogComponent],
       providers: [
         {provide: MatDialogRef, useValue: {close: (value?: any) => value}},

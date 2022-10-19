@@ -54,5 +54,5 @@ export const initialFormState: FormState = {
     id: null,
     project: null
   },
-  changed: false
+  changed: undefined
 };

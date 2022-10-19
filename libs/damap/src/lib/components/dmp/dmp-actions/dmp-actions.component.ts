@@ -8,6 +8,7 @@ import {AppState} from '../../../store/states/app.state';
 import {Observable, Subject, Subscription} from 'rxjs';
 import {selectFormChanged} from '../../../store/selectors/form.selectors';
 import {selectDmpSaving} from '../../../store/selectors/dmp.selectors';
+import {ExportWarningDialogComponent} from "../../../widgets/export-warning-dialog/export-warning-dialog.component";
 
 @Component({
   selector: 'app-actions',
@@ -66,7 +67,9 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
   }
 
   exportDmp(): void {
-    this.store.dispatch(exportDmp({dmp: this.formService.exportFormToDmp()}));
+    this.dialog.open(ExportWarningDialogComponent).afterClosed().subscribe(
+      _ => this.store.dispatch(exportDmp({dmp: this.formService.exportFormToDmp()}))
+    );
   }
 
 }

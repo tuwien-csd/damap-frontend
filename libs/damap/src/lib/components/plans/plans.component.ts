@@ -8,6 +8,8 @@ import {DmpListItem} from '../../domain/dmp-list-item';
 import {BackendService} from '../../services/backend.service';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
 import {AuthService} from '../../auth/auth.service';
+import {MatDialog} from "@angular/material/dialog";
+import {ExportWarningDialogComponent} from "../../widgets/export-warning-dialog/export-warning-dialog.component";
 
 @Component({
   selector: 'app-plan',
@@ -25,7 +27,8 @@ export class PlansComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private backendService: BackendService,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {
   }
 
@@ -50,10 +53,14 @@ export class PlansComponent implements OnInit {
   }
 
   getDocument(id: number) {
-    return this.backendService.getDmpDocument(id);
+    this.dialog.open(ExportWarningDialogComponent).afterClosed().subscribe(
+      _ => this.backendService.getDmpDocument(id)
+    );
   }
 
   getJsonFile(id: number) {
-    return this.backendService.getMaDmpJsonFile(id);
+    this.dialog.open(ExportWarningDialogComponent).afterClosed().subscribe(
+      _ => this.backendService.getMaDmpJsonFile(id)
+    );
   }
 }
