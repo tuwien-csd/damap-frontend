@@ -8,6 +8,7 @@ import {selectDmpById} from '../../../store/selectors/dmp.selectors';
 import {AppState} from '../../../store/states/app.state';
 import {DmpListItem} from '../../../domain/dmp-list-item';
 import {loadDmps} from '../../../store/actions/dmp.actions';
+import {AuthService, Dmp} from "@damap/core";
 
 @Component({
   selector: 'app-version-list',
@@ -17,19 +18,28 @@ import {loadDmps} from '../../../store/actions/dmp.actions';
 export class VersionListComponent implements OnInit {
 
   versions$: Observable<Version[]>;
-  dmp$: Observable<DmpListItem>;
+  dmp$: Observable<DmpListItem | Dmp>;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private backendService: BackendService,
-              private store: Store<AppState>) {
+              private store: Store<AppState>,
+              private auth: AuthService) {
   }
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.getDmpList();
-    this.dmp$ = this.store.select(selectDmpById({id: id}));
-    this.getVersions(id);
+    if (id) {
+      if (this.auth.isAdmin()) {
+        this.dmp$ = this.backendService.getDmpById(id);
+      } else {
+        this.getDmpList();
+        this.dmp$ = this.store.select(selectDmpById({id: id}));
+      }
+      this.getVersions(id);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   getDmpList() {

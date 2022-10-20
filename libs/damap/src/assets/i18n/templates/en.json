@@ -583,6 +583,9 @@
     "versionName": "Name",
     "versionDate": "Date",
     "revisionNumber": "Revision",
+    "list": {
+      "no.data": "No versions available."
+    },
     "view": {
       "button": {
         "goto.latest": "Go to living document",
