@@ -8,7 +8,8 @@ import {selectDmpById} from '../../../store/selectors/dmp.selectors';
 import {AppState} from '../../../store/states/app.state';
 import {DmpListItem} from '../../../domain/dmp-list-item';
 import {loadDmps} from '../../../store/actions/dmp.actions';
-import {AuthService, Dmp} from "@damap/core";
+import {AuthService} from "../../../auth/auth.service";
+import {Dmp} from "../../../domain/dmp";
 
 @Component({
   selector: 'app-version-list',

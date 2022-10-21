@@ -7,7 +7,7 @@ import {BackendService} from '../../../services/backend.service';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {selectDmpById} from '../../../store/selectors/dmp.selectors';
 import {completeDmp} from '../../../mocks/dmp-mocks';
-import {AuthService} from "@damap/core";
+import {AuthService} from "../../../auth/auth.service";
 
 describe('VersionListComponent', () => {
   let component: VersionListComponent;

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Version} from '../../../domain/version';
 import {DmpListItem} from '../../../domain/dmp-list-item';
-import {Dmp} from "@damap/core";
+import {Dmp} from "../../../domain/dmp";
 
 @Component({
   selector: 'app-version-table',
