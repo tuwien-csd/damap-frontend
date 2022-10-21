@@ -90,7 +90,7 @@
       <mat-label>{{ 'dmp.steps.people.search.service' | translate }}</mat-label>
       <mat-select
         (selectionChange)="onChangeService($event)"
-        [value]="setDefaultServiceType"
+        [(value)]="setDefaultServiceType"
       >
         <mat-option
           *ngFor="let service of serviceType | keyvalue"

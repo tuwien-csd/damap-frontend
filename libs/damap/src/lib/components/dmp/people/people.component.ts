@@ -25,7 +25,7 @@ import { ServiceType } from '../../../domain/enum/search-service-type.enum';
 export class PeopleComponent implements OnInit {
   @Input() projectMembers: Contributor[];
   @Input() dmpForm: UntypedFormGroup;
-  @Input() serviceType$: string;
+  @Input() service: string;
 
   @Output() contactPerson = new EventEmitter<any>();
   @Output() contributorToAdd = new EventEmitter<any>();
@@ -47,18 +47,18 @@ export class PeopleComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.serviceType$ = ServiceType.UNIVERSITY;
+    this.service = ServiceType.UNIVERSITY;
     this.searchResult$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((term: string) =>
-        this.backendService.getPersonSearchResult(term, this.serviceType$)
+        this.backendService.getPersonSearchResult(term, this.service)
       )
     );
   }
 
   onChangeService($event) {
-    this.serviceType$ = $event.value;
+    this.service = $event.value;
   }
 
   changeContactPerson(contact: Contributor): void {

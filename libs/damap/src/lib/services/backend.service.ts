@@ -173,7 +173,7 @@ export class BackendService {
         .get<Contributor[]>(
           `${this.backendUrl}persons/search?q=${searchTerm}&searchService=${serviceType}`
         )
-        .pipe(catchError(this.handleError('http.error.repositories.one')));
+        .pipe(catchError(this.handleError('http.error.person.search')));
     }
   
   getInternalStorages(): Observable<InternalStorage[]> {
