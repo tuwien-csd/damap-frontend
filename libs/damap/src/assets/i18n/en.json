@@ -18,5 +18,12 @@
       "save": "DMP was saved!",
       "version.save": "Version was saved!"
     }
+  },
+  "export": {
+    "dialog": {
+      "title": "Please note:",
+      "content": "You are not done yet. Please inspect the exported DMP.\n  It may still require some fine-tuning from you.",
+      "button": "OK"
+    }
   }
 }

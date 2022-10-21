@@ -103,6 +103,21 @@
               "pid": "PID"
             }
           },
+          "dialog": {
+            "add": "Add dataset",
+            "edit": "Edit dataset",
+            "title": "Dataset title",
+            "type": "Estimated type",
+            "size": "Estimated size",
+            "description": "Description",
+            "source": "Source",
+            "identifier": "Identifier",
+            "button": {
+              "add": "Add",
+              "update": "Update",
+              "cancel": "Cancel"
+            }
+          },
           "doi": {
             "search": "Enter DOI...",
             "not.found": "No dataset found."
@@ -290,16 +305,15 @@
         "question": {
           "exist": {
             "label": "Select the statement which best describes the situation in your project with respect to costs of data management.",
-            "no": "There are no costs dedicated to data management and ensuring that data will be ",
-            "yes": "As outlined below, there are costs dedicated to data management and ensuring that data will be "
+            "no": "There are no costs dedicated to data management.",
+            "yes": "As outlined below, there are costs dedicated to data management."
           },
           "title": "Item",
           "value": "Estimated cost",
           "type": "Cost Type",
           "other": "Please specify the cost type",
           "description": "Description"
-        },
-        "link": "https://www.link.example"
+        }
       },
       "end": {
         "label": "Summary"
@@ -569,6 +583,9 @@
     "versionName": "Name",
     "versionDate": "Date",
     "revisionNumber": "Revision",
+    "list": {
+      "no.data": "No versions available."
+    },
     "view": {
       "button": {
         "goto.latest": "Go to living document",

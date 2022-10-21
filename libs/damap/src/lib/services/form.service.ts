@@ -256,10 +256,6 @@ export class FormService {
     this.form.setValue(this.initialFormValue);
   }
 
-  public getContactPerson(): Contributor {
-    return (this.form.get('contributors') as UntypedFormArray).value.find(c => c.contact);
-  }
-
   public changeContactPerson(contact: Contributor) {
     // Remove old contact
     const contributorFormArray = this.form.get('contributors') as UntypedFormArray;

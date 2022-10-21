@@ -10,6 +10,7 @@ import {FormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {ExportWarningDialogComponent} from "../../../widgets/export-warning-dialog/export-warning-dialog.component";
 
 
 @NgModule({
@@ -18,13 +19,22 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     SaveVersionDialogComponent
   ],
   exports: [
-    DmpActionsComponent
+    DmpActionsComponent,
+
+    // Materials
+    MatDialogModule,
+    MatButtonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatProgressBarModule
   ],
   imports: [
     CommonModule,
     TranslateModule,
     RouterModule,
     SaveStatusModule,
+    ExportWarningDialogComponent,
 
     // Materials
     MatDialogModule,

@@ -1,4 +1,4 @@
-import {Injectable, NgModule, Pipe, PipeTransform} from '@angular/core';
+import {EventEmitter, Injectable, NgModule, Pipe, PipeTransform} from '@angular/core';
 import {TranslateFakeLoader, TranslateLoader, TranslateModule, TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {Observable, of} from 'rxjs';
 
@@ -15,6 +15,11 @@ export class TranslatePipeMock implements PipeTransform {
 
 @Injectable()
 export class TranslateServiceStub {
+
+  public onDefaultLangChange: EventEmitter<any> = new EventEmitter();
+  public onTranslationChange: EventEmitter<any> = new EventEmitter();
+  public onLangChange: EventEmitter<any> = new EventEmitter();
+
   get currentLang(): string {
     return 'en';
   }

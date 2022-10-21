@@ -1,7 +1,8 @@
 <ng-container *ngIf="dmp">
   <h2>{{dmp.project?.title || 'DMP: ' + dmp.id}}</h2>
+</ng-container>
 
-  <div class="mat-elevation-z8">
+  <div class="mat-elevation-z8" *ngIf="versions">
     <table mat-table [dataSource]="versions">
 
       <!-- Version Column -->
@@ -30,6 +31,9 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewVersion(row.revisionNumber)"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">{{'versions.list.no.data' | translate}}</td>
+      </tr>
     </table>
   </div>
-</ng-container>
