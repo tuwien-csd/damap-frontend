@@ -31,6 +31,7 @@ ARG APP=damap-frontend
 
 # create a second container running a webserver and holding the built frontend application
 FROM nginxinc/nginx-unprivileged as runner
+ADD docker/conf.d/* /etc/nginx/conf.d
 
 COPY --from=deps --chown=1001:0 /app/dist/apps/damap-frontend/ /usr/share/nginx/html/
 

@@ -6,4 +6,5 @@
 !*.json
 !*.js
 !browserslist
+!docker/*
 !nginx.conf
