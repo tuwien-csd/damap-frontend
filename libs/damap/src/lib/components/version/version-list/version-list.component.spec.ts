@@ -7,6 +7,7 @@ import {BackendService} from '../../../services/backend.service';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {selectDmpById} from '../../../store/selectors/dmp.selectors';
 import {completeDmp} from '../../../mocks/dmp-mocks';
+import {AuthService} from "../../../auth/auth.service";
 
 describe('VersionListComponent', () => {
   let component: VersionListComponent;
@@ -16,13 +17,16 @@ describe('VersionListComponent', () => {
   const initialState = {
     dmps: {entities: {1: completeDmp}}
   };
+  const authSpy = jasmine.createSpyObj('AuthService', ['isAdmin']);
 
   beforeEach(async () => {
+    authSpy.isAdmin.and.returnValue(false);
     backendSpy = jasmine.createSpyObj('BackendService', ['getDmpVersions']);
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, TranslateTestingModule],
       declarations: [VersionListComponent],
       providers: [
+        {provide: AuthService, useValue: authSpy},
         {provide: BackendService, useValue: backendSpy},
         provideMockStore({
           initialState,

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Version} from '../../../domain/version';
 import {DmpListItem} from '../../../domain/dmp-list-item';
+import {Dmp} from "../../../domain/dmp";
 
 @Component({
   selector: 'app-version-table',
@@ -11,12 +12,9 @@ export class VersionTableComponent {
 
   displayedColumns: string[] = ['version', 'name', 'date', 'revision'];
 
-  @Input() dmp: DmpListItem;
+  @Input() dmp: DmpListItem | Dmp;
   @Input() versions: Version[];
   @Output() versionToView = new EventEmitter<number>();
-
-  constructor() {
-  }
 
   viewVersion(revision: number) {
     this.versionToView.emit(revision);
