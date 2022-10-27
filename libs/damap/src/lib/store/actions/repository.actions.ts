@@ -8,7 +8,7 @@ export const recommendedRepositoriesLoaded = createAction('[Repositories] Recomm
 
 export const failedToLoadRecommendedRepositories = createAction('[Repositories] Failed to load recommended');
 
-export const loadAllRepositories = createAction('[Repositories] Load all');
+export const loadAllRepositories = createAction('[Repositories] Load all', (skipIfPresent: boolean = false) => ({skipIfPresent}));
 
 export const repositoriesLoaded = createAction('[Repositories] All loaded', props<{ repositories: RepositoryDetails[] }>());
 
@@ -18,4 +18,4 @@ export const updateRepository = createAction('[Repositories] Update one', props<
 
 export const failedToLoadRepositories = createAction('[Repositories] Failed to load all');
 
-export const setRepositoryFilter = createAction('[Repositories] Set filter', props<{ filter: { name: string, value: string [] } }>());
+export const setRepositoryFilter = createAction('[Repositories] Set filter', props<{ filter: { [key: string]: { id: string, label: string }[] } }>());

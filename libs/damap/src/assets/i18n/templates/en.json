@@ -290,14 +290,18 @@
             "recommended": "Recommended repositories could not be loaded."
           }
         },
-        "filter": {
-          "search": "Search Filter"
-        },
+        "filter": "Filter repositories",
+        "filter.search": "Search Filter",
+        "filter.find": "Find repositories",
+        "filter.reset": "Reset filter",
+        "filters": "Filters",
         "table.header.title": "Title",
         "nodatafilter": "No data matching the filter \"{{value}}\"",
         "norepositories": "No repositories found.",
         "recommended": "Recommended",
-        "find": "Find repository"
+        "recommended.none": "No further recommended repositories.",
+        "find": "Find repository",
+        "find.other": "Find other repository"
       },
       "costs": {
         "label": "Costs",

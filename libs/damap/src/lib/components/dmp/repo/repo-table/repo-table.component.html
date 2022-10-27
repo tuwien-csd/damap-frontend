@@ -1,7 +1,22 @@
-<mat-form-field>
-  <mat-label>{{'dmp.steps.repositories.search' | translate}}</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Search repository" #input>
-</mat-form-field>
+<div class="repo-search-bar">
+  <mat-form-field>
+    <mat-label>{{'dmp.steps.repositories.search' | translate}}</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search repository" #input>
+  </mat-form-field>
+
+  <div>
+    <button mat-raised-button (click)="resetFilter()" [disabled]="!filtersActive()">{{'dmp.steps.repositories.filter.reset' | translate}}
+      <mat-icon>cached</mat-icon>
+    </button>
+    <app-repo-filter [filters]="filters" (filterChange)="onFilterChange($event)"></app-repo-filter>
+  </div>
+</div>
+
+<div *ngIf="(filters | keyvalue).length"> {{'dmp.steps.repositories.filters' | translate}}:
+  <ng-container *ngFor="let filter of filters | keyvalue">
+    <app-tag background="#d1eee1" *ngFor="let item of filter.value"> {{item.label}}</app-tag>
+  </ng-container>
+</div>
 
 <ng-container *ngIf="loaded === LoadingState.LOADED">
 
@@ -25,11 +40,9 @@
       <th mat-header-cell *matHeaderCellDef><span
         class="sr-only">{{'dmp.steps.repositories.add' | translate}}</span></th>
       <td mat-cell *matCellDef="let element">
-        <div *ngIf="datasets">
-          <button mat-icon-button (click)="addRepository(element)">
-            <mat-icon color="primary">add_circle</mat-icon>
-          </button>
-        </div>
+        <button mat-icon-button (click)="addRepository(element)">
+          <mat-icon color="primary">add_circle</mat-icon>
+        </button>
       </td>
     </ng-container>
 

@@ -28,3 +28,12 @@ th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:
   width: 20px;
   padding: 0 15px;
 }
+
+.repo-search-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+div > div > button {
+  margin: 0 1em;
+}
