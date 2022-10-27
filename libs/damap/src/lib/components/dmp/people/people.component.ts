@@ -36,10 +36,10 @@ export class PeopleComponent implements OnInit {
   readonly identifierType = IdentifierType;
   readonly serviceType = ServiceType;
   readonly translateEnumSearchPrefix = 'enum.search.service.type.';
+  
   private searchTerms = new Subject<string>();
 
   searchResult$: Observable<Contributor[]>;
-  setDefaultServiceType = this.serviceType.UNIVERSITY;
 
   constructor(
     private backendService: BackendService,
@@ -55,10 +55,6 @@ export class PeopleComponent implements OnInit {
         this.backendService.getPersonSearchResult(term, this.service)
       )
     );
-  }
-
-  onChangeService($event) {
-    this.service = $event.value;
   }
 
   changeContactPerson(contact: Contributor): void {
