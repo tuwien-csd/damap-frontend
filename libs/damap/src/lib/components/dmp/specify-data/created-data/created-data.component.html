@@ -1,3 +1,4 @@
+<h2 translate>dmp.steps.data.specify.table.heading.new</h2>
 <app-data-mc [control]="kind"></app-data-mc>
 
 <ng-container *ngIf="kind.value === dataKind.SPECIFY">
@@ -18,7 +19,6 @@
   <!-- TABLE -->
   <app-dataset-table *ngIf="datasets.controls.length"
                      [datasets]="datasets"
-                     tableHeading="dmp.steps.data.specify.table.heading.new"
                      [tableHeaders]="tableHeaders"
                      (updateDataset)="update($event)"
                      (removeDataset)="remove($event)">

@@ -1,7 +1,7 @@
 <div *ngIf="(datasets.value | datasetSource: sourceType).length">
   <app-step-intro>{{ tableIntro | translate}}
   </app-step-intro>
-  <h2>{{tableHeading | translate}}</h2>
+  <h2 *ngIf="tableHeading">{{tableHeading | translate}}</h2>
 
   <table mat-table [dataSource]="datasets.value | datasetSource: sourceType" multiTemplateDataRows
          class="mat-elevation-z8" aria-label="{{tableHeading | translate}}">
