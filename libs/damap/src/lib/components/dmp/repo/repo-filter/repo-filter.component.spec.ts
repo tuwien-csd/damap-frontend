@@ -1,8 +1,9 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {RepoFilterComponent} from './repo-filter.component';
+import {FilterDialogComponent, RepoFilterComponent} from './repo-filter.component';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {TranslateTestingModule} from '../../../../testing/translate-testing/translate-testing.module';
+import {MatDialogModule} from "@angular/material/dialog";
 
 describe('RepoFilterComponent', () => {
   let component: RepoFilterComponent;
@@ -12,8 +13,8 @@ describe('RepoFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranslateTestingModule],
-      declarations: [RepoFilterComponent],
+      imports: [MatDialogModule, TranslateTestingModule],
+      declarations: [RepoFilterComponent, FilterDialogComponent],
       providers: [
         provideMockStore({initialState})
       ]
