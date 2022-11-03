@@ -19,9 +19,7 @@
     <ng-container formArrayName="storage">
       <mat-card *ngFor="let item of storageStep?.controls; let i = index">
         <div class="storage-card-top">
-          <mat-card-header>
-            <mat-card-title>{{item.value.title}}</mat-card-title>
-          </mat-card-header>
+          <mat-card-title>{{item.value.title}}</mat-card-title>
           <mat-card-actions>
             <button mat-icon-button color="accent" aria-label="{{'dmp.steps.storage.remove' | translate}}"
                     (click)="removeStorage(i)">
@@ -32,7 +30,7 @@
         <mat-card-content>
           <div [formGroupName]="i">
             <div class="form-row">
-              <mat-form-field>
+              <mat-form-field class="full-width">
                 <mat-label>{{'dmp.steps.storage.question.datasets' | translate}}</mat-label>
                 <mat-select multiple formControlName="datasets">
                   <mat-option *ngFor="let dataset of datasets?.controls" [value]="dataset.value.referenceHash">

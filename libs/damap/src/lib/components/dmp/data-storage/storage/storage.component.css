@@ -32,29 +32,7 @@
   justify-content: space-between;
 }
 
-.mat-card-content {
-  display: flex;
-  justify-content: space-between;
-}
-
 .mat-card-actions {
   margin: 0;
   padding: 0;
 }
-
-.form-row {
-  display: flex;
-  flex-direction: row;
-  flex-basis: max-content;
-  flex-grow: 100;
-  justify-content: space-evenly;
-}
-
-mat-card-content > form {
-  flex-grow: 1;
-}
-
-mat-form-field {
-  flex-grow: 1;
-}
-
