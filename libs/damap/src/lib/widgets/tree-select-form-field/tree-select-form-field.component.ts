@@ -312,7 +312,7 @@ export class TreeSelectFormFieldComponent implements OnInit {
   }
 
   /** Preselect options based on state input value (on component initialization) */
-  private setSelection() {
+  setSelection() {
     this.checklistSelection.clear();
     for (const selected of this.state) {
       for (const flatNode of this.nestedNodeMap.values()) {
