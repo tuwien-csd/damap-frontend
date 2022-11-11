@@ -1,4 +1,3 @@
-import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 
 import {CommonModule} from '@angular/common';
@@ -13,6 +12,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {LegalEthicalAspectsModule} from './legal-ethical-aspects/legal-ethical-aspects.module';
 import {LicensesModule} from './licenses/licenses.module';
+import { MatStepperModule } from '@angular/material/stepper';
 import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
 import {NgModule} from '@angular/core';
 import {PeopleModule} from './people/people.module';
