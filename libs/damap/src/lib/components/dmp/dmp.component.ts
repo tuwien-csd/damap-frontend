@@ -104,14 +104,9 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.costsStep = this.dmpForm.get('costs') as UntypedFormGroup;
   }
 
-  move(index: number) {
-    this.stepper.selectedIndex = index;
-  }
-
-  changeStep(event: StepperSelectionEvent) {
+  changeStepPosition(event: StepperSelectionEvent) {
     const stepId = this.stepper._getStepLabelId(this.stepper.selectedIndex);
     const stepElement = document.getElementById(stepId);
-    console.log(stepElement);
     if (stepElement) {
       stepElement.scrollIntoView({
         block: "start",
@@ -119,6 +114,10 @@ export class DmpComponent implements OnInit, OnDestroy {
         behavior: "smooth",
       });
     }
+  }
+
+  changeStep($event) {
+    this.stepChanged$.next($event);
   }
   
   ngOnDestroy() {

@@ -13,7 +13,6 @@ import {ConsentGuard} from './guard/consent.guard';
 import {ConsentModule} from './components/consent/consent.module';
 import {LayoutModule} from './components/layout/layout.module';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { MatStepperModule } from '@angular/material/stepper';
 import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
 import {OAuthModule} from 'angular-oauth2-oidc';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -61,8 +60,7 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
 
     // Materials
     MatSnackBarModule,
-    MatStepperModule,
-
+    
     // Modules
     LayoutModule,
     EnvBannerModule,
