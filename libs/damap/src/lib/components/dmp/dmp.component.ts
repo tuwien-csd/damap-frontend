@@ -18,6 +18,7 @@ import {InternalStorage} from '../../domain/internal-storage';
 import {Dataset} from '../../domain/dataset';
 import {DataKind} from '../../domain/enum/data-kind.enum';
 import {LoggerService} from '../../services/logger.service';
+import {DataSource} from "../../domain/enum/data-source.enum";
 
 @Component({
   selector: 'app-dmp',
@@ -95,6 +96,10 @@ export class DmpComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.formService.resetForm();
     this.store.dispatch(resetFormValue());
+  }
+
+  get showStepIfNewDatasets() {
+    return this.specifyDataStep.value.kind === DataKind.SPECIFY && this.datasets?.value.find(dataset => dataset.source == DataSource.NEW);
   }
 
   get showStep() {

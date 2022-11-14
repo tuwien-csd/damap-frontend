@@ -2,7 +2,8 @@
   <mat-label class="wrap-label">{{label | translate}}</mat-label>
   <span matPrefix>{{prefix}}</span>
   <input matInput [formControl]="control" [placeholder]="placeholder" [type]="type || 'text'" [required]="required"
-         [step]="type === 'number' ? 0.01 : null" [maxLength]="maxLength">
+         [step]="type === 'number' ? 0.01 : null" [maxLength]="maxLength" #message>
+  <mat-hint align="end">{{message.value.length}} / {{maxLength}}</mat-hint>
   <mat-error *ngIf="!control?.errors?.required && control?.errors?.empty">
     {{'form.error.empty' | translate}}
   </mat-error>

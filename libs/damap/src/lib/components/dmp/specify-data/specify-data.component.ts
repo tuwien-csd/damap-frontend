@@ -11,7 +11,6 @@ export class SpecifyDataComponent extends AbstractBaseDataComponent {
 
   @Input() fileUpload: { file: File, progress: number, finalized: boolean }[];
 
-  @Output() createDataset = new EventEmitter<string>();
   @Output() fileToAnalyse = new EventEmitter<File>();
   @Output() uploadToCancel = new EventEmitter<number>();
 
@@ -35,7 +34,4 @@ export class SpecifyDataComponent extends AbstractBaseDataComponent {
     this.uploadToCancel.emit(index);
   }
 
-  create(datasetName: string): void {
-    this.createDataset.emit(datasetName);
-  }
 }

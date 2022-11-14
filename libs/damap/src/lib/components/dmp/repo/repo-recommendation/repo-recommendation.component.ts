@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {RepositoryDetails} from '../../../../domain/repository-details';
 import {LoadingState} from '../../../../domain/enum/loading-state.enum';
-import {Repository} from '../../../../domain/repository';
 
 @Component({
   selector: 'app-repo-recommendation',
@@ -12,7 +11,6 @@ export class RepoRecommendationComponent {
 
   @Input() recommended: RepositoryDetails[];
   @Input() loaded: LoadingState;
-  @Input() selectedRepos: Repository[];
 
   readonly LoadingState = LoadingState;
 

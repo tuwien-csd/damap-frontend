@@ -1,5 +1,5 @@
 <ng-container *ngIf="loaded === LoadingState.LOADED">
-  <mat-card *ngFor="let repo of (recommended | repo: selectedRepos)">
+  <mat-card *ngFor="let repo of recommended">
     <mat-card-title>{{repo.name}}</mat-card-title>
     <app-repo-details [repo]="repo"></app-repo-details>
     <mat-card-actions align="end">

@@ -1,3 +1,4 @@
+<h2 translate>dmp.steps.data.specify.table.heading.reused</h2>
 <app-data-mc [control]="reusedKind"
              questionLabel="dmp.steps.data.specify.question.reused"
              answerLabelNone="dmp.steps.data.specify.answer.kind.reuse.none">
@@ -15,7 +16,6 @@
   <!-- TABLE -->
   <app-dataset-table *ngIf="datasets.controls.length"
                      [datasets]="datasets"
-                     tableHeading="dmp.steps.data.specify.table.heading.reused"
                      tableIntro="dmp.steps.data.specify.intro.reused"
                      [tableHeaders]="tableHeaders"
                      [sourceType]="datasetSource.REUSED"

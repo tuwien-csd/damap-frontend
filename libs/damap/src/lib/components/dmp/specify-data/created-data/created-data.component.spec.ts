@@ -4,6 +4,8 @@ import {CreatedDataComponent} from './created-data.component';
 import {TranslateTestingModule} from '../../../../testing/translate-testing/translate-testing.module';
 import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {DataKind} from '../../../../domain/enum/data-kind.enum';
+import {MatDialogModule} from "@angular/material/dialog";
+import {DatasetDialogComponent} from "../dataset-dialog/dataset-dialog.component";
 
 describe('CreatedDataComponent', () => {
   let component: CreatedDataComponent;
@@ -11,8 +13,8 @@ describe('CreatedDataComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranslateTestingModule],
-      declarations: [CreatedDataComponent]
+      imports: [MatDialogModule, TranslateTestingModule],
+      declarations: [CreatedDataComponent, DatasetDialogComponent]
     })
       .compileComponents();
   });

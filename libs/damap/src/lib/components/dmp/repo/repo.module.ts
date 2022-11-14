@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RepoDetailsComponent} from './repo-details/repo-details.component';
-import {RepoFilterComponent} from './repo-filter/repo-filter.component';
+import {FilterDialogComponent, RepoFilterComponent} from './repo-filter/repo-filter.component';
 import {RepoRecommendationComponent} from './repo-recommendation/repo-recommendation.component';
 import {RepoTableComponent} from './repo-table/repo-table.component';
 import {RetentionPeriodComponent} from './retention-period/retention-period.component';
@@ -25,6 +25,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {TreeSelectFormFieldModule} from '../../../widgets/tree-select-form-field/tree-select-form-field.module';
 import {DatasetSourceModule} from '../../../pipes/dataset-source/dataset-source.module';
+import {MatDialogModule} from "@angular/material/dialog";
+import {TagModule} from "../../../widgets/tag/tag.module";
 
 @NgModule({
   imports: [
@@ -34,6 +36,8 @@ import {DatasetSourceModule} from '../../../pipes/dataset-source/dataset-source.
     StepIntroModule,
     ErrorMessageModule,
     TreeSelectFormFieldModule,
+    DatasetSourceModule,
+    TagModule,
 
     // Materials
     MatCardModule,
@@ -48,9 +52,9 @@ import {DatasetSourceModule} from '../../../pipes/dataset-source/dataset-source.
     MatProgressBarModule,
     MatPaginatorModule,
     MatExpansionModule,
-    DatasetSourceModule,
+    MatDialogModule,
   ],
-  declarations: [RepoDetailsComponent, RepoFilterComponent, RepoRecommendationComponent,
+  declarations: [RepoDetailsComponent, RepoFilterComponent, FilterDialogComponent, RepoRecommendationComponent,
     RepoTableComponent, RetentionPeriodComponent, RepoComponent, RepoPipe],
   exports: [
     CommonModule,
@@ -59,6 +63,8 @@ import {DatasetSourceModule} from '../../../pipes/dataset-source/dataset-source.
     StepIntroModule,
     ErrorMessageModule,
     TreeSelectFormFieldModule,
+    DatasetSourceModule,
+    TagModule,
     RepoComponent,
 
     // Materials
@@ -74,6 +80,7 @@ import {DatasetSourceModule} from '../../../pipes/dataset-source/dataset-source.
     MatProgressBarModule,
     MatPaginatorModule,
     MatExpansionModule,
+    MatDialogModule,
   ]
 })
 export class RepoModule {

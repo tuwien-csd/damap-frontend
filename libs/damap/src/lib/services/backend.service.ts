@@ -162,11 +162,11 @@ export class BackendService {
     );
   }
 
-  searchRepository(filters: any): Observable<RepositoryDetails[]> {
+  searchRepository(filters: { [key: string]: {id: string, label: string}[] }): Observable<RepositoryDetails[]> {
     let params = new HttpParams();
     for (const key in filters) {
       if (filters.hasOwnProperty(key)) {
-        filters[key]?.forEach(item => params = params.append(key, item));
+        filters[key]?.forEach(item => params = params.append(key, item.id));
       }
     }
     return this.http.get<RepositoryDetails[]>(`${this.repositoryBackendUrl}/search`, {params}).pipe(

@@ -72,13 +72,13 @@ describe('RepositoryReducer', () => {
 
   it('should return set and reset repository filters', () => {
     const state = repositoryReducer(initialRepositoryState,
-      setRepositoryFilter({filter: {name: 'id', value: ['orcid']}})
+      setRepositoryFilter({filter: {"subject": [{id: 'orcid', label:'orcid'}]}})
     );
 
     expect(state.loaded).toBe(LoadingState.LOADING);
     expect(state.ids).toEqual(initialRepositoryState.ids);
     expect(state.entities).toEqual(initialRepositoryState.entities);
-    expect(state.filters).toEqual({id: ['orcid']});
+    expect(state.filters).toEqual({"subject": [{id: 'orcid', label:'orcid'}]});
 
     const newState = repositoryReducer(state, loadAllRepositories);
 
