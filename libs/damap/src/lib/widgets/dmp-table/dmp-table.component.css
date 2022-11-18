@@ -82,7 +82,8 @@ a.history {
 }
 
 a.title {
-  display: inline;
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
   color: black;
 }
