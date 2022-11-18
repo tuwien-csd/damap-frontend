@@ -30,7 +30,7 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   readonly tableHeaders: string[] = ['title', 'created', 'modified', 'contact', 'edit', 'history', 'remove'];
-  expandedElement: DmpListItem | null;
+  continueDetails: DmpListItem | null;
 
   constructor() {
   }

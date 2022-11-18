@@ -15,7 +15,7 @@ tr.element-row:not(.expanded-row):active {
 }
 
 .element-row td {
-  border-bottom-width: 0;
+  border-bottom-width: 1;
 }
 
 .element-detail {
@@ -27,10 +27,12 @@ tr.element-row:not(.expanded-row):active {
 td.mat-column-title {
   float: left;
   overflow: hidden;
+  border-bottom-width: 1;
+  width: 100%;
 }
 
 td.mat-column-created,
-td.mat-column-modified{
+td.mat-column-modified {
   min-width: 100px;
   overflow: hidden;
 }
@@ -48,10 +50,50 @@ td.mat-column-modified{
   padding: 0.5rem;
 }
 
+::ng-deep button.mat-button-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 #dmp-actions {
   margin: 1rem 0.5rem;
 }
 
 #dmp-actions > button {
   margin-right: 0.5rem;
+}
+
+::ng-deep .mat-menu-content {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  gap: 5px;
+}
+
+a.history {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  gap: 5px;
+}
+
+a.title {
+  display: inline;
+  text-decoration: none;
+  color: black;
+}
+
+button.mat-focus-indicator .mat-flat-button.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }
