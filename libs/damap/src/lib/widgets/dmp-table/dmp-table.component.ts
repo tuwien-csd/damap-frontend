@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { DmpListItem } from '../../domain/dmp-list-item';
 import { MatPaginator } from '@angular/material/paginator';
@@ -10,13 +9,6 @@ import { MatTableDataSource } from '@angular/material/table';
   selector: 'app-dmp-table',
   templateUrl: './dmp-table.component.html',
   styleUrls: ['./dmp-table.component.css'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
 })
 export class DmpTableComponent implements OnChanges, AfterViewInit {
 
@@ -29,8 +21,7 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  readonly tableHeaders: string[] = ['title', 'created', 'modified', 'contact', 'edit', 'history', 'remove'];
-  continueDetails: DmpListItem | null;
+  readonly tableHeaders: string[] = ['title', 'created', 'modified', 'contact', 'edit'];
 
   constructor() {
   }
@@ -73,5 +64,5 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
   getJsonFile(id: number) {
     this.createJsonFile.emit(id);
   }
-  
+
 }

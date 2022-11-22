@@ -9,10 +9,10 @@ import {TranslateModule} from "@ngx-translate/core";
   standalone: true,
   imports: [CommonModule, TranslateModule, MatDialogModule, MatButtonModule],
   template: `
-    <h1 mat-dialog-title>{{'export.dialog.title' | translate}}</h1>
-    <div mat-dialog-content>{{'export.dialog.content' | translate}}</div>
+    <h1 mat-dialog-title>{{'dialog.export.title' | translate}}</h1>
+    <div mat-dialog-content>{{'dialog.export.content' | translate}}</div>
     <div mat-dialog-actions>
-      <button mat-button mat-dialog-close="true">{{'export.dialog.button' | translate}}</button>
+      <button mat-button mat-dialog-close="true">{{'dialog.export.button' | translate}}</button>
     </div>
   `
 })
