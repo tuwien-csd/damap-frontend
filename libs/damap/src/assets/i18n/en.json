@@ -24,6 +24,12 @@
       "title": "Please note:",
       "content": "You are not done yet. Please inspect the exported DMP.\n  It may still require some fine-tuning from you.",
       "button": "OK"
+    },
+    "delete": {
+      "title": "Please note:",
+      "content": "You are about to delete this DMP. This action cannot be undone. Are you sure you want to proceed?",
+      "button": "Delete",
+      "cancel": "Cancel"
     }
   }
 }

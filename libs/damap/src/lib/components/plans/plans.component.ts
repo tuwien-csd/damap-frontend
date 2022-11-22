@@ -10,6 +10,7 @@ import {LoadingState} from '../../domain/enum/loading-state.enum';
 import {AuthService} from '../../auth/auth.service';
 import {MatDialog} from "@angular/material/dialog";
 import {ExportWarningDialogComponent} from "../../widgets/export-warning-dialog/export-warning-dialog.component";
+import {DeleteWarningDialogComponent} from "../../widgets/delete-warning-dialog/delete-warning-dialog.component";
 
 @Component({
   selector: 'app-plan',
@@ -36,7 +37,7 @@ export class PlansComponent implements OnInit {
     this.getDmps();
 
     if (this.isAdmin()) {
-      this.allDmps$ = this.getAllDmps();
+      this.getAllDmps();
     }
   }
 
@@ -46,10 +47,6 @@ export class PlansComponent implements OnInit {
 
   getDmps() {
     this.store.dispatch(loadDmps(true));
-  }
-
-  private getAllDmps(): Observable<DmpListItem[]> {
-    return this.backendService.getAllDmps();
   }
 
   getDocument(id: number) {
@@ -62,5 +59,26 @@ export class PlansComponent implements OnInit {
     this.dialog.open(ExportWarningDialogComponent).afterClosed().subscribe(
       _ => this.backendService.getMaDmpJsonFile(id)
     );
+  }
+
+  deleteDmp(id: number, admin: boolean) {
+    this.dialog.open(DeleteWarningDialogComponent).afterClosed().subscribe(
+      {next: response => {
+          if (response) {
+            this.backendService.deleteDmp(id).subscribe(
+              {next: _ => {
+                  if (admin) {
+                    return this.getAllDmps();
+                  }
+                  return this.store.dispatch(loadDmps(false));
+                }
+              });
+          }
+        }
+      });
+  }
+
+  private getAllDmps(): void {
+    this.allDmps$ = this.backendService.getAllDmps();
   }
 }

@@ -65,6 +65,11 @@
           <mat-icon>history</mat-icon>
           {{'plans.table.actions.history' | translate }}
         </button>
+        <button mat-menu-item *ngIf="element.accessType === FUNCTION_ROLES.OWNER || admin"
+        (click)="deleteDmp(element.id)">
+          <mat-icon>delete</mat-icon>
+          {{'plans.table.actions.delete' | translate }}
+        </button>
       </mat-menu>
     </td>
   </ng-container>

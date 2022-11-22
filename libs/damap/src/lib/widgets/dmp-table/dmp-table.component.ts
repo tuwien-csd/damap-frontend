@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 
 import { DmpListItem } from '../../domain/dmp-list-item';
+import { FunctionRole } from "../../domain/enum/function-role.enum";
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,15 +14,18 @@ import { MatTableDataSource } from '@angular/material/table';
 export class DmpTableComponent implements OnChanges, AfterViewInit {
 
   @Input() dmps: DmpListItem[];
+  @Input() admin = false;
   dataSource = new MatTableDataSource();
 
   @Output() createDocument = new EventEmitter<number>();
   @Output() createJsonFile = new EventEmitter<number>();
+  @Output() dmpToDelete = new EventEmitter<number>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   readonly tableHeaders: string[] = ['title', 'created', 'modified', 'contact', 'edit'];
+  readonly FUNCTION_ROLES = FunctionRole;
 
   constructor() {
   }
@@ -63,6 +67,10 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
 
   getJsonFile(id: number) {
     this.createJsonFile.emit(id);
+  }
+
+  deleteDmp(id: number) {
+    this.dmpToDelete.emit(id);
   }
 
 }
