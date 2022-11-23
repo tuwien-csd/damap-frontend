@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
+
 import {Contributor} from '../../../domain/contributor';
 
 @Component({
@@ -11,6 +12,10 @@ export class DataDeletionComponent {
 
   @Input() dataset: UntypedFormGroup;
   @Input() dmpForm: UntypedFormGroup;
+
+  planModel: any = { 
+    end_time: new Date() 
+  };
 
   constructor() {
   }

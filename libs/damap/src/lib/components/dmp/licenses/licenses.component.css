@@ -13,3 +13,11 @@
 .date-form{
   min-width: 300px;
 }
+
+#licensingContainer {
+  gap: 0.938rem;
+}
+
+#accessTypeContainer {
+  margin-top: 0.5rem;
+}
