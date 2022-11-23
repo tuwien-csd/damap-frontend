@@ -33,7 +33,7 @@
               <mat-label>{{
                 'dmp.steps.licensing.question.license' | translate
                 }}</mat-label>
-              <mat-select [(value)]="defaultLicense">
+              <mat-select [(value)]="defaultLicense" (selectionChange)="onChangeLicense($event)">
                 <mat-option *ngFor="let license of licenses" [value]="license.url | translate">
                   {{ license.name | translate }}
                 </mat-option>
