@@ -4,3 +4,10 @@ mat-radio-button {
   margin: 15px 0;
 }
 
+.costType {
+  font-size: 1rem;
+}
+
+#questionWrapper {
+  font-size: 0.75rem;
+}
