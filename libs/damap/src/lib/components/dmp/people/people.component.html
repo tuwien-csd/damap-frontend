@@ -5,7 +5,6 @@
 <div [formGroup]="dmpForm">
   <ng-container formArrayName="contributors">
     <div *ngIf="contributors.length > 0">
-      <p>{{'dmp.steps.people.contributors' | translate}}:</p>
       <mat-card *ngFor="let contributor of contributors.controls; index as i" class="mat-selected">
         <div class="mat-card-container">
           <div class="mat-card-left">
