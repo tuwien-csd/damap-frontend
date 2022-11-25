@@ -15,5 +15,6 @@ export const dmpReducer = createReducer(
   on(DmpAction.createDmp, DmpAction.updateDmp, DmpAction.exportDmp, (state, _) => {
     return ({...state, saving: true})
   }),
-  on(DmpAction.dmpSaved, DmpAction.failedToSaveDmp, DmpAction.dmpExported, state => ({...state, saving: false}))
+  on(DmpAction.dmpSaved, DmpAction.failedToSaveDmp, DmpAction.dmpExported, state => ({...state, saving: false})),
+  on(DmpAction.deleteDmp, (state, {id}) => adapter.removeOne(id, {...state})),
 );

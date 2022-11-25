@@ -3,7 +3,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../../store/states/app.state';
 import {selectDmps, selectDmpsLoaded} from '../../store/selectors/dmp.selectors';
 import {Observable} from 'rxjs';
-import {loadDmps} from '../../store/actions/dmp.actions';
+import {loadDmps, deleteDmp} from '../../store/actions/dmp.actions';
 import {DmpListItem} from '../../domain/dmp-list-item';
 import {BackendService} from '../../services/backend.service';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
@@ -61,16 +61,16 @@ export class PlansComponent implements OnInit {
     );
   }
 
-  deleteDmp(id: number, admin: boolean) {
+  deleteDmp(id: number) {
     this.dialog.open(DeleteWarningDialogComponent).afterClosed().subscribe(
       {next: response => {
           if (response) {
             this.backendService.deleteDmp(id).subscribe(
               {next: _ => {
-                  if (admin) {
-                    return this.getAllDmps();
+                  if (this.isAdmin()) {
+                    this.getAllDmps();
                   }
-                  return this.store.dispatch(loadDmps(false));
+                  return this.store.dispatch(deleteDmp({id}));
                 }
               });
           }
