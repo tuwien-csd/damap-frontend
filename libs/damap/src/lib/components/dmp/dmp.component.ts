@@ -1,10 +1,21 @@
-import {ActivatedRoute, Router} from '@angular/router';
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Observable, Subject, Subscription} from 'rxjs';
-import {Store, select} from '@ngrx/store';
-import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
-import {formDiff, resetFormValue, setFormValue} from '../../store/actions/form.actions';
-import {selectProjects, selectProjectsLoaded} from '../../store/selectors/project.selectors';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import {
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
+import {
+  formDiff,
+  resetFormValue,
+  setFormValue,
+} from '../../store/actions/form.actions';
+import {
+  selectProjects,
+  selectProjectsLoaded,
+} from '../../store/selectors/project.selectors';
 
 import {AppState} from '../../store/states/app.state';
 import {AuthService} from "../../auth/auth.service";
@@ -20,8 +31,8 @@ import {LoadProjects} from '../../store/actions/project.actions';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
 import {LoggerService} from '../../services/logger.service';
 import { MatStepper } from '@angular/material/stepper';
-import {OAuthService} from 'angular-oauth2-oidc';
-import {Project} from '../../domain/project';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { Project } from '../../domain/project';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
@@ -29,7 +40,6 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
   templateUrl: './dmp.component.html',
   styleUrls: ['./dmp.component.css'],
 })
-
 export class DmpComponent implements OnInit, OnDestroy {
 
   readonly username = this.auth.getUsername();
@@ -61,7 +71,7 @@ export class DmpComponent implements OnInit, OnDestroy {
   projectMembers: Contributor[];
   stepChanged$ = new Subject();
 
-  fileUpload: { file: File, progress: number, finalized: boolean }[] = [];
+  fileUpload: { file: File; progress: number; finalized: boolean }[] = [];
   fileUploadSubscription: Subscription[] = [];
 
   constructor(
@@ -71,7 +81,7 @@ export class DmpComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private backendService: BackendService,
-    public store: Store<AppState>,
+    public store: Store<AppState>
   ) {}
 
   ngOnInit() {
@@ -109,9 +119,9 @@ export class DmpComponent implements OnInit, OnDestroy {
     const stepElement = document.getElementById(stepId);
     if (stepElement) {
       stepElement.scrollIntoView({
-        block: "start",
-        inline: "nearest",
-        behavior: "smooth",
+        block: 'start',
+        inline: 'nearest',
+        behavior: 'smooth',
       });
     }
   }
@@ -119,14 +129,17 @@ export class DmpComponent implements OnInit, OnDestroy {
   changeStep($event) {
     this.stepChanged$.next($event);
   }
-  
+
   ngOnDestroy() {
     this.formService.resetForm();
     this.store.dispatch(resetFormValue());
   }
 
   get showStepIfNewDatasets() {
-    return this.specifyDataStep.value.kind === DataKind.SPECIFY && this.datasets?.value.find(dataset => dataset.source == DataSource.NEW);
+    return (
+      this.specifyDataStep.value.kind === DataKind.SPECIFY &&
+      this.datasets?.value.find((dataset) => dataset.source == DataSource.NEW)
+    );
   }
 
   get showStep() {
