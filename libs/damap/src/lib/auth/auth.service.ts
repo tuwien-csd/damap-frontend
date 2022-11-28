@@ -9,17 +9,17 @@ export class AuthService {
   constructor(private oAuthService: OAuthService) {
   }
 
-  getName() {
+  getName(): string {
     const claims = this.oAuthService.getIdentityClaims();
     return claims['name'];
   }
 
-  getUsername() {
+  getUsername(): string {
     const claims = this.oAuthService.getIdentityClaims();
     return claims['preferred_username'];
   }
 
-  isAuthenticated() {
+  isAuthenticated(): boolean {
     return this.oAuthService.hasValidIdToken() && this.oAuthService.hasValidAccessToken();
   }
 
