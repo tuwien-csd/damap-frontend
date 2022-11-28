@@ -14,6 +14,11 @@ export class AuthService {
     return claims['name'];
   }
 
+  getUsername() {
+    const claims = this.oAuthService.getIdentityClaims();
+    return claims['preferred_username'];
+  }
+
   isAuthenticated() {
     return this.oAuthService.hasValidIdToken() && this.oAuthService.hasValidAccessToken();
   }

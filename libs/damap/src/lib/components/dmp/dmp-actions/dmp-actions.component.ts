@@ -18,6 +18,7 @@ import {ExportWarningDialogComponent} from "../../../widgets/export-warning-dial
 export class DmpActionsComponent implements OnInit, OnDestroy {
 
   @Input() stepChanged$: Subject<any>;
+  @Input() admin = false;
   dmpForm: FormGroup = this.formService.dmpForm;
   formChanged$: Observable<boolean>;
   formChanged: boolean;
@@ -36,7 +37,10 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
     this.savingDmp$ = this.store.pipe(select(selectDmpSaving));
     this.subscriptions.push(this.formChanged$.subscribe(value => this.formChanged = value));
     this.subscriptions.push(this.savingDmp$.subscribe(value => this.savingDmp = value));
-    this.subscriptions.push(this.stepChanged$.subscribe(_ => this.saveDmp()));
+    // Prevent autosave for admins
+    if (!this.admin) {
+      this.subscriptions.push(this.stepChanged$.subscribe(_ => this.saveDmp()));
+    }
   }
 
   ngOnDestroy(): void {
