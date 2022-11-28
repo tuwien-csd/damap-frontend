@@ -84,6 +84,13 @@ export class BackendService {
       );
   }
 
+  deleteDmp(id: number): Observable<Dmp> {
+    return this.http.delete<Dmp>(`${this.dmpBackendUrl}/${id}`).pipe(
+      retry(3),
+      catchError(this.handleError('http.error.plans.delete'))
+    );
+  }
+
   getDmpByIdAndRevision(id: number, revision: number): Observable<Dmp> {
     return this.http.get<Dmp>(`${this.dmpBackendUrl}/${id}/${revision}`).pipe(
       retry(3),

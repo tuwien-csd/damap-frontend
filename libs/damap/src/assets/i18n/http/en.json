@@ -27,7 +27,8 @@
           "one": "Failed to load DMPs. "
         },
         "save": "Failed to save DMP. ",
-        "update": "Failed to update DMP. "
+        "update": "Failed to update DMP. ",
+        "delete": "Failed to delete DMP. "
       },
       "storages": "Failed to load storages. ",
       "versions": {
