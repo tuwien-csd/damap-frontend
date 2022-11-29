@@ -1,3 +1,5 @@
+/* eslint no-console: "off" */
+
 import { TestBed } from '@angular/core/testing';
 
 import { LoggerService } from './logger.service';

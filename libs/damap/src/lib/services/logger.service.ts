@@ -1,3 +1,5 @@
+/* eslint no-console: "off" */
+
 import {Injectable} from '@angular/core';
 import {APP_ENV} from '../constants';
 
