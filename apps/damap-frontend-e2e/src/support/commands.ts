@@ -13,14 +13,24 @@ declare namespace Cypress {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Chainable<Subject> {
     login(email: string, password: string): void;
+    logout(): void;
   }
 }
 //
 // -- This is a parent command --
-Cypress.Commands.add('login', (email, password) => {
-  console.log('Custom command example: Login', email, password);
+Cypress.Commands.add('login', (user, password) => {
+  // For Keycloak login mask
+  cy.get('input#username').type(user);
+  cy.get('input#password').type(password);
+  cy.get('input#kc-login').click();
+  cy.get('a#damap-logo').contains('DAMAP');
 });
 //
+
+Cypress.Commands.add('logout', () => {
+  cy.get('button#logout').click();
+  cy.get('div#kc-header-wrapper').contains('damap');
+});
 // -- This is a child command --
 // Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
 //
