@@ -8,7 +8,7 @@ describe('AuthService', () => {
   let spy;
 
   beforeEach(() => {
-    spy = jasmine.createSpyObj('OAuthService', ['getAccessToken', 'hasValidAccessToken']);
+    spy = jasmine.createSpyObj('OAuthService', ['getAccessToken', 'hasValidAccessToken', 'getIdentityClaims']);
     TestBed.configureTestingModule({
       providers: [{provide: OAuthService, useValue: spy}]
     });
@@ -19,11 +19,17 @@ describe('AuthService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('should return name and username', () => {
+    spy.getIdentityClaims.and.returnValue({"name": "name", "preferred_username": "username"});
+    expect(service.getUsername()).toEqual('username');
+    expect(service.getName()).toEqual('name');
+  })
+
   it('should check if is admin', () => {
-    spy.getAccessToken.and.returnValue('.' + btoa('{ "realm_access": { "roles": [ "Damap Admin" ] }}'));
+    spy.getAccessToken.and.returnValue('.' + window.btoa('{ "realm_access": { "roles": [ "Damap Admin" ] }}'));
     expect(service.isAdmin()).toBeTrue();
 
-    spy.getAccessToken.and.returnValue('.' + btoa('{ "realm_access": { "roles": [] }}'));
+    spy.getAccessToken.and.returnValue('.' + window.btoa('{ "realm_access": { "roles": [] }}'));
     expect(service.isAdmin()).toBeFalse();
   })
 });
