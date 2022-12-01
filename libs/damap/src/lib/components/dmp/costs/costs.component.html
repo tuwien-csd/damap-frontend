@@ -40,12 +40,12 @@
           </div>
           <div class="form-row">
             <div class="form-row-group">
-              <app-input-wrapper id="questionWrapper" [label]="'dmp.steps.costs.question.value'" [prefix]="'€ &nbsp;'"
+              <app-input-wrapper [label]="'dmp.steps.costs.question.value'" [prefix]="'€ &nbsp;'"
                                  [placeholder]="'1000.00'"
                                  [type]="'number'" [control]="getFormControl(i, 'value')">
               </app-input-wrapper>
-              <mat-form-field>
-                <mat-label class="costType">{{'dmp.steps.costs.question.type' | translate}}</mat-label>
+              <mat-form-field class="costType">
+                <mat-label >{{'dmp.steps.costs.question.type' | translate}}</mat-label>
                 <mat-select formControlName="type">
                   <mat-option *ngFor="let type of costType | keyvalue" [value]="type.key">
                     {{translateEnumPrefix + type.value | translate}}

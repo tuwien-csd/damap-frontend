@@ -5,9 +5,5 @@ mat-radio-button {
 }
 
 .costType {
-  font-size: 1rem;
-}
-
-#questionWrapper {
-  font-size: 0.75rem;
+  width: 50%;
 }
