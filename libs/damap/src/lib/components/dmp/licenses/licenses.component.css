@@ -14,7 +14,13 @@
   min-width: 300px;
 }
 
-#licensingContainer {
+.licenseContainerParent {
+  display: flex;
+  align-items: end;
+  gap: 30px;
+}
+
+.licenseContainer {
   gap: 0.938rem;
 }
 

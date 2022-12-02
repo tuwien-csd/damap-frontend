@@ -28,7 +28,7 @@
               {{ 'dmp.steps.licensing.warning.legalRestrictions' | translate }}
             </ng-container>
           </div>
-          <div id="licensingContainer" class="mat-card-container">
+          <div class="mat-card-container">
             <mat-form-field class="full-width">
               <mat-label>{{
                 'dmp.steps.licensing.question.license' | translate
@@ -41,7 +41,7 @@
             </mat-form-field>
             <app-license-wizard (selectedLicense)="setLicenseSelectorResult($event, i)"></app-license-wizard>
           </div>
-          <div id="licensingContainer" class="mat-card-container">
+          <div class="mat-card-container">
             <mat-form-field class="date-form">
               <mat-label>{{
                 'dmp.steps.licensing.question.startDate' | translate
@@ -56,19 +56,19 @@
               </mat-hint>
             </mat-form-field>
           </div>
-          <div id="accessTypeContainer" class="mat-card-container">
-            <mat-form-field>
-              <mat-label>{{
-                'dmp.steps.licensing.question.dataAccess' | translate
-                }}</mat-label>
-              <mat-select formControlName="dataAccess">
-                <mat-option *ngFor="let type of accessType | keyvalue" [value]="type.key">
-                  {{ translateEnumPrefix + type.value | translate }}<br />
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
         </ng-container>
+        <div class="mat-card-container">
+          <mat-form-field>
+            <mat-label>{{
+              'dmp.steps.licensing.question.dataAccess' | translate
+              }}</mat-label>
+            <mat-select formControlName="dataAccess">
+              <mat-option *ngFor="let type of accessType | keyvalue" [value]="type.key">
+                {{ translateEnumPrefix + type.value | translate }}<br />
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
         <ng-container *ngIf="dataset.value.dataAccess === accessType.CLOSED">
           <app-data-deletion [dataset]="getFormGroup(i)" [dmpForm]="dmpForm"></app-data-deletion>
         </ng-container>

@@ -28,7 +28,7 @@
         <mat-label>{{
           'dmp.steps.data.deletion.question.date' | translate
           }}</mat-label>
-        <input matInput formControlName="dateOfDeletion" [matDatepicker]="picker" [(ngModel)]="planModel.end_time" />
+        <input matInput formControlName="dateOfDeletion" [matDatepicker]="picker" [formControl]="endDate" />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
