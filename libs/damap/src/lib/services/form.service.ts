@@ -368,7 +368,7 @@ export class FormService {
       startDate: [null],
       type: [[]],
       size: [null],
-      description: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+      description: [''],
       personalData: [false],
       sensitiveData: [false],
       legalRestrictions: [false],
