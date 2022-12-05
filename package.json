@@ -13,7 +13,7 @@
     "ci:build": "npx nx run-many --target=build --parallel=2",
     "ci:lint": "nx run-many --target=lint --parallel=2",
     "ci:test": "npx nx run-many --target=test --parallel=2 --code-coverage --browsers ChromeHeadless --watch=false",
-    "ci:e2e": "nx e2e",
+    "ci:e2e": "npx nx run damap-frontend-e2e:e2e",
     "ci:coverage": "nx test --browsers ChromeHeadless --watch=false --code-coverage",
     "ci:audit": "npm audit",
     "ci:install": "npm install",
