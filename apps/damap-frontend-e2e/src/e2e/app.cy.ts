@@ -1,7 +1,6 @@
 describe("damap-frontend", () => {
 
   before(() => {
-    cy.visit("/");
     cy.fixture("users").then((users) => cy.login(users.username, users.password));
   });
 
