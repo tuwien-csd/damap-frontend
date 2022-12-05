@@ -84,6 +84,13 @@ export class BackendService {
       );
   }
 
+  deleteDmp(id: number): Observable<Dmp> {
+    return this.http.delete<Dmp>(`${this.dmpBackendUrl}/${id}`).pipe(
+      retry(3),
+      catchError(this.handleError('http.error.plans.delete'))
+    );
+  }
+
   getDmpByIdAndRevision(id: number, revision: number): Observable<Dmp> {
     return this.http.get<Dmp>(`${this.dmpBackendUrl}/${id}/${revision}`).pipe(
       retry(3),
@@ -162,11 +169,11 @@ export class BackendService {
     );
   }
 
-  searchRepository(filters: any): Observable<RepositoryDetails[]> {
+  searchRepository(filters: { [key: string]: {id: string, label: string}[] }): Observable<RepositoryDetails[]> {
     let params = new HttpParams();
     for (const key in filters) {
       if (filters.hasOwnProperty(key)) {
-        filters[key]?.forEach(item => params = params.append(key, item));
+        filters[key]?.forEach(item => params = params.append(key, item.id));
       }
     }
     return this.http.get<RepositoryDetails[]>(`${this.repositoryBackendUrl}/search`, {params}).pipe(

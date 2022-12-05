@@ -7,6 +7,7 @@ import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../store/states/app.state';
 import {Observable} from 'rxjs';
 import {
+  selectFilters,
   selectRecommendedRepositories,
   selectRecommendedRepositoriesLoaded,
   selectRepositories,
@@ -15,7 +16,7 @@ import {
 import {
   loadAllRepositories,
   loadRecommendedRepositories,
-  loadRepository
+  loadRepository, setRepositoryFilter
 } from '../../../store/actions/repository.actions';
 import {DataSource} from '../../../domain/enum/data-source.enum';
 
@@ -26,10 +27,11 @@ import {DataSource} from '../../../domain/enum/data-source.enum';
 })
 export class RepoComponent implements OnInit {
 
-  repositoriesLoaded: LoadingState;
-  repositories: RepositoryDetails[]; // Repo list loaded from backend
+  repositoriesLoaded$: Observable<LoadingState>;
+  repositories$: Observable<RepositoryDetails[]>; // Repo list loaded from backend
   recommendedLoaded$: Observable<LoadingState>;
   recommended$: Observable<RepositoryDetails[]>;
+  filters$: Observable<{ [key: string]: { id: string, label: string }[] }>;
 
   @Input() dmpForm: UntypedFormGroup;
   @Input() repoStep: UntypedFormArray;
@@ -41,16 +43,19 @@ export class RepoComponent implements OnInit {
   LoadingState = LoadingState;
   readonly datasetSource: any = DataSource;
 
+  selectedTabIndex = 0;
+
   constructor(public store: Store<AppState>) {
   }
 
   ngOnInit() {
-    this.store.pipe(select(selectRepositoriesLoaded)).subscribe(val => this.repositoriesLoaded = val);
-    this.store.pipe(select(selectRepositories)).subscribe(val => this.repositories = val);
+    this.repositoriesLoaded$ = this.store.pipe(select(selectRepositoriesLoaded));
+    this.repositories$ = this.store.pipe(select(selectRepositories));
+    this.filters$ = this.store.pipe(select(selectFilters));
     this.recommendedLoaded$ = this.store.pipe(select(selectRecommendedRepositoriesLoaded));
     this.recommended$ = this.store.pipe(select(selectRecommendedRepositories));
-    this.getRecommendedRepositories();
-    this.getRepositories();
+    this.store.dispatch(loadRecommendedRepositories());
+    this.store.dispatch(loadAllRepositories(true));
   }
 
   addRepository(repo: RepositoryDetails) {
@@ -67,6 +72,14 @@ export class RepoComponent implements OnInit {
     }
   }
 
+  filterRepositories(filter: { [key: string]: { id: string, label: string }[] } | null) {
+    if (filter) {
+      this.store.dispatch(setRepositoryFilter({filter}));
+    } else {
+      this.store.dispatch((loadAllRepositories()));
+    }
+  }
+
   getDatasetsMarkedForDeletion(index: number): Dataset[] {
     const repo = this.repoStep.at(index);
     return this.datasets.value.filter(item => item.delete && repo.value.datasets.includes(item.referenceHash));
@@ -80,19 +93,5 @@ export class RepoComponent implements OnInit {
       result += (i < datasets.length - 1) ? ', ' : '';
     }
     return result;
-  }
-
-  private getRecommendedRepositories() {
-    this.recommendedLoaded$.subscribe(loaded => {
-      if (loaded === LoadingState.NOT_LOADED) {
-        this.store.dispatch(loadRecommendedRepositories());
-      }
-    });
-  }
-
-  private getRepositories() {
-    if (this.repositoriesLoaded === LoadingState.NOT_LOADED) {
-      this.store.dispatch(loadAllRepositories());
-    }
   }
 }

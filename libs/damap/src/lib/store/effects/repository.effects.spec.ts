@@ -6,10 +6,11 @@ import {of, throwError} from 'rxjs';
 import * as RepositoryAction from '../actions/repository.actions';
 import {mockDetailRepo, mockRepo} from '../../mocks/repository-mocks';
 import {provideMockStore} from '@ngrx/store/testing';
-import {selectFilters} from '../selectors/repository.selectors';
+import {selectRecommendedRepositoriesLoaded} from '../selectors/repository.selectors';
 import {IdentifierType} from '../../domain/enum/identifier-type.enum';
 import {TestScheduler} from 'rxjs/testing';
 import {HttpErrorResponse} from '@angular/common/http';
+import {LoadingState} from "@damap/core";
 
 describe('RepositoryEffects', () => {
   let actions$;
@@ -23,9 +24,10 @@ describe('RepositoryEffects', () => {
         RepositoryEffects,
         provideMockActions(() => actions$),
         provideMockStore({
+            initialState: {damap: {repositories: {filters: {identifier: [{label: 'ORCID', id: IdentifierType.ORCID}]}}}},
             selectors: [{
-              selector: selectFilters,
-              value: {identifier: [IdentifierType.ORCID]}
+              selector: selectRecommendedRepositoriesLoaded,
+              value: {loaded: LoadingState.NOT_LOADED}
             }]
           }
         ),
@@ -71,18 +73,35 @@ describe('RepositoryEffects', () => {
 
     effects.loadRepository$.subscribe(action => {
       expect(backendService.getRepositoryById).toHaveBeenCalledWith(mockDetailRepo.id);
-      expect(action).toEqual(RepositoryAction.updateRepository({update: {id: mockDetailRepo.id, changes: mockDetailRepo}}));
+      expect(action).toEqual(RepositoryAction.updateRepository({
+        update: {
+          id: mockDetailRepo.id,
+          changes: mockDetailRepo
+        }
+      }));
     });
   });
 
   it('should search repositories by query', () => {
-    actions$ = of(RepositoryAction.setRepositoryFilter);
+    actions$ = of(RepositoryAction.setRepositoryFilter({
+      filter: {
+        identifier: [{
+          label: 'ORCID',
+          id: IdentifierType.ORCID
+        }]
+      }
+    }));
     backendService.searchRepository.and.returnValue(of([mockRepo]));
 
     effects.searchRepositoriesByQuery$({
       debounce: 10, scheduler: testScheduler,
     }).subscribe(action => {
-      expect(backendService.searchRepository).toHaveBeenCalledWith({identifier: [IdentifierType.ORCID]});
+      expect(backendService.searchRepository).toHaveBeenCalledWith({
+        identifier: [{
+          label: 'ORCID',
+          id: IdentifierType.ORCID
+        }]
+      });
       expect(action).toEqual(RepositoryAction.repositoriesLoaded({repositories: [mockRepo]}));
     });
   });

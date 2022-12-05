@@ -24,24 +24,24 @@
       </div>
       <div class="form-row">
         <div class="form-row-group">
-          <app-input-wrapper [label]="'dmp.steps.storage.external.question.location'"
-                             [control]="getFormControl(i, 'storageLocation')"></app-input-wrapper>
-          <app-input-wrapper [label]="'dmp.steps.storage.external.question.backup.location'"
-                             [control]="getFormControl(i, 'backupLocation')"></app-input-wrapper>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-row-group">
-          <app-input-wrapper [label]="'dmp.steps.storage.external.question.backup.frequency'"
-                             [control]="getFormControl(i, 'backupFrequency')"></app-input-wrapper>
-          <mat-form-field>
-            <mat-label>Dataset(s) stored</mat-label>
+          <mat-form-field class="full-width">
+            <mat-label>{{'dmp.steps.storage.question.datasets' | translate}}</mat-label>
             <mat-select multiple [formControl]="getFormControl(i, 'datasets')">
               <mat-option *ngFor="let dataset of datasets?.controls" [value]="dataset.value.referenceHash">
                 {{dataset.value.title}}
               </mat-option>
             </mat-select>
           </mat-form-field>
+          <app-input-wrapper [label]="'dmp.steps.storage.external.question.location'"
+                             [control]="getFormControl(i, 'storageLocation')"></app-input-wrapper>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-row-group">
+          <app-input-wrapper [label]="'dmp.steps.storage.external.question.backup.frequency'"
+                             [control]="getFormControl(i, 'backupFrequency')"></app-input-wrapper>
+          <app-input-wrapper [label]="'dmp.steps.storage.external.question.backup.location'"
+                             [control]="getFormControl(i, 'backupLocation')"></app-input-wrapper>
         </div>
       </div>
     </mat-expansion-panel>

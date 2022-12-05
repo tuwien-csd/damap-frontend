@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {UntypedFormControl} from '@angular/forms';
 import {AbstractBaseDataComponent} from '../abstract-base-data.component';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatChipInputEvent} from '@angular/material/chips';
+import {DatasetDialogComponent} from "../dataset-dialog/dataset-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-created-data',
@@ -13,29 +13,28 @@ export class CreatedDataComponent extends AbstractBaseDataComponent {
 
   @Input() fileUpload: { file: File, progress: number, finalized: boolean }[];
 
-  @Output() createDataset = new EventEmitter<string>();
   @Output() fileToAnalyse = new EventEmitter<File>();
   @Output() uploadToCancel = new EventEmitter<number>();
 
   readonly tableHeaders: string[] = ['dataset', 'datatype', 'size', 'description', 'actions'];
 
-  // Mat Chip properties
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-
-  constructor() {
+  constructor(public dialog: MatDialog) {
     super();
   }
 
-  addDataset(event: MatChipInputEvent): void {
-    const value = event.value;
+  openDatasetDialog() {
+    const dialogRef = this.dialog.open(DatasetDialogComponent, {
+      width: '75%',
+      maxWidth: '800px',
+      data: {dataset: {source: this.datasetSource.NEW}}
+    });
 
-    // Add dataset
-    if ((value || '').trim()) {
-      this.createDataset.emit(value);
-    }
-
-    // Reset the input value
-    event.chipInput?.clear();
+    dialogRef.afterClosed().subscribe(dataset => {
+        if (dataset) {
+          this.datasetToAdd.emit(dataset);
+        }
+      }
+    );
   }
 
   get kind(): UntypedFormControl {

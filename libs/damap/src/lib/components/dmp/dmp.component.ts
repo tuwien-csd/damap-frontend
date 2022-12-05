@@ -12,12 +12,13 @@ import {LoadProjects} from '../../store/actions/project.actions';
 import {FormService} from '../../services/form.service';
 import {HttpEventType} from '@angular/common/http';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
-import {OAuthService} from 'angular-oauth2-oidc';
 import {formDiff, resetFormValue, setFormValue} from '../../store/actions/form.actions';
 import {InternalStorage} from '../../domain/internal-storage';
 import {Dataset} from '../../domain/dataset';
 import {DataKind} from '../../domain/enum/data-kind.enum';
 import {LoggerService} from '../../services/logger.service';
+import {DataSource} from "../../domain/enum/data-source.enum";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-dmp',
@@ -26,7 +27,8 @@ import {LoggerService} from '../../services/logger.service';
 })
 export class DmpComponent implements OnInit, OnDestroy {
 
-  username: string;
+  readonly username = this.auth.getUsername();
+  readonly admin = this.auth.isAdmin();
 
   dmpForm: UntypedFormGroup = this.formService.dmpForm;
   formChanged: boolean;
@@ -56,7 +58,7 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   constructor(
     private logger: LoggerService,
-    private auth: OAuthService,
+    private auth: AuthService,
     private formService: FormService,
     private route: ActivatedRoute,
     private router: Router,
@@ -70,7 +72,6 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.projects$ = this.store.pipe(select(selectProjects));
     this.getDmpById();
     this.getSuggestedProjects();
-    this.username = this.auth.getIdentityClaims()['preferred_username'];
 
     this.dmpForm.valueChanges.subscribe(value => {
       this.logger.debug('DMPform Update');
@@ -95,6 +96,10 @@ export class DmpComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.formService.resetForm();
     this.store.dispatch(resetFormValue());
+  }
+
+  get showStepIfNewDatasets() {
+    return this.specifyDataStep.value.kind === DataKind.SPECIFY && this.datasets?.value.find(dataset => dataset.source == DataSource.NEW);
   }
 
   get showStep() {

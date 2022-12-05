@@ -100,19 +100,18 @@ describe('BackendService', () => {
     req.flush([{id: 'r3d100012810', name: 'Random Repo'}]);
   });
 
-  /*  it('should retrieve repository by Id', () => {
+    it('should retrieve repository by Id', () => {
       const id = 'r3d100012810';
       service.getRepositoryById(id).subscribe(
         repos => {
           expect(repos).toBeTruthy();
-          expect(repos.length).toBe(1);
-          expect(repos[0].id).toBe('r3d100012810');
+          expect(repos.id).toBe('r3d100012810');
         }
       );
 
       const req = httpTestingController.expectOne(`${backendUrl}repositories/${id}`);
       req.flush([{id: 'r3d100012810', name: 'Random Repo'}]);
-    });*/
+    });
 
   it('should get all suggested projects', () => {
     service.getSuggestedProjects().subscribe(
@@ -147,15 +146,15 @@ describe('BackendService', () => {
 
 
   it('should search repositories by filters', () => {
-    service.searchRepository({subjects: ['Cars']}).subscribe(
+    service.searchRepository({subjects: [{id: 'cars', label:'Cars'}]}).subscribe(
       repos => {
         expect(repos).toBeTruthy();
         expect(repos.length).toBe(2);
       }
     );
 
-    const req = httpTestingController.expectOne(`${backendUrl}repositories/search?subjects=Cars`);
-    expect(req.request.params.get('subjects')).toEqual('Cars');
+    const req = httpTestingController.expectOne(`${backendUrl}repositories/search?subjects=cars`);
+    expect(req.request.params.get('subjects')).toEqual('cars');
     req.flush([{}, {}]);
   });
 

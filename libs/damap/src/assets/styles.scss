@@ -26,12 +26,12 @@ body {
   border: 0
 }
 
-*, ::after, ::before {
-  box-sizing: border-box;
-}
-
 .mat-icon-style {
   font-size: smaller;
+}
+
+.material-icons.mat-icon {
+  overflow: initial;
 }
 
 .mat-icon-contact {

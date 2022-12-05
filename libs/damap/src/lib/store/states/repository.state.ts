@@ -4,7 +4,7 @@ import {LoadingState} from '../../domain/enum/loading-state.enum';
 
 export interface RepositoryState extends EntityState<RepositoryDetails> {
   loaded: LoadingState;
-  filters: { [key: string]: string[] }
+  filters: { [key: string]: {id: string, label: string}[] }
   recommended: RepositoryDetails[];
   recommendedLoaded: LoadingState;
 }

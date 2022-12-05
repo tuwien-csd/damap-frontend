@@ -7,7 +7,8 @@
 
   <div *ngIf="(dmpsLoaded$ | async) === LoadingState.LOADED">
     <app-dmp-table [dmps]="dmps$ | async" (createDocument)="getDocument($event)"
-                   (createJsonFile)="getJsonFile($event)"></app-dmp-table>
+                   (createJsonFile)="getJsonFile($event)"
+                   (dmpToDelete)="deleteDmp($event)"></app-dmp-table>
   </div>
   <div *ngIf="(dmpsLoaded$ | async) === LoadingState.LOADING">
     <p translate>plans.loading.load</p>
@@ -19,8 +20,9 @@
 
   <ng-container *ngIf="isAdmin()">
     <h2 translate>plans.alldmps</h2>
-    <app-dmp-table [dmps]="allDmps$ | async" (createDocument)="getDocument($event)"
-                   (createJsonFile)="getJsonFile($event)"></app-dmp-table>
+    <app-dmp-table [dmps]="allDmps$ | async" (createDocument)="getDocument($event)" [admin]="true"
+                   (createJsonFile)="getJsonFile($event)"
+                   (dmpToDelete)="deleteDmp($event)"></app-dmp-table>
   </ng-container>
 </div>
 

@@ -21,3 +21,5 @@ export const failedToSaveDmp = createAction('[Dmps] Failed to save dmp');
 export const exportDmp = createAction('[Dmps] Export dmp', props<{ dmp: Dmp }>());
 
 export const dmpExported = createAction('[Dmps] Dmp exported');
+
+export const deleteDmp = createAction('[Dmps] Remove dmp', props<{ id: number }>());

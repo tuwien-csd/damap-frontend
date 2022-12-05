@@ -27,12 +27,19 @@ describe('TreeSelectFormFieldComponent', () => {
         MatFormFieldModule, MatChipsModule, MatInputModule, MatAutocompleteModule, MatOptionModule, MatTreeModule,
         MatButtonModule, MatCheckboxModule, MatIconModule, TranslateTestingModule, NoopAnimationsModule],
       declarations: [TreeSelectFormFieldComponent]
-    })
-      .compileComponents();
+    }).compileComponents();
     fixture = TestBed.createComponent(TreeSelectFormFieldComponent);
     component = fixture.componentInstance;
     component.label = 'Filter';
-    component.treeData = [{id: 'Tree', label: 'Tree'}];
+    component.treeData = [{
+      id: 'tree',
+      label: 'Tree',
+      children: [
+        {id: 'node', label: 'Node', children: [{id: 'leaf', label: 'Leaf'}]},
+        {id: 'nodeWithOutChild', label: 'Node without child'}]
+    }];
+    // state = [{id:'node', label:'Node'}]
+    component.state = [{id: component.treeData[0].children[0].id, label: component.treeData[0].children[0].label}];
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.loader(fixture);
   });
@@ -45,4 +52,13 @@ describe('TreeSelectFormFieldComponent', () => {
     input = await loader.getHarness(MatInputHarness);
     expect(input).toBeTruthy();
   });
+
+  it('should check preselected options', async () => {
+    spyOn(component.params, 'emit');
+
+    // wait for the tree to be rendered
+    input = await loader.getHarness(MatInputHarness);
+
+    expect(component.params.emit).toHaveBeenCalledWith(component.state);
+  })
 });

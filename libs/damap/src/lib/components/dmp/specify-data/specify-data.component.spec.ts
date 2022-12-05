@@ -51,12 +51,6 @@ describe('SpecifyDataComponent', () => {
     expect(component.removeDataset.emit).toHaveBeenCalledOnceWith(0);
   });
 
-  it('should emit dataset to create', () => {
-    spyOn(component.createDataset, 'emit');
-    component.create('new dataset');
-    expect(component.createDataset.emit).toHaveBeenCalledOnceWith('new dataset');
-  });
-
   it('should emit file to analyse', () => {
     spyOn(component.fileToAnalyse, 'emit');
     const file = new File([], 'test.txt');

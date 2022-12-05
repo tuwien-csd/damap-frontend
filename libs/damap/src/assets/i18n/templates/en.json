@@ -22,8 +22,7 @@
       },
       "people": {
         "label": "People involved in data management",
-        "intro": "This step helps you to provide information on involved persons and their particular roles regarding research data management within this project. Based on the information provided in the Project Database, we have already entered the name of the Project Leader and marked her/him as the contact person for questions related to data management and the DMP (icon with person and envelope). You can change the preset information if needed and add more contributors via the search (start typing the name) and manually.",
-        "contributors": "Contributors",
+        "intro": "This step helps you to provide information on involved persons and their particular roles regarding research data management within this project. Based on the information provided in the Project Database, we have already entered the name of the Project Leader and marked them as the Contact Person for questions related to data management and the DMP (icon with person and envelope). You can change the preset information if needed and add more contributors via the search (start typing the name) and manually. Provide a minimum of one Contact Person as well as a Data Manager (may be the same person).",
         "search": "Search for person...",
         "contributor": {
           "add": "Add as contributor",
@@ -219,7 +218,7 @@
           "legalRestrictionsComment": "Please specify the legal restrictions:",
           "legalRestrictionsDocuments": "In which document(s) are these restrictions specified?",
           "otherLegalRestrictionsDocuments": "Please specify the other documents:",
-          "dataRightsAndAccessControl": "Who has rights to the produced data and who controls access to the data?"
+          "dataRightsAndAccessControl": "Who is the owner of the data and who controls access to the data?"
         },
         "link": {
           "sensitiveData": "https://ec.europa.eu/info/law/law-topic/data-protection/reform/rules-business-and-organisations/legal-grounds-processing-data/sensitive-data/what-personal-data-considered-sensitive_en"
@@ -242,7 +241,7 @@
       },
       "licensing": {
         "label": "Data access and licensing",
-        "intro": "This step helps you to specify the access to your research output in the future: Which of your data sets will be published, which will be provided to interested persons on request only and which need to be under lock and key, for contractual, regulatory, or ethical reasons? It also reminds you to choose a license for your open data that clearly describes the reuse conditions for potential reusers.",
+        "intro": "This step helps you to specify the access to your research output in the future: Which of your data sets will be published, which will be provided to interested persons on request only and which need to be under lock and key, for contractual, regulatory, or ethical reasons? It also reminds you to choose a license for your open data that clearly describes the reuse conditions for potential reusers. To comply with the FAIR principles, metadata should be published, even if the data are closed or restricted.",
         "hint": "Please indicate which datasets you plan to keep closed or publish. Select a license for the datasets you want to publish and estimate the release date.",
         "question": {
           "dataAccess": "Data Access",
@@ -290,14 +289,18 @@
             "recommended": "Recommended repositories could not be loaded."
           }
         },
-        "filter": {
-          "search": "Search Filter"
-        },
+        "filter": "Filter repositories",
+        "filter.search": "Search Filter",
+        "filter.find": "Find repositories",
+        "filter.reset": "Reset filter",
+        "filters": "Filters",
         "table.header.title": "Title",
         "nodatafilter": "No data matching the filter \"{{value}}\"",
         "norepositories": "No repositories found.",
         "recommended": "Recommended",
-        "find": "Find repository"
+        "recommended.none": "No further recommended repositories.",
+        "find": "Find repository",
+        "find.other": "Find other repository"
       },
       "costs": {
         "label": "Costs",
@@ -308,7 +311,7 @@
             "no": "There are no costs dedicated to data management.",
             "yes": "As outlined below, there are costs dedicated to data management."
           },
-          "title": "Item",
+          "title": "Title",
           "value": "Estimated cost",
           "type": "Cost Type",
           "other": "Please specify the cost type",

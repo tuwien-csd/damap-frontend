@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { DmpListItem } from '../../domain/dmp-list-item';
+import { FunctionRole } from "../../domain/enum/function-role.enum";
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,27 +10,22 @@ import { MatTableDataSource } from '@angular/material/table';
   selector: 'app-dmp-table',
   templateUrl: './dmp-table.component.html',
   styleUrls: ['./dmp-table.component.css'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
 })
 export class DmpTableComponent implements OnChanges, AfterViewInit {
 
   @Input() dmps: DmpListItem[];
+  @Input() admin = false;
   dataSource = new MatTableDataSource();
 
   @Output() createDocument = new EventEmitter<number>();
   @Output() createJsonFile = new EventEmitter<number>();
+  @Output() dmpToDelete = new EventEmitter<number>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  readonly tableHeaders: string[] = ['title', 'created', 'modified', 'contact', 'edit', 'history', 'remove'];
-  expandedElement: DmpListItem | null;
+  readonly tableHeaders: string[] = ['title', 'created', 'modified', 'contact', 'edit'];
+  readonly FUNCTION_ROLES = FunctionRole;
 
   constructor() {
   }
@@ -73,5 +68,9 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
   getJsonFile(id: number) {
     this.createJsonFile.emit(id);
   }
-  
+
+  deleteDmp(id: number) {
+    this.dmpToDelete.emit(id);
+  }
+
 }

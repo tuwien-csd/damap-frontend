@@ -5,8 +5,8 @@
     <input #searchBox type="search" matInput>
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
-  <div class="list-container">
-    <mat-selection-list [multiple]="false" style="'height: 500px; overflow:scroll'" (selectionChange)="changeProject($event)">
+  <div class="list-container" *ngIf="!selectedProject && projects?.length">
+    <mat-selection-list [multiple]="false" style=" overflow:scroll" (selectionChange)="changeProject($event)">
       <mat-list-option *ngFor="let project of (projects | projectFilter:searchBox.value)"
                        [style]="'height: auto;'"
                        [selected]="project.universityId === selectedProject?.universityId"

@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>{{'dmp.steps.repositories.filter' | translate}}</h1>
+<div mat-dialog-content>
+
+  <app-tree-select-form-field [label]="'Subjects'" [treeData]="FILTER.subjects" [state]="data['subjects']"
+                              (params)="onFilterChange('subjects', $event)"></app-tree-select-form-field>
+  <app-tree-select-form-field [label]="'Content types'" [treeData]="FILTER.contentTypes" [state]="data['contentTypes']"
+                              (params)="onFilterChange('contentTypes', $event)"></app-tree-select-form-field>
+  <app-tree-select-form-field [label]="'Countries'" [treeData]="FILTER.countries" [state]="data['countries']"
+                              (params)="onFilterChange('countries', $event)"></app-tree-select-form-field>
+  <app-tree-select-form-field [label]="'Certificates'" [treeData]="FILTER.certificates" [state]="data['certificates']"
+                              (params)="onFilterChange('certificates', $event)"></app-tree-select-form-field>
+  <app-tree-select-form-field [label]="'PID systems'" [treeData]="FILTER.pidSystems" [state]="data['pidSystems']"
+                              (params)="onFilterChange('pidSystems', $event)"></app-tree-select-form-field>
+  <!--<app-tree-select-form-field [label]="'AID systems'" [treeData]="FILTER.aidSystems" [state]="data['aidSystems']"
+                              (params)="onFilterChange('aidSystems', $event)"></app-tree-select-form-field>-->
+  <!--<app-tree-select-form-field [label]="'Repository access'" [treeData]="FILTER.accessTypes" [state]="data['repositoryAccess']"
+                              (params)="onFilterChange('repositoryAccess', $event)"></app-tree-select-form-field>-->
+  <app-tree-select-form-field [label]="'Data access'" [treeData]="FILTER.dataAccessTypes" [state]="data['dataAccess']"
+                              (params)="onFilterChange('dataAccess', $event)"></app-tree-select-form-field>
+  <app-tree-select-form-field [label]="'Data upload'" [treeData]="FILTER.accessTypes" [state]="data['dataUpload']"
+                              (params)="onFilterChange('dataUpload', $event)"></app-tree-select-form-field>
+  <app-tree-select-form-field [label]="'Data licenses'" [treeData]="FILTER.dataLicenses" [state]="data['dataLicenses']"
+                              (params)="onFilterChange('dataLicenses', $event)"></app-tree-select-form-field>
+  <app-tree-select-form-field [label]="'Repository types'" [treeData]="FILTER.repositoryTypes" [state]="data['repositoryTypes']"
+                              (params)="onFilterChange('repositoryTypes', $event)"></app-tree-select-form-field>
+  <app-tree-select-form-field [label]="'Institution types'" [treeData]="FILTER.institutionTypes" [state]="data['institutionTypes']"
+                              (params)="onFilterChange('institutionTypes', $event)"></app-tree-select-form-field>
+  <!--<app-tree-select-form-field [label]="'Versioning'" [treeData]="FILTER.versioning" [state]="data['versioning']"
+                              (params)="onFilterChange('versioning', $event)"></app-tree-select-form-field>-->
+  <app-tree-select-form-field [label]="'Metadata standards'" [treeData]="FILTER.metadataStandards" [state]="data['metadataStandards']"
+                              (params)="onFilterChange('metadataStandards', $event)"></app-tree-select-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">{{'dmp.dialog.button.cancel' | translate}} </button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="filter">{{'dmp.steps.repositories.filter.find' | translate}}</button>
+</div>

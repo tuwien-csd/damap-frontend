@@ -1,6 +1,5 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {DmpComponent} from './dmp.component';
-import {OAuthService} from 'angular-oauth2-oidc';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {ActivatedRoute} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -16,13 +15,14 @@ import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
 import {MatStepperHarness} from '@angular/material/stepper/testing';
 import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
 import {FormTestingModule} from '../../testing/form-testing/form-testing.module';
+import {AuthService} from "../../auth/auth.service";
 
 describe('DmpComponent', () => {
   let component: DmpComponent;
   let fixture: ComponentFixture<DmpComponent>;
   let loader: HarnessLoader;
   let store: MockStore;
-  let oauthSpy;
+  let authSpy;
   let backendSpy;
   let feedbackSpy;
   const initialState = {
@@ -33,8 +33,9 @@ describe('DmpComponent', () => {
   };
 
   beforeEach(async () => {
-    oauthSpy = jasmine.createSpyObj('OAuthService', ['getIdentityClaims']);
-    oauthSpy.getIdentityClaims.and.returnValue({name: 'name', groups: 'groups', preferred_username: 'username'});
+    authSpy = jasmine.createSpyObj('AuthService', ['getUsername', 'isAdmin']);
+    authSpy.getUsername.and.returnValue('name');
+    authSpy.isAdmin.and.returnValue(false);
     feedbackSpy = jasmine.createSpyObj('FeedbackService', ['error', 'success']);
     await TestBed.configureTestingModule({
       imports: [
@@ -48,7 +49,7 @@ describe('DmpComponent', () => {
       ],
       declarations: [DmpComponent],
       providers: [
-        {provide: OAuthService, useValue: oauthSpy},
+        {provide: AuthService, useValue: authSpy},
         provideMockStore({initialState}),
         {provide: ActivatedRoute, useValue: {snapshot: {paramMap: {get: (id: number) => null}}}},
         {provide: BackendService, useValue: backendSpy},

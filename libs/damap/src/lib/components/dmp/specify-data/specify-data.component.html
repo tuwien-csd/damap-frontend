@@ -3,7 +3,7 @@
   <app-created-data [specifyDataStep]="specifyDataStep"
                     [datasets]="datasets"
                     [fileUpload]="fileUpload"
-                    (createDataset)="create($event)"
+                    (datasetToAdd)="add($event)"
                     (updateDataset)="update($event)"
                     (removeDataset)="remove($event)"
                     (fileToAnalyse)="analyseFile($event)"
@@ -18,7 +18,7 @@
 
   <!-- NO DATA -->
   <ng-container
-    *ngIf="specifyDataStep.value.kind === dataKind.NONE && specifyDataStep.value.reusedKind === dataKind.NONE">
+    *ngIf="specifyDataStep.value.kind === dataKind.NONE && specifyDataStep.value['reusedKind'] === dataKind.NONE">
     <app-textarea-wrapper [label]="'dmp.steps.data.specify.question.nodata'"
                           [control]="explanation">
     </app-textarea-wrapper>
@@ -26,7 +26,7 @@
 
   <!-- DATA GENERATION -->
   <ng-container
-    *ngIf='specifyDataStep.value.kind === dataKind.SPECIFY || specifyDataStep.value.reusedKind === dataKind.SPECIFY '>
+    *ngIf="specifyDataStep.value.kind === dataKind.SPECIFY || specifyDataStep.value['reusedKind'] === dataKind.SPECIFY">
     <app-textarea-wrapper [label]="'dmp.steps.documentation.question.datageneration'"
                           [control]="dataGeneration">
     </app-textarea-wrapper>

@@ -18,7 +18,6 @@
     <app-dmp-specify-data [specifyDataStep]="specifyDataStep"
                           [datasets]="datasets"
                           [fileUpload]="fileUpload"
-                          (createDataset)="createDataset($event)"
                           (datasetToAdd)="addDataset($event)"
                           (updateDataset)="updateDataset($event)"
                           (fileToAnalyse)="analyseFile($event)"
@@ -63,14 +62,14 @@
     </ng-container>
   </mat-step>
   <mat-step label="{{'dmp.steps.licensing.label' | translate }}" [hasError]="datasets.invalid">
-    <ng-container *ngIf="showStep else noDatasets">
+    <ng-container *ngIf="showStepIfNewDatasets else noDatasets">
       <app-dmp-licenses [dmpForm]="dmpForm"
                         [datasets]="datasets">
       </app-dmp-licenses>
     </ng-container>
   </mat-step>
   <mat-step label="{{'dmp.steps.repositories.label' | translate }}" [hasError]="repoStep.invalid">
-    <ng-container *ngIf="showStep else noDatasets">
+    <ng-container *ngIf="showStepIfNewDatasets else noDatasets">
       <app-dmp-repo [dmpForm]="dmpForm"
                     [repoStep]="repoStep" [datasets]="datasets"
                     (repositoryToAdd)="addRepository($event)"
@@ -102,5 +101,5 @@
   {{'dmp.nodatasets' | translate }}
 </ng-template>
 
-<app-actions class="dmp-actions" [stepChanged$]="stepChanged$">
+<app-actions class="dmp-actions" [stepChanged$]="stepChanged$" [admin]="admin">
 </app-actions>

@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Injectable, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Injectable, Input, OnInit, Output} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
@@ -14,12 +14,17 @@ export class TreeData {
   children?: TreeData[];
 }
 
+export class TreeNodeItem {
+  id: string;
+  label: string;
+}
+
 /**
  * Tree node
  */
 export class TreeNode {
   children: TreeNode[];
-  item: { id: string, label: string };
+  item: TreeNodeItem;
   visible: boolean;
 }
 
@@ -58,7 +63,7 @@ export class TreeDatabase {
   }
 
   /**
-   * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
+   * Build the file structure tree. The `value` is the Json object, or a subtree of a Json object.
    * The return value is the list of `TreeNode`.
    */
   buildFileTree(data: TreeData[], level: number): TreeNode[] {
@@ -83,6 +88,9 @@ export class TreeDatabase {
   }
 }
 
+/**
+ * Searchable select form field with tree structured options, shows selected options as chip list.
+ */
 @Component({
   selector: 'app-tree-select-form-field',
   templateUrl: './tree-select-form-field.component.html',
@@ -91,7 +99,7 @@ export class TreeDatabase {
 })
 export class TreeSelectFormFieldComponent implements OnInit {
 
-  /** Map from flat node to nested node. This helps us finding the nested node to be modified */
+  /** Map from flat node to nested node. This helps us find the nested node to be modified */
   flatNodeMap = new Map<TreeFlatNode, TreeNode>();
 
   /** Map from nested node to flattened node. This helps us to keep the same object for selection */
@@ -107,8 +115,11 @@ export class TreeSelectFormFieldComponent implements OnInit {
 
   @Input() label: string;
   @Input() treeData: TreeData[];
+  /** Preselected options */
+  @Input() state: TreeNodeItem[];
 
-  @Output() params = new EventEmitter<string[]>();
+  /** Outputs all currently selected values (used for GET query) */
+  @Output() params = new EventEmitter<TreeNodeItem[]>();
 
   /** The selection for checklist */
   checklistSelection = new SelectionModel<TreeFlatNode>(true /* multiple */);
@@ -117,10 +128,6 @@ export class TreeSelectFormFieldComponent implements OnInit {
    * Stores selected top nodes only
    */
   selectionList: TreeFlatNode[] = [];
-
-  @ViewChild('treeselect') treeSelect: ElementRef<HTMLDivElement>;
-  @ViewChild('input') treeInput: ElementRef<HTMLInputElement>;
-  showTree = false;
 
   constructor(private _database: TreeDatabase) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
@@ -133,7 +140,6 @@ export class TreeSelectFormFieldComponent implements OnInit {
       debounceTime(50) // emits twice on change
     ).subscribe(
       _ => {
-        this.setFocus();
         this.setSelectionList();
         this.updateAndEmitParams();
       }
@@ -156,6 +162,10 @@ export class TreeSelectFormFieldComponent implements OnInit {
           this._database.filterTree();
         }
       );
+    // Set initial selection
+    if (this.state) {
+      this.setSelection();
+    }
   }
 
   getLevel = (node: TreeFlatNode) => node.level;
@@ -262,11 +272,6 @@ export class TreeSelectFormFieldComponent implements OnInit {
     return null;
   }
 
-  /** Set focus to input field */
-  private setFocus() {
-    this.treeInput.nativeElement.focus();
-  }
-
   /** Find top nodes in checklistSelection and store them in selectionList */
   private setSelectionList() {
     this.selectionList = [];
@@ -279,15 +284,11 @@ export class TreeSelectFormFieldComponent implements OnInit {
   }
 
   private updateAndEmitParams() {
-    const params: string[] = [];
+    const params: TreeNodeItem[] = [];
     for (const item of this.selectionList) {
-      params.push(item.item.id);
+      params.push(item.item);
     }
     this.params.emit(params);
-  }
-
-  showTreeSelection() {
-    this.showTree = this.treeSelect.nativeElement.matches(':focus-within');
   }
 
   applyFilter(event: Event) {
@@ -306,6 +307,18 @@ export class TreeSelectFormFieldComponent implements OnInit {
           child.visible = child.item.label.toLowerCase().includes(filterText.toLowerCase());
         }
         node.visible = child.visible || node.visible;
+      }
+    }
+  }
+
+  /** Preselect options based on state input value (on component initialization) */
+  setSelection() {
+    this.checklistSelection.clear();
+    for (const selected of this.state) {
+      for (const flatNode of this.nestedNodeMap.values()) {
+        if (flatNode.item.id === selected.id) {
+          this.itemSelectionToggle(flatNode);
+        }
       }
     }
   }

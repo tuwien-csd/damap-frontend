@@ -1,4 +1,13 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {RepositoryDetails} from '../../../../domain/repository-details';
 import {LoadingState} from '../../../../domain/enum/loading-state.enum';
@@ -20,25 +29,24 @@ import {Repository} from '../../../../domain/repository';
 })
 export class RepoTableComponent implements OnChanges, AfterViewInit {
 
-  @Input() datasets: boolean;
   @Input() selectedRepos: Repository[];
   @Input() loaded: LoadingState;
+  @Input() filters: { [key: string]: { id: string, label: string }[] } = {};
   @Input() repositories: RepositoryDetails[]; // Repo list loaded from backend
   repoList: any = []; // Filtered repo list (repo list minus selected repos)
 
   @Output() repositoryToAdd = new EventEmitter<any>();
   @Output() repositoryDetails = new EventEmitter<any>();
+  @Output() filterChange = new EventEmitter<{ [key: string]: { id: string, label: string }[] }>();
 
+  readonly LoadingState = LoadingState;
   readonly tableHeaders: string[] = ['expand', 'title', 'add'];
   expandedElement: string | null;
   dataSource = new MatTableDataSource<RepositoryDetails>();
 
-  readonly LoadingState = LoadingState;
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor() {
-  }
+  filtersActive = () => this.filters && Object.keys(this.filters).length > 0;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.repositories || changes.selectedRepos) {
@@ -86,4 +94,11 @@ export class RepoTableComponent implements OnChanges, AfterViewInit {
     this.dataSource.data = this.repoList;
   }
 
+  onFilterChange(filter: { [key: string]: { id: string, label: string }[] }) {
+    this.filterChange.emit(filter);
+  }
+
+  resetFilter() {
+    this.filterChange.emit(null);
+  }
 }
