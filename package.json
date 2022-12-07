@@ -10,6 +10,7 @@
     "watch": "nx build --watch --configuration development",
     "lint": "npx nx workspace-lint",
     "test": "nx test",
+    "e2e": "npx nx e2e damap-frontend-e2e --watch=true",
     "ci:build": "npx nx run-many --target=build --parallel=2",
     "ci:lint": "nx run-many --target=lint --parallel=2",
     "ci:test": "npx nx run-many --target=test --parallel=2 --code-coverage --browsers ChromeHeadless --watch=false",
