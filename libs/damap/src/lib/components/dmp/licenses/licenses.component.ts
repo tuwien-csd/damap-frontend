@@ -26,35 +26,21 @@ export class LicensesComponent {
   setLicenseSelectorResult(event, index: number) {
     const dataset = this.datasets.at(index);
     if (event) {
-      dataset.patchValue({ license: event.url });
+      dataset.patchValue({license: event.url});
     }
   }
 
   get isAnonymisedOrPseudonymised() {
-    return (
-      this.dmpForm?.value.legal.personalDataCompliance?.includes(
-        ComplianceType.ANONYMISATION
-      ) ||
-      this.dmpForm?.value.legal.personalDataCompliance?.includes(
-        ComplianceType.PSEUDONYMISATION
-      )
-    );
+    return this.dmpForm?.value.legal.personalDataCompliance?.includes(ComplianceType.ANONYMISATION) ||
+      this.dmpForm?.value.legal.personalDataCompliance?.includes(ComplianceType.PSEUDONYMISATION);
   }
 
   get restricted() {
-    return this.datasets?.value.filter(
-      (item) =>
-        item.dataAccess === DataAccessType.RESTRICTED &&
-        item.source === DataSource.NEW
-    );
+    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.RESTRICTED && item.source === DataSource.NEW);
   }
 
   get closed() {
-    return this.datasets?.value.filter(
-      (item) =>
-        item.dataAccess === DataAccessType.CLOSED &&
-        item.source === DataSource.NEW
-    );
+    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.CLOSED && item.source === DataSource.NEW);
   }
 
   getFormGroup(index: number): UntypedFormGroup {
