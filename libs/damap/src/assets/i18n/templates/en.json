@@ -25,6 +25,10 @@
         "intro": "This step helps you to provide information on involved persons and their particular roles regarding research data management within this project. Based on the information provided in the Project Database, we have already entered the name of the Project Leader and marked them as the Contact Person for questions related to data management and the DMP (icon with person and envelope). You can change the preset information if needed and add more contributors via the search (start typing the name) and manually. Provide a minimum of one Contact Person as well as a Data Manager (may be the same person).",
         "search": "Search for person...",
         "search.service": "Search service field",
+        "search.service.type": {
+          "UNIVERSITY": "UNIVERSITY",
+          "ORCID": "ORCID"
+        },
         "contributor": {
           "add": "Add as contributor",
           "remove": "Remove from contributors",

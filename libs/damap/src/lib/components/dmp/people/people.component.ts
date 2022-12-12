@@ -36,7 +36,7 @@ export class PeopleComponent implements OnInit {
   readonly identifierType = IdentifierType;
   readonly serviceType = ServiceType;
   
-  readonly translateEnumSearchPrefix = 'enum.search.service.type.';
+  readonly translateEnumSearchTypePrefix = 'dmp.steps.people.search.service.type.';
   readonly translateEnumPrefix = 'enum.contributor.role.'
   
   private searchTerms = new Subject<string>();
