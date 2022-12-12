@@ -30,31 +30,14 @@
           </div>
           <div class="mat-card-container">
             <mat-form-field class="full-width">
-              <mat-label>{{
-                'dmp.steps.licensing.question.license' | translate
-                }}</mat-label>
-              <mat-select [(value)]="defaultLicense" (selectionChange)="onChangeLicense($event)">
+              <mat-label>{{'dmp.steps.licensing.question.license' | translate}}</mat-label>
+              <mat-select formControlName="license">
                 <mat-option *ngFor="let license of licenses" [value]="license.url | translate">
-                  {{ license.name | translate }}
+                  {{license.name | translate}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
             <app-license-wizard (selectedLicense)="setLicenseSelectorResult($event, i)"></app-license-wizard>
-          </div>
-          <div class="mat-card-container">
-            <mat-form-field class="date-form">
-              <mat-label>{{
-                'dmp.steps.licensing.question.startDate' | translate
-                }}</mat-label>
-              <input matInput [matDatepicker]="picker_i" formControlName="startDate" />
-              <mat-datepicker-toggle matSuffix [for]="picker_i"></mat-datepicker-toggle>
-              <mat-datepicker #picker_i></mat-datepicker>
-              <mat-hint *ngIf="
-                  dmpForm.controls.project?.value?.end === dataset.value.startDate
-                ">
-                {{ 'dmp.steps.licensing.question.hint' | translate }}
-              </mat-hint>
-            </mat-form-field>
           </div>
         </ng-container>
         <div class="mat-card-container">

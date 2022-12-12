@@ -15,20 +15,14 @@ import { LicenseDefinitions } from '../../../widgets/license-wizard/license-wiza
 export class LicensesComponent {
   @Input() dmpForm: UntypedFormGroup;
   @Input() datasets: UntypedFormArray;
-  @Input() licenseUrl$: string;
 
   licenses: License[] = LicenseDefinitions;
   accessType: any = DataAccessType;
 
   translateEnumPrefix = 'enum.dataaccess.';
-  defaultLicense = 'https://creativecommons.org/licenses/by/4.0/';
 
   readonly datasetSource: any = DataSource;
-
-  onChangeLicense($event) {
-    this.licenseUrl$ = $event.value;
-  }
-
+  
   setLicenseSelectorResult(event, index: number) {
     const dataset = this.datasets.at(index);
     if (event) {
