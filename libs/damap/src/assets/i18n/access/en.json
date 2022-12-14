@@ -1,6 +1,7 @@
 {
   "access": {
     "editor": "Editor",
-    "owner": "Owner"
+    "owner": "Owner",
+    "info": "Please note that concurrent editing of a dmp can lead to data loss as changes may overwrite each other. Please make sure that you are the only one editing the dmp at the moment."
   }
 }
