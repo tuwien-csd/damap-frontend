@@ -1,33 +1,51 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {BackendService} from '../../services/backend.service';
-import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
-import {Observable, Subject, Subscription} from 'rxjs';
-import {Contributor} from '../../domain/contributor';
-import {Project} from '../../domain/project';
-import {select, Store} from '@ngrx/store';
-import {AppState} from '../../store/states/app.state';
-import {selectProjects, selectProjectsLoaded} from '../../store/selectors/project.selectors';
-import {LoadProjects} from '../../store/actions/project.actions';
-import {FormService} from '../../services/form.service';
-import {HttpEventType} from '@angular/common/http';
-import {LoadingState} from '../../domain/enum/loading-state.enum';
-import {OAuthService} from 'angular-oauth2-oidc';
-import {formDiff, resetFormValue, setFormValue} from '../../store/actions/form.actions';
-import {InternalStorage} from '../../domain/internal-storage';
-import {Dataset} from '../../domain/dataset';
-import {DataKind} from '../../domain/enum/data-kind.enum';
-import {LoggerService} from '../../services/logger.service';
-import {DataSource} from "../../domain/enum/data-source.enum";
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import {
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
+import {
+  formDiff,
+  resetFormValue,
+  setFormValue,
+} from '../../store/actions/form.actions';
+import {
+  selectProjects,
+  selectProjectsLoaded,
+} from '../../store/selectors/project.selectors';
+
+import { AppState } from '../../store/states/app.state';
+import { AuthService } from "../../auth/auth.service";
+import { BackendService } from '../../services/backend.service';
+import { Contributor } from '../../domain/contributor';
+import { DataKind } from '../../domain/enum/data-kind.enum';
+import { DataSource } from "../../domain/enum/data-source.enum";
+import { Dataset } from '../../domain/dataset';
+import { FormService } from '../../services/form.service';
+import { HttpEventType } from '@angular/common/http';
+import { InternalStorage } from '../../domain/internal-storage';
+import { LoadProjects } from '../../store/actions/project.actions';
+import { LoadingState } from '../../domain/enum/loading-state.enum';
+import { LoggerService } from '../../services/logger.service';
+import { MatStepper } from '@angular/material/stepper';
+import { Project } from '../../domain/project';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-dmp',
   templateUrl: './dmp.component.html',
-  styleUrls: ['./dmp.component.css']
+  styleUrls: ['./dmp.component.css'],
 })
 export class DmpComponent implements OnInit, OnDestroy {
 
-  username: string;
+  readonly username = this.auth.getUsername();
+  readonly admin = this.auth.isAdmin();
+
+
+  @ViewChild('stepper') stepper: MatStepper;
 
   dmpForm: UntypedFormGroup = this.formService.dmpForm;
   formChanged: boolean;
@@ -52,31 +70,29 @@ export class DmpComponent implements OnInit, OnDestroy {
   projectMembers: Contributor[];
   stepChanged$ = new Subject();
 
-  fileUpload: { file: File, progress: number, finalized: boolean }[] = [];
+  fileUpload: { file: File; progress: number; finalized: boolean }[] = [];
   fileUploadSubscription: Subscription[] = [];
 
   constructor(
     private logger: LoggerService,
-    private auth: OAuthService,
+    private auth: AuthService,
     private formService: FormService,
     private route: ActivatedRoute,
     private router: Router,
     private backendService: BackendService,
-    public store: Store<AppState>,
-  ) {
-  }
+    public store: Store<AppState>
+  ) { }
 
   ngOnInit() {
     this.projectsLoaded$ = this.store.pipe(select(selectProjectsLoaded));
     this.projects$ = this.store.pipe(select(selectProjects));
     this.getDmpById();
     this.getSuggestedProjects();
-    this.username = this.auth.getIdentityClaims()['preferred_username'];
 
-    this.dmpForm.valueChanges.subscribe(value => {
+    this.dmpForm.valueChanges.subscribe((value) => {
       this.logger.debug('DMPform Update');
       this.logger.debug(value);
-      this.store.dispatch(formDiff({newDmp: value}));
+      this.store.dispatch(formDiff({ newDmp: value }));
     });
 
     this.projectStep = this.dmpForm.get('project') as UntypedFormControl;
@@ -86,11 +102,27 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.docDataStep = this.dmpForm.get('documentation') as UntypedFormGroup;
     this.legalEthicalStep = this.dmpForm.get('legal') as UntypedFormGroup;
     this.storageStep = this.dmpForm.get('storage') as UntypedFormArray;
-    this.externalStorageStep = this.dmpForm.get('externalStorage') as UntypedFormArray;
-    this.externalStorageInfo = this.dmpForm.get('externalStorageInfo') as UntypedFormControl;
+    this.externalStorageStep = this.dmpForm.get(
+      'externalStorage'
+    ) as UntypedFormArray;
+    this.externalStorageInfo = this.dmpForm.get(
+      'externalStorageInfo'
+    ) as UntypedFormControl;
     this.repoStep = this.dmpForm.get('repositories') as UntypedFormArray;
     this.reuseStep = this.dmpForm.get('reuse') as UntypedFormGroup;
     this.costsStep = this.dmpForm.get('costs') as UntypedFormGroup;
+  }
+
+  changeStepPosition(event: StepperSelectionEvent) {
+    const stepId = this.stepper._getStepLabelId(this.stepper.selectedIndex);
+    const stepElement = document.getElementById(stepId);
+    if (stepElement) {
+      stepElement.scrollIntoView({
+        block: 'start',
+        inline: 'nearest',
+        behavior: 'smooth',
+      });
+    }
   }
 
   ngOnDestroy() {
@@ -151,24 +183,24 @@ export class DmpComponent implements OnInit, OnDestroy {
     formData.append('file', event);
     const filename = event.name;
     const reference = this.generateReferenceHash();
-    const upload = {file: event, progress: 0, finalized: false};
+    const upload = { file: event, progress: 0, finalized: false };
     this.fileUpload.push(upload);
     const uploadSub = this.backendService.analyseFileData(formData)
       .subscribe({
-          next: (response) => {
-            if (response.type === HttpEventType.UploadProgress) {
-              upload.progress = Math.round(100 * (response.loaded / response.total));
-            }
-            if (response.type === HttpEventType.Response) {
-              const dataset = response.body;
-              dataset.title = filename;
-              dataset.referenceHash = reference;
-              this.formService.addFileAnalysisAsDatasetToForm(dataset);
-            }
-          },
-          error: _ => upload.finalized = true,
-          complete: () => upload.finalized = true
-        }
+        next: (response) => {
+          if (response.type === HttpEventType.UploadProgress) {
+            upload.progress = Math.round(100 * (response.loaded / response.total));
+          }
+          if (response.type === HttpEventType.Response) {
+            const dataset = response.body;
+            dataset.title = filename;
+            dataset.referenceHash = reference;
+            this.formService.addFileAnalysisAsDatasetToForm(dataset);
+          }
+        },
+        error: _ => upload.finalized = true,
+        complete: () => upload.finalized = true
+      }
       );
     this.fileUploadSubscription.push(uploadSub);
   }
@@ -222,7 +254,7 @@ export class DmpComponent implements OnInit, OnDestroy {
         dmp => {
           if (dmp != null) {
             this.formService.mapDmpToForm(dmp);
-            this.store.dispatch(setFormValue({dmp}));
+            this.store.dispatch(setFormValue({ dmp }));
             if (dmp.project) {
               this.projects$.subscribe(projects => projects.filter(e => {
                 if (e.title === dmp.project.title && dmp.project.universityId) {

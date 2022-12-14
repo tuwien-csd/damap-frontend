@@ -9,18 +9,23 @@ export class AuthService {
   constructor(private oAuthService: OAuthService) {
   }
 
-  getName() {
+  getName(): string {
     const claims = this.oAuthService.getIdentityClaims();
     return claims['name'];
   }
 
-  isAuthenticated() {
+  getUsername(): string {
+    const claims = this.oAuthService.getIdentityClaims();
+    return claims['preferred_username'];
+  }
+
+  isAuthenticated(): boolean {
     return this.oAuthService.hasValidIdToken() && this.oAuthService.hasValidAccessToken();
   }
 
   isAdmin(): boolean {
     const parts: string[] = this.oAuthService.getAccessToken().split('.');
-    const tokenBody: any = JSON.parse('' + atob(parts[1]));
+    const tokenBody: any = JSON.parse('' + window.atob(parts[1]));
     return tokenBody.realm_access?.roles?.includes('Damap Admin');
   }
 
