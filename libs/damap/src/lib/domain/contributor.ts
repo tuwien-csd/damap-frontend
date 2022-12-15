@@ -2,7 +2,7 @@ import {ContributorRole} from './enum/contributor-role.enum';
 import {Identifier} from './identifier';
 
 export interface Contributor {
-  readonly id: number;
+  id: number;
   readonly universityId: string;
   readonly personId: Identifier;
   readonly firstName: string;

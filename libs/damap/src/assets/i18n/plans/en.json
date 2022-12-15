@@ -16,6 +16,7 @@
       },
       "actions": {
         "edit": "Edit",
+        "access": "Edit access",
         "history": "View versions",
         "delete": "Delete DMP"
       },

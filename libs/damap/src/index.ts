@@ -34,6 +34,7 @@ export * from './lib/auth/auth.service';
 export * from './lib/services/backend.service';
 
 // Models
+export * from './lib/domain/access';
 export * from './lib/domain/config';
 export * from './lib/domain/consent';
 export * from './lib/domain/contributor';

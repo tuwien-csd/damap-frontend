@@ -1,0 +1,20 @@
+<mat-card class="mat-selected">
+  <div class="mat-card-container">
+    <div class="mat-card-left">
+      <div>
+        <mat-icon class="mat-icon-style">person</mat-icon>
+        {{person.firstName}} {{person.lastName}}
+        <mat-icon *ngIf="person.contact" class="mat-icon-contact" color="primary">
+          contact_mail
+        </mat-icon>
+        <span class="sr-only">{{'dmp.steps.people.contact.person' | translate}}</span>
+      </div>
+      <mat-icon class="mat-icon-style">mail_outline</mat-icon>
+      {{person.mbox}}
+      <app-orcid
+        *ngIf="person.personId?.identifier && (person.personId?.type === identifierType.ORCID)"
+        [orcidId]="person.personId?.identifier"></app-orcid>
+    </div>
+    <ng-content></ng-content>
+  </div>
+</mat-card>

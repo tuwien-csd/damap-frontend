@@ -1,0 +1,17 @@
+<!--{{access$ | async | json}}-->
+<div class="access-list" *ngFor="let access of accesses$ | async">
+  <damap-person-card [person]="access">
+    <div *ngIf="access.access !== accessType.OWNER else owner">
+      <mat-checkbox color="primary" [checked]="access.access === accessType.EDITOR"
+                    (change)="editorToggle($event, access)">
+        {{ 'access.editor' | translate }}
+      </mat-checkbox>
+    </div>
+    <ng-template #owner>
+      <div class="owner">
+        <mat-icon class="mat-icon-style" color="primary">star</mat-icon>
+        {{ 'access.owner' | translate }}
+      </div>
+    </ng-template>
+  </damap-person-card>
+</div>

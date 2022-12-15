@@ -14,6 +14,7 @@ import {InternalStorage} from '../domain/internal-storage';
 import {Version} from '../domain/version';
 import {Dataset} from '../domain/dataset';
 import {APP_ENV} from '../constants';
+import { Access } from "../domain/access";
 
 @Injectable({
   providedIn: 'root'
@@ -114,6 +115,32 @@ export class BackendService {
     return this.http.put<Version>(this.versionBackendUrl, version, httpOptions).pipe(
       retry(3),
       catchError(this.handleError('http.error.versions.save'))
+    );
+  }
+
+  getAccess(dmpId: number): Observable<Access[]> {
+    return this.http.get<Access[]>(`${this.backendUrl}access/dmps/${dmpId}`).pipe(
+      retry(3),
+      catchError(this.handleError("http.error.access.load"))
+    );
+  }
+
+  createAccess(access: Access): Observable<Access> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    };
+    return this.http.post<Access>(`${this.backendUrl}access`, access, httpOptions).pipe(
+      retry(3),
+      catchError(this.handleError("http.error.access.save"))
+    );
+  }
+
+  deleteAccess(id: number): Observable<any> {
+    return this.http.delete(`${this.backendUrl}access/${id}`).pipe(
+      retry(3),
+      catchError(this.handleError("http.error.access.delete"))
     );
   }
 
