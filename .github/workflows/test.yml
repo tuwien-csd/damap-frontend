@@ -86,5 +86,5 @@ jobs:
             -Dsonar.sources=.
             -Dsonar.sourceEncoding=UTF-8
             -Dsonar.javascript.lcov.reportPaths=**/lcov.info
-            -Dsonar.coverage.exclusions=**/*.spec.ts,**/karma.conf.js,src/environments/*.ts,src/main.ts,src/test.ts,
+            -Dsonar.coverage.exclusions=**/*.spec.ts,**/karma.conf.js,src/environments/*.ts,src/main.ts,src/test.ts,apps/damap-frontend-e2e/**/*.*
 
