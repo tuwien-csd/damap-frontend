@@ -26,6 +26,7 @@ Cypress.Commands.add('login', (user, password) => {
   cy.get('input#password').type(password);
   cy.get('input#kc-login').click();
   cy.get('a#damap-logo').contains('DAMAP');
+  // Check if consent popup is shown
   cy.wait("@consent").then((interception) => {
     if (interception.response.body.consentGiven !== true) {
       cy.get("app-consent button").click();

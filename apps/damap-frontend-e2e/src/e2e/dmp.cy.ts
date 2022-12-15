@@ -30,7 +30,8 @@ describe("dmp", () => {
 
     // Add new data
     cy.get("@steps").contains("Specify").click();
-    cy.get("app-created-data app-data-mc mat-radio-group mat-radio-button").last().scrollIntoView().click();
+    cy.get("app-created-data app-data-mc mat-radio-group").scrollIntoView();
+    cy.get("app-created-data app-data-mc mat-radio-group mat-radio-button").last().click();
 
     // Use file upload
     cy.get("app-created-data mat-tab-group div.mat-tab-labels > div").last().click();
