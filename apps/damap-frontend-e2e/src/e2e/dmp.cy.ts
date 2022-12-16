@@ -28,6 +28,11 @@ describe("dmp", () => {
     cy.get("app-dmp-project app-manual-project-input app-textarea-wrapper textarea").first().type("Test Description");
     cy.get("app-dmp-project app-manual-project-input > form > button").click();
 
+    // Add contributor via search
+    cy.get("@steps").contains("People").click();
+    cy.get("app-person-search input").first().type("Test");
+    cy.get(".search-result mat-option").first().click();
+
     // Add new data
     cy.get("@steps").contains("Specify").click();
     cy.get("app-created-data app-data-mc mat-radio-group").scrollIntoView();
