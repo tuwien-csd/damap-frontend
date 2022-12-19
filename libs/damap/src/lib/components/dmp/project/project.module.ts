@@ -1,20 +1,21 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProjectComponent } from './project.component';
-import { TranslateModule } from '@ngx-translate/core';
 import { ErrorMessageModule } from '../../../widgets/error-message/error-message.module';
-import { MatCardModule } from '@angular/material/card';
+import { InfoMessageModule } from "../../../widgets/info-message/info-message.module";
+import { ManualProjectInputComponent } from './manual-project-input/manual-project-input.component';
 import { MatButtonModule } from '@angular/material/button';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { ManualProjectInputComponent } from './manual-project-input/manual-project-input.component';
-import { SharedModule } from '../../../shared/shared.module';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { ProjectListComponent } from './project-list/project-list.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgModule } from '@angular/core';
+import { ProjectComponent } from './project.component';
+import { ProjectListComponent } from './project-list/project-list.component';
+import { SharedModule } from '../../../shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     TranslateModule,
     ErrorMessageModule,
     SharedModule,
+    InfoMessageModule,
 
     // Materials
     MatCardModule,
@@ -32,7 +34,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatListModule,
     MatTooltipModule,
     MatDatepickerModule,
-    MatTabsModule,
+    MatTabsModule
   ],
   declarations: [
     ProjectComponent,
@@ -45,6 +47,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     ErrorMessageModule,
     SharedModule,
     ProjectComponent,
+    InfoMessageModule,
 
     // Materials
     MatCardModule,
