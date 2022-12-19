@@ -1,15 +1,17 @@
-import {TestBed} from '@angular/core/testing';
-import {BackendService} from './backend.service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {FeedbackService} from './feedback.service';
-import {Project} from '../domain/project';
-import {Dmp} from '../domain/dmp';
-import {completeDmp} from '../mocks/dmp-mocks';
-import {HttpEventType, HttpHeaders} from '@angular/common/http';
-import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
-import {Contributor} from '../domain/contributor';
-import {closedDatasetMock} from '../mocks/dataset-mocks';
-import {APP_ENV} from '../constants';
+import { TestBed } from "@angular/core/testing";
+import { BackendService } from "./backend.service";
+import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { FeedbackService } from "./feedback.service";
+import { Project } from "../domain/project";
+import { Dmp } from "../domain/dmp";
+import { completeDmp } from "../mocks/dmp-mocks";
+import { HttpEventType, HttpHeaders } from "@angular/common/http";
+import { TranslateTestingModule } from "../testing/translate-testing/translate-testing.module";
+import { Contributor } from "../domain/contributor";
+import { closedDatasetMock } from "../mocks/dataset-mocks";
+import { APP_ENV } from "../constants";
+import { mockAccess } from "../mocks/access-mocks";
+import { EMPTY } from "rxjs";
 
 describe('BackendService', () => {
   let service: BackendService;
@@ -84,6 +86,36 @@ describe('BackendService', () => {
     req.flush(completeDmp);
   });
 
+  it("should get all accesses for dmp", () => {
+    service.getAccess(completeDmp.id).subscribe(
+      accesses => {
+        expect(accesses).toBeTruthy();
+        expect(accesses.length).toBe(1);
+      }
+    );
+
+    const req = httpTestingController.expectOne(`${backendUrl}access/dmps/${completeDmp.id}`);
+    req.flush([mockAccess]);
+  });
+
+
+  it("should create access", () => {
+    service.createAccess(mockAccess).subscribe(
+      access => expect(access).toBeTruthy()
+    );
+
+    const req = httpTestingController.expectOne(`${backendUrl}access`);
+    req.flush(mockAccess);
+  });
+
+  it("should delete access", () => {
+    service.deleteAccess(mockAccess.id).subscribe(
+      access => expect(access).toBe(EMPTY)
+    );
+
+    const req = httpTestingController.expectOne(`${backendUrl}access/${mockAccess.id}`);
+    req.flush(EMPTY);
+  });
 
   it('should retrieve all repositories', () => {
     service.getRepositories().subscribe(

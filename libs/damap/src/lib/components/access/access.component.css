@@ -1,0 +1,16 @@
+#access-wrapper {
+  max-width: 800px;
+  padding: 1rem;
+}
+
+.action-buttons {
+  padding-bottom: 20px;
+}
+
+.action-buttons > button {
+  margin-right: 1rem;
+}
+
+.owner mat-icon {
+  margin-right: -0.5rem;
+}
