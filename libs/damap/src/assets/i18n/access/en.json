@@ -5,6 +5,7 @@
     },
     "editor": "Editor",
     "owner": "Owner",
+    "list": "Only contributors can be assigned editing rights for a DMP. ",
     "info": "Please note that simultaneous editing of a DMP can lead to data loss as changes may overwrite each other. Please make sure that you are the only one editing the dmp at the moment."
   }
 }
