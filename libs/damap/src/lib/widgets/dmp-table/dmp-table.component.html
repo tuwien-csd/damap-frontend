@@ -53,13 +53,13 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu" xPosition="before">
-        <button mat-menu-item (click)="getJsonFile(element.id)">
-          <mat-icon>code</mat-icon>
-          {{ 'plans.table.export.json' | translate }}
-        </button>
         <button mat-menu-item routerLink="/dmp/{{element.id}}/access">
           <mat-icon>admin_panel_settings</mat-icon>
           {{'plans.table.actions.access' | translate }}
+        </button>
+        <button mat-menu-item (click)="getJsonFile(element.id)">
+          <mat-icon>code</mat-icon>
+          {{ 'plans.table.export.json' | translate }}
         </button>
         <button mat-menu-item (click)="getDocument(element.id)">
           <mat-icon>description</mat-icon>
