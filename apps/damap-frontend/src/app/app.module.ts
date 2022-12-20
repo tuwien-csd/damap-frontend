@@ -1,22 +1,23 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {AppComponent} from './app.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {RouterModule} from '@angular/router';
-import {APP_ROUTES} from './app.routes';
-import {OAuthModule} from 'angular-oauth2-oidc';
-import {environment} from '../environments/environment';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AuthGuard, EnvBannerModule} from '@damap/core';
-import {ConfigService} from './services/config.service';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+
+import {APP_ROUTES} from './app.routes';
+import {AppComponent} from './app.component';
+import {AppStoreModule} from './store/app-store.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserModule} from '@angular/platform-browser';
+import {ConfigService} from './services/config.service';
 import {ConsentGuard} from './guard/consent.guard';
 import {ConsentModule} from './components/consent/consent.module';
 import {LayoutModule} from './components/layout/layout.module';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
+import {OAuthModule} from 'angular-oauth2-oidc';
 import {ReactiveFormsModule} from '@angular/forms';
-import {AppStoreModule} from './store/app-store.module';
+import {RouterModule} from '@angular/router';
+import {environment} from '../environments/environment';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
@@ -59,7 +60,7 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
 
     // Materials
     MatSnackBarModule,
-
+    
     // Modules
     LayoutModule,
     EnvBannerModule,

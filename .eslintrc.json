@@ -9,13 +9,16 @@
         "*.ts"
       ],
       "parserOptions": {
-        "createDefaultProgram": true
+        "createDefaultProgram": true,
+        "project": "./tsconfig.*?.json"
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "prettier"
       ],
       "rules": {
+        "no-console": "error",
         "@angular-eslint/directive-selector": [
           "error",
           {

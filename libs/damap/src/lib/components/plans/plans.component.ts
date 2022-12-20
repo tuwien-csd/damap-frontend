@@ -46,7 +46,7 @@ export class PlansComponent implements OnInit {
   }
 
   getDmps() {
-    this.store.dispatch(loadDmps(true));
+    this.store.dispatch(loadDmps(false));
   }
 
   getDocument(id: number) {

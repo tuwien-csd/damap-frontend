@@ -1,0 +1,30 @@
+<div id="access-wrapper">
+  <div *ngIf="dmp$ | async as dmp">
+    <h2>{{ dmp.project?.title || 'DMP ID: ' + dmp.id }}</h2>
+  </div>
+  <div class="action-buttons">
+    <button mat-raised-button [routerLink]="'/plans'">
+      <mat-icon>chevron_left</mat-icon>
+      {{'access.button.plans' | translate}}
+    </button>
+    <button mat-raised-button color="primary"
+            [routerLink]="'/dmp/' + id">{{'versions.view.button.goto.latest' | translate}}</button>
+  </div>
+  <app-info-message>{{ 'access.list' | translate }}{{ 'access.info' | translate }}</app-info-message>
+  <div class="access-list" *ngFor="let access of accesses$ | async">
+    <damap-person-card [person]="access">
+      <div *ngIf="access.access !== accessType.OWNER else owner">
+        <mat-checkbox color="primary" [checked]="access.access === accessType.EDITOR"
+                      (change)="editorToggle($event, access)">
+          {{ 'access.editor' | translate }}
+        </mat-checkbox>
+      </div>
+      <ng-template #owner>
+        <div class="owner">
+          <mat-icon class="mat-icon-style" color="primary">star</mat-icon>
+          {{ 'access.owner' | translate }}
+        </div>
+      </ng-template>
+    </damap-person-card>
+  </div>
+</div>
