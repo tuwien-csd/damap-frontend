@@ -1,16 +1,17 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ReactiveFormsModule, UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
+import {mockContact, mockContributor1} from '../../../mocks/contributor-mocks';
 
-import {PeopleComponent} from './people.component';
-import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
-import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, ReactiveFormsModule} from '@angular/forms';
-import {MatCardModule} from '@angular/material/card';
-import {MatIconModule} from '@angular/material/icon';
 import {BackendService} from '../../../services/backend.service';
 import {ContributorFilterPipe} from './contributor-filter.pipe';
+import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
-import {mockContact, mockContributor1} from '../../../mocks/contributor-mocks';
+import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {PeopleComponent} from './people.component';
+import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
+import { of } from 'rxjs';
 
 describe('PeopleComponent', () => {
   let component: PeopleComponent;
@@ -18,6 +19,8 @@ describe('PeopleComponent', () => {
   let backendSpy;
 
   beforeEach(async () => {
+    backendSpy = jasmine.createSpyObj('BackendService', ['loadServiceConfig']);
+    backendSpy.loadServiceConfig.and.returnValue(of({}));
     await TestBed.configureTestingModule({
       imports: [TranslateTestingModule, MatCardModule, MatIconModule, MatDialogModule, ReactiveFormsModule, MatSelectModule, NoopAnimationsModule],
       declarations: [PeopleComponent, ContributorFilterPipe],

@@ -63,9 +63,9 @@
   <div>
     <mat-form-field appearance="fill">
       <mat-label>{{ 'dmp.steps.people.search.service' | translate }}</mat-label>
-      <mat-select [(value)]="service">
-        <mat-option *ngFor="let service of serviceType | keyvalue" [value]="service.value">
-          {{ translateEnumSearchTypePrefix + service.value | translate }}
+      <mat-select [(value)]="serviceConfigType">
+        <mat-option *ngFor="let service of serviceConfigType$ | keyvalue" [value]="service.value">
+          {{  service.value.displayText | translate }}
         </mat-option>
       </mat-select>
     </mat-form-field>

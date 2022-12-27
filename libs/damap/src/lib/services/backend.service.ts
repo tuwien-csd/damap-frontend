@@ -3,6 +3,7 @@ import {catchError, map, retry, shareReplay} from 'rxjs/operators';
 
 import {APP_ENV} from '../constants';
 import { Access } from "../domain/access";
+import { Config } from '../domain/config';
 import {Consent} from '../domain/consent'
 import {Contributor} from '../domain/contributor';
 import {Dataset} from '../domain/dataset';
@@ -173,7 +174,12 @@ export class BackendService {
         .get<Contributor[]>(
           `${this.backendUrl}persons/search?q=${searchTerm}&searchService=${serviceType}`
         )
-        .pipe(catchError(this.handleError('http.error.person.search')));
+        .pipe(catchError(this.handleError('http.error.repositories.one')));
+    }
+    
+  loadServiceConfig(): Observable<Config> {
+      const host = this.backendUrl;
+      return this.http.get<Config>(`${host}config`);
     }
   
   getInternalStorages(): Observable<InternalStorage[]> {
