@@ -1,24 +1,27 @@
 import {Component, Input} from '@angular/core';
-import {FormControl, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 import {Contributor} from '../../../domain/contributor';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-data-deletion',
   templateUrl: './data-deletion.component.html',
-  styleUrls: ['./data-deletion.component.css']
+  styleUrls: ['./data-deletion.component.css'],
 })
 export class DataDeletionComponent {
-
   @Input() dataset: UntypedFormGroup;
   @Input() dmpForm: UntypedFormGroup;
 
-  endDate = new FormControl(new Date());
+  getSelection = (contributor1: Contributor, contributor2: Contributor) =>
+    contributor1?.id === contributor2?.id;
 
-  constructor() {
+  setDateOfDeletion($event: MatSlideToggleChange) {
+    if ($event.checked) { this.dataset.controls.dateOfDeletion.setValue(
+        this.dmpForm.value.project.end
+      );
+    }
   }
-
-  getSelection = (contributor1: Contributor, contributor2: Contributor) => contributor1?.id === contributor2?.id;
 
   get contributors(): Contributor[] {
     return this.dmpForm.get('contributors')?.value;
@@ -29,8 +32,8 @@ export class DataDeletionComponent {
   }
 
   get willBePublished(): boolean {
-    return !!this.dmpForm.value.repositories.filter(item =>
-      item.datasets.includes(this.dataset.value.referenceHash)).length;
+    return !!this.dmpForm.value.repositories.filter((item) =>
+      item.datasets.includes(this.dataset.value.referenceHash)
+    ).length;
   }
-
 }

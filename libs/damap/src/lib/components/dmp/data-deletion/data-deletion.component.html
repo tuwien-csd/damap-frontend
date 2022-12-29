@@ -7,7 +7,7 @@
   </div>
   <div>
     <p>{{ 'dmp.steps.data.deletion.question.label' | translate }}</p>
-    <mat-slide-toggle formControlName="delete" color="primary">{{
+    <mat-slide-toggle (change)="setDateOfDeletion($event)" formControlName="delete" color="primary">{{
       'dmp.steps.data.deletion.question.delete' | translate
       }}</mat-slide-toggle>
   </div>
@@ -28,7 +28,7 @@
         <mat-label>{{
           'dmp.steps.data.deletion.question.date' | translate
           }}</mat-label>
-        <input matInput formControlName="dateOfDeletion" [matDatepicker]="picker" [formControl]="endDate" />
+        <input matInput formControlName="dateOfDeletion" [matDatepicker]="picker"  />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -37,4 +37,5 @@
       [maxLength]="4000">
     </app-input-wrapper>
   </div>
+  
 </div>
