@@ -124,6 +124,22 @@ export const REPO_FILTERS: { [key: string]: TreeData[] } = {
       label: FILE_TYPES.STANDARD_OFFICE_DOCUMENTS.label
     },
     {
+      id: FILE_TYPES.STRUCTURED_TEXT.label,
+      label: FILE_TYPES.STRUCTURED_TEXT.label
+    },
+    {
+      id: FILE_TYPES.IMAGES.label,
+      label: FILE_TYPES.IMAGES.label
+    },
+    {
+      id: FILE_TYPES.AUDIOVISUAL_DATA.label,
+      label: FILE_TYPES.AUDIOVISUAL_DATA.label
+    },
+    {
+      id: FILE_TYPES.RAW_DATA.label,
+      label: FILE_TYPES.RAW_DATA.label
+    },
+    {
       id: FILE_TYPES.NETWORKBASED_DATA.label,
       label: FILE_TYPES.NETWORKBASED_DATA.label
     },
@@ -132,32 +148,16 @@ export const REPO_FILTERS: { [key: string]: TreeData[] } = {
       label: FILE_TYPES.DATABASES.label
     },
     {
-      id: FILE_TYPES.IMAGES.label,
-      label: FILE_TYPES.IMAGES.label
-    },
-    {
       id: FILE_TYPES.STRUCTURED_GRAPHICS.label,
       label: FILE_TYPES.STRUCTURED_GRAPHICS.label
-    },
-    {
-      id: FILE_TYPES.AUDIOVISUAL_DATA.label,
-      label: FILE_TYPES.AUDIOVISUAL_DATA.label
     },
     {
       id: FILE_TYPES.SCIENTIFIC_STATISTICAL_DATA.label,
       label: FILE_TYPES.SCIENTIFIC_STATISTICAL_DATA.label
     },
     {
-      id: FILE_TYPES.RAW_DATA.label,
-      label: FILE_TYPES.RAW_DATA.label
-    },
-    {
       id: FILE_TYPES.PLAIN_TEXT.label,
       label: FILE_TYPES.PLAIN_TEXT.label
-    },
-    {
-      id: FILE_TYPES.STRUCTURED_TEXT.label,
-      label: FILE_TYPES.STRUCTURED_TEXT.label
     },
     {
       id: FILE_TYPES.ARCHIVED_DATA.label,
