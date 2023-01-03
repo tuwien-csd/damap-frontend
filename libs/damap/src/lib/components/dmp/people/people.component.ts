@@ -15,7 +15,6 @@ import { BackendService } from '../../../services/backend.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Dataset } from '../../../domain/dataset';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { FormService } from '../../../services/form.service';
 import { ServiceConfig } from '../../../domain/config-services';
 
 @Component({
@@ -26,7 +25,6 @@ import { ServiceConfig } from '../../../domain/config-services';
 export class PeopleComponent implements OnInit {
   @Input() projectMembers: Contributor[];
   @Input() dmpForm: UntypedFormGroup;
-  @Input() serviceConfigType: ServiceConfig;
 
   @Output() contactPerson = new EventEmitter<any>();
   @Output() contributorToAdd = new EventEmitter<any>();
@@ -36,20 +34,20 @@ export class PeopleComponent implements OnInit {
   readonly roles: any = ContributorRole;
   readonly identifierType = IdentifierType;
   readonly translateEnumPrefix = 'enum.contributor.role.'
-  
+
   private searchTerms = new Subject<string>();
 
   searchResult$: Observable<Contributor[]>;
-  serviceConfigType$: ServiceConfig[];
-
+  serviceConfig$: ServiceConfig[];
+  serviceConfigType: ServiceConfig;
+  
   constructor(
     private backendService: BackendService,
     public dialog: MatDialog,
-    public formService: FormService
   ) {}
 
   ngOnInit(): void {
-    this.backendService.loadServiceConfig().subscribe(service => this.serviceConfigType$ = service.personSearchServiceConfigs);
+    this.backendService.loadServiceConfig().subscribe(service => this.serviceConfig$ = service.personSearchServiceConfigs);
     this.searchResult$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
