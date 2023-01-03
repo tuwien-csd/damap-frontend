@@ -1,15 +1,17 @@
-import {NgModule} from '@angular/core';
 import {LicenseSelectorDialogComponent, LicenseWizardComponent} from './license-wizard.component';
-import {TranslateModule} from '@ngx-translate/core';
+
 import {CommonModule} from '@angular/common';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule} from '@angular/material/dialog';
 import {LicenseFilterPipe} from './license-filter.pipe';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import {NgModule} from '@angular/core';
+import { TooltipModule } from '../tooltip/tooltip.module';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -23,6 +25,7 @@ import {MatInputModule} from '@angular/material/input';
     MatCheckboxModule,
     MatFormFieldModule,
     MatCardModule,
+    TooltipModule,
     MatInputModule
   ],
   declarations: [LicenseWizardComponent, LicenseSelectorDialogComponent, LicenseFilterPipe],
@@ -38,6 +41,7 @@ import {MatInputModule} from '@angular/material/input';
     MatCheckboxModule,
     MatFormFieldModule,
     MatCardModule,
+    TooltipModule,
     MatInputModule
   ]
 })

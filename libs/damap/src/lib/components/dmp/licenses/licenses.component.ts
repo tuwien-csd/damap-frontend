@@ -1,28 +1,28 @@
-import {Component, Input} from '@angular/core';
-import {UntypedFormArray, UntypedFormGroup} from '@angular/forms';
-import {License} from '../../../domain/license';
-import {LicenseDefinitions} from '../../../widgets/license-wizard/license-wizard-list';
-import {DataAccessType} from '../../../domain/enum/data-access-type.enum';
-import {ComplianceType} from '../../../domain/enum/compliance-type.enum';
-import {DataSource} from '../../../domain/enum/data-source.enum';
+import { Component, Input } from '@angular/core';
+import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
+
+import { ComplianceType } from '../../../domain/enum/compliance-type.enum';
+import { DataAccessType } from '../../../domain/enum/data-access-type.enum';
+import { DataSource } from '../../../domain/enum/data-source.enum';
+import { License } from '../../../domain/license';
+import { LicenseDefinitions } from '../../../widgets/license-wizard/license-wizard-list';
 
 @Component({
   selector: 'app-dmp-licenses',
   templateUrl: './licenses.component.html',
   styleUrls: ['./licenses.component.css'],
 })
-
 export class LicensesComponent {
-
   @Input() dmpForm: UntypedFormGroup;
   @Input() datasets: UntypedFormArray;
 
   licenses: License[] = LicenseDefinitions;
   accessType: any = DataAccessType;
 
-  translateEnumPrefix = 'enum.dataaccess.'
-  readonly datasetSource: any = DataSource;
+  translateEnumPrefix = 'enum.dataaccess.';
 
+  readonly datasetSource: any = DataSource;
+  
   setLicenseSelectorResult(event, index: number) {
     const dataset = this.datasets.at(index);
     if (event) {
