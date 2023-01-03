@@ -4,19 +4,19 @@ export const FILE_TYPES = {
     label: 'Standard office documents',
     description: 'text documents, spreadsheets, presentations'
   },
+  STRUCTURED_TEXT: {id: 'STRUCTURED_TEXT', label: 'Structured text', description: 'CSV, JSON, etc.'},
+  IMAGES: {id: 'IMAGES', label: 'Images', description: 'JPEG, JPEG2000, GIF, TIF, PNG, SVG, etc.'},
+  AUDIOVISUAL_DATA: {id: 'AUDIOVISUAL_DATA', label: 'Audiovisual data', description: 'WAVE, MP3, MP4, Flash, etc.'},
+  RAW_DATA: {id: 'RAW_DATA', label: 'Raw data', description: 'device specific output'},
   NETWORKBASED_DATA: {id: 'NETWORKBASED_DATA', label: 'Networkbased data', description: 'websites, email, chat history, etc.'},
   DATABASES: {id: 'DATABASES', label: 'Databases', description: 'DBASE, MS Access, Oracle, MySQL, etc.'},
-  IMAGES: {id: 'IMAGES', label: 'Images', description: 'JPEG, JPEG2000, GIF, TIF, PNG, SVG, etc.'},
   STRUCTURED_GRAPHICS: {id: 'STRUCTURED_GRAPHICS', label: 'Structured graphics', description: 'CAD, CAM, 3D, VRML, etc.'},
-  AUDIOVISUAL_DATA: {id: 'AUDIOVISUAL_DATA', label: 'Audiovisual data', description: 'WAVE, MP3, MP4, Flash, etc.'},
   SCIENTIFIC_STATISTICAL_DATA: {
     id: 'SCIENTIFIC_STATISTICAL_DATA',
     label: 'Scientific and statistical data formats',
     description: 'SPSS, FITS, GIS, etc.'
   },
-  RAW_DATA: {id: 'RAW_DATA', label: 'Raw data', description: 'device specific output'},
   PLAIN_TEXT: {id: 'PLAIN_TEXT', label: 'Plain text', description: 'TXT in various encodings'},
-  STRUCTURED_TEXT: {id: 'STRUCTURED_TEXT', label: 'Structured text', description: 'XML, SGML, etc.'},
   ARCHIVED_DATA: {id: 'ARCHIVED_DATA', label: 'Archived data', description: 'ZIP, RAR, JAR, etc.'},
   SOFTWARE_APPLICATIONS: {
     id: 'SOFTWARE_APPLICATIONS',
