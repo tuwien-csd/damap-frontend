@@ -13,9 +13,7 @@
               <mat-icon *ngIf="contributor.value.contact" class="mat-icon-contact" color="primary">
                 contact_mail
               </mat-icon>
-              <span class="sr-only">{{
-                'dmp.steps.people.contact.person' | translate
-                }}</span>
+              <span class="sr-only">{{'dmp.steps.people.contact.person' | translate}}</span>
             </div>
             <mat-icon class="mat-icon-style">mail_outline</mat-icon>
             {{ contributor.value.mbox }}
@@ -26,9 +24,7 @@
           </div>
           <div [formGroupName]="i">
             <mat-form-field appearance="fill">
-              <mat-label>{{
-                'dmp.steps.people.contributor.role' | translate
-                }}</mat-label>
+              <mat-label>{{'dmp.steps.people.contributor.role' | translate}}</mat-label>
               <mat-select formControlName="role">
                 <mat-option *ngFor="let role of roles | keyvalue" [value]="role.key">
                   {{ translateEnumPrefix + role.value | translate }}
@@ -38,11 +34,11 @@
           </div>
           <div class="mat-card-right">
             <button mat-button (click)="changeContactPerson(contributor.value)" *ngIf="!contributor.value.contact"
-              title="{{ 'dmp.steps.people.contact.add' | translate }}">
+                    title="{{ 'dmp.steps.people.contact.add' | translate }}">
               <mat-icon>contact_mail</mat-icon>
             </button>
             <button mat-button (click)="removeContributor(i)"
-              title="{{ 'dmp.steps.people.contributor.remove' | translate }}">
+                    title="{{ 'dmp.steps.people.contributor.remove' | translate }}">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
@@ -55,8 +51,7 @@
 <!-- SEARCH -->
 <div [formGroup]="dmpForm" class="mat-search-form-field">
   <app-person-search [result]="
-      searchResult$
-        | async
+      searchResult$ | async
         | contributorFilter: dmpForm.controls.contributors.value
     " (termToSearch)="searchContributor($event)" (personToAdd)="addContributor($event)">
   </app-person-search>
@@ -89,11 +84,11 @@
       </div>
       <div class="mat-card-right">
         <button mat-raised-button *ngIf="member.universityId" (click)="changeContactPerson(member)"
-          title="{{ 'dmp.steps.people.contact.add' | translate }}">
+                title="{{ 'dmp.steps.people.contact.add' | translate }}">
           <mat-icon>contact_mail</mat-icon>
         </button>
         <button mat-raised-button (click)="addContributor(member)"
-          title="{{ 'dmp.steps.people.contributor.add' | translate }}">
+                title="{{ 'dmp.steps.people.contributor.add' | translate }}">
           <mat-icon>person_add</mat-icon>
         </button>
       </div>
