@@ -40,14 +40,17 @@ export class PeopleComponent implements OnInit {
   searchResult$: Observable<Contributor[]>;
   serviceConfig$: ServiceConfig[];
   serviceConfigType: ServiceConfig;
-  
+
   constructor(
     private backendService: BackendService,
     public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
-    this.backendService.loadServiceConfig().subscribe(service => this.serviceConfig$ = service.personSearchServiceConfigs);
+    this.backendService.loadServiceConfig().subscribe(service => {
+      this.serviceConfig$ = service.personSearchServiceConfigs;
+      this.serviceConfigType = this.serviceConfig$[0];
+    });
     this.searchResult$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
