@@ -5,8 +5,10 @@ export default defineConfig({
   e2e: {
     ...nxE2EPreset(__dirname),
     specPattern: [
+      "**/app.cy.ts",
       "**/dmp.cy.ts",
       "**/access.cy.ts",
+      "**/delete-dmp.cy.ts",
       "**/*.cy.ts"
     ],
   },
