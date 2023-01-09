@@ -10,3 +10,17 @@
   max-height: 300px;
   overflow: auto;
 }
+
+.mat-search-form-field{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 1.25rem;
+  gap: 1.25rem;
+}
+
+mat-form-field {
+  transform: translateY(0em) scale(0.95);
+  width: 100%;
+  top: -0.4rem;
+}

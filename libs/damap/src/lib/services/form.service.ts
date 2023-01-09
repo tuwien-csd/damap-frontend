@@ -1,18 +1,20 @@
-import { Injectable } from '@angular/core';
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { Dmp } from '../domain/dmp';
+
+import { AccessRight } from '../domain/enum/access-right.enum';
 import { Contributor } from '../domain/contributor';
-import { Dataset } from '../domain/dataset';
 import { Cost } from '../domain/cost';
 import { DataAccessType } from '../domain/enum/data-access-type.enum';
-import { Storage } from '../domain/storage';
-import { AccessRight } from '../domain/enum/access-right.enum';
-import { notEmptyValidator } from '../validators/not-empty.validator';
-import { ExternalStorage } from '../domain/external-storage';
-import { Repository } from '../domain/repository';
-import { InternalStorage } from '../domain/internal-storage';
-import { currencyValidator } from '../validators/currency.validator';
 import { DataSource } from '../domain/enum/data-source.enum';
+import { Dataset } from '../domain/dataset';
+import { Dmp } from '../domain/dmp';
+import { ExternalStorage } from '../domain/external-storage';
+import { Injectable } from '@angular/core';
+import { InternalStorage } from '../domain/internal-storage';
+import { Repository } from '../domain/repository';
+import { Storage } from '../domain/storage';
+import { ccBy } from '../widgets/license-wizard/license-wizard-list';
+import { currencyValidator } from '../validators/currency.validator';
+import { notEmptyValidator } from '../validators/not-empty.validator';
 
 @Injectable({
   providedIn: 'root'
@@ -364,7 +366,7 @@ export class FormService {
     return this.formBuilder.group({
       id: [null, { disabled: true }],
       title: [title, [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
-      license: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
+      license: [ccBy.url, Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       startDate: [null],
       type: [[]],
       size: [null],

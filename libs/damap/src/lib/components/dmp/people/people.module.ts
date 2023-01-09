@@ -1,15 +1,16 @@
-import {NgModule} from '@angular/core';
 import {ConfirmDeletionDialogComponent, PeopleComponent} from './people.component';
-import {ContributorManualComponent} from './contributor-manual/contributor-manual.component';
-import {StepIntroModule} from '../../../widgets/step-intro/step-intro.module';
-import {MatCardModule} from '@angular/material/card';
-import {OrcidModule} from '../../../widgets/orcid/orcid.module';
-import {MatSelectModule} from '@angular/material/select';
-import {MatButtonModule} from '@angular/material/button';
+
 import {ContributorFilterPipe} from './contributor-filter.pipe';
-import {SharedModule} from '../../../shared/shared.module';
-import {PersonSearchModule} from '../../../widgets/person-search/person-search.module';
+import {ContributorManualComponent} from './contributor-manual/contributor-manual.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+import {NgModule} from '@angular/core';
+import {OrcidModule} from '../../../widgets/orcid/orcid.module';
+import {PersonSearchModule} from '../../../widgets/person-search/person-search.module';
+import {SharedModule} from '../../../shared/shared.module';
+import {StepIntroModule} from '../../../widgets/step-intro/step-intro.module';
 
 @NgModule({
   imports: [

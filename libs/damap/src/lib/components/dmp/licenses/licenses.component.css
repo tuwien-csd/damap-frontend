@@ -13,3 +13,17 @@
 .date-form{
   min-width: 300px;
 }
+
+.licenseContainerParent {
+  display: flex;
+  align-items: end;
+  gap: 30px;
+}
+
+.licenseContainer {
+  gap: 0.938rem;
+}
+
+#accessTypeContainer {
+  margin-top: 0.5rem;
+}

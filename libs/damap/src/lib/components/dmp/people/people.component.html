@@ -1,5 +1,4 @@
-<app-step-intro>{{'dmp.steps.people.intro' | translate}}
-</app-step-intro>
+<app-step-intro>{{ 'dmp.steps.people.intro' | translate }} </app-step-intro>
 
 <!-- CONTRIBUTORS -->
 <div [formGroup]="dmpForm">
@@ -10,37 +9,36 @@
           <div class="mat-card-left">
             <div>
               <mat-icon class="mat-icon-style">person</mat-icon>
-              {{contributor.value.firstName}} {{contributor.value.lastName}}
+              {{ contributor.value.firstName }} {{ contributor.value.lastName }}
               <mat-icon *ngIf="contributor.value.contact" class="mat-icon-contact" color="primary">
                 contact_mail
               </mat-icon>
               <span class="sr-only">{{'dmp.steps.people.contact.person' | translate}}</span>
             </div>
             <mat-icon class="mat-icon-style">mail_outline</mat-icon>
-            {{contributor.value.mbox}}
-            <app-orcid
-              *ngIf="contributor.value.personId?.identifier && (contributor.value.personId?.type === identifierType.ORCID)"
-              [orcidId]="contributor.value.personId?.identifier"></app-orcid>
+            {{ contributor.value.mbox }}
+            <app-orcid *ngIf="
+                contributor.value.personId?.identifier &&
+                contributor.value.personId?.type === identifierType.ORCID
+              " [orcidId]="contributor.value.personId?.identifier"></app-orcid>
           </div>
           <div [formGroupName]="i">
             <mat-form-field appearance="fill">
               <mat-label>{{'dmp.steps.people.contributor.role' | translate}}</mat-label>
               <mat-select formControlName="role">
-                <mat-option
-                  *ngFor="let role of roles | keyvalue" [value]="role.key">
-                  {{translateEnumPrefix + role.value | translate}}
+                <mat-option *ngFor="let role of roles | keyvalue" [value]="role.key">
+                  {{ translateEnumPrefix + role.value | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="mat-card-right">
-            <button mat-button (click)="changeContactPerson(contributor.value)"
-                    *ngIf="!contributor.value.contact"
-                    title="{{'dmp.steps.people.contact.add' | translate}}">
+            <button mat-button (click)="changeContactPerson(contributor.value)" *ngIf="!contributor.value.contact"
+                    title="{{ 'dmp.steps.people.contact.add' | translate }}">
               <mat-icon>contact_mail</mat-icon>
             </button>
             <button mat-button (click)="removeContributor(i)"
-                    title="{{'dmp.steps.people.contributor.remove' | translate}}">
+                    title="{{ 'dmp.steps.people.contributor.remove' | translate }}">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
@@ -51,50 +49,62 @@
 </div>
 
 <!-- SEARCH -->
-<app-person-search [result]="(searchResult$ | async) | contributorFilter: dmpForm.controls.contributors.value"
-                   (termToSearch)="searchContributor($event)" (personToAdd)="addContributor($event)">
-</app-person-search>
+<div [formGroup]="dmpForm" class="mat-search-form-field">
+  <app-person-search [result]="
+      searchResult$ | async
+        | contributorFilter: dmpForm.controls.contributors.value
+    " (termToSearch)="searchContributor($event)" (personToAdd)="addContributor($event)">
+  </app-person-search>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ 'dmp.steps.people.search.service' | translate }}</mat-label>
+      <mat-select [(value)]="serviceConfigType">
+        <mat-option *ngFor="let service of serviceConfig$ | keyvalue" [value]="service.value">
+          {{  service.value.displayText | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
 
 <!-- LIST OF PEOPLE -->
-<div class="list-container" *ngIf="projectMembers?.length > 0 else empty">
-  <mat-card *ngFor="let member of (projectMembers | contributorFilter: dmpForm.controls.contributors.value)">
+<div class="list-container" *ngIf="projectMembers?.length > 0; else empty">
+  <mat-card *ngFor="
+      let member of projectMembers
+        | contributorFilter: dmpForm.controls.contributors.value
+    ">
     <div class="mat-card-container">
       <div class="mat-card-left">
         <div>
           <mat-icon class="mat-icon-style">person</mat-icon>
-          {{member.firstName}} {{member.lastName}}
+          {{ member.firstName }} {{ member.lastName }}
         </div>
         <mat-icon class="mat-icon-style">mail_outline</mat-icon>
-        {{member.mbox}}
+        {{ member.mbox }}
       </div>
       <div class="mat-card-right">
-        <button mat-raised-button *ngIf="member.universityId"
-                (click)="changeContactPerson(member)"
-                title="{{'dmp.steps.people.contact.add' | translate}}">
+        <button mat-raised-button *ngIf="member.universityId" (click)="changeContactPerson(member)"
+                title="{{ 'dmp.steps.people.contact.add' | translate }}">
           <mat-icon>contact_mail</mat-icon>
         </button>
         <button mat-raised-button (click)="addContributor(member)"
-                title="{{'dmp.steps.people.contributor.add' | translate}}">
+                title="{{ 'dmp.steps.people.contributor.add' | translate }}">
           <mat-icon>person_add</mat-icon>
         </button>
       </div>
     </div>
     <div class="mat-card-container" *ngIf="member.roleInProject">
       <div class="projectRoleTag">
-        {{member.roleInProject}}
+        {{ member.roleInProject }}
       </div>
-      <div class="personIdentifier">
-
-      </div>
+      <div class="personIdentifier"></div>
     </div>
   </mat-card>
 </div>
 <ng-template #empty>
-  {{'dmp.steps.people.nopeople' | translate}}
+  {{ 'dmp.steps.people.nopeople' | translate }}
 </ng-template>
 
-
 <!-- MANUAL INPUT -->
-<app-contributor-manual (contactPerson)="changeContactPerson($event)"
-                        (contributorToAdd)="addContributor($event)">
+<app-contributor-manual (contactPerson)="changeContactPerson($event)" (contributorToAdd)="addContributor($event)">
 </app-contributor-manual>
