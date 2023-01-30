@@ -5,7 +5,6 @@ import {catchError, filter, map, switchMap, tap, withLatestFrom} from 'rxjs/oper
 
 import {AppState} from '../states/app.state';
 import {BackendService} from '../../services/backend.service';
-import { ETemplateType } from '../../domain/enum/export-template-type.enum';
 import {FeedbackService} from '../../services/feedback.service';
 import {FormService} from '../../services/form.service';
 import {Injectable} from '@angular/core';
@@ -98,19 +97,17 @@ export class DmpEffects {
     switchMap(([action, changed]) => {
       if (changed !== false) { 
         let http$ = action.dmp.id ? this.backendService.editDmp(action.dmp) : this.backendService.createDmp(action.dmp);
-        // eslint-disable-next-line no-console
-        // console.log("HEREEE", http$);
         return http$.pipe(
           tap(dmp => {
             this.formService.mapDmpToForm(dmp);
             this.store$.dispatch(setFormValue({dmp}));
-            this.backendService.exportTemplate(dmp.id, action.template);
+            this.backendService.exportTemplate(dmp.id, action.dmpTemplateType);
             this.store$.dispatch(DmpAction.dmpExported());
           }),
           catchError(() => of(DmpAction.failedToSaveDmp()))
         );
       }
-      this.backendService.exportTemplate(action.dmp.id, action.template);
+      this.backendService.exportTemplate(action.dmp.id, action.dmpTemplateType);
       this.store$.dispatch(DmpAction.dmpExported());
       return of(action);
     })), {dispatch: false});

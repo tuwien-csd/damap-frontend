@@ -1,8 +1,7 @@
-import {Component, Inject, Input} from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {Component, Input} from '@angular/core';
 
 import { ETemplateType } from '../../domain/enum/export-template-type.enum';
-import { FormService } from '../../services/form.service';
+import { MatDialogRef } from '@angular/material/dialog';
 import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
@@ -15,16 +14,15 @@ export class ExportWarningDialogComponent {
   @Input() dmpForm: UntypedFormGroup;
   @Input() project: UntypedFormGroup
   
-  template: any = ETemplateType;
+  dmpTemplate: any = ETemplateType;
+  selectedTemplate = '';
 
 
   constructor(public dialogRef: MatDialogRef<ExportWarningDialogComponent>) {
   }
 
-  closeDialog() {
-    // eslint-disable-next-line no-console
-    // console.log("SECOND", this.template);
-    this.dialogRef.close(this.template);
+  onDisabled() {
+    return this.selectedTemplate.length === 0;
   }
-}
 
+}

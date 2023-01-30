@@ -3,6 +3,7 @@ import {of, throwError} from 'rxjs';
 
 import {BackendService} from '../../services/backend.service';
 import {DmpEffects} from './dmp.effects';
+import { ETemplateType } from '../../domain/enum/export-template-type.enum';
 import {FeedbackService} from '../../services/feedback.service';
 import {FormService} from '../../services/form.service';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -34,7 +35,7 @@ describe('DmpEffects', () => {
         {
           provide: BackendService,
           useValue: jasmine.createSpyObj('BackendService',
-            ['getDmps', 'createDmp', 'editDmp', 'saveDmpVersion','getDmpDocument'])
+            ['getDmps', 'createDmp', 'editDmp', 'saveDmpVersion','getDmpDocument', 'exportTemplate'])
         },
         {provide: FormService, useValue: jasmine.createSpyObj('FormService', ['mapDmpToForm'])},
         {provide: FeedbackService, useValue: jasmine.createSpyObj('FeedbackService', ['success'])},
@@ -92,14 +93,14 @@ describe('DmpEffects', () => {
   });
 
   it('should save and export dmp', () => {
-    actions$ = of(exportDmp({dmp: completeDmp}));
+    actions$ = of(exportDmp({dmp: completeDmp, dmpTemplateType: ETemplateType.FWF }));
     backendService.editDmp.and.returnValue(of(completeDmp));
 
     effects.exportDmp$.subscribe({
         complete: () => {
           expect(backendService.editDmp).toHaveBeenCalledTimes(0);
           expect(formService.mapDmpToForm).toHaveBeenCalledTimes(0);
-          expect(backendService.getDmpDocument).toHaveBeenCalledOnceWith(completeDmp.id);
+          expect(backendService.exportTemplate).toHaveBeenCalledOnceWith(completeDmp.id, ETemplateType.FWF);
         }
       }
     );
@@ -108,7 +109,7 @@ describe('DmpEffects', () => {
   it('should export dmp without saving', () => {
     effects.store$.setState({damap: {dmps: {dmps: [], loaded: LoadingState.LOADED}, form: {changed: true}}});
 
-    actions$ = of(exportDmp({dmp: completeDmp}));
+    actions$ = of(exportDmp({dmp: completeDmp, dmpTemplateType: ETemplateType.SCIENCE_EUROPE}));
     backendService.editDmp.and.returnValue(of(completeDmp));
     const storeSpy = spyOn(effects.store$, 'dispatch').and.callThrough();
 
@@ -116,7 +117,7 @@ describe('DmpEffects', () => {
         complete: () => {
           expect(backendService.editDmp).toHaveBeenCalledTimes(1);
           expect(formService.mapDmpToForm).toHaveBeenCalledOnceWith(completeDmp);
-          expect(backendService.getDmpDocument).toHaveBeenCalledOnceWith(completeDmp.id);
+          expect(backendService.exportTemplate).toHaveBeenCalledOnceWith(completeDmp.id, ETemplateType.FWF);
           expect(storeSpy).toHaveBeenCalledTimes(2);
         }
       }
@@ -126,7 +127,7 @@ describe('DmpEffects', () => {
   it('should fail to save and export dmp', () => {
     effects.store$.setState({damap: {dmps: {dmps: [], loaded: LoadingState.LOADED}, form: {changed: true}}});
 
-    actions$ = of(exportDmp({dmp: completeDmp}));
+    actions$ = of(exportDmp({dmp: completeDmp, dmpTemplateType: ETemplateType.FWF}));
     backendService.editDmp.and.returnValue(throwError(() => new HttpErrorResponse({})));
     const storeSpy = spyOn(effects.store$, 'dispatch').and.callThrough();
 
@@ -134,7 +135,7 @@ describe('DmpEffects', () => {
         complete: () => {
           expect(backendService.editDmp).toHaveBeenCalledTimes(1);
           expect(formService.mapDmpToForm).toHaveBeenCalledTimes(0);
-          expect(backendService.getDmpDocument).toHaveBeenCalledTimes(0);
+          expect(backendService.exportTemplate).toHaveBeenCalledTimes(0);
           expect(storeSpy).toHaveBeenCalledTimes(0);
         }
       }

@@ -1,6 +1,3 @@
-import {dmpReducer} from './dmp.reducer';
-import {initialDmpState} from '../states/dmp.state';
-import {LoadingState} from '../../domain/enum/loading-state.enum';
 import {
   createDmp,
   dmpExported,
@@ -12,8 +9,13 @@ import {
   loadDmps,
   updateDmp
 } from '../actions/dmp.actions';
-import {mockDmpList} from '../../mocks/dmp-list-mocks';
+
+import { ETemplateType } from '../../domain/enum/export-template-type.enum';
+import {LoadingState} from '../../domain/enum/loading-state.enum';
 import {completeDmp} from '../../mocks/dmp-mocks';
+import {dmpReducer} from './dmp.reducer';
+import {initialDmpState} from '../states/dmp.state';
+import {mockDmpList} from '../../mocks/dmp-list-mocks';
 
 describe('DmpReducer', () => {
   it('should return failed loading state', () => {
@@ -69,7 +71,7 @@ describe('DmpReducer', () => {
 
 
   it('should export dmp', () => {
-    let state = dmpReducer(initialDmpState, exportDmp({dmp: completeDmp}));
+    let state = dmpReducer(initialDmpState, exportDmp({dmp: completeDmp, dmpTemplateType: ETemplateType.FWF}));
     expect(state.saving).toBe(true);
 
     state = dmpReducer(state, dmpExported());
