@@ -816,6 +816,10 @@
       "ENCRYPTION_OF_SYSTEMS": "encryption of systems",
       "LOCKED_STORAGE": "keep printouts of sensitive data in locked storage",
       "OTHER": "other measures"
+    },
+    "exporttemplatetype": {
+      "FWF": "FWF",
+      "SCIENCE_EUROPE":"SCIENCE_EUROPE"
     }
   },
   "yes": "Yes",

@@ -9,6 +9,7 @@ import { DataAccessType } from '../domain/enum/data-access-type.enum';
 import { Dataset } from '../domain/dataset';
 import { DataSource } from '../domain/enum/data-source.enum';
 import { Dmp } from '../domain/dmp';
+import { ETemplateType } from '../domain/enum/export-template-type.enum';
 import { ExternalStorage } from '../domain/external-storage';
 import { Injectable } from '@angular/core';
 import { InternalStorage } from '../domain/internal-storage';
@@ -101,7 +102,7 @@ export class FormService {
         exist: [null],
         existCris: [null],
         list: this.formBuilder.array([])
-      })
+      }),
     });
   }
 
@@ -158,7 +159,7 @@ export class FormService {
         existCris: dmp.costsExistCris
       },
       restrictedAccessInfo: dmp.restrictedAccessInfo,
-      closedAccessInfo: dmp.closedAccessInfo
+      closedAccessInfo: dmp.closedAccessInfo,
     });
 
     // Contributors, datasets, repositories, costs
@@ -390,7 +391,7 @@ export class FormService {
       deletionPerson: [null],
       retentionPeriod: [null],
       source: [DataSource.NEW, Validators.required],
-      datasetId: [null]
+      datasetId: [null],
     });
   }
 

@@ -1,20 +1,30 @@
-import {Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatButtonModule} from "@angular/material/button";
-import {TranslateModule} from "@ngx-translate/core";
+import {Component, Inject, Input} from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
+import { ETemplateType } from '../../domain/enum/export-template-type.enum';
+import { FormService } from '../../services/form.service';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'damap-export-warning-dialog',
-  standalone: true,
-  imports: [CommonModule, TranslateModule, MatDialogModule, MatButtonModule],
-  template: `
-    <h1 mat-dialog-title>{{'dialog.export.title' | translate}}</h1>
-    <div mat-dialog-content>{{'dialog.export.content' | translate}}</div>
-    <div mat-dialog-actions>
-      <button mat-button mat-dialog-close="true">{{'dialog.export.button' | translate}}</button>
-    </div>
-  `
+  templateUrl: './export-warning-dialog.html',
+  styleUrls: ['./export-warning-dialog.css'],
 })
+
 export class ExportWarningDialogComponent {
+  @Input() dmpForm: UntypedFormGroup;
+  @Input() project: UntypedFormGroup
+  
+  template: any = ETemplateType;
+
+
+  constructor(public dialogRef: MatDialogRef<ExportWarningDialogComponent>) {
+  }
+
+  closeDialog() {
+    // eslint-disable-next-line no-console
+    // console.log("SECOND", this.template);
+    this.dialogRef.close(this.template);
+  }
 }
+

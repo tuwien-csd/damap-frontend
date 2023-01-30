@@ -1,14 +1,16 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {FormService} from '../../../services/form.service';
+import {FormGroup, UntypedFormGroup} from '@angular/forms';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {createDmp, exportDmp, saveDmpVersion, updateDmp} from '../../../store/actions/dmp.actions';
-import {select, Store} from '@ngrx/store';
-import {AppState} from '../../../store/states/app.state';
 import {Observable, Subject, Subscription} from 'rxjs';
-import {selectFormChanged} from '../../../store/selectors/form.selectors';
-import {selectDmpSaving} from '../../../store/selectors/dmp.selectors';
+import {Store, select} from '@ngrx/store';
+import {createDmp, exportDmp, saveDmpVersion, updateDmp} from '../../../store/actions/dmp.actions';
+
+import {AppState} from '../../../store/states/app.state';
+import { ETemplateType } from '../../../domain/enum/export-template-type.enum';
 import {ExportWarningDialogComponent} from "../../../widgets/export-warning-dialog/export-warning-dialog.component";
+import {FormService} from '../../../services/form.service';
+import {selectDmpSaving} from '../../../store/selectors/dmp.selectors';
+import {selectFormChanged} from '../../../store/selectors/form.selectors';
 
 @Component({
   selector: 'app-actions',
@@ -19,17 +21,21 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
 
   @Input() stepChanged$: Subject<any>;
   @Input() admin = false;
+
   dmpForm: FormGroup = this.formService.dmpForm;
   formChanged$: Observable<boolean>;
   formChanged: boolean;
   savingDmp$: Observable<boolean>;
   savingDmp: boolean;
+  template: ETemplateType;
+
 
   private subscriptions: Subscription[] = [];
 
   constructor(private formService: FormService,
               private dialog: MatDialog,
-              private store: Store<AppState>) {
+              private store: Store<AppState>,
+              ) {
   }
 
   ngOnInit(): void {
@@ -71,11 +77,21 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
   }
 
   exportDmp(): void {
-    this.dialog.open(ExportWarningDialogComponent).afterClosed().subscribe(
-      _ => this.store.dispatch(exportDmp({dmp: this.formService.exportFormToDmp()}))
-    );
-  }
+    const dmp = this.formService.exportFormToDmp();
+    if (!dmp.project?.funding) {
+      this.dialog.open(ExportWarningDialogComponent).afterClosed().subscribe(
+       temp => {
+        // eslint-disable-next-line no-console
+        console.log("HEREEE", temp);
+        this.template = temp;
 
+        // this.template
+        this.store.dispatch(exportDmp({dmp: this.formService.exportFormToDmp(), template: this.template}))
+        // template = this.template;
+      }
+    );
+    }
+  }
 }
 
 @Component({

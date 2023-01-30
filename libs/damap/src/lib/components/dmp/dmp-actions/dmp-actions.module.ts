@@ -1,17 +1,17 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {DmpActionsComponent, SaveVersionDialogComponent} from './dmp-actions.component';
-import {SaveStatusModule} from '../../../widgets/save-status/save-status.module';
-import {TranslateModule} from '@ngx-translate/core';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
-import {RouterModule} from '@angular/router';
+
+import {CommonModule} from '@angular/common';
+import {ExportWarningModule} from "../../../widgets/export-warning-dialog/export-warning.module";
 import {FormsModule} from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {ExportWarningDialogComponent} from "../../../widgets/export-warning-dialog/export-warning-dialog.component";
-
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {SaveStatusModule} from '../../../widgets/save-status/save-status.module';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import {ExportWarningDialogComponent} from "../../../widgets/export-warning-dial
     TranslateModule,
     RouterModule,
     SaveStatusModule,
-    ExportWarningDialogComponent,
+    ExportWarningModule,
 
     // Materials
     MatDialogModule,

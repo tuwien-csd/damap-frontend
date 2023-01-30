@@ -1,0 +1,23 @@
+<div >
+  <h1 mat-dialog-title>{{'dialog.export.title' | translate}}</h1>
+  <div mat-dialog-content>{{'dialog.export.content' | translate}}</div>
+  <div mat-dialog-actions>
+    <div class="container">
+      <ng-container>
+        <mat-form-field appearance="fill">
+          <mat-label>{{ 'Choose type of export' | translate }}</mat-label>
+          <mat-select [(ngModel)]="template.FWF">
+            <mat-option 
+              *ngFor="let id of template | keyvalue"
+              [value]="id.key">
+              {{id.key}}<br />
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+    <button mat-button mat-dialog-close="true" mat-raised-button color="primary" [disabled]="template.invalid">
+      {{'dialog.export.button' | translate}}
+    </button>
+  </div>
+  </div>
+</div>
