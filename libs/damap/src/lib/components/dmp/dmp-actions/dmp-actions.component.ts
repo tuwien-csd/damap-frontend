@@ -1,5 +1,4 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {FormGroup, UntypedFormGroup} from '@angular/forms';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Observable, Subject, Subscription} from 'rxjs';
 import {Store, select} from '@ngrx/store';
@@ -8,6 +7,7 @@ import {createDmp, exportDmp, saveDmpVersion, updateDmp} from '../../../store/ac
 import {AppState} from '../../../store/states/app.state';
 import { ETemplateType } from '../../../domain/enum/export-template-type.enum';
 import {ExportWarningDialogComponent} from "../../../widgets/export-warning-dialog/export-warning-dialog.component";
+import {FormGroup} from '@angular/forms';
 import {FormService} from '../../../services/form.service';
 import {selectDmpSaving} from '../../../store/selectors/dmp.selectors';
 import {selectFormChanged} from '../../../store/selectors/form.selectors';
@@ -27,7 +27,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
   formChanged: boolean;
   savingDmp$: Observable<boolean>;
   savingDmp: boolean;
-  template: ETemplateType;
+  exportDmpType: ETemplateType;
 
 
   private subscriptions: Subscription[] = [];
@@ -77,20 +77,13 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
   }
 
   exportDmp(): void {
-    const dmp = this.formService.exportFormToDmp();
-    if (!dmp.project?.funding) {
       this.dialog.open(ExportWarningDialogComponent).afterClosed().subscribe(
-       temp => {
-        // eslint-disable-next-line no-console
-        console.log("HEREEE", temp);
-        this.template = temp;
-
-        // this.template
-        this.store.dispatch(exportDmp({dmp: this.formService.exportFormToDmp(), template: this.template}))
-        // template = this.template;
+       template => {
+        this.exportDmpType = template;
+        if (this.exportDmpType.length === 0) return;
+        this.store.dispatch(exportDmp({dmp: this.formService.exportFormToDmp(), dmpTemplateType: this.exportDmpType}))
       }
     );
-    }
   }
 }
 

@@ -1,22 +1,22 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-
-import {PlansComponent} from './plans.component';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
-import {BackendService} from '../../services/backend.service';
-import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
+
 import {AuthService} from '../../auth/auth.service';
+import {BackendService} from '../../services/backend.service';
+import {DeleteWarningDialogComponent} from "../../widgets/delete-warning-dialog/delete-warning-dialog.component";
+import {HarnessLoader} from "@angular/cdk/testing";
+import {MatButtonHarness} from "@angular/material/button/testing";
+import {MatButtonModule} from "@angular/material/button";
+import {MatDialogHarness} from "@angular/material/dialog/testing";
+import {MatDialogModule} from "@angular/material/dialog";
 import {MatIconModule} from '@angular/material/icon';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatDialogModule} from "@angular/material/dialog";
-import {HarnessLoader} from "@angular/cdk/testing";
-import {MatDialogHarness} from "@angular/material/dialog/testing";
-import {DeleteWarningDialogComponent} from "../../widgets/delete-warning-dialog/delete-warning-dialog.component";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {PlansComponent} from './plans.component';
 import {TestbedHarnessEnvironment} from "@angular/cdk/testing/testbed";
+import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
 import {mockDmpList} from "../../mocks/dmp-list-mocks";
 import {of} from "rxjs";
-import {MatButtonModule} from "@angular/material/button";
-import {MatButtonHarness} from "@angular/material/button/testing";
 
 describe('PlanComponent', () => {
   let component: PlansComponent;
@@ -28,7 +28,7 @@ describe('PlanComponent', () => {
   const initialState = {damap: {dmps: {loaded: true, entities: mockDmpList, ids: [1]}}};
 
   beforeEach(waitForAsync(async () => {
-    backendSpy = jasmine.createSpyObj('BackendService', ['getDmpDocument', 'getMaDmpJsonFile', 'getAllDmps', 'deleteDmp']);
+    backendSpy = jasmine.createSpyObj('BackendService', ['getDmpDocument', 'getMaDmpJsonFile', 'getAllDmps', 'deleteDmp', 'exportTemplate']);
     backendSpy.getAllDmps.and.returnValue(of(mockDmpList));
     authSpy = jasmine.createSpyObj('AuthService', ['hasValidAccessToken', 'isAdmin']);
     await TestBed.configureTestingModule({

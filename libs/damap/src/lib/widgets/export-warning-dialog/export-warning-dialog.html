@@ -5,17 +5,17 @@
     <div class="container">
       <ng-container>
         <mat-form-field appearance="fill">
-          <mat-label>{{ 'Choose type of export' | translate }}</mat-label>
-          <mat-select [(ngModel)]="template.FWF">
+          <mat-label>{{ 'dialog.export.type' | translate }}</mat-label>
+          <mat-select [(value)]="selectedTemplate">
             <mat-option 
-              *ngFor="let id of template | keyvalue"
+              *ngFor="let id of dmpTemplate | keyvalue"
               [value]="id.key">
               {{id.key}}<br />
             </mat-option>
           </mat-select>
         </mat-form-field>
       </ng-container>
-    <button mat-button mat-dialog-close="true" mat-raised-button color="primary" [disabled]="template.invalid">
+    <button class="button" mat-button [mat-dialog-close]="selectedTemplate" mat-raised-button color="primary" [disabled]="onDisabled()">
       {{'dialog.export.button' | translate}}
     </button>
   </div>

@@ -18,7 +18,7 @@ import {TranslateModule} from '@ngx-translate/core';
     MatIconModule,
     MatDialogModule,
     MatButtonModule,
-    MatSelectModule,
+    MatSelectModule
 ],
   declarations: [ExportWarningDialogComponent],
   exports: [

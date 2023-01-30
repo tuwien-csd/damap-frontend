@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {DmpActionsComponent, SaveVersionDialogComponent} from './dmp-actions.component';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule} from '@angular/material/dialog';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
-import {FormTestingModule} from '../../../testing/form-testing/form-testing.module';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
-import {Subject} from 'rxjs';
-import {HarnessLoader} from '@angular/cdk/testing';
-import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
-import {MatDialogHarness} from '@angular/material/dialog/testing';
-import {MatInputHarness} from '@angular/material/input/testing';
-import {MatButtonHarness} from '@angular/material/button/testing';
+
+import { ExportWarningModule } from '../../../widgets/export-warning-dialog/export-warning.module';
+import {FormTestingModule} from '../../../testing/form-testing/form-testing.module';
 import {FormsModule} from '@angular/forms';
-import {ExportWarningDialogComponent} from "../../../widgets/export-warning-dialog/export-warning-dialog.component";
+import {HarnessLoader} from '@angular/cdk/testing';
+import {MatButtonHarness} from '@angular/material/button/testing';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogHarness} from '@angular/material/dialog/testing';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputHarness} from '@angular/material/input/testing';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {Subject} from 'rxjs';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
 
 describe('DmpActionsComponent', () => {
   let component: DmpActionsComponent;
@@ -31,8 +31,9 @@ describe('DmpActionsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ExportWarningDialogComponent,
-        MatButtonModule, MatDialogModule,
+        ExportWarningModule,
+        MatButtonModule, 
+        MatDialogModule,
         FormsModule,
         NoopAnimationsModule,
         TranslateTestingModule,
