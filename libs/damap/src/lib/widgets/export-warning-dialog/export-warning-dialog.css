@@ -1,0 +1,18 @@
+.mat-search-form-field{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 1.25rem;
+    margin: 1.25rem;
+  }
+  
+  mat-form-field {
+    width: 50%;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%
+  }

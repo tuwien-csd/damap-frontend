@@ -1,17 +1,20 @@
-import {Injectable} from '@angular/core';
-import {Actions, createEffect, ofType} from '@ngrx/effects';
 import * as DmpAction from '../actions/dmp.actions';
+
+import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {catchError, filter, map, switchMap, tap, withLatestFrom} from 'rxjs/operators';
-import {BackendService} from '../../services/backend.service';
-import {of} from 'rxjs';
-import {Store} from '@ngrx/store';
+
 import {AppState} from '../states/app.state';
-import {FormService} from '../../services/form.service';
+import {BackendService} from '../../services/backend.service';
+import { ETemplateType } from '../../domain/enum/export-template-type.enum';
 import {FeedbackService} from '../../services/feedback.service';
-import {setFormValue} from '../actions/form.actions';
-import {selectDmpsLoaded} from '../selectors/dmp.selectors';
+import {FormService} from '../../services/form.service';
+import {Injectable} from '@angular/core';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
+import {Store} from '@ngrx/store';
+import {of} from 'rxjs';
+import {selectDmpsLoaded} from '../selectors/dmp.selectors';
 import {selectFormChanged} from '../selectors/form.selectors';
+import {setFormValue} from '../actions/form.actions';
 
 @Injectable()
 export class DmpEffects {
@@ -93,19 +96,21 @@ export class DmpEffects {
     ofType(DmpAction.exportDmp),
     withLatestFrom(this.store$.select(selectFormChanged)),
     switchMap(([action, changed]) => {
-      if (changed !== false) {
+      if (changed !== false) { 
         let http$ = action.dmp.id ? this.backendService.editDmp(action.dmp) : this.backendService.createDmp(action.dmp);
+        // eslint-disable-next-line no-console
+        // console.log("HEREEE", http$);
         return http$.pipe(
           tap(dmp => {
             this.formService.mapDmpToForm(dmp);
             this.store$.dispatch(setFormValue({dmp}));
-            this.backendService.getDmpDocument(dmp.id);
+            this.backendService.exportTemplate(dmp.id, action.template);
             this.store$.dispatch(DmpAction.dmpExported());
           }),
           catchError(() => of(DmpAction.failedToSaveDmp()))
         );
       }
-      this.backendService.getDmpDocument(action.dmp.id);
+      this.backendService.exportTemplate(action.dmp.id, action.template);
       this.store$.dispatch(DmpAction.dmpExported());
       return of(action);
     })), {dispatch: false});
@@ -118,4 +123,5 @@ export class DmpEffects {
     private feedbackService: FeedbackService
   ) {
   }
+  
 }

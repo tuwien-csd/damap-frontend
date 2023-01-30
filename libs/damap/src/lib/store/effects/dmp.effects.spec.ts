@@ -1,16 +1,17 @@
-import {provideMockActions} from '@ngrx/effects/testing';
-import {TestBed} from '@angular/core/testing';
+import {createDmp, dmpsLoaded, exportDmp, failedToLoadDmps, loadDmps} from '../actions/dmp.actions';
 import {of, throwError} from 'rxjs';
+
 import {BackendService} from '../../services/backend.service';
 import {DmpEffects} from './dmp.effects';
-import {createDmp, dmpsLoaded, exportDmp, failedToLoadDmps, loadDmps} from '../actions/dmp.actions';
-import {mockDmpList} from '../../mocks/dmp-list-mocks';
-import {provideMockStore} from '@ngrx/store/testing';
-import {FormService} from '../../services/form.service';
 import {FeedbackService} from '../../services/feedback.service';
+import {FormService} from '../../services/form.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
+import {TestBed} from '@angular/core/testing';
 import {completeDmp} from '../../mocks/dmp-mocks';
+import {mockDmpList} from '../../mocks/dmp-list-mocks';
+import {provideMockActions} from '@ngrx/effects/testing';
+import {provideMockStore} from '@ngrx/store/testing';
 
 describe('DmpEffects', () => {
   let actions$;
@@ -33,7 +34,7 @@ describe('DmpEffects', () => {
         {
           provide: BackendService,
           useValue: jasmine.createSpyObj('BackendService',
-            ['getDmps', 'createDmp', 'editDmp', 'saveDmpVersion', 'getDmpDocument'])
+            ['getDmps', 'createDmp', 'editDmp', 'saveDmpVersion','getDmpDocument'])
         },
         {provide: FormService, useValue: jasmine.createSpyObj('FormService', ['mapDmpToForm'])},
         {provide: FeedbackService, useValue: jasmine.createSpyObj('FeedbackService', ['success'])},
