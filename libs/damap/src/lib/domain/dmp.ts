@@ -3,7 +3,6 @@ import { Cost } from './cost';
 import { DataKind } from './enum/data-kind.enum';
 import { DataQualityType } from './enum/data-quality-type.enum';
 import { Dataset } from './dataset';
-import { ETemplateType } from './enum/export-template-type.enum';
 import { ExternalStorage } from './external-storage';
 import { Project } from './project';
 import { Repository } from './repository';

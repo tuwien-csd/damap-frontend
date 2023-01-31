@@ -2,13 +2,14 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Observable, Subject, Subscription} from 'rxjs';
 import {Store, select} from '@ngrx/store';
-import {createDmp, exportDmp, saveDmpVersion, updateDmp} from '../../../store/actions/dmp.actions';
+import {createDmp, exportDmpTemplate, saveDmpVersion, updateDmp} from '../../../store/actions/dmp.actions';
 
 import {AppState} from '../../../store/states/app.state';
 import { ETemplateType } from '../../../domain/enum/export-template-type.enum';
 import {ExportWarningDialogComponent} from "../../../widgets/export-warning-dialog/export-warning-dialog.component";
 import {FormGroup} from '@angular/forms';
 import {FormService} from '../../../services/form.service';
+import { Project } from '../../../domain/project';
 import {selectDmpSaving} from '../../../store/selectors/dmp.selectors';
 import {selectFormChanged} from '../../../store/selectors/form.selectors';
 
@@ -27,6 +28,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
   formChanged: boolean;
   savingDmp$: Observable<boolean>;
   savingDmp: boolean;
+  project: Project;
   exportDmpType: ETemplateType;
 
 
@@ -76,12 +78,12 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
     });
   }
 
-  exportDmp(): void {
+  exportDmpTemplate(): void {
       this.dialog.open(ExportWarningDialogComponent).afterClosed().subscribe(
        template => {
         this.exportDmpType = template;
-        if (this.exportDmpType.length === 0) return;
-        this.store.dispatch(exportDmp({dmp: this.formService.exportFormToDmp(), dmpTemplateType: this.exportDmpType}))
+        if (this.project?.funding && this.exportDmpType.length === 0) return;
+        this.store.dispatch(exportDmpTemplate({dmp: this.formService.exportFormToDmp(), dmpTemplateType: this.exportDmpType}))
       }
     );
   }
@@ -103,5 +105,4 @@ export class SaveVersionDialogComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

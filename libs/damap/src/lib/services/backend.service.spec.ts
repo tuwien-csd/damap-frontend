@@ -248,7 +248,7 @@ describe('BackendService', () => {
     const spyObj = jasmine.createSpyObj('a', ['click']);
     spyOn(document, 'createElement').and.returnValue(spyObj);
 
-    service.exportTemplate(1, "FWF");
+    service.exportDmpTemplate(1, "FWF");
     const req = httpTestingController.expectOne(`${backendUrl}document/1?template=FWF`);
     req.flush(new Blob(), {headers: new HttpHeaders({'content-disposition': 'filename=any.docx'})})
 

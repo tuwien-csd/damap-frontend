@@ -1,20 +1,24 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {DmpActionsComponent, SaveVersionDialogComponent} from './dmp-actions.component';
-import {MockStore, provideMockStore} from '@ngrx/store/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  DmpActionsComponent,
+  SaveVersionDialogComponent,
+} from './dmp-actions.component';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
+import { ExportWarningDialogComponent } from '../../../widgets/export-warning-dialog/export-warning-dialog.component';
 import { ExportWarningModule } from '../../../widgets/export-warning-dialog/export-warning.module';
-import {FormTestingModule} from '../../../testing/form-testing/form-testing.module';
-import {FormsModule} from '@angular/forms';
-import {HarnessLoader} from '@angular/cdk/testing';
-import {MatButtonHarness} from '@angular/material/button/testing';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDialogHarness} from '@angular/material/dialog/testing';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatInputHarness} from '@angular/material/input/testing';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {Subject} from 'rxjs';
-import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
-import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
+import { FormTestingModule } from '../../../testing/form-testing/form-testing.module';
+import { FormsModule } from '@angular/forms';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogHarness } from '@angular/material/dialog/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputHarness } from '@angular/material/input/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Subject } from 'rxjs';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
 
 describe('DmpActionsComponent', () => {
   let component: DmpActionsComponent;
@@ -23,26 +27,28 @@ describe('DmpActionsComponent', () => {
   let store: MockStore;
   const initialState = {
     damap: {
-      form: {dmp: null, changed: false},
-      dmps: {saving: false}
-    }
+      form: { dmp: null, changed: false },
+      dmps: { saving: false },
+    },
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         ExportWarningModule,
-        MatButtonModule, 
+        MatButtonModule,
         MatDialogModule,
         FormsModule,
         NoopAnimationsModule,
         TranslateTestingModule,
-        FormTestingModule
+        FormTestingModule,
       ],
-      declarations: [DmpActionsComponent, SaveVersionDialogComponent],
-      providers: [
-        provideMockStore({initialState})
-      ]
+      declarations: [
+        DmpActionsComponent,
+        SaveVersionDialogComponent,
+        ExportWarningDialogComponent,
+      ],
+      providers: [provideMockStore({ initialState })],
     }).compileComponents();
     store = TestBed.inject(MockStore);
   });
@@ -102,7 +108,7 @@ describe('DmpActionsComponent', () => {
 
   it('should dispatch export dmp action', async () => {
     spyOn(store, 'dispatch');
-    component.exportDmp();
+    component.exportDmpTemplate();
 
     let dialogs = await loader.getAllHarnesses(MatDialogHarness);
     expect(dialogs.length).toBe(1);
@@ -110,7 +116,6 @@ describe('DmpActionsComponent', () => {
 
     dialogs = await loader.getAllHarnesses(MatDialogHarness);
     expect(dialogs.length).toBe(0);
-
     expect(store.dispatch).toHaveBeenCalledTimes(1);
   });
 });

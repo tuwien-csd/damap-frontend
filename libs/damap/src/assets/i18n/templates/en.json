@@ -817,7 +817,7 @@
       "LOCKED_STORAGE": "keep printouts of sensitive data in locked storage",
       "OTHER": "other measures"
     },
-    "exporttemplatetype": {
+    "exportDmpTemplatetype": {
       "FWF": "FWF",
       "SCIENCE_EUROPE":"SCIENCE_EUROPE"
     }

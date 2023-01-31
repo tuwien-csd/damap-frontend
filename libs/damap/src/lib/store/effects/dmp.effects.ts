@@ -91,8 +91,8 @@ export class DmpEffects {
       ))
   ));
 
-  exportDmp$ = createEffect(() => this.actions$.pipe(
-    ofType(DmpAction.exportDmp),
+  exportDmpTemplate$ = createEffect(() => this.actions$.pipe(
+    ofType(DmpAction.exportDmpTemplate),
     withLatestFrom(this.store$.select(selectFormChanged)),
     switchMap(([action, changed]) => {
       if (changed !== false) { 
@@ -101,13 +101,13 @@ export class DmpEffects {
           tap(dmp => {
             this.formService.mapDmpToForm(dmp);
             this.store$.dispatch(setFormValue({dmp}));
-            this.backendService.exportTemplate(dmp.id, action.dmpTemplateType);
+            this.backendService.exportDmpTemplate(dmp.id, action.dmpTemplateType);
             this.store$.dispatch(DmpAction.dmpExported());
           }),
           catchError(() => of(DmpAction.failedToSaveDmp()))
         );
       }
-      this.backendService.exportTemplate(action.dmp.id, action.dmpTemplateType);
+      this.backendService.exportDmpTemplate(action.dmp.id, action.dmpTemplateType);
       this.store$.dispatch(DmpAction.dmpExported());
       return of(action);
     })), {dispatch: false});

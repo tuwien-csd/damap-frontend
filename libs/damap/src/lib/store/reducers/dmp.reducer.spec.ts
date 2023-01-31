@@ -3,7 +3,7 @@ import {
   dmpExported,
   dmpSaved,
   dmpsLoaded,
-  exportDmp,
+  exportDmpTemplate,
   failedToLoadDmps,
   failedToSaveDmp,
   loadDmps,
@@ -71,7 +71,7 @@ describe('DmpReducer', () => {
 
 
   it('should export dmp', () => {
-    let state = dmpReducer(initialDmpState, exportDmp({dmp: completeDmp, dmpTemplateType: ETemplateType.FWF}));
+    let state = dmpReducer(initialDmpState, exportDmpTemplate({dmp: completeDmp, dmpTemplateType: ETemplateType.FWF}));
     expect(state.saving).toBe(true);
 
     state = dmpReducer(state, dmpExported());

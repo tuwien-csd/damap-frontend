@@ -27,9 +27,7 @@ export class RepoFilterComponent {
       }
     });
   }
-
 }
-
 
 @Component({
   selector: 'filter-dialog',
