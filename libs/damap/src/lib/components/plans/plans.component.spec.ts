@@ -28,7 +28,7 @@ describe('PlanComponent', () => {
   const initialState = {damap: {dmps: {loaded: true, entities: mockDmpList, ids: [1]}}};
 
   beforeEach(waitForAsync(async () => {
-    backendSpy = jasmine.createSpyObj('BackendService', ['getDmpDocument', 'getMaDmpJsonFile', 'getAllDmps', 'deleteDmp', 'exportTemplate']);
+    backendSpy = jasmine.createSpyObj('BackendService', ['getDmpDocument', 'getMaDmpJsonFile', 'getAllDmps', 'deleteDmp', 'exportDmpTemplate']);
     backendSpy.getAllDmps.and.returnValue(of(mockDmpList));
     authSpy = jasmine.createSpyObj('AuthService', ['hasValidAccessToken', 'isAdmin']);
     await TestBed.configureTestingModule({

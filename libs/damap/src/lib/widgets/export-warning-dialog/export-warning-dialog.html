@@ -1,4 +1,4 @@
-<div >
+<div>
   <h1 mat-dialog-title>{{'dialog.export.title' | translate}}</h1>
   <div mat-dialog-content>{{'dialog.export.content' | translate}}</div>
   <div mat-dialog-actions>
@@ -7,7 +7,7 @@
         <mat-form-field appearance="fill">
           <mat-label>{{ 'dialog.export.type' | translate }}</mat-label>
           <mat-select [(value)]="selectedTemplate">
-            <mat-option 
+            <mat-option
               *ngFor="let id of dmpTemplate | keyvalue"
               [value]="id.key">
               {{id.key}}<br />
@@ -15,9 +15,15 @@
           </mat-select>
         </mat-form-field>
       </ng-container>
-    <button class="button" mat-button [mat-dialog-close]="selectedTemplate" mat-raised-button color="primary" [disabled]="onDisabled()">
-      {{'dialog.export.button' | translate}}
-    </button>
-  </div>
+      <button
+        class="button"
+        mat-button
+        [mat-dialog-close]="selectedTemplate"
+        mat-raised-button
+        color="primary"
+        [disabled]="onDisabled()">
+        {{'dialog.export.button' | translate}}
+      </button>
+    </div>
   </div>
 </div>

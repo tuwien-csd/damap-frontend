@@ -265,7 +265,7 @@ export class BackendService {
       .pipe(retry(3), catchError(this.handleError('http.error.openaire')));
   }
 
-  exportTemplate(dmpId: number, template: string) : void {
+  exportDmpTemplate(dmpId: number, template: string) : void {
     this.http.get(`${this.backendUrl}document/${dmpId}?template=${template}`,  {
       responseType: 'blob',
       observe: 'response',

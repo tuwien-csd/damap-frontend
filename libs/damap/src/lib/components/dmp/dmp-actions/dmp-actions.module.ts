@@ -1,7 +1,6 @@
 import {DmpActionsComponent, SaveVersionDialogComponent} from './dmp-actions.component';
 
 import {CommonModule} from '@angular/common';
-import {ExportWarningModule} from "../../../widgets/export-warning-dialog/export-warning.module";
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -20,7 +19,6 @@ import {TranslateModule} from '@ngx-translate/core';
   ],
   exports: [
     DmpActionsComponent,
-
     // Materials
     MatDialogModule,
     MatButtonModule,
@@ -34,7 +32,6 @@ import {TranslateModule} from '@ngx-translate/core';
     TranslateModule,
     RouterModule,
     SaveStatusModule,
-    ExportWarningModule,
 
     // Materials
     MatDialogModule,

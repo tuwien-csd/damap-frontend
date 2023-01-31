@@ -20,7 +20,7 @@ export const dmpSaved = createAction('[Dmps] Dmp saved');
 
 export const failedToSaveDmp = createAction('[Dmps] Failed to save dmp');
 
-export const exportDmp = createAction('[Dmps] Export dmp', props<{ dmp: Dmp, dmpTemplateType: ETemplateType }>());
+export const exportDmpTemplate = createAction('[Dmps] Export dmp', props<{ dmp: Dmp, dmpTemplateType: ETemplateType }>());
 
 export const dmpExported = createAction('[Dmps] Dmp exported');
 
