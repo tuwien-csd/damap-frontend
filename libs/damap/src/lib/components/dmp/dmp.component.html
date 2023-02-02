@@ -1,7 +1,6 @@
 <mat-vertical-stepper #stepper [linear]="false" (selectionChange)="changeStep($event); changeStepPosition($event)">
   <mat-step label="{{'dmp.steps.project.label' | translate }}">
-    <app-dmp-project [projects]="projects$ | async"
-                     [loaded]="projectsLoaded$ | async"
+    <app-dmp-project [loaded]="projectsLoaded$ | async"
                      [projectStep]="projectStep"
                      (project)="changeProject($event)"></app-dmp-project>
   </mat-step>

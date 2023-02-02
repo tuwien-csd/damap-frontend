@@ -87,7 +87,6 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.projectsLoaded$ = this.store.pipe(select(selectProjectsLoaded));
     this.projects$ = this.store.pipe(select(selectProjects));
     this.getDmpById();
-    this.getSuggestedProjects();
 
     this.dmpForm.valueChanges.subscribe((value) => {
       this.logger.debug('DMPform Update');
@@ -267,10 +266,6 @@ export class DmpComponent implements OnInit, OnDestroy {
           }
         });
     }
-  }
-
-  private getSuggestedProjects() {
-    this.store.dispatch(new LoadProjects());
   }
 
   private getProjectMembers(projectId: number) {

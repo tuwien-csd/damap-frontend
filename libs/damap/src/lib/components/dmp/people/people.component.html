@@ -51,7 +51,7 @@
 <!-- SEARCH -->
 <div [formGroup]="dmpForm" class="mat-search-form-field">
   <app-person-search [result]="
-      searchResult$ | async
+     ( searchResult$ | async )?.items ?? []
         | contributorFilter: dmpForm.controls.contributors.value
     " (termToSearch)="searchContributor($event)" (personToAdd)="addContributor($event)">
   </app-person-search>

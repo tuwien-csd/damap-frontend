@@ -52,6 +52,9 @@ export * from './lib/domain/license-details';
 export * from './lib/domain/project';
 export * from './lib/domain/repository';
 export * from './lib/domain/repository-details';
+export * from './lib/domain/search/pagination';
+export * from './lib/domain/search/search';
+export * from './lib/domain/search/search-result';
 export * from './lib/domain/storage';
 export * from './lib/domain/version';
 // Enums
