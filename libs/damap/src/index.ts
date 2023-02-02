@@ -12,7 +12,6 @@ export * from './lib/store/effects/dmp.effects';
 export * from './lib/store/selectors/dmp.selectors';
 export * from './lib/store/reducers/dmp.reducer';
 export * from './lib/store/actions/dmp.actions';
-export * from './lib/store/effects/project.effects';
 export * from './lib/store/selectors/project.selectors';
 export * from './lib/store/reducers/project.reducer';
 export * from './lib/store/actions/project.actions';

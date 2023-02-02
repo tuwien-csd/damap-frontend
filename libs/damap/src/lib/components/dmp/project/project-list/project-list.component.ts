@@ -1,19 +1,20 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectionListChange } from '@angular/material/list';
-import { BackendService, SearchResult } from '@damap/core';
+import { BackendService } from "../../../../services/backend.service";
 import {
   debounceTime,
   distinctUntilChanged, Observable, Subject, switchMap
 } from 'rxjs';
 import { Project } from '../../../../domain/project';
+import { SearchResult } from '../../../../domain/search/search-result';
 
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.css'],
 })
-export class ProjectListComponent {
+export class ProjectListComponent implements OnInit {
   @Input() selectedProject: Project;
   @Output() projectToSet = new EventEmitter<Project>();
 
