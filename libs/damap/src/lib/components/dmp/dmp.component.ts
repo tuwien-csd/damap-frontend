@@ -27,7 +27,6 @@ import { Dataset } from '../../domain/dataset';
 import { FormService } from '../../services/form.service';
 import { HttpEventType } from '@angular/common/http';
 import { InternalStorage } from '../../domain/internal-storage';
-import { LoadProjects } from '../../store/actions/project.actions';
 import { LoadingState } from '../../domain/enum/loading-state.enum';
 import { LoggerService } from '../../services/logger.service';
 import { MatStepper } from '@angular/material/stepper';

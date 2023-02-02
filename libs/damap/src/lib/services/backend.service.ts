@@ -153,7 +153,7 @@ export class BackendService {
   }
 
   getProjectSearchResult(searchTerm: string): Observable<SearchResult<Project>> {
-    var queryParams = new HttpParams({
+    let queryParams = new HttpParams({
       fromObject: {
         "q": searchTerm,
       }
