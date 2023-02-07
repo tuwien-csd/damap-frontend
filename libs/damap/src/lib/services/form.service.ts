@@ -1,20 +1,20 @@
-import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { AccessRight } from '../domain/enum/access-right.enum';
+import { ccBy } from '../widgets/license-wizard/license-wizard-list';
 import { compareContributors, Contributor } from '../domain/contributor';
 import { Cost } from '../domain/cost';
+import { currencyValidator } from '../validators/currency.validator';
 import { DataAccessType } from '../domain/enum/data-access-type.enum';
-import { DataSource } from '../domain/enum/data-source.enum';
 import { Dataset } from '../domain/dataset';
+import { DataSource } from '../domain/enum/data-source.enum';
 import { Dmp } from '../domain/dmp';
 import { ExternalStorage } from '../domain/external-storage';
 import { Injectable } from '@angular/core';
 import { InternalStorage } from '../domain/internal-storage';
+import { notEmptyValidator } from '../validators/not-empty.validator';
 import { Repository } from '../domain/repository';
 import { Storage } from '../domain/storage';
-import { ccBy } from '../widgets/license-wizard/license-wizard-list';
-import { currencyValidator } from '../validators/currency.validator';
-import { notEmptyValidator } from '../validators/not-empty.validator';
 
 @Injectable({
   providedIn: 'root'
@@ -484,11 +484,22 @@ export class FormService {
   }
 
   private createCostFormGroup(): UntypedFormGroup {
+    let costFormControl = new FormControl(0, {
+      validators: currencyValidator(),
+      updateOn: 'change',
+    });
+    costFormControl.valueChanges.subscribe(n => {
+      if (!costFormControl.valid) return; // return if input is not valid
+
+      // n is a string here, so we convert it to a number
+      costFormControl.setValue(Number(n), { emitEvent: false });
+    });
+
     return this.formBuilder.group({
       id: [null, { disabled: true }],
       title: ['New cost', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
       currencyCode: ['EUR', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
-      value: [0, currencyValidator()], // validate currency format
+      value: costFormControl,
       type: [null],
       customType: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       description: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
