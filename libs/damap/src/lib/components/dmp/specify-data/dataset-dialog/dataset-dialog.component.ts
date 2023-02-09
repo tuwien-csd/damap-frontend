@@ -5,10 +5,9 @@ import {FILE_SIZES, FILE_TYPES} from '../data-specs';
 import {FormService} from '../../../../services/form.service';
 import {Dataset} from '../../../../domain/dataset';
 import {DataSource} from '../../../../domain/enum/data-source.enum';
-import {IdentifierType} from '../../../../domain/enum/identifier-type.enum';
-import { Identifier } from '@damap/core';
-import { IdentifierTypeReusedData } from '../../../../domain/identifier-type';
 
+import { IdentifierTypeReusedData } from '../../../../domain/identifier-type';
+import { Identifier } from '../../../../domain/identifier';
 
 @Component({
   selector: 'app-dataset-dialog',
@@ -20,7 +19,6 @@ export class DatasetDialogComponent {
   readonly FILE_TYPES = FILE_TYPES;
   readonly FILE_SIZES = FILE_SIZES;
   readonly datasetSource: any = DataSource;
-  identifierType: any = IdentifierType;
   identifierTypeReusedData: any = IdentifierTypeReusedData;
 
 
@@ -43,7 +41,6 @@ export class DatasetDialogComponent {
       this.datasetId = data.dataset.datasetId;
     }
   }
-
 
   get title(): UntypedFormControl {
     return this.dataset.get('title') as UntypedFormControl;

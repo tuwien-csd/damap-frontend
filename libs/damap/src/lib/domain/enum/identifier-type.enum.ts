@@ -10,4 +10,3 @@ export enum IdentifierType {
   ROR = 'ROR',
   OTHER = 'OTHER'
 }
-
