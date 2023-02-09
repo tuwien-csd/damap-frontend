@@ -313,11 +313,11 @@
             "no": "There are no costs dedicated to data management.",
             "yes": "As outlined below, there are costs dedicated to data management."
           },
-          "title": "Title",
+          "title": "Name",
           "value": "Estimated cost",
           "type": "Cost Type",
           "other": "Please specify the cost type",
-          "description": "Description"
+          "description": "Description (optional)"
         }
       },
       "end": {
