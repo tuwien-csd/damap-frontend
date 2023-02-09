@@ -34,7 +34,7 @@
     <mat-form-field>
       <mat-label>{{'dmp.steps.data.specify.dialog.identifier' | translate}}</mat-label>
       <mat-select [(ngModel)]="datasetId.type">
-        <mat-option *ngFor="let id of identifierType | keyvalue: originalOrder" [value]="id.key">
+        <mat-option *ngFor="let id of identifierTypeReusedData | keyvalue: originalOrder" [value]="id.key">
           {{id.key}}<br/>
         </mat-option>
       </mat-select>
