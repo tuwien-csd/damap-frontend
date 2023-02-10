@@ -1,4 +1,4 @@
-import { FormArray, FormControl, FormGroup, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { AccessRight } from '../domain/enum/access-right.enum';
 import { ccBy } from '../widgets/license-wizard/license-wizard-list';
@@ -491,14 +491,14 @@ export class FormService {
   private createCostFormGroup(): UntypedFormGroup {
     return this.formBuilder.group({
       id: new FormControl<number>({ value: null, disabled: true }),
-      title: new FormControl<String>('New cost', {
+      title: new FormControl<string>('New cost', {
         validators: [
           Validators.required,
           Validators.maxLength(this.TEXT_SHORT_LENGTH),
           notEmptyValidator(),
         ],
       }),
-      currencyCode: new FormControl<String>('EUR', {
+      currencyCode: new FormControl<string>('EUR', {
         validators: [
           Validators.required,
           Validators.maxLength(this.TEXT_SHORT_LENGTH),
@@ -506,10 +506,10 @@ export class FormService {
       }),
       value: new FormControl<number>(0, { validators: [currencyValidator()] }),
       type: new FormControl<CostType>(null),
-      customType: new FormControl<String>('', {
+      customType: new FormControl<string>('', {
         validators: Validators.maxLength(this.TEXT_SHORT_LENGTH),
       }),
-      description: new FormControl<String>('', {
+      description: new FormControl<string>('', {
         validators: Validators.maxLength(this.TEXT_MAX_LENGTH),
       }),
     });
