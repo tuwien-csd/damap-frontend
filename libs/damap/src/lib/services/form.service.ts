@@ -1,4 +1,4 @@
-import { FormControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { AccessRight } from '../domain/enum/access-right.enum';
 import { ccBy } from '../widgets/license-wizard/license-wizard-list';
@@ -15,6 +15,7 @@ import { InternalStorage } from '../domain/internal-storage';
 import { notEmptyValidator } from '../validators/not-empty.validator';
 import { Repository } from '../domain/repository';
 import { Storage } from '../domain/storage';
+import { CostType } from '../domain/enum/cost-type.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -201,7 +202,9 @@ export class FormService {
       committeeReviewed: formValue.legal.committeeReviewed,
       committeeReviewedCris: formValue.legal.committeeReviewedCris,
       contributors: formValue.contributors,
-      costs: formValue.costs.exist ? formValue.costs.list : [],
+      costs: formValue.costs.exist
+        ? formValue.costs.list.map(this.mapFormGroupToCost)
+        : [],
       costsExist: formValue.costs.exist,
       costsExistCris: formValue.costs.existCris,
       dataGeneration: formValue.data.dataGeneration,
@@ -219,8 +222,10 @@ export class FormService {
       humanParticipantsCris: formValue.legal.humanParticipantsCris,
       legalRestrictions: formValue.legal.legalRestrictions,
       legalRestrictionsCris: formValue.legal.legalRestrictionsCris,
-      legalRestrictionsDocuments: formValue.legal.legalRestrictionsDocuments || [],
-      otherLegalRestrictionsDocument: formValue.legal.otherLegalRestrictionsDocuments,
+      legalRestrictionsDocuments:
+        formValue.legal.legalRestrictionsDocuments || [],
+      otherLegalRestrictionsDocument:
+        formValue.legal.otherLegalRestrictionsDocuments,
       legalRestrictionsComment: formValue.legal.legalRestrictionsComment,
       dataRightsAndAccessControl: formValue.legal.dataRightsAndAccessControl,
       metadata: formValue.documentation.metadata,
@@ -242,7 +247,7 @@ export class FormService {
       targetAudience: formValue.reuse.targetAudience,
       tools: formValue.reuse.tools,
       id: formValue.id,
-      project: formValue.project
+      project: formValue.project,
     };
   }
 
@@ -484,25 +489,29 @@ export class FormService {
   }
 
   private createCostFormGroup(): UntypedFormGroup {
-    let costFormControl = new FormControl(0, {
-      validators: currencyValidator(),
-      updateOn: 'change',
-    });
-    costFormControl.valueChanges.subscribe(n => {
-      if (!costFormControl.valid) return; // return if input is not valid
-
-      // n is a string here, so we convert it to a number
-      costFormControl.setValue(Number(n), { emitEvent: false });
-    });
-
     return this.formBuilder.group({
-      id: [null, { disabled: true }],
-      title: ['New cost', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
-      currencyCode: ['EUR', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
-      value: costFormControl,
-      type: [null],
-      customType: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
-      description: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
+      id: new FormControl<number>({ value: null, disabled: true }),
+      title: new FormControl<String>('New cost', {
+        validators: [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      }),
+      currencyCode: new FormControl<String>('EUR', {
+        validators: [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+        ],
+      }),
+      value: new FormControl<number>(0, { validators: [currencyValidator()] }),
+      type: new FormControl<CostType>(null),
+      customType: new FormControl<String>('', {
+        validators: Validators.maxLength(this.TEXT_SHORT_LENGTH),
+      }),
+      description: new FormControl<String>('', {
+        validators: Validators.maxLength(this.TEXT_MAX_LENGTH),
+      }),
     });
   }
 
@@ -518,6 +527,19 @@ export class FormService {
       description: cost.description || ''
     });
     return formGroup;
+  }
+
+  private mapFormGroupToCost(group: Object) : Cost {
+    let c: Cost = {
+      id: Number(group['id']),
+      title: group['title'],
+      value: Number(group['value']),
+      currencyCode: group['currencyCode'],
+      description: group['description'],
+      type: group['type'],
+      customType: group['customType'],
+    };
+    return c;
   }
 
   private removeDatasetReferences(index: number) {
