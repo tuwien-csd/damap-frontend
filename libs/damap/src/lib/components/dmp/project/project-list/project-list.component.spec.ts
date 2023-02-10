@@ -14,7 +14,6 @@ import { of } from 'rxjs';
 import { mockProject } from '../../../../mocks/project-mocks';
 import { mockProjectSearchResult } from '../../../../mocks/search';
 import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
-import { ProjectFilterPipe } from '../project-filter.pipe';
 import { ProjectListComponent } from './project-list.component';
 
 describe('ProjectListComponent', () => {
@@ -28,7 +27,7 @@ describe('ProjectListComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [TranslateTestingModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatListModule, NoopAnimationsModule],
-      declarations: [ProjectListComponent, ProjectFilterPipe],
+      declarations: [ProjectListComponent],
       providers: [{ provide: BackendService, useValue: backendSpy }],
     }).compileComponents();
 

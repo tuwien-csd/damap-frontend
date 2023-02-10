@@ -6,7 +6,6 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {BackendService} from '../../services/backend.service';
 import {FeedbackService} from '../../services/feedback.service';
 import {ReactiveFormsModule, UntypedFormControl} from '@angular/forms';
-import {LoadingState} from '../../domain/enum/loading-state.enum';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
@@ -28,7 +27,6 @@ describe('DmpComponent', () => {
   const initialState = {
     damap: {
       form: {dmp: null, changed: false},
-      projects: {projects: [], loaded: LoadingState.LOADED}
     }
   };
 

@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import {
   UntypedFormArray,
   UntypedFormControl,
@@ -12,10 +12,6 @@ import {
   resetFormValue,
   setFormValue,
 } from '../../store/actions/form.actions';
-import {
-  selectProjects,
-  selectProjectsLoaded,
-} from '../../store/selectors/project.selectors';
 
 import { AppState } from '../../store/states/app.state';
 import { AuthService } from "../../auth/auth.service";
@@ -27,7 +23,6 @@ import { Dataset } from '../../domain/dataset';
 import { FormService } from '../../services/form.service';
 import { HttpEventType } from '@angular/common/http';
 import { InternalStorage } from '../../domain/internal-storage';
-import { LoadingState } from '../../domain/enum/loading-state.enum';
 import { LoggerService } from '../../services/logger.service';
 import { MatStepper } from '@angular/material/stepper';
 import { Project } from '../../domain/project';
@@ -64,7 +59,6 @@ export class DmpComponent implements OnInit, OnDestroy {
   costsStep: UntypedFormGroup;
 
   // Resources
-  projectsLoaded$: Observable<LoadingState>;
   projects$: Observable<Project[]>;
   projectMembers: Contributor[];
   stepChanged$ = new Subject();
@@ -83,8 +77,6 @@ export class DmpComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.projectsLoaded$ = this.store.pipe(select(selectProjectsLoaded));
-    this.projects$ = this.store.pipe(select(selectProjects));
     this.getDmpById();
 
     this.dmpForm.valueChanges.subscribe((value) => {
