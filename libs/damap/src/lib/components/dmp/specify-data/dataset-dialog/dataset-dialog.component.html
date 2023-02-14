@@ -6,7 +6,7 @@
 <div mat-dialog-content id="datasetDialog">
   <div [formGroup]="dataset">
     <app-input-wrapper [label]="'dmp.steps.data.specify.dialog.title' | translate" [control]="title"></app-input-wrapper>
-    <div class="dialogRow">
+    <div class="dialogRow" *ngIf="dataset.controls.source.value === datasetSource.NEW">
       <mat-form-field>
         <mat-label>{{'dmp.steps.data.specify.dialog.type' | translate}}</mat-label>
         <mat-select formControlName="type" required multiple>
