@@ -1,19 +1,19 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { compareContributors, Contributor } from '../../../domain/contributor';
+import { Contributor, compareContributors } from '../../../domain/contributor';
 
 @Pipe({
   name: 'contributorFilter',
 })
 export class ContributorFilterPipe implements PipeTransform {
   transform(
-    projectMembers: Contributor[],
-    contributors: Contributor[]
+    newContributors: Contributor[],
+    alreadyAddedContributors: Contributor[]
   ): Contributor[] {
-    return projectMembers?.filter(
+    return newContributors?.filter(
       entry =>
-        // filter contributors that are already in the list
-        contributors.find(c => {
+        // filter contributors that are already in the list based on universityId and personId
+        alreadyAddedContributors.find(c => {
           return compareContributors(c, entry);
         }) === undefined
     );

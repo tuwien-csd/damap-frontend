@@ -15,7 +15,15 @@ interface Contributor {
   roleInProject: string;
 }
 
-function compareContributors(c1: Contributor, c2: Contributor) {
+// Would be better to have it as a static function for Contributor (class)
+/**
+ * Returns whether the contributors are the same, based on universityId or personId.
+ * @param c1 contributor one.
+ * @param c2 contributor two.
+ */
+function compareContributors(c1: Contributor, c2: Contributor): boolean {
+  if (!c1 || !c2) return false;
+
   const universityId =
     c1.universityId && c2.universityId && c1.universityId === c2.universityId;
   const personId =
