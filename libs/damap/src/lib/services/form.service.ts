@@ -265,9 +265,9 @@ export class FormService {
 
     // Add/set new contact
     if (contact) {
-      const newContact = contributorFormArray.controls.find(c => compareContributors(c.value, contact));
-      if (newContact) {
-        newContact.patchValue({ contact: true });
+      const existingContact = contributorFormArray.controls.find(c => compareContributors(c.value, contact));
+      if (existingContact) {
+        existingContact.patchValue({ contact: true });
       } else {
         this.addContributorToForm(contact, true);
       }

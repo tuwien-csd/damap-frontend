@@ -57,6 +57,10 @@ describe('FormService', () => {
       contact: true,
     });
     expect(getContributorFromForm(1)).toEqual(mockContributor2);
+    service.removeContributorFromForm(1);
+    service.changeContactPerson(mockContributor2);
+    expect(getContributorFromForm(0)).toEqual(mockContributor1);
+    expect(getContributorFromForm(1)).toEqual( {...mockContributor2, contact: true} )
   });
 
   function getContributorFromForm(index: number): Contributor {
