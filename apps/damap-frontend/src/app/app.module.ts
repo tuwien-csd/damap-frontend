@@ -27,6 +27,7 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
     {prefix: './assets/damap-core/i18n/dashboard/', suffix: '.json'},
     {prefix: './assets/damap-core/i18n/plans/', suffix: '.json'},
     {prefix: './assets/damap-core/i18n/http/', suffix: '.json'},
+    {prefix: './assets/damap-core/i18n/gdpr/', suffix: '.json'},
     {prefix: './assets/damap-core/i18n/', suffix: '.json'},
     {prefix: './assets/i18n/', suffix: '.json'}
   ]);
@@ -60,7 +61,7 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
 
     // Materials
     MatSnackBarModule,
-    
+
     // Modules
     LayoutModule,
     EnvBannerModule,
