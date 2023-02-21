@@ -226,6 +226,19 @@ describe('BackendService', () => {
     req.flush(closedDatasetMock);
   });
 
+  it('should retrieve GDPR data', () => {
+    service.getGdpr().subscribe(gdpr => {
+      expect(gdpr).toBeTruthy();
+      expect(gdpr.length).toBe(1);
+
+      const consent = gdpr.find(item => item.entity === 'Consent');
+      expect(consent.entries.length).toBe(1);
+    });
+
+    const req = httpTestingController.expectOne(`${backendUrl}gdpr/extended`);
+    req.flush([{ entity: 'Consent', entries: [{ consentGiven: 'true' }] }]);
+  });
+
   it('should get dmp document', () => {
     const spyObj = jasmine.createSpyObj('a', ['click']);
     spyOn(document, 'createElement').and.returnValue(spyObj);
