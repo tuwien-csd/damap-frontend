@@ -16,9 +16,10 @@ export class CostsComponent {
   @Output() costToRemove = new EventEmitter<number>();
 
   costType: any = CostType;
-
+  costTypeObject = Object.values(CostType);
+  
   translateEnumPrefix = 'enum.costs.'
-
+  
   get list() {
     return this.costsStep?.get('list') as UntypedFormArray;
   }
