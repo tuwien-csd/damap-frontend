@@ -1,7 +1,7 @@
 import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { AccessRight } from '../domain/enum/access-right.enum';
-import { Contributor } from '../domain/contributor';
+import { compareContributors, Contributor } from '../domain/contributor';
 import { Cost } from '../domain/cost';
 import { DataAccessType } from '../domain/enum/data-access-type.enum';
 import { DataSource } from '../domain/enum/data-source.enum';
@@ -265,9 +265,9 @@ export class FormService {
 
     // Add/set new contact
     if (contact) {
-      const newContact = contributorFormArray.controls.find(c => c.value.universityId === contact.universityId);
-      if (newContact) {
-        newContact.patchValue({ contact: true });
+      const existingContact = contributorFormArray.controls.find(c => compareContributors(c.value, contact));
+      if (existingContact) {
+        existingContact.patchValue({ contact: true });
       } else {
         this.addContributorToForm(contact, true);
       }
