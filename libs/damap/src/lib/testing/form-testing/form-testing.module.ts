@@ -1,15 +1,20 @@
-import {Injectable, NgModule} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
-import {FormService} from '../../services/form.service';
+import { Injectable, NgModule } from '@angular/core';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  UntypedFormBuilder
+} from '@angular/forms';
+import { FormService } from '../../services/form.service';
 
 @Injectable()
-export class FormServiceStub {
-
-  get dmpForm() {
+export class FormServiceStub extends FormService {
+  // Override to always have a fresh form.
+  override get dmpForm() {
     return new FormGroup({
       id: new FormControl(null),
       project: new FormControl(),
-      data: new FormGroup({kind: new FormControl('SPECIFY')}),
+      data: new FormGroup({ kind: new FormControl('SPECIFY') }),
       datasets: new FormArray([]),
       documentation: new FormGroup({}),
       legal: new FormGroup({}),
@@ -18,22 +23,15 @@ export class FormServiceStub {
       externalStorageInfo: new FormControl(),
       repositories: new FormArray([]),
       reuse: new FormGroup({}),
-      costs: new FormGroup({})
+      costs: new FormGroup({}),
     });
-  }
-
-  resetForm() {
-  }
-
-  exportFormToDmp() {
-    return {};
   }
 }
 
 @NgModule({
   providers: [
-    {provide: FormService, useClass: FormServiceStub},
-  ]
+    { provide: FormService, useClass: FormServiceStub },
+    { provide: UntypedFormBuilder, useClass: UntypedFormBuilder },
+  ],
 })
-export class FormTestingModule {
-}
+export class FormTestingModule {}
