@@ -59,7 +59,6 @@ export class DmpComponent implements OnInit, OnDestroy {
   costsStep: UntypedFormGroup;
 
   // Resources
-  projects$: Observable<Project[]>;
   projectMembers: Contributor[];
   stepChanged$ = new Subject();
 
@@ -139,6 +138,7 @@ export class DmpComponent implements OnInit, OnDestroy {
       }
       this.projectStep.setValue(project);
     } else {
+      this.projectMembers.length = 0;
       this.projectStep.reset();
     }
   }
@@ -238,25 +238,20 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   private getDmpById() {
     const id = +this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.logger.debug('Get DMP with ID: ' + id);
-      this.backendService.getDmpById(id).subscribe(
-        dmp => {
-          if (dmp != null) {
-            this.formService.mapDmpToForm(dmp);
-            this.store.dispatch(setFormValue({ dmp }));
-            if (dmp.project) {
-              this.projects$.subscribe(projects => projects.filter(e => {
-                if (e.title === dmp.project.title && dmp.project.universityId) {
-                  this.getProjectMembers(e.universityId);
-                }
-              }))
-            }
-          } else {
-            this.router.navigate(['plans']);
-          }
-        });
-    }
+    if (!id) return;
+
+    this.logger.debug('Get DMP with ID: ' + id);
+    this.backendService.getDmpById(id).subscribe(dmp => {
+      if (dmp != null) {
+        this.formService.mapDmpToForm(dmp);
+        this.store.dispatch(setFormValue({ dmp }));
+        if (dmp.project && dmp.project.universityId) {
+          this.getProjectMembers(dmp.project.universityId);
+        }
+      } else {
+        this.router.navigate(['plans']);
+      }
+    });
   }
 
   private getProjectMembers(projectId: number) {
