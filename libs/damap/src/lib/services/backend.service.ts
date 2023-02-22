@@ -17,12 +17,13 @@ import {Project} from '../domain/project';
 import {RepositoryDetails} from '../domain/repository-details';
 import {TranslateService} from '@ngx-translate/core';
 import {Version} from '../domain/version';
+import { Gdpr } from "../domain/gdpr";
 
 @Injectable({
   providedIn: 'root',
 })
 export class BackendService {
- 
+
   private backendUrl = APP_ENV.backendurl;
   private dmpBackendUrl = this.backendUrl + 'dmps';
   private versionBackendUrl = this.backendUrl + 'versions';
@@ -176,12 +177,12 @@ export class BackendService {
         )
         .pipe(catchError(this.handleError('http.error.repositories.one')));
     }
-    
+
   loadServiceConfig(): Observable<Config> {
       const host = this.backendUrl;
       return this.http.get<Config>(`${host}config`);
     }
-  
+
   getInternalStorages(): Observable<InternalStorage[]> {
     const langCode = 'eng'; // TODO: Replace with template lang in the future
     return this.http
@@ -284,6 +285,10 @@ export class BackendService {
     return this.http
       .post<Consent>(`${this.backendUrl}consent`, consent)
       .pipe(retry(3), catchError(this.handleError('http.error.consent.edit')));
+  }
+
+  getGdpr(): Observable<Gdpr[]> {
+    return this.http.get<Gdpr[]>(`${this.backendUrl}gdpr/extended`);
   }
 
   private handleError(message = 'http.error.standard') {
