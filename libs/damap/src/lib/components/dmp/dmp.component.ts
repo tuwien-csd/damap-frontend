@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Subject, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
 import {
   UntypedFormArray,
   UntypedFormControl,
@@ -12,10 +12,6 @@ import {
   resetFormValue,
   setFormValue,
 } from '../../store/actions/form.actions';
-import {
-  selectProjects,
-  selectProjectsLoaded,
-} from '../../store/selectors/project.selectors';
 
 import { AppState } from '../../store/states/app.state';
 import { AuthService } from "../../auth/auth.service";
@@ -27,8 +23,6 @@ import { Dataset } from '../../domain/dataset';
 import { FormService } from '../../services/form.service';
 import { HttpEventType } from '@angular/common/http';
 import { InternalStorage } from '../../domain/internal-storage';
-import { LoadProjects } from '../../store/actions/project.actions';
-import { LoadingState } from '../../domain/enum/loading-state.enum';
 import { LoggerService } from '../../services/logger.service';
 import { MatStepper } from '@angular/material/stepper';
 import { Project } from '../../domain/project';
@@ -65,8 +59,6 @@ export class DmpComponent implements OnInit, OnDestroy {
   costsStep: UntypedFormGroup;
 
   // Resources
-  projectsLoaded$: Observable<LoadingState>;
-  projects$: Observable<Project[]>;
   projectMembers: Contributor[];
   stepChanged$ = new Subject();
 
@@ -84,10 +76,7 @@ export class DmpComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.projectsLoaded$ = this.store.pipe(select(selectProjectsLoaded));
-    this.projects$ = this.store.pipe(select(selectProjects));
     this.getDmpById();
-    this.getSuggestedProjects();
 
     this.dmpForm.valueChanges.subscribe((value) => {
       this.logger.debug('DMPform Update');
@@ -149,6 +138,7 @@ export class DmpComponent implements OnInit, OnDestroy {
       }
       this.projectStep.setValue(project);
     } else {
+      this.projectMembers.length = 0;
       this.projectStep.reset();
     }
   }
@@ -248,29 +238,20 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   private getDmpById() {
     const id = +this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.logger.debug('Get DMP with ID: ' + id);
-      this.backendService.getDmpById(id).subscribe(
-        dmp => {
-          if (dmp != null) {
-            this.formService.mapDmpToForm(dmp);
-            this.store.dispatch(setFormValue({ dmp }));
-            if (dmp.project) {
-              this.projects$.subscribe(projects => projects.filter(e => {
-                if (e.title === dmp.project.title && dmp.project.universityId) {
-                  this.getProjectMembers(e.universityId);
-                }
-              }))
-            }
-          } else {
-            this.router.navigate(['plans']);
-          }
-        });
-    }
-  }
+    if (!id) return;
 
-  private getSuggestedProjects() {
-    this.store.dispatch(new LoadProjects());
+    this.logger.debug('Get DMP with ID: ' + id);
+    this.backendService.getDmpById(id).subscribe(dmp => {
+      if (dmp != null) {
+        this.formService.mapDmpToForm(dmp);
+        this.store.dispatch(setFormValue({ dmp }));
+        if (dmp.project && dmp.project.universityId) {
+          this.getProjectMembers(dmp.project.universityId);
+        }
+      } else {
+        this.router.navigate(['plans']);
+      }
+    });
   }
 
   private getProjectMembers(projectId: number) {

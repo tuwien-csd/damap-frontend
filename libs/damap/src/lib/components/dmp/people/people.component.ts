@@ -16,6 +16,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Dataset } from '../../../domain/dataset';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ServiceConfig } from '../../../domain/config-services';
+import { SearchResult } from '../../../domain/search/search-result';
 
 @Component({
   selector: 'app-dmp-people',
@@ -37,7 +38,7 @@ export class PeopleComponent implements OnInit {
 
   private searchTerms = new Subject<string>();
 
-  searchResult$: Observable<Contributor[]>;
+  searchResult$: Observable<SearchResult<Contributor>>;
   serviceConfig$: ServiceConfig[];
   serviceConfigType: ServiceConfig;
 

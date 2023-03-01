@@ -1,17 +1,20 @@
-import { TestBed } from "@angular/core/testing";
-import { BackendService } from "./backend.service";
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
-import { FeedbackService } from "./feedback.service";
-import { Project } from "../domain/project";
-import { Dmp } from "../domain/dmp";
-import { completeDmp } from "../mocks/dmp-mocks";
 import { HttpEventType, HttpHeaders } from "@angular/common/http";
-import { TranslateTestingModule } from "../testing/translate-testing/translate-testing.module";
-import { Contributor } from "../domain/contributor";
-import { closedDatasetMock } from "../mocks/dataset-mocks";
-import { APP_ENV } from "../constants";
-import { mockAccess } from "../mocks/access-mocks";
+import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { TestBed } from "@angular/core/testing";
 import { EMPTY } from "rxjs";
+import { APP_ENV } from "../constants";
+import { Contributor } from "../domain/contributor";
+import { Dmp } from "../domain/dmp";
+import { Project } from "../domain/project";
+import { SearchResult } from "../domain/search/search-result";
+import { mockAccess } from "../mocks/access-mocks";
+import { closedDatasetMock } from "../mocks/dataset-mocks";
+import { completeDmp } from "../mocks/dmp-mocks";
+import { mockProject } from "../mocks/project-mocks";
+import { mockProjectSearchResult } from "../mocks/search";
+import { TranslateTestingModule } from "../testing/translate-testing/translate-testing.module";
+import { BackendService } from "./backend.service";
+import { FeedbackService } from "./feedback.service";
 
 describe('BackendService', () => {
   let service: BackendService;
@@ -146,18 +149,19 @@ describe('BackendService', () => {
     });
 
   it('should get all suggested projects', () => {
-    service.getSuggestedProjects().subscribe(
-      (projects: Project[]) => {
-        expect(projects).toBeTruthy();
-        expect(projects.length).toBe(1,);
+    service.getProjectSearchResult("").subscribe(
+      (searchResult: SearchResult<Project>) => {
+        expect(searchResult).toBeTruthy();
+        expect(searchResult.items).toBeTruthy();
+        expect(searchResult.items.length).toBe(1,);
 
-        const project = projects[0];
-        expect(project.title).toBe('Mock project');
+        const project = searchResult.items[0];
+        expect(project.title).toBe(mockProject.title);
       }
     );
 
-    const req = httpTestingController.expectOne(`${backendUrl}projects`);
-    req.flush([{id: null, universityId: 1234, title: 'Mock project'}]);
+    const req = httpTestingController.expectOne(`${backendUrl}projects?q=`);
+    req.flush(mockProjectSearchResult);
   });
 
 
