@@ -4,13 +4,13 @@ import {
   Inject,
   Input,
   OnInit,
-  Output,
+  Output
 } from '@angular/core';
 import { ContributorRole } from '../../../domain/enum/contributor-role.enum';
 import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
 import { Contributor } from '../../../domain/contributor';
 import { IdentifierType } from '../../../domain/enum/identifier-type.enum';
-import { Observable, Subject, switchMap } from 'rxjs';
+import { Observable, of, Subject, Subscription, switchMap } from 'rxjs';
 import { BackendService } from '../../../services/backend.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Dataset } from '../../../domain/dataset';
@@ -34,9 +34,10 @@ export class PeopleComponent implements OnInit {
 
   readonly roles: any = ContributorRole;
   readonly identifierType = IdentifierType;
-  readonly translateEnumPrefix = 'enum.contributor.role.'
+  readonly translateEnumPrefix = 'enum.contributor.role.';
 
   private searchTerms = new Subject<string>();
+  private subscriptions: Subscription[] = [];
 
   searchResult$: Observable<SearchResult<Contributor>>;
   serviceConfig$: ServiceConfig[];
@@ -44,21 +45,54 @@ export class PeopleComponent implements OnInit {
 
   constructor(
     private backendService: BackendService,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.backendService.loadServiceConfig().subscribe(service => {
       this.serviceConfig$ = service.personSearchServiceConfigs;
-      this.serviceConfigType = this.serviceConfig$[0];
+      this.serviceConfigType = service.personSearchServiceConfigs[0];
+      this.updateSearchResult();
     });
+
     this.searchResult$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      switchMap((term: string) =>
-        this.backendService.getPersonSearchResult(term, this.serviceConfigType.displayText)
-      )
+      switchMap((term: string) => {
+        return this.backendService.getPersonSearchResult(
+          term,
+          this.serviceConfigType.displayText
+        );
+      })
     );
+  }
+
+  onServiceConfigChange(serviceConfigType: ServiceConfig) {
+    this.serviceConfigType = serviceConfigType;
+    this.searchTerms.next((event.target as HTMLInputElement).value);
+    this.updateSearchResult();
+  }
+
+  private updateSearchResult(): void {
+    const searchResult$ = this.searchTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((term: string) => {
+        return this.backendService.getPersonSearchResult(
+          term,
+          this.serviceConfigType.displayText
+        );
+      })
+    );
+    this.subscriptions.push(
+      searchResult$.subscribe(result => {
+        this.searchResult$ = of(result);
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   changeContactPerson(contact: Contributor): void {
@@ -80,7 +114,7 @@ export class PeopleComponent implements OnInit {
       const dialogRef = this.dialog.open(ConfirmDeletionDialogComponent, {
         data: datasets,
       });
-      dialogRef.afterClosed().subscribe((result) => {
+      dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.contributorToRemove.emit(index);
         }
@@ -98,9 +132,7 @@ export class PeopleComponent implements OnInit {
 
   private getDatasetsForContributor(contributor: Contributor): Dataset[] {
     const datasets = this.dmpForm.controls.datasets.value;
-    return datasets.filter(
-      (item) => item.deletionPerson?.id === contributor?.id
-    );
+    return datasets.filter(item => item.deletionPerson?.id === contributor?.id);
   }
 }
 
