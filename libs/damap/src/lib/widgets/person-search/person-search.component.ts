@@ -11,13 +11,14 @@ export class PersonSearchComponent {
   @Input() result: Contributor[];
   @Output() termToSearch = new EventEmitter<string>();
   @Output() personToAdd = new EventEmitter<Contributor>();
-
-  constructor() {}
+  
+  currentSearchTerm: string;
 
   search(term: string) {
     if (term.trim()) {
       this.termToSearch.emit(term);
     }
+    this.currentSearchTerm = term;
   }
 
   selectPerson(person: Contributor) {

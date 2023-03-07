@@ -3,30 +3,33 @@ import {
   EventEmitter,
   Inject,
   Input,
+  OnDestroy,
   OnInit,
-  Output
+  Output,
+  ViewChild,
 } from '@angular/core';
-import { ContributorRole } from '../../../domain/enum/contributor-role.enum';
 import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
-import { Contributor } from '../../../domain/contributor';
-import { IdentifierType } from '../../../domain/enum/identifier-type.enum';
-import { Observable, of, Subject, Subscription, switchMap } from 'rxjs';
-import { BackendService } from '../../../services/backend.service';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Dataset } from '../../../domain/dataset';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ServiceConfig } from '../../../domain/config-services';
 import { SearchResult } from '../../../domain/search/search-result';
+import { Contributor } from '../../../domain/contributor';
+import { Dataset } from '../../../domain/dataset';
+import { ContributorRole } from '../../../domain/enum/contributor-role.enum';
+import { IdentifierType } from '../../../domain/enum/identifier-type.enum';
+import { BackendService } from '../../../services/backend.service';
+import { PersonSearchComponent } from '../../../widgets/person-search/person-search.component';
 
 @Component({
   selector: 'app-dmp-people',
   templateUrl: './people.component.html',
   styleUrls: ['./people.component.css'],
 })
-export class PeopleComponent implements OnInit {
+export class PeopleComponent implements OnInit, OnDestroy {
   @Input() projectMembers: Contributor[];
   @Input() dmpForm: UntypedFormGroup;
-
+  @ViewChild(PersonSearchComponent) personSearch: PersonSearchComponent;
   @Output() contactPerson = new EventEmitter<any>();
   @Output() contributorToAdd = new EventEmitter<any>();
   @Output() contributorToRemove = new EventEmitter<any>();
@@ -52,43 +55,22 @@ export class PeopleComponent implements OnInit {
     this.backendService.loadServiceConfig().subscribe(service => {
       this.serviceConfig$ = service.personSearchServiceConfigs;
       this.serviceConfigType = service.personSearchServiceConfigs[0];
-      this.updateSearchResult();
     });
 
-    this.searchResult$ = this.searchTerms.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap((term: string) => {
-        return this.backendService.getPersonSearchResult(
+    const searchSubscription = this.searchTerms
+      .pipe(debounceTime(300))
+      .subscribe((term: string) => {
+        this.searchResult$ = this.backendService.getPersonSearchResult(
           term,
           this.serviceConfigType.displayText
         );
-      })
-    );
+      });
+    this.subscriptions.push(searchSubscription);
   }
 
   onServiceConfigChange(serviceConfigType: ServiceConfig) {
     this.serviceConfigType = serviceConfigType;
-    this.searchTerms.next((event.target as HTMLInputElement).value);
-    this.updateSearchResult();
-  }
-
-  private updateSearchResult(): void {
-    const searchResult$ = this.searchTerms.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap((term: string) => {
-        return this.backendService.getPersonSearchResult(
-          term,
-          this.serviceConfigType.displayText
-        );
-      })
-    );
-    this.subscriptions.push(
-      searchResult$.subscribe(result => {
-        this.searchResult$ = of(result);
-      })
-    );
+    this.searchTerms.next(this.personSearch.currentSearchTerm);
   }
 
   ngOnDestroy(): void {
