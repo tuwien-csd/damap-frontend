@@ -11,7 +11,7 @@ import {
 import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 import { ServiceConfig } from '../../../domain/config-services';
 import { SearchResult } from '../../../domain/search/search-result';
 import { Contributor } from '../../../domain/contributor';

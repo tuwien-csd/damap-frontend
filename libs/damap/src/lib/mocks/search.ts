@@ -1,8 +1,11 @@
-import { Project } from '../domain/project';
+import { mockProject, mockRecommendedProject } from './project-mocks';
+
+import { Contributor } from '../domain/contributor';
 import { Pagination } from '../domain/search/pagination';
+import { Project } from '../domain/project';
 import { Search } from '../domain/search/search';
 import { SearchResult } from '../domain/search/search-result';
-import { mockProject, mockRecommendedProject } from './project-mocks';
+import { mockContact } from './contributor-mocks';
 
 export const mockPagination: Pagination = {
   page: 1,
@@ -24,4 +27,9 @@ export const mockProjectSearchResult: SearchResult<Project> = {
 export const mockRecommendedProjectSearchResult: SearchResult<Project> = {
   items: [mockRecommendedProject],
   search: mockSearch,
+}
+
+export const mockContributorSearchResult: SearchResult<Contributor> = {
+  search: mockSearch,
+  items: [mockContact]
 };
