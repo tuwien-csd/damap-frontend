@@ -1,16 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {select, Store} from '@ngrx/store';
-import {AppState} from '../../store/states/app.state';
+import {Store, select} from '@ngrx/store';
+import {deleteDmp, loadDmps} from '../../store/actions/dmp.actions';
 import {selectDmps, selectDmpsLoaded} from '../../store/selectors/dmp.selectors';
-import {Observable} from 'rxjs';
-import {loadDmps, deleteDmp} from '../../store/actions/dmp.actions';
-import {DmpListItem} from '../../domain/dmp-list-item';
-import {BackendService} from '../../services/backend.service';
-import {LoadingState} from '../../domain/enum/loading-state.enum';
+
+import {AppState} from '../../store/states/app.state';
 import {AuthService} from '../../auth/auth.service';
-import {MatDialog} from "@angular/material/dialog";
-import {ExportWarningDialogComponent} from "../../widgets/export-warning-dialog/export-warning-dialog.component";
+import {BackendService} from '../../services/backend.service';
 import {DeleteWarningDialogComponent} from "../../widgets/delete-warning-dialog/delete-warning-dialog.component";
+import {DmpListItem} from '../../domain/dmp-list-item';
+import {ExportWarningDialogComponent} from "../../widgets/export-warning-dialog/export-warning-dialog.component";
+import {LoadingState} from '../../domain/enum/loading-state.enum';
+import {MatDialog} from "@angular/material/dialog";
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-plan',
@@ -56,9 +57,7 @@ export class PlansComponent implements OnInit {
   }
 
   getJsonFile(id: number) {
-    this.dialog.open(ExportWarningDialogComponent).afterClosed().subscribe(
-      _ => this.backendService.getMaDmpJsonFile(id)
-    );
+    this.backendService.getMaDmpJsonFile(id);
   }
 
   deleteDmp(id: number) {

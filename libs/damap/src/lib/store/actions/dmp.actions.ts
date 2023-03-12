@@ -25,3 +25,5 @@ export const exportDmpTemplate = createAction('[Dmps] Export dmp', props<{ dmp: 
 export const dmpExported = createAction('[Dmps] Dmp exported');
 
 export const deleteDmp = createAction('[Dmps] Remove dmp', props<{ id: number }>());
+
+export const exportDmp = createAction('[Dmps] Export dmp', props<{ dmp: Dmp }>());
