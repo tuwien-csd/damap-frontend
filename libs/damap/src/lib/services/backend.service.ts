@@ -1,9 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, map, retry, shareReplay } from 'rxjs/operators';
 
-import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
 import { APP_ENV } from '../constants';
 import { Access } from "../domain/access";
 import { Config } from '../domain/config';
@@ -12,13 +9,16 @@ import { Contributor } from '../domain/contributor';
 import { Dataset } from '../domain/dataset';
 import { Dmp } from '../domain/dmp';
 import { DmpListItem } from '../domain/dmp-list-item';
+import { FeedbackService } from './feedback.service';
 import { Gdpr } from '../domain/gdpr';
+import { Injectable } from '@angular/core';
 import { InternalStorage } from '../domain/internal-storage';
+import { Observable } from 'rxjs';
 import { Project } from '../domain/project';
 import { RepositoryDetails } from '../domain/repository-details';
 import { SearchResult } from '../domain/search/search-result';
+import { TranslateService } from '@ngx-translate/core';
 import { Version } from '../domain/version';
-import { FeedbackService } from './feedback.service';
 
 @Injectable({
   providedIn: 'root',
@@ -277,8 +277,7 @@ export class BackendService {
   }
   
   getDmpDocument(id: number): void {
-    this.http
-      .get(this.backendUrl + 'document/' + id, {
+    this.http.get(`${this.backendUrl}document/${id}`, {
         responseType: 'blob',
         observe: 'response',
       })
@@ -289,8 +288,7 @@ export class BackendService {
   }
 
   getMaDmpJsonFile(id: number): void {
-    this.http
-      .get(this.backendUrl + 'madmp/file/' + id, {
+    this.http.get(`${this.backendUrl}madmp/file/${id}`, {
         responseType: 'blob',
         observe: 'response',
       })

@@ -5,7 +5,6 @@ import {
 } from './dmp-actions.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
-import { ExportWarningDialogComponent } from '../../../widgets/export-warning-dialog/export-warning-dialog.component';
 import { ExportWarningModule } from '../../../widgets/export-warning-dialog/export-warning.module';
 import { FormTestingModule } from '../../../testing/form-testing/form-testing.module';
 import { FormsModule } from '@angular/forms';
@@ -45,8 +44,7 @@ describe('DmpActionsComponent', () => {
       ],
       declarations: [
         DmpActionsComponent,
-        SaveVersionDialogComponent,
-        ExportWarningDialogComponent,
+        SaveVersionDialogComponent
       ],
       providers: [provideMockStore({ initialState })],
     }).compileComponents();

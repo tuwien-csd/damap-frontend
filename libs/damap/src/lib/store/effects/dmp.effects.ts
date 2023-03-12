@@ -107,7 +107,10 @@ export class DmpEffects {
           catchError(() => of(DmpAction.failedToSaveDmp()))
         );
       }
-      this.backendService.exportDmpTemplate(action.dmp.id, action.dmpTemplateType);
+      if(action.dmp.project.funding) {
+        this.backendService.exportDmpTemplate(action.dmp.id, action.dmpTemplateType);
+      }
+      this.backendService.getDmpDocument(action.dmp.id);
       this.store$.dispatch(DmpAction.dmpExported());
       return of(action);
     })), {dispatch: false});
