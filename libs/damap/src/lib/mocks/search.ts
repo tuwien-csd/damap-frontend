@@ -2,7 +2,7 @@ import { Project } from '../domain/project';
 import { Pagination } from '../domain/search/pagination';
 import { Search } from '../domain/search/search';
 import { SearchResult } from '../domain/search/search-result';
-import { mockProject } from './project-mocks';
+import { mockProject, mockRecommendedProject } from './project-mocks';
 
 export const mockPagination: Pagination = {
   page: 1,
@@ -18,5 +18,10 @@ export const mockSearch: Search = {
 
 export const mockProjectSearchResult: SearchResult<Project> = {
   items: [mockProject],
+  search: mockSearch,
+};
+
+export const mockRecommendedProjectSearchResult: SearchResult<Project> = {
+  items: [mockRecommendedProject],
   search: mockSearch,
 };

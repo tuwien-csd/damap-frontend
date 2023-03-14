@@ -152,6 +152,16 @@ export class BackendService {
     );
   }
 
+  getRecommendedProjects(): Observable<SearchResult<Project>> {
+    return this.http
+      .get<SearchResult<Project>>(`${this.projectBackendUrl}/recommended`)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('http.error.projects')),
+        shareReplay(1)
+      );
+  }
+
   getProjectSearchResult(searchTerm: string): Observable<SearchResult<Project>> {
     let queryParams = new HttpParams({
       fromObject: {
