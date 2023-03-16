@@ -24,6 +24,28 @@ export const mockProject: Project = {
   dmpExists: true
 };
 
+export const mockRecommendedProject: Project = {
+  end: new Date(),
+  funding: {
+    fundingName: 'Funding name',
+    fundingProgram: 'Funding program',
+    funderId: {
+      identifier: '501100004955', type: IdentifierType.FUNDREF
+    },
+    fundingStatus: FundingState.GRANTED,
+    grantId: {
+      identifier: '1337',
+      type: null
+    }, id: 1337
+  },
+  id: 1337,
+  start: new Date(),
+  title: 'Recommended Project title',
+  universityId: 1337,
+  description: '',
+  dmpExists: true
+};
+
 export const mockManualProject: Project = {
   end: new Date(),
   funding: undefined,
