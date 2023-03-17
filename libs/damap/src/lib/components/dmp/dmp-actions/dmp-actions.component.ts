@@ -7,7 +7,7 @@ import {
   exportDmp,
   exportDmpTemplate,
   saveDmpVersion,
-  updateDmp,
+  updateDmp
 } from '../../../store/actions/dmp.actions';
 
 import { AppState } from '../../../store/states/app.state';
@@ -43,7 +43,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
     private formService: FormService,
     private dialog: MatDialog,
     private store: Store<AppState>
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.formChanged$ = this.store.pipe(select(selectFormChanged));
@@ -93,12 +93,22 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
   }
 
   exportDmpTemplate(): void {
-    this.dialog
-      .open(ExportWarningDialogComponent)
-      .afterClosed()
-      .subscribe(template => {
-        this.exportDmpType = template;
-        if (this.funding) {
+    if (this.funding) {
+      this.store.dispatch(
+        exportDmp({ dmp: this.formService.exportFormToDmp() })
+      );
+    } else {
+      const dialogRef = this.dialog.open(ExportWarningDialogComponent, {
+        data: {
+          funding: this.funding,
+        },
+      });
+
+      dialogRef.componentInstance.funding = this.funding;
+
+      dialogRef.afterClosed().subscribe(template => {
+        if (template) {
+          this.exportDmpType = template;
           this.store.dispatch(
             exportDmpTemplate({
               dmp: this.formService.exportFormToDmp(),
@@ -111,6 +121,14 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
           );
         }
       });
+
+      dialogRef.backdropClick().subscribe(() => {
+        dialogRef.close();
+        this.store.dispatch(
+          exportDmp({ dmp: this.formService.exportFormToDmp() })
+        );
+      });
+    }
   }
 }
 
@@ -122,7 +140,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
 export class SaveVersionDialogComponent {
   versionName = '';
 
-  constructor(public dialogRef: MatDialogRef<SaveVersionDialogComponent>) { }
+  constructor(public dialogRef: MatDialogRef<SaveVersionDialogComponent>) {}
 
   onNoClick(): void {
     this.dialogRef.close();

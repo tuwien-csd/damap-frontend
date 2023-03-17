@@ -286,7 +286,7 @@ export class BackendService {
         next: (response) => this.downloadFile(response),
       });
   }
-
+  
   getMaDmpJsonFile(id: number): void {
     this.http.get(`${this.backendUrl}madmp/file/${id}`, {
         responseType: 'blob',
