@@ -4,7 +4,7 @@
   <div mat-dialog-actions>
     <div class="container">
       <ng-container>
-        <mat-form-field appearance="fill" *ngIf="funding">
+        <mat-form-field appearance="fill" *ngIf="!funding">
           <mat-label>{{ 'dialog.export.type' | translate }}</mat-label>
           <mat-select [(value)]="selectedTemplate">
             <mat-option
