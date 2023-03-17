@@ -19,11 +19,6 @@ export const mockSearch: Search = {
   query: '',
 };
 
-export const mockProjectSearchResult: SearchResult<Project> = {
-  items: [mockProject],
-  search: mockSearch,
-};
-
 export const mockRecommendedProjectSearchResult: SearchResult<Project> = {
   items: [mockRecommendedProject],
   search: mockSearch,
@@ -32,4 +27,9 @@ export const mockRecommendedProjectSearchResult: SearchResult<Project> = {
 export const mockContributorSearchResult: SearchResult<Contributor> = {
   search: mockSearch,
   items: [mockContact]
+};
+
+export const mockProjectSearchResult: SearchResult<Project> = {
+  items: [mockProject],
+  search: mockSearch,
 };
