@@ -58,7 +58,7 @@
   <div>
     <mat-form-field appearance="fill">
       <mat-label>{{ 'dmp.steps.people.search.service' | translate }}</mat-label>
-      <mat-select [(value)]="serviceConfigType">
+      <mat-select id="serviceSelect" [(value)]="serviceConfigType" (selectionChange)="onServiceConfigChange($event.value)">
         <mat-option *ngFor="let service of serviceConfig$ | keyvalue" [value]="service.value">
           {{  service.value.displayText | translate }}
         </mat-option>
