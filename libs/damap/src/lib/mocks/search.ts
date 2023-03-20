@@ -22,11 +22,11 @@ export const mockSearch: Search = {
 export const mockRecommendedProjectSearchResult: SearchResult<Project> = {
   items: [mockRecommendedProject],
   search: mockSearch,
-}
+};
 
 export const mockContributorSearchResult: SearchResult<Contributor> = {
   search: mockSearch,
-  items: [mockContact]
+  items: [mockContact],
 };
 
 export const mockProjectSearchResult: SearchResult<Project> = {

@@ -27,9 +27,11 @@ import { PersonSearchComponent } from '../../../widgets/person-search/person-sea
   styleUrls: ['./people.component.css'],
 })
 export class PeopleComponent implements OnInit, OnDestroy {
+  @ViewChild(PersonSearchComponent) personSearch: PersonSearchComponent;
+
   @Input() projectMembers: Contributor[];
   @Input() dmpForm: UntypedFormGroup;
-  @ViewChild(PersonSearchComponent) personSearch: PersonSearchComponent;
+
   @Output() contactPerson = new EventEmitter<any>();
   @Output() contributorToAdd = new EventEmitter<any>();
   @Output() contributorToRemove = new EventEmitter<any>();

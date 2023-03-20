@@ -90,7 +90,7 @@ describe('PeopleComponent', () => {
       expect(component.serviceConfigType).toEqual(serviceConfigMockData[0]);
     });
   });
-  
+
   it('should update serviceConfigType when a service option is selected', async () => {
     spyOn(component, 'onServiceConfigChange').and.callThrough();
 
@@ -114,14 +114,12 @@ describe('PeopleComponent', () => {
 
     expect(orcidOption).toBeTruthy();
 
-    if (orcidOption) {
-      await orcidOption.click();
-      fixture.detectChanges();
-    }
+    await orcidOption.click();
+    fixture.detectChanges();
 
     expect(component.serviceConfigType).toEqual(serviceConfigMockData[1]);
   });
-  
+
   it('should emit contact', () => {
     spyOn(component.contactPerson, 'emit');
 
