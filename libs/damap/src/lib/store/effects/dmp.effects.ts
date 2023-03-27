@@ -130,14 +130,7 @@ export class DmpEffects {
               tap(dmp => {
                 this.formService.mapDmpToForm(dmp);
                 this.store$.dispatch(setFormValue({ dmp }));
-                if (action.type === DmpAction.exportDmpTemplate.type) {
-                  this.backendService.exportDmpTemplate(
-                    dmp.id,
-                    action.dmpTemplateType
-                  );
-                } else {
-                  this.backendService.getDmpDocument(dmp.id);
-                }
+                this.backendService.getDmpDocument(action.dmp.id);
                 this.store$.dispatch(DmpAction.dmpExported());
               }),
               catchError(() => of(DmpAction.failedToSaveDmp()))
@@ -148,7 +141,7 @@ export class DmpEffects {
               action.dmp.id,
               action.dmpTemplateType
             );
-          } else {
+          } else if (action.type === DmpAction.exportDmp.type){
             this.backendService.getDmpDocument(action.dmp.id);
           }
           this.store$.dispatch(DmpAction.dmpExported());

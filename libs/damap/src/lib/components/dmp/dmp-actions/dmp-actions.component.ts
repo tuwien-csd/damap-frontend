@@ -92,47 +92,44 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
       }
     });
   }
-
   exportDmpTemplate(): void {
-    if (this.projectFunding) {
+    if (this.projectFunding?.funding?.funderId) {
       this.store.dispatch(
         exportDmp({ dmp: this.formService.exportFormToDmp() })
       );
     } else {
       const dialogRef = this.dialog.open(ExportWarningDialogComponent, {
         data: {
-          projectFunding: this.projectFunding,
+          projectFunding: this.projectFunding?.funding?.funderId,
         },
       });
   
       dialogRef.componentInstance.projectFunding = this.projectFunding;
   
-      dialogRef.afterClosed().subscribe(template => {
-        if (template) {
-          this.exportDmpType = template;
-          this.store.dispatch(
-            exportDmpTemplate({
-              dmp: this.formService.exportFormToDmp(),
-              dmpTemplateType: this.exportDmpType,
-            })
-          );
+      dialogRef.beforeClosed().subscribe((result) => {
+        if (result === undefined) {
+          //  outside the dialog, do nothing
+          return;
         } else {
-          this.store.dispatch(
-            exportDmp({ dmp: this.formService.exportFormToDmp() })
-          );
+          const template = result;
+          if (template) {
+            this.exportDmpType = template;
+            this.store.dispatch(
+              exportDmpTemplate({
+                dmp: this.formService.exportFormToDmp(),
+                dmpTemplateType: this.exportDmpType,
+              })
+            );
+          } else {
+            this.store.dispatch(
+              exportDmp({ dmp: this.formService.exportFormToDmp() })
+            );
+          }
         }
-      });
-  
-      dialogRef.backdropClick().subscribe(() => {
-        dialogRef.close();
-        this.store.dispatch(
-          exportDmp({ dmp: this.formService.exportFormToDmp() })
-        );
       });
     }
   }
-}
-  
+}  
 
 @Component({
   selector: 'app-save-version-dialog',

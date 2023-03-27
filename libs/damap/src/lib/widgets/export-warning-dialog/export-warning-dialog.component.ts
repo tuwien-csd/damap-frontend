@@ -19,5 +19,4 @@ export class ExportWarningDialogComponent {
   selectedTemplate = '';
 
   constructor(public dialogRef: MatDialogRef<ExportWarningDialogComponent>) {}
-
 }
