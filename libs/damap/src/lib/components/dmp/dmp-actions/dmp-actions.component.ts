@@ -7,7 +7,7 @@ import {
   exportDmp,
   exportDmpTemplate,
   saveDmpVersion,
-  updateDmp
+  updateDmp,
 } from '../../../store/actions/dmp.actions';
 
 import { AppState } from '../../../store/states/app.state';
@@ -15,7 +15,7 @@ import { ETemplateType } from '../../../domain/enum/export-template-type.enum';
 import { ExportWarningDialogComponent } from '../../../widgets/export-warning-dialog/export-warning-dialog.component';
 import { FormGroup } from '@angular/forms';
 import { FormService } from '../../../services/form.service';
-import { Project } from '../../../domain/project';
+import { Funding } from '../../../domain/funding';
 import { selectDmpSaving } from '../../../store/selectors/dmp.selectors';
 import { selectFormChanged } from '../../../store/selectors/form.selectors';
 
@@ -27,7 +27,7 @@ import { selectFormChanged } from '../../../store/selectors/form.selectors';
 export class DmpActionsComponent implements OnInit, OnDestroy {
   @Input() stepChanged$: Subject<any>;
   @Input() admin = false;
-  projectFunding: Project;
+  @Input() projectFunding: Funding;
 
   dmpForm: FormGroup = this.formService.dmpForm;
 
@@ -93,20 +93,20 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
     });
   }
   exportDmpTemplate(): void {
-    if (this.projectFunding?.funding?.funderId) {
+    if (this.dmpForm.controls.funding) {
       this.store.dispatch(
         exportDmp({ dmp: this.formService.exportFormToDmp() })
       );
     } else {
       const dialogRef = this.dialog.open(ExportWarningDialogComponent, {
         data: {
-          projectFunding: this.projectFunding?.funding?.funderId,
+          projectFunding: this.dmpForm.controls.funding,
         },
       });
-  
+
       dialogRef.componentInstance.projectFunding = this.projectFunding;
-  
-      dialogRef.beforeClosed().subscribe((result) => {
+
+      dialogRef.beforeClosed().subscribe(result => {
         if (result === undefined) {
           //  outside the dialog, do nothing
           return;
@@ -129,7 +129,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
       });
     }
   }
-}  
+}
 
 @Component({
   selector: 'app-save-version-dialog',

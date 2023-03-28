@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import {
-  deleteDmp,
-  exportDmp,
-  exportDmpTemplate,
-  loadDmps,
-} from '../../store/actions/dmp.actions';
+import { deleteDmp, loadDmps } from '../../store/actions/dmp.actions';
 import {
   selectDmps,
   selectDmpsLoaded,
@@ -18,11 +13,12 @@ import { DeleteWarningDialogComponent } from '../../widgets/delete-warning-dialo
 import { DmpListItem } from '../../domain/dmp-list-item';
 import { ETemplateType } from '../../domain/enum/export-template-type.enum';
 import { ExportWarningDialogComponent } from '../../widgets/export-warning-dialog/export-warning-dialog.component';
+import { FormGroup } from '@angular/forms';
 import { FormService } from '../../services/form.service';
+import { Funding } from '../../domain/funding';
 import { LoadingState } from '../../domain/enum/loading-state.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { Project } from '../../domain/project';
 
 @Component({
   selector: 'app-plan',
@@ -35,8 +31,9 @@ export class PlansComponent implements OnInit {
     select(selectDmpsLoaded)
   );
   LoadingState = LoadingState;
-  projectFunding: Project;
+  projectFunding: Funding;
   exportDmpType: ETemplateType;
+  dmpForm: FormGroup = this.formService.dmpForm;
 
   allDmps$: Observable<DmpListItem[]>;
 
@@ -44,6 +41,7 @@ export class PlansComponent implements OnInit {
     private store: Store<AppState>,
     private backendService: BackendService,
     private authService: AuthService,
+    private formService: FormService,
     private dialog: MatDialog
   ) {}
   ngOnInit() {
@@ -63,15 +61,12 @@ export class PlansComponent implements OnInit {
   }
 
   getDocument(id: number) {
-    if (this.projectFunding?.funding?.funderId) {
-      this.dialog
-        .open(ExportWarningDialogComponent)
-        .afterClosed()
-        .subscribe(_ => this.backendService.getDmpDocument(id));
+    if (this.dmpForm.controls.funding) {
+      this.backendService.getDmpDocument(id);
     } else {
       const dialogRef = this.dialog.open(ExportWarningDialogComponent, {
         data: {
-          projectFunding: this.projectFunding?.funding.funderId,
+          projectFunding: this.projectFunding,
         },
       });
 
