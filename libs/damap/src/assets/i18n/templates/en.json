@@ -162,7 +162,7 @@
       },
       "documentation": {
         "label": "Documentation and data quality",
-        "intro": "This step helps you to specify the description of your datasets and their generation. This may include information on the methodology used to collect the data, analytical and procedural information, definitions of variables, units of measurement, information on data organisation and so on.",
+        "intro": "This step helps you to provide information on how data will be organised during the project, which data quality control measures are used, what documentation will be prepared and made available to enable reuse of data, and which metadata will be provided.",
         "question": {
           "metadata": "Please indicate which metadata will be provided to help others identify, discover and reuse the data.",
           "datageneration": "How will the research data be generated or reused and which methods and software will be used?",
