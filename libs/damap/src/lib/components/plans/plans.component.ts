@@ -15,7 +15,6 @@ import { ETemplateType } from '../../domain/enum/export-template-type.enum';
 import { ExportWarningDialogComponent } from '../../widgets/export-warning-dialog/export-warning-dialog.component';
 import { FormGroup } from '@angular/forms';
 import { FormService } from '../../services/form.service';
-import { Funding } from '../../domain/funding';
 import { LoadingState } from '../../domain/enum/loading-state.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -31,7 +30,6 @@ export class PlansComponent implements OnInit {
     select(selectDmpsLoaded)
   );
   LoadingState = LoadingState;
-  projectFunding: Funding;
   exportDmpType: ETemplateType;
   dmpForm: FormGroup = this.formService.dmpForm;
 
@@ -61,30 +59,28 @@ export class PlansComponent implements OnInit {
   }
 
   getDocument(id: number) {
-    if (this.dmpForm.controls.funding) {
-      this.backendService.getDmpDocument(id);
-    } else {
-      const dialogRef = this.dialog.open(ExportWarningDialogComponent, {
-        data: {
-          projectFunding: this.projectFunding,
-        },
-      });
+    this.backendService.getDmpById(id).subscribe(x => {
+      this.openExportWarningDialog(x.project?.funderSupported, id);
+    });
+  }
 
-      dialogRef.componentInstance.projectFunding = this.projectFunding;
-      dialogRef.beforeClosed().subscribe(result => {
-        if (result === undefined) {
-          return;
+  openExportWarningDialog(funderSupported: boolean, id: number): void {
+    const dialogRef = this.dialog.open(ExportWarningDialogComponent, {});
+    dialogRef.componentInstance.funderSupported = funderSupported;
+
+    dialogRef.beforeClosed().subscribe(result => {
+      if (result === undefined) {
+        return;
+      } else {
+        const template = result;
+        if (!funderSupported) {
+          this.exportDmpType = template;
+          this.backendService.exportDmpTemplate(id, this.exportDmpType);
         } else {
-          const template = result;
-          if (template) {
-            this.exportDmpType = template;
-            this.backendService.exportDmpTemplate(id, this.exportDmpType);
-          } else {
-            this.backendService.getDmpDocument(id);
-          }
+          this.backendService.getDmpDocument(id);
         }
-      });
-    }
+      }
+    });
   }
 
   getJsonFile(id: number) {

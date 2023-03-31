@@ -1,22 +1,24 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {MockStore, provideMockStore} from '@ngrx/store/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
-import {AuthService} from '../../auth/auth.service';
-import {BackendService} from '../../services/backend.service';
-import {DeleteWarningDialogComponent} from "../../widgets/delete-warning-dialog/delete-warning-dialog.component";
-import {HarnessLoader} from "@angular/cdk/testing";
-import {MatButtonHarness} from "@angular/material/button/testing";
-import {MatButtonModule} from "@angular/material/button";
-import {MatDialogHarness} from "@angular/material/dialog/testing";
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatIconModule} from '@angular/material/icon';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {NoopAnimationsModule} from "@angular/platform-browser/animations";
-import {PlansComponent} from './plans.component';
-import {TestbedHarnessEnvironment} from "@angular/cdk/testing/testbed";
-import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
-import {mockDmpList} from "../../mocks/dmp-list-mocks";
-import {of} from "rxjs";
+import { AuthService } from '../../auth/auth.service';
+import { BackendService } from '../../services/backend.service';
+import { DeleteWarningDialogComponent } from '../../widgets/delete-warning-dialog/delete-warning-dialog.component';
+import { FormService } from '../../services/form.service';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogHarness } from '@angular/material/dialog/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { PlansComponent } from './plans.component';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
+import { UntypedFormBuilder } from '@angular/forms';
+import { mockDmpList } from '../../mocks/dmp-list-mocks';
+import { of } from 'rxjs';
 
 describe('PlanComponent', () => {
   let component: PlansComponent;
@@ -25,22 +27,42 @@ describe('PlanComponent', () => {
   let authSpy;
   let backendSpy;
   let store: MockStore;
-  const initialState = {damap: {dmps: {loaded: true, entities: mockDmpList, ids: [1]}}};
+  const initialState = {
+    damap: { dmps: { loaded: true, entities: mockDmpList, ids: [1] } },
+  };
 
   beforeEach(waitForAsync(async () => {
-    backendSpy = jasmine.createSpyObj('BackendService', ['getDmpDocument', 'getMaDmpJsonFile', 'getAllDmps', 'deleteDmp', 'exportDmpTemplate']);
+    backendSpy = jasmine.createSpyObj('BackendService', [
+      'getDmpDocument',
+      'getMaDmpJsonFile',
+      'getDmpById',
+      'getAllDmps',
+      'deleteDmp',
+      'exportDmpTemplate',
+    ]);
     backendSpy.getAllDmps.and.returnValue(of(mockDmpList));
-    authSpy = jasmine.createSpyObj('AuthService', ['hasValidAccessToken', 'isAdmin']);
+    authSpy = jasmine.createSpyObj('AuthService', [
+      'hasValidAccessToken',
+      'isAdmin',
+    ]);
     await TestBed.configureTestingModule({
-      imports: [MatIconModule, MatProgressBarModule, MatDialogModule, MatButtonModule,
-        TranslateTestingModule, DeleteWarningDialogComponent,
-        NoopAnimationsModule],
+      imports: [
+        MatIconModule,
+        MatProgressBarModule,
+        MatDialogModule,
+        MatButtonModule,
+        TranslateTestingModule,
+        DeleteWarningDialogComponent,
+        NoopAnimationsModule,
+      ],
       declarations: [PlansComponent],
       providers: [
-        provideMockStore({initialState}),
-        {provide: BackendService, useValue: backendSpy},
-        {provide: AuthService, useValue: authSpy}
-      ]
+        provideMockStore({ initialState }),
+        { provide: BackendService, useValue: backendSpy },
+        { provide: AuthService, useValue: authSpy },
+        UntypedFormBuilder,
+        FormService,
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(PlansComponent);
     component = fixture.componentInstance;
@@ -56,7 +78,7 @@ describe('PlanComponent', () => {
   it('should remove dmps', async () => {
     spyOn(store, 'dispatch');
     authSpy.isAdmin.and.returnValue(true);
-    backendSpy.deleteDmp.and.returnValue(of({status: 204}));
+    backendSpy.deleteDmp.and.returnValue(of({ status: 204 }));
 
     component.deleteDmp(1);
     const dialogs = await loader.getAllHarnesses(MatDialogHarness);

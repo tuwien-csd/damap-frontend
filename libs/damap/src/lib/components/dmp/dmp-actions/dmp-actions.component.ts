@@ -7,7 +7,7 @@ import {
   exportDmp,
   exportDmpTemplate,
   saveDmpVersion,
-  updateDmp,
+  updateDmp
 } from '../../../store/actions/dmp.actions';
 
 import { AppState } from '../../../store/states/app.state';
@@ -15,7 +15,6 @@ import { ETemplateType } from '../../../domain/enum/export-template-type.enum';
 import { ExportWarningDialogComponent } from '../../../widgets/export-warning-dialog/export-warning-dialog.component';
 import { FormGroup } from '@angular/forms';
 import { FormService } from '../../../services/form.service';
-import { Funding } from '../../../domain/funding';
 import { selectDmpSaving } from '../../../store/selectors/dmp.selectors';
 import { selectFormChanged } from '../../../store/selectors/form.selectors';
 
@@ -27,7 +26,6 @@ import { selectFormChanged } from '../../../store/selectors/form.selectors';
 export class DmpActionsComponent implements OnInit, OnDestroy {
   @Input() stepChanged$: Subject<any>;
   @Input() admin = false;
-  @Input() projectFunding: Funding;
 
   dmpForm: FormGroup = this.formService.dmpForm;
 
@@ -92,42 +90,38 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  dispatchExportDmp(): void {
+    this.store.dispatch(exportDmp({ dmp: this.formService.exportFormToDmp() }));
+  }
+
+  dispatchExportDmpTemplate(template: string): void {
+    this.store.dispatch(
+      exportDmpTemplate({
+        dmp: this.formService.exportFormToDmp(),
+        dmpTemplateType: this.exportDmpType,
+      })
+    );
+  }
+
   exportDmpTemplate(): void {
-    if (this.dmpForm.controls.funding) {
-      this.store.dispatch(
-        exportDmp({ dmp: this.formService.exportFormToDmp() })
-      );
-    } else {
-      const dialogRef = this.dialog.open(ExportWarningDialogComponent, {
-        data: {
-          projectFunding: this.dmpForm.controls.funding,
-        },
-      });
+    const dialogRef = this.dialog.open(ExportWarningDialogComponent, {});
+    dialogRef.componentInstance.funderSupported =
+      this.dmpForm.controls.project.getRawValue().funderSupported;
 
-      dialogRef.componentInstance.projectFunding = this.projectFunding;
-
-      dialogRef.beforeClosed().subscribe(result => {
-        if (result === undefined) {
-          //  outside the dialog, do nothing
-          return;
+    dialogRef.beforeClosed().subscribe(result => {
+      if (result === undefined) {
+        return;
+      } else {
+        const template = result;
+        if (!this.dmpForm.controls.project.getRawValue().funderSupported) {
+          this.exportDmpType = template;
+          this.dispatchExportDmpTemplate(this.exportDmpType);
         } else {
-          const template = result;
-          if (template) {
-            this.exportDmpType = template;
-            this.store.dispatch(
-              exportDmpTemplate({
-                dmp: this.formService.exportFormToDmp(),
-                dmpTemplateType: this.exportDmpType,
-              })
-            );
-          } else {
-            this.store.dispatch(
-              exportDmp({ dmp: this.formService.exportFormToDmp() })
-            );
-          }
+          this.dispatchExportDmp();
         }
-      });
-    }
+      }
+    });
   }
 }
 

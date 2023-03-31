@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   DmpActionsComponent,
-  SaveVersionDialogComponent,
+  SaveVersionDialogComponent
 } from './dmp-actions.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
+import { ETemplateType } from '../../../domain/enum/export-template-type.enum';
 import { ExportWarningModule } from '../../../widgets/export-warning-dialog/export-warning.module';
 import { FormTestingModule } from '../../../testing/form-testing/form-testing.module';
 import { FormsModule } from '@angular/forms';
@@ -42,10 +43,7 @@ describe('DmpActionsComponent', () => {
         TranslateTestingModule,
         FormTestingModule,
       ],
-      declarations: [
-        DmpActionsComponent,
-        SaveVersionDialogComponent
-      ],
+      declarations: [DmpActionsComponent, SaveVersionDialogComponent],
       providers: [provideMockStore({ initialState })],
     }).compileComponents();
     store = TestBed.inject(MockStore);
@@ -104,16 +102,48 @@ describe('DmpActionsComponent', () => {
     expect(dialogs.length).toBe(0);
   });
 
-  it('should dispatch export dmp action', async () => {
-    spyOn(store, 'dispatch');
+  it('should call dispatchExportDmp if funderSupported is true', async () => {
+    spyOn(component, 'dispatchExportDmp').and.callThrough();
+    spyOn(component, 'exportDmpTemplate').and.callThrough();
+
+    spyOn(component.dmpForm.controls.project, 'getRawValue').and.returnValue({
+      funderSupported: true,
+    });
+
     component.exportDmpTemplate();
+    spyOn(store, 'dispatch').and.callThrough();
+    component.dispatchExportDmp();
 
     let dialogs = await loader.getAllHarnesses(MatDialogHarness);
     expect(dialogs.length).toBe(1);
-    await dialogs[0].close();
 
+    await dialogs[0].close();
     dialogs = await loader.getAllHarnesses(MatDialogHarness);
     expect(dialogs.length).toBe(0);
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(component.exportDmpTemplate).toHaveBeenCalledTimes(1);
+    expect(component.dispatchExportDmp).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call dispatchExportDmp if funderSupported is false', async () => {
+    spyOn(component, 'dispatchExportDmpTemplate').and.callThrough();
+    spyOn(component, 'exportDmpTemplate').and.callThrough();
+
+    spyOn(component.dmpForm.controls.project, 'getRawValue').and.returnValue({
+      funderSupported: false,
+    });
+
+    component.exportDmpTemplate();
+    spyOn(store, 'dispatch').and.callThrough();
+    component.dispatchExportDmpTemplate(ETemplateType.FWF);
+
+    let dialogs = await loader.getAllHarnesses(MatDialogHarness);
+    expect(dialogs.length).toBe(1);
+
+    await dialogs[0].close();
+    dialogs = await loader.getAllHarnesses(MatDialogHarness);
+
+    expect(dialogs.length).toBe(0);
+    expect(component.exportDmpTemplate).toHaveBeenCalledTimes(1);
+    expect(component.dispatchExportDmpTemplate).toHaveBeenCalledTimes(1);
   });
 });

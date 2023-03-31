@@ -9,4 +9,5 @@ export interface Project {
   readonly start: Date;
   readonly end: Date;
   readonly dmpExists: boolean;
+  readonly funderSupported: boolean;
 }

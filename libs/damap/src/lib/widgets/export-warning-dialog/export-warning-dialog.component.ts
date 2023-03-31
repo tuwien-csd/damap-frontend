@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 
 import { ETemplateType } from '../../domain/enum/export-template-type.enum';
-import { Funding } from '../../domain/funding';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UntypedFormGroup } from '@angular/forms';
 
@@ -13,7 +12,7 @@ import { UntypedFormGroup } from '@angular/forms';
 export class ExportWarningDialogComponent {
   @Input() dmpForm: UntypedFormGroup;
   @Input() project: UntypedFormGroup;
-  @Input() projectFunding: Funding;
+  @Input() funderSupported: boolean;
 
   dmpTemplate: any = ETemplateType;
   selectedTemplate = '';

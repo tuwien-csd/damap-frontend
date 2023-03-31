@@ -1,6 +1,6 @@
+import {FundingState} from '../domain/enum/funding-state.enum';
 import {IdentifierType} from '../domain/enum/identifier-type.enum';
 import {Project} from '../domain/project';
-import {FundingState} from '../domain/enum/funding-state.enum';
 
 export const mockProject: Project = {
   end: new Date(),
@@ -21,7 +21,8 @@ export const mockProject: Project = {
   title: 'Project title',
   universityId: 1234,
   description: '',
-  dmpExists: true
+  dmpExists: true,
+  funderSupported: true
 };
 
 export const mockRecommendedProject: Project = {
@@ -43,7 +44,8 @@ export const mockRecommendedProject: Project = {
   title: 'Recommended Project title',
   universityId: 1337,
   description: '',
-  dmpExists: true
+  dmpExists: true,
+  funderSupported: false
 };
 
 export const mockManualProject: Project = {
@@ -54,6 +56,7 @@ export const mockManualProject: Project = {
   title: 'Project title 2',
   universityId: undefined,
   description: '',
-  dmpExists: undefined
+  dmpExists: undefined,
+  funderSupported: false
 };
 
