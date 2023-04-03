@@ -385,7 +385,7 @@ export class FormService {
       referenceHash: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       selectedProjectMembersAccess: [AccessRight.WRITE],
       otherProjectMembersAccess: [AccessRight.WRITE],
-      publicAccess: [AccessRight.READ],
+      publicAccess: [AccessRight.NONE],
       delete: [false],
       dateOfDeletion: [null],
       reasonForDeletion: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
