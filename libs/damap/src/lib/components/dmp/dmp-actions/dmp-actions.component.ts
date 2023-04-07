@@ -7,7 +7,7 @@ import {
   exportDmp,
   exportDmpTemplate,
   saveDmpVersion,
-  updateDmp
+  updateDmp,
 } from '../../../store/actions/dmp.actions';
 
 import { AppState } from '../../../store/states/app.state';
@@ -95,15 +95,6 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
     this.store.dispatch(exportDmp({ dmp: this.formService.exportFormToDmp() }));
   }
 
-  dispatchExportDmpTemplate(template: string): void {
-    this.store.dispatch(
-      exportDmpTemplate({
-        dmp: this.formService.exportFormToDmp(),
-        dmpTemplateType: this.exportDmpType,
-      })
-    );
-  }
-
   exportDmpTemplate(): void {
     const dialogRef = this.dialog.open(ExportWarningDialogComponent, {});
     dialogRef.componentInstance.funderSupported =
@@ -112,15 +103,16 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
     dialogRef.beforeClosed().subscribe(result => {
       if (result === undefined) {
         return;
-      } else {
-        const template = result;
-        if (!this.dmpForm.controls.project.getRawValue().funderSupported) {
-          this.exportDmpType = template;
-          this.dispatchExportDmpTemplate(this.exportDmpType);
-        } else {
-          this.dispatchExportDmp();
-        }
       }
+      if (!this.dmpForm.controls.project.getRawValue().funderSupported) {
+        const template = result;
+        this.exportDmpType = template;
+        exportDmpTemplate({
+          dmp: this.formService.exportFormToDmp(),
+          dmpTemplateType: this.exportDmpType,
+        });
+      }
+      this.dispatchExportDmp();
     });
   }
 }
