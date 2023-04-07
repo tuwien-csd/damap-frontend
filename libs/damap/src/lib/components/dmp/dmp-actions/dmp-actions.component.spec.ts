@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   DmpActionsComponent,
-  SaveVersionDialogComponent,
+  SaveVersionDialogComponent
 } from './dmp-actions.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { Subject, of } from 'rxjs';
 
 import { ExportWarningModule } from '../../../widgets/export-warning-dialog/export-warning.module';
 import { FormTestingModule } from '../../../testing/form-testing/form-testing.module';
@@ -15,10 +16,8 @@ import { MatDialogHarness } from '@angular/material/dialog/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Subject } from 'rxjs';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
-import { of } from 'rxjs';
 
 describe('DmpActionsComponent', () => {
   let component: DmpActionsComponent;
