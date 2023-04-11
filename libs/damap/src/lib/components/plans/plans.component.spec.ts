@@ -1,4 +1,10 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+  waitForAsync,
+} from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 
 import { AuthService } from '../../auth/auth.service';
@@ -90,4 +96,47 @@ describe('PlanComponent', () => {
     expect(backendSpy.deleteDmp).toHaveBeenCalledWith(1);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
   });
+
+  it('should call getDmpDocument if funderSupported is true', fakeAsync(() => {
+    spyOn(component, 'getDocument').and.callThrough();
+    spyOn(component, 'openExportWarningDialog').and.callThrough();
+    backendSpy.getDmpById.and.returnValue(
+      of({ project: { funderSupported: true } })
+    );
+
+    const id = 1;
+    component.getDocument(id);
+    tick();
+
+    expect(component.getDocument).toHaveBeenCalledTimes(1);
+    expect(component.openExportWarningDialog).toHaveBeenCalledWith(true, id);
+  }));
+
+  it('should call exportDmpTemplate and getDmpDocument if funderSupported is false', fakeAsync(() => {
+    spyOn(component, 'getDocument').and.callThrough();
+    spyOn(component, 'openExportWarningDialog').and.callThrough();
+    backendSpy.getDmpById.and.returnValue(
+      of({ project: { funderSupported: false } })
+    );
+
+    const id = 1;
+    const dialogRefMock = {
+      componentInstance: { funderSupported: false },
+      beforeClosed: () => of('some_template'),
+      close: () => {},
+    };
+
+    spyOn((component as any).dialog, 'open').and.returnValue(dialogRefMock);
+
+    component.getDocument(id);
+    tick();
+
+    expect(component.getDocument).toHaveBeenCalledTimes(1);
+    expect(component.openExportWarningDialog).toHaveBeenCalledWith(false, id);
+    expect(backendSpy.exportDmpTemplate).toHaveBeenCalledWith(
+      id,
+      'some_template'
+    );
+    expect(backendSpy.getDmpDocument).toHaveBeenCalledWith(id);
+  }));
 });
