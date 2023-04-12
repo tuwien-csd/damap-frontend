@@ -1,30 +1,31 @@
-import { TestBed } from '@angular/core/testing';
-
-import { SummaryService } from './summary.service';
-import { Dmp } from '../domain/dmp';
-import { mockContact, mockContributor1 } from '../mocks/contributor-mocks';
-import { DataKind } from '../domain/enum/data-kind.enum';
 import { closedDatasetMock, openDatasetMock, restrictedDatasetMock } from '../mocks/dataset-mocks';
-import { DataQualityType } from '../domain/enum/data-quality-type.enum';
-import { ComplianceType } from '../domain/enum/compliance-type.enum';
-import { SecurityMeasure } from '../domain/enum/security-measure.enum';
-import { Agreement } from '../domain/enum/agreement.enum';
 import { completeDmp, noDataDmp } from '../mocks/dmp-mocks';
+import { mockContact, mockContributor1 } from '../mocks/contributor-mocks';
+
+import { Agreement } from '../domain/enum/agreement.enum';
+import { ComplianceType } from '../domain/enum/compliance-type.enum';
 import { CostType } from '../domain/enum/cost-type.enum';
-import { mockStorage } from '../mocks/storage-mocks';
-import { ExternalStorage } from '../domain/external-storage';
+import { DataKind } from '../domain/enum/data-kind.enum';
+import { DataQualityType } from '../domain/enum/data-quality-type.enum';
 import { DataSource } from '../domain/enum/data-source.enum';
+import { Dmp } from '../domain/dmp';
+import { ExternalStorage } from '../domain/external-storage';
+import { SecurityMeasure } from '../domain/enum/security-measure.enum';
+import { SummaryService } from './summary.service';
+import { TestBed } from '@angular/core/testing';
+import { mockStorage } from '../mocks/storage-mocks';
 
 describe('SummaryService', () => {
   let service: SummaryService;
   let dmp: Dmp;
+  
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(SummaryService);
     dmp = { ...baseDmp };
   });
-
+  
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
@@ -38,7 +39,8 @@ describe('SummaryService', () => {
       id: 0,
       start: undefined,
       title: '',
-      universityId: 0
+      universityId: 0,
+      funderSupported: false,
     };
     let summary = SummaryService.evaluateProjectStep(null);
     expect(summary.completeness).toEqual(0);

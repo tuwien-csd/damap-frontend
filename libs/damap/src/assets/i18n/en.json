@@ -23,7 +23,8 @@
     "export": {
       "title": "The file download has started.",
       "content": "Please note that you are not done yet. \n  The exported document may still require fine-tuning.",
-      "button": "OK"
+      "button": "OK",
+      "type": "Choose type of export"
     },
     "delete": {
       "title": "Please note:",

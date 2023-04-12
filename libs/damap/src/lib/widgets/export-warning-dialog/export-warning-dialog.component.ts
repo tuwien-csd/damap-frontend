@@ -1,20 +1,21 @@
-import {Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatButtonModule} from "@angular/material/button";
-import {TranslateModule} from "@ngx-translate/core";
+import { Component, Input } from '@angular/core';
+
+import { ETemplateType } from '../../domain/enum/export-template-type.enum';
+import { MatDialogRef } from '@angular/material/dialog';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'damap-export-warning-dialog',
-  standalone: true,
-  imports: [CommonModule, TranslateModule, MatDialogModule, MatButtonModule],
-  template: `
-    <h1 mat-dialog-title>{{'dialog.export.title' | translate}}</h1>
-    <div mat-dialog-content>{{'dialog.export.content' | translate}}</div>
-    <div mat-dialog-actions>
-      <button mat-button mat-dialog-close="true">{{'dialog.export.button' | translate}}</button>
-    </div>
-  `
+  templateUrl: './export-warning-dialog.html',
+  styleUrls: ['./export-warning-dialog.css'],
 })
 export class ExportWarningDialogComponent {
+  @Input() dmpForm: UntypedFormGroup;
+  @Input() project: UntypedFormGroup;
+  @Input() funderSupported: boolean;
+
+  dmpTemplate: any = ETemplateType;
+  selectedTemplate = '';
+
+  constructor(public dialogRef: MatDialogRef<ExportWarningDialogComponent>) {}
 }

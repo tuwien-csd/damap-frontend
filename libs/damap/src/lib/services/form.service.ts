@@ -1,21 +1,21 @@
+import { Contributor, compareContributors } from '../domain/contributor';
 import { FormControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { AccessRight } from '../domain/enum/access-right.enum';
-import { ccBy } from '../widgets/license-wizard/license-wizard-list';
-import { compareContributors, Contributor } from '../domain/contributor';
 import { Cost } from '../domain/cost';
-import { currencyValidator } from '../validators/currency.validator';
+import { CostType } from '../domain/enum/cost-type.enum';
 import { DataAccessType } from '../domain/enum/data-access-type.enum';
-import { Dataset } from '../domain/dataset';
 import { DataSource } from '../domain/enum/data-source.enum';
+import { Dataset } from '../domain/dataset';
 import { Dmp } from '../domain/dmp';
 import { ExternalStorage } from '../domain/external-storage';
 import { Injectable } from '@angular/core';
 import { InternalStorage } from '../domain/internal-storage';
-import { notEmptyValidator } from '../validators/not-empty.validator';
 import { Repository } from '../domain/repository';
 import { Storage } from '../domain/storage';
-import { CostType } from '../domain/enum/cost-type.enum';
+import { ccBy } from '../widgets/license-wizard/license-wizard-list';
+import { currencyValidator } from '../validators/currency.validator';
+import { notEmptyValidator } from '../validators/not-empty.validator';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +48,7 @@ export class FormService {
     return this.formBuilder.group({
       id: [null],
       project: [null],
+      funding: [null],
       contributors: this.formBuilder.array([]),
       data: this.formBuilder.group({
         kind: [null],
@@ -101,7 +102,7 @@ export class FormService {
         exist: [null],
         existCris: [null],
         list: this.formBuilder.array([])
-      })
+      }),
     });
   }
 
@@ -111,6 +112,7 @@ export class FormService {
     this.form.patchValue({
       id: dmp.id,
       project: dmp.project,
+      funding: dmp.project.funding,
       data: {
         kind: dmp.dataKind,
         reusedKind: dmp.reusedDataKind,
@@ -158,7 +160,7 @@ export class FormService {
         existCris: dmp.costsExistCris
       },
       restrictedAccessInfo: dmp.restrictedAccessInfo,
-      closedAccessInfo: dmp.closedAccessInfo
+      closedAccessInfo: dmp.closedAccessInfo,
     });
 
     // Contributors, datasets, repositories, costs
@@ -390,7 +392,7 @@ export class FormService {
       deletionPerson: [null],
       retentionPeriod: [null],
       source: [DataSource.NEW, Validators.required],
-      datasetId: [null]
+      datasetId: [null],
     });
   }
 

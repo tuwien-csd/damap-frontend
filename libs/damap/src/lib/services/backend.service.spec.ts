@@ -1,20 +1,21 @@
-import { HttpEventType, HttpHeaders } from "@angular/common/http";
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
-import { TestBed } from "@angular/core/testing";
-import { EMPTY } from "rxjs";
+import { HttpEventType, HttpHeaders } from "@angular/common/http";
+
 import { APP_ENV } from "../constants";
+import { BackendService } from "./backend.service";
 import { Contributor } from "../domain/contributor";
 import { Dmp } from "../domain/dmp";
+import { EMPTY } from "rxjs";
+import { FeedbackService } from "./feedback.service";
 import { Project } from "../domain/project";
 import { SearchResult } from "../domain/search/search-result";
-import { mockAccess } from "../mocks/access-mocks";
+import { TestBed } from "@angular/core/testing";
+import { TranslateTestingModule } from "../testing/translate-testing/translate-testing.module";
 import { closedDatasetMock } from "../mocks/dataset-mocks";
 import { completeDmp } from "../mocks/dmp-mocks";
+import { mockAccess } from "../mocks/access-mocks";
 import { mockProject } from "../mocks/project-mocks";
 import { mockProjectSearchResult } from "../mocks/search";
-import { TranslateTestingModule } from "../testing/translate-testing/translate-testing.module";
-import { BackendService } from "./backend.service";
-import { FeedbackService } from "./feedback.service";
 
 describe('BackendService', () => {
   let service: BackendService;
@@ -247,8 +248,8 @@ describe('BackendService', () => {
     const spyObj = jasmine.createSpyObj('a', ['click']);
     spyOn(document, 'createElement').and.returnValue(spyObj);
 
-    service.getDmpDocument(1);
-    const req = httpTestingController.expectOne(`${backendUrl}document/1`);
+    service.exportDmpTemplate(1, "FWF");
+    const req = httpTestingController.expectOne(`${backendUrl}document/1?template=FWF`);
     req.flush(new Blob(), {headers: new HttpHeaders({'content-disposition': 'filename=any.docx'})})
 
     expect(document.createElement).toHaveBeenCalledTimes(1);
