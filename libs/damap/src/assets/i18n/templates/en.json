@@ -229,7 +229,7 @@
         "heading": "Ethical aspects",
         "question": {
           "humanParticipants": "Will you involve human participants in the project and thereby collect or process their personal data?",
-          "ethicalIssues": "Beyond the use of sensitive personal data, are there any other ethical issues associated with your research?",
+          "ethicalIssues": "Beyond the use of personal data, are there any other ethical issues associated with your research?",
           "committeeReviewed": {
             "prefix": "Was your research plan reviewed by an ethics committee, the ",
             "researchCommittee": {
