@@ -373,7 +373,7 @@ export class FormService {
     return this.formBuilder.group({
       id: [null, { disabled: true }],
       title: [title, [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
-      license: [ccBy.url, Validators.maxLength(this.TEXT_SHORT_LENGTH)],
+      license: [ccBy.id, Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       startDate: [null],
       type: [[]],
       size: [null],
