@@ -68,9 +68,13 @@
 <div class="footer">
   <div class="version-information">
     {{'layout.version' | translate }}: {{version}}
-  </div>
-  <div>
     <a [routerLink]="'/gdpr'" rel="noopener">{{'layout.gdpr' | translate}}</a>
+  </div>
+  <div class="info">
+    <a [href]="'layout.impressum.link' | translate" rel="noopener"
+       target="_blank">{{'layout.impressum.text' | translate}}</a>
+    <a [href]="'layout.termsandconditions.link' | translate" rel="noopener"
+       target="_blank">{{'layout.termsandconditions.text' | translate}}</a>
     <a [href]="'layout.dataprotection.link' | translate" rel="noopener"
        target="_blank">{{'layout.dataprotection.text' | translate}}</a>
   </div>
