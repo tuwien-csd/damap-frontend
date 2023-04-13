@@ -46,6 +46,12 @@ mat-nav-list {
   height: 50px;
 }
 
+.info {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
 .mm-navbar {
   padding: 0;
   border: none;

@@ -19,6 +19,18 @@
       "text": "Data Protection Declaration",
       "link": "#"
     },
+    "impressum": {
+      "text": "Impressum",
+      "link": "#"
+    },
+    "termsandconditions": {
+      "text": "Terms and Conditions",
+      "link": "#"
+    },
     "gdpr": "GDPR Info"
+  },
+  "env": {
+    "title": "Test Environment",
+    "text": "This instance is used for developing and testing the web application. Contents may be changed or deleted at any time without prior notice."
   }
 }

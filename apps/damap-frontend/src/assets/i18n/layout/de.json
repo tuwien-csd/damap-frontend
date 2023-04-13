@@ -2,14 +2,14 @@
   "title": "DAMAP",
   "layout": {
     "menu": {
-      "home": "Home",
+      "home": "Startseite",
       "plans": "DMPs",
       "mobile": {
-        "open": "Open page navigation",
-        "close": "Close page navigation"
+        "open": "Seitennavigation öffnen",
+        "close": "Seitennavigation schließen"
       }
     },
-    "logout": "Ausloggen",
+    "logout": "Abmelden",
     "version": "Version",
     "logo": {
       "text": "Zurück zur Hauptseite",
@@ -18,7 +18,16 @@
     "dataprotection": {
       "text": "Datenschutzerklärung",
       "link": "#"
-    }
+    },
+    "impressum": {
+      "text": "Impressum",
+      "link": "#"
+    },
+    "termsandconditions": {
+      "text": "Allgemeine Geschäftsbedingungen",
+      "link": "#"
+    },
+    "gdpr": "DSGVO-Info"
   },
   "env": {
     "title": "Test Umgebung",
