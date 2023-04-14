@@ -43,7 +43,6 @@ export * from './lib/domain/funding';
 export * from './lib/domain/host';
 export * from './lib/domain/identifier';
 export * from './lib/domain/internal-storage';
-export * from './lib/domain/license';
 export * from './lib/domain/license-details';
 export * from './lib/domain/project';
 export * from './lib/domain/repository';

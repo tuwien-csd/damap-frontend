@@ -4,7 +4,7 @@ import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
 import { ComplianceType } from '../../../domain/enum/compliance-type.enum';
 import { DataAccessType } from '../../../domain/enum/data-access-type.enum';
 import { DataSource } from '../../../domain/enum/data-source.enum';
-import { License } from '../../../domain/license';
+import { LicenseDetails } from '../../../domain/license-details';
 import { LicenseDefinitions } from '../../../widgets/license-wizard/license-wizard-list';
 
 @Component({
@@ -16,17 +16,17 @@ export class LicensesComponent {
   @Input() dmpForm: UntypedFormGroup;
   @Input() datasets: UntypedFormArray;
 
-  licenses: License[] = LicenseDefinitions;
+  licenses: LicenseDetails[] = LicenseDefinitions;
   accessType: any = DataAccessType;
 
   translateEnumPrefix = 'enum.dataaccess.';
 
   readonly datasetSource: any = DataSource;
-  
+
   setLicenseSelectorResult(event, index: number) {
     const dataset = this.datasets.at(index);
     if (event) {
-      dataset.patchValue({license: event.url});
+      dataset.patchValue({license: event.id});
     }
   }
 

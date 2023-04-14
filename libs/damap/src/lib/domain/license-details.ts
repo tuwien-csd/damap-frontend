@@ -1,4 +1,5 @@
 export interface LicenseDetails {
+  id: string;
   name: string;
   priority: number;
   available: boolean;
