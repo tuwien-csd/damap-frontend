@@ -22,6 +22,7 @@
 .footer a {
   color: white;
   text-decoration: none;
+  padding:0 0.5rem;
 }
 
 mat-nav-list {
@@ -43,6 +44,12 @@ mat-nav-list {
   left: 0;
   right: 0;
   height: 50px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
 }
 
 .mm-navbar {
@@ -266,7 +273,7 @@ svg {
   .nav-item-desktop {
     display: block;
   }
-  
+
   .sidenav-btn {
     display: none;
   }

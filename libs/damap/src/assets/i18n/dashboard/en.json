@@ -1,6 +1,6 @@
 {
   "dashboard": {
-    "welcome.message": "Welcome to DAMAP, a service that helps you to create and update the Data Management Plan (DMP) for your project.",
+    "welcome.message": "Welcome to DAMAP, a service that helps you to create the Data Management Plan (DMP) for your project.",
     "dmp": {
       "heading": "What is a DMP?",
       "text": {
@@ -27,7 +27,8 @@
             "link": "https://www.scienceeurope.org/our-resources/practical-guide-to-the-international-alignment-of-research-data-management"
           }
         },
-        "document": "exports a pre-filled DMP as a Word document that you can customize and use for submission to European and national funders, for example FWF and FFG",
+        "document": "exports a pre-filled DMP as a document that you can customize and use for submission to European and national funders",
+        "supports": "delivers DMPs for FWF projects in the funder-specific format",
         "benefits": {
           "text": "saves you work by",
           "one": "pre-filling content with detailed information from your CRIS application and other systems",
@@ -42,6 +43,25 @@
           },
           "suffix": "."
         }
+      }
+    },
+    "instructions": {
+      "heading": "How to create a DMP",
+      "steps": {
+        "heading": "Follow the tool through steps 1-10 to provide the required information.",
+        "body": "You do not have to do all steps in one go, simply save the status and continue later. You can always go back and jump between steps. You may even invite colleagues from your institution to add information. If you wish, you can version your DMP."
+      },
+      "export": {
+        "heading": "Export the DMP draft as a document.",
+        "body": "Depending on the funder of your project, the exported DMP will either reflect the funder’s DMP template (FWF) or the DMP recommendations by Science Europe. This happens automatically for imported projects."
+      },
+      "finalise": {
+        "heading": "Finalise your DMP in a text editor.",
+        "body": "The exported DMP is an automatically created draft that you still need to add the finishing touches to. If you have a choice, we recommend editing in Word. Check the content carefully and complete any missing information, including the DMP version details on the cover sheet. Once ready, you can save your DMP as a PDF and provide it to the funder. Please note that you do not need to transfer your changes back into the DMP tool, as the created DMP document will be the basis for subsequent versions, not the tool."
+      },
+      "update": {
+        "heading": "Regularly update your DMP.",
+        "body": "A DMP is a living document and it is recommended to keep it up to date – for yourself, the project team, and the funder. The funders usually ask for updates at certain milestones and at the end of the project. Any changes can easily be done within the document, you do not need the tool for updates. Nevertheless, if you wish to add or change details and create a new version in the DMP tool, for example to update the machine-actionable information, remember to carefully check and complete the exported DMP as described above."
       }
     }
   }

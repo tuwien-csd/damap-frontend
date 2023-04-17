@@ -162,7 +162,7 @@
       },
       "documentation": {
         "label": "Documentation and data quality",
-        "intro": "This step helps you to specify the description of your datasets and their generation. This may include information on the methodology used to collect the data, analytical and procedural information, definitions of variables, units of measurement, information on data organisation and so on.",
+        "intro": "This step helps you to provide information on how data will be organised during the project, which data quality control measures are used, what documentation will be prepared and made available to enable reuse of data, and which metadata will be provided.",
         "question": {
           "metadata": "Please indicate which metadata will be provided to help others identify, discover and reuse the data.",
           "datageneration": "How will the research data be generated or reused and which methods and software will be used?",
@@ -229,7 +229,7 @@
         "heading": "Ethical aspects",
         "question": {
           "humanParticipants": "Will you involve human participants in the project and thereby collect or process their personal data?",
-          "ethicalIssues": "Beyond the use of sensitive personal data, are there any other ethical issues associated with your research?",
+          "ethicalIssues": "Beyond the use of personal data, are there any other ethical issues associated with your research?",
           "committeeReviewed": {
             "prefix": "Was your research plan reviewed by an ethics committee, the ",
             "researchCommittee": {
@@ -313,11 +313,11 @@
             "no": "There are no costs dedicated to data management.",
             "yes": "As outlined below, there are costs dedicated to data management."
           },
-          "title": "Title",
+          "title": "Name",
           "value": "Estimated cost",
           "type": "Cost Type",
           "other": "Please specify the cost type",
-          "description": "Description"
+          "description": "Description (optional)"
         }
       },
       "end": {
@@ -816,6 +816,10 @@
       "ENCRYPTION_OF_SYSTEMS": "encryption of systems",
       "LOCKED_STORAGE": "keep printouts of sensitive data in locked storage",
       "OTHER": "other measures"
+    },
+    "exportDmpTemplatetype": {
+      "FWF": "FWF",
+      "SCIENCE_EUROPE":"SCIENCE_EUROPE"
     }
   },
   "yes": "Yes",

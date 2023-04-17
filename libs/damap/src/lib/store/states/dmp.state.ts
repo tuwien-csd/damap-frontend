@@ -1,6 +1,7 @@
-import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
-import {DmpListItem} from '../../domain/dmp-list-item';
-import {LoadingState} from '../../domain/enum/loading-state.enum';
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+
+import { DmpListItem } from '../../domain/dmp-list-item';
+import { LoadingState } from '../../domain/enum/loading-state.enum';
 
 export interface DmpState extends EntityState<DmpListItem> {
   loaded: LoadingState;

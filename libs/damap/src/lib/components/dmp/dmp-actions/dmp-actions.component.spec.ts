@@ -1,20 +1,23 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  DmpActionsComponent,
+  SaveVersionDialogComponent,
+} from './dmp-actions.component';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { Subject, of } from 'rxjs';
 
-import {DmpActionsComponent, SaveVersionDialogComponent} from './dmp-actions.component';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule} from '@angular/material/dialog';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
-import {FormTestingModule} from '../../../testing/form-testing/form-testing.module';
-import {MockStore, provideMockStore} from '@ngrx/store/testing';
-import {Subject} from 'rxjs';
-import {HarnessLoader} from '@angular/cdk/testing';
-import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
-import {MatDialogHarness} from '@angular/material/dialog/testing';
-import {MatInputHarness} from '@angular/material/input/testing';
-import {MatButtonHarness} from '@angular/material/button/testing';
-import {FormsModule} from '@angular/forms';
-import {ExportWarningDialogComponent} from "../../../widgets/export-warning-dialog/export-warning-dialog.component";
+import { ExportWarningModule } from '../../../widgets/export-warning-dialog/export-warning.module';
+import { FormTestingModule } from '../../../testing/form-testing/form-testing.module';
+import { FormsModule } from '@angular/forms';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogHarness } from '@angular/material/dialog/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputHarness } from '@angular/material/input/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
 
 describe('DmpActionsComponent', () => {
   let component: DmpActionsComponent;
@@ -23,25 +26,24 @@ describe('DmpActionsComponent', () => {
   let store: MockStore;
   const initialState = {
     damap: {
-      form: {dmp: null, changed: false},
-      dmps: {saving: false}
-    }
+      form: { dmp: null, changed: false },
+      dmps: { saving: false },
+    },
   };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        ExportWarningDialogComponent,
-        MatButtonModule, MatDialogModule,
+        ExportWarningModule,
+        MatButtonModule,
+        MatDialogModule,
         FormsModule,
         NoopAnimationsModule,
         TranslateTestingModule,
-        FormTestingModule
+        FormTestingModule,
       ],
       declarations: [DmpActionsComponent, SaveVersionDialogComponent],
-      providers: [
-        provideMockStore({initialState})
-      ]
+      providers: [provideMockStore({ initialState })],
     }).compileComponents();
     store = TestBed.inject(MockStore);
   });
@@ -99,17 +101,51 @@ describe('DmpActionsComponent', () => {
     expect(dialogs.length).toBe(0);
   });
 
-  it('should dispatch export dmp action', async () => {
-    spyOn(store, 'dispatch');
-    component.exportDmp();
+  it('should call dispatchExportDmp if funderSupported is true', async () => {
+    spyOn(component, 'dispatchExportDmp').and.callThrough();
+    spyOn(component, 'exportDmpTemplate').and.callThrough();
+
+    spyOn(component.dmpForm.controls.project, 'getRawValue').and.returnValue({
+      funderSupported: true,
+    });
+
+    component.exportDmpTemplate();
+    spyOn(store, 'dispatch').and.callThrough();
+    component.dispatchExportDmp();
 
     let dialogs = await loader.getAllHarnesses(MatDialogHarness);
     expect(dialogs.length).toBe(1);
-    await dialogs[0].close();
 
+    await dialogs[0].close();
     dialogs = await loader.getAllHarnesses(MatDialogHarness);
     expect(dialogs.length).toBe(0);
 
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(component.exportDmpTemplate).toHaveBeenCalledTimes(1);
+    expect(component.dispatchExportDmp).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call dispatchExportDmp if funderSupported is false', async () => {
+    spyOn(component, 'dispatchExportDmp').and.callThrough();
+    spyOn(component, 'exportDmpTemplate').and.callThrough();
+
+    spyOn(component.dmpForm.controls.project, 'getRawValue').and.returnValue({
+      funderSupported: false,
+    });
+
+    const dialogRefMock = {
+      componentInstance: { funderSupported: false },
+      beforeClosed: () => of('show popup'),
+      close: () => {},
+    };
+
+    spyOn((component as any).dialog, 'open').and.returnValue(dialogRefMock);
+
+    component.exportDmpTemplate();
+
+    await fixture.whenStable();
+
+    expect(component.dispatchExportDmp).not.toHaveBeenCalled();
+    expect((component as any).dialog.open).toHaveBeenCalled();
+    expect(component.dmpForm.controls.project.getRawValue).toHaveBeenCalled();
   });
 });

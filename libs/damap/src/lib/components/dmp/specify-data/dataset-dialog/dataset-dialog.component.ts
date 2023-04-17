@@ -1,12 +1,13 @@
 import {Component, Inject} from '@angular/core';
-import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FILE_SIZES, FILE_TYPES} from '../data-specs';
 import {FormService} from '../../../../services/form.service';
 import {Dataset} from '../../../../domain/dataset';
 import {DataSource} from '../../../../domain/enum/data-source.enum';
-import {IdentifierType} from '../../../../domain/enum/identifier-type.enum';
-import {Identifier} from '../../../../domain/identifier';
+
+import { IdentifierTypeReusedData } from '../../../../domain/identifier-type';
+import { Identifier } from '../../../../domain/identifier';
 
 @Component({
   selector: 'app-dataset-dialog',
@@ -18,7 +19,8 @@ export class DatasetDialogComponent {
   readonly FILE_TYPES = FILE_TYPES;
   readonly FILE_SIZES = FILE_SIZES;
   readonly datasetSource: any = DataSource;
-  readonly identifierType: any = IdentifierType;
+  identifierTypeReusedData: any = IdentifierTypeReusedData;
+
 
   mode = 'add';
   dataset: UntypedFormGroup = this.formService.createDatasetFormGroup(this.data.dataset.title);

@@ -1,17 +1,21 @@
-import { TestBed } from "@angular/core/testing";
-import { BackendService } from "./backend.service";
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { HttpEventType, HttpHeaders } from "@angular/common/http";
+
+import { APP_ENV } from "../constants";
+import { BackendService } from "./backend.service";
+import { Contributor } from "../domain/contributor";
+import { Dmp } from "../domain/dmp";
+import { EMPTY } from "rxjs";
 import { FeedbackService } from "./feedback.service";
 import { Project } from "../domain/project";
-import { Dmp } from "../domain/dmp";
-import { completeDmp } from "../mocks/dmp-mocks";
-import { HttpEventType, HttpHeaders } from "@angular/common/http";
+import { SearchResult } from "../domain/search/search-result";
+import { TestBed } from "@angular/core/testing";
 import { TranslateTestingModule } from "../testing/translate-testing/translate-testing.module";
-import { Contributor } from "../domain/contributor";
 import { closedDatasetMock } from "../mocks/dataset-mocks";
-import { APP_ENV } from "../constants";
+import { completeDmp } from "../mocks/dmp-mocks";
 import { mockAccess } from "../mocks/access-mocks";
-import { EMPTY } from "rxjs";
+import { mockProject } from "../mocks/project-mocks";
+import { mockProjectSearchResult } from "../mocks/search";
 
 describe('BackendService', () => {
   let service: BackendService;
@@ -146,18 +150,19 @@ describe('BackendService', () => {
     });
 
   it('should get all suggested projects', () => {
-    service.getSuggestedProjects().subscribe(
-      (projects: Project[]) => {
-        expect(projects).toBeTruthy();
-        expect(projects.length).toBe(1,);
+    service.getProjectSearchResult("").subscribe(
+      (searchResult: SearchResult<Project>) => {
+        expect(searchResult).toBeTruthy();
+        expect(searchResult.items).toBeTruthy();
+        expect(searchResult.items.length).toBe(1,);
 
-        const project = projects[0];
-        expect(project.title).toBe('Mock project');
+        const project = searchResult.items[0];
+        expect(project.title).toBe(mockProject.title);
       }
     );
 
-    const req = httpTestingController.expectOne(`${backendUrl}projects`);
-    req.flush([{id: null, universityId: 1234, title: 'Mock project'}]);
+    const req = httpTestingController.expectOne(`${backendUrl}projects?q=`);
+    req.flush(mockProjectSearchResult);
   });
 
 
@@ -226,12 +231,25 @@ describe('BackendService', () => {
     req.flush(closedDatasetMock);
   });
 
+  it('should retrieve GDPR data', () => {
+    service.getGdpr().subscribe(gdpr => {
+      expect(gdpr).toBeTruthy();
+      expect(gdpr.length).toBe(1);
+
+      const consent = gdpr.find(item => item.entity === 'Consent');
+      expect(consent.entries.length).toBe(1);
+    });
+
+    const req = httpTestingController.expectOne(`${backendUrl}gdpr/extended`);
+    req.flush([{ entity: 'Consent', entries: [{ consentGiven: 'true' }] }]);
+  });
+
   it('should get dmp document', () => {
     const spyObj = jasmine.createSpyObj('a', ['click']);
     spyOn(document, 'createElement').and.returnValue(spyObj);
 
-    service.getDmpDocument(1);
-    const req = httpTestingController.expectOne(`${backendUrl}document/1`);
+    service.exportDmpTemplate(1, "FWF");
+    const req = httpTestingController.expectOne(`${backendUrl}document/1?template=FWF`);
     req.flush(new Blob(), {headers: new HttpHeaders({'content-disposition': 'filename=any.docx'})})
 
     expect(document.createElement).toHaveBeenCalledTimes(1);

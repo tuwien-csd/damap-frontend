@@ -21,21 +21,12 @@
 
   <!-- Project list -->
   <mat-tab label="{{'dmp.steps.project.list' | translate}}">
-    <div *ngIf="loaded === LoadingState.LOADING">
-      <p>{{'dmp.steps.project.loading.load' | translate}}</p>
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </div>
-    <div *ngIf="loaded === LoadingState.LOADED">
       <div>
-        <app-project-list [selectedProject]="projectStep?.value" [projects]="projects"
+        <app-project-list [selectedProject]="projectStep?.value"
                           (projectToSet)="changeProject($event)"></app-project-list>
       </div>
-      <button mat-raised-button color="primary" *ngIf="!projects?.length"
+      <button mat-raised-button color="primary"
               (click)="changeTab(1)">{{'dmp.steps.project.manual.input' | translate}}</button>
-    </div>
-    <div *ngIf="loaded === LoadingState.FAILED">
-      <app-error-message [message]="'dmp.steps.project.loading.failed'"></app-error-message>
-    </div>
   </mat-tab>
 
   <!-- Manual project input -->

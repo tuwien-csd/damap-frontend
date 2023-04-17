@@ -51,14 +51,14 @@
 <!-- SEARCH -->
 <div [formGroup]="dmpForm" class="mat-search-form-field">
   <app-person-search [result]="
-      searchResult$ | async
+     ( searchResult$ | async )?.items ?? []
         | contributorFilter: dmpForm.controls.contributors.value
     " (termToSearch)="searchContributor($event)" (personToAdd)="addContributor($event)">
   </app-person-search>
   <div>
     <mat-form-field appearance="fill">
       <mat-label>{{ 'dmp.steps.people.search.service' | translate }}</mat-label>
-      <mat-select [(value)]="serviceConfigType">
+      <mat-select id="serviceSelect" [(value)]="serviceConfigType" (selectionChange)="onServiceConfigChange($event.value)">
         <mat-option *ngFor="let service of serviceConfig$ | keyvalue" [value]="service.value">
           {{  service.value.displayText | translate }}
         </mat-option>

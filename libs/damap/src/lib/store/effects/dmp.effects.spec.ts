@@ -1,16 +1,18 @@
-import {provideMockActions} from '@ngrx/effects/testing';
-import {TestBed} from '@angular/core/testing';
+import {createDmp, dmpsLoaded, exportDmpTemplate, failedToLoadDmps, loadDmps} from '../actions/dmp.actions';
 import {of, throwError} from 'rxjs';
+
 import {BackendService} from '../../services/backend.service';
 import {DmpEffects} from './dmp.effects';
-import {createDmp, dmpsLoaded, exportDmp, failedToLoadDmps, loadDmps} from '../actions/dmp.actions';
-import {mockDmpList} from '../../mocks/dmp-list-mocks';
-import {provideMockStore} from '@ngrx/store/testing';
-import {FormService} from '../../services/form.service';
+import { ETemplateType } from '../../domain/enum/export-template-type.enum';
 import {FeedbackService} from '../../services/feedback.service';
+import {FormService} from '../../services/form.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {LoadingState} from '../../domain/enum/loading-state.enum';
+import {TestBed} from '@angular/core/testing';
 import {completeDmp} from '../../mocks/dmp-mocks';
+import {mockDmpList} from '../../mocks/dmp-list-mocks';
+import {provideMockActions} from '@ngrx/effects/testing';
+import {provideMockStore} from '@ngrx/store/testing';
 
 describe('DmpEffects', () => {
   let actions$;
@@ -33,7 +35,7 @@ describe('DmpEffects', () => {
         {
           provide: BackendService,
           useValue: jasmine.createSpyObj('BackendService',
-            ['getDmps', 'createDmp', 'editDmp', 'saveDmpVersion', 'getDmpDocument'])
+            ['getDmps', 'createDmp', 'editDmp', 'saveDmpVersion', 'exportDmpTemplate', 'getDmpDocument'])
         },
         {provide: FormService, useValue: jasmine.createSpyObj('FormService', ['mapDmpToForm'])},
         {provide: FeedbackService, useValue: jasmine.createSpyObj('FeedbackService', ['success'])},
@@ -91,14 +93,13 @@ describe('DmpEffects', () => {
   });
 
   it('should save and export dmp', () => {
-    actions$ = of(exportDmp({dmp: completeDmp}));
+    actions$ = of(exportDmpTemplate({dmp: completeDmp, dmpTemplateType: ETemplateType.FWF }));
     backendService.editDmp.and.returnValue(of(completeDmp));
 
-    effects.exportDmp$.subscribe({
+    effects.exportDmpTemplate$.subscribe({
         complete: () => {
           expect(backendService.editDmp).toHaveBeenCalledTimes(0);
           expect(formService.mapDmpToForm).toHaveBeenCalledTimes(0);
-          expect(backendService.getDmpDocument).toHaveBeenCalledOnceWith(completeDmp.id);
         }
       }
     );
@@ -107,15 +108,14 @@ describe('DmpEffects', () => {
   it('should export dmp without saving', () => {
     effects.store$.setState({damap: {dmps: {dmps: [], loaded: LoadingState.LOADED}, form: {changed: true}}});
 
-    actions$ = of(exportDmp({dmp: completeDmp}));
+    actions$ = of(exportDmpTemplate({dmp: completeDmp, dmpTemplateType: ETemplateType.FWF}));
     backendService.editDmp.and.returnValue(of(completeDmp));
     const storeSpy = spyOn(effects.store$, 'dispatch').and.callThrough();
 
-    effects.exportDmp$.subscribe({
+    effects.exportDmpTemplate$.subscribe({
         complete: () => {
           expect(backendService.editDmp).toHaveBeenCalledTimes(1);
           expect(formService.mapDmpToForm).toHaveBeenCalledOnceWith(completeDmp);
-          expect(backendService.getDmpDocument).toHaveBeenCalledOnceWith(completeDmp.id);
           expect(storeSpy).toHaveBeenCalledTimes(2);
         }
       }
@@ -125,19 +125,17 @@ describe('DmpEffects', () => {
   it('should fail to save and export dmp', () => {
     effects.store$.setState({damap: {dmps: {dmps: [], loaded: LoadingState.LOADED}, form: {changed: true}}});
 
-    actions$ = of(exportDmp({dmp: completeDmp}));
+    actions$ = of(exportDmpTemplate({dmp: completeDmp, dmpTemplateType: ETemplateType.FWF}));
     backendService.editDmp.and.returnValue(throwError(() => new HttpErrorResponse({})));
     const storeSpy = spyOn(effects.store$, 'dispatch').and.callThrough();
 
-    effects.exportDmp$.subscribe({
+    effects.exportDmpTemplate$.subscribe({
         complete: () => {
           expect(backendService.editDmp).toHaveBeenCalledTimes(1);
           expect(formService.mapDmpToForm).toHaveBeenCalledTimes(0);
-          expect(backendService.getDmpDocument).toHaveBeenCalledTimes(0);
           expect(storeSpy).toHaveBeenCalledTimes(0);
         }
       }
     );
-  });
-
+   });
 });

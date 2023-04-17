@@ -1,0 +1,30 @@
+<div>
+  <h1 mat-dialog-title>{{'dialog.export.title' | translate}}</h1>
+  <div mat-dialog-content>{{'dialog.export.content' | translate}}</div>
+  <div mat-dialog-actions>
+    <div class="container">
+      <ng-container>
+        <mat-form-field appearance="fill" *ngIf="!funderSupported">
+          <mat-label>{{ 'dialog.export.type' | translate }}</mat-label>
+          <mat-select [(value)]="selectedTemplate">
+            <mat-option
+              *ngFor="let id of dmpTemplate | keyvalue"
+              [value]="id.key">
+              {{id.key}}<br />
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+      <button
+        class="button"
+        mat-button
+        [mat-dialog-close]="selectedTemplate"
+        [disabled]="!selectedTemplate && !funderSupported"
+        mat-raised-button
+        color="primary"
+      >
+        {{'dialog.export.button' | translate}}
+      </button>
+    </div>
+  </div>
+</div>

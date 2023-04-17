@@ -32,7 +32,7 @@
             <mat-form-field class="full-width">
               <mat-label>{{'dmp.steps.licensing.question.license' | translate}}</mat-label>
               <mat-select formControlName="license">
-                <mat-option *ngFor="let license of licenses" [value]="license.url | translate">
+                <mat-option *ngFor="let license of licenses" [value]="license.id | translate">
                   {{license.name | translate}}
                 </mat-option>
               </mat-select>

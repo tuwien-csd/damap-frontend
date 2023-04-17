@@ -1,6 +1,8 @@
-import {createAction, props} from '@ngrx/store';
-import {DmpListItem} from '../../domain/dmp-list-item';
-import {Dmp} from '../../domain/dmp';
+import { createAction, props } from '@ngrx/store';
+
+import { Dmp } from '../../domain/dmp';
+import { DmpListItem } from '../../domain/dmp-list-item';
+import { ETemplateType } from '../../domain/enum/export-template-type.enum';
 
 export const loadDmps = createAction('[Dmps] Load all', (skipIfPresent: boolean = true) => ({skipIfPresent}));
 
@@ -18,8 +20,11 @@ export const dmpSaved = createAction('[Dmps] Dmp saved');
 
 export const failedToSaveDmp = createAction('[Dmps] Failed to save dmp');
 
-export const exportDmp = createAction('[Dmps] Export dmp', props<{ dmp: Dmp }>());
 
 export const dmpExported = createAction('[Dmps] Dmp exported');
 
 export const deleteDmp = createAction('[Dmps] Remove dmp', props<{ id: number }>());
+
+export const exportDmp = createAction('[Dmps] Export dmp', props<{ dmp: Dmp }>());
+
+export const exportDmpTemplate = createAction('[Dmps] Export dmp with template', props<{ dmp: Dmp, dmpTemplateType: ETemplateType }>());

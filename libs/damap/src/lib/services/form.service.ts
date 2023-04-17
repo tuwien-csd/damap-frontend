@@ -1,8 +1,9 @@
-import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Contributor, compareContributors } from '../domain/contributor';
+import { FormControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { AccessRight } from '../domain/enum/access-right.enum';
-import { Contributor } from '../domain/contributor';
 import { Cost } from '../domain/cost';
+import { CostType } from '../domain/enum/cost-type.enum';
 import { DataAccessType } from '../domain/enum/data-access-type.enum';
 import { DataSource } from '../domain/enum/data-source.enum';
 import { Dataset } from '../domain/dataset';
@@ -47,6 +48,7 @@ export class FormService {
     return this.formBuilder.group({
       id: [null],
       project: [null],
+      funding: [null],
       contributors: this.formBuilder.array([]),
       data: this.formBuilder.group({
         kind: [null],
@@ -100,7 +102,7 @@ export class FormService {
         exist: [null],
         existCris: [null],
         list: this.formBuilder.array([])
-      })
+      }),
     });
   }
 
@@ -110,6 +112,7 @@ export class FormService {
     this.form.patchValue({
       id: dmp.id,
       project: dmp.project,
+      funding: dmp.project.funding,
       data: {
         kind: dmp.dataKind,
         reusedKind: dmp.reusedDataKind,
@@ -157,7 +160,7 @@ export class FormService {
         existCris: dmp.costsExistCris
       },
       restrictedAccessInfo: dmp.restrictedAccessInfo,
-      closedAccessInfo: dmp.closedAccessInfo
+      closedAccessInfo: dmp.closedAccessInfo,
     });
 
     // Contributors, datasets, repositories, costs
@@ -201,7 +204,9 @@ export class FormService {
       committeeReviewed: formValue.legal.committeeReviewed,
       committeeReviewedCris: formValue.legal.committeeReviewedCris,
       contributors: formValue.contributors,
-      costs: formValue.costs.exist ? formValue.costs.list : [],
+      costs: formValue.costs.exist
+        ? formValue.costs.list.map(this.mapFormGroupToCost)
+        : [],
       costsExist: formValue.costs.exist,
       costsExistCris: formValue.costs.existCris,
       dataGeneration: formValue.data.dataGeneration,
@@ -219,8 +224,10 @@ export class FormService {
       humanParticipantsCris: formValue.legal.humanParticipantsCris,
       legalRestrictions: formValue.legal.legalRestrictions,
       legalRestrictionsCris: formValue.legal.legalRestrictionsCris,
-      legalRestrictionsDocuments: formValue.legal.legalRestrictionsDocuments || [],
-      otherLegalRestrictionsDocument: formValue.legal.otherLegalRestrictionsDocuments,
+      legalRestrictionsDocuments:
+        formValue.legal.legalRestrictionsDocuments || [],
+      otherLegalRestrictionsDocument:
+        formValue.legal.otherLegalRestrictionsDocuments,
       legalRestrictionsComment: formValue.legal.legalRestrictionsComment,
       dataRightsAndAccessControl: formValue.legal.dataRightsAndAccessControl,
       metadata: formValue.documentation.metadata,
@@ -242,7 +249,7 @@ export class FormService {
       targetAudience: formValue.reuse.targetAudience,
       tools: formValue.reuse.tools,
       id: formValue.id,
-      project: formValue.project
+      project: formValue.project,
     };
   }
 
@@ -265,9 +272,9 @@ export class FormService {
 
     // Add/set new contact
     if (contact) {
-      const newContact = contributorFormArray.controls.find(c => c.value.universityId === contact.universityId);
-      if (newContact) {
-        newContact.patchValue({ contact: true });
+      const existingContact = contributorFormArray.controls.find(c => compareContributors(c.value, contact));
+      if (existingContact) {
+        existingContact.patchValue({ contact: true });
       } else {
         this.addContributorToForm(contact, true);
       }
@@ -366,7 +373,7 @@ export class FormService {
     return this.formBuilder.group({
       id: [null, { disabled: true }],
       title: [title, [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
-      license: [ccBy.url, Validators.maxLength(this.TEXT_SHORT_LENGTH)],
+      license: [ccBy.id, Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       startDate: [null],
       type: [[]],
       size: [null],
@@ -378,14 +385,14 @@ export class FormService {
       referenceHash: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       selectedProjectMembersAccess: [AccessRight.WRITE],
       otherProjectMembersAccess: [AccessRight.WRITE],
-      publicAccess: [AccessRight.READ],
+      publicAccess: [AccessRight.NONE],
       delete: [false],
       dateOfDeletion: [null],
       reasonForDeletion: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       deletionPerson: [null],
-      retentionPeriod: [null],
+      retentionPeriod: [10],
       source: [DataSource.NEW, Validators.required],
-      datasetId: [null]
+      datasetId: [null],
     });
   }
 
@@ -485,13 +492,28 @@ export class FormService {
 
   private createCostFormGroup(): UntypedFormGroup {
     return this.formBuilder.group({
-      id: [null, { disabled: true }],
-      title: ['New cost', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
-      currencyCode: ['EUR', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
-      value: [0, currencyValidator()], // validate currency format
-      type: [null],
-      customType: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
-      description: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
+      id: new FormControl<number>({ value: null, disabled: true }),
+      title: new FormControl<string>('New cost', {
+        validators: [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      }),
+      currencyCode: new FormControl<string>('EUR', {
+        validators: [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+        ],
+      }),
+      value: new FormControl<number>(0, { validators: [currencyValidator()] }),
+      type: new FormControl<CostType>(null),
+      customType: new FormControl<string>('', {
+        validators: Validators.maxLength(this.TEXT_SHORT_LENGTH),
+      }),
+      description: new FormControl<string>('', {
+        validators: Validators.maxLength(this.TEXT_MAX_LENGTH),
+      }),
     });
   }
 
@@ -507,6 +529,19 @@ export class FormService {
       description: cost.description || ''
     });
     return formGroup;
+  }
+
+  private mapFormGroupToCost(group: Object) : Cost {
+    let c: Cost = {
+      id: Number(group['id']),
+      title: group['title'],
+      value: Number(group['value']),
+      currencyCode: group['currencyCode'],
+      description: group['description'],
+      type: group['type'],
+      customType: group['customType'],
+    };
+    return c;
   }
 
   private removeDatasetReferences(index: number) {

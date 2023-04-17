@@ -1,27 +1,37 @@
-import {Component, OnInit} from '@angular/core';
-import {select, Store} from '@ngrx/store';
-import {AppState} from '../../store/states/app.state';
-import {selectDmps, selectDmpsLoaded} from '../../store/selectors/dmp.selectors';
-import {Observable} from 'rxjs';
-import {loadDmps, deleteDmp} from '../../store/actions/dmp.actions';
-import {DmpListItem} from '../../domain/dmp-list-item';
-import {BackendService} from '../../services/backend.service';
-import {LoadingState} from '../../domain/enum/loading-state.enum';
-import {AuthService} from '../../auth/auth.service';
-import {MatDialog} from "@angular/material/dialog";
-import {ExportWarningDialogComponent} from "../../widgets/export-warning-dialog/export-warning-dialog.component";
-import {DeleteWarningDialogComponent} from "../../widgets/delete-warning-dialog/delete-warning-dialog.component";
+import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { deleteDmp, loadDmps } from '../../store/actions/dmp.actions';
+import {
+  selectDmps,
+  selectDmpsLoaded,
+} from '../../store/selectors/dmp.selectors';
+
+import { AppState } from '../../store/states/app.state';
+import { AuthService } from '../../auth/auth.service';
+import { BackendService } from '../../services/backend.service';
+import { DeleteWarningDialogComponent } from '../../widgets/delete-warning-dialog/delete-warning-dialog.component';
+import { DmpListItem } from '../../domain/dmp-list-item';
+import { ETemplateType } from '../../domain/enum/export-template-type.enum';
+import { ExportWarningDialogComponent } from '../../widgets/export-warning-dialog/export-warning-dialog.component';
+import { FormGroup } from '@angular/forms';
+import { FormService } from '../../services/form.service';
+import { LoadingState } from '../../domain/enum/loading-state.enum';
+import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-plan',
   templateUrl: './plans.component.html',
-  styleUrls: ['./plans.component.css']
+  styleUrls: ['./plans.component.css'],
 })
 export class PlansComponent implements OnInit {
-
   dmps$: Observable<DmpListItem[]> = this.store.pipe(select(selectDmps));
-  dmpsLoaded$: Observable<LoadingState> = this.store.pipe(select(selectDmpsLoaded));
+  dmpsLoaded$: Observable<LoadingState> = this.store.pipe(
+    select(selectDmpsLoaded)
+  );
   LoadingState = LoadingState;
+  exportDmpType: ETemplateType;
+  dmpForm: FormGroup = this.formService.dmpForm;
 
   allDmps$: Observable<DmpListItem[]>;
 
@@ -29,10 +39,9 @@ export class PlansComponent implements OnInit {
     private store: Store<AppState>,
     private backendService: BackendService,
     private authService: AuthService,
+    private formService: FormService,
     private dialog: MatDialog
-  ) {
-  }
-
+  ) {}
   ngOnInit() {
     this.getDmps();
 
@@ -50,31 +59,51 @@ export class PlansComponent implements OnInit {
   }
 
   getDocument(id: number) {
-    this.dialog.open(ExportWarningDialogComponent).afterClosed().subscribe(
-      _ => this.backendService.getDmpDocument(id)
-    );
+    this.backendService.getDmpById(id).subscribe(x => {
+      this.openExportWarningDialog(x.project?.funderSupported, id);
+    });
+  }
+
+  openExportWarningDialog(funderSupported: boolean, id: number): void {
+    const dialogRef = this.dialog.open(ExportWarningDialogComponent, {});
+    dialogRef.componentInstance.funderSupported = funderSupported;
+
+    dialogRef.beforeClosed().subscribe(result => {
+      if (result === undefined) {
+        return;
+      } else {
+        if (!funderSupported) {
+          const template = result;
+          this.exportDmpType = template;
+          this.backendService.exportDmpTemplate(id, this.exportDmpType);
+        } else {
+          this.backendService.getDmpDocument(id);
+        }
+      }
+    });
   }
 
   getJsonFile(id: number) {
-    this.dialog.open(ExportWarningDialogComponent).afterClosed().subscribe(
-      _ => this.backendService.getMaDmpJsonFile(id)
-    );
+    this.backendService.getMaDmpJsonFile(id);
   }
 
   deleteDmp(id: number) {
-    this.dialog.open(DeleteWarningDialogComponent).afterClosed().subscribe(
-      {next: response => {
+    this.dialog
+      .open(DeleteWarningDialogComponent)
+      .afterClosed()
+      .subscribe({
+        next: response => {
           if (response) {
-            this.backendService.deleteDmp(id).subscribe(
-              {next: _ => {
-                  if (this.isAdmin()) {
-                    this.getAllDmps();
-                  }
-                  return this.store.dispatch(deleteDmp({id}));
+            this.backendService.deleteDmp(id).subscribe({
+              next: _ => {
+                if (this.isAdmin()) {
+                  this.getAllDmps();
                 }
-              });
+                return this.store.dispatch(deleteDmp({ id }));
+              },
+            });
           }
-        }
+        },
       });
   }
 

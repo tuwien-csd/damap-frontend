@@ -3,26 +3,32 @@ import {
   EventEmitter,
   Inject,
   Input,
+  OnDestroy,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
-import { ContributorRole } from '../../../domain/enum/contributor-role.enum';
 import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
-import { Contributor } from '../../../domain/contributor';
-import { IdentifierType } from '../../../domain/enum/identifier-type.enum';
-import { Observable, Subject, switchMap } from 'rxjs';
-import { BackendService } from '../../../services/backend.service';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Dataset } from '../../../domain/dataset';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { ServiceConfig } from '../../../domain/config-services';
+import { SearchResult } from '../../../domain/search/search-result';
+import { Contributor } from '../../../domain/contributor';
+import { Dataset } from '../../../domain/dataset';
+import { ContributorRole } from '../../../domain/enum/contributor-role.enum';
+import { IdentifierType } from '../../../domain/enum/identifier-type.enum';
+import { BackendService } from '../../../services/backend.service';
+import { PersonSearchComponent } from '../../../widgets/person-search/person-search.component';
 
 @Component({
   selector: 'app-dmp-people',
   templateUrl: './people.component.html',
   styleUrls: ['./people.component.css'],
 })
-export class PeopleComponent implements OnInit {
+export class PeopleComponent implements OnInit, OnDestroy {
+  @ViewChild(PersonSearchComponent) personSearch: PersonSearchComponent;
+
   @Input() projectMembers: Contributor[];
   @Input() dmpForm: UntypedFormGroup;
 
@@ -33,31 +39,44 @@ export class PeopleComponent implements OnInit {
 
   readonly roles: any = ContributorRole;
   readonly identifierType = IdentifierType;
-  readonly translateEnumPrefix = 'enum.contributor.role.'
+  readonly translateEnumPrefix = 'enum.contributor.role.';
 
   private searchTerms = new Subject<string>();
+  private subscriptions: Subscription[] = [];
 
-  searchResult$: Observable<Contributor[]>;
+  searchResult$: Observable<SearchResult<Contributor>>;
   serviceConfig$: ServiceConfig[];
   serviceConfigType: ServiceConfig;
 
   constructor(
     private backendService: BackendService,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.backendService.loadServiceConfig().subscribe(service => {
       this.serviceConfig$ = service.personSearchServiceConfigs;
-      this.serviceConfigType = this.serviceConfig$[0];
+      this.serviceConfigType = service.personSearchServiceConfigs[0];
     });
-    this.searchResult$ = this.searchTerms.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap((term: string) =>
-        this.backendService.getPersonSearchResult(term, this.serviceConfigType.displayText)
-      )
-    );
+
+    const searchSubscription = this.searchTerms
+      .pipe(debounceTime(300))
+      .subscribe((term: string) => {
+        this.searchResult$ = this.backendService.getPersonSearchResult(
+          term,
+          this.serviceConfigType.displayText
+        );
+      });
+    this.subscriptions.push(searchSubscription);
+  }
+
+  onServiceConfigChange(serviceConfigType: ServiceConfig) {
+    this.serviceConfigType = serviceConfigType;
+    this.searchTerms.next(this.personSearch.currentSearchTerm);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   changeContactPerson(contact: Contributor): void {
@@ -79,7 +98,7 @@ export class PeopleComponent implements OnInit {
       const dialogRef = this.dialog.open(ConfirmDeletionDialogComponent, {
         data: datasets,
       });
-      dialogRef.afterClosed().subscribe((result) => {
+      dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.contributorToRemove.emit(index);
         }
@@ -97,9 +116,7 @@ export class PeopleComponent implements OnInit {
 
   private getDatasetsForContributor(contributor: Contributor): Dataset[] {
     const datasets = this.dmpForm.controls.datasets.value;
-    return datasets.filter(
-      (item) => item.deletionPerson?.id === contributor?.id
-    );
+    return datasets.filter(item => item.deletionPerson?.id === contributor?.id);
   }
 }
 

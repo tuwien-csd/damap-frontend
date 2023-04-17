@@ -1,28 +1,30 @@
-import {HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders, HttpParams} from '@angular/common/http';
-import {catchError, map, retry, shareReplay} from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders, HttpParams } from '@angular/common/http';
+import { catchError, map, retry, shareReplay } from 'rxjs/operators';
 
-import {APP_ENV} from '../constants';
+import { APP_ENV } from '../constants';
 import { Access } from "../domain/access";
 import { Config } from '../domain/config';
-import {Consent} from '../domain/consent'
-import {Contributor} from '../domain/contributor';
-import {Dataset} from '../domain/dataset';
-import {Dmp} from '../domain/dmp';
-import {DmpListItem} from '../domain/dmp-list-item';
-import {FeedbackService} from './feedback.service';
-import {Injectable} from '@angular/core';
-import {InternalStorage} from '../domain/internal-storage';
-import {Observable} from 'rxjs';
-import {Project} from '../domain/project';
-import {RepositoryDetails} from '../domain/repository-details';
-import {TranslateService} from '@ngx-translate/core';
-import {Version} from '../domain/version';
+import { Consent } from '../domain/consent';
+import { Contributor } from '../domain/contributor';
+import { Dataset } from '../domain/dataset';
+import { Dmp } from '../domain/dmp';
+import { DmpListItem } from '../domain/dmp-list-item';
+import { FeedbackService } from './feedback.service';
+import { Gdpr } from '../domain/gdpr';
+import { Injectable } from '@angular/core';
+import { InternalStorage } from '../domain/internal-storage';
+import { Observable } from 'rxjs';
+import { Project } from '../domain/project';
+import { RepositoryDetails } from '../domain/repository-details';
+import { SearchResult } from '../domain/search/search-result';
+import { TranslateService } from '@ngx-translate/core';
+import { Version } from '../domain/version';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BackendService {
- 
+
   private backendUrl = APP_ENV.backendurl;
   private dmpBackendUrl = this.backendUrl + 'dmps';
   private versionBackendUrl = this.backendUrl + 'versions';
@@ -33,7 +35,7 @@ export class BackendService {
     private http: HttpClient,
     private feedbackService: FeedbackService,
     private translate: TranslateService
-  ) {}
+  ) { }
 
   private static getFilenameFromContentDisposition(
     contentDisposition: string
@@ -150,9 +152,24 @@ export class BackendService {
     );
   }
 
-  getSuggestedProjects(): Observable<Project[]> {
+  getRecommendedProjects(): Observable<SearchResult<Project>> {
     return this.http
-      .get<Project[]>(this.projectBackendUrl)
+      .get<SearchResult<Project>>(`${this.projectBackendUrl}/recommended`)
+      .pipe(
+        retry(3),
+        catchError(this.handleError('http.error.projects')),
+        shareReplay(1)
+      );
+  }
+
+  getProjectSearchResult(searchTerm: string): Observable<SearchResult<Project>> {
+    let queryParams = new HttpParams({
+      fromObject: {
+        "q": searchTerm,
+      }
+    });
+    return this.http
+      .get<SearchResult<Project>>(this.projectBackendUrl, { params: queryParams })
       .pipe(
         retry(3),
         catchError(this.handleError('http.error.projects')),
@@ -169,19 +186,19 @@ export class BackendService {
       );
   }
 
-  getPersonSearchResult(searchTerm: string, serviceType: string): Observable<Contributor[]> {
-      return this.http
-        .get<Contributor[]>(
-          `${this.backendUrl}persons/search?q=${searchTerm}&searchService=${serviceType}`
-        )
-        .pipe(catchError(this.handleError('http.error.repositories.one')));
-    }
-    
+  getPersonSearchResult(searchTerm: string, serviceType: string): Observable<SearchResult<Contributor>> {
+    return this.http
+      .get<SearchResult<Contributor>>(
+        `${this.backendUrl}persons?q=${searchTerm}&searchService=${serviceType}`
+      )
+      .pipe(catchError(this.handleError('http.error.repositories.one')));
+  }
+
   loadServiceConfig(): Observable<Config> {
-      const host = this.backendUrl;
-      return this.http.get<Config>(`${host}config`);
-    }
-  
+    const host = this.backendUrl;
+    return this.http.get<Config>(`${host}config`);
+  }
+
   getInternalStorages(): Observable<InternalStorage[]> {
     const langCode = 'eng'; // TODO: Replace with template lang in the future
     return this.http
@@ -219,7 +236,7 @@ export class BackendService {
       );
   }
 
-  searchRepository(filters: { [key: string]: {id: string, label: string}[] }): Observable<RepositoryDetails[]> {
+  searchRepository(filters: { [key: string]: { id: string, label: string }[] }): Observable<RepositoryDetails[]> {
     let params = new HttpParams();
     for (const key in filters) {
       if (filters.hasOwnProperty(key)) {
@@ -248,9 +265,19 @@ export class BackendService {
       .pipe(retry(3), catchError(this.handleError('http.error.openaire')));
   }
 
+  exportDmpTemplate(dmpId: number, template: string) : void {
+    this.http.get(`${this.backendUrl}document/${dmpId}?template=${template}`,  {
+      responseType: 'blob',
+      observe: 'response',
+    }) 
+    .pipe(catchError(this.handleError('http.error.document')))
+    .subscribe({
+      next: (response) => this.downloadFile(response),
+    });
+  }
+  
   getDmpDocument(id: number): void {
-    this.http
-      .get(this.backendUrl + 'document/' + id, {
+    this.http.get(`${this.backendUrl}document/${id}`, {
         responseType: 'blob',
         observe: 'response',
       })
@@ -259,10 +286,9 @@ export class BackendService {
         next: (response) => this.downloadFile(response),
       });
   }
-
+  
   getMaDmpJsonFile(id: number): void {
-    this.http
-      .get(this.backendUrl + 'madmp/file/' + id, {
+    this.http.get(`${this.backendUrl}madmp/file/${id}`, {
         responseType: 'blob',
         observe: 'response',
       })
@@ -284,6 +310,10 @@ export class BackendService {
     return this.http
       .post<Consent>(`${this.backendUrl}consent`, consent)
       .pipe(retry(3), catchError(this.handleError('http.error.consent.edit')));
+  }
+
+  getGdpr(): Observable<Gdpr[]> {
+    return this.http.get<Gdpr[]>(`${this.backendUrl}gdpr/extended`);
   }
 
   private handleError(message = 'http.error.standard') {

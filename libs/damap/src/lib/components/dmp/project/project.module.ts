@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ProjectComponent} from './project.component';
-import {ProjectFilterPipe} from './project-filter.pipe';
 import {TranslateModule} from '@ngx-translate/core';
 import {ErrorMessageModule} from '../../../widgets/error-message/error-message.module';
 import {MatCardModule} from '@angular/material/card';
@@ -34,7 +33,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatDatepickerModule,
     MatTabsModule,
   ],
-  declarations: [ProjectComponent, ProjectFilterPipe, ManualProjectInputComponent, ProjectListComponent],
+  declarations: [ProjectComponent, ManualProjectInputComponent, ProjectListComponent],
   exports: [
     CommonModule,
     TranslateModule,

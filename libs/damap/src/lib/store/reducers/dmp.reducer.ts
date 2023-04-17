@@ -1,7 +1,9 @@
-import {adapter, initialDmpState} from '../states/dmp.state';
 import * as DmpAction from '../actions/dmp.actions';
-import {LoadingState} from '../../domain/enum/loading-state.enum';
+
+import {adapter, initialDmpState} from '../states/dmp.state';
 import {createReducer, on} from '@ngrx/store';
+
+import {LoadingState} from '../../domain/enum/loading-state.enum';
 
 export const dmpReducer = createReducer(
   initialDmpState,
@@ -12,7 +14,7 @@ export const dmpReducer = createReducer(
     return adapter.setAll(dmps, {...state, loaded: LoadingState.LOADED})
   }),
   on(DmpAction.failedToLoadDmps, state => ({...state, loaded: LoadingState.FAILED})),
-  on(DmpAction.createDmp, DmpAction.updateDmp, DmpAction.exportDmp, (state, _) => {
+  on(DmpAction.createDmp, DmpAction.updateDmp, DmpAction.exportDmpTemplate, (state, _) => {
     return ({...state, saving: true})
   }),
   on(DmpAction.dmpSaved, DmpAction.failedToSaveDmp, DmpAction.dmpExported, state => ({...state, saving: false})),
