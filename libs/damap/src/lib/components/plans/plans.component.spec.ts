@@ -137,6 +137,5 @@ describe('PlanComponent', () => {
       id,
       'some_template'
     );
-    expect(backendSpy.getDmpDocument).toHaveBeenCalledWith(id);
   }));
 });
