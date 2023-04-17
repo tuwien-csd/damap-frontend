@@ -69,13 +69,16 @@ export class PlansComponent implements OnInit {
     dialogRef.componentInstance.funderSupported = funderSupported;
 
     dialogRef.beforeClosed().subscribe(result => {
-      if (result === undefined) {return;} else {
+      if (result === undefined) {
+        return;
+      } else {
         if (!funderSupported) {
           const template = result;
           this.exportDmpType = template;
           this.backendService.exportDmpTemplate(id, this.exportDmpType);
+        } else {
+          this.backendService.getDmpDocument(id);
         }
-        this.backendService.getDmpDocument(id);
       }
     });
   }

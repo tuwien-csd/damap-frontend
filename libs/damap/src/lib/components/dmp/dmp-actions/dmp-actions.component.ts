@@ -103,16 +103,20 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
     dialogRef.beforeClosed().subscribe(result => {
       if (result === undefined) {
         return;
-      }
-      if (!this.dmpForm.controls.project.getRawValue().funderSupported) {
+      } else {
         const template = result;
-        this.exportDmpType = template;
-        exportDmpTemplate({
-          dmp: this.formService.exportFormToDmp(),
-          dmpTemplateType: this.exportDmpType,
-        });
+        if (!this.dmpForm.controls.project.getRawValue().funderSupported) {
+          this.exportDmpType = template;
+          this.store.dispatch(
+            exportDmpTemplate({
+              dmp: this.formService.exportFormToDmp(),
+              dmpTemplateType: this.exportDmpType,
+            })
+          );
+        } else {
+          this.dispatchExportDmp();
+        }
       }
-      this.dispatchExportDmp();
     });
   }
 }

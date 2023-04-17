@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   DmpActionsComponent,
-  SaveVersionDialogComponent
+  SaveVersionDialogComponent,
 } from './dmp-actions.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Subject, of } from 'rxjs';
@@ -142,7 +142,10 @@ describe('DmpActionsComponent', () => {
 
     component.exportDmpTemplate();
 
-    expect(component.exportDmpTemplate).toHaveBeenCalledTimes(1);
-    expect(component.dispatchExportDmp).toHaveBeenCalledTimes(1);
+    await fixture.whenStable();
+
+    expect(component.dispatchExportDmp).not.toHaveBeenCalled();
+    expect((component as any).dialog.open).toHaveBeenCalled();
+    expect(component.dmpForm.controls.project.getRawValue).toHaveBeenCalled();
   });
 });
