@@ -1,1 +1,48 @@
-{}
+{
+    "dashboard": {
+        "welcome.message": "Willkommen bei DAMAP, einem Service, der Ihnen hilft, den Datenmanagementplan (DMP) für Ihr Projekt zu erstellen und zu aktualisieren.",
+        "dmp": {
+            "heading": "Was ist ein DMP?",
+            "text": {
+                "prefix": "Ein ",
+                "dmp": {
+                    "text": "DMP",
+                    "link": "https://www.tugraz.at/sites/rdm/dmps/data-management-plans"
+                },
+                "middle": " ist ein strukturiertes Dokument, das Aufzeichnungen darüber führt, welche Forschungsdaten während und nach einem Projekt erstellt werden und was mit diesen Daten geschieht. Es hilft bei der Planung des Forschungsprozesses, der Verwaltung Ihrer Daten gemäß den ",
+                "fairprinciples": {
+                    "text": "FAIR-Prinzipien",
+                    "link": "https://www.tugraz.at/sites/rdm/publish/the-fair-data-principles"
+                },
+                "suffix": ", und definiert Rechte und Pflichten in einem Forschungsprojekt, an dem mehrere Forscher oder Institutionen beteiligt sind."
+            }
+        },
+        "tool": {
+            "heading": "DAMAP",
+            "bulletpoints": {
+                "dmp": {
+                    "text": "führt Sie Schritt für Schritt durch die verschiedenen Abschnitte eines DMP, indem es dem ",
+                    "sepg": {
+                        "text": "Praktischen Leitfaden von Science Europe",
+                        "link": "https://www.scienceeurope.org/our-resources/practical-guide-to-the-international-alignment-of-research-data-management"
+                    }
+                },
+                "document": "exportiert einen vorausgefüllten DMP als Word-Dokument, das Sie anpassen und für die Einreichung bei europäischen und nationalen Förderern verwenden können, wie zum Beispiel FWF und FFG",
+                "benefits": {
+                    "text": "spart Ihnen Arbeit durch",
+                    "one": "vorausgefüllten Inhalt mit detaillierten Informationen aus Ihrer CRIS-Anwendung und anderen Systemen",
+                    "two": "Bereitstellung von Assistenten, Anleitungen und Listen von Elementen zur Auswahl",
+                    "three": "Vorschläge zu liefern, die Sie entweder akzeptieren oder an Ihre Bedürfnisse anpassen können"
+                },
+                "madmp": {
+                    "prefix": "ist kompatibel mit der ",
+                    "rda": {
+                        "text": "RDA-Empfehlung zu maschinenlesbaren DMPs",
+                        "link": "https://doi.org/10.15497/rda00039"
+                    },
+                    "suffix": "."
+                }
+            }
+        }
+    }
+}

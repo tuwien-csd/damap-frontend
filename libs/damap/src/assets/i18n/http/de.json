@@ -1,1 +1,48 @@
-{}
+{
+  "http": {
+    "error": {
+      "standard": "Fehler beim Laden der Ressource. ",
+      "0": "Der Service kann nicht erreicht werden. Bitte versuchen Sie es später erneut. Wenn das Problem weiterhin besteht, kontaktieren Sie damap-support@tugraz.at.",
+      "404": "Die angeforderte Ressource konnte nicht gefunden werden.",
+      "500": "Ein Fehler ist aufgetreten. Bitte kontaktieren Sie damap-support@tugraz.at.",
+      "503": "Der Service ist derzeit nicht verfügbar. Bitte versuchen Sie es später erneut.",
+      "consent": {
+        "edit": "Aktualisieren der Zustimmungspräferenzen fehlgeschlagen.",
+        "one": "Abrufen der Zustimmungspräferenzen fehlgeschlagen."
+      },
+      "fileanalysis": "Dateianalyse fehlgeschlagen. ",
+      "repositories": {
+        "search": "Repositoriesuche fehlgeschlagen. ",
+        "recommended": "Empfohlene Repositories konnten nicht geladen werden. ",
+        "one": "Details zum Repository konnten nicht geladen werden. ",
+        "all": "Repositories konnten nicht geladen werden. "
+      },
+      "person.search": "Personensuche fehlgeschlagen. ",
+      "projects": "Projekte konnten nicht geladen werden. ",
+      "projectmembers": "Projektmitglieder konnten nicht geladen werden. ",
+      "plans": {
+        "load": {
+          "all": "Alle DMPs konnten nicht geladen werden. ",
+          "yours": "Ihre DMPs konnten nicht geladen werden. ",
+          "one": "DMPs konnten nicht geladen werden. "
+        },
+        "save": "DMP konnte nicht gespeichert werden. ",
+        "update": "Aktualisieren des DMPs fehlgeschlagen. ",
+        "delete": "Löschen des DMPs fehlgeschlagen. "
+      },
+      "storages": "Speicher konnten nicht geladen werden. ",
+      "versions": {
+        "load": "DMP-Versionen konnten nicht geladen werden. ",
+        "save": "DMP-Version konnte nicht gespeichert werden. ",
+        "revision": "DMP-Revision konnte nicht geladen werden. "
+      },
+      "openaire": "Abrufen von Datensatzinformationen von OpenAIRE fehlgeschlagen. Bitte versuchen Sie es später erneut.",
+      "document": "Beim Generieren Ihres Dokuments ist ein unerwarteter Fehler aufgetreten. Wenn das Problem weiterhin besteht, kontaktieren Sie damap-support@tugraz.at.",
+      "access": {
+        "load": "Konnte Zugriffsinformationen nicht laden.",
+        "save": "Konnte Zugriff nicht aktualisieren.",
+        "delete": "Konnte Zugriff nicht entfernen."
+      }
+    }
+  }
+}
