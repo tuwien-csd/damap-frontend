@@ -1,0 +1,36 @@
+{
+  "info": {
+    "ethical": {
+      "humanParticipants": {
+        "prefix": "Für die Teilnahme ist eine informierte Einwilligung erforderlich (zusätzlich zur informierten Einwilligung zur Datenverarbeitung). Für weitere Informationen kontaktieren Sie die ",
+        "researchEthicsCoordination": {
+          "text": "Ethikkommission für Forschungskoordination",
+          "link": "ethikkommission@tugraz.at"
+        },
+        "middle": " oder konsultieren Sie: ",
+        "researchEthics": {
+          "link": "ethikkommission@tugraz.at"
+        }
+      },
+      "ethicalIssues": {
+        "text": "Ihr Forschungsplan kann eine ethische Überprüfung erfordern. Informieren Sie sich durch Konsultation der",
+        "researchEthics": {
+          "text": "Ethikkommission",
+          "link": "ethikkommission@tugraz.at"
+        }
+      },
+      "committeeReviewed": {
+        "prefix": "Bitte beachten Sie, dass Sie (potenzielle) ethische Fragen gemäß den Anforderungen des relevanten Fördergebers in separaten Dokumenten behandeln müssen. Das DMP dient nur dazu, einige ethische Fragen zu identifizieren.\nBitte kontaktieren Sie Ihren zuständigen Ethikkoordinator unter ",
+        "mail": {
+          "text": "ethikkommission@tugraz.at",
+          "link": "ethikkommission@tugraz.at"
+        },
+        "suffix": ", um weitere Informationen und Unterstützung zu erhalten. Sie müssen dies tun, wenn Ihre geplante Forschung eine menschliche Teilnahme beinhaltet."
+      }
+    },
+    "cris": "Aktuell ausgewählte Option im CRIS-System: {{value}}.",
+    "documentation": {
+      "metadata": "In Archiven wird Metadaten verwendet, um konsistente und strukturierte Beschreibungen von Ressourcen und ihren Eigenschaften zu erstellen. Metadaten sind unabhängig und können entweder zusammen mit den beschriebenen Ressourcen oder getrennt gespeichert werden. Metadaten spielen eine wichtige Rolle in der Zukunft Ihrer gespeicherten Forschungsdaten: Sie enthalten wichtige Informationen, die es Ihnen und anderen ermöglichen, nach Ihren Daten zu suchen und diese zu finden.\nEin Metadatensatz besteht hauptsächlich aus beschreibenden Kategorien, den sogenannten Elementen, und ihren Werten. Um die Kommunikation mit anderen Systemen zu erleichtern, werden für die Elemente vordefinierte Standards und für die Werte kontrollierte Vokabulare verwendet."
+    }
+  }
+}

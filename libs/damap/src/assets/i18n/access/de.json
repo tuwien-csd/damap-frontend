@@ -1,1 +1,11 @@
-{}
+{
+    "access": {
+        "button": {
+            "plans": "Zurück zur DMP-Übersicht"
+        },
+        "editor": "Bearbeiter",
+        "owner": "Besitzer",
+        "list": "Nur Mitwirkende können Bearbeitungsrechte für eine DMP zugewiesen werden.",
+        "info": "Bitte beachten Sie, dass simultanes Bearbeiten einer DMP zu Datenverlust führen kann, da Änderungen sich gegenseitig überschreiben können. Bitte stellen Sie sicher, dass Sie derzeit der einzige sind, der die DMP bearbeitet."
+    }
+}
