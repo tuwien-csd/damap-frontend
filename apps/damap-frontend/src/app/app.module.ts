@@ -1,35 +1,37 @@
-import {APP_INITIALIZER, NgModule} from '@angular/core';
-import {AuthGuard, EnvBannerModule} from '@damap/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { AuthGuard, EnvBannerModule } from '@damap/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
-import {APP_ROUTES} from './app.routes';
-import {AppComponent} from './app.component';
-import {AppStoreModule} from './store/app-store.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {BrowserModule} from '@angular/platform-browser';
-import {ConfigService} from './services/config.service';
-import {ConsentGuard} from './guard/consent.guard';
-import {ConsentModule} from './components/consent/consent.module';
-import {LayoutModule} from './components/layout/layout.module';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
-import {OAuthModule} from 'angular-oauth2-oidc';
-import {ReactiveFormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
-import {environment} from '../environments/environment';
+import { APP_ROUTES } from './app.routes';
+import { AppComponent } from './app.component';
+import { AppStoreModule } from './store/app-store.module';
+import { AuthService } from '../../../../libs/damap/src';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { ConfigService } from './services/config.service';
+import { ConsentGuard } from './guard/consent.guard';
+import { ConsentModule } from './components/consent/consent.module';
+import { LayoutModule } from './components/layout/layout.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { TuGrazAuthService } from './services/tugrazAuth.service';
+import { environment } from '../environments/environment';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
   return new MultiTranslateHttpLoader(http, [
-    {prefix: './assets/i18n/layout/', suffix: '.json'},
-    {prefix: './assets/i18n/consent/', suffix: '.json'},
-    {prefix: './assets/damap-core/i18n/dashboard/', suffix: '.json'},
-    {prefix: './assets/damap-core/i18n/plans/', suffix: '.json'},
-    {prefix: './assets/damap-core/i18n/http/', suffix: '.json'},
-    {prefix: './assets/damap-core/i18n/gdpr/', suffix: '.json'},
-    {prefix: './assets/damap-core/i18n/', suffix: '.json'},
-    {prefix: './assets/i18n/', suffix: '.json'}
+    { prefix: './assets/i18n/layout/', suffix: '.json' },
+    { prefix: './assets/i18n/consent/', suffix: '.json' },
+    { prefix: './assets/damap-core/i18n/dashboard/', suffix: '.json' },
+    { prefix: './assets/damap-core/i18n/plans/', suffix: '.json' },
+    { prefix: './assets/damap-core/i18n/http/', suffix: '.json' },
+    { prefix: './assets/damap-core/i18n/gdpr/', suffix: '.json' },
+    { prefix: './assets/damap-core/i18n/', suffix: '.json' },
+    { prefix: './assets/i18n/', suffix: '.json' },
   ]);
 }
 
@@ -77,8 +79,11 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
     },
     AuthGuard,
     ConsentGuard,
+    {
+      provide: AuthService,
+      useClass: TuGrazAuthService,
+    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
