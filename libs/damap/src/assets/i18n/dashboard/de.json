@@ -1,48 +1,67 @@
 {
-    "dashboard": {
-        "welcome.message": "Willkommen bei DAMAP, einem Service, der Ihnen hilft, den Datenmanagementplan (DMP) für Ihr Projekt zu erstellen und zu aktualisieren.",
+  "dashboard": {
+    "welcome.message": "Willkommen bei TU Graz DMP Tool, einem Service, der Ihnen hilft, den Datenmanagementplan (DMP) für Ihr Projekt zu erstellen und zu aktualisieren.",
+    "dmp": {
+      "heading": "Was ist ein DMP?",
+      "text": {
+        "prefix": "Ein ",
         "dmp": {
-            "heading": "Was ist ein DMP?",
-            "text": {
-                "prefix": "Ein ",
-                "dmp": {
-                    "text": "DMP",
-                    "link": "https://www.tugraz.at/sites/rdm/dmps/data-management-plans"
-                },
-                "middle": " ist ein strukturiertes Dokument, das Aufzeichnungen darüber führt, welche Forschungsdaten während und nach einem Projekt erstellt werden und was mit diesen Daten geschieht. Es hilft bei der Planung des Forschungsprozesses, der Verwaltung Ihrer Daten gemäß den ",
-                "fairprinciples": {
-                    "text": "FAIR-Prinzipien",
-                    "link": "https://www.tugraz.at/sites/rdm/publish/the-fair-data-principles"
-                },
-                "suffix": ", und definiert Rechte und Pflichten in einem Forschungsprojekt, an dem mehrere Forscher oder Institutionen beteiligt sind."
-            }
+          "text": "DMP",
+          "link": "https://www.tugraz.at/sites/rdm/dmps/data-management-plans"
         },
-        "tool": {
-            "heading": "DAMAP",
-            "bulletpoints": {
-                "dmp": {
-                    "text": "führt Sie Schritt für Schritt durch die verschiedenen Abschnitte eines DMP, indem es dem ",
-                    "sepg": {
-                        "text": "Praktischen Leitfaden von Science Europe",
-                        "link": "https://www.scienceeurope.org/our-resources/practical-guide-to-the-international-alignment-of-research-data-management"
-                    }
-                },
-                "document": "exportiert einen vorausgefüllten DMP als Word-Dokument, das Sie anpassen und für die Einreichung bei europäischen und nationalen Förderern verwenden können, wie zum Beispiel FWF und FFG",
-                "benefits": {
-                    "text": "spart Ihnen Arbeit durch",
-                    "one": "vorausgefüllten Inhalt mit detaillierten Informationen aus Ihrer CRIS-Anwendung und anderen Systemen",
-                    "two": "Bereitstellung von Assistenten, Anleitungen und Listen von Elementen zur Auswahl",
-                    "three": "Vorschläge zu liefern, die Sie entweder akzeptieren oder an Ihre Bedürfnisse anpassen können"
-                },
-                "madmp": {
-                    "prefix": "ist kompatibel mit der ",
-                    "rda": {
-                        "text": "RDA-Empfehlung zu maschinenlesbaren DMPs",
-                        "link": "https://doi.org/10.15497/rda00039"
-                    },
-                    "suffix": "."
-                }
-            }
+        "middle": " ist ein strukturiertes Dokument, das Aufzeichnungen darüber führt, welche Forschungsdaten während und nach einem Projekt erstellt werden und was mit diesen Daten geschieht. Es hilft bei der Planung des Forschungsprozesses, der Verwaltung Ihrer Daten gemäß den ",
+        "fairprinciples": {
+          "text": "FAIR-Prinzipien",
+          "link": "https://www.tugraz.at/sites/rdm/publish/the-fair-data-principles"
+        },
+        "suffix": ", und definiert Rechte und Pflichten in einem Forschungsprojekt, an dem mehrere Forscher oder Institutionen beteiligt sind."
+      }
+    },
+    "tool": {
+      "heading": "TU Graz DMP Tool",
+      "bulletpoints": {
+        "dmp": {
+          "text": "führt Sie Schritt für Schritt durch die verschiedenen Abschnitte eines DMP, indem es dem ",
+          "sepg": {
+            "text": "Praktischen Leitfaden von Science Europe",
+            "link": "https://www.scienceeurope.org/our-resources/practical-guide-to-the-international-alignment-of-research-data-management"
+          }
+        },
+        "document": "exportiert einen vorausgefüllten DMP als Word-Dokument, das Sie anpassen und für die Einreichung bei europäischen und nationalen Förderern verwenden können, wie zum Beispiel FWF und FFG",
+        "benefits": {
+          "text": "spart Ihnen Arbeit durch",
+          "one": "vorausgefüllten Inhalt mit detaillierten Informationen aus Ihrer CRIS-Anwendung und anderen Systemen",
+          "two": "Bereitstellung von Assistenten, Anleitungen und Listen von Elementen zur Auswahl",
+          "three": "Vorschläge zu liefern, die Sie entweder akzeptieren oder an Ihre Bedürfnisse anpassen können"
+        },
+        "madmp": {
+          "prefix": "ist kompatibel mit der ",
+          "rda": {
+            "text": "RDA-Empfehlung zu maschinenlesbaren DMPs",
+            "link": "https://doi.org/10.15497/rda00039"
+          },
+          "suffix": "."
         }
+      }
     }
+  },
+  "instructions": {
+    "heading": "Wie erstellt man einen DMP",
+    "steps": {
+      "heading": "Folgen Sie dem Tool durch die Schritte 1-10, um die erforderlichen Informationen zu liefern.",
+      "body": "Sie müssen nicht alle Schritte auf einmal durchführen, speichern Sie einfach den Status und setzen Sie später fort. Sie können jederzeit zurückkehren und zwischen den Schritten wechseln. Sie können sogar Kollegen aus Ihrer Einrichtung einladen, Informationen hinzuzufügen. Wenn Sie möchten, können Sie Ihren DMP versionieren."
+    },
+    "export": {
+      "heading": "Exportieren Sie den DMP-Entwurf als Dokument.",
+      "body": "Abhängig vom Geldgeber Ihres Projekts wird der exportierte DMP entweder das DMP-Template des Geldgebers (FWF) oder die DMP-Empfehlungen von Science Europe widerspiegeln. Dies geschieht automatisch bei importierten Projekten."
+    },
+    "finalise": {
+      "heading": "Finalisieren Sie Ihren DMP in einem Texteditor.",
+      "body": "Der exportierte DMP ist ein automatisch erstellter Entwurf, den Sie noch fertigstellen müssen. Wenn Sie die Wahl haben, empfehlen wir die Bearbeitung in Word. Überprüfen Sie den Inhalt sorgfältig und vervollständigen Sie fehlende Informationen, einschließlich der DMP-Version Details auf dem Deckblatt. Wenn Sie fertig sind, können Sie Ihren DMP als PDF speichern und dem Geldgeber zur Verfügung stellen. Bitte beachten Sie, dass Sie Ihre Änderungen nicht zurück in das DMP-Tool übertragen müssen, da das erstellte DMP-Dokument die Grundlage für nachfolgende Versionen ist, nicht das Tool."
+    },
+    "update": {
+      "heading": "Aktualisieren Sie Ihren DMP regelmäßig.",
+      "body": "Ein DMP ist ein lebendes Dokument und es wird empfohlen, es aktuell zu halten - für sich selbst, das Projektteam und den Geldgeber. Die Geldgeber fragen in der Regel bei bestimmten Meilensteinen und am Ende des Projekts nach Aktualisierungen. Änderungen können leicht innerhalb des Dokuments vorgenommen werden, Sie benötigen das Tool nicht für Aktualisierungen. Wenn Sie jedoch Details hinzufügen oder ändern und eine neue Version im DMP-Tool erstellen möchten, zum Beispiel um die maschinenlesbaren Informationen zu aktualisieren, denken Sie daran, den exportierten DMP sorgfältig zu überprüfen und zu vervollständigen, wie oben beschrieben."
+    }
+  }
 }
