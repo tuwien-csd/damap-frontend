@@ -143,8 +143,9 @@ A[data-lang-active-en] {
 .logo A {
   margin-left: 30px;
   transition: color .3s ease, background .3s ease;
-  line-height: 50px;
+  line-height: 30px;
   height: 50px;
+  width: 70%;
   text-decoration: none;
 }
 
@@ -173,6 +174,7 @@ A[data-lang-active-en] {
 }
 
 #mainHeader #mainHeaderLogo A {
+  margin-top: -20px;
   top: 5px;
   position: relative;
   display: block;
