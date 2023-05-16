@@ -6,8 +6,8 @@ env:
 on:
   push:
     branches:
-      - master
-      - next
+      - prod
+      - test
   workflow_dispatch:
 
 permissions:
@@ -39,5 +39,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: v${{ steps.meta.outputs.tags }}:{{ GITHUB_REF_NAME }}
           labels: ${{ steps.meta.outputs.labels }}
