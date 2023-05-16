@@ -32,7 +32,7 @@ jobs:
 
       - uses: nrwl/nx-set-shas@v3
         with:
-          main-branch-name: 'master'
+          main-branch-name: ${{ GITHUB_REF_NAME }}
       - run: npm ci
       - run: npx nx workspace-lint
       #format check currently does not signal what the issue is
