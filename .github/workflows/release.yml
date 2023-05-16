@@ -39,5 +39,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: v${{ steps.meta.outputs.tags }}:${{ github.ref.name }}
+          tags: v${{ steps.meta.outputs.tags }}:${{ github.ref_name }}
           labels: ${{ steps.meta.outputs.labels }}
