@@ -1,9 +1,6 @@
 name: test
 
-on:
-  push:
-  pull_request:
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
   build:
@@ -17,6 +14,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm run ci:install
 
       - run: npm ci
       - run: npx nx workspace-lint
