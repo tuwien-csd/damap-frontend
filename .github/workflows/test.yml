@@ -23,15 +23,32 @@ jobs:
 
       - run: npm ci
       - run: npx nx workspace-lint
+      #format check currently does not signal what the issue is
+      #      - run: npx nx format:check
 
-      - name: Lint all projects
+      - name: Merge - Lint all projects
+        if: ${{ env.is-master-branch == 'true' || env.is-next-branch == 'true' }}
         run: npm run ci:lint
 
-      - name: Build all projects
+      - name: PR - Lint affected
+        if: ${{ env.is-pull-request == 'true' }}
+        run: npm run affected:lint
+
+      - name: Merge - Build all projects
+        if: ${{ env.is-master-branch == 'true' || env.is-next-branch == 'true' }}
         run: npm run ci:build
 
-      - name: Test all projects
+      - name: PR - Build affected
+        if: ${{ env.is-pull-request == 'true' }}
+        run: npm run affected:build
+
+      - name: Merge - Test all projects
+        if: ${{ env.is-master-branch == 'true' || env.is-next-branch == 'true' }}
         run: npm run ci:test
+
+      - name: PR - Test affected
+        if: ${{ env.is-pull-request == 'true' }}
+        run: npm run affected:test
 
       - name: Publish Linting Report
         uses: mikepenz/action-junit-report@v3
