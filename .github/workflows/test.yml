@@ -1,8 +1,6 @@
 name: test
 
 env:
-  is-master-branch: ${{ github.ref == 'refs/heads/master' }}
-  is-next-branch: ${{ github.ref == 'refs/heads/next' }}
   is-pull-request: ${{ github.event_name == 'pull_request' }}
 
 on:
@@ -31,8 +29,7 @@ jobs:
         run: npm run ci:install
 
       - uses: nrwl/nx-set-shas@v3
-        with:
-          main-branch-name: ${{ github.ref_name }}
+
       - run: npm ci
       - run: npx nx workspace-lint
       #format check currently does not signal what the issue is
