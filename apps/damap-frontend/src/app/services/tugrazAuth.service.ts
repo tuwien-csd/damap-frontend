@@ -1,4 +1,4 @@
-import { AuthService } from '../../../../../libs/damap/src';
+import { AuthService } from '@damap/core';
 import { Injectable } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 

@@ -1,21 +1,9 @@
 name: test
 
-env:
-  is-master-branch: ${{ github.ref == 'refs/heads/master' }}
-  is-next-branch: ${{ github.ref == 'refs/heads/next' }}
-  is-pull-request: ${{ github.event_name == 'pull_request' }}
-
-on:
-  push:
-    branches:
-      - master
-      - next
-  pull_request:
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -30,37 +18,19 @@ jobs:
       - name: Install dependencies
         run: npm run ci:install
 
-      - uses: nrwl/nx-set-shas@v3
-        with:
-          main-branch-name: 'master'
       - run: npm ci
       - run: npx nx workspace-lint
       #format check currently does not signal what the issue is
       #      - run: npx nx format:check
 
       - name: Merge - Lint all projects
-        if: ${{ env.is-master-branch == 'true' || env.is-next-branch == 'true' }}
         run: npm run ci:lint
 
-      - name: PR - Lint affected
-        if: ${{ env.is-pull-request == 'true' }}
-        run: npm run affected:lint
-
       - name: Merge - Build all projects
-        if: ${{ env.is-master-branch == 'true' || env.is-next-branch == 'true' }}
         run: npm run ci:build
 
-      - name: PR - Build affected
-        if: ${{ env.is-pull-request == 'true' }}
-        run: npm run affected:build
-
       - name: Merge - Test all projects
-        if: ${{ env.is-master-branch == 'true' || env.is-next-branch == 'true' }}
         run: npm run ci:test
-
-      - name: PR - Test affected
-        if: ${{ env.is-pull-request == 'true' }}
-        run: npm run affected:test
 
       - name: Publish Linting Report
         uses: mikepenz/action-junit-report@v3
@@ -73,18 +43,3 @@ jobs:
         if: always()
         with:
           report_paths: 'reports/test/**/*.xml'
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.organization=tuwien-csd
-            -Dsonar.projectKey=tuwien-csd_damap-frontend
-            -Dsonar.sources=.
-            -Dsonar.sourceEncoding=UTF-8
-            -Dsonar.javascript.lcov.reportPaths=**/lcov.info
-            -Dsonar.coverage.exclusions=**/*.spec.ts,**/karma.conf.js,src/environments/*.ts,src/main.ts,src/test.ts,apps/damap-frontend-e2e/**/*.*
-
