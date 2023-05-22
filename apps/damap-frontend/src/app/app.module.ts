@@ -6,7 +6,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { APP_ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { AppStoreModule } from './store/app-store.module';
-import { AuthService } from '../../../../libs/damap/src';
+import { AuthService } from '@damap/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ConfigService } from './services/config.service';
