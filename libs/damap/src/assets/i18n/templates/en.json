@@ -124,7 +124,7 @@
           }
         },
         "access": {
-          "heading": "Set access rights for all datasets",
+          "heading": "Planned access rights for all datasets",
           "question": {
             "dataset": "Dataset",
             "selected": "for selected project members",
