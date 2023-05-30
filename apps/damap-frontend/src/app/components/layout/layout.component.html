@@ -24,9 +24,9 @@
     </div>
     <mat-nav-list>
       <a mat-list-item class="nav-item-mobile" [routerLink]="'/dashboard'"
-         routerLinkActive="active">{{'layout.menu.home' | translate }}</a>
-      <a mat-list-item class="nav-item-mobile" [routerLink]="'/plans'"
-         routerLinkActive="active">{{'layout.menu.plans' | translate }}</a>
+        routerLinkActive="active">{{'layout.menu.home' | translate }}</a>
+      <a mat-list-item class="nav-item-mobile" [routerLink]="'/plans'" routerLinkActive="active">{{'layout.menu.plans' |
+        translate }}</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -34,14 +34,11 @@
       <mat-toolbar-row id="mainHeader" [style]="'padding: 0px;'">
         <div class="mainHeaderLeft">
           <button mat-icon-button title="{{'layout.menu.mobile.open'| translate }}"
-                  (click)="sidenav.opened = !sidenav.opened"
-                  *ngIf="!sidenav.opened">
+            (click)="sidenav.opened = !sidenav.opened" *ngIf="!sidenav.opened">
             <mat-icon>menu</mat-icon>
           </button>
-          <button mat-icon-button title="{{'layout.menu.mobile.close'| translate }}"
-                  class="sidenav-btn"
-                  (click)="sidenav.opened = !sidenav.opened"
-                  *ngIf="sidenav.opened">
+          <button mat-icon-button title="{{'layout.menu.mobile.close'| translate }}" class="sidenav-btn"
+            (click)="sidenav.opened = !sidenav.opened" *ngIf="sidenav.opened">
             <mat-icon>close</mat-icon>
           </button>
         </div>
@@ -50,8 +47,8 @@
         <!-- University Logo -->
         <div id="mainHeaderLogo">
           <a class="mat-focus-indicator" title="{{'layout.logo.text' | translate }}"
-             [href]="'layout.logo.link' | translate" rel="noopener">
-            <img src="assets/logo.svg" alt="Logo" height="100" width="100">
+            [href]="'layout.logo.link' | translate" rel="noopener">
+            <img src="assets/logo.svg" alt="Logo">
           </a>
         </div>
         <!-- University Logo End -->
@@ -59,7 +56,6 @@
       <mat-toolbar-row>
         <h1 translate>title</h1>
       </mat-toolbar-row>
-
     </mat-toolbar>
     <app-env-banner *ngIf="env === 'DEV'"></app-env-banner>
     <router-outlet></router-outlet>
@@ -71,12 +67,13 @@
     <a [routerLink]="'/gdpr'" rel="noopener">{{'layout.gdpr' | translate}}</a>
   </div>
   <div class="info">
-    <a [href]="'layout.impressum.link' | translate" rel="noopener"
-       target="_blank">{{'layout.impressum.text' | translate}}</a>
+    <a [href]="'layout.impressum.link' | translate" rel="noopener" target="_blank">{{'layout.impressum.text' |
+      translate}}</a>
     <a [href]="'layout.termsandconditions.link' | translate" rel="noopener"
-       target="_blank">{{'layout.termsandconditions.text' | translate}}</a>
-    <a [href]="'layout.dataprotection.link' | translate" rel="noopener"
-       target="_blank">{{'layout.dataprotection.text' | translate}}</a>
+      target="_blank">{{'layout.termsandconditions.text' | translate}}</a>
+    <a [href]="'layout.dataprotection.link' | translate" rel="noopener" target="_blank">{{'layout.dataprotection.text' |
+      translate}}</a>
+    <a [href]="'layout.accessibility.link' | translate" rel="noopener" target="_blank">{{'layout.accessibility.text' |
+      translate}}</a>
   </div>
 </div>
-
