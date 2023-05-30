@@ -15,6 +15,8 @@ export class ExportWarningDialogComponent {
   @Input() funderSupported: boolean;
 
   dmpTemplate: any = ETemplateType;
+
+  translateTemplatePrefixEnum = 'enum.exportDmpTemplatetype.'
   selectedTemplate = '';
 
   constructor(public dialogRef: MatDialogRef<ExportWarningDialogComponent>) {}
