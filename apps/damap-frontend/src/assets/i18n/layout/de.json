@@ -17,15 +17,19 @@
     },
     "dataprotection": {
       "text": "Datenschutzerklärung",
-      "link": "#"
-    },
+      "link": "https://cloud.tugraz.at/index.php/f/757573576"   
+     },
     "impressum": {
       "text": "Impressum",
       "link": "https://www.tugraz.at/en/about-this-page/legal-notice/"
     },
     "termsandconditions": {
       "text": "Allgemeine Geschäftsbedingungen",
-      "link": "#"
+      "link": "https://cloud.tugraz.at/index.php/f/757613482"
+    },
+    "accessibility": {
+      "text": "Barrierefreiheitserklärung",
+      "link": "https://cloud.tugraz.at/index.php/f/757582114"
     },
     "gdpr": "DSGVO-Info"
   },

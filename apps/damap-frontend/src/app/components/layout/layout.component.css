@@ -11,7 +11,7 @@
   background-color: #2a2a2a;
   color: white;
   font-size: small;
-  padding: 1rem 2rem;
+  padding: 2rem 2rem;
   z-index: 10;
   position: relative;
   height: 50px;
@@ -208,14 +208,14 @@ svg {
   text-decoration: none;
   color: var(--main-color);
   text-transform: uppercase;
-  line-height: 70px;
+  line-height: 100px;
   font-family: FFDINWebPro,sans-serif;
   font-weight: 700;
   display: none;
 }
 
 #mainHeader #mainHeaderLogo {
-  padding-right: 5px;
+  padding: 10px;
   display: flex;
   align-self: flex-start;
 }
@@ -248,26 +248,26 @@ svg {
 @media only screen and (min-width: 1024px) {
 
   .mm-navbars-top {
-    line-height: 70px;
-    height: 70px;
+    line-height: 100px;
+    height: 100px;
   }
 
   #user {
-    margin-top: 70px;
+    margin-top: 100px;
     padding: 12px 16px;
   }
 
   .mm-navbars-top .languageElement A {
-    line-height: 70px;
-    height: 70px;
+    line-height: 100px;
+    height: 100px;
   }
 
   #mainHeader {
-    height: 70px;
+    height: 100px;
   }
 
   #mainHeader #mainHeaderLogo A {
-    top: 15px;
+    top: 30px;
     padding-right: 15px;
     position: relative;
   }

@@ -17,7 +17,7 @@
     },
     "dataprotection": {
       "text": "Data Protection Declaration",
-      "link": "#"
+      "link": "https://cloud.tugraz.at/index.php/f/757573576"
     },
     "impressum": {
       "text": "Impressum",
@@ -25,7 +25,11 @@
     },
     "termsandconditions": {
       "text": "Terms and Conditions",
-      "link": "#"
+      "link": "https://cloud.tugraz.at/index.php/f/757613482"
+    },
+    "accessibility": {
+      "text": "Accessibility",
+      "link": "https://cloud.tugraz.at/index.php/f/757582114"
     },
     "gdpr": "GDPR Info"
   },
