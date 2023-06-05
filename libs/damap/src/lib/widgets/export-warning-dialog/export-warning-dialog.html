@@ -10,7 +10,7 @@
             <mat-option
               *ngFor="let id of dmpTemplate | keyvalue"
               [value]="id.key">
-              {{translateTemplatePrefixEnum + id.key | translate}}<br />
+              {{id.value | translate}}<br />
             </mat-option>
           </mat-select>
         </mat-form-field>
