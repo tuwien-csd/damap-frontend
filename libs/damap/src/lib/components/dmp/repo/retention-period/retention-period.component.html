@@ -1,10 +1,11 @@
-<div [formGroup]="dmpForm">
+<div class="mat-panel" [formGroup]="dmpForm">
   <mat-accordion>
     <mat-expansion-panel hideToggle>
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header >
         <mat-panel-title>
           {{'dmp.steps.retentionPeriod.title' | translate}}
         </mat-panel-title>
+        <mat-icon class="color-icon">edit_calendar</mat-icon>
       </mat-expansion-panel-header>
       <ng-container *ngFor="let dataset of datasets.controls, index as i">
         <ng-container *ngIf="dataset.value.source === datasetSource.NEW">
