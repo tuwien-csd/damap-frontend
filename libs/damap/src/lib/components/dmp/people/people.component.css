@@ -24,3 +24,9 @@ mat-form-field {
   width: 100%;
   top: -0.4rem;
 }
+
+.contributor-warning {
+  font-size: 13pt;
+  position: relative;
+  top: -10px; 
+}

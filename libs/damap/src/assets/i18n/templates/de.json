@@ -28,7 +28,8 @@
                 "contributor": {
                     "add": "Als Mitwirkender hinzufügen",
                     "remove": "Aus Mitwirkenden entfernen",
-                    "role": "Rolle"
+                    "role": "Rolle",
+                    "warning": " Personen, die nicht Angehörige der TU Graz sind, müssen von Ihnen persönlich über die Erfassung ihrer Daten in diesem Tool informiert werden."
                 },
                 "contact": {
                     "person": "Kontaktperson",

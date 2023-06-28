@@ -1,44 +1,72 @@
-<app-step-intro>{{ 'dmp.steps.people.intro' | translate }} </app-step-intro>
+<app-step-intro>{{ "dmp.steps.people.intro" | translate }} </app-step-intro>
 
 <!-- CONTRIBUTORS -->
 <div [formGroup]="dmpForm">
   <ng-container formArrayName="contributors">
     <div *ngIf="contributors.length > 0">
-      <mat-card *ngFor="let contributor of contributors.controls; index as i" class="mat-selected">
+      <mat-card
+        *ngFor="let contributor of contributors.controls; index as i"
+        class="mat-selected">
         <div class="mat-card-container">
           <div class="mat-card-left">
             <div>
               <mat-icon class="mat-icon-style">person</mat-icon>
               {{ contributor.value.firstName }} {{ contributor.value.lastName }}
-              <mat-icon *ngIf="contributor.value.contact" class="mat-icon-contact" color="primary">
+              <mat-icon
+                *ngIf="contributor.value.contact"
+                class="mat-icon-contact"
+                color="primary">
                 contact_mail
               </mat-icon>
-              <span class="sr-only">{{'dmp.steps.people.contact.person' | translate}}</span>
+              <mat-icon
+                *ngIf="!contributor.value.universityId"
+                color="primary"
+                class="contributor-warning"
+                matTooltip="{{
+                  'dmp.steps.people.contributor.warning' | translate
+                }}"
+                matTooltipPosition="below"
+                >info</mat-icon
+              >
+              <span class="sr-only">{{
+                "dmp.steps.people.contact.person" | translate
+              }}</span>
             </div>
             <mat-icon class="mat-icon-style">mail_outline</mat-icon>
             {{ contributor.value.mbox }}
-            <app-orcid *ngIf="
+            <app-orcid
+              *ngIf="
                 contributor.value.personId?.identifier &&
                 contributor.value.personId?.type === identifierType.ORCID
-              " [orcidId]="contributor.value.personId?.identifier"></app-orcid>
+              "
+              [orcidId]="contributor.value.personId?.identifier"></app-orcid>
           </div>
           <div [formGroupName]="i">
             <mat-form-field appearance="fill">
-              <mat-label>{{'dmp.steps.people.contributor.role' | translate}}</mat-label>
+              <mat-label>{{
+                "dmp.steps.people.contributor.role" | translate
+              }}</mat-label>
               <mat-select formControlName="role">
-                <mat-option *ngFor="let role of roles | keyvalue" [value]="role.key">
+                <mat-option
+                  *ngFor="let role of roles | keyvalue"
+                  [value]="role.key">
                   {{ translateEnumPrefix + role.value | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="mat-card-right">
-            <button mat-button (click)="changeContactPerson(contributor.value)" *ngIf="!contributor.value.contact"
-                    title="{{ 'dmp.steps.people.contact.add' | translate }}">
+            <button
+              mat-button
+              (click)="changeContactPerson(contributor.value)"
+              *ngIf="!contributor.value.contact"
+              title="{{ 'dmp.steps.people.contact.add' | translate }}">
               <mat-icon>contact_mail</mat-icon>
             </button>
-            <button mat-button (click)="removeContributor(i)"
-                    title="{{ 'dmp.steps.people.contributor.remove' | translate }}">
+            <button
+              mat-button
+              (click)="removeContributor(i)"
+              title="{{ 'dmp.steps.people.contributor.remove' | translate }}">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
@@ -50,17 +78,25 @@
 
 <!-- SEARCH -->
 <div [formGroup]="dmpForm" class="mat-search-form-field">
-  <app-person-search [result]="
-     ( searchResult$ | async )?.items ?? []
-        | contributorFilter: dmpForm.controls.contributors.value
-    " (termToSearch)="searchContributor($event)" (personToAdd)="addContributor($event)">
+  <app-person-search
+    [result]="
+      (searchResult$ | async)?.items ?? []
+        | contributorFilter : dmpForm.controls.contributors.value
+    "
+    (termToSearch)="searchContributor($event)"
+    (personToAdd)="addContributor($event)">
   </app-person-search>
   <div>
     <mat-form-field appearance="fill">
-      <mat-label>{{ 'dmp.steps.people.search.service' | translate }}</mat-label>
-      <mat-select id="serviceSelect" [(value)]="serviceConfigType" (selectionChange)="onServiceConfigChange($event.value)">
-        <mat-option *ngFor="let service of serviceConfig$ | keyvalue" [value]="service.value">
-          {{  service.value.displayText | translate }}
+      <mat-label>{{ "dmp.steps.people.search.service" | translate }}</mat-label>
+      <mat-select
+        id="serviceSelect"
+        [(value)]="serviceConfigType"
+        (selectionChange)="onServiceConfigChange($event.value)">
+        <mat-option
+          *ngFor="let service of serviceConfig$ | keyvalue"
+          [value]="service.value">
+          {{ service.value.displayText | translate }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -69,9 +105,10 @@
 
 <!-- LIST OF PEOPLE -->
 <div class="list-container" *ngIf="projectMembers?.length > 0; else empty">
-  <mat-card *ngFor="
+  <mat-card
+    *ngFor="
       let member of projectMembers
-        | contributorFilter: dmpForm.controls.contributors.value
+        | contributorFilter : dmpForm.controls.contributors.value
     ">
     <div class="mat-card-container">
       <div class="mat-card-left">
@@ -83,12 +120,17 @@
         {{ member.mbox }}
       </div>
       <div class="mat-card-right">
-        <button mat-raised-button *ngIf="member.universityId" (click)="changeContactPerson(member)"
-                title="{{ 'dmp.steps.people.contact.add' | translate }}">
+        <button
+          mat-raised-button
+          *ngIf="member.universityId"
+          (click)="changeContactPerson(member)"
+          title="{{ 'dmp.steps.people.contact.add' | translate }}">
           <mat-icon>contact_mail</mat-icon>
         </button>
-        <button mat-raised-button (click)="addContributor(member)"
-                title="{{ 'dmp.steps.people.contributor.add' | translate }}">
+        <button
+          mat-raised-button
+          (click)="addContributor(member)"
+          title="{{ 'dmp.steps.people.contributor.add' | translate }}">
           <mat-icon>person_add</mat-icon>
         </button>
       </div>
@@ -102,9 +144,11 @@
   </mat-card>
 </div>
 <ng-template #empty>
-  {{ 'dmp.steps.people.nopeople' | translate }}
+  {{ "dmp.steps.people.nopeople" | translate }}
 </ng-template>
 
 <!-- MANUAL INPUT -->
-<app-contributor-manual (contactPerson)="changeContactPerson($event)" (contributorToAdd)="addContributor($event)">
+<app-contributor-manual
+  (contactPerson)="changeContactPerson($event)"
+  (contributorToAdd)="addContributor($event)">
 </app-contributor-manual>

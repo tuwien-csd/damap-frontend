@@ -11,6 +11,7 @@ import {OrcidModule} from '../../../widgets/orcid/orcid.module';
 import {PersonSearchModule} from '../../../widgets/person-search/person-search.module';
 import {SharedModule} from '../../../shared/shared.module';
 import {StepIntroModule} from '../../../widgets/step-intro/step-intro.module';
+import { TooltipModule } from '../../../widgets/tooltip/tooltip.module';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import {StepIntroModule} from '../../../widgets/step-intro/step-intro.module';
     MatSelectModule,
     MatButtonModule,
     MatDialogModule,
+    TooltipModule
   ],
   declarations: [PeopleComponent, ContributorManualComponent, ContributorFilterPipe, ConfirmDeletionDialogComponent],
   exports: [
@@ -38,6 +40,7 @@ import {StepIntroModule} from '../../../widgets/step-intro/step-intro.module';
     MatSelectModule,
     MatButtonModule,
     MatDialogModule,
+    TooltipModule
   ]
 })
 export class PeopleModule {

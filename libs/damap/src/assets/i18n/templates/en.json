@@ -28,7 +28,8 @@
           "contributor": {
             "add": "Add as contributor",
             "remove": "Remove from contributors",
-            "role": "Role"
+            "role": "Role",
+            "warning": "Persons who are not members of TU Graz must be personally informed by you about the collection of their data in this tool."
           },
           "contact": {
             "person": "Contact person",
