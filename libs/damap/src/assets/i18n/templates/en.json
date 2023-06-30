@@ -819,7 +819,7 @@
     },
     "exportDmpTemplatetype": {
       "FWF": "FWF",
-      "SCIENCE_EUROPE":"SCIENCE_EUROPE"
+      "SCIENCE_EUROPE": "Science Europe"
     }
   },
   "yes": "Yes",
