@@ -1,0 +1,22 @@
+.tu-storage {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.storage-selected {
+  flex-grow: 100;
+}
+
+.storage-card-top {
+  display: flex;
+  flex-grow: 100;
+  justify-content: space-between;
+}
+
+.storage-grid {
+  min-width: 300px;
+  width: 30%;
+  max-height: 400px;
+  overflow-y: scroll;
+}

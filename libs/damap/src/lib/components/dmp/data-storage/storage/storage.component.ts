@@ -1,13 +1,14 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Store, select} from '@ngrx/store';
 import {UntypedFormArray, UntypedFormGroup} from '@angular/forms';
-import {InternalStorage} from '../../../../domain/internal-storage';
-import {select, Store} from '@ngrx/store';
-import {AppState} from '../../../../store/states/app.state';
-import {LoadingState} from '../../../../domain/enum/loading-state.enum';
 import {
   selectInternalStorages,
   selectInternalStoragesLoaded
 } from '../../../../store/selectors/internal-storage.selectors';
+
+import {AppState} from '../../../../store/states/app.state';
+import {InternalStorage} from '../../../../domain/internal-storage';
+import {LoadingState} from '../../../../domain/enum/loading-state.enum';
 import {loadInternalStorages} from '../../../../store/actions/internal-storage.actions';
 
 @Component({
