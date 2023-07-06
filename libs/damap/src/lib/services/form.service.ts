@@ -112,7 +112,7 @@ export class FormService {
     this.form.patchValue({
       id: dmp.id,
       project: dmp.project,
-      funding: dmp.project.funding,
+      funding: dmp.project?.funding,
       data: {
         kind: dmp.dataKind,
         reusedKind: dmp.reusedDataKind,
