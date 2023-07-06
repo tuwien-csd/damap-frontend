@@ -18,7 +18,7 @@ export class ReuseComponent {
     'Officers of local/national governments',
     'Decision makers in industry',
     'Students and general public',
-    'Others:...'];
+    'Others: '];
 
   constructor() {
   }
