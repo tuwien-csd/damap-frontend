@@ -17,7 +17,7 @@
     },
     "dataprotection": {
       "text": "Data Protection Declaration",
-      "link": "https://cloud.tugraz.at/index.php/f/757573576"
+      "link": "/assets/legal/Datenschutzerklärung_PrivacyPolicy_TU_Graz_DMP_Tool.pdf"
     },
     "impressum": {
       "text": "Impressum",
@@ -25,11 +25,11 @@
     },
     "termsandconditions": {
       "text": "Terms and Conditions",
-      "link": "https://cloud.tugraz.at/index.php/f/757613482"
+      "link": "/assets/legal/Nutzungsbedingungen_TermsofUse_TU_Graz_DMP_Tool.pdf"
     },
     "accessibility": {
       "text": "Accessibility",
-      "link": "https://cloud.tugraz.at/index.php/f/757582114"
+      "link": "/assets/legal/Barrierefreiheitserklärung_AccessibilityStatement_TU_Graz_DMP_Tool.pdf"
     },
     "gdpr": "GDPR Info-Box"
   },
