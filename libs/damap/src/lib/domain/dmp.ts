@@ -14,7 +14,7 @@ export interface Dmp {
   readonly id: number;
   title?: string;
   description?: string;
-  project: Project;
+  project?: Project;
   contributors: Contributor[];
   dataKind: DataKind;
   reusedDataKind: DataKind;

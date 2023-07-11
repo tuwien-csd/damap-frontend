@@ -17,6 +17,10 @@
       "update": "DMP was updated!",
       "save": "DMP was saved!",
       "version.save": "Version was saved!"
+    },
+    "error": {
+      "load": "DMPs were not loaded.",
+      "save": "DMP was not updated."
     }
   },
   "dialog": {

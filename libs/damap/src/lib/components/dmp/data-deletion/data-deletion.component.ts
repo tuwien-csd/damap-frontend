@@ -1,7 +1,7 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
-import {Contributor} from '../../../domain/contributor';
+import { Contributor } from '../../../domain/contributor';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
@@ -17,8 +17,9 @@ export class DataDeletionComponent {
     contributor1?.id === contributor2?.id;
 
   setDateOfDeletion($event: MatSlideToggleChange) {
-    if ($event.checked) { this.dataset.controls.dateOfDeletion.setValue(
-        this.dmpForm.value.project.end
+    if ($event.checked) {
+      this.dataset.controls.dateOfDeletion.setValue(
+        this.dmpForm.value.project?.end
       );
     }
   }
@@ -32,7 +33,7 @@ export class DataDeletionComponent {
   }
 
   get willBePublished(): boolean {
-    return !!this.dmpForm.value.repositories.filter((item) =>
+    return !!this.dmpForm.value.repositories.filter(item =>
       item.datasets.includes(this.dataset.value.referenceHash)
     ).length;
   }
