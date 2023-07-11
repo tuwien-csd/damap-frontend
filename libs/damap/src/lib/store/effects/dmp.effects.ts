@@ -7,7 +7,7 @@ import {
   map,
   switchMap,
   tap,
-  withLatestFrom
+  withLatestFrom,
 } from 'rxjs/operators';
 
 import { AppState } from '../states/app.state';
@@ -35,7 +35,10 @@ export class DmpEffects {
       switchMap(_ =>
         this.backendService.getDmps().pipe(
           map(dmps => DmpAction.dmpsLoaded({ dmps })),
-          catchError(() => of(DmpAction.failedToLoadDmps()))
+          catchError((error: Error) => {
+            this.feedbackService.error('dmp.error.load', error);
+            return of(DmpAction.failedToLoadDmps());
+          })
         )
       )
     )
@@ -53,7 +56,10 @@ export class DmpEffects {
             this.store$.dispatch(setFormValue({ dmp }));
             return DmpAction.loadDmps(false);
           }),
-          catchError(() => of(DmpAction.failedToSaveDmp()))
+          catchError((error: Error) => {
+            this.feedbackService.error('dmp.error.save', error);
+            return of(DmpAction.failedToSaveDmp());
+          })
         )
       )
     )
@@ -65,12 +71,16 @@ export class DmpEffects {
       switchMap(action =>
         this.backendService.editDmp(action.dmp).pipe(
           map(dmp => {
+            setFormValue({ dmp });
             this.formService.mapDmpToForm(dmp);
             this.feedbackService.success('dmp.success.update');
             this.store$.dispatch(DmpAction.dmpSaved());
             return setFormValue({ dmp });
           }),
-          catchError(() => of(DmpAction.failedToSaveDmp()))
+          catchError((error: Error) => {
+            this.feedbackService.error('dmp.error.save', error);
+            return of(DmpAction.failedToSaveDmp());
+          })
         )
       )
     )
@@ -96,9 +106,10 @@ export class DmpEffects {
               dmp: dmp,
             };
           }),
-          catchError(error => {
+          catchError((err: any) => {
+            this.feedbackService.error('dmp.error.save', err);
             this.store$.dispatch(DmpAction.failedToSaveDmp());
-            return error;
+            return err;
           })
         );
       }),
@@ -112,7 +123,11 @@ export class DmpEffects {
             return DmpAction.loadDmps(true);
           })
         )
-      )
+      ),
+      catchError((error: Error) => {
+        this.feedbackService.error('dmp.error.save', error);
+        return of(DmpAction.failedToSaveDmp());
+      })
     )
   );
 
@@ -133,7 +148,10 @@ export class DmpEffects {
                 this.backendService.getDmpDocument(action.dmp.id);
                 this.store$.dispatch(DmpAction.dmpExported());
               }),
-              catchError(() => of(DmpAction.failedToSaveDmp()))
+              catchError((error: Error) => {
+                this.feedbackService.error('dmp.error.save', error);
+                return of(DmpAction.failedToSaveDmp());
+              })
             );
           }
           if (action.type === DmpAction.exportDmpTemplate.type) {
@@ -141,7 +159,7 @@ export class DmpEffects {
               action.dmp.id,
               action.dmpTemplateType
             );
-          } else if (action.type === DmpAction.exportDmp.type){
+          } else if (action.type === DmpAction.exportDmp.type) {
             this.backendService.getDmpDocument(action.dmp.id);
           }
           this.store$.dispatch(DmpAction.dmpExported());

@@ -245,7 +245,7 @@ export class DmpComponent implements OnInit, OnDestroy {
       if (dmp != null) {
         this.formService.mapDmpToForm(dmp);
         this.store.dispatch(setFormValue({ dmp }));
-        if (dmp.project && dmp.project.universityId) {
+        if (dmp.project?.universityId) {
           this.getProjectMembers(dmp.project.universityId);
         }
       } else {
