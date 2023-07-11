@@ -1,36 +1,40 @@
 {
-    "yes": "Ja",
-    "no": "Nein",
-    "fair": "FAIR",
-    "treeselect": {
-        "filter": "Auswahl filtern",
-        "toggle": "{{value}} umschalten",
-        "options": "Optionen auswählen"
+  "yes": "Ja",
+  "no": "Nein",
+  "fair": "FAIR",
+  "treeselect": {
+    "filter": "Auswahl filtern",
+    "toggle": "{{value}} umschalten",
+    "options": "Optionen auswählen"
+  },
+  "languages": "Sprachen",
+  "env": {
+    "title": "Testumgebung",
+    "text": "Diese Anwendungsinstanz dient nur zu Entwicklungs- und Testzwecken. Der Inhalt kann jederzeit ohne vorherige Benachrichtigung gelöscht werden."
+  },
+  "dmp": {
+    "success": {
+      "update": "DMP wurde geupdated!",
+      "save": "DMP wurde gespeichert!",
+      "version.save": "Version wurde gespeichert!"
     },
-    "languages": "Sprachen",
-    "env": {
-        "title": "Testumgebung",
-        "text": "Diese Anwendungsinstanz dient nur zu Entwicklungs- und Testzwecken. Der Inhalt kann jederzeit ohne vorherige Benachrichtigung gelöscht werden."
-    },
-    "dmp": {
-        "success": {
-            "update": "DMP wurde aktualisiert!",
-            "save": "DMP wurde gespeichert!",
-            "version.save": "Version wurde gespeichert!"
-        }
-    },
-    "dialog": {
-        "export": {
-            "title": "Der Dateidownload wurde gestartet.",
-            "content": "Bitte beachten Sie, dass Sie damit noch nicht fertig sind. \n Das exportierte Dokument muss möglicherweise noch fein abgestimmt werden.",
-            "button": "OK",
-            "type": "Exporttyp auswählen"
-        },
-        "delete": {
-            "title": "Bitte beachten Sie:",
-            "content": "Sie sind dabei, diesen DMP zu löschen. Dieser Vorgang kann nicht rückgängig gemacht werden. Sind Sie sicher, dass Sie fortfahren möchten?",
-            "button": "Löschen",
-            "cancel": "Abbrechen"
-        }
+    "error": {
+      "load": "DMPs wurden nicht geladen.",
+      "save": "DMP wurde nicht gespeichert."
     }
+  },
+  "dialog": {
+    "export": {
+      "title": "Der Dateidownload wurde gestartet.",
+      "content": "Bitte beachten Sie, dass Sie damit noch nicht fertig sind. \n Das exportierte Dokument muss möglicherweise noch fein abgestimmt werden.",
+      "button": "OK",
+      "type": "Exporttyp auswählen"
+    },
+    "delete": {
+      "title": "Bitte beachten Sie:",
+      "content": "Sie sind dabei, diesen DMP zu löschen. Dieser Vorgang kann nicht rückgängig gemacht werden. Sind Sie sicher, dass Sie fortfahren möchten?",
+      "button": "Löschen",
+      "cancel": "Abbrechen"
+    }
+  }
 }

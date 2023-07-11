@@ -112,19 +112,19 @@ export class FormService {
     this.form.patchValue({
       id: dmp.id,
       project: dmp.project,
-      funding: dmp.project.funding,
+      funding: dmp.project?.funding,
       data: {
         kind: dmp.dataKind,
         reusedKind: dmp.reusedDataKind,
         explanation: dmp.noDataExplanation,
-        dataGeneration: dmp.dataGeneration
+        dataGeneration: dmp.dataGeneration,
       },
       documentation: {
         metadata: dmp.metadata,
         structure: dmp.structure,
         documentation: dmp.documentation,
         dataQuality: dmp.dataQuality,
-        otherDataQuality: dmp.otherDataQuality
+        otherDataQuality: dmp.otherDataQuality,
       },
       externalStorageInfo: dmp.externalStorageInfo,
       legal: {
@@ -148,51 +148,51 @@ export class FormService {
         ethicalIssues: dmp.ethicalIssuesExist,
         ethicalIssuesCris: dmp.ethicalIssuesExistCris,
         committeeReviewed: dmp.committeeReviewed,
-        committeeReviewedCris: dmp.committeeReviewedCris
+        committeeReviewedCris: dmp.committeeReviewedCris,
       },
       reuse: {
         targetAudience: dmp.targetAudience,
         tools: dmp.tools,
-        restrictedDataAccess: dmp.restrictedDataAccess
+        restrictedDataAccess: dmp.restrictedDataAccess,
       },
       costs: {
         exist: dmp.costsExist,
-        existCris: dmp.costsExistCris
+        existCris: dmp.costsExistCris,
       },
       restrictedAccessInfo: dmp.restrictedAccessInfo,
       closedAccessInfo: dmp.closedAccessInfo,
     });
 
     // Contributors, datasets, repositories, costs
-    if (dmp.contributors) {
-      for (const contributor of dmp.contributors) {
-        (this.form.controls['contributors'] as UntypedFormArray).push(this.mapContributorToFormGroup(contributor));
-      }
+    for (const contributor of dmp.contributors || []) {
+      (this.form.controls['contributors'] as UntypedFormArray).push(
+        this.mapContributorToFormGroup(contributor)
+      );
     }
-    if (dmp.datasets) {
-      for (const dataset of dmp.datasets) {
-        (this.form.controls['datasets'] as UntypedFormArray).push(this.mapDatasetToFormGroup(dataset));
-      }
+    for (const dataset of dmp.datasets || []) {
+      (this.form.controls['datasets'] as UntypedFormArray).push(
+        this.mapDatasetToFormGroup(dataset)
+      );
     }
-    if (dmp.repositories) {
-      for (const repo of dmp.repositories) {
-        (this.form.controls['repositories'] as UntypedFormArray).push(this.mapRepositoryToFormGroup(repo));
-      }
+    for (const repo of dmp.repositories || []) {
+      (this.form.controls['repositories'] as UntypedFormArray).push(
+        this.mapRepositoryToFormGroup(repo)
+      );
     }
-    if (dmp.costs) {
-      for (const cost of dmp.costs) {
-        (this.form.controls['costs'].get('list') as UntypedFormArray).push(this.mapCostToFormGroup(cost));
-      }
+    for (const cost of dmp.costs || []) {
+      (this.form.controls['costs'].get('list') as UntypedFormArray).push(
+        this.mapCostToFormGroup(cost)
+      );
     }
-    if (dmp.storage) {
-      for (const storage of dmp.storage) {
-        (this.form.controls['storage'] as UntypedFormArray).push(this.mapStorageToFormGroup(storage));
-      }
+    for (const storage of dmp.storage || []) {
+      (this.form.controls['storage'] as UntypedFormArray).push(
+        this.mapStorageToFormGroup(storage)
+      );
     }
-    if (dmp.externalStorage) {
-      for (const externalStorage of dmp.externalStorage) {
-        (this.form.controls['externalStorage'] as UntypedFormArray).push(this.mapExternalStorageToFormGroup(externalStorage));
-      }
+    for (const externalStorage of dmp.externalStorage || []) {
+      (this.form.controls['externalStorage'] as UntypedFormArray).push(
+        this.mapExternalStorageToFormGroup(externalStorage)
+      );
     }
   }
 
