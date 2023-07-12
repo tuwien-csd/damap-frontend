@@ -1,10 +1,10 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
+import {mockContributor1, mockContributor2} from '../../../mocks/contributor-mocks';
 
 import {DataDeletionComponent} from './data-deletion.component';
-import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {MatSliderModule} from '@angular/material/slider';
 import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
-import {mockContributor1, mockContributor2} from '../../../mocks/contributor-mocks';
 
 describe('DataDeletionComponent', () => {
   let component: DataDeletionComponent;
@@ -41,26 +41,5 @@ describe('DataDeletionComponent', () => {
     expect(component.getSelection(mockContributor1, mockContributor1)).toBe(true);
     expect(component.getSelection(mockContributor1, null)).toBe(false);
     expect(component.getSelection(null, null)).toBe(true);
-  });
-
-  it('should check if dataset will be published', () => {
-    component.dmpForm = new UntypedFormGroup({
-      repositories: new UntypedFormArray([
-        new UntypedFormControl({datasets: ['ref1']}),
-        new UntypedFormControl({datasets: ['ref1']})
-      ])
-    });
-    component.dataset = new UntypedFormGroup({
-      referenceHash: new UntypedFormControl('ref1')
-    });
-
-    expect(component.willBePublished).toBe(true);
-
-
-    component.dataset = new UntypedFormGroup({
-      referenceHash: new UntypedFormControl('ref2')
-    });
-
-    expect(component.willBePublished).toBe(false);
   });
 });

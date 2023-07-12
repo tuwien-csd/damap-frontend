@@ -31,10 +31,4 @@ export class DataDeletionComponent {
   get reasonForDeletion(): UntypedFormControl {
     return this.dataset.controls.reasonForDeletion as UntypedFormControl;
   }
-
-  get willBePublished(): boolean {
-    return !!this.dmpForm.value.repositories.filter(item =>
-      item.datasets.includes(this.dataset.value.referenceHash)
-    ).length;
-  }
 }
