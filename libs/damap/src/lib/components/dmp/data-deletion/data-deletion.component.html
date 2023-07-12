@@ -1,5 +1,5 @@
 <div [formGroup]="dataset">
-  <div class="warning" *ngIf="willBePublished">
+  <div class="warning" *ngIf="dataset.value.delete">
     <div class="warning-icon">
       <mat-icon>error_outline</mat-icon>
     </div>
@@ -28,7 +28,7 @@
         <mat-label>{{
           'dmp.steps.data.deletion.question.date' | translate
           }}</mat-label>
-        <input matInput formControlName="dateOfDeletion" [matDatepicker]="picker"  />
+        <input matInput formControlName="dateOfDeletion" [matDatepicker]="picker" />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -37,5 +37,4 @@
       [maxLength]="4000">
     </app-input-wrapper>
   </div>
-  
 </div>
