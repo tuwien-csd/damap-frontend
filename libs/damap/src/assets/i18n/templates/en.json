@@ -124,7 +124,7 @@
           }
         },
         "access": {
-          "heading": "Set access rights for all datasets",
+          "heading": "Planned access rights for all datasets",
           "question": {
             "dataset": "Dataset",
             "selected": "for selected project members",
@@ -272,6 +272,7 @@
         "heading": "Repositories",
         "search": "Search repository",
         "add": "Add repository",
+        "use": "Use repository",
         "remove": "Remove repository",
         "selected": "You selected:",
         "question": {
@@ -819,7 +820,7 @@
     },
     "exportDmpTemplatetype": {
       "FWF": "FWF",
-      "SCIENCE_EUROPE":"SCIENCE_EUROPE"
+      "SCIENCE_EUROPE": "Science Europe"
     }
   },
   "yes": "Yes",

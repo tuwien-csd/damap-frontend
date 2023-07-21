@@ -97,15 +97,16 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
 
   exportDmpTemplate(): void {
     const dialogRef = this.dialog.open(ExportWarningDialogComponent, {});
-    dialogRef.componentInstance.funderSupported =
-      this.dmpForm.controls.project.getRawValue().funderSupported;
+    let funderSupported: boolean =
+      this.dmpForm.controls.project?.getRawValue()?.funderSupported ?? false;
+    dialogRef.componentInstance.funderSupported = funderSupported;
 
     dialogRef.beforeClosed().subscribe(result => {
       if (result === undefined) {
         return;
       } else {
         const template = result;
-        if (!this.dmpForm.controls.project.getRawValue().funderSupported) {
+        if (!funderSupported) {
           this.exportDmpType = template;
           this.store.dispatch(
             exportDmpTemplate({

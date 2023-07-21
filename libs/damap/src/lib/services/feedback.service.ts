@@ -1,24 +1,31 @@
-import {Injectable} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {TranslateService} from '@ngx-translate/core';
+import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
+import { LoggerService } from './logger.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FeedbackService {
+  constructor(
+    protected _snackBar: MatSnackBar,
+    protected translate: TranslateService,
+    protected loggerService: LoggerService
+  ) {}
 
-  constructor(private _snackBar: MatSnackBar,
-              private translate: TranslateService) {
-  }
-
-  error(message: string) {
+  error(message: string, error?: Error) {
     this.translate.get(message).subscribe(translation =>
       this._snackBar.open(translation, 'x', {
         duration: 4500,
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        panelClass: 'snack-error'
-      }));
+        panelClass: 'snack-error',
+      })
+    );
+
+    if (error) {
+      this.loggerService.error(error);
+    }
   }
 
   success(message: string) {
@@ -27,7 +34,8 @@ export class FeedbackService {
         duration: 4500,
         horizontalPosition: 'center',
         verticalPosition: 'top',
-        panelClass: 'snack-success'
-      }));
+        panelClass: 'snack-success',
+      })
+    );
   }
 }
