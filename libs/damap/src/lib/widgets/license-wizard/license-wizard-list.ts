@@ -128,7 +128,7 @@ export const perlArtistic2 = {
   name: 'license.wizard.license.perlArtistic2.name',
   priority: 8,
   available: true,
-  url: 'https://opensource.org/licenses/Artistic-2.0',
+  url: 'https://opensource.org/license/artistic-license-2-0-php/',
   description: 'license.wizard.license.perlArtistic2.description',
   categories: ['public', 'software', 'perl'],
   labels: ['public', 'perl', 'osi']
