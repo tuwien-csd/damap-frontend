@@ -48,7 +48,7 @@ export const odcBy = {
   name: 'license.wizard.license.odcBy.name',
   priority: 1,
   available: false,
-  url: 'https://opendatacommons.org/licensesby/summary/',
+  url: 'https://opendatacommons.org/licenses/by/summary/',
   description: 'license.wizard.license.odcBy.description',
   categories: ['public', 'data', 'by'],
   labels: ['public']
@@ -68,7 +68,7 @@ export const odbl = {
   name: 'license.wizard.license.odbl.name',
   priority: 1,
   available: false,
-  url: 'https://opendatacommons.org/licensesodbl/summary/',
+  url: 'https://opendatacommons.org/licenses/odbl/summary/',
   description: 'license.wizard.license.odbl.description',
   categories: ['public', 'data', 'by', 'sa'],
   labels: ['public']
