@@ -174,7 +174,7 @@ export const agpl1 = {
   name: 'license.wizard.license.agpl1.name',
   priority: 50,
   available: false,
-  url: 'http://www.affero.org/oagpl.html',
+  url: 'https://www.affero.org/oagpl.html',
   description: 'license.wizard.license.agpl1.description',
   categories: ['public', 'software', 'agpl', 'copyleft', 'strong'],
   labels: ['public', 'copyleft'],
