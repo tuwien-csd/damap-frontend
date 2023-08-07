@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ErrorMessageModule } from '../../../widgets/error-message/error-message.module';
-import { InfoMessageModule } from "../../../widgets/info-message/info-message.module";
+import { InfoMessageModule } from '../../../widgets/info-message/info-message.module';
 import { ManualProjectInputComponent } from './manual-project-input/manual-project-input.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -34,7 +34,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatListModule,
     MatTooltipModule,
     MatDatepickerModule,
-    MatTabsModule
+    MatTabsModule,
   ],
   declarations: [
     ProjectComponent,

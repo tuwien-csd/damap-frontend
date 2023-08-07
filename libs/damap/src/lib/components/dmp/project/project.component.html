@@ -1,4 +1,6 @@
-<app-info-message *ngIf="!projectStep?.value?.funding">{{'info.project.funder' | translate}}</app-info-message>
+<app-info-message *ngIf="!projectStep?.value?.funding">{{
+  "info.project.funder" | translate
+}}</app-info-message>
 
 <!-- Selected project -->
 <div *ngIf="projectStep?.value">
