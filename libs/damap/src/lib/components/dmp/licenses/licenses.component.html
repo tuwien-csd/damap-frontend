@@ -81,9 +81,8 @@
 <div [style.margin.px]="'5'">
   <div [formGroup]="dmpForm">
     <ng-container *ngIf="restricted?.length > 0">
-      <mat-form-field class="full-width">
-        <mat-label class="wrap-normal-label"
-          >{{ "dmp.steps.licensing.question.restrictedAccessInfo" | translate }}
+      <mat-form-field class="full-width custom-style" >
+        <mat-label class="wrap-normal-label">{{ 'dmp.steps.licensing.question.restrictedAccessInfo' | translate }}
           <ng-container *ngFor="let set of restricted; last as last">
             "{{ set.title }}"<span *ngIf="!last">, </span>.
           </ng-container>
@@ -96,9 +95,8 @@
     </ng-container>
 
     <ng-container *ngIf="closed?.length > 0">
-      <mat-form-field class="full-width">
-        <mat-label class="wrap-normal-label"
-          >{{ "dmp.steps.licensing.question.closedAccessInfo" | translate }}
+      <mat-form-field class="full-width custom-style">
+        <mat-label class="wrap-normal-label">{{ 'dmp.steps.licensing.question.closedAccessInfo' | translate }}
           <span *ngFor="let set of closed; last as last">
             "{{ set.title }}"<span *ngIf="!last">, </span>.
           </span>
