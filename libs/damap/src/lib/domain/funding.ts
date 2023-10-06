@@ -1,5 +1,5 @@
-import {Identifier} from './identifier';
-import {FundingState} from './enum/funding-state.enum';
+import { Identifier } from './identifier';
+import { FundingState } from './enum/funding-state.enum';
 
 export interface Funding {
   readonly id: number;

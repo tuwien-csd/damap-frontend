@@ -1,23 +1,22 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Store, select} from '@ngrx/store';
-import {UntypedFormArray, UntypedFormGroup} from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
 import {
   selectInternalStorages,
-  selectInternalStoragesLoaded
+  selectInternalStoragesLoaded,
 } from '../../../../store/selectors/internal-storage.selectors';
 
-import {AppState} from '../../../../store/states/app.state';
-import {InternalStorage} from '../../../../domain/internal-storage';
-import {LoadingState} from '../../../../domain/enum/loading-state.enum';
-import {loadInternalStorages} from '../../../../store/actions/internal-storage.actions';
+import { AppState } from '../../../../store/states/app.state';
+import { InternalStorage } from '../../../../domain/internal-storage';
+import { LoadingState } from '../../../../domain/enum/loading-state.enum';
+import { loadInternalStorages } from '../../../../store/actions/internal-storage.actions';
 
 @Component({
   selector: 'app-dmp-storage',
   templateUrl: './storage.component.html',
-  styleUrls: ['./storage.component.css']
+  styleUrls: ['./storage.component.css'],
 })
 export class StorageComponent implements OnInit {
-
   @Input() dmpForm: UntypedFormGroup;
   @Input() storageStep: UntypedFormArray;
   @Input() datasets: UntypedFormArray;
@@ -28,12 +27,15 @@ export class StorageComponent implements OnInit {
   internalStorages: InternalStorage[] = [];
   internalStoragesLoaded: LoadingState;
 
-  constructor(private store: Store<AppState>) {
-  }
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
-    this.store.pipe(select(selectInternalStoragesLoaded)).subscribe(val => this.internalStoragesLoaded = val);
-    this.store.pipe(select(selectInternalStorages)).subscribe(val => this.internalStorages = val);
+    this.store
+      .pipe(select(selectInternalStoragesLoaded))
+      .subscribe(val => (this.internalStoragesLoaded = val));
+    this.store
+      .pipe(select(selectInternalStorages))
+      .subscribe(val => (this.internalStorages = val));
     this.getInternalStorages();
   }
 

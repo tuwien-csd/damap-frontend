@@ -1,11 +1,11 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {ReusedDataComponent} from './reused-data.component';
-import {BackendService} from '../../../../services/backend.service';
-import {MatDialogModule} from '@angular/material/dialog';
-import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
-import {restrictedDatasetMock} from '../../../../mocks/dataset-mocks';
-import {of} from 'rxjs';
+import { ReusedDataComponent } from './reused-data.component';
+import { BackendService } from '../../../../services/backend.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { restrictedDatasetMock } from '../../../../mocks/dataset-mocks';
+import { of } from 'rxjs';
 
 describe('ReusedDataComponent', () => {
   let component: ReusedDataComponent;
@@ -17,9 +17,7 @@ describe('ReusedDataComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MatDialogModule],
       declarations: [ReusedDataComponent],
-      providers: [
-        {provide: BackendService, useValue: backendSpy}
-      ]
+      providers: [{ provide: BackendService, useValue: backendSpy }],
     }).compileComponents();
   });
 
@@ -27,7 +25,7 @@ describe('ReusedDataComponent', () => {
     fixture = TestBed.createComponent(ReusedDataComponent);
     component = fixture.componentInstance;
     component.specifyDataStep = new UntypedFormGroup({
-      reusedKind: new UntypedFormControl(undefined)
+      reusedKind: new UntypedFormControl(undefined),
     });
     fixture.detectChanges();
   });
@@ -41,7 +39,11 @@ describe('ReusedDataComponent', () => {
     backendSpy.searchDataset.and.returnValue(of(restrictedDatasetMock));
     component.searchDataset('doi:10.12345/12345');
 
-    expect(backendSpy.searchDataset).toHaveBeenCalledOnceWith('doi:10.12345/12345');
-    expect(component.datasetToAdd.emit).toHaveBeenCalledOnceWith(restrictedDatasetMock);
+    expect(backendSpy.searchDataset).toHaveBeenCalledOnceWith(
+      'doi:10.12345/12345'
+    );
+    expect(component.datasetToAdd.emit).toHaveBeenCalledOnceWith(
+      restrictedDatasetMock
+    );
   });
 });

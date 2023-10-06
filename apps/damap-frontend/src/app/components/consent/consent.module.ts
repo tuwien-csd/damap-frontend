@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {ConsentComponent} from './consent.component';
-import {TranslateModule} from '@ngx-translate/core';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ConsentComponent } from './consent.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import {MatButtonModule} from '@angular/material/button';
 
     // Materials
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   declarations: [ConsentComponent],
   exports: [
@@ -22,8 +22,7 @@ import {MatButtonModule} from '@angular/material/button';
 
     // Materials
     MatDialogModule,
-    MatButtonModule
-  ]
+    MatButtonModule,
+  ],
 })
-export class ConsentModule {
-}
+export class ConsentModule {}

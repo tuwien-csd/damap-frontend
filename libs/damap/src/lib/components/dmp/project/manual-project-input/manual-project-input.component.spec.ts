@@ -1,14 +1,17 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {ManualProjectInputComponent} from './manual-project-input.component';
-import {TranslateTestingModule} from '../../../../testing/translate-testing/translate-testing.module';
-import {mockManualProject, mockProject} from '../../../../mocks/project-mocks';
-import {SimpleChange} from '@angular/core';
-import {HarnessLoader} from '@angular/cdk/testing';
-import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
-import {MatButtonModule} from '@angular/material/button';
-import {MatButtonHarness} from '@angular/material/button/testing';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ManualProjectInputComponent } from './manual-project-input.component';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
+import {
+  mockManualProject,
+  mockProject,
+} from '../../../../mocks/project-mocks';
+import { SimpleChange } from '@angular/core';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('ManualProjectInputComponent', () => {
   let component: ManualProjectInputComponent;
@@ -17,8 +20,13 @@ describe('ManualProjectInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranslateTestingModule, MatButtonModule, FormsModule, ReactiveFormsModule],
-      declarations: [ManualProjectInputComponent]
+      imports: [
+        TranslateTestingModule,
+        MatButtonModule,
+        FormsModule,
+        ReactiveFormsModule,
+      ],
+      declarations: [ManualProjectInputComponent],
     }).compileComponents();
   });
 
@@ -37,11 +45,15 @@ describe('ManualProjectInputComponent', () => {
     spyOn(component.form, 'patchValue');
 
     component.project = mockProject;
-    component.ngOnChanges({project: new SimpleChange(mockManualProject, mockProject, false)});
+    component.ngOnChanges({
+      project: new SimpleChange(mockManualProject, mockProject, false),
+    });
     expect(component.form.patchValue).toHaveBeenCalledTimes(0);
 
     component.project = mockManualProject;
-    component.ngOnChanges({project: new SimpleChange(mockProject, mockManualProject, false)});
+    component.ngOnChanges({
+      project: new SimpleChange(mockProject, mockManualProject, false),
+    });
     expect(component.form.patchValue).toHaveBeenCalledTimes(1);
     expect(component.form.patchValue).toHaveBeenCalledWith(mockManualProject);
   });

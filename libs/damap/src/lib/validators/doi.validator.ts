@@ -1,4 +1,4 @@
-import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 /**
  * Verify DOI structure
@@ -11,6 +11,6 @@ export function doiValidator(): ValidatorFn {
     }
     const regex = /^(doi:|https:\/\/doi\.org\/)?(10\.\S*)$/;
     const doi = regex.test(control.value.trim());
-    return doi ? null : {doi: true};
+    return doi ? null : { doi: true };
   };
 }

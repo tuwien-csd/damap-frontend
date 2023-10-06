@@ -1,9 +1,9 @@
-import {DataAccessType} from './enum/data-access-type.enum';
-import {AccessRight} from './enum/access-right.enum';
-import {DataType} from './enum/data-type.enum';
-import {Contributor} from './contributor';
-import {DataSource} from './enum/data-source.enum';
-import {Identifier} from './identifier';
+import { DataAccessType } from './enum/data-access-type.enum';
+import { AccessRight } from './enum/access-right.enum';
+import { DataType } from './enum/data-type.enum';
+import { Contributor } from './contributor';
+import { DataSource } from './enum/data-source.enum';
+import { Identifier } from './identifier';
 
 export interface Dataset {
   readonly id: number;

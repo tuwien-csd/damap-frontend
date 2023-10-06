@@ -1,15 +1,15 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {StorageComponent} from './storage.component';
-import {StorageFilterPipe} from './storage-filter.pipe';
-import {TranslateTestingModule} from '../../../../testing/translate-testing/translate-testing.module';
-import {provideMockStore} from '@ngrx/store/testing';
-import {LoadingState} from '../../../../domain/enum/loading-state.enum';
+import { StorageComponent } from './storage.component';
+import { StorageFilterPipe } from './storage-filter.pipe';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
+import { provideMockStore } from '@ngrx/store/testing';
+import { LoadingState } from '../../../../domain/enum/loading-state.enum';
 import {
   selectInternalStorages,
-  selectInternalStoragesLoaded
+  selectInternalStoragesLoaded,
 } from '../../../../store/selectors/internal-storage.selectors';
-import {mockInternalStorage} from '../../../../mocks/storage-mocks';
+import { mockInternalStorage } from '../../../../mocks/storage-mocks';
 
 describe('StorageComponent', () => {
   let component: StorageComponent;
@@ -22,13 +22,15 @@ describe('StorageComponent', () => {
       providers: [
         provideMockStore({
           selectors: [
-            {selector: selectInternalStoragesLoaded, value: LoadingState.LOADED},
-            {selector: selectInternalStorages, value: [mockInternalStorage]}
-          ]
+            {
+              selector: selectInternalStoragesLoaded,
+              value: LoadingState.LOADED,
+            },
+            { selector: selectInternalStorages, value: [mockInternalStorage] },
+          ],
         }),
-      ]
-    })
-      .compileComponents();
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

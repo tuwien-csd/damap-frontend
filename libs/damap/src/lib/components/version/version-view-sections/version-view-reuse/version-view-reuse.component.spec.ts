@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {VersionViewReuseComponent} from './version-view-reuse.component';
-import {TranslateTestingModule} from '../../../../testing/translate-testing/translate-testing.module';
+import { VersionViewReuseComponent } from './version-view-reuse.component';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
 
 describe('VersionViewReuseComponent', () => {
   let component: VersionViewReuseComponent;
@@ -10,7 +10,7 @@ describe('VersionViewReuseComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [VersionViewReuseComponent],
-      imports: [TranslateTestingModule]
+      imports: [TranslateTestingModule],
     }).compileComponents();
   });
 

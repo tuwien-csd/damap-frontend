@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {VersionViewCostsComponent} from './version-view-costs.component';
-import {TranslateTestingModule} from '../../../../testing/translate-testing/translate-testing.module';
+import { VersionViewCostsComponent } from './version-view-costs.component';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
 
 describe('VersionViewCostsComponent', () => {
   let component: VersionViewCostsComponent;
@@ -10,7 +10,7 @@ describe('VersionViewCostsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [VersionViewCostsComponent],
-      imports: [TranslateTestingModule]
+      imports: [TranslateTestingModule],
     }).compileComponents();
   });
 

@@ -20,9 +20,7 @@
           "apps/damap-frontend/src/favicon.ico",
           "apps/damap-frontend/src/assets"
         ],
-        "styles": [
-          "apps/damap-frontend/src/styles.scss"
-        ],
+        "styles": ["apps/damap-frontend/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -108,9 +106,7 @@
           "apps/damap-frontend/src/favicon.ico",
           "apps/damap-frontend/src/assets"
         ],
-        "styles": [
-          "apps/damap-frontend/src/styles.scss"
-        ],
+        "styles": ["apps/damap-frontend/src/styles.scss"],
         "scripts": []
       }
     },

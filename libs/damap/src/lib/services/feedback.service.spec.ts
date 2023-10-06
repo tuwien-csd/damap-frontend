@@ -1,21 +1,20 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {FeedbackService} from './feedback.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {TranslateTestingModule} from '../testing/translate-testing/translate-testing.module';
+import { FeedbackService } from './feedback.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateTestingModule } from '../testing/translate-testing/translate-testing.module';
 
 describe('FeedbackService', () => {
   let service: FeedbackService;
   let matSnackBar: MatSnackBar;
   const mockMatSnackBar = {
-    open: () => {
-    }
+    open: () => {},
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [TranslateTestingModule],
-      providers: [{provide: MatSnackBar, useValue: mockMatSnackBar},]
+      providers: [{ provide: MatSnackBar, useValue: mockMatSnackBar }],
     });
     service = TestBed.inject(FeedbackService);
     matSnackBar = TestBed.inject(MatSnackBar);
@@ -40,7 +39,7 @@ describe('FeedbackService', () => {
       duration: 4500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
-      panelClass: 'snack-success'
+      panelClass: 'snack-success',
     });
   });
 });

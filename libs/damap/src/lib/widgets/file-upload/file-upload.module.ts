@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FileUploadComponent} from './file-upload.component';
-import {MatIconModule} from '@angular/material/icon';
-import {TranslateModule} from '@ngx-translate/core';
-import {MatButtonModule} from '@angular/material/button';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {DragdropDirective} from './dragdrop.directive';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FileUploadComponent } from './file-upload.component';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { DragdropDirective } from './dragdrop.directive';
 
 @NgModule({
   imports: [
@@ -15,7 +15,8 @@ import {DragdropDirective} from './dragdrop.directive';
     // Materials
     MatIconModule,
     MatButtonModule,
-    MatProgressBarModule],
+    MatProgressBarModule,
+  ],
   declarations: [FileUploadComponent, DragdropDirective],
   exports: [
     CommonModule,
@@ -26,8 +27,7 @@ import {DragdropDirective} from './dragdrop.directive';
     // Materials
     MatIconModule,
     MatButtonModule,
-    MatProgressBarModule
-  ]
+    MatProgressBarModule,
+  ],
 })
-export class FileUploadModule {
-}
+export class FileUploadModule {}

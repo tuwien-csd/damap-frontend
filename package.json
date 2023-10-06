@@ -21,7 +21,9 @@
     "affected:lint": "npx nx affected --target=lint --parallel=2",
     "affected:build": "npx nx affected --target=build --parallel=2",
     "affected:test": "npx nx affected --target=test --parallel=2 --code-coverage --browsers ChromeHeadless --watch=false",
-    "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main"
+    "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
+    "format": "npx prettier --write .",
+    "format:check": "npx prettier --check ."
   },
   "private": true,
   "dependencies": {

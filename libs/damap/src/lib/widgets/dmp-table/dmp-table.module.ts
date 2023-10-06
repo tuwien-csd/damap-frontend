@@ -17,7 +17,9 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
-    CommonModule, RouterModule, TranslateModule,
+    CommonModule,
+    RouterModule,
+    TranslateModule,
 
     // Materials
     MatFormFieldModule,
@@ -30,11 +32,14 @@ import { TranslateModule } from '@ngx-translate/core';
     MatSelectModule,
     MatSortModule,
     MatMenuModule,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   declarations: [DmpTableComponent],
   exports: [
-    CommonModule, TranslateModule, RouterModule, DmpTableComponent,
+    CommonModule,
+    TranslateModule,
+    RouterModule,
+    DmpTableComponent,
 
     // Materials
     MatFormFieldModule,
@@ -47,9 +52,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatSelectModule,
     MatSortModule,
     MatMenuModule,
-    MatTooltipModule
-  ]
+    MatTooltipModule,
+  ],
 })
-
-export class DmpTableModule {
-}
+export class DmpTableModule {}

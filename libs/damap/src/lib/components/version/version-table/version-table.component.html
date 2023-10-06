@@ -1,39 +1,53 @@
 <ng-container *ngIf="dmp">
-  <h2>{{dmp.project?.title || 'DMP: ' + dmp.id}}</h2>
+  <h2>{{ dmp.project?.title || "DMP: " + dmp.id }}</h2>
 </ng-container>
 
-  <div class="mat-elevation-z8" *ngIf="versions">
-    <table mat-table [dataSource]="versions" aria-label="DMP Versions">
+<div class="mat-elevation-z8" *ngIf="versions">
+  <table mat-table [dataSource]="versions" aria-label="DMP Versions">
+    <!-- Version Column -->
+    <ng-container matColumnDef="version">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ "versions.versionId" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let element; index as i">{{ i + 1 }}</td>
+    </ng-container>
 
-      <!-- Version Column -->
-      <ng-container matColumnDef="version">
-        <th mat-header-cell *matHeaderCellDef>  {{'versions.versionId' | translate}} </th>
-        <td mat-cell *matCellDef="let element, index as i"> {{i + 1}} </td>
-      </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ "versions.versionName" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.versionName }}</td>
+    </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>  {{'versions.versionName' | translate}} </th>
-        <td mat-cell *matCellDef="let element"> {{element.versionName}} </td>
-      </ng-container>
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ "versions.versionDate" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.versionDate | date }}
+      </td>
+    </ng-container>
 
-      <!-- Date Column -->
-      <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef>  {{'versions.versionDate' | translate}} </th>
-        <td mat-cell *matCellDef="let element"> {{element.versionDate | date}} </td>
-      </ng-container>
+    <!-- Revision Column -->
+    <ng-container matColumnDef="revision">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ "versions.revisionNumber" | translate }}
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.revisionNumber }}</td>
+    </ng-container>
 
-      <!-- Revision Column -->
-      <ng-container matColumnDef="revision">
-        <th mat-header-cell *matHeaderCellDef> {{'versions.revisionNumber' | translate}} </th>
-        <td mat-cell *matCellDef="let element"> {{element.revisionNumber}} </td>
-      </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="viewVersion(row.revisionNumber)"></tr>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewVersion(row.revisionNumber)"></tr>
-
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">{{'versions.list.no.data' | translate}}</td>
-      </tr>
-    </table>
-  </div>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        {{ "versions.list.no.data" | translate }}
+      </td>
+    </tr>
+  </table>
+</div>

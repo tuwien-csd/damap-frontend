@@ -1,9 +1,11 @@
 <ng-container *ngIf="loaded === LoadingState.LOADED">
   <mat-card *ngFor="let repo of recommended">
-    <mat-card-title>{{repo.name}}</mat-card-title>
+    <mat-card-title>{{ repo.name }}</mat-card-title>
     <app-repo-details [repo]="repo"></app-repo-details>
     <mat-card-actions align="end">
-      <button mat-raised-button (click)="addRepository(repo)" color="primary">Use repository</button>
+      <button mat-raised-button (click)="addRepository(repo)" color="primary">
+        Use repository
+      </button>
     </mat-card-actions>
   </mat-card>
 </ng-container>
@@ -12,5 +14,8 @@
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-container>
 <ng-container *ngIf="loaded === LoadingState.FAILED">
-  <app-error-message message="{{'dmp.steps.repositories.loading.failed.recommended' | translate}}"></app-error-message>
+  <app-error-message
+    message="{{
+      'dmp.steps.repositories.loading.failed.recommended' | translate
+    }}"></app-error-message>
 </ng-container>

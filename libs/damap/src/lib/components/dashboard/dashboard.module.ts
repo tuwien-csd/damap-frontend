@@ -1,25 +1,28 @@
-import {NgModule} from '@angular/core';
-import {DashboardComponent} from './dashboard.component';
-import {CommonModule} from '@angular/common';
-import {TranslateModule} from '@ngx-translate/core';
-import {MatButtonModule} from '@angular/material/button';
-import {RouterModule} from '@angular/router';
-import {MatIconModule} from '@angular/material/icon';
+import { NgModule } from '@angular/core';
+import { DashboardComponent } from './dashboard.component';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [DashboardComponent],
   imports: [
-    CommonModule, RouterModule, TranslateModule,
+    CommonModule,
+    RouterModule,
+    TranslateModule,
     // Materials
-    MatButtonModule, MatIconModule
+    MatButtonModule,
+    MatIconModule,
   ],
   exports: [
     CommonModule,
     DashboardComponent,
 
     // Materials
-    MatButtonModule, MatIconModule
-  ]
+    MatButtonModule,
+    MatIconModule,
+  ],
 })
-export class DashboardModule {
-}
+export class DashboardModule {}

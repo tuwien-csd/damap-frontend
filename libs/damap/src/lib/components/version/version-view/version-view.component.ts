@@ -1,19 +1,18 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {BackendService} from '../../../services/backend.service';
-import {Observable} from 'rxjs';
-import {Dmp} from '../../../domain/dmp';
-import {MatAccordion} from '@angular/material/expansion';
-import {Version} from '../../../domain/version';
-import {DataKind} from '../../../domain/enum/data-kind.enum';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BackendService } from '../../../services/backend.service';
+import { Observable } from 'rxjs';
+import { Dmp } from '../../../domain/dmp';
+import { MatAccordion } from '@angular/material/expansion';
+import { Version } from '../../../domain/version';
+import { DataKind } from '../../../domain/enum/data-kind.enum';
 
 @Component({
   selector: 'app-version-view',
   templateUrl: './version-view.component.html',
-  styleUrls: ['./version-view.component.css']
+  styleUrls: ['./version-view.component.css'],
 })
 export class VersionViewComponent implements OnInit {
-
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   versions$: Observable<Version[]>;
@@ -23,9 +22,10 @@ export class VersionViewComponent implements OnInit {
 
   readonly dataKind = DataKind;
 
-  constructor(private route: ActivatedRoute,
-              private backendService: BackendService) {
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private backendService: BackendService
+  ) {}
 
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id');
@@ -39,10 +39,11 @@ export class VersionViewComponent implements OnInit {
   }
 
   getDmpVersion(id: number, revision: number): void {
-    this.dmp$ = this.backendService.getDmpByIdAndRevision(id, revision)
+    this.dmp$ = this.backendService.getDmpByIdAndRevision(id, revision);
   }
 
   getVersionName(versions: Version[]): string {
-    return versions.find(item => item.revisionNumber === this.revision)?.versionName;
+    return versions.find(item => item.revisionNumber === this.revision)
+      ?.versionName;
   }
 }

@@ -1,12 +1,16 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {DatasetTableComponent} from './dataset-table.component';
-import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {TranslateTestingModule} from '../../../../testing/translate-testing/translate-testing.module';
-import {DatasetSourceModule} from '../../../../pipes/dataset-source/dataset-source.module';
-import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {of} from 'rxjs';
+import { DatasetTableComponent } from './dataset-table.component';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
+import { DatasetSourceModule } from '../../../../pipes/dataset-source/dataset-source.module';
+import {
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs';
 
 describe('DatasetTableComponent', () => {
   let component: DatasetTableComponent;
@@ -16,8 +20,13 @@ describe('DatasetTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatDialogModule, TranslateTestingModule, DatasetSourceModule, NoopAnimationsModule],
-      declarations: [DatasetTableComponent]
+      imports: [
+        MatDialogModule,
+        TranslateTestingModule,
+        DatasetSourceModule,
+        NoopAnimationsModule,
+      ],
+      declarations: [DatasetTableComponent],
     }).compileComponents();
   });
 
@@ -42,9 +51,14 @@ describe('DatasetTableComponent', () => {
 
   it('should open DatasetDialogComponent', async () => {
     spyOn(component.updateDataset, 'emit');
-    spyOn(component.dialog, 'open').and.returnValue({afterClosed: () => of(formGroup2.getRawValue())} as MatDialogRef<unknown>);
+    spyOn(component.dialog, 'open').and.returnValue({
+      afterClosed: () => of(formGroup2.getRawValue()),
+    } as MatDialogRef<unknown>);
     component.openDatasetDialog(formGroup2.getRawValue());
-    expect(component.updateDataset.emit).toHaveBeenCalledOnceWith({index: 1, update: formGroup2.getRawValue()});
+    expect(component.updateDataset.emit).toHaveBeenCalledOnceWith({
+      index: 1,
+      update: formGroup2.getRawValue(),
+    });
   });
 
   it('should remove dataset', () => {

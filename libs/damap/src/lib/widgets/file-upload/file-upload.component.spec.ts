@@ -1,9 +1,9 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {FileUploadComponent} from './file-upload.component';
-import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
-import {MatIconModule} from '@angular/material/icon';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { FileUploadComponent } from './file-upload.component';
+import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 describe('FileUploadComponent', () => {
   let component: FileUploadComponent;
@@ -12,9 +12,8 @@ describe('FileUploadComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MatIconModule, MatProgressBarModule, TranslateTestingModule],
-      declarations: [FileUploadComponent]
-    })
-      .compileComponents();
+      declarations: [FileUploadComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

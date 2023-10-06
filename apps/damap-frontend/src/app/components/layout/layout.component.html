@@ -1,14 +1,23 @@
 <mat-sidenav-container>
-  <mat-sidenav #sidenav [fixedInViewport]="true" (window:resize)="widescreen()" [opened]="widescreen()" mode="side">
+  <mat-sidenav
+    #sidenav
+    [fixedInViewport]="true"
+    (window:resize)="widescreen()"
+    [opened]="widescreen()"
+    mode="side">
     <div class="mm-navbars-top mat-focus-indicator">
       <div class="mm-navbar mm-navbar-size-1">
         <div class="logo">
-          <a title="Damap" id="damap-logo" class="mat-focus-indicator" [routerLink]="'/'">
-            {{'title'| translate }}
+          <a
+            title="Damap"
+            id="damap-logo"
+            class="mat-focus-indicator"
+            [routerLink]="'/'">
+            {{ "title" | translate }}
           </a>
         </div>
         <div class="languageElement">
-          <button mat-button [matMenuTriggerFor]="language">{{lang}}</button>
+          <button mat-button [matMenuTriggerFor]="language">{{ lang }}</button>
           <mat-menu #language="matMenu">
             <button mat-menu-item (click)="useLanguage('en')">EN</button>
             <button mat-menu-item (click)="useLanguage('de')">DE</button>
@@ -17,41 +26,61 @@
       </div>
     </div>
     <div id="user" class="dark-theme">
-      <div> {{name}} </div>
-      <button mat-icon-button id="logout" [attr.aria-label]="'layout.logout' | translate" (click)="logout()">
+      <div>{{ name }}</div>
+      <button
+        mat-icon-button
+        id="logout"
+        [attr.aria-label]="'layout.logout' | translate"
+        (click)="logout()">
         <mat-icon>logout</mat-icon>
       </button>
     </div>
     <mat-nav-list>
-      <a mat-list-item class="nav-item-mobile" [routerLink]="'/dashboard'"
-         routerLinkActive="active">{{'layout.menu.home' | translate }}</a>
-      <a mat-list-item class="nav-item-mobile" [routerLink]="'/plans'"
-         routerLinkActive="active">{{'layout.menu.plans' | translate }}</a>
+      <a
+        mat-list-item
+        class="nav-item-mobile"
+        [routerLink]="'/dashboard'"
+        routerLinkActive="active"
+        >{{ "layout.menu.home" | translate }}</a
+      >
+      <a
+        mat-list-item
+        class="nav-item-mobile"
+        [routerLink]="'/plans'"
+        routerLinkActive="active"
+        >{{ "layout.menu.plans" | translate }}</a
+      >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
       <mat-toolbar-row id="mainHeader" [style]="'padding: 0px;'">
         <div class="mainHeaderLeft">
-          <button mat-icon-button title="{{'layout.menu.mobile.open'| translate }}"
-                  (click)="sidenav.opened = !sidenav.opened"
-                  *ngIf="!sidenav.opened">
+          <button
+            mat-icon-button
+            title="{{ 'layout.menu.mobile.open' | translate }}"
+            (click)="sidenav.opened = !sidenav.opened"
+            *ngIf="!sidenav.opened">
             <mat-icon>menu</mat-icon>
           </button>
-          <button mat-icon-button title="{{'layout.menu.mobile.close'| translate }}"
-                  class="sidenav-btn"
-                  (click)="sidenav.opened = !sidenav.opened"
-                  *ngIf="sidenav.opened">
+          <button
+            mat-icon-button
+            title="{{ 'layout.menu.mobile.close' | translate }}"
+            class="sidenav-btn"
+            (click)="sidenav.opened = !sidenav.opened"
+            *ngIf="sidenav.opened">
             <mat-icon>close</mat-icon>
           </button>
         </div>
-        <div class="mainHeaderRight">
-        </div>
+        <div class="mainHeaderRight"></div>
         <!-- University Logo -->
         <div id="mainHeaderLogo">
-          <a class="mat-focus-indicator" title="{{'layout.logo.text' | translate }}"
-             [href]="'layout.logo.link' | translate" rel="noopener">
-            <img src="assets/logo.svg" alt="Logo" height="75" width="75">
+          <a
+            class="mat-focus-indicator"
+            title="{{ 'layout.logo.text' | translate }}"
+            [href]="'layout.logo.link' | translate"
+            rel="noopener">
+            <img src="assets/logo.svg" alt="Logo" height="75" width="75" />
           </a>
         </div>
         <!-- University Logo End -->
@@ -59,7 +88,6 @@
       <mat-toolbar-row>
         <h1 translate>title</h1>
       </mat-toolbar-row>
-
     </mat-toolbar>
     <app-env-banner *ngIf="env === 'DEV'"></app-env-banner>
     <router-outlet></router-outlet>
@@ -67,16 +95,27 @@
 </mat-sidenav-container>
 <div class="footer">
   <div class="version-information">
-    {{'layout.version' | translate }}: {{version}}
-    <a [routerLink]="'/gdpr'" rel="noopener">{{'layout.gdpr' | translate}}</a>
+    {{ "layout.version" | translate }}: {{ version }}
+    <a [routerLink]="'/gdpr'" rel="noopener">{{ "layout.gdpr" | translate }}</a>
   </div>
   <div class="info">
-    <a [href]="'layout.impressum.link' | translate" rel="noopener"
-       target="_blank">{{'layout.impressum.text' | translate}}</a>
-    <a [href]="'layout.termsandconditions.link' | translate" rel="noopener"
-       target="_blank">{{'layout.termsandconditions.text' | translate}}</a>
-    <a [href]="'layout.dataprotection.link' | translate" rel="noopener"
-       target="_blank">{{'layout.dataprotection.text' | translate}}</a>
+    <a
+      [href]="'layout.impressum.link' | translate"
+      rel="noopener"
+      target="_blank"
+      >{{ "layout.impressum.text" | translate }}</a
+    >
+    <a
+      [href]="'layout.termsandconditions.link' | translate"
+      rel="noopener"
+      target="_blank"
+      >{{ "layout.termsandconditions.text" | translate }}</a
+    >
+    <a
+      [href]="'layout.dataprotection.link' | translate"
+      rel="noopener"
+      target="_blank"
+      >{{ "layout.dataprotection.text" | translate }}</a
+    >
   </div>
 </div>
-

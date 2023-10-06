@@ -1,9 +1,21 @@
-import {EventEmitter, Injectable, NgModule, Pipe, PipeTransform} from '@angular/core';
-import {TranslateFakeLoader, TranslateLoader, TranslateModule, TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {Observable, of} from 'rxjs';
+import {
+  EventEmitter,
+  Injectable,
+  NgModule,
+  Pipe,
+  PipeTransform,
+} from '@angular/core';
+import {
+  TranslateFakeLoader,
+  TranslateLoader,
+  TranslateModule,
+  TranslatePipe,
+  TranslateService,
+} from '@ngx-translate/core';
+import { Observable, of } from 'rxjs';
 
 @Pipe({
-  name: 'translate'
+  name: 'translate',
 })
 export class TranslatePipeMock implements PipeTransform {
   public name = 'translate';
@@ -15,17 +27,22 @@ export class TranslatePipeMock implements PipeTransform {
 
 @Injectable()
 export class TranslateServiceStub {
-
   public onDefaultLangChange: EventEmitter<any> = new EventEmitter();
   public onTranslationChange: EventEmitter<any> = new EventEmitter();
   public onLangChange: EventEmitter<any> = new EventEmitter();
 
+  private _currentLang = 'en';
+
   get currentLang(): string {
-    return 'en';
+    return this._currentLang;
   }
 
   public get(key: any): Observable<any> {
     return of(key);
+  }
+
+  public use(key: string): void {
+    this._currentLang = key;
   }
 
   public instant(key: any): any {
@@ -40,19 +57,14 @@ export class TranslateServiceStub {
 @NgModule({
   imports: [
     TranslateModule.forRoot({
-      loader: {provide: TranslateLoader, useClass: TranslateFakeLoader}
-    })
+      loader: { provide: TranslateLoader, useClass: TranslateFakeLoader },
+    }),
   ],
-  declarations: [
-    TranslatePipeMock
-  ],
+  declarations: [TranslatePipeMock],
   providers: [
-    {provide: TranslateService, useClass: TranslateServiceStub},
-    {provide: TranslatePipe, useClass: TranslatePipeMock}
+    { provide: TranslateService, useClass: TranslateServiceStub },
+    { provide: TranslatePipe, useClass: TranslatePipeMock },
   ],
-  exports: [
-    TranslatePipeMock
-  ]
+  exports: [TranslatePipeMock],
 })
-export class TranslateTestingModule {
-}
+export class TranslateTestingModule {}

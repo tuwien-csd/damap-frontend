@@ -1,4 +1,8 @@
-import { closedDatasetMock, openDatasetMock, restrictedDatasetMock } from '../mocks/dataset-mocks';
+import {
+  closedDatasetMock,
+  openDatasetMock,
+  restrictedDatasetMock,
+} from '../mocks/dataset-mocks';
 import { completeDmp, noDataDmp } from '../mocks/dmp-mocks';
 import { mockContact, mockContributor1 } from '../mocks/contributor-mocks';
 
@@ -18,14 +22,13 @@ import { mockStorage } from '../mocks/storage-mocks';
 describe('SummaryService', () => {
   let service: SummaryService;
   let dmp: Dmp;
-  
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(SummaryService);
     dmp = { ...baseDmp };
   });
-  
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
@@ -56,52 +59,79 @@ describe('SummaryService', () => {
     const contributors = [];
     let summary = SummaryService.evaluatePeopleStep(contributors);
     expect(summary.completeness).toEqual(0);
-    expect(summary.status).toEqual(['dmp.steps.summary.people.contact.missing', 'dmp.steps.summary.people.contributor.none']);
+    expect(summary.status).toEqual([
+      'dmp.steps.summary.people.contact.missing',
+      'dmp.steps.summary.people.contributor.none',
+    ]);
 
     contributors.push(mockContributor1);
     summary = SummaryService.evaluatePeopleStep(contributors);
     expect(summary.completeness).toEqual(50);
-    expect(summary.status).toEqual(['dmp.steps.summary.people.contact.missing', 'dmp.steps.summary.people.contributor.one']);
+    expect(summary.status).toEqual([
+      'dmp.steps.summary.people.contact.missing',
+      'dmp.steps.summary.people.contributor.one',
+    ]);
 
     contributors.push(mockContact);
     summary = SummaryService.evaluatePeopleStep(contributors);
     expect(summary.completeness).toEqual(100);
-    expect(summary.status).toEqual(
-      ['dmp.steps.summary.people.contact.set', 'dmp.steps.summary.people.contributor.multiple', '2']);
+    expect(summary.status).toEqual([
+      'dmp.steps.summary.people.contact.set',
+      'dmp.steps.summary.people.contributor.multiple',
+      '2',
+    ]);
   });
 
   it('should test data step', () => {
     let summary = SummaryService.evaluateDataStep(dmp);
     expect(summary.completeness).toEqual(0);
-    expect(summary.status).toEqual(['dmp.steps.summary.data.specify.none.none']);
+    expect(summary.status).toEqual([
+      'dmp.steps.summary.data.specify.none.none',
+    ]);
 
     dmp.dataKind = DataKind.NONE;
     dmp.reusedDataKind = DataKind.NONE;
     summary = SummaryService.evaluateDataStep(dmp);
     expect(summary.completeness).toEqual(50);
-    expect(summary.status).toEqual(
-      ['dmp.steps.summary.data.specify.datasets.none.produced',
-        'dmp.steps.summary.data.specify.datasets.none.reused',
-        'dmp.steps.summary.data.specify.datasets.missingexplanation']
-    );
+    expect(summary.status).toEqual([
+      'dmp.steps.summary.data.specify.datasets.none.produced',
+      'dmp.steps.summary.data.specify.datasets.none.reused',
+      'dmp.steps.summary.data.specify.datasets.missingexplanation',
+    ]);
 
     dmp.dataKind = DataKind.SPECIFY;
     dmp.datasets = [{ ...restrictedDatasetMock }];
     summary = SummaryService.evaluateDataStep(dmp);
     expect(summary.completeness).toEqual(80);
-    expect(summary.status.includes('dmp.steps.summary.data.specify.datasets.produced')).toBeTrue();
-    expect(summary.status.includes('dmp.steps.summary.data.specify.datasets.datageneration')).toBeTrue();
+    expect(
+      summary.status.includes(
+        'dmp.steps.summary.data.specify.datasets.produced'
+      )
+    ).toBeTrue();
+    expect(
+      summary.status.includes(
+        'dmp.steps.summary.data.specify.datasets.datageneration'
+      )
+    ).toBeTrue();
     expect(summary.status.includes('1. ')).toBeTrue();
 
     dmp.dataGeneration = 'data generation';
     summary = SummaryService.evaluateDataStep(dmp);
     expect(summary.completeness).toEqual(100);
-    expect(summary.status.includes('dmp.steps.summary.data.specify.datasets.datageneration')).toBeFalse();
+    expect(
+      summary.status.includes(
+        'dmp.steps.summary.data.specify.datasets.datageneration'
+      )
+    ).toBeFalse();
 
     dmp.dataKind = DataKind.UNKNOWN;
     summary = SummaryService.evaluateDataStep(dmp);
     expect(summary.completeness).toEqual(50);
-    expect(summary.status.includes('dmp.steps.summary.data.specify.datasets.unknown.produced')).toBeTrue();
+    expect(
+      summary.status.includes(
+        'dmp.steps.summary.data.specify.datasets.unknown.produced'
+      )
+    ).toBeTrue();
   });
 
   it('should test documentation step', () => {
@@ -129,7 +159,6 @@ describe('SummaryService', () => {
   });
 
   it('should test storage step', () => {
-
     dmp.datasets = [{ ...openDatasetMock }];
     let summary = SummaryService.evaluateStorageStep(dmp);
     expect(summary.completeness).toEqual(0);
@@ -141,8 +170,9 @@ describe('SummaryService', () => {
     expect(summary.completeness).toEqual(100);
 
     let externalStorage: ExternalStorage = {
-      id: 0, title: '',
-      datasets: [openDatasetMock.referenceHash]
+      id: 0,
+      title: '',
+      datasets: [openDatasetMock.referenceHash],
     };
     dmp.externalStorage = [externalStorage];
     dmp.storage = [];
@@ -193,7 +223,6 @@ describe('SummaryService', () => {
     dmp.legalRestrictionsComment = 'comment';
     summary = SummaryService.evaluateLegalStep(dmp);
     expect(summary.completeness).toEqual(100);
-
   });
 
   it('should test license step', () => {
@@ -244,7 +273,6 @@ describe('SummaryService', () => {
   });
 
   it('should test repository step', () => {
-
     dmp.datasets = [{ ...openDatasetMock }];
     let summary = SummaryService.evaluateRepositoryStep(dmp);
     expect(summary.completeness).toEqual(0);
@@ -255,7 +283,6 @@ describe('SummaryService', () => {
   });
 
   it('should test reuse step', () => {
-
     let summary = SummaryService.evaluateReuseStep(dmp);
     expect(summary.completeness).toEqual(0);
 
@@ -274,7 +301,6 @@ describe('SummaryService', () => {
   });
 
   it('should test cost step', () => {
-
     dmp.costsExist = undefined;
     let summary = SummaryService.evaluateCostStep(dmp);
     expect(summary.completeness).toEqual(0);
@@ -287,15 +313,17 @@ describe('SummaryService', () => {
     summary = SummaryService.evaluateCostStep(dmp);
     expect(summary.completeness).toEqual(0);
 
-    dmp.costs = [{
-      currencyCode: 'EUR',
-      customType: '',
-      description: 'cost description',
-      id: -1,
-      title: 'New cost',
-      type: CostType.DATABASE,
-      value: 123
-    }];
+    dmp.costs = [
+      {
+        currencyCode: 'EUR',
+        customType: '',
+        description: 'cost description',
+        id: -1,
+        title: 'New cost',
+        type: CostType.DATABASE,
+        value: 123,
+      },
+    ];
     summary = SummaryService.evaluateCostStep(dmp);
     expect(summary.completeness).toEqual(100);
   });
@@ -373,6 +401,6 @@ describe('SummaryService', () => {
     storage: [],
     structure: '',
     targetAudience: '',
-    tools: ''
+    tools: '',
   };
 });

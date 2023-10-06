@@ -1,5 +1,5 @@
 export enum DataKind {
   UNKNOWN = 'UNKNOWN',
   NONE = 'NONE',
-  SPECIFY = 'SPECIFY'
+  SPECIFY = 'SPECIFY',
 }

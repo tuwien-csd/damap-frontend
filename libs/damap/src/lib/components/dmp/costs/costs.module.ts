@@ -1,16 +1,16 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {TranslateModule} from '@ngx-translate/core';
-import {CostsComponent} from './costs.component';
-import {ReactiveFormsModule} from '@angular/forms';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatIconModule} from '@angular/material/icon';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {SharedModule} from '../../../shared/shared.module';
-import {MatSelectModule} from '@angular/material/select';
-import {MatButtonModule} from '@angular/material/button';
-import {CrisTagModule} from '../../../widgets/cris-tag/cris-tag.module';
-import {StepIntroModule} from '../../../widgets/step-intro/step-intro.module';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { CostsComponent } from './costs.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { SharedModule } from '../../../shared/shared.module';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { CrisTagModule } from '../../../widgets/cris-tag/cris-tag.module';
+import { StepIntroModule } from '../../../widgets/step-intro/step-intro.module';
 
 @NgModule({
   imports: [
@@ -27,7 +27,6 @@ import {StepIntroModule} from '../../../widgets/step-intro/step-intro.module';
     MatExpansionModule,
     MatSelectModule,
     MatButtonModule,
-
   ],
   declarations: [CostsComponent],
   exports: [
@@ -45,8 +44,6 @@ import {StepIntroModule} from '../../../widgets/step-intro/step-intro.module';
     MatExpansionModule,
     MatSelectModule,
     MatButtonModule,
-
-  ]
+  ],
 })
-export class CostsModule {
-}
+export class CostsModule {}

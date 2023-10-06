@@ -320,7 +320,7 @@ export class TreeSelectFormFieldComponent implements OnInit {
 
   applyFilter(event: Event) {
     let filterText = (event.target as HTMLInputElement).value;
-    filterText ??= '';
+    filterText = filterText ?? '';
     this.searchFilter.next(filterText);
   }
 

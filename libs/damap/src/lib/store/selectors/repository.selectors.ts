@@ -1,12 +1,13 @@
-import {createSelector} from '@ngrx/store';
-import {adapter, RepositoryState} from '../states/repository.state';
-import {AppState, selectDamapState} from '../states/app.state';
+import { createSelector } from '@ngrx/store';
+import { adapter, RepositoryState } from '../states/repository.state';
+import { AppState, selectDamapState } from '../states/app.state';
 
-const {
-  selectAll
-} = adapter.getSelectors();
+const { selectAll } = adapter.getSelectors();
 
-export const selectRepositoryState = createSelector(selectDamapState, (state: AppState) => state.repositories);
+export const selectRepositoryState = createSelector(
+  selectDamapState,
+  (state: AppState) => state.repositories
+);
 
 export const selectRecommendedRepositories = createSelector(
   selectRepositoryState,

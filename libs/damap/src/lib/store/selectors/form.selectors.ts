@@ -1,7 +1,10 @@
-import {createSelector} from '@ngrx/store';
-import {AppState, selectDamapState} from '../states/app.state';
+import { createSelector } from '@ngrx/store';
+import { AppState, selectDamapState } from '../states/app.state';
 
-export const selectFormState = createSelector(selectDamapState, (state: AppState) => state.form);
+export const selectFormState = createSelector(
+  selectDamapState,
+  (state: AppState) => state.form
+);
 
 export const selectForm = createSelector(
   selectFormState,
@@ -13,7 +16,6 @@ export const selectFormChanged = createSelector(
   formState => formState.changed
 );
 
-export const selectFormContact = createSelector(
-  selectFormState,
-  formState => formState.dmp.contributors?.find(c => c.contact)
+export const selectFormContact = createSelector(selectFormState, formState =>
+  formState.dmp.contributors?.find(c => c.contact)
 );

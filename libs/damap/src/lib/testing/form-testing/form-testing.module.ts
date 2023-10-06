@@ -3,7 +3,7 @@ import {
   FormArray,
   FormControl,
   FormGroup,
-  UntypedFormBuilder
+  UntypedFormBuilder,
 } from '@angular/forms';
 import { FormService } from '../../services/form.service';
 
