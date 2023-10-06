@@ -10,7 +10,7 @@
         <mat-card-title>{{element.title}}</mat-card-title>
       </mat-card-header>
       <ng-container *ngIf="element.url">
-        <mat-card-content><a href="{{element.url}}" target="_blank">{{'dmp.steps.storage.link' | translate}}</a>
+        <mat-card-content><a href="{{element.url}}" target="_blank" rel="noopener">{{'dmp.steps.storage.link' | translate}}</a>
         </mat-card-content>
       </ng-container>
     </mat-card>

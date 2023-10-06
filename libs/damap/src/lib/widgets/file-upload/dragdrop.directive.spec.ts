@@ -46,7 +46,7 @@ describe('DragdropDirective', () => {
   });
 
   it('should have same fileOver value', () => {
-    const item = decorated.injector.get(DragdropDirective) as DragdropDirective;
+    const item = decorated.injector.get(DragdropDirective);
     const bgColor = decorated.nativeElement.fileOver;
     expect(bgColor).toBe(item.fileOver);
   });

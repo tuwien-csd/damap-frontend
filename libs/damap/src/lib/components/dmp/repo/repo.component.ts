@@ -1,24 +1,25 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {UntypedFormArray, UntypedFormGroup} from '@angular/forms';
-import {RepositoryDetails} from '../../../domain/repository-details';
-import {LoadingState} from '../../../domain/enum/loading-state.enum';
-import {Dataset} from '../../../domain/dataset';
-import {select, Store} from '@ngrx/store';
-import {AppState} from '../../../store/states/app.state';
-import {Observable} from 'rxjs';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
+import { RepositoryDetails } from '../../../domain/repository-details';
+import { LoadingState } from '../../../domain/enum/loading-state.enum';
+import { Dataset } from '../../../domain/dataset';
+import { select, Store } from '@ngrx/store';
+import { AppState } from '../../../store/states/app.state';
+import { Observable } from 'rxjs';
 import {
   selectFilters,
   selectRecommendedRepositories,
   selectRecommendedRepositoriesLoaded,
   selectRepositories,
-  selectRepositoriesLoaded
+  selectRepositoriesLoaded,
 } from '../../../store/selectors/repository.selectors';
 import {
   loadAllRepositories,
   loadRecommendedRepositories,
-  loadRepository, setRepositoryFilter
+  loadRepository,
+  setRepositoryFilter,
 } from '../../../store/actions/repository.actions';
-import {DataSource} from '../../../domain/enum/data-source.enum';
+import { DataSource } from '../../../domain/enum/data-source.enum';
 
 @Component({
   selector: 'app-dmp-repo',
@@ -26,12 +27,11 @@ import {DataSource} from '../../../domain/enum/data-source.enum';
   styleUrls: ['./repo.component.css'],
 })
 export class RepoComponent implements OnInit {
-
   repositoriesLoaded$: Observable<LoadingState>;
   repositories$: Observable<RepositoryDetails[]>; // Repo list loaded from backend
   recommendedLoaded$: Observable<LoadingState>;
   recommended$: Observable<RepositoryDetails[]>;
-  filters$: Observable<{ [key: string]: { id: string, label: string }[] }>;
+  filters$: Observable<{ [key: string]: { id: string; label: string }[] }>;
 
   @Input() dmpForm: UntypedFormGroup;
   @Input() repoStep: UntypedFormArray;
@@ -45,14 +45,17 @@ export class RepoComponent implements OnInit {
 
   selectedTabIndex = 0;
 
-  constructor(public store: Store<AppState>) {
-  }
+  constructor(public store: Store<AppState>) {}
 
   ngOnInit() {
-    this.repositoriesLoaded$ = this.store.pipe(select(selectRepositoriesLoaded));
+    this.repositoriesLoaded$ = this.store.pipe(
+      select(selectRepositoriesLoaded)
+    );
     this.repositories$ = this.store.pipe(select(selectRepositories));
     this.filters$ = this.store.pipe(select(selectFilters));
-    this.recommendedLoaded$ = this.store.pipe(select(selectRecommendedRepositoriesLoaded));
+    this.recommendedLoaded$ = this.store.pipe(
+      select(selectRecommendedRepositoriesLoaded)
+    );
     this.recommended$ = this.store.pipe(select(selectRecommendedRepositories));
     this.store.dispatch(loadRecommendedRepositories());
     this.store.dispatch(loadAllRepositories(true));
@@ -68,29 +71,33 @@ export class RepoComponent implements OnInit {
 
   getRepositoryDetails(repo: RepositoryDetails) {
     if (!repo.description) {
-      this.store.dispatch(loadRepository({id: repo.id}));
+      this.store.dispatch(loadRepository({ id: repo.id }));
     }
   }
 
-  filterRepositories(filter: { [key: string]: { id: string, label: string }[] } | null) {
+  filterRepositories(
+    filter: { [key: string]: { id: string; label: string }[] } | null
+  ) {
     if (filter) {
-      this.store.dispatch(setRepositoryFilter({filter}));
+      this.store.dispatch(setRepositoryFilter({ filter }));
     } else {
-      this.store.dispatch((loadAllRepositories()));
+      this.store.dispatch(loadAllRepositories());
     }
   }
 
   getDatasetsMarkedForDeletion(index: number): Dataset[] {
     const repo = this.repoStep.at(index);
-    return this.datasets.value.filter(item => item.delete && repo.value.datasets.includes(item.referenceHash));
+    return this.datasets.value.filter(
+      item => item.delete && repo.value.datasets.includes(item.referenceHash)
+    );
   }
 
   getDatasetsMarkedForDeletionAsString(index: number): string {
     const datasets: Dataset[] = this.getDatasetsMarkedForDeletion(index);
     let result = '';
     for (const [i, item] of datasets.entries()) {
-      result += '\"' + item.title + '\"';
-      result += (i < datasets.length - 1) ? ', ' : '';
+      result += `"${item.title}"`;
+      result += i < datasets.length - 1 ? ', ' : '';
     }
     return result;
   }

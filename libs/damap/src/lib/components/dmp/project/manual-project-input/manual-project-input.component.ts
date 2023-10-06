@@ -5,7 +5,7 @@ import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 @Component({
   selector: 'app-manual-project-input',
   templateUrl: './manual-project-input.component.html',
-  styleUrls: ['./manual-project-input.component.css']
+  styleUrls: []
 })
 export class ManualProjectInputComponent implements OnChanges {
 

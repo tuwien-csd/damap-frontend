@@ -88,7 +88,7 @@ export class RepoTableComponent implements OnChanges, AfterViewInit {
   private filterRepos(): void {
     this.repoList = Object.assign([], this.repositories);
     for (const entry of this.selectedRepos) {
-      this.repoList = this.repoList.filter(e => !(e.id === entry.repositoryId));
+      this.repoList = this.repoList.filter(e => (e.id !== entry.repositoryId));
     }
     this.dataSource.paginator = this.paginator;
     this.dataSource.data = this.repoList;

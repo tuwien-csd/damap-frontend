@@ -15,11 +15,11 @@
   </div>
   <app-info-message *ngIf="legalEthicalStep.controls.humanParticipants.value">
     {{'info.ethical.humanParticipants.prefix' | translate}}
-    <a href="{{'info.ethical.humanParticipants.researchEthicsCoordination.link' | translate}}"
-       target="_blank">{{'info.ethical.humanParticipants.researchEthicsCoordination.text' | translate}}</a>
+    <a href="{{'info.ethical.humanParticipants.researchEthicsCoordination.link' | translate}}" target="_blank"
+      rel="noopener">{{'info.ethical.humanParticipants.researchEthicsCoordination.text' | translate}}</a>
     {{'info.ethical.humanParticipants.middle' | translate}}
-    <a href="{{'info.ethical.humanParticipants.researchEthics.link' | translate}}"
-       target="_blank">{{'info.ethical.humanParticipants.researchEthics.link' | translate}}</a>.
+    <a href="{{'info.ethical.humanParticipants.researchEthics.link' | translate}}" target="_blank"
+      rel="noopener">{{'info.ethical.humanParticipants.researchEthics.link' | translate}}</a>.
   </app-info-message>
 
   <label id="ethicalIssues">
@@ -37,14 +37,15 @@
   </div>
   <app-info-message *ngIf="legalEthicalStep.controls.ethicalIssues.value">
     {{'info.ethical.ethicalIssues.text' | translate}}
-    <a href="{{'info.ethical.ethicalIssues.researchEthics.link' | translate}}"
-       target="_blank">{{'info.ethical.ethicalIssues.researchEthics.text' | translate}}</a>.
+    <a href="{{'info.ethical.ethicalIssues.researchEthics.link' | translate}}" target="_blank"
+      rel="noopener">{{'info.ethical.ethicalIssues.researchEthics.text' | translate}}</a>.
   </app-info-message>
 
   <label id="committeeReviewed">
     {{'dmp.steps.ethical.question.committeeReviewed.prefix' | translate}}
-    <a href="{{'dmp.steps.ethical.question.committeeReviewed.researchCommittee.link' | translate}}"
-       target="_blank">{{'dmp.steps.ethical.question.committeeReviewed.researchCommittee.text' | translate}}</a>{{'dmp.steps.ethical.question.committeeReviewed.suffix' | translate}}
+    <a href="{{'dmp.steps.ethical.question.committeeReviewed.researchCommittee.link' | translate}}" target="_blank"
+      rel="noopener">{{'dmp.steps.ethical.question.committeeReviewed.researchCommittee.text' |
+      translate}}</a>{{'dmp.steps.ethical.question.committeeReviewed.suffix' | translate}}
   </label>
   <div class="flex-radio">
     <app-cris-tag [cris]="legalEthicalStep?.value.committeeReviewedCris"></app-cris-tag>
@@ -57,7 +58,7 @@
   </div>
   <app-info-message>
     {{'info.ethical.committeeReviewed.prefix' | translate}}
-    <a href="{{'info.ethical.committeeReviewed.mail.link' | translate}}">
+    <a href="{{'info.ethical.committeeReviewed.mail.link' | translate}}" rel="noopener">
       {{'info.ethical.committeeReviewed.mail.text' | translate}}</a>
     {{'info.ethical.committeeReviewed.suffix' | translate}}
   </app-info-message>

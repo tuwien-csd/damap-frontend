@@ -4,7 +4,7 @@ import * as LoginActions from '../actions/login.actions';
 
 function setToken(state, auth) {
   let parts:string[] = auth.token.split('.');
-  let tokenBody:any = JSON.parse(atob(parts[1]));
+  let tokenBody:any = JSON.parse(Buffer.from(parts[1], 'base64').toString());
   return {...state, token: auth.token, roles: tokenBody.realm_access.roles, username: tokenBody.preferred_username};
 }
 

@@ -21,7 +21,6 @@ describe('BackendService', () => {
   let service: BackendService;
   let httpTestingController: HttpTestingController;
   const backendUrl = APP_ENV.backendurl;
-  let feedbackServiceSpy: jasmine.SpyObj<FeedbackService>
 
   beforeEach(() => {
     const spy = jasmine.createSpyObj('FeedbackService', ['error', 'success']);
@@ -30,7 +29,7 @@ describe('BackendService', () => {
       providers: [{provide: FeedbackService, useValue: spy}]
     });
     service = TestBed.inject(BackendService);
-    feedbackServiceSpy = TestBed.inject(FeedbackService) as jasmine.SpyObj<FeedbackService>;
+    TestBed.inject(FeedbackService) as jasmine.SpyObj<FeedbackService>;
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 

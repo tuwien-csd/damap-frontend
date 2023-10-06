@@ -6,7 +6,7 @@ import { Project } from '../../../domain/project';
 @Component({
   selector: 'app-dmp-project',
   templateUrl: './project.component.html',
-  styleUrls: ['./project.component.css']
+  styleUrls: []
 })
 export class ProjectComponent {
 

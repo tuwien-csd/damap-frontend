@@ -10,7 +10,6 @@ import { of, throwError } from 'rxjs';
 import { BackendService } from '../../services/backend.service';
 import { DmpEffects } from './dmp.effects';
 import { ETemplateType } from '../../domain/enum/export-template-type.enum';
-import { FeedbackService } from '../../services/feedback.service';
 import { FormService } from '../../services/form.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoadingState } from '../../domain/enum/loading-state.enum';
@@ -35,9 +34,7 @@ describe('DmpEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        FeedbackTestingModule,
-      ],
+      imports: [FeedbackTestingModule],
       providers: [
         DmpEffects,
         provideMockActions(() => actions$),
