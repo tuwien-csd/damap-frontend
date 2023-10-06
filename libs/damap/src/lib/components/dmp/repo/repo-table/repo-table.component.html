@@ -20,7 +20,7 @@
 
 <ng-container *ngIf="loaded === LoadingState.LOADED">
 
-  <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows aria-label="Table of data repositories">
     <ng-container matColumnDef="expand">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element" (click)="expandRow(element)">

@@ -3,7 +3,7 @@
   <input matInput (keyup)="applyFilter($event)" placeholder="{{ 'plans.table.search' | translate }}" #input />
 </mat-form-field>
 
-<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" style="outline: none" matSort>
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" style="outline: none" matSort aria-label="Available DMPs">
 
   <ng-container matColumnDef="title">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>

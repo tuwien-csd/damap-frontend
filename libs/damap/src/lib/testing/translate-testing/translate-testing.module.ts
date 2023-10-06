@@ -28,9 +28,6 @@ export class TranslateServiceStub {
     return of(key);
   }
 
-  public use(key: any): void {
-  }
-
   public instant(key: any): any {
     return key;
   }

@@ -11,10 +11,6 @@
                               (params)="onFilterChange('certificates', $event)"></app-tree-select-form-field>
   <app-tree-select-form-field [label]="'PID systems'" [treeData]="FILTER.pidSystems" [state]="data['pidSystems']"
                               (params)="onFilterChange('pidSystems', $event)"></app-tree-select-form-field>
-  <!--<app-tree-select-form-field [label]="'AID systems'" [treeData]="FILTER.aidSystems" [state]="data['aidSystems']"
-                              (params)="onFilterChange('aidSystems', $event)"></app-tree-select-form-field>-->
-  <!--<app-tree-select-form-field [label]="'Repository access'" [treeData]="FILTER.accessTypes" [state]="data['repositoryAccess']"
-                              (params)="onFilterChange('repositoryAccess', $event)"></app-tree-select-form-field>-->
   <app-tree-select-form-field [label]="'Data access'" [treeData]="FILTER.dataAccessTypes" [state]="data['dataAccess']"
                               (params)="onFilterChange('dataAccess', $event)"></app-tree-select-form-field>
   <app-tree-select-form-field [label]="'Data upload'" [treeData]="FILTER.accessTypes" [state]="data['dataUpload']"
@@ -25,8 +21,6 @@
                               (params)="onFilterChange('repositoryTypes', $event)"></app-tree-select-form-field>
   <app-tree-select-form-field [label]="'Institution types'" [treeData]="FILTER.institutionTypes" [state]="data['institutionTypes']"
                               (params)="onFilterChange('institutionTypes', $event)"></app-tree-select-form-field>
-  <!--<app-tree-select-form-field [label]="'Versioning'" [treeData]="FILTER.versioning" [state]="data['versioning']"
-                              (params)="onFilterChange('versioning', $event)"></app-tree-select-form-field>-->
   <app-tree-select-form-field [label]="'Metadata standards'" [treeData]="FILTER.metadataStandards" [state]="data['metadataStandards']"
                               (params)="onFilterChange('metadataStandards', $event)"></app-tree-select-form-field>
 </div>

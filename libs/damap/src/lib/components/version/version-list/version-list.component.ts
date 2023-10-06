@@ -14,7 +14,7 @@ import {Dmp} from "../../../domain/dmp";
 @Component({
   selector: 'app-version-list',
   templateUrl: './version-list.component.html',
-  styleUrls: ['./version-list.component.css']
+  styleUrls: []
 })
 export class VersionListComponent implements OnInit {
 

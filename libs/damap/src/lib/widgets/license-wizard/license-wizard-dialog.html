@@ -11,8 +11,7 @@
         <!-- Software: License Matrix -->
         <ng-container *ngIf="step.question === 'license.wizard.question.licenseInteropSoftware'">
           <div *ngFor="let license of softwareLicenses">
-            <mat-checkbox *ngIf="license.code"
-                          (change)="changeLicenseMatrix(license.code)">
+            <mat-checkbox *ngIf="license.code" (change)="changeLicenseMatrix(license.code)">
               {{license.name | translate}}
             </mat-checkbox>
           </div>
@@ -31,8 +30,8 @@
         <!-- Answers -->
         <div class="ls-answer-buttons">
           <ng-container *ngFor="let item of step.answers">
-            <button mat-raised-button (click)="setNextStep(i, item.next)"
-                    color="primary">{{item.label | translate}}</button>
+            <button mat-raised-button (click)="setNextStep(i, item.next)" color="primary">{{item.label |
+              translate}}</button>
           </ng-container>
         </div>
       </div>
@@ -52,7 +51,8 @@
         <div class="ls-item-header">
           <h3 [mat-dialog-close]="license">{{license.name | translate}}</h3>
           <div>
-            <a href="{{license.url}}" target="_blank" mat-button>{{'license.wizard.info' | translate}}</a>
+            <a href="{{license.url}}" target="_blank" rel="noopener" mat-button>{{'license.wizard.info' |
+              translate}}</a>
           </div>
         </div>
         <div class="ls-description" [mat-dialog-close]="license">

@@ -27,9 +27,6 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
   readonly tableHeaders: string[] = ['title', 'created', 'modified', 'contact', 'edit'];
   readonly FUNCTION_ROLES = FunctionRole;
 
-  constructor() {
-  }
-
   ngOnChanges(changes: SimpleChanges) {
     if (changes.dmps) {
       this.dataSource.data = this.dmps;

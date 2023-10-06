@@ -16,7 +16,7 @@ export const reducers: ActionReducerMap<AppState> = {
 };
 
 export const config = {
-  metaReducers: !APP_ENV.production ? [] : [],
+  metaReducers: [],
   runtimeChecks: {
     strictStateImmutability: true,
     strictActionImmutability: true,

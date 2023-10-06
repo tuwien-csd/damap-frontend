@@ -12,7 +12,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
     StoreModule.forRoot(
       {},
       {
-        metaReducers: !environment.production ? [] : [],
+        metaReducers: [],
         runtimeChecks: {
           strictActionImmutability: true,
           strictStateImmutability: true,

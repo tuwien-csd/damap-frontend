@@ -3,7 +3,7 @@
 </ng-container>
 
   <div class="mat-elevation-z8" *ngIf="versions">
-    <table mat-table [dataSource]="versions">
+    <table mat-table [dataSource]="versions" aria-label="DMP Versions">
 
       <!-- Version Column -->
       <ng-container matColumnDef="version">

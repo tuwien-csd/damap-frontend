@@ -12,7 +12,7 @@ import { TranslateModule } from "@ngx-translate/core";
   standalone: true,
   imports: [CommonModule, TranslateModule, MatCardModule, MatIconModule, OrcidModule],
   templateUrl: './person-card.component.html',
-  styleUrls: ['./person-card.component.css'],
+  styleUrls: [],
 })
 export class PersonCardComponent {
 

@@ -71,14 +71,14 @@ export class PlansComponent implements OnInit {
     dialogRef.beforeClosed().subscribe(result => {
       if (result === undefined) {
         return;
+      }
+
+      if (!funderSupported) {
+        const template = result;
+        this.exportDmpType = template;
+        this.backendService.exportDmpTemplate(id, this.exportDmpType);
       } else {
-        if (!funderSupported) {
-          const template = result;
-          this.exportDmpType = template;
-          this.backendService.exportDmpTemplate(id, this.exportDmpType);
-        } else {
-          this.backendService.getDmpDocument(id);
-        }
+        this.backendService.getDmpDocument(id);
       }
     });
   }

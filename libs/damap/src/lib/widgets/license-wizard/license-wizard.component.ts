@@ -1,41 +1,43 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {ccByNcSa, ccBySa, DataLicenses, LicenseDefinitions, odbl, SoftwareLicenses} from './license-wizard-list';
-import {LicenseDetails} from '../../domain/license-details';
-import {Filter, QUESTION_TREE, Step} from './license-wizard-questions';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-
+import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  ccByNcSa,
+  ccBySa,
+  DataLicenses,
+  LicenseDefinitions,
+  odbl,
+  SoftwareLicenses,
+} from './license-wizard-list';
+import { LicenseDetails } from '../../domain/license-details';
+import { Filter, QUESTION_TREE, Step } from './license-wizard-questions';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-license-wizard',
   templateUrl: './license-wizard.component.html',
-  styleUrls: ['./license-wizard.component.css']
+  styleUrls: ['./license-wizard.component.css'],
 })
 export class LicenseWizardComponent {
-
   @Output() selectedLicense = new EventEmitter<LicenseDetails>();
 
-  constructor(public dialog: MatDialog) {
-  }
+  constructor(public dialog: MatDialog) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(LicenseSelectorDialogComponent, {
-      width: '800px'
+      width: '800px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       this.selectedLicense.emit(result);
     });
   }
-
 }
 
 @Component({
   selector: 'app-license-wizard-dialog',
   templateUrl: 'license-wizard-dialog.html',
-  styleUrls: ['./license-wizard.component.css']
+  styleUrls: ['./license-wizard.component.css'],
 })
 export class LicenseSelectorDialogComponent {
-
   licenseList: LicenseDetails[] = [...LicenseDefinitions];
   softwareLicenses: LicenseDetails[] = SoftwareLicenses;
   dataLicenses = DataLicenses;
@@ -44,10 +46,15 @@ export class LicenseSelectorDialogComponent {
   options: LicenseDetails[][] = []; // compatible data licenses
   steps: Step[] = [QUESTION_TREE];
 
-  constructor(public dialogRef: MatDialogRef<LicenseSelectorDialogComponent>) {
-  }
+  constructor(public dialogRef: MatDialogRef<LicenseSelectorDialogComponent>) {}
 
-  setNextStep(currentIndex: number, next: { step: (...[]) => Step, filter?: Filter }) {
+  setNextStep(
+    currentIndex: number,
+    next: {
+      step: (lincense: Iterable<LicenseDetails>, option?: string) => Step;
+      filter?: Filter;
+    }
+  ) {
     if (next.filter?.licenses) {
       this.licenseList = next.filter.licenses;
     }
@@ -60,7 +67,9 @@ export class LicenseSelectorDialogComponent {
       this.matrix = [];
     }
     if (this.options.length) {
-      this.steps.push(next.step(this.licenseList, this.dataLicenseCompatibility()));
+      this.steps.push(
+        next.step(this.licenseList, this.dataLicenseCompatibility())
+      );
       this.options = [];
       return;
     }
@@ -76,7 +85,9 @@ export class LicenseSelectorDialogComponent {
   }
 
   changeLicenseOptions(i: number) {
-    if (this.options.find(item => item === this.dataLicenses[i]) === undefined) {
+    if (
+      this.options.find(item => item === this.dataLicenses[i]) === undefined
+    ) {
       this.options.push(this.dataLicenses[i]);
     } else {
       this.options = this.options.filter(item => item !== this.dataLicenses[i]);
@@ -98,7 +109,9 @@ export class LicenseSelectorDialogComponent {
     if (include) {
       this.licenseList = this.licenseList.filter(license => {
         for (const category of include) {
-          if (license.categories.find(item => item === category) === undefined) {
+          if (
+            license.categories.find(item => item === category) === undefined
+          ) {
             return false;
           }
         }
@@ -106,8 +119,12 @@ export class LicenseSelectorDialogComponent {
       });
     }
     if (exclude) {
-      this.licenseList = this.licenseList.filter(license =>
-        !(license.categories.find(category => (exclude.find(item => item === category) !== undefined)) !== undefined));
+      this.licenseList = this.licenseList.filter(
+        license =>
+          license.categories.find(
+            category => exclude.find(item => item === category) !== undefined
+          ) === undefined
+      );
     }
   }
 
@@ -117,7 +134,7 @@ export class LicenseSelectorDialogComponent {
       const license = LicenseDefinitions.find(item => item.code === code);
       for (let i = newLicenseList.length - 1; i >= 0; i--) {
         const item = newLicenseList[i];
-        if (!item.code || !(license.compatibility?.includes(item.code))) {
+        if (!item.code || !license.compatibility?.includes(item.code)) {
           newLicenseList.splice(i, 1);
         }
       }

@@ -8,7 +8,6 @@ import {MatDialogModule} from "@angular/material/dialog";
 describe('RepoFilterComponent', () => {
   let component: RepoFilterComponent;
   let fixture: ComponentFixture<RepoFilterComponent>;
-  let store: MockStore;
   const initialState = {filters: null};
 
   beforeEach(async () => {
@@ -25,7 +24,7 @@ describe('RepoFilterComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RepoFilterComponent);
     component = fixture.componentInstance;
-    store = TestBed.inject(MockStore);
+    TestBed.inject(MockStore);
     fixture.detectChanges();
   });
 

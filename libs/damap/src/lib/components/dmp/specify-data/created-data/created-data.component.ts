@@ -7,7 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 @Component({
   selector: 'app-created-data',
   templateUrl: './created-data.component.html',
-  styleUrls: ['./created-data.component.css']
+  styleUrls: []
 })
 export class CreatedDataComponent extends AbstractBaseDataComponent {
 
