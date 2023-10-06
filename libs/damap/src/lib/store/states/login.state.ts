@@ -4,8 +4,8 @@ export interface LoginState {
   token: string;
 }
 
-export const initialState:LoginState = {
-  username:undefined,
+export const initialState: LoginState = {
+  username: undefined,
   roles: [],
-  token:undefined
+  token: undefined,
 };

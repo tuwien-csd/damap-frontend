@@ -14,11 +14,11 @@ import {
 } from '../../store/actions/form.actions';
 
 import { AppState } from '../../store/states/app.state';
-import { AuthService } from "../../auth/auth.service";
+import { AuthService } from '../../auth/auth.service';
 import { BackendService } from '../../services/backend.service';
 import { Contributor } from '../../domain/contributor';
 import { DataKind } from '../../domain/enum/data-kind.enum';
-import { DataSource } from "../../domain/enum/data-source.enum";
+import { DataSource } from '../../domain/enum/data-source.enum';
 import { Dataset } from '../../domain/dataset';
 import { FormService } from '../../services/form.service';
 import { HttpEventType } from '@angular/common/http';
@@ -34,10 +34,8 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
   styleUrls: ['./dmp.component.css'],
 })
 export class DmpComponent implements OnInit, OnDestroy {
-
   readonly username = this.auth.getUsername();
   readonly admin = this.auth.isAdmin();
-
 
   @ViewChild('stepper') stepper: MatStepper;
 
@@ -73,12 +71,12 @@ export class DmpComponent implements OnInit, OnDestroy {
     private router: Router,
     private backendService: BackendService,
     public store: Store<AppState>
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.getDmpById();
 
-    this.dmpForm.valueChanges.subscribe((value) => {
+    this.dmpForm.valueChanges.subscribe(value => {
       this.logger.debug('DMPform Update');
       this.logger.debug(value);
       this.store.dispatch(formDiff({ newDmp: value }));
@@ -120,11 +118,18 @@ export class DmpComponent implements OnInit, OnDestroy {
   }
 
   get showStepIfNewDatasets() {
-    return this.specifyDataStep.value.kind === DataKind.SPECIFY && this.datasets?.value.find(dataset => dataset.source == DataSource.NEW);
+    return (
+      this.specifyDataStep.value.kind === DataKind.SPECIFY &&
+      this.datasets?.value.find(dataset => dataset.source == DataSource.NEW)
+    );
   }
 
   get showStep() {
-    return (this.specifyDataStep.value.kind === DataKind.SPECIFY || this.specifyDataStep.value.reusedKind === DataKind.SPECIFY) && this.datasets.length;
+    return (
+      (this.specifyDataStep.value.kind === DataKind.SPECIFY ||
+        this.specifyDataStep.value.reusedKind === DataKind.SPECIFY) &&
+      this.datasets.length
+    );
   }
 
   changeStep($event) {
@@ -164,7 +169,7 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formService.addReusedDatasetToForm(dataset);
   }
 
-  updateDataset(event: { index: number, update: Dataset }) {
+  updateDataset(event: { index: number; update: Dataset }) {
     this.formService.updateDatasetOfForm(event.index, event.update);
   }
 
@@ -175,23 +180,23 @@ export class DmpComponent implements OnInit, OnDestroy {
     const reference = this.generateReferenceHash();
     const upload = { file: event, progress: 0, finalized: false };
     this.fileUpload.push(upload);
-    const uploadSub = this.backendService.analyseFileData(formData)
-      .subscribe({
-        next: (response) => {
-          if (response.type === HttpEventType.UploadProgress) {
-            upload.progress = Math.round(100 * (response.loaded / response.total));
-          }
-          if (response.type === HttpEventType.Response) {
-            const dataset = response.body;
-            dataset.title = filename;
-            dataset.referenceHash = reference;
-            this.formService.addFileAnalysisAsDatasetToForm(dataset);
-          }
-        },
-        error: _ => upload.finalized = true,
-        complete: () => upload.finalized = true
-      }
-      );
+    const uploadSub = this.backendService.analyseFileData(formData).subscribe({
+      next: response => {
+        if (response.type === HttpEventType.UploadProgress) {
+          upload.progress = Math.round(
+            100 * (response.loaded / response.total)
+          );
+        }
+        if (response.type === HttpEventType.Response) {
+          const dataset = response.body;
+          dataset.title = filename;
+          dataset.referenceHash = reference;
+          this.formService.addFileAnalysisAsDatasetToForm(dataset);
+        }
+      },
+      error: _ => (upload.finalized = true),
+      complete: () => (upload.finalized = true),
+    });
     this.fileUploadSubscription.push(uploadSub);
   }
 
@@ -220,7 +225,7 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formService.removeExternalStorageFromForm(index);
   }
 
-  addRepository(repo: { id: string, name: string }) {
+  addRepository(repo: { id: string; name: string }) {
     this.formService.addRepositoryToForm(repo);
   }
 
@@ -255,10 +260,9 @@ export class DmpComponent implements OnInit, OnDestroy {
   }
 
   private getProjectMembers(projectId: number) {
-    this.backendService.getProjectMembers(projectId)
-      .subscribe(members => {
-        this.projectMembers = members;
-      });
+    this.backendService.getProjectMembers(projectId).subscribe(members => {
+      this.projectMembers = members;
+    });
   }
 
   private generateReferenceHash(): string {

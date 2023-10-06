@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {TranslateModule} from '@ngx-translate/core';
-import {SummaryComponent} from './summary.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { SummaryComponent } from './summary.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 
     // Materials
     MatTableModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
   declarations: [SummaryComponent],
   exports: [
@@ -22,6 +22,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 
     // Materials
     MatTableModule,
-    MatProgressBarModule
-  ]
-})export class SummaryModule {}
+    MatProgressBarModule,
+  ],
+})
+export class SummaryModule {}

@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {TranslateTestingModule} from '@damap/core';
-import {ConsentComponent} from './consent.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateTestingModule } from '@damap/core';
+import { ConsentComponent } from './consent.component';
 
 describe('ConsentComponent', () => {
   let component: ConsentComponent;
@@ -9,9 +9,8 @@ describe('ConsentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TranslateTestingModule],
-      declarations: [ConsentComponent]
-    })
-      .compileComponents();
+      declarations: [ConsentComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,4 +1,4 @@
-import { ServiceConfig } from "./config-services";
+import { ServiceConfig } from './config-services';
 
 export interface Config {
   readonly authUrl: string;

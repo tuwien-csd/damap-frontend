@@ -4,7 +4,6 @@ about: Describe a specific set of changes
 title: ''
 labels: ''
 assignees: ''
-
 ---
 
 **Changes**

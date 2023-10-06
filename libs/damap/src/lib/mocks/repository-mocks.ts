@@ -1,12 +1,12 @@
-import {RepositoryDetails} from '../domain/repository-details';
+import { RepositoryDetails } from '../domain/repository-details';
 
 export const mockRepo: RepositoryDetails = {
   id: 'r3d100013557',
-  name: 'TU Data'
-}
+  name: 'TU Data',
+};
 
 export const mockDetailRepo: RepositoryDetails = {
   id: 'r3d100013557',
   name: 'TU Data',
-  description: 'Repo description'
-}
+  description: 'Repo description',
+};

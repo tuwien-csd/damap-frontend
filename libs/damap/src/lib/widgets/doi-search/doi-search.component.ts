@@ -1,22 +1,31 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
-import {Dataset} from '../../domain/dataset';
-import {UntypedFormControl} from '@angular/forms';
-import {doiValidator} from '../../validators/doi.validator';
-import {LoadingState} from '../../domain/enum/loading-state.enum';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { Dataset } from '../../domain/dataset';
+import { UntypedFormControl } from '@angular/forms';
+import { doiValidator } from '../../validators/doi.validator';
+import { LoadingState } from '../../domain/enum/loading-state.enum';
 
 @Component({
   selector: 'app-doi-search',
   templateUrl: './doi-search.component.html',
-  styleUrls: ['./doi-search.component.css']
+  styleUrls: ['./doi-search.component.css'],
 })
 export class DoiSearchComponent implements OnChanges {
-
   @Input() result: Dataset = undefined;
   @Input() loading: LoadingState;
   @Output() termToSearch = new EventEmitter<string>();
   @Output() datasetToAdd = new EventEmitter<Dataset>();
 
-  doi = new UntypedFormControl('', {validators: doiValidator(), updateOn: 'blur'});
+  doi = new UntypedFormControl('', {
+    validators: doiValidator(),
+    updateOn: 'blur',
+  });
 
   readonly loadingState: any = LoadingState;
 
@@ -39,5 +48,4 @@ export class DoiSearchComponent implements OnChanges {
       this.termToSearch.emit(term);
     }
   }
-
 }

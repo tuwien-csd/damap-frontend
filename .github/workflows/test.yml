@@ -15,7 +15,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -35,8 +34,7 @@ jobs:
           main-branch-name: 'master'
       - run: npm ci
       - run: npx nx workspace-lint
-      #format check currently does not signal what the issue is
-      #      - run: npx nx format:check
+      - run: npx nx format:check
 
       - name: Merge - Lint all projects
         if: ${{ env.is-master-branch == 'true' || env.is-next-branch == 'true' }}
@@ -87,4 +85,3 @@ jobs:
             -Dsonar.sourceEncoding=UTF-8
             -Dsonar.javascript.lcov.reportPaths=**/lcov.info
             -Dsonar.coverage.exclusions=**/*.spec.ts,**/karma.conf.js,src/environments/*.ts,src/main.ts,src/test.ts,apps/damap-frontend-e2e/**/*.*
-

@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {RepoDetailsComponent} from './repo-details.component';
-import {mockDetailRepo} from '../../../../mocks/repository-mocks';
-import {TranslateTestingModule} from '../../../../testing/translate-testing/translate-testing.module';
+import { RepoDetailsComponent } from './repo-details.component';
+import { mockDetailRepo } from '../../../../mocks/repository-mocks';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
 
 describe('RepoRecommendationComponent', () => {
   let component: RepoDetailsComponent;
@@ -11,7 +11,7 @@ describe('RepoRecommendationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TranslateTestingModule],
-      declarations: [RepoDetailsComponent]
+      declarations: [RepoDetailsComponent],
     }).compileComponents();
   });
 

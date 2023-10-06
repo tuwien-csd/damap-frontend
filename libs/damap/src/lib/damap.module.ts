@@ -34,7 +34,10 @@ const MODULES = [DashboardModule, PlansModule];
   ],
 })
 export class DamapModule {
-  static forRoot(env: { production: boolean, backendurl: string }): ModuleWithProviders<DamapModule> {
+  static forRoot(env: {
+    production: boolean;
+    backendurl: string;
+  }): ModuleWithProviders<DamapModule> {
     return {
       ngModule: DamapModule,
       providers: [{ provide: APP_ENV, useValue: env }],

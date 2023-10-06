@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {ExternalStorageComponent} from './external-storage.component';
-import {TranslateTestingModule} from '../../../../testing/translate-testing/translate-testing.module';
+import { ExternalStorageComponent } from './external-storage.component';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
 
 describe('ExternalStorageComponent', () => {
   let component: ExternalStorageComponent;
@@ -10,9 +10,8 @@ describe('ExternalStorageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TranslateTestingModule],
-      declarations: [ExternalStorageComponent]
-    })
-      .compileComponents();
+      declarations: [ExternalStorageComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,9 +1,9 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {DataAccessComponent} from './data-access.component';
-import {TranslateTestingModule} from '../../../../testing/translate-testing/translate-testing.module';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { DataAccessComponent } from './data-access.component';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('DataAccessComponent', () => {
   let component: DataAccessComponent;
@@ -11,10 +11,13 @@ describe('DataAccessComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatExpansionModule, NoopAnimationsModule, TranslateTestingModule],
-      declarations: [DataAccessComponent]
-    })
-      .compileComponents();
+      imports: [
+        MatExpansionModule,
+        NoopAnimationsModule,
+        TranslateTestingModule,
+      ],
+      declarations: [DataAccessComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -52,7 +52,7 @@ export const initialFormState: FormState = {
     targetAudience: '',
     tools: '',
     id: null,
-    project: null
+    project: null,
   },
-  changed: undefined
+  changed: undefined,
 };

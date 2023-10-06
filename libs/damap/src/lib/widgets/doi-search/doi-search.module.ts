@@ -1,14 +1,14 @@
-import {NgModule} from '@angular/core';
-import {DoiSearchComponent} from './doi-search.component';
-import {CommonModule} from '@angular/common';
-import {TranslateModule} from '@ngx-translate/core';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatOptionModule} from '@angular/material/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
-import {ErrorMessageModule} from '../error-message/error-message.module';
+import { NgModule } from '@angular/core';
+import { DoiSearchComponent } from './doi-search.component';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatOptionModule } from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { ErrorMessageModule } from '../error-message/error-message.module';
 
 @NgModule({
   declarations: [DoiSearchComponent],
@@ -24,7 +24,7 @@ import {ErrorMessageModule} from '../error-message/error-message.module';
     MatInputModule,
     MatIconModule,
     MatOptionModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   exports: [
     CommonModule,
@@ -39,8 +39,7 @@ import {ErrorMessageModule} from '../error-message/error-message.module';
     MatInputModule,
     MatIconModule,
     MatOptionModule,
-    MatButtonModule
-  ]
+    MatButtonModule,
+  ],
 })
-export class DoiSearchModule {
-}
+export class DoiSearchModule {}

@@ -2,44 +2,64 @@
   <section>
     <p translate>dashboard.welcome.message</p>
     <div class="button-row-left">
-      <button mat-raised-button class="big-button" routerLink="/plans"
-              color="primary">{{'plans.mydmps' | translate}}</button>
-      <button mat-raised-button class="big-button" routerLink="/dmp" color="primary">
+      <button
+        mat-raised-button
+        class="big-button"
+        routerLink="/plans"
+        color="primary">
+        {{ "plans.mydmps" | translate }}
+      </button>
+      <button
+        mat-raised-button
+        class="big-button"
+        routerLink="/dmp"
+        color="primary">
         <mat-icon>add</mat-icon>
-        {{'plans.create.dmp' | translate }}
+        {{ "plans.create.dmp" | translate }}
       </button>
     </div>
     <section>
       <h2 translate>dashboard.dmp.heading</h2>
       <p>
-        {{'dashboard.dmp.text.prefix' | translate}}
+        {{ "dashboard.dmp.text.prefix" | translate }}
         <a [href]="'dashboard.dmp.text.dmp.link' | translate" target="_blank">
-          {{'dashboard.dmp.text.dmp.text' | translate}}</a>{{'dashboard.dmp.text.middle' | translate}}
-        <a [href]="'dashboard.dmp.text.fairprinciples.link' | translate" target="_blank">
-          {{'dashboard.dmp.text.fairprinciples.text' | translate}}</a>{{'dashboard.dmp.text.suffix' | translate}}
+          {{ "dashboard.dmp.text.dmp.text" | translate }}</a
+        >{{ "dashboard.dmp.text.middle" | translate }}
+        <a
+          [href]="'dashboard.dmp.text.fairprinciples.link' | translate"
+          target="_blank">
+          {{ "dashboard.dmp.text.fairprinciples.text" | translate }}</a
+        >{{ "dashboard.dmp.text.suffix" | translate }}
       </p>
-
     </section>
     <section>
       <h2 translate>dashboard.tool.heading</h2>
       <ul>
         <li>
-          {{'dashboard.tool.bulletpoints.dmp.text' | translate}}
-          <a [href]="'dashboard.tool.bulletpoints.dmp.sepg.link' | translate" target="_blank">
-            {{'dashboard.tool.bulletpoints.dmp.sepg.text' | translate}}</a>
+          {{ "dashboard.tool.bulletpoints.dmp.text" | translate }}
+          <a
+            [href]="'dashboard.tool.bulletpoints.dmp.sepg.link' | translate"
+            target="_blank">
+            {{ "dashboard.tool.bulletpoints.dmp.sepg.text" | translate }}</a
+          >
         </li>
         <li translate>dashboard.tool.bulletpoints.document</li>
         <li translate>dashboard.tool.bulletpoints.supports</li>
-        <li translate>dashboard.tool.bulletpoints.benefits.text
+        <li translate>
+          dashboard.tool.bulletpoints.benefits.text
           <ul>
             <li translate>dashboard.tool.bulletpoints.benefits.one</li>
             <li translate>dashboard.tool.bulletpoints.benefits.two</li>
             <li translate>dashboard.tool.bulletpoints.benefits.three</li>
           </ul>
         </li>
-        <li>{{'dashboard.tool.bulletpoints.madmp.prefix' | translate}}
-          <a [href]="'dashboard.tool.bulletpoints.madmp.rda.link' | translate" target="_blank">
-            {{'dashboard.tool.bulletpoints.madmp.rda.text' | translate}}</a>{{'dashboard.tool.bulletpoints.madmp.suffix' | translate}}
+        <li>
+          {{ "dashboard.tool.bulletpoints.madmp.prefix" | translate }}
+          <a
+            [href]="'dashboard.tool.bulletpoints.madmp.rda.link' | translate"
+            target="_blank">
+            {{ "dashboard.tool.bulletpoints.madmp.rda.text" | translate }}</a
+          >{{ "dashboard.tool.bulletpoints.madmp.suffix" | translate }}
         </li>
       </ul>
     </section>

@@ -7,7 +7,7 @@
   width: 100%;
 }
 
-::ng-deep .mat-select-panel:not([class*="mat-elevation-z"]){
-   transform: translate(2em, 2em) !important; 
-   min-width: 100% !important;
+::ng-deep .mat-select-panel:not([class*="mat-elevation-z"]) {
+  transform: translate(2em, 2em) !important;
+  min-width: 100% !important;
 }

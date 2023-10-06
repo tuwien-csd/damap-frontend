@@ -1,10 +1,17 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
-import {mockContributor1, mockContributor2} from '../../../mocks/contributor-mocks';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
+import {
+  mockContributor1,
+  mockContributor2,
+} from '../../../mocks/contributor-mocks';
 
-import {DataDeletionComponent} from './data-deletion.component';
-import {MatSliderModule} from '@angular/material/slider';
-import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
+import { DataDeletionComponent } from './data-deletion.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
 
 describe('DataDeletionComponent', () => {
   let component: DataDeletionComponent;
@@ -13,9 +20,8 @@ describe('DataDeletionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MatSliderModule, TranslateTestingModule],
-      declarations: [DataDeletionComponent]
-    })
-      .compileComponents();
+      declarations: [DataDeletionComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -24,10 +30,10 @@ describe('DataDeletionComponent', () => {
     component.dataset = new UntypedFormGroup({
       delete: new UntypedFormControl(true),
       dateOfDeletion: new UntypedFormControl(null),
-      reasonForDeletion: new UntypedFormControl('reason')
+      reasonForDeletion: new UntypedFormControl('reason'),
     });
     component.dmpForm = new UntypedFormGroup({
-      repositories: new UntypedFormArray([])
+      repositories: new UntypedFormArray([]),
     });
     fixture.detectChanges();
   });
@@ -37,8 +43,12 @@ describe('DataDeletionComponent', () => {
   });
 
   it('should test compare function', () => {
-    expect(component.getSelection(mockContributor1, mockContributor2)).toBe(false);
-    expect(component.getSelection(mockContributor1, mockContributor1)).toBe(true);
+    expect(component.getSelection(mockContributor1, mockContributor2)).toBe(
+      false
+    );
+    expect(component.getSelection(mockContributor1, mockContributor1)).toBe(
+      true
+    );
     expect(component.getSelection(mockContributor1, null)).toBe(false);
     expect(component.getSelection(null, null)).toBe(true);
   });
