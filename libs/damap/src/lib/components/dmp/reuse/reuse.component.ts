@@ -24,6 +24,6 @@ export class ReuseComponent {
   }
 
   get restricted() {
-    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.RESTRICTED && item.source === DataSource.NEW);
+    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.RESTRICTED && item.source === DataSource.NEW);kjl hgklhsadf gkhasdfkgjhsdfklgjhasf;
   }
 }
