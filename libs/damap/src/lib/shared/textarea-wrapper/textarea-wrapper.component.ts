@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormControl, Validators } from '@angular/forms';
+
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 
 @Component({
@@ -15,6 +16,7 @@ export class TextareaWrapperComponent implements OnInit {
   @Input() autocompleteOptions: string[];
   @Input() appearance: MatFormFieldAppearance = 'fill';
   @Input() maxLength = 4000;
+  @Input() applyCustomStyle = false;
 
   required = false;
 

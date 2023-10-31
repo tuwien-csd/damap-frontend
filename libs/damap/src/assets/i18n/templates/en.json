@@ -514,7 +514,7 @@
         "description": "The most restrictive creative commons license. This only allows people to download and share your work for no commercial gain and for no other purposes."
       },
       "perlArtistic1": {
-        "name": "Artistic License 1.0",
+        "name": "Artistic License (Perl) 1.0",
         "description": "NOTE: This license has been superseded by the Artistic License, Version 2.0. This is a license for software packages with the intent of giving the original copyright holder some measure of control over his software while still remaining open source. It is flexible and allows you to distribute or sell modified versions as long as you fulfill one of various conditions. Look at section 4 in the full text for a better explanation."
       },
       "perlArtistic2": {

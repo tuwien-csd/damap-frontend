@@ -24,10 +24,6 @@
   font-weight: bold;
 }
 
-.mat-expansion-panel {
-  background: #006699;
-}
-
 .mat-panel-title {
-  color: white;
+  font-weight: 800;
 }
