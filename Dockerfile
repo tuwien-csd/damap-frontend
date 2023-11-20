@@ -33,4 +33,4 @@ ARG APP=damap-frontend
 FROM nginxinc/nginx-unprivileged AS runner
 ADD docker/conf.d/* /etc/nginx/conf.d
 
-COPY --from=deps --chown=1001:0 --chmod=644 /app/dist/apps/damap-frontend/ /usr/share/nginx/html/
+COPY --from=deps --chown=1001:0 /app/dist/apps/damap-frontend/ /usr/share/nginx/html/
