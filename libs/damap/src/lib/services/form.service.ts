@@ -325,20 +325,8 @@ export class FormService {
     (this.form.get('contributors') as UntypedFormArray).removeAt(index);
   }
 
-  public addDatasetToForm(reference: string, title: string) {
-    const formGroup = this.createDatasetFormGroup(title);
-    formGroup.patchValue({
-      referenceHash: reference,
-      startDate: this.form.value.project?.end || null,
-      dateOfDeletion: this.form.value.project?.end || null,
-    });
-    (this.form.get('datasets') as UntypedFormArray).push(formGroup);
-  }
-
-  public addReusedDatasetToForm(dataset: Dataset) {
-    if (dataset.startDate == null) {
-      dataset.startDate = this.getStartDate();
-    }
+  public addDatasetToForm(dataset: Dataset) {
+    dataset.startDate = this.getStartDate();
 
     const formGroup = this.mapDatasetToFormGroup(dataset);
     (this.form.get('datasets') as UntypedFormArray).push(formGroup);
@@ -352,15 +340,6 @@ export class FormService {
   public removeDatasetFromForm(index: number) {
     this.removeDatasetReferences(index);
     (this.form.get('datasets') as UntypedFormArray).removeAt(index);
-  }
-
-  public addFileAnalysisAsDatasetToForm(dataset: Dataset) {
-    if (dataset.startDate == null) {
-      dataset.startDate = this.getStartDate();
-    }
-
-    const formGroup = this.mapDatasetToFormGroup(dataset);
-    (this.form.get('datasets') as UntypedFormArray).push(formGroup);
   }
 
   public addStorageToForm(storage: InternalStorage) {

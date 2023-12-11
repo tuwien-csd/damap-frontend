@@ -161,13 +161,9 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formService.removeContributorFromForm(index);
   }
 
-  createDataset(title: string) {
-    this.formService.addDatasetToForm(this.generateReferenceHash(), title);
-  }
-
   addDataset(dataset: Dataset) {
     dataset.referenceHash = this.generateReferenceHash();
-    this.formService.addReusedDatasetToForm(dataset);
+    this.formService.addDatasetToForm(dataset);
   }
 
   updateDataset(event: { index: number; update: Dataset }) {
@@ -192,7 +188,7 @@ export class DmpComponent implements OnInit, OnDestroy {
           const dataset = response.body;
           dataset.title = filename;
           dataset.referenceHash = reference;
-          this.formService.addFileAnalysisAsDatasetToForm(dataset);
+          this.formService.addDatasetToForm(dataset);
         }
       },
       error: _ => (upload.finalized = true),
