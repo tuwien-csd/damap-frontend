@@ -77,7 +77,6 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.getDmpById();
 
     this.dmpForm.valueChanges.subscribe(value => {
-      this.logger.debug('DMPform Update');
       this.logger.debug(value);
       this.store.dispatch(formDiff({ newDmp: value }));
     });
@@ -131,7 +130,6 @@ export class DmpComponent implements OnInit, OnDestroy {
       this.datasets.length
     );
   }
-
   changeStep($event) {
     this.stepChanged$.next($event);
   }
@@ -142,6 +140,9 @@ export class DmpComponent implements OnInit, OnDestroy {
         this.getProjectMembers(project.universityId);
       }
       this.projectStep.setValue(project);
+      if (project.end != null) {
+        this.formService.presetStartDateOnDatasets();
+      }
     } else {
       this.projectMembers.length = 0;
       this.projectStep.reset();
