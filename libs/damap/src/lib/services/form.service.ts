@@ -1,6 +1,5 @@
 import { Contributor, compareContributors } from '../domain/contributor';
 import {
-  FormArray,
   FormControl,
   UntypedFormArray,
   UntypedFormBuilder,
@@ -434,7 +433,7 @@ export class FormService {
     if (this.form.value.project?.end || null) {
       const startDate = new Date(this.form.value.project.end);
       startDate.setMonth(startDate.getMonth() - 2);
-      const datasets = (this.form.get('datasets') as UntypedFormArray);
+      const datasets = this.form.get('datasets') as UntypedFormArray;
       for (let i = 0; i < datasets.length; i++) {
         if (datasets.at(i).value.startDate == null) {
           datasets.at(i).patchValue({
