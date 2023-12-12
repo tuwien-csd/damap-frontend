@@ -324,19 +324,10 @@ export class FormService {
     (this.form.get('contributors') as UntypedFormArray).removeAt(index);
   }
 
-  public addDatasetToForm(reference: string, title: string) {
-    const formGroup = this.createDatasetFormGroup(title);
-    formGroup.patchValue({
-      referenceHash: reference,
-      startDate: this.form.value.project?.end || null,
-      dateOfDeletion: this.form.value.project?.end || null,
-    });
-    (this.form.get('datasets') as UntypedFormArray).push(formGroup);
-  }
+  public addDatasetToForm(dataset: Dataset) {
+    dataset.startDate = this.getStartDate();
 
-  public addReusedDatasetToForm(dataset: Dataset) {
-    const formGroup = this.createDatasetFormGroup('Reused dataset');
-    formGroup.patchValue(dataset);
+    const formGroup = this.mapDatasetToFormGroup(dataset);
     (this.form.get('datasets') as UntypedFormArray).push(formGroup);
   }
 
@@ -348,14 +339,6 @@ export class FormService {
   public removeDatasetFromForm(index: number) {
     this.removeDatasetReferences(index);
     (this.form.get('datasets') as UntypedFormArray).removeAt(index);
-  }
-
-  public addFileAnalysisAsDatasetToForm(dataset: Dataset) {
-    const formGroup = this.mapDatasetToFormGroup(dataset);
-    formGroup.patchValue({
-      startDate: this.form.value.project?.end || null,
-    });
-    (this.form.get('datasets') as UntypedFormArray).push(formGroup);
   }
 
   public addStorageToForm(storage: InternalStorage) {
@@ -444,6 +427,21 @@ export class FormService {
       source: [DataSource.NEW, Validators.required],
       datasetId: [null],
     });
+  }
+
+  public presetStartDateOnDatasets() {
+    if (this.form.value.project?.end || null) {
+      const startDate = new Date(this.form.value.project.end);
+      startDate.setMonth(startDate.getMonth() - 2);
+      const datasets = this.form.get('datasets') as UntypedFormArray;
+      for (let i = 0; i < datasets.length; i++) {
+        if (datasets.at(i).value.startDate == null) {
+          datasets.at(i).patchValue({
+            startDate: startDate,
+          });
+        }
+      }
+    }
   }
 
   private mapDatasetToFormGroup(dataset: Dataset): UntypedFormGroup {
@@ -640,6 +638,16 @@ export class FormService {
         entry => entry !== dataset.value.referenceHash
       );
       item.patchValue({ datasets });
+    }
+  }
+
+  private getStartDate(): Date {
+    if (this.form.value.project?.end || null) {
+      const startDate = new Date(this.form.value.project.end);
+      startDate.setMonth(startDate.getMonth() - 2);
+      return startDate;
+    } else {
+      return null;
     }
   }
 }

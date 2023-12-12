@@ -77,7 +77,6 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.getDmpById();
 
     this.dmpForm.valueChanges.subscribe(value => {
-      this.logger.debug('DMPform Update');
       this.logger.debug(value);
       this.store.dispatch(formDiff({ newDmp: value }));
     });
@@ -131,7 +130,6 @@ export class DmpComponent implements OnInit, OnDestroy {
       this.datasets.length
     );
   }
-
   changeStep($event) {
     this.stepChanged$.next($event);
   }
@@ -142,6 +140,9 @@ export class DmpComponent implements OnInit, OnDestroy {
         this.getProjectMembers(project.universityId);
       }
       this.projectStep.setValue(project);
+      if (project.end != null) {
+        this.formService.presetStartDateOnDatasets();
+      }
     } else {
       this.projectMembers.length = 0;
       this.projectStep.reset();
@@ -160,13 +161,9 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formService.removeContributorFromForm(index);
   }
 
-  createDataset(title: string) {
-    this.formService.addDatasetToForm(this.generateReferenceHash(), title);
-  }
-
   addDataset(dataset: Dataset) {
     dataset.referenceHash = this.generateReferenceHash();
-    this.formService.addReusedDatasetToForm(dataset);
+    this.formService.addDatasetToForm(dataset);
   }
 
   updateDataset(event: { index: number; update: Dataset }) {
@@ -191,7 +188,7 @@ export class DmpComponent implements OnInit, OnDestroy {
           const dataset = response.body;
           dataset.title = filename;
           dataset.referenceHash = reference;
-          this.formService.addFileAnalysisAsDatasetToForm(dataset);
+          this.formService.addDatasetToForm(dataset);
         }
       },
       error: _ => (upload.finalized = true),

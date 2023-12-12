@@ -69,6 +69,22 @@
           </div>
         </ng-container>
 
+        <div class="mat-card-container">
+          <mat-form-field>
+            <mat-label>{{
+              "dmp.steps.licensing.question.startDate" | translate
+            }}</mat-label>
+            <input
+              matInput
+              formControlName="startDate"
+              [matDatepicker]="picker" />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
         <ng-container *ngIf="dataset.value.dataAccess === accessType.CLOSED">
           <app-data-deletion
             [dataset]="getFormGroup(i)"
