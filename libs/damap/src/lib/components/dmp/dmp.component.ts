@@ -57,7 +57,7 @@ export class DmpComponent implements OnInit, OnDestroy {
   costsStep: UntypedFormGroup;
 
   // Resources
-  projectMembers: Contributor[];
+  projectMembers: Contributor[] = [];
   stepChanged$ = new Subject();
 
   fileUpload: { file: File; progress: number; finalized: boolean }[] = [];
