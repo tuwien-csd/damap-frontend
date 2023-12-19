@@ -30,12 +30,12 @@
       </td>
     </ng-container>
 
-    <!-- Revision Column -->
-    <ng-container matColumnDef="revision">
+    <!-- Editor Column -->
+    <ng-container matColumnDef="editor">
       <th mat-header-cell *matHeaderCellDef>
-        {{ "versions.revisionNumber" | translate }}
+        {{ "versions.editor" | translate }}
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.revisionNumber }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.editor }}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
