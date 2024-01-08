@@ -588,7 +588,7 @@
     "versionId": "Version",
     "versionName": "Name",
     "versionDate": "Date",
-    "revisionNumber": "Revision",
+    "editor": "Editor",
     "list": {
       "no.data": "No versions available."
     },

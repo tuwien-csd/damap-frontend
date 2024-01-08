@@ -9,7 +9,7 @@ import { Dmp } from '../../../domain/dmp';
   styleUrls: ['./version-table.component.css'],
 })
 export class VersionTableComponent {
-  displayedColumns: string[] = ['version', 'name', 'date', 'revision'];
+  displayedColumns: string[] = ['version', 'name', 'date', 'editor'];
 
   @Input() dmp: DmpListItem | Dmp;
   @Input() versions: Version[];
