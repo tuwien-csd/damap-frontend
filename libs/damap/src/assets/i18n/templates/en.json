@@ -79,7 +79,10 @@
           "tab": {
             "manual": "Manually",
             "upload": "Upload sample data",
-            "doi": "Enter DOI"
+            "doi": "Enter DOI",
+            "access": "Access rights",
+            "storage": "Storage",
+            "introStorage": "This step helps you to document who is allowed to see or edit your data in the project phase and to find good storage and backup solutions for your data."
           },
           "button": {
             "add": {

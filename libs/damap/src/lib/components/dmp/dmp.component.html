@@ -46,28 +46,33 @@
       externalStorageInfo.invalid
     ">
     <ng-container *ngIf="showStep; else noDatasets">
-      <app-step-intro
-        >This step helps you to document who is allowed to see or edit your data
-        in the project phase and to find good storage and backup solutions for
-        your data.
-      </app-step-intro>
-      <app-data-access
-        [dmpForm]="dmpForm"
-        [datasets]="datasets"></app-data-access>
-      <app-dmp-storage
-        [dmpForm]="dmpForm"
-        [storageStep]="storageStep"
-        [datasets]="datasets"
-        (storageToAdd)="addStorage($event)"
-        (storageToRemove)="removeStorage($event)">
-      </app-dmp-storage>
-      <app-dmp-external-storage
-        [externalStorageStep]="externalStorageStep"
-        [externalStorageInfo]="externalStorageInfo"
-        [datasets]="datasets"
-        (externalStorageToAdd)="addExternalStorage()"
-        (externalStorageToRemove)="removeExternalStorage($event)">
-      </app-dmp-external-storage>
+      <div class="intro-step">
+        <app-step-intro>
+          {{ "dmp.steps.data.specify.tab.introStorage" | translate }}
+        </app-step-intro>
+      </div>
+      <mat-tab-group dynamicHeight>
+        <mat-tab label="{{ 'dmp.steps.data.specify.tab.access' | translate }}">
+          <app-data-access [dmpForm]="dmpForm" [datasets]="datasets">
+          </app-data-access>
+        </mat-tab>
+        <mat-tab label="{{ 'dmp.steps.data.specify.tab.storage' | translate }}">
+          <app-dmp-storage
+            [dmpForm]="dmpForm"
+            [storageStep]="storageStep"
+            [datasets]="datasets"
+            (storageToAdd)="addStorage($event)"
+            (storageToRemove)="removeStorage($event)">
+          </app-dmp-storage>
+          <app-dmp-external-storage
+            [externalStorageStep]="externalStorageStep"
+            [externalStorageInfo]="externalStorageInfo"
+            [datasets]="datasets"
+            (externalStorageToAdd)="addExternalStorage()"
+            (externalStorageToRemove)="removeExternalStorage($event)">
+          </app-dmp-external-storage>
+        </mat-tab>
+      </mat-tab-group>
     </ng-container>
   </mat-step>
 
