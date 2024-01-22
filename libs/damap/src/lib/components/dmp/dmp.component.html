@@ -51,7 +51,7 @@
           {{ "dmp.steps.data.specify.tab.introStorage" | translate }}
         </app-step-intro>
       </div>
-      <mat-tab-group dynamicHeight>
+      <mat-tab-group dynamicHeight animationDuration="0ms">
         <mat-tab label="{{ 'dmp.steps.data.specify.tab.access' | translate }}">
           <app-data-access [dmpForm]="dmpForm" [datasets]="datasets">
           </app-data-access>

@@ -20,3 +20,10 @@
   max-height: 400px;
   overflow-y: scroll;
 }
+
+.storage-card-container {
+  display: flex;
+  gap: 10px;
+  flex-grow: 100;
+  align-items: baseline;
+}
