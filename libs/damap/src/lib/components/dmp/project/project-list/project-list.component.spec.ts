@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 import {
   mockProjectSearchResult,
   mockRecommendedProjectSearchResult,
@@ -56,10 +61,34 @@ describe('ProjectListComponent', () => {
     loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
+  it('should call fetchRecommendedProjects when selectedProject is set to null', () => {
+    spyOn(component, 'fetchRecommendedProjects');
+    component.selectedProject = null;
+    expect(component.fetchRecommendedProjects).toHaveBeenCalled();
+  });
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should fetch recommended projects when search term is null or empty', fakeAsync(() => {
+    component.fetchRecommendedProjects();
+    tick();
+    expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
+
+    component.search(null);
+    tick();
+    expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
+
+    component.search('');
+    tick();
+    expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
+  }));
+
+  it('should use getRecommendedProjects when fetchRecommendedProjects is called', () => {
+    component.fetchRecommendedProjects();
+    expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
+  });
 
   it('should load projects on text input', async () => {
     const input = await loader.getHarness(MatInputHarness);

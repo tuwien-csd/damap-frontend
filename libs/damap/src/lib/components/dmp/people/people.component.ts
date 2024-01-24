@@ -47,7 +47,6 @@ export class PeopleComponent implements OnInit, OnDestroy {
   searchResult$: Observable<SearchResult<Contributor>>;
   serviceConfig$: ServiceConfig[];
   serviceConfigType: ServiceConfig;
-  currentSearchTerm: '';
 
   constructor(
     private backendService: BackendService,
@@ -72,10 +71,8 @@ export class PeopleComponent implements OnInit, OnDestroy {
   }
 
   onServiceConfigChange(serviceConfigType: ServiceConfig) {
-    if (this.currentSearchTerm) {
-      this.serviceConfigType = serviceConfigType;
-      this.searchTerms.next(this.personSearch.currentSearchTerm);
-    }
+    this.serviceConfigType = serviceConfigType;
+    this.searchTerms.next(this.personSearch.currentSearchTerm);
   }
 
   ngOnDestroy(): void {
