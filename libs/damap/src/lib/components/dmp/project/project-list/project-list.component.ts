@@ -36,7 +36,6 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   }
 
   set selectedProject(project: Project) {
-    console.log('selectedProject setter called', project);
     this._selectedProject = project;
     if (project === null) {
       this.fetchRecommendedProjects();

@@ -24,14 +24,10 @@ export class ProjectComponent {
   @ViewChild('tabGroup') tabGroup: MatTabGroup;
 
   changeProject(project: Project): void {
-    console.log(this.projectList);
     this.project.emit(project);
     if (project === null) {
-      // Check if projectList reference is available
       if (this.projectList) {
         this.projectList.fetchRecommendedProjects();
-      } else {
-        console.error('projectList is not available');
       }
     }
   }
