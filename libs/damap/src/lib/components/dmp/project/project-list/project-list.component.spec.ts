@@ -13,6 +13,7 @@ import { BackendService } from '@damap/core';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
@@ -48,6 +49,7 @@ describe('ProjectListComponent', () => {
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
+        MatIconModule,
         MatListModule,
         NoopAnimationsModule,
       ],
@@ -59,34 +61,16 @@ describe('ProjectListComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.loader(fixture);
-  });
-
-  it('should call fetchRecommendedProjects when selectedProject is set to null', () => {
-    spyOn(component, 'fetchRecommendedProjects');
-    component.selectedProject = null;
-    expect(component.fetchRecommendedProjects).toHaveBeenCalled();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should fetch recommended projects when search term is null or empty', fakeAsync(() => {
-    component.fetchRecommendedProjects();
-    tick();
-    expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
-
-    component.search(null);
-    tick();
-    expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
-
-    component.search('');
-    tick();
-    expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
-  }));
-
-  it('should use getRecommendedProjects when fetchRecommendedProjects is called', () => {
-    component.fetchRecommendedProjects();
+  it('should fetch recommended projects after creation', async () => {
+    // making sure that the input is initialized
+    await loader.getHarness(MatInputHarness);
     expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
   });
 
@@ -95,6 +79,9 @@ describe('ProjectListComponent', () => {
 
     await input.setValue(mockProject.title);
     expect(backendSpy.getProjectSearchResult).toHaveBeenCalled();
+
+    await input.setValue('');
+    expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
   });
 
   it('should change project on selection', async () => {
@@ -111,5 +98,26 @@ describe('ProjectListComponent', () => {
 
     await options[0].select();
     expect(component.projectToSet.emit).toHaveBeenCalled();
+  });
+
+  it('should call fetchRecommendedProjects when selectedProject is set to null', () => {
+    spyOn(component, 'fetchRecommendedProjects');
+    component.selectedProject = null;
+    expect(component.fetchRecommendedProjects).toHaveBeenCalled();
+  });
+
+  it('should use getRecommendedProjects when fetchRecommendedProjects is called', fakeAsync(() => {
+    component.ngOnInit();
+    fixture.detectChanges();
+    component.fetchRecommendedProjects();
+    tick(300);
+    fixture.detectChanges();
+    expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
+  }));
+
+  it('should load projects on text input', async () => {
+    const input = await loader.getHarness(MatInputHarness);
+    await input.setValue(mockProject.title);
+    expect(backendSpy.getProjectSearchResult).toHaveBeenCalled();
   });
 });

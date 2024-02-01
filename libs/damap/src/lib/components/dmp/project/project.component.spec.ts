@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BackendService } from '../../../services/backend.service';
-import { By } from '@angular/platform-browser';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { ProjectComponent } from './project.component';
@@ -50,21 +49,5 @@ describe('ProjectComponent', () => {
     spyOn(component.project, 'emit');
     component.changeProject(mockProject);
     expect(component.project.emit).toHaveBeenCalledWith(mockProject);
-  });
-
-  it('should call fetchRecommendedProjects on null project', () => {
-    component.changeProject(null);
-    fixture.detectChanges();
-
-    const childComponent = fixture.debugElement.query(
-      By.directive(ProjectListComponent)
-    ).componentInstance;
-
-    if (childComponent) {
-      childComponent.fetchRecommendedProjects();
-      expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
-    } else {
-      fail('ProjectListComponent is not initialized');
-    }
   });
 });

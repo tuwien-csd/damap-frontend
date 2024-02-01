@@ -11,7 +11,6 @@ import {
   Subject,
   debounceTime,
   distinctUntilChanged,
-  merge,
   of,
   switchMap,
 } from 'rxjs';
@@ -52,11 +51,16 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.fetchDefaultRecommendedProjects();
     this.searchTerms
       .pipe(
         debounceTime(300),
-        distinctUntilChanged(),
+        distinctUntilChanged((previous, current) => {
+          if (previous === null && current === null) {
+            // search for recommended projects
+            return false;
+          }
+          return previous === current;
+        }),
         switchMap((term: string) =>
           term === null || term.length === 0
             ? this.backendService.getRecommendedProjects()
@@ -67,27 +71,11 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.search(null);
-  }
-
-  fetchDefaultRecommendedProjects(): void {
-    this.searchResult$ = this.backendService.getRecommendedProjects();
+    this.fetchRecommendedProjects();
   }
 
   fetchRecommendedProjects(): void {
-    const recommendedProjects$ = this.backendService.getRecommendedProjects();
-    this.searchResult$ = merge(
-      recommendedProjects$,
-      this.searchTerms.pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
-        switchMap((term: string) =>
-          term === null || term.length === 0
-            ? recommendedProjects$
-            : this.backendService.getProjectSearchResult(term)
-        )
-      )
-    );
+    this.search(null);
   }
 
   search(term: string) {
