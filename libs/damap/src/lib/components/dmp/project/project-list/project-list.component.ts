@@ -6,16 +6,18 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSelectionListChange } from '@angular/material/list';
-import { BackendService } from '../../../../services/backend.service';
 import {
-  debounceTime,
-  distinctUntilChanged,
   Observable,
   Subject,
+  debounceTime,
+  distinctUntilChanged,
+  of,
   switchMap,
 } from 'rxjs';
+
+import { BackendService } from '../../../../services/backend.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSelectionListChange } from '@angular/material/list';
 import { Project } from '../../../../domain/project';
 import { SearchResult } from '../../../../domain/search/search-result';
 
@@ -25,8 +27,20 @@ import { SearchResult } from '../../../../domain/search/search-result';
   styleUrls: ['./project-list.component.css'],
 })
 export class ProjectListComponent implements OnInit, AfterViewInit {
-  @Input() selectedProject: Project;
   @Output() projectToSet = new EventEmitter<Project>();
+  private _selectedProject: Project;
+
+  @Input()
+  get selectedProject(): Project {
+    return this._selectedProject;
+  }
+
+  set selectedProject(project: Project) {
+    this._selectedProject = project;
+    if (project === null) {
+      this.fetchRecommendedProjects();
+    }
+  }
 
   private searchTerms = new Subject<string>();
   searchResult$: Observable<SearchResult<Project>>;
@@ -37,20 +51,30 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.searchResult$ = this.searchTerms.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap((term: string) => {
-        if (term === null || term.length === 0) {
-          return this.backendService.getRecommendedProjects();
-        } else {
-          return this.backendService.getProjectSearchResult(term);
-        }
-      })
-    );
+    this.searchTerms
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged((previous, current) => {
+          if (previous === null && current === null) {
+            // search for recommended projects
+            return false;
+          }
+          return previous === current;
+        }),
+        switchMap((term: string) =>
+          term === null || term.length === 0
+            ? this.backendService.getRecommendedProjects()
+            : this.backendService.getProjectSearchResult(term)
+        )
+      )
+      .subscribe(results => (this.searchResult$ = of(results)));
   }
 
   ngAfterViewInit(): void {
+    this.fetchRecommendedProjects();
+  }
+
+  fetchRecommendedProjects(): void {
     this.search(null);
   }
 

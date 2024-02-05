@@ -5,9 +5,10 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+
 import { MatTabGroup } from '@angular/material/tabs';
 import { Project } from '../../../domain/project';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-dmp-project',
@@ -16,7 +17,6 @@ import { Project } from '../../../domain/project';
 })
 export class ProjectComponent {
   @Input() projectStep: UntypedFormControl;
-
   @Output() project = new EventEmitter<any>();
 
   @ViewChild('tabGroup') tabGroup: MatTabGroup;
