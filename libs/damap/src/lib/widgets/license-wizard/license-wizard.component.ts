@@ -51,7 +51,7 @@ export class LicenseSelectorDialogComponent {
   setNextStep(
     currentIndex: number,
     next: {
-      step: (lincense: Iterable<LicenseDetails>, option?: string) => Step;
+      step: (license: Iterable<LicenseDetails>, option?: string) => Step;
       filter?: Filter;
     }
   ) {

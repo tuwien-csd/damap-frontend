@@ -471,117 +471,169 @@
       "library": "Library"
     },
     "license": {
-      "ccPublicDomain": {
-        "name": "Public Domain Mark (PD)",
-        "description": "The work identified as being free of known restrictions under copyright law, including all related and neighboring rights."
+      "agpl1": {
+        "name": "Affero General Public License v1.0 only",
+        "description": "The GNU Affero General Public License is a free, copyleft license for software and other kinds of works, specifically designed to ensure cooperation with the community in the case of network server software."
       },
-      "ccZero": {
-        "name": "Public Domain Dedication (CC Zero)",
-        "description": "CC Zero enables scientists, educators, artists and other creators and owners of copyright- or database-protected content to waive those interests in their works and thereby place them as completely as possible in the public domain, so that others may freely build upon, enhance and reuse the works for any purposes without restriction under copyright or database law."
+      "agpl1plus": {
+        "name": "Affero General Public License v1.0 or later",
+        "description": "The GNU Affero General Public License is a free, copyleft license for software and other kinds of works, specifically designed to ensure cooperation with the community in the case of network server software. Allows content under this \"any later version\" grant to be redistributed under the GPL-3.0-or-later."
       },
-      "pddl": {
-        "name": "Open Data Commons Public Domain Dedication and License (PDDL)",
-        "description": "This license is meant to be an international, database-specific equivalent of the public domain. You cannot relicense or sublicense any database under this license because, like the public domain, after dedication you no longer own any rights to the database."
+      "agpl3": {
+        "name": "GNU Affero General Public License v3.0 or later",
+        "description": "The AGPL license differs from the other GNU licenses in that it was built for network software. You can distribute modified versions if you keep track of the changes and the date you made them. As per usual with GNU licenses, you must license derivatives under AGPL. It provides the same restrictions and freedoms as the GPLv3 but with an additional clause which makes it so that source code must be distributed along with web publication. Since web sites and services are never distributed in the traditional sense, the AGPL is the GPL of the web."
       },
-      "ccBy": {
-        "name": "Creative Commons Attribution (CC BY)",
-        "description": "This is the standard creative commons license that gives others maximum freedom to do what they want with your work."
+      "agpl3plus": {
+        "name": "GNU Affero General Public License v3.0 or later",
+        "description": "The AGPL license differs from the other GNU licenses in that it was built for network software. You can distribute modified versions if you keep track of the changes and the date you made them. As per usual with GNU licenses, you must license derivatives under AGPL. It provides the same restrictions and freedoms as the GPLv3 but with an additional clause which makes it so that source code must be distributed along with web publication. Since web sites and services are never distributed in the traditional sense, the AGPL is the GPL of the web. This license identifier refers to the choice to use code under AGPL-3.0-or-later (i.e., AGPL-3.0 or some later version), as distinguished from use of code under AGPL-3.0-only"
       },
-      "odcBy": {
-        "name": "Open Data Commons Attribution License (ODC-By)",
-        "description": ""
+      "apache1": {
+        "name": "Apache License 1.0",
+        "description": "This is the original Apache License which applies only to very old versions of Apache packages. Consider using a newer license. It allows you much freedom with the software."
       },
-      "ccBySa": {
-        "name": "Creative Commons Attribution-ShareAlike (CC BY-SA)",
-        "description": "This creative commons license is very similar to the regular Attribution license, but requires you to release all derivative works under this same license."
+      "apache1_1": {
+        "name": "Apache License 1.1",
+        "description": "This license allows you much freedom with the software and differs only slightly from version 1.0. Consider using a newer version."
       },
-      "odbl": {
-        "name": "Open Data Commons Open Database License (ODbL)",
-        "description": "A copyleft license used by OpenStreetMap and others with very specific terms designed for databases."
+      "apache2": {
+        "name": "Apache License 2",
+        "description": "A license that allows you much freedom with the software, including an explicit right to a patent. \"State changes\" means that you have to include a notice in each file you modified. "
       },
-      "ccByNd": {
-        "name": "Creative Commons Attribution-NoDerivs (CC BY-ND)",
-        "description": "The no derivatives creative commons license is straightforward; you can take a work released under this license and re-distribute it but you cannot change it."
-      },
-      "ccByNc": {
-        "name": "Creative Commons Attribution-NonCommercial (CC BY-NC)",
-        "description": "A creative commons license that bans commercial use."
-      },
-      "ccByNcSa": {
-        "name": "Creative Commons Attribution-NonCommercial-ShareAlike (CC BY-NC-SA)",
-        "description": "A creative commons license that bans commercial use and requires you to release any modified works under this license."
-      },
-      "ccByNcNd": {
-        "name": "Creative Commons Attribution-NonCommercial-NoDerivs (CC BY-NC-ND)",
-        "description": "The most restrictive creative commons license. This only allows people to download and share your work for no commercial gain and for no other purposes."
-      },
-      "perlArtistic1": {
-        "name": "Artistic License (Perl) 1.0",
+      "artistic1": {
+        "name": "Artistic License 1.0",
         "description": "NOTE: This license has been superseded by the Artistic License, Version 2.0. This is a license for software packages with the intent of giving the original copyright holder some measure of control over his software while still remaining open source. It is flexible and allows you to distribute or sell modified versions as long as you fulfill one of various conditions. Look at section 4 in the full text for a better explanation."
       },
-      "perlArtistic2": {
+      "artistic1Perl": {
+        "name": "Artistic License 1.0 (Perl)",
+        "description": "NOTE: This license has been superseded by the Artistic License, Version 2.0. This is a license for software packages with the intent of giving the original copyright holder some measure of control over his software while still remaining open source. It is flexible and allows you to distribute or sell modified versions as long as you fulfill one of various conditions. Look at section 4 in the full text for a better explanation."
+      },
+      "artistic2": {
         "name": "Artistic License 2.0",
         "description": "This is a license for software packages with the intent of giving the original copyright holder some measure of control over his software while still remaining open source. It is flexible and allows you to distribute or sell modified versions as long as you fulfill one of various conditions. Look at section 4 in the full text for a better explanation."
       },
-      "gpl2plus": {
-        "name": "GNU General Public License 2 or later (GPL-2.0)",
-        "description": "You may copy, distribute and modify the software as long as you track changes/dates of in source files and keep all modifications under GPL. You can distribute your application using a GPL library commercially, but you must also disclose the source code."
+      "bsd2c": {
+        "name": "BSD 2-Clause \"Simplified\" License",
+        "description": "The BSD 2-clause license allows you almost unlimited freedom with the software so long as you include the BSD copyright notice in it."
+      },
+      "bsd3c": {
+        "name": "BSD 3-Clause \"New\" or \"Revised\" License",
+        "description": "The BSD 3-clause license allows you almost unlimited freedom with the software so long as you include the BSD copyright notice in it. \"Use trademark\" in this case means you cannot use the names of the original company or its members to endorse derived products."
+      },
+      "ccBy": {
+        "name": "Creative Commons Attribution 4.0 International",
+        "description": "This is the standard creative commons license that gives others maximum freedom to do what they want with your work."
+      },
+      "ccByNc": {
+        "name": "Creative Commons Attribution Non Commercial 4.0 International",
+        "description": "A creative commons license that bans commercial use."
+      },
+      "ccByNcNd": {
+        "name": "Creative Commons Attribution Non Commercial No Derivatives 4.0 International",
+        "description": "The most restrictive creative commons license. This only allows people to download and share your work for no commercial gain and for no other purposes."
+      },
+      "ccByNcSa": {
+        "name": "Creative Commons Attribution Non Commercial Share Alike 4.0 International",
+        "description": "A creative commons license that bans commercial use and requires you to release any modified works under this license."
+      },
+      "ccByNd": {
+        "name": "Creative Commons Attribution No Derivatives 4.0 International",
+        "description": "The no derivatives creative commons license is straightforward; you can take a work released under this license and re-distribute it but you cannot change it."
+      },
+      "ccBySa": {
+        "name": "Creative Commons Attribution Share Alike 4.0 International",
+        "description": "This creative commons license is very similar to the regular Attribution license, but requires you to release all derivative works under this same license."
+      },
+      "ccPublicDomain": {
+        "name": "Public Domain Mark",
+        "description": "The work identified as being free of known restrictions under copyright law, including all related and neighboring rights."
+      },
+      "ccZero": {
+        "name": "Creative Commons Zero v1.0 Universal",
+        "description": "CC Zero enables scientists, educators, artists and other creators and owners of copyright- or database-protected content to waive those interests in their works and thereby place them as completely as possible in the public domain, so that others may freely build upon, enhance and reuse the works for any purposes without restriction under copyright or database law."
+      },
+      "cddl1": {
+        "name": "Common Development and Distribution License 1.0",
+        "description": "This is a very permissive and popular license made by Sun Microsystems that also includes explicit patent grants. It is relatively simplistic in its conditions, requiring only a small amount of documentation for redistribution (applying to source as well as modified code)."
+      },
+      "cddl1_1": {
+        "name": "Common Development and Distribution License 1.1",
+        "description": "Oracle version of 1.0. This is a very permissive and popular license made by Sun Microsystems that also includes explicit patent grants. It is relatively simplistic in its conditions, requiring only a small amount of documentation for redistribution (applying to source as well as modified code)."
+      },
+      "epl1": {
+        "name": "Eclipse Public License 1.0",
+        "description": "This license, made and used by the Eclipse Foundation, isn’t all too stringent and gives both copyright and explicit patent rights. Check the full text of the license to see how liability is accorded."
+      },
+      "epl2": {
+        "name": "Eclipse Public License 2.0",
+        "description": "This license, made and used by the Eclipse Foundation, isn’t all too stringent and gives both copyright and explicit patent rights. Check the full text of the license to see how liability is accorded."
       },
       "gpl2": {
-        "name": "GNU General Public License 2 (GPL-2.0)",
+        "name": "GNU General Public License v2.0 only",
         "description": "Standard GNU GPL version 2 but without support for later versions i.e. you cannot relicense under GPL 3."
       },
+      "gpl2plus": {
+        "name": "GNU General Public License v2.0 or later",
+        "description": "You may copy, distribute and modify the software as long as you track changes/dates of in source files and keep all modifications under GPL. You can distribute your application using a GPL library commercially, but you must also disclose the source code."
+      },
       "gpl3": {
-        "name": "GNU General Public License 3 (GPL-3.0)",
+        "name": "GNU General Public License v3.0 only",
         "description": "You may copy, distribute and modify the software as long as you track changes/dates of in source files and keep modifications under GPL. You can distribute your application using a GPL library commercially, but you must also provide the source code. GPL 3 tries to close some loopholes in GPL 2."
       },
-      "agpl1": {
-        "name": "Affero General Public License 1 (AGPL-1.0)",
-        "description": "werfds"
+      "gpl3plus": {
+        "name": "GNU General Public License v3.0 or later",
+        "description": "You may copy, distribute and modify the software as long as you track changes/dates of in source files and keep modifications under GPL. You can distribute your application using a GPL library commercially, but you must also provide the source code. GPL 3 tries to close some loopholes in GPL 2."
       },
-      "agpl3": {
-        "name": "Affero General Public License 3 (AGPL-3.0)",
-        "description": "The AGPL license differs from the other GNU licenses in that it was built for network software. You can distribute modified versions if you keep track of the changes and the date you made them. As per usual with GNU licenses, you must license derivatives under AGPL. It provides the same restrictions and freedoms as the GPLv3 but with an additional clause which makes it so that source code must be distributed along with web publication. Since web sites and services are never distributed in the traditional sense, the AGPL is the GPL of the web."
+      "lgpl2": {
+        "name": "GNU Library General Public License v2 only",
+        "description": "Standard GNU LGPL version 2.0 but without support for later versions i.e. you cannot relicense under LGPL 3."
+      },
+      "lgpl2plus": {
+        "name": "GNU Library General Public License v2 or later",
+        "description": "You may copy, distribute and modify the software provided that modifications are described inside the modified files and licensed for free under LGPL-2.0. Derivatives or non-separate (statically-linked) works of the software must be licensed under LGPL, but separate, parent projects don't have to be."
+      },
+      "lgpl2_1": {
+        "name": "GNU Lesser General Public License v2.1 only",
+        "description": "Standard GNU LGPL version 2.1 but without support for later versions i.e. you cannot relicense under LGPL 3."
+      },
+      "lgpl2_1plus": {
+        "name": "GNU Lesser General Public License v2.1 or later",
+        "description": "You may copy, distribute and modify the software provided that modifications are described inside the modified files and licensed for free under LGPL-2.1. Derivatives or non-separate (statically-linked) works of the software must be licensed under LGPL, but separate, parent projects don't have to be."
+      },
+      "lgpl3": {
+        "name": "GNU Lesser General Public License v3.0 only",
+        "description": "You may copy, distribute and modify the software provided that modifications are described inside the modified files and licensed for free under LGPL-2.1.  Derivatives or non-separate (statically-linked) works of the software must be licensed under LGPL, but separate, parent projects don't have to be. LGPL 3 tries to close some loopholes in LGPL 2.1."
+      },
+      "lgpl3plus": {
+        "name": "GNU Lesser General Public License v3.0 or later",
+        "description": "You may copy, distribute and modify the software provided that modifications are described inside the modified files and licensed for free under LGPL-2.1.  Derivatives or non-separate (statically-linked) works of the software must be licensed under LGPL, but separate, parent projects don't have to be. LGPL 3 tries to close some loopholes in LGPL 2.1."
+      },
+      "mit": {
+        "name": "MIT License",
+        "description": "A short, permissive software license. Basically, you can do whatever you want as long as you include the original copyright and license."
+      },
+      "mpl1": {
+        "name": "Mozilla Public License 1.0",
+        "description": "This license has been superseded by 1.1. It is a lenient license used by the Mozilla Corporation that allows you a variety of explicit freedoms with the software so long as you keep modifications under this license and distribute the original source code alongside executables. It is a good midway license; it isn’t very strict and has only straightforward requirements."
+      },
+      "mpl1_1": {
+        "name": "Mozilla Public License 1.1",
+        "description": "This license has been superseded by 2.0. It is a lenient license used by the Mozilla Corporation that allows you a variety of explicit freedoms with the software so long as you keep modifications under this license and distribute the original source code alongside executables. It is a good midway license; it isn’t very strict and has only straightforward requirements."
       },
       "mpl2": {
         "name": "Mozilla Public License 2.0",
         "description": "This is a lenient license used by the Mozilla Corporation that allows you a variety of explicit freedoms with the software so long as you keep modifications under this license and distribute the original source code alongside executables. It is a good midway license; it isn’t very strict and has only straightforward requirements."
       },
-      "lgpl21plus": {
-        "name": "GNU Library or \"Lesser\" General Public License 2.1 or later (LGPL-2.1)",
-        "description": "You may copy, distribute and modify the software provided that modifications are described inside the modified files and licensed for free under LGPL-2.1. Derivatives or non-separate (statically-linked) works of the software must be licensed under LGPL, but separate, parent projects don't have to be."
+      "odbl": {
+        "name": "Open Data Commons Open Database License v1.0",
+        "description": "A copyleft license used by OpenStreetMap and others with very specific terms designed for databases."
       },
-      "lgpl21": {
-        "name": "GNU Library or \"Lesser\" General Public License 2.1 (LGPL-2.1)",
-        "description": "Standard GNU LGPL version 2.1 but without support for later versions i.e. you cannot relicense under LGPL 3."
+      "odcBy": {
+        "name": "Open Data Commons Attribution License v1.0",
+        "description": "The Open Data Commons Attribution License is a license agreement intended to allow users to freely share, modify, and use this Database subject only to the attribution requirements set out in Section 4 of the license text."
       },
-      "lgpl3": {
-        "name": "GNU Library or \"Lesser\" General Public License 3.0 (LGPL-3.0)",
-        "description": "You may copy, distribute and modify the software provided that modifications are described inside the modified files and licensed for free under LGPL-2.1.  Derivatives or non-separate (statically-linked) works of the software must be licensed under LGPL, but separate, parent projects don't have to be. LGPL 3 tries to close some loopholes in LGPL 2.1."
-      },
-      "epl1": {
-        "name": "Eclipse Public License 1.0 (EPL-1.0)",
-        "description": "This license, made and used by the Eclipse Foundation, isn’t all too stringent and gives both copyright and explicit patent rights. Check the full text of the license to see how liability is accorded."
-      },
-      "cddl1": {
-        "name": "Common Development and Distribution License (CDDL-1.0)",
-        "description": "This is a very permissive and popular license made by Sun Microsystems that also includes explicit patent grants. It is relatively simplistic in its conditions, requiring only a small amount of documentation for redistribution (applying to source as well as modified code)."
-      },
-      "mit": {
-        "name": "The MIT License (MIT)",
-        "description": "A short, permissive software license. Basically, you can do whatever you want as long as you include the original copyright and license."
-      },
-      "bsd3c": {
-        "name": "The BSD 3-Clause \"New\" or \"Revised\" License (BSD)",
-        "description": "The BSD 3-clause license allows you almost unlimited freedom with the software so long as you include the BSD copyright notice in it. \"Use trademark\" in this case means you cannot use the names of the original company or its members to endorse derived products."
-      },
-      "bsd2c": {
-        "name": "The BSD 2-Clause \"Simplified\" or \"FreeBSD\" License",
-        "description": "The BSD 2-clause license allows you almost unlimited freedom with the software so long as you include the BSD copyright notice in it."
-      },
-      "apache2": {
-        "name": "Apache License 2",
-        "description": "A license that allows you much freedom with the software, including an explicit right to a patent. \"State changes\" means that you have to include a notice in each file you modified. "
+      "pddl": {
+        "name": "Open Data Commons Public Domain Dedication and License",
+        "description": "This license is meant to be an international, database-specific equivalent of the public domain. You cannot relicense or sublicense any database under this license because, like the public domain, after dedication you no longer own any rights to the database."
       }
     },
     "search": "Search license...",
