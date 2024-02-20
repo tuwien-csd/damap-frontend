@@ -6,7 +6,7 @@
     [opened]="widescreen()"
     mode="side">
     <div class="mm-navbars-top mat-focus-indicator">
-      <div class="mm-navbar mm-navbar-size-1">
+      <div class="mm-navbar">
         <div class="logo">
           <a
             title="Damap"
@@ -17,7 +17,7 @@
           </a>
         </div>
         <div class="languageElement">
-          <button mat-button [matMenuTriggerFor]="language">{{ lang }}</button>
+          <button mat-button style="color:inherit" class="mm-navbar-button" [matMenuTriggerFor]="language">{{ lang }}</button>
           <mat-menu #language="matMenu">
             <button mat-menu-item (click)="useLanguage('en')">EN</button>
             <button mat-menu-item (click)="useLanguage('de')">DE</button>
@@ -86,7 +86,7 @@
         <!-- University Logo End -->
       </mat-toolbar-row>
       <mat-toolbar-row>
-        <h1 translate>title</h1>
+        <strong translate>title</strong>
       </mat-toolbar-row>
     </mat-toolbar>
     <app-env-banner *ngIf="env === 'DEV'"></app-env-banner>

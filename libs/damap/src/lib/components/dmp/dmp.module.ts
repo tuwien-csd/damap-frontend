@@ -10,7 +10,7 @@ import { DmpActionsModule } from './dmp-actions/dmp-actions.module';
 import { DmpComponent } from './dmp.component';
 import { DocDataQualityModule } from './doc-data-quality/doc-data-quality.module';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend } from "@angular/common/http";
 import { LegalEthicalAspectsModule } from './legal-ethical-aspects/legal-ethical-aspects.module';
 import { LicensesModule } from './licenses/licenses.module';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -26,14 +26,14 @@ import { SummaryModule } from './summary/summary.module';
 import { VersionModule } from '../version/version.module';
 
 // required for AOT compilation
-export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
+export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
   return new MultiTranslateHttpLoader(http, [
-    { prefix: './assets/damap-core/i18n/', suffix: '.json' },
-    { prefix: './assets/damap-core/i18n/access/', suffix: '.json' },
-    { prefix: './assets/damap-core/i18n/templates/', suffix: '.json' },
-    { prefix: './assets/damap-core/i18n/help/', suffix: '.json' },
-    { prefix: './assets/damap-core/i18n/info/', suffix: '.json' },
-    { prefix: './assets/i18n/', suffix: '.json' },
+    '/assets/damap-core/i18n/',
+    '/assets/damap-core/i18n/access/',
+    '/assets/damap-core/i18n/templates/',
+    '/assets/damap-core/i18n/help/',
+    '/assets/damap-core/i18n/info/',
+    '/assets/i18n/',
   ]);
 }
 
@@ -47,7 +47,7 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
+        deps: [HttpBackend],
       },
       isolate: true,
       extend: true,

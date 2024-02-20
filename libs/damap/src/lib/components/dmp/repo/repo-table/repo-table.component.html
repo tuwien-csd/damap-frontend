@@ -14,7 +14,7 @@
       (click)="resetFilter()"
       [disabled]="!filtersActive()">
       {{ "dmp.steps.repositories.filter.reset" | translate }}
-      <mat-icon>cached</mat-icon>
+      <mat-icon iconPositionEnd>cached</mat-icon>
     </button>
     <app-repo-filter
       [filters]="filters"
@@ -35,7 +35,7 @@
   <table
     mat-table
     [dataSource]="dataSource"
-    multiTemplateDataRows
+    multiTemplateDataRows="true"
     aria-label="Table of data repositories">
     <ng-container matColumnDef="expand">
       <th mat-header-cell *matHeaderCellDef></th>
@@ -126,7 +126,7 @@
     class="mat-elevation-z8"
     [pageSize]="10"
     [pageSizeOptions]="[10, 15, 20]"
-    showFirstLastButtons></mat-paginator>
+    showFirstLastButtons="true"></mat-paginator>
 </ng-container>
 <ng-container *ngIf="loaded === LoadingState.LOADING">
   <p translate>dmp.steps.repositories.loading.load.all</p>

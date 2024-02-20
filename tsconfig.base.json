@@ -17,6 +17,7 @@
     "target": "es2020",
     "module": "es2020",
     "lib": ["es2018", "dom"],
+    "types": ["node"],
     "paths": {
       "@damap/core": ["libs/damap/src/index.ts"]
     },
@@ -25,7 +26,8 @@
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true
+    "strictInputAccessModifiers": true,
+    "types": ["node"]
   },
   "exclude": ["node_modules", "tmp"]
 }

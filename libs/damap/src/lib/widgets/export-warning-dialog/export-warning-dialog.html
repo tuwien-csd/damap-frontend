@@ -1,7 +1,7 @@
-<div>
+
   <h1 mat-dialog-title>{{'dialog.export.title' | translate}}</h1>
-  <div mat-dialog-content>{{'dialog.export.content' | translate}}</div>
-  <div mat-dialog-actions>
+  <mat-dialog-content>
+    {{'dialog.export.content' | translate}}
     <div class="container">
       <ng-container>
         <mat-form-field appearance="fill" *ngIf="!funderSupported">
@@ -25,5 +25,4 @@
         {{'dialog.export.button' | translate}}
       </button>
     </div>
-  </div>
-</div>
+  </mat-dialog-content>

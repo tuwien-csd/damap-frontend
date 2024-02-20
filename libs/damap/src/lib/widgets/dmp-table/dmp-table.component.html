@@ -10,7 +10,7 @@
 <table
   mat-table
   [dataSource]="dataSource"
-  multiTemplateDataRows
+  multiTemplateDataRows="true"
   class="mat-elevation-z8"
   style="outline: none"
   matSort
@@ -113,5 +113,6 @@
 </table>
 <mat-paginator
   class="mat-elevation-z8"
-  [pageSizeOptions]="[10, 20]"
-  showFirstLastButtons></mat-paginator>
+  [pageSize]="10"
+  [pageSizeOptions]="[10, 15, 20]"
+  showFirstLastButtons="true"></mat-paginator>

@@ -9,3 +9,5 @@
 
 # Test coverage files
 **/coverage/**
+
+/.nx/cache

@@ -35,8 +35,6 @@ mat-nav-list {
 }
 
 .mm-navbars-top {
-  background: inherit;
-  border-color: inherit;
   background-color: var(--main-color);
   border-width: 0;
   overflow: hidden;
@@ -44,6 +42,11 @@ mat-nav-list {
   left: 0;
   right: 0;
   height: 50px;
+}
+
+.mm-navbar-button {
+  color: #fff;
+  height: 100%;
 }
 
 .info {

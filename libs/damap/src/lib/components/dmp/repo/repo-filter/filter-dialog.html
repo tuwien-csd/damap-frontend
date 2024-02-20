@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>{{'dmp.steps.repositories.filter' | translate}}</h1>
-<div mat-dialog-content>
+<mat-dialog-content>
   <app-tree-select-form-field
     [label]="'Subjects'"
     [treeData]="FILTER.subjects"
@@ -55,12 +55,12 @@
     [treeData]="FILTER.metadataStandards"
     [state]="data['metadataStandards']"
     (params)="onFilterChange('metadataStandards', $event)"></app-tree-select-form-field>
-</div>
-<div mat-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions>
   <button mat-button (click)="onNoClick()">
     {{'dmp.dialog.button.cancel' | translate}}
   </button>
   <button mat-raised-button color="primary" [mat-dialog-close]="filter">
     {{'dmp.steps.repositories.filter.find' | translate}}
   </button>
-</div>
+</mat-dialog-actions>

@@ -5,15 +5,16 @@
     formArrayName="datasets"
     *ngFor="let dataset of datasets?.controls; index as i">
     <mat-card
+      appearance="raised"
       *ngIf="dataset.value.source === datasetSource.NEW"
-      class="mat-selected">
+      class="mat-mdc-selected">
       <ng-container [formGroupName]="i">
-        <div class="mat-card-container">
-          <div class="mat-card-left">
+        <mat-card-header>
+          <mat-card-title>
             <h4>{{ dataset.value.title }}</h4>
-          </div>
-        </div>
-        <div class="mat-card-container">
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
           <mat-form-field>
             <mat-label>{{
               "dmp.steps.licensing.question.dataAccess" | translate
@@ -26,7 +27,8 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
+        </mat-card-content>
+
         <ng-container *ngIf="dataset.value.dataAccess === accessType.OPEN">
           <div
             class="warning"
@@ -49,27 +51,29 @@
               {{ "dmp.steps.licensing.warning.legalRestrictions" | translate }}
             </ng-container>
           </div>
-          <div class="mat-card-container">
-            <mat-form-field class="full-width">
-              <mat-label>{{
-                "dmp.steps.licensing.question.license" | translate
-              }}</mat-label>
-              <mat-select formControlName="license">
-                <mat-option
-                  *ngFor="let license of licenses"
-                  [value]="license.id | translate">
-                  {{ license.name | translate }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <app-license-wizard
-              (selectedLicense)="
-                setLicenseSelectorResult($event, i)
-              "></app-license-wizard>
-          </div>
+          <mat-card-content>
+            <div class="mat-card-container">
+              <mat-form-field class="full-width">
+                <mat-label>{{
+                  "dmp.steps.licensing.question.license" | translate
+                }}</mat-label>
+                <mat-select formControlName="license">
+                  <mat-option
+                    *ngFor="let license of licenses"
+                    [value]="license.id | translate">
+                    {{ license.name | translate }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <app-license-wizard
+                (selectedLicense)="
+                  setLicenseSelectorResult($event, i)
+                "></app-license-wizard>
+            </div>
+          </mat-card-content>
         </ng-container>
 
-        <div class="mat-card-container">
+        <mat-card-content>
           <mat-form-field>
             <mat-label>{{
               "dmp.steps.licensing.question.startDate" | translate
@@ -83,13 +87,15 @@
               [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
-        </div>
+        </mat-card-content>
 
-        <ng-container *ngIf="dataset.value.dataAccess === accessType.CLOSED">
-          <app-data-deletion
-            [dataset]="getFormGroup(i)"
-            [dmpForm]="dmpForm"></app-data-deletion>
-        </ng-container>
+        <mat-card-content>
+          <ng-container *ngIf="dataset.value.dataAccess === accessType.CLOSED">
+            <app-data-deletion
+              [dataset]="getFormGroup(i)"
+              [dmpForm]="dmpForm"></app-data-deletion>
+          </ng-container>
+        </mat-card-content>
       </ng-container>
     </mat-card>
   </ng-container>

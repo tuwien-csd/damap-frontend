@@ -14,47 +14,50 @@
 <div *ngIf="repoStep.controls.length" [formGroup]="dmpForm">
   <p translate>dmp.steps.repositories.selected</p>
   <mat-card
+    appearance="raised"
     *ngFor="let repo of repoStep.controls; index as i"
-    class="mat-selected">
-    <ng-container formArrayName="repositories">
-      <div class="mat-card-container">
-        <div class="mat-card-left">
-          <h4>{{ repo.value.title }}</h4>
-        </div>
-        <div class="mat-card-right">
-          <button mat-icon-button (click)="removeRepository(i)">
-            <mat-icon>cancel</mat-icon>
-          </button>
-        </div>
-      </div>
-      <div [formGroupName]="i">
+    class="mat-mdc-selected">
+    <mat-card-content>
+      <ng-container formArrayName="repositories">
         <div class="mat-card-container">
-          <mat-form-field>
-            <mat-label>{{
-              "dmp.steps.repositories.question.datasets" | translate
-            }}</mat-label>
-            <mat-select multiple formControlName="datasets">
-              <mat-option
-                *ngFor="
+          <div class="mat-card-left">
+            <h4>{{ repo.value.title }}</h4>
+          </div>
+          <div class="mat-card-right">
+            <button mat-icon-button (click)="removeRepository(i)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div [formGroupName]="i">
+          <div class="mat-card-container">
+            <mat-form-field>
+              <mat-label>{{
+                "dmp.steps.repositories.question.datasets" | translate
+                }}</mat-label>
+              <mat-select multiple formControlName="datasets">
+                <mat-option
+                  *ngFor="
                   let dataset of datasets.value
                     | datasetSource : datasetSource.NEW
                 "
-                [value]="dataset.referenceHash">
-                {{ dataset.title }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="mat-card-container">
-          <app-error-message
-            *ngIf="getDatasetsMarkedForDeletion(i).length > 0"
-            [data]="getDatasetsMarkedForDeletionAsString(i)"
-            [message]="
+                  [value]="dataset.referenceHash">
+                  {{ dataset.title }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="mat-card-container">
+            <app-error-message
+              *ngIf="getDatasetsMarkedForDeletion(i).length > 0"
+              [data]="getDatasetsMarkedForDeletionAsString(i)"
+              [message]="
               'dmp.steps.repositories.warning.deletion'
             "></app-error-message>
+          </div>
         </div>
-      </div>
-    </ng-container>
+      </ng-container>
+    </mat-card-content>
   </mat-card>
 </div>
 
@@ -84,7 +87,7 @@
           color="primary"
           (click)="selectedTabIndex = 1">
           {{ "dmp.steps.repositories.find.other" | translate }}
-          <mat-icon>search</mat-icon>
+          <mat-icon iconPositionEnd>search</mat-icon>
         </button>
       </ng-template>
     </mat-tab>
