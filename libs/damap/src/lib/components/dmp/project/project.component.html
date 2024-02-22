@@ -12,8 +12,8 @@
           <strong>{{ projectStep.value.title }}</strong>
         </div>
         <mat-icon class="mat-icon-style">date_range</mat-icon>
-        {{ projectStep.value.start | date }} -
-        {{ projectStep.value.end | date }}
+        {{ projectStep.value.start | date : "dd/MMMM/yy" }} -
+        {{ projectStep.value.end | date : "dd/MMMM/yy" }}
       </div>
       <div class="mat-card-right">
         <button mat-button (click)="changeProject(null)">
