@@ -8,7 +8,7 @@
     "build-openshift": "nx build --configuration=openshift",
     "build-prod": "nx build --configuration=production",
     "watch": "nx build --watch --configuration development",
-    "lint": "npx nx workspace-lint",
+    "report": "npx nx report",
     "test": "nx test",
     "e2e": "npx nx e2e damap-frontend-e2e --watch=true",
     "ci:build": "npx nx run-many --target=build --parallel=2",
