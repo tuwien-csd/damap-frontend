@@ -70,7 +70,7 @@ export class DmpComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private backendService: BackendService,
-    public store: Store<AppState>
+    public store: Store<AppState>,
   ) {}
 
   ngOnInit() {
@@ -89,10 +89,10 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.legalEthicalStep = this.dmpForm.get('legal') as UntypedFormGroup;
     this.storageStep = this.dmpForm.get('storage') as UntypedFormArray;
     this.externalStorageStep = this.dmpForm.get(
-      'externalStorage'
+      'externalStorage',
     ) as UntypedFormArray;
     this.externalStorageInfo = this.dmpForm.get(
-      'externalStorageInfo'
+      'externalStorageInfo',
     ) as UntypedFormControl;
     this.repoStep = this.dmpForm.get('repositories') as UntypedFormArray;
     this.reuseStep = this.dmpForm.get('reuse') as UntypedFormGroup;
@@ -181,7 +181,7 @@ export class DmpComponent implements OnInit, OnDestroy {
       next: response => {
         if (response.type === HttpEventType.UploadProgress) {
           upload.progress = Math.round(
-            100 * (response.loaded / response.total)
+            100 * (response.loaded / response.total),
           );
         }
         if (response.type === HttpEventType.Response) {

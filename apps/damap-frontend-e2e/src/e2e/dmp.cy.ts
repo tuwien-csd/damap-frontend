@@ -17,7 +17,7 @@ describe('dmp', () => {
 
     // Get stepper headers
     cy.get(
-      'app-dmp mat-vertical-stepper mat-step-header > div.mat-step-label > div'
+      'app-dmp mat-vertical-stepper mat-step-header > div.mat-step-label > div',
     ).as('steps');
 
     // Create new project
@@ -30,12 +30,12 @@ describe('dmp', () => {
     cy.get('app-dmp-project mat-datepicker-toggle').click();
     cy.get('button.mat-calendar-body-active').first().click();
     cy.get(
-      'div.cdk-overlay-container mat-calendar button.mat-calendar-body-active'
+      'div.cdk-overlay-container mat-calendar button.mat-calendar-body-active',
     )
       .last()
       .click();
     cy.get(
-      'app-dmp-project app-manual-project-input app-textarea-wrapper textarea'
+      'app-dmp-project app-manual-project-input app-textarea-wrapper textarea',
     )
       .first()
       .type('Test Description');
@@ -66,7 +66,7 @@ describe('dmp', () => {
           mimeType: 'text/plain',
           lastModified: Date.now(),
         },
-        { action: 'drag-drop' }
+        { action: 'drag-drop' },
       );
     cy.get('app-created-data app-dataset-table table tbody tr')
       .last()

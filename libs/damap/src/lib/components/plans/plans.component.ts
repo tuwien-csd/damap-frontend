@@ -27,7 +27,7 @@ import { Observable } from 'rxjs';
 export class PlansComponent implements OnInit {
   dmps$: Observable<DmpListItem[]> = this.store.pipe(select(selectDmps));
   dmpsLoaded$: Observable<LoadingState> = this.store.pipe(
-    select(selectDmpsLoaded)
+    select(selectDmpsLoaded),
   );
   LoadingState = LoadingState;
   exportDmpType: ETemplateType;
@@ -40,7 +40,7 @@ export class PlansComponent implements OnInit {
     private backendService: BackendService,
     private authService: AuthService,
     private formService: FormService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {}
   ngOnInit() {
     this.getDmps();

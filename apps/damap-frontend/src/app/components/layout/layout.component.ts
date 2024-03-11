@@ -21,7 +21,7 @@ export class LayoutComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private translate: TranslateService,
-    private configService: ConfigService
+    private configService: ConfigService,
   ) {
     this.env = this.configService.getEnvironment();
   }

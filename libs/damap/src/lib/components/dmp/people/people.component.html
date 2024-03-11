@@ -13,7 +13,8 @@
             <div class="mat-card-left">
               <div>
                 <mat-icon class="mat-icon-style">person</mat-icon>
-                {{ contributor.value.firstName }} {{ contributor.value.lastName }}
+                {{ contributor.value.firstName }}
+                {{ contributor.value.lastName }}
                 <mat-icon
                   *ngIf="contributor.value.contact"
                   class="mat-icon-contact"
@@ -22,22 +23,22 @@
                 </mat-icon>
                 <span class="sr-only">{{
                   "dmp.steps.people.contact.person" | translate
-                  }}</span>
+                }}</span>
               </div>
               <mat-icon class="mat-icon-style">mail_outline</mat-icon>
               {{ contributor.value.mbox }}
               <app-orcid
                 *ngIf="
-                contributor.value.personId?.identifier &&
-                contributor.value.personId?.type === identifierType.ORCID
-              "
+                  contributor.value.personId?.identifier &&
+                  contributor.value.personId?.type === identifierType.ORCID
+                "
                 [orcidId]="contributor.value.personId?.identifier"></app-orcid>
             </div>
             <div [formGroupName]="i">
               <mat-form-field appearance="fill">
                 <mat-label>{{
                   "dmp.steps.people.contributor.role" | translate
-                  }}</mat-label>
+                }}</mat-label>
                 <mat-select formControlName="role">
                   <mat-option
                     *ngFor="let role of roles | keyvalue"
@@ -64,7 +65,6 @@
             </div>
           </div>
         </mat-card-content>
-
       </mat-card>
     </div>
   </ng-container>
@@ -75,7 +75,7 @@
   <app-person-search
     [result]="
       (searchResult$ | async)?.items ?? []
-        | contributorFilter : dmpForm.controls.contributors.value
+        | contributorFilter: dmpForm.controls.contributors.value
     "
     (termToSearch)="searchContributor($event)"
     (personToAdd)="addContributor($event)">
@@ -103,7 +103,7 @@
     appearance="raised"
     *ngFor="
       let member of projectMembers
-        | contributorFilter : dmpForm.controls.contributors.value
+        | contributorFilter: dmpForm.controls.contributors.value
     ">
     <div class="mat-card-container">
       <div class="mat-card-left">

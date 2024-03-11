@@ -50,7 +50,7 @@ export class PeopleComponent implements OnInit, OnDestroy {
 
   constructor(
     private backendService: BackendService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +64,7 @@ export class PeopleComponent implements OnInit, OnDestroy {
       .subscribe((term: string) => {
         this.searchResult$ = this.backendService.getPersonSearchResult(
           term,
-          this.serviceConfigType.displayText
+          this.serviceConfigType.displayText,
         );
       });
     this.subscriptions.push(searchSubscription);

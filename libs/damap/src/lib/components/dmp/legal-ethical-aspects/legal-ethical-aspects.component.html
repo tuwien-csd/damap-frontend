@@ -53,9 +53,7 @@
             </mat-label>
             <mat-select formControlName="sensitiveDataSecurity" multiple>
               <mat-option
-                *ngFor="
-                  let option of securityOptions | keyvalue : originalOrder
-                "
+                *ngFor="let option of securityOptions | keyvalue: originalOrder"
                 [value]="option.value">
                 {{ translateSecurityPrefixEnum + option.value | translate }}
               </mat-option>
@@ -126,9 +124,7 @@
           }}</mat-label>
           <mat-select formControlName="personalDataCompliance" multiple>
             <mat-option
-              *ngFor="
-                let option of complianceOptions | keyvalue : originalOrder
-              "
+              *ngFor="let option of complianceOptions | keyvalue: originalOrder"
               [value]="option.key">
               {{ translateCompliancePrefixEnum + option.value | translate }}
             </mat-option>
@@ -185,7 +181,7 @@
         }}</mat-label>
         <mat-select formControlName="legalRestrictionsDocuments" multiple>
           <mat-option
-            *ngFor="let option of agreementOptions | keyvalue : originalOrder"
+            *ngFor="let option of agreementOptions | keyvalue: originalOrder"
             [value]="option.key">
             {{ translateAgreementPrefixEnum + option.value | translate }}
           </mat-option>

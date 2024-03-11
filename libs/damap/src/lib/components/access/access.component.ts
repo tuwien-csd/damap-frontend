@@ -41,7 +41,7 @@ export class AccessComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private backendService: BackendService
+    private backendService: BackendService,
   ) {}
 
   ngOnInit(): void {

@@ -14,7 +14,7 @@ export const APP_ROUTES: Routes = [
         path: '',
         loadChildren: () =>
           import('@damap/core').then(
-            m => m.DamapModule.forRoot(environment).ngModule
+            m => m.DamapModule.forRoot(environment).ngModule,
           ),
       },
     ],

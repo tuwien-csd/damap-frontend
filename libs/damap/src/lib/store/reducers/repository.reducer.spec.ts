@@ -16,7 +16,7 @@ describe('RepositoryReducer', () => {
   it('should return failed loading state', () => {
     const state = repositoryReducer(
       initialRepositoryState,
-      failedToLoadRepositories
+      failedToLoadRepositories,
     );
 
     expect(state.loaded).toBe(LoadingState.FAILED);
@@ -28,7 +28,7 @@ describe('RepositoryReducer', () => {
   it('should return recommended loading state', () => {
     const state = repositoryReducer(
       initialRepositoryState,
-      recommendedRepositoriesLoaded({ repositories: [mockDetailRepo] })
+      recommendedRepositoriesLoaded({ repositories: [mockDetailRepo] }),
     );
 
     expect(state.recommendedLoaded).toBe(LoadingState.LOADED);
@@ -42,7 +42,7 @@ describe('RepositoryReducer', () => {
   it('should load recommended repositories state', () => {
     const state = repositoryReducer(
       initialRepositoryState,
-      loadRecommendedRepositories
+      loadRecommendedRepositories,
     );
 
     expect(state.recommendedLoaded).toBe(LoadingState.LOADING);
@@ -55,7 +55,7 @@ describe('RepositoryReducer', () => {
   it('should return loading state', () => {
     const state = repositoryReducer(
       initialRepositoryState,
-      loadAllRepositories
+      loadAllRepositories,
     );
 
     expect(state.loaded).toBe(LoadingState.LOADING);
@@ -67,7 +67,7 @@ describe('RepositoryReducer', () => {
   it('should return loaded and updated repositories', () => {
     const state = repositoryReducer(
       initialRepositoryState,
-      repositoriesLoaded({ repositories: [mockRepo] })
+      repositoriesLoaded({ repositories: [mockRepo] }),
     );
 
     expect(state.loaded).toBe(LoadingState.LOADED);
@@ -77,7 +77,9 @@ describe('RepositoryReducer', () => {
 
     const newState = repositoryReducer(
       state,
-      updateRepository({ update: { id: mockRepo.id, changes: mockDetailRepo } })
+      updateRepository({
+        update: { id: mockRepo.id, changes: mockDetailRepo },
+      }),
     );
 
     expect(newState.loaded).toBe(LoadingState.LOADED);
@@ -91,7 +93,7 @@ describe('RepositoryReducer', () => {
       initialRepositoryState,
       setRepositoryFilter({
         filter: { subject: [{ id: 'orcid', label: 'orcid' }] },
-      })
+      }),
     );
 
     expect(state.loaded).toBe(LoadingState.LOADING);

@@ -18,7 +18,7 @@ describe('ContributorFilterPipe', () => {
 
     const filteredContributors = pipe.transform(
       contributorSearchResult,
-      addedContributors
+      addedContributors,
     );
     expect(filteredContributors);
     expect(filteredContributors.length).toBe(1);
@@ -33,7 +33,7 @@ describe('ContributorFilterPipe', () => {
 
     let c2NoUniversityID: Contributor = { ...c2, universityId: null };
     expect(
-      compareContributors(c2NoUniversityID, c2NoUniversityID)
+      compareContributors(c2NoUniversityID, c2NoUniversityID),
     ).toBeTruthy();
   });
 });

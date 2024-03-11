@@ -53,7 +53,7 @@ export class LicenseSelectorDialogComponent {
     next: {
       step: (license: Iterable<LicenseDetails>, option?: string) => Step;
       filter?: Filter;
-    }
+    },
   ) {
     if (next.filter?.licenses) {
       this.licenseList = next.filter.licenses;
@@ -68,7 +68,7 @@ export class LicenseSelectorDialogComponent {
     }
     if (this.options.length) {
       this.steps.push(
-        next.step(this.licenseList, this.dataLicenseCompatibility())
+        next.step(this.licenseList, this.dataLicenseCompatibility()),
       );
       this.options = [];
       return;
@@ -122,8 +122,8 @@ export class LicenseSelectorDialogComponent {
       this.licenseList = this.licenseList.filter(
         license =>
           license.categories.find(
-            category => exclude.find(item => item === category) !== undefined
-          ) === undefined
+            category => exclude.find(item => item === category) !== undefined,
+          ) === undefined,
       );
     }
   }

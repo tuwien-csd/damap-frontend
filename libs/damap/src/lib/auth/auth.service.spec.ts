@@ -34,12 +34,12 @@ describe('AuthService', () => {
 
   it('should check if is admin', () => {
     spy.getAccessToken.and.returnValue(
-      '.' + window.btoa('{ "realm_access": { "roles": [ "Damap Admin" ] }}')
+      '.' + window.btoa('{ "realm_access": { "roles": [ "Damap Admin" ] }}'),
     );
     expect(service.isAdmin()).toBeTrue();
 
     spy.getAccessToken.and.returnValue(
-      '.' + window.btoa('{ "realm_access": { "roles": [] }}')
+      '.' + window.btoa('{ "realm_access": { "roles": [] }}'),
     );
     expect(service.isAdmin()).toBeFalse();
   });

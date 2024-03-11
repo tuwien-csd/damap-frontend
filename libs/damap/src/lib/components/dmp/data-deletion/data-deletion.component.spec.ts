@@ -44,10 +44,10 @@ describe('DataDeletionComponent', () => {
 
   it('should test compare function', () => {
     expect(component.getSelection(mockContributor1, mockContributor2)).toBe(
-      false
+      false,
     );
     expect(component.getSelection(mockContributor1, mockContributor1)).toBe(
-      true
+      true,
     );
     expect(component.getSelection(mockContributor1, null)).toBe(false);
     expect(component.getSelection(null, null)).toBe(true);

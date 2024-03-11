@@ -47,7 +47,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 
   constructor(
     private backendService: BackendService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -64,8 +64,8 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
         switchMap((term: string) =>
           term === null || term.length === 0
             ? this.backendService.getRecommendedProjects()
-            : this.backendService.getProjectSearchResult(term)
-        )
+            : this.backendService.getProjectSearchResult(term),
+        ),
       )
       .subscribe(results => (this.searchResult$ = of(results)));
   }

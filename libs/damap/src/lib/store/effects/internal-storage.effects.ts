@@ -13,18 +13,18 @@ export class InternalStorageEffects {
       switchMap(_ =>
         this.backendService.getInternalStorages().pipe(
           map(internalStorages =>
-            InternalStorageAction.internalStoragesLoaded({ internalStorages })
+            InternalStorageAction.internalStoragesLoaded({ internalStorages }),
           ),
           catchError(() =>
-            of(InternalStorageAction.failedToLoadInternalStorages())
-          )
-        )
-      )
-    )
+            of(InternalStorageAction.failedToLoadInternalStorages()),
+          ),
+        ),
+      ),
+    ),
   );
 
   constructor(
     private actions$: Actions,
-    private backendService: BackendService
+    private backendService: BackendService,
   ) {}
 }

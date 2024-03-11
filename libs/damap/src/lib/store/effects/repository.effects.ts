@@ -30,14 +30,14 @@ export class RepositoryEffects {
       switchMap(_ =>
         this.backendService.getRecommendedRepositories().pipe(
           map(repositories =>
-            RepositoryAction.recommendedRepositoriesLoaded({ repositories })
+            RepositoryAction.recommendedRepositoriesLoaded({ repositories }),
           ),
           catchError(() =>
-            of(RepositoryAction.failedToLoadRecommendedRepositories())
-          )
-        )
-      )
-    )
+            of(RepositoryAction.failedToLoadRecommendedRepositories()),
+          ),
+        ),
+      ),
+    ),
   );
 
   loadRepositories$ = createEffect(() =>
@@ -46,20 +46,20 @@ export class RepositoryEffects {
       withLatestFrom(this.store$.select(selectRepositoriesLoaded)),
       filter(
         ([action, loaded]) =>
-          !(action.skipIfPresent && loaded === LoadingState.LOADED)
+          !(action.skipIfPresent && loaded === LoadingState.LOADED),
       ),
       switchMap(_ =>
         this.backendService.getRepositories().pipe(
           map(repositories =>
-            RepositoryAction.repositoriesLoaded({ repositories })
+            RepositoryAction.repositoriesLoaded({ repositories }),
           ),
           catchError(() => of(RepositoryAction.failedToLoadRepositories())),
           takeUntil(
-            this.actions$.pipe(ofType(RepositoryAction.setRepositoryFilter))
-          )
-        )
-      )
-    )
+            this.actions$.pipe(ofType(RepositoryAction.setRepositoryFilter)),
+          ),
+        ),
+      ),
+    ),
   );
 
   loadRepository$ = createEffect(() =>
@@ -68,9 +68,9 @@ export class RepositoryEffects {
       switchMap(action =>
         this.backendService
           .getRepositoryById(action.id)
-          .pipe(map(update => RepositoryAction.updateRepository({ update })))
-      )
-    )
+          .pipe(map(update => RepositoryAction.updateRepository({ update }))),
+      ),
+    ),
   );
 
   searchRepositoriesByQuery$ = createEffect(
@@ -85,34 +85,34 @@ export class RepositoryEffects {
           debounceTime(debounce, scheduler),
           switchMap(action => {
             const filters = Object.keys(action.filter)?.find(
-              item => action.filter[item]?.length
+              item => action.filter[item]?.length,
             );
             if (filters) {
               return this.backendService.searchRepository(action.filter).pipe(
                 map(repositories =>
-                  RepositoryAction.repositoriesLoaded({ repositories })
+                  RepositoryAction.repositoriesLoaded({ repositories }),
                 ),
                 catchError(() =>
-                  of(RepositoryAction.failedToLoadRepositories())
+                  of(RepositoryAction.failedToLoadRepositories()),
                 ),
                 takeUntil(
                   this.actions$.pipe(
                     ofType(
                       RepositoryAction.loadAllRepositories ||
-                        RepositoryAction.setRepositoryFilter
-                    )
-                  )
-                )
+                        RepositoryAction.setRepositoryFilter,
+                    ),
+                  ),
+                ),
               );
             }
             return of(RepositoryAction.loadAllRepositories());
-          })
-        )
+          }),
+        ),
   );
 
   constructor(
     private actions$: Actions,
     private store$: Store<AppState>,
-    private backendService: BackendService
+    private backendService: BackendService,
   ) {}
 }

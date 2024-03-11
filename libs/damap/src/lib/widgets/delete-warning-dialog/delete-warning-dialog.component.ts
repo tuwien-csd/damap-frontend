@@ -10,7 +10,9 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [CommonModule, TranslateModule, MatDialogModule, MatButtonModule],
   template: `
     <h1 mat-dialog-title>{{ 'dialog.delete.title' | translate }}</h1>
-    <mat-dialog-content>{{ 'dialog.delete.content' | translate }}</mat-dialog-content>
+    <mat-dialog-content>{{
+      'dialog.delete.content' | translate
+    }}</mat-dialog-content>
     <mat-dialog-actions>
       <button mat-button [mat-dialog-close]="false">
         {{ 'dialog.delete.cancel' | translate }}

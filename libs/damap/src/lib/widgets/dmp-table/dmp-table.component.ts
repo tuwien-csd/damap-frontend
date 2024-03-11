@@ -56,7 +56,7 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.sortingDataAccessor = (
       item: DmpListItem,
-      property: string
+      property: string,
     ) => {
       switch (property) {
         case 'title':

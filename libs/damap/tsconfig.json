@@ -20,12 +20,12 @@
     "noImplicitOverride": true,
     //    "noPropertyAccessFromIndexSignature": true, FIXME
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
+    "strictInputAccessModifiers": true
     //    "strictTemplates": true FIXME
   }
 }

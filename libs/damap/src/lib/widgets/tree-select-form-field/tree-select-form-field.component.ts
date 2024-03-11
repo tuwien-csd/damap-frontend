@@ -139,21 +139,21 @@ export class TreeSelectFormFieldComponent implements OnInit {
       this.transformer,
       this.getLevel,
       this.isExpandable,
-      this.getChildren
+      this.getChildren,
     );
     this.treeControl = new FlatTreeControl<TreeFlatNode>(
       this.getLevel,
-      this.isExpandable
+      this.isExpandable,
     );
     this.dataSource = new MatTreeFlatDataSource(
       this.treeControl,
-      this.treeFlattener
+      this.treeFlattener,
     );
 
     // Update form field selection
     this.checklistSelection.changed
       .pipe(
-        debounceTime(50) // emits twice on change
+        debounceTime(50), // emits twice on change
       )
       .subscribe(_ => {
         this.setSelectionList();
@@ -227,7 +227,7 @@ export class TreeSelectFormFieldComponent implements OnInit {
   descendantsPartiallySelected(node: TreeFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
     const result = descendants.some(child =>
-      this.checklistSelection.isSelected(child)
+      this.checklistSelection.isSelected(child),
     );
     return result && !this.descendantsAllSelected(node);
   }

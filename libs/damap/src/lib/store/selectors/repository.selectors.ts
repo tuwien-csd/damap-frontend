@@ -6,30 +6,30 @@ const { selectAll } = adapter.getSelectors();
 
 export const selectRepositoryState = createSelector(
   selectDamapState,
-  (state: AppState) => state.repositories
+  (state: AppState) => state.repositories,
 );
 
 export const selectRecommendedRepositories = createSelector(
   selectRepositoryState,
-  (state: RepositoryState) => state.recommended
+  (state: RepositoryState) => state.recommended,
 );
 
 export const selectRecommendedRepositoriesLoaded = createSelector(
   selectRepositoryState,
-  (state: RepositoryState) => state.recommendedLoaded
+  (state: RepositoryState) => state.recommendedLoaded,
 );
 
 export const selectRepositoriesLoaded = createSelector(
   selectRepositoryState,
-  repositoriesState => repositoriesState.loaded
+  repositoriesState => repositoriesState.loaded,
 );
 
 export const selectRepositories = createSelector(
   selectRepositoryState,
-  selectAll
+  selectAll,
 );
 
 export const selectFilters = createSelector(
   selectRepositoryState,
-  (state: RepositoryState) => state.filters
+  (state: RepositoryState) => state.filters,
 );

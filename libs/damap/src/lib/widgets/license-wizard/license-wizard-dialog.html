@@ -68,8 +68,12 @@
           <div class="ls-item-header">
             <h3 [mat-dialog-close]="license">{{license.name | translate}}</h3>
             <div>
-              <a href="{{license.url}}" target="_blank" rel="noopener" mat-button
-              >{{'license.wizard.info' | translate}}</a
+              <a
+                href="{{license.url}}"
+                target="_blank"
+                rel="noopener"
+                mat-button
+                >{{'license.wizard.info' | translate}}</a
               >
             </div>
           </div>
@@ -77,7 +81,6 @@
             {{license.description | translate}}
           </div>
         </mat-card-content>
-
       </mat-card>
     </div>
   </ng-container>

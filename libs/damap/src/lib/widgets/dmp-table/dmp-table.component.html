@@ -101,7 +101,7 @@
   <tr class="mat-row" *matNoDataRow>
     <ng-container *ngIf="input.value.length > 0; else empty">
       <td class="mat-cell" colspan="4">
-        {{ "plans.table.nodatafilter" | translate : { value: input.value } }}"
+        {{ "plans.table.nodatafilter" | translate: { value: input.value } }}"
       </td>
     </ng-container>
     <ng-template #empty>

@@ -30,7 +30,7 @@ export class DmpEffects {
       withLatestFrom(this.store$.select(selectDmpsLoaded)),
       filter(
         ([action, loaded]) =>
-          !(action.skipIfPresent && loaded === LoadingState.LOADED)
+          !(action.skipIfPresent && loaded === LoadingState.LOADED),
       ),
       switchMap(_ =>
         this.backendService.getDmps().pipe(
@@ -38,10 +38,10 @@ export class DmpEffects {
           catchError((error: Error) => {
             this.feedbackService.error('dmp.error.load', error);
             return of(DmpAction.failedToLoadDmps());
-          })
-        )
-      )
-    )
+          }),
+        ),
+      ),
+    ),
   );
 
   createDmp$ = createEffect(() =>
@@ -59,10 +59,10 @@ export class DmpEffects {
           catchError((error: Error) => {
             this.feedbackService.error('dmp.error.save', error);
             return of(DmpAction.failedToSaveDmp());
-          })
-        )
-      )
-    )
+          }),
+        ),
+      ),
+    ),
   );
 
   updateDmp$ = createEffect(() =>
@@ -80,10 +80,10 @@ export class DmpEffects {
           catchError((error: Error) => {
             this.feedbackService.error('dmp.error.save', error);
             return of(DmpAction.failedToSaveDmp());
-          })
-        )
-      )
-    )
+          }),
+        ),
+      ),
+    ),
   );
 
   saveDmpVersion$ = createEffect(() =>
@@ -110,7 +110,7 @@ export class DmpEffects {
             this.feedbackService.error('dmp.error.save', err);
             this.store$.dispatch(DmpAction.failedToSaveDmp());
             return err;
-          })
+          }),
         );
       }),
       switchMap(({ version, dmp }) =>
@@ -121,14 +121,14 @@ export class DmpEffects {
             this.store$.dispatch(DmpAction.dmpSaved());
             this.store$.dispatch(setFormValue({ dmp }));
             return DmpAction.loadDmps(true);
-          })
-        )
+          }),
+        ),
       ),
       catchError((error: Error) => {
         this.feedbackService.error('dmp.error.save', error);
         return of(DmpAction.failedToSaveDmp());
-      })
-    )
+      }),
+    ),
   );
 
   exportDmpTemplate$ = createEffect(
@@ -151,22 +151,22 @@ export class DmpEffects {
               catchError((error: Error) => {
                 this.feedbackService.error('dmp.error.save', error);
                 return of(DmpAction.failedToSaveDmp());
-              })
+              }),
             );
           }
           if (action.type === DmpAction.exportDmpTemplate.type) {
             this.backendService.exportDmpTemplate(
               action.dmp.id,
-              action.dmpTemplateType
+              action.dmpTemplateType,
             );
           } else if (action.type === DmpAction.exportDmp.type) {
             this.backendService.getDmpDocument(action.dmp.id);
           }
           this.store$.dispatch(DmpAction.dmpExported());
           return of(action);
-        })
+        }),
       ),
-    { dispatch: false }
+    { dispatch: false },
   );
 
   constructor(
@@ -174,6 +174,6 @@ export class DmpEffects {
     private store$: Store<AppState>,
     private backendService: BackendService,
     private formService: FormService,
-    private feedbackService: FeedbackService
+    private feedbackService: FeedbackService,
   ) {}
 }

@@ -24,7 +24,7 @@ export class VersionViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private backendService: BackendService
+    private backendService: BackendService,
   ) {}
 
   ngOnInit(): void {

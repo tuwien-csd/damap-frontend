@@ -43,7 +43,7 @@ export class DocDataQualityComponent {
 
   get isOtherDataQualitySelected() {
     return this.docDataStep.controls.dataQuality.value?.includes(
-      DataQualityType.OTHERS
+      DataQualityType.OTHERS,
     );
   }
 

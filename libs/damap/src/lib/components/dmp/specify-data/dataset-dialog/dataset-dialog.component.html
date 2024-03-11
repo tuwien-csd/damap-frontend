@@ -21,7 +21,7 @@
         }}</mat-label>
         <mat-select formControlName="type" required multiple>
           <mat-option
-            *ngFor="let type of FILE_TYPES | keyvalue : originalOrder"
+            *ngFor="let type of FILE_TYPES | keyvalue: originalOrder"
             [value]="type.value.id">
             {{ type.value.label }}
             <span *ngIf="type.value.description">
@@ -59,7 +59,7 @@
       }}</mat-label>
       <mat-select [(ngModel)]="datasetId.type">
         <mat-option
-          *ngFor="let id of identifierTypeReusedData | keyvalue : originalOrder"
+          *ngFor="let id of identifierTypeReusedData | keyvalue: originalOrder"
           [value]="id.key">
           {{ id.key }}<br />
         </mat-option>

@@ -40,10 +40,10 @@ describe('ReusedDataComponent', () => {
     component.searchDataset('doi:10.12345/12345');
 
     expect(backendSpy.searchDataset).toHaveBeenCalledOnceWith(
-      'doi:10.12345/12345'
+      'doi:10.12345/12345',
     );
     expect(component.datasetToAdd.emit).toHaveBeenCalledOnceWith(
-      restrictedDatasetMock
+      restrictedDatasetMock,
     );
   });
 });

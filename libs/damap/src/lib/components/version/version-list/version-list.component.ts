@@ -25,7 +25,7 @@ export class VersionListComponent implements OnInit {
     private router: Router,
     private backendService: BackendService,
     private store: Store<AppState>,
-    private auth: AuthService
+    private auth: AuthService,
   ) {}
 
   ngOnInit(): void {

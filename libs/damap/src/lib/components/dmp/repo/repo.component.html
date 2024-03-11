@@ -34,13 +34,13 @@
             <mat-form-field>
               <mat-label>{{
                 "dmp.steps.repositories.question.datasets" | translate
-                }}</mat-label>
+              }}</mat-label>
               <mat-select multiple formControlName="datasets">
                 <mat-option
                   *ngFor="
-                  let dataset of datasets.value
-                    | datasetSource : datasetSource.NEW
-                "
+                    let dataset of datasets.value
+                      | datasetSource: datasetSource.NEW
+                  "
                   [value]="dataset.referenceHash">
                   {{ dataset.title }}
                 </mat-option>
@@ -52,8 +52,8 @@
               *ngIf="getDatasetsMarkedForDeletion(i).length > 0"
               [data]="getDatasetsMarkedForDeletionAsString(i)"
               [message]="
-              'dmp.steps.repositories.warning.deletion'
-            "></app-error-message>
+                'dmp.steps.repositories.warning.deletion'
+              "></app-error-message>
           </div>
         </div>
       </ng-container>
@@ -70,10 +70,7 @@
         {{ "dmp.steps.repositories.recommended" | translate }}
       </ng-template>
       <ng-container
-        *ngIf="
-          (recommended | repo : repoStep.value).length;
-          else noRecommended
-        ">
+        *ngIf="(recommended | repo: repoStep.value).length; else noRecommended">
         <app-repo-recommendation
           [recommended]="recommended"
           [loaded]="recommendedLoaded$ | async"

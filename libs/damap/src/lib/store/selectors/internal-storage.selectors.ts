@@ -6,15 +6,15 @@ const { selectAll } = adapter.getSelectors();
 
 export const selectInternalStorageState = createSelector(
   selectDamapState,
-  (state: AppState) => state.internalStorages
+  (state: AppState) => state.internalStorages,
 );
 
 export const selectInternalStoragesLoaded = createSelector(
   selectInternalStorageState,
-  internalStorageState => internalStorageState.loaded
+  internalStorageState => internalStorageState.loaded,
 );
 
 export const selectInternalStorages = createSelector(
   selectInternalStorageState,
-  selectAll
+  selectAll,
 );

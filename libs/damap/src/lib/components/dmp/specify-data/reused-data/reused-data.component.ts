@@ -27,7 +27,7 @@ export class ReusedDataComponent
 
   constructor(
     private backendService: BackendService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {
     super();
   }
@@ -38,7 +38,7 @@ export class ReusedDataComponent
         switchMap((term: string) => {
           this.loading = LoadingState.LOADING;
           return this.backendService.searchDataset(term);
-        })
+        }),
       )
       .subscribe({
         next: (dataset: Dataset) => {

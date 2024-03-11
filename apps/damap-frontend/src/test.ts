@@ -11,7 +11,7 @@ declare const require: {
   context(
     path: string,
     deep?: boolean,
-    filter?: RegExp
+    filter?: RegExp,
   ): {
     keys(): string[];
     <T>(id: string): T;
@@ -24,7 +24,7 @@ getTestBed().initTestEnvironment(
   platformBrowserDynamicTesting(),
   {
     teardown: { destroyAfterEach: false },
-  }
+  },
 );
 // Then we find all the tests.
 const context = require.context('./', true, /\.spec\.ts$/);

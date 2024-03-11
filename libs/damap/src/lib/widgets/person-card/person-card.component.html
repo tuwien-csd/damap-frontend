@@ -13,15 +13,15 @@
           </mat-icon>
           <span class="sr-only">{{
             "dmp.steps.people.contact.person" | translate
-            }}</span>
+          }}</span>
         </div>
         <mat-icon class="mat-icon-style">mail_outline</mat-icon>
         {{ person.mbox }}
         <app-orcid
           *ngIf="
-          person.personId?.identifier &&
-          person.personId?.type === identifierType.ORCID
-        "
+            person.personId?.identifier &&
+            person.personId?.type === identifierType.ORCID
+          "
           [orcidId]="person.personId?.identifier"></app-orcid>
       </div>
     </div>

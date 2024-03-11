@@ -10,7 +10,7 @@ import { DmpActionsModule } from './dmp-actions/dmp-actions.module';
 import { DmpComponent } from './dmp.component';
 import { DocDataQualityModule } from './doc-data-quality/doc-data-quality.module';
 import { FormsModule } from '@angular/forms';
-import { HttpBackend } from "@angular/common/http";
+import { HttpBackend } from '@angular/common/http';
 import { LegalEthicalAspectsModule } from './legal-ethical-aspects/legal-ethical-aspects.module';
 import { LicensesModule } from './licenses/licenses.module';
 import { MatStepperModule } from '@angular/material/stepper';

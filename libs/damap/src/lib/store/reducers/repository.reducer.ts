@@ -17,7 +17,7 @@ export const repositoryReducer = createReducer(
       ...state,
       recommendedLoaded: LoadingState.LOADED,
       recommended: repositories,
-    })
+    }),
   ),
   on(RepositoryAction.failedToLoadRecommendedRepositories, state => ({
     ...state,
@@ -49,5 +49,5 @@ export const repositoryReducer = createReducer(
     ...state,
     filters: filter,
     loaded: LoadingState.LOADING,
-  }))
+  })),
 );

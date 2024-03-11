@@ -19,7 +19,9 @@
         (keyup)="applyFilter($event)" />
     </mat-chip-grid>
     <mat-autocomplete #auto="matAutocomplete" class="tree-select-list">
-      <mat-option disabled="true">{{ "treeselect.options" | translate }}</mat-option>
+      <mat-option disabled="true">{{
+        "treeselect.options" | translate
+      }}</mat-option>
       <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
         <mat-tree-node
           *matTreeNodeDef="let node"
@@ -50,7 +52,7 @@
             mat-icon-button
             matTreeNodeToggle
             [attr.aria-label]="
-              'treeselect.toggle' | translate : { value: node.item.label }
+              'treeselect.toggle' | translate: { value: node.item.label }
             ">
             <mat-icon class="mat-icon-rtl-mirror">
               {{

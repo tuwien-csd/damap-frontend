@@ -82,7 +82,7 @@ describe('DmpEffects', () => {
   it('should load dmps and fail', () => {
     actions$ = of(loadDmps(false));
     backendService.getDmps.and.returnValue(
-      throwError(() => new HttpErrorResponse({}))
+      throwError(() => new HttpErrorResponse({})),
     );
 
     effects.loadDmps$.subscribe((action: any) => {
@@ -113,7 +113,7 @@ describe('DmpEffects', () => {
       exportDmpTemplate({
         dmp: completeDmp,
         dmpTemplateType: ETemplateType.FWF,
-      })
+      }),
     );
     backendService.editDmp.and.returnValue(of(completeDmp));
 
@@ -137,7 +137,7 @@ describe('DmpEffects', () => {
       exportDmpTemplate({
         dmp: completeDmp,
         dmpTemplateType: ETemplateType.FWF,
-      })
+      }),
     );
     backendService.editDmp.and.returnValue(of(completeDmp));
     const storeSpy = spyOn(effects.store$, 'dispatch').and.callThrough();
@@ -163,10 +163,10 @@ describe('DmpEffects', () => {
       exportDmpTemplate({
         dmp: completeDmp,
         dmpTemplateType: ETemplateType.FWF,
-      })
+      }),
     );
     backendService.editDmp.and.returnValue(
-      throwError(() => new HttpErrorResponse({}))
+      throwError(() => new HttpErrorResponse({})),
     );
     const storeSpy = spyOn(effects.store$, 'dispatch').and.callThrough();
 

@@ -1,6 +1,6 @@
 <app-info-message *ngIf="!projectStep?.value?.funding">{{
   "info.project.funder" | translate
-  }}</app-info-message>
+}}</app-info-message>
 
 <!-- Selected project -->
 <div *ngIf="projectStep?.value">
@@ -12,12 +12,11 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-
       <div class="mat-card-container">
         <p>
           <mat-icon class="mat-icon-style">date_range</mat-icon>
-          {{ projectStep.value.start | date : "dd/MMMM/yy" }} -
-          {{ projectStep.value.end | date : "dd/MMMM/yy" }}
+          {{ projectStep.value.start | date: "dd/MMMM/yy" }} -
+          {{ projectStep.value.end | date: "dd/MMMM/yy" }}
         </p>
         <div>
           <button mat-icon-button (click)="changeProject(null)">

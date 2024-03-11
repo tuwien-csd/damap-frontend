@@ -8,12 +8,12 @@ import { Repository } from '../../../domain/repository';
 export class RepoPipe implements PipeTransform {
   transform(
     repos: RepositoryDetails[],
-    selected: Repository[]
+    selected: Repository[],
   ): RepositoryDetails[] {
     return repos.filter(
       (e: RepositoryDetails) =>
         selected.find((entry: Repository) => entry.repositoryId === e.id) ===
-        undefined
+        undefined,
     );
   }
 }

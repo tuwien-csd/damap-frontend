@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { AuthGuard, EnvBannerModule } from '@damap/core';
-import { HttpBackend, HttpClientModule } from "@angular/common/http";
+import { HttpBackend, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import { APP_ROUTES } from './app.routes';

@@ -190,32 +190,32 @@ export class FormService {
     // Contributors, datasets, repositories, costs
     for (const contributor of dmp.contributors || []) {
       (this.form.controls['contributors'] as UntypedFormArray).push(
-        this.mapContributorToFormGroup(contributor)
+        this.mapContributorToFormGroup(contributor),
       );
     }
     for (const dataset of dmp.datasets || []) {
       (this.form.controls['datasets'] as UntypedFormArray).push(
-        this.mapDatasetToFormGroup(dataset)
+        this.mapDatasetToFormGroup(dataset),
       );
     }
     for (const repo of dmp.repositories || []) {
       (this.form.controls['repositories'] as UntypedFormArray).push(
-        this.mapRepositoryToFormGroup(repo)
+        this.mapRepositoryToFormGroup(repo),
       );
     }
     for (const cost of dmp.costs || []) {
       (this.form.controls['costs'].get('list') as UntypedFormArray).push(
-        this.mapCostToFormGroup(cost)
+        this.mapCostToFormGroup(cost),
       );
     }
     for (const storage of dmp.storage || []) {
       (this.form.controls['storage'] as UntypedFormArray).push(
-        this.mapStorageToFormGroup(storage)
+        this.mapStorageToFormGroup(storage),
       );
     }
     for (const externalStorage of dmp.externalStorage || []) {
       (this.form.controls['externalStorage'] as UntypedFormArray).push(
-        this.mapExternalStorageToFormGroup(externalStorage)
+        this.mapExternalStorageToFormGroup(externalStorage),
       );
     }
   }
@@ -292,16 +292,16 @@ export class FormService {
   public changeContactPerson(contact: Contributor) {
     // Remove old contact
     const contributorFormArray = this.form.get(
-      'contributors'
+      'contributors',
     ) as UntypedFormArray;
     contributorFormArray.controls.forEach(c =>
-      c.patchValue({ contact: false })
+      c.patchValue({ contact: false }),
     );
 
     // Add/set new contact
     if (contact) {
       const existingContact = contributorFormArray.controls.find(c =>
-        compareContributors(c.value, contact)
+        compareContributors(c.value, contact),
       );
       if (existingContact) {
         existingContact.patchValue({ contact: true });
@@ -316,7 +316,7 @@ export class FormService {
     contributorFormGroup.patchValue(contributor);
     contributorFormGroup.patchValue({ contact });
     (this.form.get('contributors') as UntypedFormArray).push(
-      contributorFormGroup
+      contributorFormGroup,
     );
   }
 
@@ -382,7 +382,7 @@ export class FormService {
     const costFormGroup: UntypedFormGroup = this.createCostFormGroup();
     (
       (this.form.get('costs') as UntypedFormGroup).get(
-        'list'
+        'list',
       ) as UntypedFormArray
     ).push(costFormGroup);
   }
@@ -390,7 +390,7 @@ export class FormService {
   public removeCostFromForm(index: number) {
     (
       (this.form.get('costs') as UntypedFormGroup).get(
-        'list'
+        'list',
       ) as UntypedFormArray
     ).removeAt(index);
   }
@@ -467,7 +467,7 @@ export class FormService {
   }
 
   private mapContributorToFormGroup(
-    contributor: Contributor
+    contributor: Contributor,
   ): UntypedFormGroup {
     const formGroup = this.createContributorFormGroup();
     formGroup.patchValue(contributor);
@@ -521,7 +521,7 @@ export class FormService {
   }
 
   private mapExternalStorageToFormGroup(
-    externalStorage: ExternalStorage
+    externalStorage: ExternalStorage,
   ): UntypedFormGroup {
     const formGroup = this.createExternalStorageFormGroup();
     formGroup.setValue({
@@ -612,7 +612,7 @@ export class FormService {
 
   private removeDatasetReferences(index: number) {
     const dataset = (this.form.get('datasets') as UntypedFormArray).at(
-      index
+      index,
     ) as UntypedFormGroup;
 
     // Storage
@@ -630,12 +630,12 @@ export class FormService {
 
   private removeDatasetReferenceInFormArray(
     array: UntypedFormArray,
-    dataset: UntypedFormGroup
+    dataset: UntypedFormGroup,
   ) {
     for (let i = 0; i < array.controls?.length; i++) {
       const item = array.at(i);
       const datasets = item.value.datasets.filter(
-        entry => entry !== dataset.value.referenceHash
+        entry => entry !== dataset.value.referenceHash,
       );
       item.patchValue({ datasets });
     }

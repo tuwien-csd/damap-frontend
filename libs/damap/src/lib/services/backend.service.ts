@@ -39,11 +39,11 @@ export class BackendService {
   constructor(
     private http: HttpClient,
     private feedbackService: FeedbackService,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {}
 
   private static getFilenameFromContentDisposition(
-    contentDisposition: string
+    contentDisposition: string,
   ): string {
     const start = contentDisposition.lastIndexOf('filename=');
     return contentDisposition.substring(start + 9);
@@ -54,7 +54,7 @@ export class BackendService {
       .get<DmpListItem[]>(`${this.dmpBackendUrl}/list`)
       .pipe(
         retry(3),
-        catchError(this.handleError('http.error.plans.load.yours'))
+        catchError(this.handleError('http.error.plans.load.yours')),
       );
   }
 
@@ -63,7 +63,7 @@ export class BackendService {
       .get<DmpListItem[]>(`${this.dmpBackendUrl}/all`)
       .pipe(
         retry(3),
-        catchError(this.handleError('http.error.plans.load.all'))
+        catchError(this.handleError('http.error.plans.load.all')),
       );
   }
 
@@ -72,7 +72,7 @@ export class BackendService {
       .get<Dmp>(`${this.dmpBackendUrl}/${id}`)
       .pipe(
         retry(3),
-        catchError(this.handleError('http.error.plans.load.one'))
+        catchError(this.handleError('http.error.plans.load.one')),
       );
   }
 
@@ -109,7 +109,7 @@ export class BackendService {
       .get<Dmp>(`${this.dmpBackendUrl}/${id}/${revision}`)
       .pipe(
         retry(3),
-        catchError(this.handleError('http.error.versions.revision'))
+        catchError(this.handleError('http.error.versions.revision')),
       );
   }
 
@@ -159,12 +159,12 @@ export class BackendService {
       .pipe(
         retry(3),
         catchError(this.handleError('http.error.projects')),
-        shareReplay(1)
+        shareReplay(1),
       );
   }
 
   getProjectSearchResult(
-    searchTerm: string
+    searchTerm: string,
   ): Observable<SearchResult<Project>> {
     let queryParams = new HttpParams({
       fromObject: {
@@ -178,7 +178,7 @@ export class BackendService {
       .pipe(
         retry(3),
         catchError(this.handleError('http.error.projects')),
-        shareReplay(1)
+        shareReplay(1),
       );
   }
 
@@ -187,18 +187,18 @@ export class BackendService {
       .get<Contributor[]>(`${this.projectBackendUrl}/${projectId}/staff`)
       .pipe(
         retry(3),
-        catchError(this.handleError('http.error.projectmembers'))
+        catchError(this.handleError('http.error.projectmembers')),
       );
   }
 
   getPersonSearchResult(
     searchTerm: string,
-    serviceType: string
+    serviceType: string,
   ): Observable<SearchResult<Contributor>> {
     return this.http
-      .get<SearchResult<Contributor>>(
-        `${this.backendUrl}persons?q=${searchTerm}&searchService=${serviceType}`
-      )
+      .get<
+        SearchResult<Contributor>
+      >(`${this.backendUrl}persons?q=${searchTerm}&searchService=${serviceType}`)
       .pipe(catchError(this.handleError('http.error.repositories.one')));
   }
 
@@ -219,7 +219,7 @@ export class BackendService {
       .get<RepositoryDetails[]>(this.repositoryBackendUrl)
       .pipe(
         retry(3),
-        catchError(this.handleError('http.error.repositories.all'))
+        catchError(this.handleError('http.error.repositories.all')),
       );
   }
 
@@ -228,19 +228,19 @@ export class BackendService {
       .get<RepositoryDetails[]>(`${this.repositoryBackendUrl}/recommended`)
       .pipe(
         retry(3),
-        catchError(this.handleError('http.error.repositories.recommended'))
+        catchError(this.handleError('http.error.repositories.recommended')),
       );
   }
 
   getRepositoryById(
-    id: string
+    id: string,
   ): Observable<{ id: string; changes: RepositoryDetails }> {
     return this.http
       .get<RepositoryDetails>(`${this.repositoryBackendUrl}/${id}`)
       .pipe(
         map(repo => ({ id, changes: repo })),
         retry(3),
-        catchError(this.handleError('http.error.repositories.one'))
+        catchError(this.handleError('http.error.repositories.one')),
       );
   }
 
@@ -315,7 +315,7 @@ export class BackendService {
     return this.http.get<Consent>(`${this.backendUrl}consent`).pipe(
       map(details => details.consentGiven),
       retry(3),
-      catchError(this.handleError('http.error.consent.one'))
+      catchError(this.handleError('http.error.consent.one')),
     );
   }
 
