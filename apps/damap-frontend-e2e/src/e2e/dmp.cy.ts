@@ -57,24 +57,24 @@ describe('dmp', () => {
     cy.get('app-created-data mat-tab-group div.mat-tab-labels > div')
       .last()
       .click();
-    cy.get('app-created-data app-file-upload .dropzone')
-      .scrollIntoView()
-      .selectFile(
-        {
-          contents: Cypress.Buffer.from('file contents'),
-          fileName: 'file.txt',
-          mimeType: 'text/plain',
-          lastModified: Date.now(),
-        },
-        { action: 'drag-drop' },
-      );
+    cy.get('app-created-data app-file-upload .dropzone').scrollIntoView();
+    cy.get('app-created-data app-file-upload .dropzone').selectFile(
+      {
+        contents: Cypress.Buffer.from('file contents'),
+        fileName: 'file.txt',
+        mimeType: 'text/plain',
+        lastModified: Date.now(),
+      },
+      { action: 'drag-drop' },
+    );
     cy.get('app-created-data app-dataset-table table tbody tr')
       .last()
       .contains('file.txt');
     cy.get('app-save-status > div').contains('You have unsaved changes.');
 
     // Check autosave
-    cy.get('@steps').contains('Documentation').scrollIntoView().click();
+    cy.get('@steps').contains('Documentation').scrollIntoView();
+    cy.get('@steps').contains('Documentation').click();
     cy.get('app-save-status > div').contains('All changes have been saved.');
 
     // Search for repository
@@ -94,7 +94,8 @@ describe('dmp', () => {
     cy.get('app-dmp-repo app-tag').should('exist');
 
     // Go back to plans
-    cy.get('@steps').contains('Summary').scrollIntoView().click();
+    cy.get('@steps').contains('Summary').scrollIntoView();
+    cy.get('@steps').contains('Summary').click();
     cy.get('mat-nav-list > a').contains('DMPs').click();
 
     // Check if dmp shows in list
