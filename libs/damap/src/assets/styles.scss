@@ -1,12 +1,12 @@
-
-html, body {
+html,
+body {
   height: 100%;
 }
 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  letter-spacing: .03rem;
+  letter-spacing: 0.03rem;
   font-weight: 300;
 }
 
@@ -23,7 +23,7 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   clip-path: inset(50%);
-  border: 0
+  border: 0;
 }
 
 .mat-icon-style {

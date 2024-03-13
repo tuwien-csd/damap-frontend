@@ -1,7 +1,16 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 
 import { DmpListItem } from '../../domain/dmp-list-item';
-import { FunctionRole } from "../../domain/enum/function-role.enum";
+import { FunctionRole } from '../../domain/enum/function-role.enum';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,7 +21,6 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./dmp-table.component.css'],
 })
 export class DmpTableComponent implements OnChanges, AfterViewInit {
-
   @Input() dmps: DmpListItem[];
   @Input() admin = false;
   dataSource = new MatTableDataSource();
@@ -24,11 +32,14 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  readonly tableHeaders: string[] = ['title', 'created', 'modified', 'contact', 'edit'];
+  readonly tableHeaders: string[] = [
+    'title',
+    'created',
+    'modified',
+    'contact',
+    'edit',
+  ];
   readonly FUNCTION_ROLES = FunctionRole;
-
-  constructor() {
-  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.dmps) {
@@ -38,18 +49,24 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.filterPredicate = (data: DmpListItem, filter: string) =>
-      data.project?.title?.toLowerCase().includes(filter)
-      || data.title?.toLowerCase().includes(filter)
-      || data.id.toString().includes(filter);
+      data.project?.title?.toLowerCase().includes(filter) ||
+      data.title?.toLowerCase().includes(filter) ||
+      data.id.toString().includes(filter);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.dataSource.sortingDataAccessor = (item: DmpListItem, property: string) => {
+    this.dataSource.sortingDataAccessor = (
+      item: DmpListItem,
+      property: string
+    ) => {
       switch (property) {
-        case 'title': return item.project?.title || 'DMP ID: ' + item.id;
-        case 'contact': return item.contact?.firstName + ' ' + item.contact?.lastName;
-        default: return item[property];
+        case 'title':
+          return item.project?.title || 'DMP ID: ' + item.id;
+        case 'contact':
+          return item.contact?.firstName + ' ' + item.contact?.lastName;
+        default:
+          return item[property];
       }
-    }
+    };
   }
 
   applyFilter(event: Event) {
@@ -72,5 +89,4 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
   deleteDmp(id: number) {
     this.dmpToDelete.emit(id);
   }
-
 }

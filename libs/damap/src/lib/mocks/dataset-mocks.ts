@@ -1,10 +1,10 @@
-import {Dataset} from '../domain/dataset';
-import {DataAccessType} from '../domain/enum/data-access-type.enum';
-import {AccessRight} from '../domain/enum/access-right.enum';
-import {DataType} from '../domain/enum/data-type.enum';
-import {mockContributor1} from './contributor-mocks';
-import {DataSource} from '../domain/enum/data-source.enum';
-import {IdentifierType} from '../domain/enum/identifier-type.enum';
+import { Dataset } from '../domain/dataset';
+import { DataAccessType } from '../domain/enum/data-access-type.enum';
+import { AccessRight } from '../domain/enum/access-right.enum';
+import { DataType } from '../domain/enum/data-type.enum';
+import { mockContributor1 } from './contributor-mocks';
+import { DataSource } from '../domain/enum/data-source.enum';
+import { IdentifierType } from '../domain/enum/identifier-type.enum';
 
 export const openDatasetMock: Dataset = {
   description: '',
@@ -30,9 +30,9 @@ export const openDatasetMock: Dataset = {
   source: DataSource.NEW,
   datasetId: {
     identifier: 'XXXXX',
-    type: IdentifierType.DOI
-  }
-}
+    type: IdentifierType.DOI,
+  },
+};
 
 export const closedDatasetMock: Dataset = {
   description: '',
@@ -58,9 +58,9 @@ export const closedDatasetMock: Dataset = {
   source: DataSource.REUSED,
   datasetId: {
     identifier: 'XXXXX',
-    type: IdentifierType.DOI
-  }
-}
+    type: IdentifierType.DOI,
+  },
+};
 
 export const restrictedDatasetMock: Dataset = {
   description: '',
@@ -84,5 +84,5 @@ export const restrictedDatasetMock: Dataset = {
   reasonForDeletion: '',
   retentionPeriod: null,
   source: DataSource.NEW,
-  datasetId: null
-}
+  datasetId: null,
+};

@@ -1,12 +1,20 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {SpecifyDataComponent} from './specify-data.component';
-import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, ReactiveFormsModule} from '@angular/forms';
-import {MatRadioModule} from '@angular/material/radio';
-import {StepIntroComponent} from '../../../widgets/step-intro/step-intro.component';
-import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
-import {MatTabsModule} from '@angular/material/tabs';
-import {closedDatasetMock, restrictedDatasetMock} from '../../../mocks/dataset-mocks';
+import { SpecifyDataComponent } from './specify-data.component';
+import {
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
+import { StepIntroComponent } from '../../../widgets/step-intro/step-intro.component';
+import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
+import { MatTabsModule } from '@angular/material/tabs';
+import {
+  closedDatasetMock,
+  restrictedDatasetMock,
+} from '../../../mocks/dataset-mocks';
 
 describe('SpecifyDataComponent', () => {
   let component: SpecifyDataComponent;
@@ -14,8 +22,13 @@ describe('SpecifyDataComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, MatTabsModule, MatRadioModule, TranslateTestingModule],
-      declarations: [SpecifyDataComponent, StepIntroComponent]
+      imports: [
+        ReactiveFormsModule,
+        MatTabsModule,
+        MatRadioModule,
+        TranslateTestingModule,
+      ],
+      declarations: [SpecifyDataComponent, StepIntroComponent],
     }).compileComponents();
   });
 
@@ -24,7 +37,7 @@ describe('SpecifyDataComponent', () => {
     component = fixture.componentInstance;
     component.specifyDataStep = new UntypedFormGroup({
       kind: new UntypedFormControl(null),
-      explanation: new UntypedFormControl('')
+      explanation: new UntypedFormControl(''),
     });
     component.datasets = new UntypedFormArray([]);
     fixture.detectChanges();
@@ -42,10 +55,15 @@ describe('SpecifyDataComponent', () => {
 
     // Test add dataset
     component.add(closedDatasetMock);
-    expect(component.datasetToAdd.emit).toHaveBeenCalledOnceWith(closedDatasetMock);
+    expect(component.datasetToAdd.emit).toHaveBeenCalledOnceWith(
+      closedDatasetMock
+    );
     // Test update dataset
-    component.update({index: 0, update: restrictedDatasetMock});
-    expect(component.updateDataset.emit).toHaveBeenCalledOnceWith({index: 0, update: restrictedDatasetMock});
+    component.update({ index: 0, update: restrictedDatasetMock });
+    expect(component.updateDataset.emit).toHaveBeenCalledOnceWith({
+      index: 0,
+      update: restrictedDatasetMock,
+    });
     // Test remove dataset
     component.remove(0);
     expect(component.removeDataset.emit).toHaveBeenCalledOnceWith(0);

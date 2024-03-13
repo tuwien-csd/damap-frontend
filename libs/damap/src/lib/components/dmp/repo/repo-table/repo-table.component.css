@@ -24,7 +24,9 @@ tr.element-row:not(.expanded-row):active {
   flex-direction: column;
 }
 
-th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
   width: 20px;
   padding: 0 15px;
 }

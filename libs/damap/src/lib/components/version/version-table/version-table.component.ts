@@ -1,16 +1,15 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Version} from '../../../domain/version';
-import {DmpListItem} from '../../../domain/dmp-list-item';
-import {Dmp} from "../../../domain/dmp";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Version } from '../../../domain/version';
+import { DmpListItem } from '../../../domain/dmp-list-item';
+import { Dmp } from '../../../domain/dmp';
 
 @Component({
   selector: 'app-version-table',
   templateUrl: './version-table.component.html',
-  styleUrls: ['./version-table.component.css']
+  styleUrls: ['./version-table.component.css'],
 })
 export class VersionTableComponent {
-
-  displayedColumns: string[] = ['version', 'name', 'date', 'revision'];
+  displayedColumns: string[] = ['version', 'name', 'date', 'editor'];
 
   @Input() dmp: DmpListItem | Dmp;
   @Input() versions: Version[];

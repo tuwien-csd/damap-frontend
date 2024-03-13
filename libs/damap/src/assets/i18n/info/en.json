@@ -1,29 +1,31 @@
 {
   "info": {
+    "project.funder": "If your project is missing, please contact [mail@address.example]. You can add project information manually, however you will have to select a funder template when exporting as funder information is not available.",
     "ethical": {
       "humanParticipants": {
-        "prefix": "An informed consent for participation (in addition to an informed consent to data processing) is required. For more information, contact the ",
+        "prefix": "An informed consent for participation (in addition to an informed consent to data processing) is required. For more information, see an ",
         "researchEthicsCoordination": {
-          "text": "research ethics coordination",
-          "link": "https://www.link.example"
+          "text": "Example Informed Consent Guide",
+          "link": "https://www.tuwien.at/fileadmin/Assets/forschung/Forschungsethik/Guidance_Document_Informed_Consent.pdf"
         },
-        "middle": " or consult: ",
+        "middle": " or consult your institution's ",
         "researchEthics": {
-          "link": "https://www.link.example"
+          "text": "center for responsible research practices",
+          "link": "https://www.tuwien.at/forschung/fti-support/responsible-research-practices"
         }
       },
       "ethicalIssues": {
-        "text": "Your research plan may require ethical review. Inform yourself by consulting",
+        "text": "Your research plan may require ethical review. Inform yourself by consulting your ",
         "researchEthics": {
-          "text": "https://www.link.example",
-          "link": "https://www.link.example"
+          "text": "institution's code of conduct",
+          "link": "https://www.tuwien.at/index.php?eID=dms&s=4&path=Richtlinien%20und%20Verordnungen/Code%20of%20Conduct%20fuer%20wissenschaftliches%20Arbeiten.pdf"
         }
       },
       "committeeReviewed": {
-        "prefix": "Please note that you must address (potential) ethical issues in separate documents according to the requirements of the relevant funding body. The DMP only serves to help identify some ethical issues.\nPlease contact your responsible Ethics Coordinator at ",
+        "prefix": "Please note that you must address (potential) ethical issues in separate documents according to the requirements of the relevant funding body. The DMP only serves to help identify some ethical issues.\nPlease contact your ",
         "mail": {
-          "text": "mail@address.example",
-          "link": "mail@address.example"
+          "text": "institution's Ethic's Committee",
+          "link": "https://www.tuwien.at/forschung/fti-support/responsible-research-practices/research-ethics-committee"
         },
         "suffix": " for additional information and support. You must do so if your planned research involves any human participation."
       }

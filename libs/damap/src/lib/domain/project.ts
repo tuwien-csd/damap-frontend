@@ -1,4 +1,4 @@
-import {Funding} from './funding';
+import { Funding } from './funding';
 
 export interface Project {
   readonly id: number;

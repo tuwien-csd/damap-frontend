@@ -5,10 +5,9 @@ import { MatFormFieldAppearance } from '@angular/material/form-field';
 @Component({
   selector: 'app-input-wrapper [label] [control]',
   templateUrl: './input-wrapper.component.html',
-  styleUrls: ['./input-wrapper.component.css']
+  styleUrls: ['./input-wrapper.component.css'],
 })
 export class InputWrapperComponent implements OnInit {
-
   @Input() label: string;
   @Input() control: UntypedFormControl;
   @Input() prefix: string;
@@ -19,11 +18,7 @@ export class InputWrapperComponent implements OnInit {
 
   required = false;
 
-  constructor() {
-  }
-
   ngOnInit(): void {
     this.required = this.control?.hasValidator(Validators.required);
   }
-
 }

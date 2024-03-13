@@ -1,8 +1,8 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {RepoRecommendationComponent} from './repo-recommendation.component';
-import {RepoPipe} from '../repo.pipe';
-import {mockDetailRepo} from '../../../../mocks/repository-mocks';
+import { RepoRecommendationComponent } from './repo-recommendation.component';
+import { RepoPipe } from '../repo.pipe';
+import { mockDetailRepo } from '../../../../mocks/repository-mocks';
 
 describe('RepoRecommendationComponent', () => {
   let component: RepoRecommendationComponent;
@@ -10,7 +10,7 @@ describe('RepoRecommendationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RepoRecommendationComponent, RepoPipe]
+      declarations: [RepoRecommendationComponent, RepoPipe],
     }).compileComponents();
   });
 

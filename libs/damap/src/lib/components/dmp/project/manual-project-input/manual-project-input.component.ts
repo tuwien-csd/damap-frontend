@@ -1,24 +1,37 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
-import {Project} from '../../../../domain/project';
-import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { Project } from '../../../../domain/project';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-manual-project-input',
   templateUrl: './manual-project-input.component.html',
-  styleUrls: ['./manual-project-input.component.css']
+  styleUrls: [],
 })
 export class ManualProjectInputComponent implements OnChanges {
-
   @Input() project: Project;
   @Output() projectUpdate = new EventEmitter<Project>();
 
   form = new UntypedFormGroup({
     id: new UntypedFormControl(null),
-    title: new UntypedFormControl('', [Validators.required, Validators.maxLength(255)]),
+    title: new UntypedFormControl('', [
+      Validators.required,
+      Validators.maxLength(255),
+    ]),
     description: new UntypedFormControl(''),
     start: new UntypedFormControl(null),
-    end: new UntypedFormControl(null)
-  })
+    end: new UntypedFormControl(null),
+  });
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.project && !this.project?.universityId) {

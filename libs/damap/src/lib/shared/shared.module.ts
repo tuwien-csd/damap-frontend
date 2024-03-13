@@ -1,13 +1,12 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {MatInputModule} from '@angular/material/input';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {InputWrapperComponent} from './input-wrapper/input-wrapper.component';
-import {TextareaWrapperComponent} from './textarea-wrapper/textarea-wrapper.component';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {TranslateModule} from '@ngx-translate/core';
-import {MatFormFieldModule} from '@angular/material/form-field';
-
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputWrapperComponent } from './input-wrapper/input-wrapper.component';
+import { TextareaWrapperComponent } from './textarea-wrapper/textarea-wrapper.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [InputWrapperComponent, TextareaWrapperComponent],
@@ -20,7 +19,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     // Materials
     MatFormFieldModule,
     MatInputModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
   ],
   exports: [
     CommonModule,
@@ -33,8 +32,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     // Materials
     MatFormFieldModule,
     MatInputModule,
-    MatAutocompleteModule
-  ]
+    MatAutocompleteModule,
+  ],
 })
-export class SharedModule {
-}
+export class SharedModule {}

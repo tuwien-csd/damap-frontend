@@ -1,23 +1,29 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { HarnessLoader } from '@angular/cdk/testing';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatInputHarness } from '@angular/material/input/testing';
-import { MatListModule } from '@angular/material/list';
-import { MatSelectionListHarness } from '@angular/material/list/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { BackendService } from '@damap/core';
-import { of } from 'rxjs';
-import { mockProject } from '../../../../mocks/project-mocks';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 import {
   mockProjectSearchResult,
   mockRecommendedProjectSearchResult,
 } from '../../../../mocks/search';
-import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
+
+import { BackendService } from '@damap/core';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputHarness } from '@angular/material/input/testing';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectionListHarness } from '@angular/material/list/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ProjectListComponent } from './project-list.component';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
+import { mockProject } from '../../../../mocks/project-mocks';
+import { of } from 'rxjs';
 
 describe('ProjectListComponent', () => {
   let component: ProjectListComponent;
@@ -43,6 +49,7 @@ describe('ProjectListComponent', () => {
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
+        MatIconModule,
         MatListModule,
         NoopAnimationsModule,
       ],
@@ -54,6 +61,7 @@ describe('ProjectListComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.loader(fixture);
+    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -90,5 +98,26 @@ describe('ProjectListComponent', () => {
 
     await options[0].select();
     expect(component.projectToSet.emit).toHaveBeenCalled();
+  });
+
+  it('should call fetchRecommendedProjects when selectedProject is set to null', () => {
+    spyOn(component, 'fetchRecommendedProjects');
+    component.selectedProject = null;
+    expect(component.fetchRecommendedProjects).toHaveBeenCalled();
+  });
+
+  it('should use getRecommendedProjects when fetchRecommendedProjects is called', fakeAsync(() => {
+    component.ngOnInit();
+    fixture.detectChanges();
+    component.fetchRecommendedProjects();
+    tick(300);
+    fixture.detectChanges();
+    expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
+  }));
+
+  it('should load projects on text input', async () => {
+    const input = await loader.getHarness(MatInputHarness);
+    await input.setValue(mockProject.title);
+    expect(backendSpy.getProjectSearchResult).toHaveBeenCalled();
   });
 });

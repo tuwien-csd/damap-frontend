@@ -3,25 +3,26 @@
 
 <ng-container *ngIf="kind.value === dataKind.SPECIFY">
   <mat-tab-group dynamicHeight>
-    <mat-tab label="{{'dmp.steps.data.specify.tab.manual' | translate}}">
+    <mat-tab label="{{ 'dmp.steps.data.specify.tab.manual' | translate }}">
       <button mat-raised-button color="primary" (click)="openDatasetDialog()">
-        {{'dmp.steps.data.specify.button.add.manual' | translate}}
+        {{ "dmp.steps.data.specify.button.add.manual" | translate }}
       </button>
     </mat-tab>
-    <mat-tab label="{{'dmp.steps.data.specify.tab.upload' | translate}}">
-      <app-file-upload [fileUpload]="fileUpload"
-                       (fileToUpload)="analyseFile($event)"
-                       (uploadToCancel)="cancelUpload($event)">
+    <mat-tab label="{{ 'dmp.steps.data.specify.tab.upload' | translate }}">
+      <app-file-upload
+        [fileUpload]="fileUpload"
+        (fileToUpload)="analyseFile($event)"
+        (uploadToCancel)="cancelUpload($event)">
       </app-file-upload>
     </mat-tab>
   </mat-tab-group>
 
   <!-- TABLE -->
-  <app-dataset-table *ngIf="datasets.controls.length"
-                     [datasets]="datasets"
-                     [tableHeaders]="tableHeaders"
-                     (updateDataset)="update($event)"
-                     (removeDataset)="remove($event)">
-
+  <app-dataset-table
+    *ngIf="datasets.controls.length"
+    [datasets]="datasets"
+    [tableHeaders]="tableHeaders"
+    (updateDataset)="update($event)"
+    (removeDataset)="remove($event)">
   </app-dataset-table>
 </ng-container>

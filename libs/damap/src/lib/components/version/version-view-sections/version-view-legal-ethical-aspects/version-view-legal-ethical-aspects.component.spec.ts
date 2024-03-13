@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {VersionViewLegalEthicalAspectsComponent} from './version-view-legal-ethical-aspects.component';
-import {TranslateTestingModule} from '../../../../testing/translate-testing/translate-testing.module';
+import { VersionViewLegalEthicalAspectsComponent } from './version-view-legal-ethical-aspects.component';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
 
 describe('VersionViewLegalEthicalAspectsComponent', () => {
   let component: VersionViewLegalEthicalAspectsComponent;
@@ -10,7 +10,7 @@ describe('VersionViewLegalEthicalAspectsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [VersionViewLegalEthicalAspectsComponent],
-      imports: [TranslateTestingModule]
+      imports: [TranslateTestingModule],
     }).compileComponents();
   });
 

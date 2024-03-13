@@ -1,14 +1,14 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {DoiSearchComponent} from './doi-search.component';
-import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {restrictedDatasetMock} from '../../mocks/dataset-mocks';
-import {LoadingState} from '../../domain/enum/loading-state.enum';
-import {SimpleChange} from '@angular/core';
+import { DoiSearchComponent } from './doi-search.component';
+import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { restrictedDatasetMock } from '../../mocks/dataset-mocks';
+import { LoadingState } from '../../domain/enum/loading-state.enum';
+import { SimpleChange } from '@angular/core';
 
 describe('DoiSearchComponent', () => {
   let component: DoiSearchComponent;
@@ -16,9 +16,14 @@ describe('DoiSearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TranslateTestingModule, MatFormFieldModule, MatInputModule,
-        MatIconModule, NoopAnimationsModule],
-      declarations: [DoiSearchComponent]
+      imports: [
+        TranslateTestingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        NoopAnimationsModule,
+      ],
+      declarations: [DoiSearchComponent],
     }).compileComponents();
   });
 
@@ -43,12 +48,24 @@ describe('DoiSearchComponent', () => {
     expect(component.doi.disabled).toBe(false);
 
     component.loading = LoadingState.LOADING;
-    component.ngOnChanges({loading: new SimpleChange(LoadingState.NOT_LOADED, LoadingState.LOADING, true)});
+    component.ngOnChanges({
+      loading: new SimpleChange(
+        LoadingState.NOT_LOADED,
+        LoadingState.LOADING,
+        true
+      ),
+    });
     expect(component.loading).toBe(LoadingState.LOADING);
     expect(component.doi.disable).toHaveBeenCalledTimes(1);
 
     component.loading = LoadingState.LOADED;
-    component.ngOnChanges({loading: new SimpleChange(LoadingState.LOADING, LoadingState.LOADED, false)});
+    component.ngOnChanges({
+      loading: new SimpleChange(
+        LoadingState.LOADING,
+        LoadingState.LOADED,
+        false
+      ),
+    });
     expect(component.doi.setValue).toHaveBeenCalledTimes(1);
     expect(component.doi.enable).toHaveBeenCalledTimes(1);
   });

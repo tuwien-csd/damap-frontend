@@ -1,4 +1,4 @@
-import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 /**
  * Verify ORCID iD structure
@@ -22,8 +22,8 @@ export function orcidValidator(): ValidatorFn {
     // Check if last character is correct (checksum)
     if (input.length === 16) {
       let lastChar = result === 10 ? 'X' : result;
-      return lastChar == input.charAt(15) ? null : {orcid}
+      return lastChar == input.charAt(15) ? null : { orcid };
     }
-    return {orcid};
+    return { orcid };
   };
 }

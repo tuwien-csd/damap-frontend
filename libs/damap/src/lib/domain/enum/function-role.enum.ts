@@ -3,5 +3,5 @@ export enum FunctionRole {
   EDITOR = 'EDITOR',
   GUEST = 'GUEST',
   OWNER = 'OWNER',
-  SUPPORT = 'SUPPORT'
+  SUPPORT = 'SUPPORT',
 }

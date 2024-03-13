@@ -4,4 +4,5 @@ export interface Version {
   readonly revisionNumber: number;
   readonly versionName: string;
   readonly versionDate: Date;
+  readonly editor: string;
 }

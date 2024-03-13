@@ -1,4 +1,4 @@
 export interface ServiceConfig {
-    displayText: string;
-    queryValue: string;
+  displayText: string;
+  queryValue: string;
 }

@@ -25,9 +25,9 @@
 }
 
 .mat-expansion-panel {
-  background: #006699;
+  outline: 1px solid var(--main-color);
 }
 
 .mat-panel-title {
-  color: white;
+  font-weight: 500;
 }

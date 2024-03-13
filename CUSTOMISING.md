@@ -12,7 +12,7 @@ The project is structured as follows:
 ```
 apps
  └─── damap-frontend      # The frontend application that can be customised
- 
+
  libs
   └─── damap              # The damap library that contains the core functionality
 ```
@@ -31,15 +31,15 @@ on them.
 This happens in the following section:
 
 ```typescript
-  providers: [
+providers: [
   {
     provide: APP_INITIALIZER,
     useFactory: (configService: ConfigService) => () =>
       configService.initializeApp(),
     deps: [ConfigService],
     multi: true,
-  }
-]
+  },
+];
 ```
 
 On startup the app will use the [ConfigService](libs/damap/src/lib/services/config.service.ts) to fetch the data.
@@ -60,12 +60,12 @@ the [ConfigService](apps/damap-frontend/src/app/services/config.service.ts) and 
 of [AppModule](apps/damap-frontend/src/app/app.module.ts):
 
 ```typescript
-  OAuthModule.forRoot({
+OAuthModule.forRoot({
   resourceServer: {
     allowedUrls: [environment.backendurl],
     sendAccessToken: true,
   },
-})
+});
 ```
 
 All application [routes](apps/damap-frontend/src/app/app.routes.ts) are protected by
@@ -83,13 +83,13 @@ specifically in the [LayoutComponent](libs/layout/src/lib/layout/layout.componen
 Your can change this file to adapt the layout to your needs, however, you should keep `<router-outlet></router-outlet>`
 in the template.
 
-* Logo: Provide your [logo](src/assets/logo.svg) as src/assets/logo.svg
-* Logo link: You can change the link of your logo by setting the translation key `layout.logo.text`
+- Logo: Provide your [logo](src/assets/logo.svg) as src/assets/logo.svg
+- Logo link: You can change the link of your logo by setting the translation key `layout.logo.text`
   in [i18n/layout/en.json](apps/damap-frontend/src/assets/i18n/layout/en.json)
-* Theme: to customize the theme adapt the files
-  * [custom-theme.scss](apps/damap-frontend/src/themes/custom-theme.scss) and
-  * [custom-palettes.scss](apps/damap-frontend/src/themes/custom-palettes.scss)
-* Translations: [src/assets/i18n/layout/](apps/damap-frontend/src/assets/layout/en.json) (
+- Theme: to customize the theme adapt the files
+  - [custom-theme.scss](apps/damap-frontend/src/themes/custom-theme.scss) and
+  - [custom-palettes.scss](apps/damap-frontend/src/themes/custom-palettes.scss)
+- Translations: [src/assets/i18n/layout/](apps/damap-frontend/src/assets/layout/en.json) (
   see [Translations](#translations) for
   more information)
 
@@ -112,9 +112,9 @@ In each module the `HttpLoaderFactory` defines in which folders the translations
 ```typescript
 export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
   return new MultiTranslateHttpLoader(http, [
-    {prefix: './assets/i18n/layout/', suffix: '.json'},
-    {prefix: './assets/i18n/consent/', suffix: '.json'},
-    {prefix: './assets/i18n/', suffix: '.json'}
+    { prefix: './assets/i18n/layout/', suffix: '.json' },
+    { prefix: './assets/i18n/consent/', suffix: '.json' },
+    { prefix: './assets/i18n/', suffix: '.json' },
   ]);
 }
 ```

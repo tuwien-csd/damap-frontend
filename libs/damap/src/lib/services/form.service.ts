@@ -1,5 +1,11 @@
 import { Contributor, compareContributors } from '../domain/contributor';
-import { FormControl, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  UntypedFormArray,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 
 import { AccessRight } from '../domain/enum/access-right.enum';
 import { Cost } from '../domain/cost';
@@ -18,10 +24,9 @@ import { currencyValidator } from '../validators/currency.validator';
 import { notEmptyValidator } from '../validators/not-empty.validator';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FormService {
-
   private TEXT_MAX_LENGTH = 4000;
   private TEXT_SHORT_LENGTH = 255;
   private readonly form: UntypedFormGroup;
@@ -37,11 +42,16 @@ export class FormService {
   }
 
   public static restrictedDatasets(datasets: Dataset[]): boolean {
-    return datasets.find(item => item.dataAccess === DataAccessType.RESTRICTED) != null;
+    return (
+      datasets.find(item => item.dataAccess === DataAccessType.RESTRICTED) !=
+      null
+    );
   }
 
   public static closedDatasets(datasets: Dataset[]): boolean {
-    return datasets.find(item => item.dataAccess === DataAccessType.CLOSED) != null;
+    return (
+      datasets.find(item => item.dataAccess === DataAccessType.CLOSED) != null
+    );
   }
 
   private createDmpForm(): UntypedFormGroup {
@@ -54,7 +64,7 @@ export class FormService {
         kind: [null],
         explanation: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         reusedKind: [null],
-        dataGeneration: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
+        dataGeneration: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       }),
       datasets: this.formBuilder.array([]),
       documentation: this.formBuilder.group({
@@ -62,7 +72,7 @@ export class FormService {
         structure: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         documentation: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         dataQuality: [[]],
-        otherDataQuality: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
+        otherDataQuality: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       }),
       storage: this.formBuilder.array([]),
       externalStorage: this.formBuilder.array([]),
@@ -71,43 +81,57 @@ export class FormService {
         personalData: [false],
         personalDataCris: [null],
         personalDataCompliance: [[]],
-        otherPersonalDataCompliance: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        otherPersonalDataCompliance: [
+          '',
+          Validators.maxLength(this.TEXT_MAX_LENGTH),
+        ],
         sensitiveData: [false],
         sensitiveDataCris: [null],
         sensitiveDataSecurity: [[]],
-        otherDataSecurityMeasures: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        otherDataSecurityMeasures: [
+          '',
+          Validators.maxLength(this.TEXT_MAX_LENGTH),
+        ],
         sensitiveDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         legalRestrictions: [false],
         legalRestrictionsCris: [null],
         legalRestrictionsDocuments: [[]],
-        otherLegalRestrictionsDocuments: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-        legalRestrictionsComment: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-        dataRightsAndAccessControl: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
+        otherLegalRestrictionsDocuments: [
+          '',
+          Validators.maxLength(this.TEXT_MAX_LENGTH),
+        ],
+        legalRestrictionsComment: [
+          '',
+          Validators.maxLength(this.TEXT_MAX_LENGTH),
+        ],
+        dataRightsAndAccessControl: [
+          '',
+          Validators.maxLength(this.TEXT_MAX_LENGTH),
+        ],
         humanParticipants: [false],
         humanParticipantsCris: [null],
         ethicalIssues: [false],
         ethicalIssuesCris: [null],
         committeeReviewed: [false],
-        committeeReviewedCris: [null]
+        committeeReviewedCris: [null],
       }),
       repositories: this.formBuilder.array([]),
       reuse: this.formBuilder.group({
         targetAudience: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
         tools: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
-        restrictedDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)]
+        restrictedDataAccess: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       }),
       restrictedAccessInfo: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       closedAccessInfo: ['', Validators.maxLength(this.TEXT_MAX_LENGTH)],
       costs: this.formBuilder.group({
         exist: [null],
         existCris: [null],
-        list: this.formBuilder.array([])
+        list: this.formBuilder.array([]),
       }),
     });
   }
 
   public mapDmpToForm(dmp: Dmp) {
-
     this.resetForm();
     this.form.patchValue({
       id: dmp.id,
@@ -267,12 +291,18 @@ export class FormService {
 
   public changeContactPerson(contact: Contributor) {
     // Remove old contact
-    const contributorFormArray = this.form.get('contributors') as UntypedFormArray;
-    contributorFormArray.controls.forEach(c => c.patchValue({ contact: false }));
+    const contributorFormArray = this.form.get(
+      'contributors'
+    ) as UntypedFormArray;
+    contributorFormArray.controls.forEach(c =>
+      c.patchValue({ contact: false })
+    );
 
     // Add/set new contact
     if (contact) {
-      const existingContact = contributorFormArray.controls.find(c => compareContributors(c.value, contact));
+      const existingContact = contributorFormArray.controls.find(c =>
+        compareContributors(c.value, contact)
+      );
       if (existingContact) {
         existingContact.patchValue({ contact: true });
       } else {
@@ -285,26 +315,19 @@ export class FormService {
     const contributorFormGroup = this.createContributorFormGroup();
     contributorFormGroup.patchValue(contributor);
     contributorFormGroup.patchValue({ contact });
-    (this.form.get('contributors') as UntypedFormArray).push(contributorFormGroup);
+    (this.form.get('contributors') as UntypedFormArray).push(
+      contributorFormGroup
+    );
   }
 
   public removeContributorFromForm(index: number) {
     (this.form.get('contributors') as UntypedFormArray).removeAt(index);
   }
 
-  public addDatasetToForm(reference: string, title: string) {
-    const formGroup = this.createDatasetFormGroup(title);
-    formGroup.patchValue({
-      referenceHash: reference,
-      startDate: this.form.value.project?.end || null,
-      dateOfDeletion: this.form.value.project?.end || null
-    });
-    (this.form.get('datasets') as UntypedFormArray).push(formGroup);
-  }
+  public addDatasetToForm(dataset: Dataset) {
+    dataset.startDate = this.getStartDate();
 
-  public addReusedDatasetToForm(dataset: Dataset) {
-    const formGroup = this.createDatasetFormGroup('Reused dataset');
-    formGroup.patchValue(dataset);
+    const formGroup = this.mapDatasetToFormGroup(dataset);
     (this.form.get('datasets') as UntypedFormArray).push(formGroup);
   }
 
@@ -318,17 +341,12 @@ export class FormService {
     (this.form.get('datasets') as UntypedFormArray).removeAt(index);
   }
 
-  public addFileAnalysisAsDatasetToForm(dataset: Dataset) {
-    const formGroup = this.mapDatasetToFormGroup(dataset);
-    formGroup.patchValue({
-      startDate: this.form.value.project?.end || null
-    });
-    (this.form.get('datasets') as UntypedFormArray).push(formGroup);
-  }
-
   public addStorageToForm(storage: InternalStorage) {
     const storageFormGroup = this.createStorageFormGroup();
-    storageFormGroup.patchValue({ internalStorageId: storage.id, title: storage.title });
+    storageFormGroup.patchValue({
+      internalStorageId: storage.id,
+      title: storage.title,
+    });
     (this.form.get('storage') as UntypedFormArray).push(storageFormGroup);
   }
 
@@ -347,11 +365,11 @@ export class FormService {
     storage.removeAt(index);
   }
 
-  public addRepositoryToForm(repo: { id: string, name: string }) {
+  public addRepositoryToForm(repo: { id: string; name: string }) {
     const repoFormGroup = this.createRepositoryFormGroup();
     repoFormGroup.patchValue({
       repositoryId: repo.id,
-      title: repo.name
+      title: repo.name,
     });
     (this.form.get('repositories') as UntypedFormArray).push(repoFormGroup);
   }
@@ -362,17 +380,32 @@ export class FormService {
 
   public addCostToForm() {
     const costFormGroup: UntypedFormGroup = this.createCostFormGroup();
-    ((this.form.get('costs') as UntypedFormGroup).get('list') as UntypedFormArray).push(costFormGroup);
+    (
+      (this.form.get('costs') as UntypedFormGroup).get(
+        'list'
+      ) as UntypedFormArray
+    ).push(costFormGroup);
   }
 
   public removeCostFromForm(index: number) {
-    ((this.form.get('costs') as UntypedFormGroup).get('list') as UntypedFormArray).removeAt(index);
+    (
+      (this.form.get('costs') as UntypedFormGroup).get(
+        'list'
+      ) as UntypedFormArray
+    ).removeAt(index);
   }
 
   public createDatasetFormGroup(title: string): UntypedFormGroup {
     return this.formBuilder.group({
       id: [null, { disabled: true }],
-      title: [title, [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
+      title: [
+        title,
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
       license: [ccBy.id, Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       startDate: [null],
       type: [[]],
@@ -396,6 +429,21 @@ export class FormService {
     });
   }
 
+  public presetStartDateOnDatasets() {
+    if (this.form.value.project?.end || null) {
+      const startDate = new Date(this.form.value.project.end);
+      startDate.setMonth(startDate.getMonth() - 2);
+      const datasets = this.form.get('datasets') as UntypedFormArray;
+      for (let i = 0; i < datasets.length; i++) {
+        if (datasets.at(i).value.startDate == null) {
+          datasets.at(i).patchValue({
+            startDate: startDate,
+          });
+        }
+      }
+    }
+  }
+
   private mapDatasetToFormGroup(dataset: Dataset): UntypedFormGroup {
     const formGroup = this.createDatasetFormGroup(dataset.title);
     formGroup.patchValue(dataset);
@@ -414,11 +462,13 @@ export class FormService {
       personId: [null],
       role: [null],
       roleInProject: [''],
-      universityId: [null]
+      universityId: [null],
     });
   }
 
-  private mapContributorToFormGroup(contributor: Contributor): UntypedFormGroup {
+  private mapContributorToFormGroup(
+    contributor: Contributor
+  ): UntypedFormGroup {
     const formGroup = this.createContributorFormGroup();
     formGroup.patchValue(contributor);
     return formGroup;
@@ -428,8 +478,15 @@ export class FormService {
     return this.formBuilder.group({
       id: [null, { disabled: true }],
       internalStorageId: [null, { disabled: true }],
-      title: ['', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
-      datasets: [[]]
+      title: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+      datasets: [[]],
     });
   }
 
@@ -439,7 +496,7 @@ export class FormService {
       id: storage.id,
       internalStorageId: storage.internalStorageId,
       title: storage.title,
-      datasets: storage.datasets || []
+      datasets: storage.datasets || [],
     });
     return formGroup;
   }
@@ -447,16 +504,25 @@ export class FormService {
   private createExternalStorageFormGroup(): UntypedFormGroup {
     return this.formBuilder.group({
       id: [null, { disabled: true }],
-      title: ['Other', [Validators.required, Validators.maxLength(this.TEXT_SHORT_LENGTH), notEmptyValidator()]],
+      title: [
+        'Other',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
       url: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       storageLocation: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       backupLocation: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       backupFrequency: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
-      datasets: [[]]
+      datasets: [[]],
     });
   }
 
-  private mapExternalStorageToFormGroup(externalStorage: ExternalStorage): UntypedFormGroup {
+  private mapExternalStorageToFormGroup(
+    externalStorage: ExternalStorage
+  ): UntypedFormGroup {
     const formGroup = this.createExternalStorageFormGroup();
     formGroup.setValue({
       id: externalStorage.id,
@@ -465,7 +531,7 @@ export class FormService {
       storageLocation: externalStorage.storageLocation || null,
       backupLocation: externalStorage.backupLocation || null,
       backupFrequency: externalStorage.backupFrequency || null,
-      datasets: externalStorage.datasets || []
+      datasets: externalStorage.datasets || [],
     });
     return formGroup;
   }
@@ -475,7 +541,7 @@ export class FormService {
       id: [null, { disabled: true }],
       repositoryId: [null],
       title: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
-      datasets: [[]]
+      datasets: [[]],
     });
   }
 
@@ -485,7 +551,7 @@ export class FormService {
       id: repo.id,
       repositoryId: repo.repositoryId,
       title: repo.title || '',
-      datasets: repo.datasets || []
+      datasets: repo.datasets || [],
     });
     return formGroup;
   }
@@ -526,12 +592,12 @@ export class FormService {
       value: cost.value,
       type: cost.type || null,
       customType: cost.customType || '',
-      description: cost.description || ''
+      description: cost.description || '',
     });
     return formGroup;
   }
 
-  private mapFormGroupToCost(group: Object) : Cost {
+  private mapFormGroupToCost(group: Object): Cost {
     let c: Cost = {
       id: Number(group['id']),
       title: group['title'],
@@ -545,7 +611,9 @@ export class FormService {
   }
 
   private removeDatasetReferences(index: number) {
-    const dataset = (this.form.get('datasets') as UntypedFormArray).at(index) as UntypedFormGroup;
+    const dataset = (this.form.get('datasets') as UntypedFormArray).at(
+      index
+    ) as UntypedFormGroup;
 
     // Storage
     const storageStep = this.form.get('storage') as UntypedFormArray;
@@ -560,11 +628,26 @@ export class FormService {
     this.removeDatasetReferenceInFormArray(repoStep, dataset);
   }
 
-  private removeDatasetReferenceInFormArray(array: UntypedFormArray, dataset: UntypedFormGroup) {
+  private removeDatasetReferenceInFormArray(
+    array: UntypedFormArray,
+    dataset: UntypedFormGroup
+  ) {
     for (let i = 0; i < array.controls?.length; i++) {
       const item = array.at(i);
-      const datasets = item.value.datasets.filter(entry => entry !== dataset.value.referenceHash);
+      const datasets = item.value.datasets.filter(
+        entry => entry !== dataset.value.referenceHash
+      );
       item.patchValue({ datasets });
+    }
+  }
+
+  private getStartDate(): Date {
+    if (this.form.value.project?.end || null) {
+      const startDate = new Date(this.form.value.project.end);
+      startDate.setMonth(startDate.getMonth() - 2);
+      return startDate;
+    } else {
+      return null;
     }
   }
 }

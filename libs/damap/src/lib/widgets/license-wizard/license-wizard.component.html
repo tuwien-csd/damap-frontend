@@ -1,4 +1,9 @@
-<button mat-raised-button color="accent" matTooltip="{{'dmp.steps.licensing.info' | translate }}" [attr.aria-label]="'license.wizard.select' | translate"
-        color="primary" (click)="openDialog()">
-      {{'License selector' | translate}}
+<button
+  mat-raised-button
+  color="accent"
+  matTooltip="{{ 'dmp.steps.licensing.info' | translate }}"
+  [attr.aria-label]="'license.wizard.select' | translate"
+  color="primary"
+  (click)="openDialog()">
+  {{ "License selector" | translate }}
 </button>

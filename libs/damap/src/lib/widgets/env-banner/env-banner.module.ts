@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {EnvBannerComponent} from './env-banner.component';
-import {CommonModule} from '@angular/common';
-import {TranslateModule} from '@ngx-translate/core';
-import {MatCardModule} from '@angular/material/card';
+import { NgModule } from '@angular/core';
+import { EnvBannerComponent } from './env-banner.component';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [EnvBannerComponent],
@@ -11,7 +11,7 @@ import {MatCardModule} from '@angular/material/card';
     TranslateModule,
 
     // Materials
-    MatCardModule
+    MatCardModule,
   ],
   exports: [
     CommonModule,
@@ -19,7 +19,7 @@ import {MatCardModule} from '@angular/material/card';
     EnvBannerComponent,
 
     // Materials
-    MatCardModule
-  ]
+    MatCardModule,
+  ],
 })
 export class EnvBannerModule {}

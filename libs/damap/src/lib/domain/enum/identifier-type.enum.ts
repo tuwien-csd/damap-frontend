@@ -8,5 +8,5 @@ export enum IdentifierType {
   URL = 'URL',
   FUNDREF = 'FUNDREF',
   ROR = 'ROR',
-  OTHER = 'OTHER'
+  OTHER = 'OTHER',
 }
