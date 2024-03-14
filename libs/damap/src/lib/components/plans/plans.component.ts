@@ -25,13 +25,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./plans.component.css'],
 })
 export class PlansComponent implements OnInit {
-  dmps$: Observable<DmpListItem[]> = this.store.pipe(select(selectDmps));
-  dmpsLoaded$: Observable<LoadingState> = this.store.pipe(
-    select(selectDmpsLoaded),
-  );
+  dmps$: Observable<DmpListItem[]>;
+  dmpsLoaded$: Observable<LoadingState>;
   LoadingState = LoadingState;
   exportDmpType: ETemplateType;
-  dmpForm: FormGroup = this.formService.dmpForm;
+  dmpForm: FormGroup;
 
   allDmps$: Observable<DmpListItem[]>;
 
@@ -41,7 +39,12 @@ export class PlansComponent implements OnInit {
     private authService: AuthService,
     private formService: FormService,
     private dialog: MatDialog,
-  ) {}
+  ) {
+    this.dmps$ = this.store.pipe(select(selectDmps));
+    this.dmpsLoaded$ = this.store.pipe(select(selectDmpsLoaded));
+    this.dmpForm = this.formService.dmpForm;
+  }
+
   ngOnInit() {
     this.getDmps();
 

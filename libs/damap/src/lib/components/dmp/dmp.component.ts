@@ -34,12 +34,16 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
   styleUrls: ['./dmp.component.css'],
 })
 export class DmpComponent implements OnInit, OnDestroy {
-  readonly username = this.auth.getUsername();
-  readonly admin = this.auth.isAdmin();
+  get username(): string {
+    return this.auth.getUsername();
+  }
+  get admin(): boolean {
+    return this.auth.isAdmin();
+  }
 
   @ViewChild('stepper') stepper: MatStepper;
+  dmpForm: UntypedFormGroup;
 
-  dmpForm: UntypedFormGroup = this.formService.dmpForm;
   formChanged: boolean;
 
   // Steps
@@ -71,7 +75,9 @@ export class DmpComponent implements OnInit, OnDestroy {
     private router: Router,
     private backendService: BackendService,
     public store: Store<AppState>,
-  ) {}
+  ) {
+    this.dmpForm = this.formService.dmpForm;
+  }
 
   ngOnInit() {
     this.getDmpById();

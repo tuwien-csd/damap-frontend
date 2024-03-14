@@ -27,7 +27,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
   @Input() stepChanged$: Subject<any>;
   @Input() admin = false;
 
-  dmpForm: FormGroup = this.formService.dmpForm;
+  dmpForm: FormGroup;
 
   formChanged$: Observable<boolean>;
   formChanged: boolean;
@@ -42,7 +42,9 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
     private formService: FormService,
     private dialog: MatDialog,
     private store: Store<AppState>,
-  ) {}
+  ) {
+    this.dmpForm = this.formService.dmpForm;
+  }
 
   ngOnInit(): void {
     this.formChanged$ = this.store.pipe(select(selectFormChanged));

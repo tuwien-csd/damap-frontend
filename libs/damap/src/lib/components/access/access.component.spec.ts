@@ -9,7 +9,8 @@ import {
 } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { PersonCardComponent } from '../../widgets/person-card/person-card.component';
-import { BackendService, TranslateTestingModule } from '@damap/core';
+import { BackendService } from '../../services/backend.service';
+import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
 import { ActivatedRoute } from '@angular/router';
 import { mockAccess } from '../../mocks/access-mocks';
 import { completeDmp } from '../../mocks/dmp-mocks';

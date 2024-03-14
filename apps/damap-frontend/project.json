@@ -95,14 +95,14 @@
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "browserTarget": "damap-frontend:build"
+        "buildTarget": "damap-frontend:build"
       },
       "configurations": {
         "production": {
-          "browserTarget": "damap-frontend:build:production"
+          "buildTarget": "damap-frontend:build:production"
         },
         "development": {
-          "browserTarget": "damap-frontend:build:development"
+          "buildTarget": "damap-frontend:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -110,7 +110,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "damap-frontend:build"
+        "buildTarget": "damap-frontend:build"
       }
     },
     "test": {

@@ -10,7 +10,7 @@ import { selectRecommendedRepositoriesLoaded } from '../selectors/repository.sel
 import { IdentifierType } from '../../domain/enum/identifier-type.enum';
 import { TestScheduler } from 'rxjs/testing';
 import { HttpErrorResponse } from '@angular/common/http';
-import { LoadingState } from '@damap/core';
+import { LoadingState } from '../../domain/enum/loading-state.enum';
 
 describe('RepositoryEffects', () => {
   let actions$;
