@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "nx",
     "start": "npx nx serve damap-frontend",
-    "build": "nx build",
+    "build": "nx run build:damap-frontend",
     "build-openshift": "nx build --configuration=openshift",
     "build-prod": "nx build --configuration=production",
     "watch": "nx build --watch --configuration development",
