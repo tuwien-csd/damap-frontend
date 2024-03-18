@@ -15,14 +15,14 @@ export class ConsentGuard implements CanActivate {
 
   constructor(
     private backendService: BackendService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {
     this.consentGiven = true;
   }
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    state: RouterStateSnapshot,
   ): boolean {
     const consentResponse = this.backendService.getConsentGiven();
     consentResponse.subscribe(response => {

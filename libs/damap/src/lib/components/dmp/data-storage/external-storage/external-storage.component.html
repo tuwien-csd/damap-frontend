@@ -11,14 +11,17 @@
   <div class="storage-selected">
     <ng-container>
       <mat-card
+        appearance="raised"
         *ngFor="let item of externalStorageStep?.controls; let i = index">
         <div class="storage-card-top">
-          <mat-card-title [class.form-error]="item.invalid">
-            {{ item.value.title }}
-          </mat-card-title>
-          <mat-panel-description>
-            {{ item.value.backupLocation }}
-          </mat-panel-description>
+          <mat-card-header>
+            <mat-card-title [class.form-error]="item.invalid">
+              {{ item.value.title }}
+            </mat-card-title>
+            <mat-panel-description>
+              {{ item.value.backupLocation }}
+            </mat-panel-description>
+          </mat-card-header>
         </div>
         <mat-card-content>
           <div class="form-row">

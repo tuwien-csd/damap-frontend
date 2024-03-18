@@ -21,9 +21,7 @@ export class DatasetDialogComponent {
   identifierTypeReusedData: any = IdentifierTypeReusedData;
 
   mode = 'add';
-  dataset: UntypedFormGroup = this.formService.createDatasetFormGroup(
-    this.data.dataset.title
-  );
+  dataset: UntypedFormGroup;
   datasetId: Identifier = {
     identifier: undefined,
     type: undefined,
@@ -34,8 +32,12 @@ export class DatasetDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<DatasetDialogComponent>,
     private formService: FormService,
-    @Inject(MAT_DIALOG_DATA) public data: { dataset: Dataset; mode: string }
+    @Inject(MAT_DIALOG_DATA) public data: { dataset: Dataset; mode: string },
   ) {
+    this.dataset = this.formService.createDatasetFormGroup(
+      this.data.dataset.title,
+    );
+
     this.dataset.patchValue(data.dataset);
     this.mode = data.mode ?? this.mode;
     if (data.dataset.datasetId) {

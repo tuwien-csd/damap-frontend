@@ -61,19 +61,26 @@
     </div>
     <div class="ls-list">
       <mat-card
+        appearance="raised"
         class="ls-item"
         *ngFor="let license of (licenseList | licenseFilter:searchBox.value)">
-        <div class="ls-item-header">
-          <h3 [mat-dialog-close]="license">{{license.name | translate}}</h3>
-          <div>
-            <a href="{{license.url}}" target="_blank" rel="noopener" mat-button
-              >{{'license.wizard.info' | translate}}</a
-            >
+        <mat-card-content>
+          <div class="ls-item-header">
+            <h3 [mat-dialog-close]="license">{{license.name | translate}}</h3>
+            <div>
+              <a
+                href="{{license.url}}"
+                target="_blank"
+                rel="noopener"
+                mat-button
+                >{{'license.wizard.info' | translate}}</a
+              >
+            </div>
           </div>
-        </div>
-        <div class="ls-description" [mat-dialog-close]="license">
-          {{license.description | translate}}
-        </div>
+          <div class="ls-description" [mat-dialog-close]="license">
+            {{license.description | translate}}
+          </div>
+        </mat-card-content>
       </mat-card>
     </div>
   </ng-container>

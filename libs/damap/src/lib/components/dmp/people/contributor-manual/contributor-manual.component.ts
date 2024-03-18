@@ -74,7 +74,7 @@ export class ContributorManualComponent {
     this.show = false;
     this.form.reset();
     (this.form.controls.personId as UntypedFormGroup).controls.type.setValue(
-      IdentifierType.ORCID
+      IdentifierType.ORCID,
     );
   }
 }

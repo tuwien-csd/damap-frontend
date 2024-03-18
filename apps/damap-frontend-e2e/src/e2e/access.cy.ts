@@ -9,11 +9,8 @@ describe('access', () => {
 
   it('should add dmp editor', () => {
     cy.intercept('POST', '/api/access').as('createAccess');
-    cy.get('app-dmp-table tr')
-      .first()
-      .get('td')
-      .last()
-      .click()
+    cy.get('app-dmp-table tr').first().get('td').last().click();
+    cy.get('mat-mdc-menu-content button')
       .get('mat-icon')
       .contains('admin_panel_settings')
       .click();
@@ -23,11 +20,8 @@ describe('access', () => {
 
   it('should delete dmp editor', () => {
     cy.intercept('DELETE', '/api/access/*').as('deleteAccess');
-    cy.get('app-dmp-table tr')
-      .first()
-      .get('td')
-      .last()
-      .click()
+    cy.get('app-dmp-table tr').first().get('td').last().click();
+    cy.get('mat-mdc-menu-content button')
       .get('mat-icon')
       .contains('admin_panel_settings')
       .click();

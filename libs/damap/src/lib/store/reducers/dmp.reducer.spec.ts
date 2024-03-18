@@ -47,7 +47,7 @@ describe('DmpReducer', () => {
   it('should return loaded dmps', () => {
     const state = dmpReducer(
       initialDmpState,
-      dmpsLoaded({ dmps: mockDmpList })
+      dmpsLoaded({ dmps: mockDmpList }),
     );
 
     expect(state.loaded).toBe(LoadingState.LOADED);
@@ -77,7 +77,7 @@ describe('DmpReducer', () => {
       exportDmpTemplate({
         dmp: completeDmp,
         dmpTemplateType: ETemplateType.FWF,
-      })
+      }),
     );
     expect(state.saving).toBe(true);
 

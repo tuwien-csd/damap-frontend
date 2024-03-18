@@ -32,7 +32,7 @@ export class RepoFilterComponent {
           if (result) {
             this.filterChange.emit(result);
           }
-        }
+        },
       );
   }
 }
@@ -48,7 +48,7 @@ export class FilterDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<FilterDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: { [key: string]: { id: string; label: string }[] }
+    public data: { [key: string]: { id: string; label: string }[] },
   ) {}
 
   onFilterChange(filterName: string, event: { id: string; label: string }[]) {

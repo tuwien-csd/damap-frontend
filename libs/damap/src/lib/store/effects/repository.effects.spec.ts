@@ -10,7 +10,7 @@ import { selectRecommendedRepositoriesLoaded } from '../selectors/repository.sel
 import { IdentifierType } from '../../domain/enum/identifier-type.enum';
 import { TestScheduler } from 'rxjs/testing';
 import { HttpErrorResponse } from '@angular/common/http';
-import { LoadingState } from '@damap/core';
+import { LoadingState } from '../../domain/enum/loading-state.enum';
 
 describe('RepositoryEffects', () => {
   let actions$;
@@ -63,7 +63,7 @@ describe('RepositoryEffects', () => {
   it('should load and return recommended repositories', () => {
     actions$ = of(RepositoryAction.loadRecommendedRepositories);
     backendService.getRecommendedRepositories.and.returnValue(
-      of([mockDetailRepo])
+      of([mockDetailRepo]),
     );
 
     effects.loadRecommendedRepositories$.subscribe(action => {
@@ -71,7 +71,7 @@ describe('RepositoryEffects', () => {
       expect(action).toEqual(
         RepositoryAction.recommendedRepositoriesLoaded({
           repositories: [mockDetailRepo],
-        })
+        }),
       );
     });
   });
@@ -83,7 +83,7 @@ describe('RepositoryEffects', () => {
     effects.loadRepositories$.subscribe(action => {
       expect(backendService.getRepositories).toHaveBeenCalled();
       expect(action).toEqual(
-        RepositoryAction.repositoriesLoaded({ repositories: [mockRepo] })
+        RepositoryAction.repositoriesLoaded({ repositories: [mockRepo] }),
       );
     });
   });
@@ -94,12 +94,12 @@ describe('RepositoryEffects', () => {
       of({
         id: mockDetailRepo.id,
         changes: mockDetailRepo,
-      })
+      }),
     );
 
     effects.loadRepository$.subscribe(action => {
       expect(backendService.getRepositoryById).toHaveBeenCalledWith(
-        mockDetailRepo.id
+        mockDetailRepo.id,
       );
       expect(action).toEqual(
         RepositoryAction.updateRepository({
@@ -107,7 +107,7 @@ describe('RepositoryEffects', () => {
             id: mockDetailRepo.id,
             changes: mockDetailRepo,
           },
-        })
+        }),
       );
     });
   });
@@ -123,7 +123,7 @@ describe('RepositoryEffects', () => {
             },
           ],
         },
-      })
+      }),
     );
     backendService.searchRepository.and.returnValue(of([mockRepo]));
 
@@ -142,7 +142,7 @@ describe('RepositoryEffects', () => {
           ],
         });
         expect(action).toEqual(
-          RepositoryAction.repositoriesLoaded({ repositories: [mockRepo] })
+          RepositoryAction.repositoriesLoaded({ repositories: [mockRepo] }),
         );
       });
   });
@@ -150,7 +150,7 @@ describe('RepositoryEffects', () => {
   it('should load repositories and fail', () => {
     actions$ = of(RepositoryAction.loadAllRepositories);
     backendService.getRepositories.and.returnValue(
-      throwError(() => new HttpErrorResponse({}))
+      throwError(() => new HttpErrorResponse({})),
     );
 
     effects.loadRepositories$.subscribe(action => {

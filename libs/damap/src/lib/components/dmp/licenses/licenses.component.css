@@ -16,7 +16,7 @@
 
 .licenseContainerParent {
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   gap: 30px;
 }
 
@@ -28,7 +28,7 @@
   margin-top: 0.5rem;
 }
 
-.custom-style ::ng-deep .mat-form-field-flex {
+.custom-style ::ng-deep .mat-mdc-text-field-wrapper {
   background-color: var(--main-color);
   background-image: linear-gradient(
     rgba(255, 255, 255, 0.9),

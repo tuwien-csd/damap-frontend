@@ -47,55 +47,55 @@ export class LegalEthicalAspectsComponent {
 
   get sensitiveDataAccess(): UntypedFormControl {
     return this.legalEthicalStep.get(
-      'sensitiveDataAccess'
+      'sensitiveDataAccess',
     ) as UntypedFormControl;
   }
 
   get otherPersonalDataCompliance(): UntypedFormControl {
     return this.legalEthicalStep?.get(
-      'otherPersonalDataCompliance'
+      'otherPersonalDataCompliance',
     ) as UntypedFormControl;
   }
 
   get otherDataSecurityMeasures(): UntypedFormControl {
     return this.legalEthicalStep.get(
-      'otherDataSecurityMeasures'
+      'otherDataSecurityMeasures',
     ) as UntypedFormControl;
   }
 
   get legalRestrictionsComment(): UntypedFormControl {
     return this.legalEthicalStep?.get(
-      'legalRestrictionsComment'
+      'legalRestrictionsComment',
     ) as UntypedFormControl;
   }
 
   get otherLegalRestrictionsDocuments(): UntypedFormControl {
     return this.legalEthicalStep.get(
-      'otherLegalRestrictionsDocuments'
+      'otherLegalRestrictionsDocuments',
     ) as UntypedFormControl;
   }
 
   get dataRightsAndAccessControl(): UntypedFormControl {
     return this.legalEthicalStep.get(
-      'dataRightsAndAccessControl'
+      'dataRightsAndAccessControl',
     ) as UntypedFormControl;
   }
 
   get isOtherSelected() {
     return this.legalEthicalStep?.controls.personalDataCompliance?.value.includes(
-      ComplianceType.OTHER
+      ComplianceType.OTHER,
     );
   }
 
   get isOtherMeasureSelected() {
     return this.legalEthicalStep.controls.sensitiveDataSecurity.value?.includes(
-      SecurityMeasure.OTHER
+      SecurityMeasure.OTHER,
     );
   }
 
   get isOtherDocumentSelected() {
     return this.legalEthicalStep.controls.legalRestrictionsDocuments.value?.includes(
-      Agreement.OTHER
+      Agreement.OTHER,
     );
   }
 }

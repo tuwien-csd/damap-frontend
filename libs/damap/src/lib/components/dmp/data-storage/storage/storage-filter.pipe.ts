@@ -8,7 +8,7 @@ import { InternalStorage } from '../../../../domain/internal-storage';
 export class StorageFilterPipe implements PipeTransform {
   transform(data: InternalStorage[], selected: Storage[]) {
     return data.filter(
-      item => !selected?.find(entry => entry.internalStorageId === item.id)
+      item => !selected?.find(entry => entry.internalStorageId === item.id),
     );
   }
 }

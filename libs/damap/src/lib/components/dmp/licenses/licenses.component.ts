@@ -33,10 +33,10 @@ export class LicensesComponent {
   get isAnonymisedOrPseudonymised() {
     return (
       this.dmpForm?.value.legal.personalDataCompliance?.includes(
-        ComplianceType.ANONYMISATION
+        ComplianceType.ANONYMISATION,
       ) ||
       this.dmpForm?.value.legal.personalDataCompliance?.includes(
-        ComplianceType.PSEUDONYMISATION
+        ComplianceType.PSEUDONYMISATION,
       )
     );
   }
@@ -45,7 +45,7 @@ export class LicensesComponent {
     return this.datasets?.value.filter(
       item =>
         item.dataAccess === DataAccessType.RESTRICTED &&
-        item.source === DataSource.NEW
+        item.source === DataSource.NEW,
     );
   }
 
@@ -53,7 +53,7 @@ export class LicensesComponent {
     return this.datasets?.value.filter(
       item =>
         item.dataAccess === DataAccessType.CLOSED &&
-        item.source === DataSource.NEW
+        item.source === DataSource.NEW,
     );
   }
 

@@ -32,7 +32,7 @@
   justify-content: space-between;
 }
 
-.mat-card-actions {
+.mat-mdc-card-actions {
   margin: 0;
   padding: 0;
 }

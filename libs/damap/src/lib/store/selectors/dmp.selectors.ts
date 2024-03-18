@@ -6,12 +6,12 @@ export const { selectAll } = adapter.getSelectors();
 
 export const selectDmpsState = createSelector(
   selectDamapState,
-  (state: AppState) => state.dmps
+  (state: AppState) => state.dmps,
 );
 
 export const selectDmpsLoaded = createSelector(
   selectDmpsState,
-  dmpsState => dmpsState.loaded
+  dmpsState => dmpsState.loaded,
 );
 
 export const selectDmps = createSelector(selectDmpsState, selectAll);
@@ -21,5 +21,5 @@ export const selectDmpById = (props: { id: number }) =>
 
 export const selectDmpSaving = createSelector(
   selectDmpsState,
-  dmpsState => dmpsState.saving
+  dmpsState => dmpsState.saving,
 );

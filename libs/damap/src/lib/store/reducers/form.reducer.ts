@@ -13,7 +13,7 @@ export const formReducer = createReducer(
     ...state,
     changed: !equals(state.dmp, newDmp),
   })),
-  on(resetFormValue, _ => initialFormState)
+  on(resetFormValue, _ => initialFormState),
 );
 
 export function equals(a, b) {

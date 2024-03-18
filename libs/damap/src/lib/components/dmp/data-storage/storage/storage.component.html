@@ -2,9 +2,10 @@
 <section class="tu-storage">
   <div class="storage-grid">
     <mat-card
+      appearance="raised"
       *ngFor="
         let element of internalStorages
-          | storageFilter : storageStep?.getRawValue()
+          | storageFilter: storageStep?.getRawValue()
       "
       class="storage-card">
       <mat-card-header (click)="addStorage(element)">
@@ -24,7 +25,9 @@
   </div>
   <div class="storage-selected" [formGroup]="dmpForm">
     <ng-container formArrayName="storage">
-      <mat-card *ngFor="let item of storageStep?.controls; let i = index">
+      <mat-card
+        appearance="raised"
+        *ngFor="let item of storageStep?.controls; let i = index">
         <div class="storage-card-top">
           <mat-card-title>{{ item.value.title }}</mat-card-title>
           <mat-card-actions>

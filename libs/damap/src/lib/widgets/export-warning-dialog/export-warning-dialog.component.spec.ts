@@ -6,7 +6,7 @@ import { ExportWarningDialogComponent } from './export-warning-dialog.component'
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateTestingModule } from '@damap/core';
+import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
 import { provideMockStore } from '@ngrx/store/testing';
 
 describe('ExportWarningDialogComponent', () => {

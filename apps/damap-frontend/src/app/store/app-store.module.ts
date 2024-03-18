@@ -17,7 +17,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
           strictActionImmutability: true,
           strictStateImmutability: true,
         },
-      }
+      },
     ),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({

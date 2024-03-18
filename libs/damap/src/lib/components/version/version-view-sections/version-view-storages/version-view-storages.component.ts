@@ -16,7 +16,7 @@ export class VersionViewStoragesComponent {
 
   getDatasetsForStorage(storage: Host): Dataset[] {
     return this.datasets.filter(item =>
-      storage.datasets.includes(item.referenceHash)
+      storage.datasets.includes(item.referenceHash),
     );
   }
 }

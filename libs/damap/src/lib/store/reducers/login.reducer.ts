@@ -15,7 +15,7 @@ function setToken(state, auth) {
 
 const loginReducer = createReducer(
   initialState,
-  on(LoginActions.login, setToken)
+  on(LoginActions.login, setToken),
 );
 
 export function reducer(state: LoginState | undefined, action: Action) {

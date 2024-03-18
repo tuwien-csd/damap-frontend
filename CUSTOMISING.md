@@ -34,8 +34,7 @@ This happens in the following section:
 providers: [
   {
     provide: APP_INITIALIZER,
-    useFactory: (configService: ConfigService) => () =>
-      configService.initializeApp(),
+    useFactory: (configService: ConfigService) => () => configService.initializeApp(),
     deps: [ConfigService],
     multi: true,
   },

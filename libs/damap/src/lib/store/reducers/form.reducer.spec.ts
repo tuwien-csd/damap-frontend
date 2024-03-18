@@ -7,7 +7,7 @@ describe('FormReducer', () => {
   it('should set form', () => {
     const state = formReducer(
       initialFormState,
-      setFormValue({ dmp: completeDmp })
+      setFormValue({ dmp: completeDmp }),
     );
 
     expect(state.changed).toBeFalse();
@@ -17,7 +17,7 @@ describe('FormReducer', () => {
   it('should check form diff', () => {
     const state = formReducer(
       { dmp: completeDmp, changed: false },
-      formDiff({ newDmp: completeDmp })
+      formDiff({ newDmp: completeDmp }),
     );
     expect(state.changed).toBeFalse();
     expect(state.dmp).toEqual(completeDmp);

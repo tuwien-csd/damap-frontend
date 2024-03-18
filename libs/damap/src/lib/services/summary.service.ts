@@ -99,7 +99,7 @@ export class SummaryService {
         peopleLevel.status.push('dmp.steps.summary.people.contributor.one');
       } else {
         peopleLevel.status.push(
-          'dmp.steps.summary.people.contributor.multiple'
+          'dmp.steps.summary.people.contributor.multiple',
         );
         peopleLevel.status.push(`${contributors.length}`);
       }
@@ -122,7 +122,7 @@ export class SummaryService {
       if (dmp[kind] === DataKind.NONE) {
         datasetLevel.completeness += 50;
         datasetLevel.status.push(
-          `dmp.steps.summary.data.specify.datasets.none.${datakind}`
+          `dmp.steps.summary.data.specify.datasets.none.${datakind}`,
         );
       } else if (dmp[kind] === DataKind.SPECIFY) {
         // check if datasets exist
@@ -133,12 +133,12 @@ export class SummaryService {
           datasetLevel.completeness += 50;
         }
         datasetLevel.status.push(
-          `dmp.steps.summary.data.specify.datasets.${datakind}`
+          `dmp.steps.summary.data.specify.datasets.${datakind}`,
         );
         datasetLevel.status.push(`${datasets.length}. `);
       } else if (dmp[kind] === DataKind.UNKNOWN) {
         datasetLevel.status.push(
-          `dmp.steps.summary.data.specify.datasets.unknown.${datakind}`
+          `dmp.steps.summary.data.specify.datasets.unknown.${datakind}`,
         );
       }
     }
@@ -151,7 +151,7 @@ export class SummaryService {
       if (!dmp.noDataExplanation) {
         datasetLevel.completeness -= 50;
         datasetLevel.status.push(
-          'dmp.steps.summary.data.specify.datasets.missingexplanation'
+          'dmp.steps.summary.data.specify.datasets.missingexplanation',
         );
       }
     } else if (
@@ -164,7 +164,7 @@ export class SummaryService {
             ? datasetLevel.completeness - 20
             : datasetLevel.completeness;
         datasetLevel.status.push(
-          'dmp.steps.summary.data.specify.datasets.datageneration'
+          'dmp.steps.summary.data.specify.datasets.datageneration',
         );
       }
     } else if (!dmp.dataKind && !dmp.reusedDataKind) {
@@ -267,7 +267,7 @@ export class SummaryService {
           'sensitiveData',
           dmp.sensitiveDataSecurity,
           SecurityMeasure.OTHER,
-          dmp.otherDataSecurityMeasures
+          dmp.otherDataSecurityMeasures,
         ) *
           legalPercent) /
         3;
@@ -286,7 +286,7 @@ export class SummaryService {
           'personalData',
           dmp.personalDataCompliance,
           ComplianceType.OTHER,
-          dmp.otherPersonalDataCompliance
+          dmp.otherPersonalDataCompliance,
         ) *
           legalPercent) /
         2;
@@ -302,7 +302,7 @@ export class SummaryService {
           'legalRestrictions',
           dmp.legalRestrictionsDocuments,
           Agreement.OTHER,
-          dmp.otherLegalRestrictionsDocument
+          dmp.otherLegalRestrictionsDocument,
         ) *
           legalPercent) /
         3;
@@ -336,18 +336,18 @@ export class SummaryService {
 
     const newDatasets = this.getDatasetsBySource(dmp.datasets, DataSource.NEW);
     const publishedDatasets = newDatasets.filter(
-      d => d.dataAccess === DataAccessType.OPEN
+      d => d.dataAccess === DataAccessType.OPEN,
     );
     const restrictedCount = newDatasets.filter(
-      d => d.dataAccess === DataAccessType.RESTRICTED
+      d => d.dataAccess === DataAccessType.RESTRICTED,
     ).length;
     const closedCount = newDatasets.filter(
-      d => d.dataAccess === DataAccessType.CLOSED
+      d => d.dataAccess === DataAccessType.CLOSED,
     ).length;
     const deletedDatasets = newDatasets.filter(d => d.delete);
 
     const incompleteDataset = publishedDatasets.find(
-      d => !d.license || !d.startDate
+      d => !d.license || !d.startDate,
     );
     if (incompleteDataset) {
       licensesLevel.completeness -= 30;
@@ -361,7 +361,7 @@ export class SummaryService {
     }
 
     const incompleteDeletedDataset = deletedDatasets.find(
-      d => !d.deletionPerson || !d.dateOfDeletion || !d.reasonForDeletion
+      d => !d.deletionPerson || !d.dateOfDeletion || !d.reasonForDeletion,
     );
     if (deletedDatasets.length > 0 && incompleteDeletedDataset) {
       licensesLevel.completeness -= 30;
@@ -386,21 +386,21 @@ export class SummaryService {
       ...new Set([...this.getAllHostDatasets(dmp.repositories)]),
     ];
     const newDatasets = dmp.datasets.filter(
-      d => d.source === DataSource.NEW && d.dataAccess === DataAccessType.OPEN
+      d => d.source === DataSource.NEW && d.dataAccess === DataAccessType.OPEN,
     );
     const undepositedDataset = newDatasets.find(
-      d => !repoDatasets.includes(d.referenceHash)
+      d => !repoDatasets.includes(d.referenceHash),
     );
 
     if (newDatasets.length && undepositedDataset) {
       repositoriesLevel.completeness = 0;
       repositoriesLevel.status.push(
-        'dmp.steps.summary.repositories.deposited.incomplete'
+        'dmp.steps.summary.repositories.deposited.incomplete',
       );
     } else {
       repositoriesLevel.completeness = 100;
       repositoriesLevel.status.push(
-        'dmp.steps.summary.repositories.deposited.complete'
+        'dmp.steps.summary.repositories.deposited.complete',
       );
     }
 
@@ -416,7 +416,7 @@ export class SummaryService {
     const restrictedDatasets = !!dmp.datasets.filter(
       d =>
         d.dataAccess === DataAccessType.RESTRICTED &&
-        d.source === DataSource.NEW
+        d.source === DataSource.NEW,
     ).length;
     const reusePercent = 100 / (restrictedDatasets ? 3 : 2);
     if (dmp.targetAudience) {
@@ -475,7 +475,7 @@ export class SummaryService {
 
   private static getDatasetsBySource(
     datasets: Dataset[],
-    source: DataSource
+    source: DataSource,
   ): Dataset[] {
     return datasets.filter(d => d.source === source);
   }
@@ -501,7 +501,7 @@ export class SummaryService {
     condition: string,
     enumList: string[],
     otherEnum: string,
-    otherField: string
+    otherField: string,
   ): number {
     let completeness = 0;
     for (const item of dmp.datasets) {

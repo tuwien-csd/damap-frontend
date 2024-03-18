@@ -80,7 +80,7 @@ describe('BackendService', () => {
     });
 
     const req = httpTestingController.expectOne(
-      `${backendUrl}dmps/${completeDmp.id}`
+      `${backendUrl}dmps/${completeDmp.id}`,
     );
     expect(req.request.method).toBe('PUT');
     req.flush(completeDmp);
@@ -93,7 +93,7 @@ describe('BackendService', () => {
     });
 
     const req = httpTestingController.expectOne(
-      `${backendUrl}access/dmps/${completeDmp.id}`
+      `${backendUrl}access/dmps/${completeDmp.id}`,
     );
     req.flush([mockAccess]);
   });
@@ -113,7 +113,7 @@ describe('BackendService', () => {
       .subscribe(access => expect(access).toBe(EMPTY));
 
     const req = httpTestingController.expectOne(
-      `${backendUrl}access/${mockAccess.id}`
+      `${backendUrl}access/${mockAccess.id}`,
     );
     req.flush(EMPTY);
   });
@@ -139,7 +139,7 @@ describe('BackendService', () => {
     });
 
     const req = httpTestingController.expectOne(
-      `${backendUrl}repositories/${id}`
+      `${backendUrl}repositories/${id}`,
     );
     req.flush([{ id: 'r3d100012810', name: 'Random Repo' }]);
   });
@@ -172,7 +172,7 @@ describe('BackendService', () => {
       });
 
     const req = httpTestingController.expectOne(
-      `${backendUrl}projects/1234/staff`
+      `${backendUrl}projects/1234/staff`,
     );
     req.flush([
       {
@@ -191,7 +191,7 @@ describe('BackendService', () => {
       });
 
     const req = httpTestingController.expectOne(
-      `${backendUrl}repositories/search?subjects=cars`
+      `${backendUrl}repositories/search?subjects=cars`,
     );
     expect(req.request.params.get('subjects')).toEqual('cars');
     req.flush([{}, {}]);
@@ -233,7 +233,7 @@ describe('BackendService', () => {
     });
 
     const req = httpTestingController.expectOne(
-      `${backendUrl}openaire?doi=${doi}`
+      `${backendUrl}openaire?doi=${doi}`,
     );
     expect(req.request.method).toBe('GET');
     req.flush(closedDatasetMock);
@@ -258,7 +258,7 @@ describe('BackendService', () => {
 
     service.exportDmpTemplate(1, 'FWF');
     const req = httpTestingController.expectOne(
-      `${backendUrl}document/1?template=FWF`
+      `${backendUrl}document/1?template=FWF`,
     );
     req.flush(new Blob(), {
       headers: new HttpHeaders({ 'content-disposition': 'filename=any.docx' }),

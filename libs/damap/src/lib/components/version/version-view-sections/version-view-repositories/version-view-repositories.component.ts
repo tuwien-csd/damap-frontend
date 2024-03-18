@@ -13,7 +13,7 @@ export class VersionViewRepositoriesComponent {
 
   getDatasetsForRepository(repo: Repository): Dataset[] {
     return this.datasets?.filter(item =>
-      repo.datasets.includes(item.referenceHash)
+      repo.datasets.includes(item.referenceHash),
     );
   }
 }

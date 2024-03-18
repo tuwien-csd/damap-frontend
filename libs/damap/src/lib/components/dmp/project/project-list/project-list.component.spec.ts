@@ -9,7 +9,7 @@ import {
   mockRecommendedProjectSearchResult,
 } from '../../../../mocks/search';
 
-import { BackendService } from '@damap/core';
+import { BackendService } from '../../../../services/backend.service';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -37,10 +37,10 @@ describe('ProjectListComponent', () => {
       'getRecommendedProjects',
     ]);
     backendSpy.getProjectSearchResult.and.returnValue(
-      of(mockProjectSearchResult)
+      of(mockProjectSearchResult),
     );
     backendSpy.getRecommendedProjects.and.returnValue(
-      of(mockRecommendedProjectSearchResult)
+      of(mockRecommendedProjectSearchResult),
     );
 
     await TestBed.configureTestingModule({

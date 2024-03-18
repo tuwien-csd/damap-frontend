@@ -105,13 +105,13 @@ describe('SummaryService', () => {
     expect(summary.completeness).toEqual(80);
     expect(
       summary.status.includes(
-        'dmp.steps.summary.data.specify.datasets.produced'
-      )
+        'dmp.steps.summary.data.specify.datasets.produced',
+      ),
     ).toBeTrue();
     expect(
       summary.status.includes(
-        'dmp.steps.summary.data.specify.datasets.datageneration'
-      )
+        'dmp.steps.summary.data.specify.datasets.datageneration',
+      ),
     ).toBeTrue();
     expect(summary.status.includes('1. ')).toBeTrue();
 
@@ -120,8 +120,8 @@ describe('SummaryService', () => {
     expect(summary.completeness).toEqual(100);
     expect(
       summary.status.includes(
-        'dmp.steps.summary.data.specify.datasets.datageneration'
-      )
+        'dmp.steps.summary.data.specify.datasets.datageneration',
+      ),
     ).toBeFalse();
 
     dmp.dataKind = DataKind.UNKNOWN;
@@ -129,8 +129,8 @@ describe('SummaryService', () => {
     expect(summary.completeness).toEqual(50);
     expect(
       summary.status.includes(
-        'dmp.steps.summary.data.specify.datasets.unknown.produced'
-      )
+        'dmp.steps.summary.data.specify.datasets.unknown.produced',
+      ),
     ).toBeTrue();
   });
 

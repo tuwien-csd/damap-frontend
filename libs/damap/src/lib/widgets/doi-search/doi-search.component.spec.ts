@@ -52,7 +52,7 @@ describe('DoiSearchComponent', () => {
       loading: new SimpleChange(
         LoadingState.NOT_LOADED,
         LoadingState.LOADING,
-        true
+        true,
       ),
     });
     expect(component.loading).toBe(LoadingState.LOADING);
@@ -63,7 +63,7 @@ describe('DoiSearchComponent', () => {
       loading: new SimpleChange(
         LoadingState.LOADING,
         LoadingState.LOADED,
-        false
+        false,
       ),
     });
     expect(component.doi.setValue).toHaveBeenCalledTimes(1);
