@@ -23,7 +23,7 @@ COPY . /app
 ENV PATH="$PATH:/app/node_modules/@angular/cli/bin/"
 
 # install and build the application on the builder container
-RUN npm install --ignore-scripts -g "nx@20.0.4"
+RUN npm install --ignore-scripts -g "nx@20.11.17"
 RUN npm install --ignore-scripts
 RUN npx nx build damap-frontend
 
