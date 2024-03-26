@@ -9,12 +9,12 @@ export enum FormActionTypes {
 
 export const setFormValue = createAction(
   FormActionTypes.SetForm,
-  props<{ dmp: Dmp }>()
+  props<{ dmp: Dmp }>(),
 );
 
 export const formDiff = createAction(
   FormActionTypes.FormDiff,
-  props<{ newDmp: Dmp }>()
+  props<{ newDmp: Dmp }>(),
 );
 
 export const resetFormValue = createAction(FormActionTypes.ResetForm);

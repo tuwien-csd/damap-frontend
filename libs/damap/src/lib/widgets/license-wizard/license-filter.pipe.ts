@@ -12,7 +12,7 @@ export class LicenseFilterPipe implements PipeTransform {
     return data.filter(
       item =>
         item.available &&
-        item.name.toLowerCase().indexOf(searchText.toLowerCase()) !== -1
+        item.name.toLowerCase().indexOf(searchText.toLowerCase()) !== -1,
     );
   }
 }

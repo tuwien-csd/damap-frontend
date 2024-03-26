@@ -19,10 +19,10 @@ export const internalStorageReducer = createReducer(
         ...state,
         loaded: LoadingState.LOADED,
       });
-    }
+    },
   ),
   on(InternalStorageAction.failedToLoadInternalStorages, state => ({
     ...state,
     loaded: LoadingState.FAILED,
-  }))
+  })),
 );

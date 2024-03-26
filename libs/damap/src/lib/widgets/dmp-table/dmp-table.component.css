@@ -31,7 +31,7 @@ td.mat-column-contact {
   width: 30px;
 }
 
-::ng-deep button.mat-button-wrapper {
+::ng-deep button.mdc-button_label {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -45,7 +45,7 @@ td.mat-column-contact {
   margin-right: 0.5rem;
 }
 
-::ng-deep .mat-menu-content {
+::ng-deep .mat-mdc-menu-content {
   display: flex;
   flex-direction: column;
   padding: 5px;
@@ -59,10 +59,10 @@ a.title {
   color: black;
 }
 
-button.mat-focus-indicator .mat-flat-button.mat-primary,
-.mat-raised-button.mat-primary,
-.mat-fab.mat-primary,
-.mat-mini-fab.mat-primary {
+button.mat-focus-indicator .mat-mdc-unelevated-button.mat-primary,
+.mat-mdc-raised-button.mat-primary,
+.mat-mdc-fab.mat-primary,
+.mat-mdc-mini-fab.mat-primary {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

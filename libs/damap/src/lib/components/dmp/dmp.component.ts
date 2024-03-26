@@ -34,12 +34,16 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
   styleUrls: ['./dmp.component.css'],
 })
 export class DmpComponent implements OnInit, OnDestroy {
-  readonly username = this.auth.getUsername();
-  readonly admin = this.auth.isAdmin();
+  get username(): string {
+    return this.auth.getUsername();
+  }
+  get admin(): boolean {
+    return this.auth.isAdmin();
+  }
 
   @ViewChild('stepper') stepper: MatStepper;
+  dmpForm: UntypedFormGroup;
 
-  dmpForm: UntypedFormGroup = this.formService.dmpForm;
   formChanged: boolean;
 
   // Steps
@@ -70,8 +74,10 @@ export class DmpComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private backendService: BackendService,
-    public store: Store<AppState>
-  ) {}
+    public store: Store<AppState>,
+  ) {
+    this.dmpForm = this.formService.dmpForm;
+  }
 
   ngOnInit() {
     this.getDmpById();
@@ -89,10 +95,10 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.legalEthicalStep = this.dmpForm.get('legal') as UntypedFormGroup;
     this.storageStep = this.dmpForm.get('storage') as UntypedFormArray;
     this.externalStorageStep = this.dmpForm.get(
-      'externalStorage'
+      'externalStorage',
     ) as UntypedFormArray;
     this.externalStorageInfo = this.dmpForm.get(
-      'externalStorageInfo'
+      'externalStorageInfo',
     ) as UntypedFormControl;
     this.repoStep = this.dmpForm.get('repositories') as UntypedFormArray;
     this.reuseStep = this.dmpForm.get('reuse') as UntypedFormGroup;
@@ -181,7 +187,7 @@ export class DmpComponent implements OnInit, OnDestroy {
       next: response => {
         if (response.type === HttpEventType.UploadProgress) {
           upload.progress = Math.round(
-            100 * (response.loaded / response.total)
+            100 * (response.loaded / response.total),
           );
         }
         if (response.type === HttpEventType.Response) {

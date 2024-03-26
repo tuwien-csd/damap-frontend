@@ -17,7 +17,7 @@ describe('dmp', () => {
 
     // Get stepper headers
     cy.get(
-      'app-dmp mat-vertical-stepper mat-step-header > div.mat-step-label > div'
+      'app-dmp mat-vertical-stepper mat-step-header > div.mat-step-label > div',
     ).as('steps');
 
     // Create new project
@@ -30,12 +30,12 @@ describe('dmp', () => {
     cy.get('app-dmp-project mat-datepicker-toggle').click();
     cy.get('button.mat-calendar-body-active').first().click();
     cy.get(
-      'div.cdk-overlay-container mat-calendar button.mat-calendar-body-active'
+      'div.cdk-overlay-container mat-calendar button.mat-calendar-body-active',
     )
       .last()
       .click();
     cy.get(
-      'app-dmp-project app-manual-project-input app-textarea-wrapper textarea'
+      'app-dmp-project app-manual-project-input app-textarea-wrapper textarea',
     )
       .first()
       .type('Test Description');
@@ -57,24 +57,24 @@ describe('dmp', () => {
     cy.get('app-created-data mat-tab-group div.mat-tab-labels > div')
       .last()
       .click();
-    cy.get('app-created-data app-file-upload .dropzone')
-      .scrollIntoView()
-      .selectFile(
-        {
-          contents: Cypress.Buffer.from('file contents'),
-          fileName: 'file.txt',
-          mimeType: 'text/plain',
-          lastModified: Date.now(),
-        },
-        { action: 'drag-drop' }
-      );
+    cy.get('app-created-data app-file-upload .dropzone').scrollIntoView();
+    cy.get('app-created-data app-file-upload .dropzone').selectFile(
+      {
+        contents: Cypress.Buffer.from('file contents'),
+        fileName: 'file.txt',
+        mimeType: 'text/plain',
+        lastModified: Date.now(),
+      },
+      { action: 'drag-drop' },
+    );
     cy.get('app-created-data app-dataset-table table tbody tr')
       .last()
       .contains('file.txt');
     cy.get('app-save-status > div').contains('You have unsaved changes.');
 
     // Check autosave
-    cy.get('@steps').contains('Documentation').scrollIntoView().click();
+    cy.get('@steps').contains('Documentation').scrollIntoView();
+    cy.get('@steps').contains('Documentation').click();
     cy.get('app-save-status > div').contains('All changes have been saved.');
 
     // Search for repository
@@ -94,7 +94,8 @@ describe('dmp', () => {
     cy.get('app-dmp-repo app-tag').should('exist');
 
     // Go back to plans
-    cy.get('@steps').contains('Summary').scrollIntoView().click();
+    cy.get('@steps').contains('Summary').scrollIntoView();
+    cy.get('@steps').contains('Summary').click();
     cy.get('mat-nav-list > a').contains('DMPs').click();
 
     // Check if dmp shows in list

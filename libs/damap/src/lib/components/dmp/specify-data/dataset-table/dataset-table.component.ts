@@ -51,7 +51,7 @@ export class DatasetTableComponent {
 
   private findFormArrayIndex(dataset: Dataset): number {
     return this.datasets.value.findIndex(d =>
-      d.id ? d.id === dataset.id : d.referenceHash === dataset.referenceHash
+      d.id ? d.id === dataset.id : d.referenceHash === dataset.referenceHash,
     );
   }
 }

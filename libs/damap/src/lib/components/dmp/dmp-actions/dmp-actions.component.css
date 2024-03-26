@@ -17,7 +17,7 @@
   align-items: center;
 }
 
-.mat-dialog-actions {
+.mat-mdc-dialog-actions {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }

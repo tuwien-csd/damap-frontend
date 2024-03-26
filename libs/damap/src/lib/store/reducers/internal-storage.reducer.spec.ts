@@ -13,7 +13,7 @@ describe('StorageReducer', () => {
   it('should return failed loading state', () => {
     const state = internalStorageReducer(
       initialInternalStorageState,
-      failedToLoadInternalStorages
+      failedToLoadInternalStorages,
     );
 
     expect(state.loaded).toBe(LoadingState.FAILED);
@@ -24,7 +24,7 @@ describe('StorageReducer', () => {
   it('should return loading state', () => {
     const state = internalStorageReducer(
       initialInternalStorageState,
-      loadInternalStorages
+      loadInternalStorages,
     );
 
     expect(state.loaded).toBe(LoadingState.LOADING);
@@ -35,7 +35,7 @@ describe('StorageReducer', () => {
   it('should return loaded storages', () => {
     const state = internalStorageReducer(
       initialInternalStorageState,
-      internalStoragesLoaded({ internalStorages: [mockInternalStorage] })
+      internalStoragesLoaded({ internalStorages: [mockInternalStorage] }),
     );
 
     expect(state.loaded).toBe(LoadingState.LOADED);

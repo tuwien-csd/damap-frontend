@@ -20,7 +20,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { IdentifierType } from '../../../../domain/enum/identifier-type.enum';
-import { TranslateTestingModule } from '@damap/core';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
 
 describe('DatasetDialogComponent', () => {
   let component: DatasetDialogComponent;

@@ -56,7 +56,7 @@ describe('SpecifyDataComponent', () => {
     // Test add dataset
     component.add(closedDatasetMock);
     expect(component.datasetToAdd.emit).toHaveBeenCalledOnceWith(
-      closedDatasetMock
+      closedDatasetMock,
     );
     // Test update dataset
     component.update({ index: 0, update: restrictedDatasetMock });

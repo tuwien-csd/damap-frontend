@@ -24,7 +24,7 @@ export class ReuseComponent {
     return this.datasets?.value.filter(
       item =>
         item.dataAccess === DataAccessType.RESTRICTED &&
-        item.source === DataSource.NEW
+        item.source === DataSource.NEW,
     );
   }
 }

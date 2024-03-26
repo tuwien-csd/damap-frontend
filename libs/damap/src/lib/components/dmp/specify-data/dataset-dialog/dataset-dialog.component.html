@@ -7,7 +7,7 @@
   }}</ng-template>
 </h1>
 
-<div mat-dialog-content id="datasetDialog">
+<mat-dialog-content id="datasetDialog">
   <div [formGroup]="dataset">
     <app-input-wrapper
       [label]="'dmp.steps.data.specify.dialog.title' | translate"
@@ -21,7 +21,7 @@
         }}</mat-label>
         <mat-select formControlName="type" required multiple>
           <mat-option
-            *ngFor="let type of FILE_TYPES | keyvalue : originalOrder"
+            *ngFor="let type of FILE_TYPES | keyvalue: originalOrder"
             [value]="type.value.id">
             {{ type.value.label }}
             <span *ngIf="type.value.description">
@@ -59,7 +59,7 @@
       }}</mat-label>
       <mat-select [(ngModel)]="datasetId.type">
         <mat-option
-          *ngFor="let id of identifierTypeReusedData | keyvalue : originalOrder"
+          *ngFor="let id of identifierTypeReusedData | keyvalue: originalOrder"
           [value]="id.key">
           {{ id.key }}<br />
         </mat-option>
@@ -72,14 +72,13 @@
       <input matInput [(ngModel)]="datasetId.identifier" maxlength="255" />
     </mat-form-field>
   </div>
-</div>
+</mat-dialog-content>
 
-<div mat-dialog-actions>
+<mat-dialog-actions>
   <button mat-button (click)="onNoClick()">
     {{ "dmp.steps.data.specify.dialog.button.cancel" | translate }}
   </button>
   <button
-    mat-button
     (click)="onDialogClose()"
     mat-raised-button
     color="primary"
@@ -91,4 +90,4 @@
       "dmp.steps.data.specify.dialog.button.add" | translate
     }}</ng-container>
   </button>
-</div>
+</mat-dialog-actions>

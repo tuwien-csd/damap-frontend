@@ -7,3 +7,7 @@
 .dmp-warning {
   color: darkorange;
 }
+
+.mat-list-option-right {
+  float: right;
+}

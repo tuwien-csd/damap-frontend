@@ -11,11 +11,8 @@ describe('delete dmp', () => {
 
   it('should delete dmp', () => {
     cy.intercept('DELETE', '/api/dmps/*').as('deleteDmp');
-    cy.get('app-dmp-table tr')
-      .first()
-      .get('td')
-      .last()
-      .click()
+    cy.get('app-dmp-table tr').first().get('td').last().click();
+    cy.get('mat-mdc-menu-content button')
       .get('mat-icon')
       .contains('delete')
       .click();

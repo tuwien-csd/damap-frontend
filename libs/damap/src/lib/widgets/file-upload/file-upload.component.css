@@ -48,7 +48,7 @@ mat-progress-bar {
   align-items: center;
 }
 
-.mat-list-item {
+.mat-mdc-list-item {
   height: auto;
 }
 

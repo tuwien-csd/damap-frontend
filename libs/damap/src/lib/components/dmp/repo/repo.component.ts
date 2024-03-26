@@ -49,12 +49,12 @@ export class RepoComponent implements OnInit {
 
   ngOnInit() {
     this.repositoriesLoaded$ = this.store.pipe(
-      select(selectRepositoriesLoaded)
+      select(selectRepositoriesLoaded),
     );
     this.repositories$ = this.store.pipe(select(selectRepositories));
     this.filters$ = this.store.pipe(select(selectFilters));
     this.recommendedLoaded$ = this.store.pipe(
-      select(selectRecommendedRepositoriesLoaded)
+      select(selectRecommendedRepositoriesLoaded),
     );
     this.recommended$ = this.store.pipe(select(selectRecommendedRepositories));
     this.store.dispatch(loadRecommendedRepositories());
@@ -76,7 +76,7 @@ export class RepoComponent implements OnInit {
   }
 
   filterRepositories(
-    filter: { [key: string]: { id: string; label: string }[] } | null
+    filter: { [key: string]: { id: string; label: string }[] } | null,
   ) {
     if (filter) {
       this.store.dispatch(setRepositoryFilter({ filter }));
@@ -88,7 +88,7 @@ export class RepoComponent implements OnInit {
   getDatasetsMarkedForDeletion(index: number): Dataset[] {
     const repo = this.repoStep.at(index);
     return this.datasets.value.filter(
-      item => item.delete && repo.value.datasets.includes(item.referenceHash)
+      item => item.delete && repo.value.datasets.includes(item.referenceHash),
     );
   }
 

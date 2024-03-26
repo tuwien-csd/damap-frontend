@@ -1,4 +1,10 @@
-<mat-card>
-  <mat-card-title>{{ "env.title" | translate }}</mat-card-title>
-  <p translate>env.text</p>
+<mat-card appearance="raised">
+  <mat-card-header>
+    <mat-card-title>
+      <strong> {{ "env.title" | translate }} </strong>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p translate>env.text</p>
+  </mat-card-content>
 </mat-card>

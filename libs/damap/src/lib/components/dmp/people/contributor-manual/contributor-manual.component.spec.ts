@@ -47,7 +47,8 @@ describe('ContributorManualComponent', () => {
     });
     component.resetForm();
     expect(
-      (component.form.controls.personId as UntypedFormGroup).controls.type.value
+      (component.form.controls.personId as UntypedFormGroup).controls.type
+        .value,
     ).toBe(IdentifierType.ORCID);
   });
 });

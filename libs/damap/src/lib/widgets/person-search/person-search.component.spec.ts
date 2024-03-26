@@ -57,7 +57,7 @@ describe('PersonSearchComponent', () => {
     expect(await input.getValue()).toBe(mockContributor1.firstName);
     expect(options.length).toBe(1);
     expect(await options[0].getText()).toBe(
-      `${mockContributor1.firstName} ${mockContributor1.lastName}`
+      `${mockContributor1.firstName} ${mockContributor1.lastName}`,
     );
 
     await options[0].click();

@@ -5,9 +5,9 @@ export const loadInternalStorages = createAction('[Internal Storages] Load');
 
 export const internalStoragesLoaded = createAction(
   '[Internal Storages] Loaded',
-  props<{ internalStorages: InternalStorage[] }>()
+  props<{ internalStorages: InternalStorage[] }>(),
 );
 
 export const failedToLoadInternalStorages = createAction(
-  '[Internal Storages] Failed to load'
+  '[Internal Storages] Failed to load',
 );

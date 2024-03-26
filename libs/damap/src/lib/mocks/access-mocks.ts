@@ -1,5 +1,6 @@
 import { Access } from '../domain/access';
-import { FunctionRole, IdentifierType } from '@damap/core';
+import { FunctionRole } from '../domain/enum/function-role.enum';
+import { IdentifierType } from '../domain/enum/identifier-type.enum';
 
 export const mockAccess: Access = {
   id: 100,

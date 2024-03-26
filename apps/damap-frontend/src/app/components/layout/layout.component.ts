@@ -1,5 +1,5 @@
+import pkg from '../../../../../../package.json'; // eslint-disable-line
 import { Component, OnInit } from '@angular/core';
-import pkg from '../../../../../../package.json';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '@damap/core';
 import { ConfigService } from '../../services/config.service';
@@ -13,7 +13,7 @@ export class LayoutComponent implements OnInit {
   public title = 'Data Management Plan';
   public version: string = pkg.version;
   public name: string;
-  public lang = 'EN';
+  public lang = 'en';
   public widescreen = () => window.innerWidth >= 1024;
 
   readonly env: string;
@@ -21,7 +21,7 @@ export class LayoutComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private translate: TranslateService,
-    private configService: ConfigService
+    private configService: ConfigService,
   ) {
     this.env = this.configService.getEnvironment();
   }
@@ -29,7 +29,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
     this.name = this.auth.getName();
     const browserLang = this.translate.getBrowserLang();
-    this.translate.use(browserLang.match(/en|de/) ? browserLang : 'en');
+    this.translate.use(browserLang?.match(/en|de/) ? browserLang : 'en');
     this.lang = this.translate.currentLang.toUpperCase();
   }
 

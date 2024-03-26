@@ -38,7 +38,7 @@ describe('DmpComponent', () => {
     authSpy.isAdmin.and.returnValue(false);
     feedbackSpy = jasmine.createSpyObj('FeedbackService', ['error', 'success']);
     backendSpy = jasmine.createSpyObj(
-      Object.getOwnPropertyNames(BackendService.prototype)
+      Object.getOwnPropertyNames(BackendService.prototype),
     );
     backendSpy.getDmpById.and.returnValue(of(completeDmp));
     backendSpy.getProjectMembers.and.returnValue(of([mockContributor1]));

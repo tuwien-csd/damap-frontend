@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './components/layout/layout.component';
-import { AuthGuard } from '@damap/core';
+import { AuthGuard, DamapModule } from '@damap/core';
 import { ConsentGuard } from './guard/consent.guard';
 import { environment } from '../environments/environment';
 
@@ -12,10 +12,7 @@ export const APP_ROUTES: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () =>
-          import('@damap/core').then(
-            m => m.DamapModule.forRoot(environment).ngModule
-          ),
+        loadChildren: () => DamapModule.forRoot(environment).ngModule,
       },
     ],
   },

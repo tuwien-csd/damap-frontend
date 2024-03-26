@@ -34,7 +34,7 @@ describe('InternalStorageEffects', () => {
   it('should load and return internal storages', () => {
     actions$ = of(InternalStorageAction.loadInternalStorages);
     backendService.getInternalStorages.and.returnValue(
-      of([mockInternalStorage])
+      of([mockInternalStorage]),
     );
 
     effects.loadInternalStorages$.subscribe(action => {
@@ -42,7 +42,7 @@ describe('InternalStorageEffects', () => {
       expect(action).toEqual(
         InternalStorageAction.internalStoragesLoaded({
           internalStorages: [mockInternalStorage],
-        })
+        }),
       );
     });
   });
@@ -50,13 +50,13 @@ describe('InternalStorageEffects', () => {
   it('should load internal storages and fail', () => {
     actions$ = of(InternalStorageAction.loadInternalStorages);
     backendService.getInternalStorages.and.returnValue(
-      throwError(() => new HttpErrorResponse({}))
+      throwError(() => new HttpErrorResponse({})),
     );
 
     effects.loadInternalStorages$.subscribe(action => {
       expect(backendService.getInternalStorages).toHaveBeenCalledWith();
       expect(action).toEqual(
-        InternalStorageAction.failedToLoadInternalStorages()
+        InternalStorageAction.failedToLoadInternalStorages(),
       );
     });
   });

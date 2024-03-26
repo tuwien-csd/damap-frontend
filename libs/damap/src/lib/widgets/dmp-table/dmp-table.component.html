@@ -10,7 +10,7 @@
 <table
   mat-table
   [dataSource]="dataSource"
-  multiTemplateDataRows
+  multiTemplateDataRows="true"
   class="mat-elevation-z8"
   style="outline: none"
   matSort
@@ -101,7 +101,7 @@
   <tr class="mat-row" *matNoDataRow>
     <ng-container *ngIf="input.value.length > 0; else empty">
       <td class="mat-cell" colspan="4">
-        {{ "plans.table.nodatafilter" | translate : { value: input.value } }}"
+        {{ "plans.table.nodatafilter" | translate: { value: input.value } }}"
       </td>
     </ng-container>
     <ng-template #empty>
@@ -113,5 +113,6 @@
 </table>
 <mat-paginator
   class="mat-elevation-z8"
-  [pageSizeOptions]="[10, 20]"
-  showFirstLastButtons></mat-paginator>
+  [pageSize]="10"
+  [pageSizeOptions]="[10, 15, 20]"
+  showFirstLastButtons="true"></mat-paginator>

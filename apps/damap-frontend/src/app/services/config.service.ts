@@ -12,7 +12,10 @@ import { environment } from '../../environments/environment';
 export class ConfigService {
   private config: Config;
 
-  constructor(private http: HttpClient, private oauthService: OAuthService) {}
+  constructor(
+    private http: HttpClient,
+    private oauthService: OAuthService,
+  ) {}
 
   public initializeApp(): Promise<boolean> {
     return this.loadConfig()
@@ -43,7 +46,7 @@ export class ConfigService {
       .catch(error => {
         /* eslint-disable no-console */
         console.error(
-          'Failed to load config - please make sure your backend is up and running!'
+          'Failed to load config - please make sure your backend is up and running!',
         );
         console.log('Backend: ' + environment.backendurl);
         console.error(error);

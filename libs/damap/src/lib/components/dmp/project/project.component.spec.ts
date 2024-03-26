@@ -22,7 +22,7 @@ describe('ProjectComponent', () => {
     ]);
 
     backendSpy.getRecommendedProjects.and.returnValue(
-      of(mockRecommendedProjectSearchResult)
+      of(mockRecommendedProjectSearchResult),
     );
 
     await TestBed.configureTestingModule({
