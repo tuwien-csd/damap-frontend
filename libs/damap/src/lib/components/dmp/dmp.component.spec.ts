@@ -16,8 +16,10 @@ import { TranslateTestingModule } from '../../testing/translate-testing/translat
 import { FormTestingModule } from '../../testing/form-testing/form-testing.module';
 import { AuthService } from '../../auth/auth.service';
 import { completeDmp } from '../../mocks/dmp-mocks';
-import { of } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { mockContributor1 } from '../../mocks/contributor-mocks';
+import { configMockData } from '../../mocks/config-service-mocks';
+import { Config } from '../../domain/config';
 
 describe('DmpComponent', () => {
   let component: DmpComponent;
@@ -25,6 +27,7 @@ describe('DmpComponent', () => {
   let loader: HarnessLoader;
   let authSpy;
   let backendSpy: jasmine.SpyObj<BackendService>;
+  let loadServiceConfigSpy;
   let feedbackSpy;
   const initialState = {
     damap: {
@@ -39,6 +42,9 @@ describe('DmpComponent', () => {
     feedbackSpy = jasmine.createSpyObj('FeedbackService', ['error', 'success']);
     backendSpy = jasmine.createSpyObj(
       Object.getOwnPropertyNames(BackendService.prototype),
+    );
+    loadServiceConfigSpy = backendSpy.loadServiceConfig.and.returnValue(
+      of(configMockData),
     );
     backendSpy.getDmpById.and.returnValue(of(completeDmp));
     backendSpy.getProjectMembers.and.returnValue(of([mockContributor1]));
@@ -74,12 +80,23 @@ describe('DmpComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DmpComponent);
     component = fixture.componentInstance;
+    component.config$ = new Subject<Config>();
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('ngOnInit', () => {
+    it('should load service config and publish he result into config$ observable', () => {
+      component.ngOnInit();
+      expect(loadServiceConfigSpy).toHaveBeenCalled();
+      component.config$.subscribe(config =>
+        expect(config).toEqual(configMockData),
+      );
+    });
   });
 
   it('should load all stepper harnesses and get steps of stepper', async () => {

@@ -20,6 +20,7 @@ import { ContributorRole } from '../../../domain/enum/contributor-role.enum';
 import { IdentifierType } from '../../../domain/enum/identifier-type.enum';
 import { BackendService } from '../../../services/backend.service';
 import { PersonSearchComponent } from '../../../widgets/person-search/person-search.component';
+import { Config } from '../../../domain/config';
 
 @Component({
   selector: 'app-dmp-people',
@@ -29,6 +30,7 @@ import { PersonSearchComponent } from '../../../widgets/person-search/person-sea
 export class PeopleComponent implements OnInit, OnDestroy {
   @ViewChild(PersonSearchComponent) personSearch: PersonSearchComponent;
 
+  @Input() config$: Observable<Config>;
   @Input() projectMembers: Contributor[];
   @Input() dmpForm: UntypedFormGroup;
 
@@ -43,6 +45,7 @@ export class PeopleComponent implements OnInit, OnDestroy {
 
   private searchTerms = new Subject<string>();
   private subscriptions: Subscription[] = [];
+  private configSubscription: Subscription;
 
   searchResult$: Observable<SearchResult<Contributor>>;
   serviceConfig$: ServiceConfig[];
@@ -54,9 +57,9 @@ export class PeopleComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.backendService.loadServiceConfig().subscribe(service => {
-      this.serviceConfig$ = service.personSearchServiceConfigs;
-      this.serviceConfigType = service.personSearchServiceConfigs[0];
+    this.configSubscription = this.config$.subscribe(config => {
+      this.serviceConfig$ = config.personSearchServiceConfigs;
+      this.serviceConfigType = config.personSearchServiceConfigs[0];
     });
 
     const searchSubscription = this.searchTerms
@@ -77,6 +80,7 @@ export class PeopleComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.configSubscription.unsubscribe();
   }
 
   changeContactPerson(contact: Contributor): void {

@@ -15,4 +15,5 @@ export const configMockData: Config = {
   authUser: '',
   env: '',
   personSearchServiceConfigs: serviceConfigMockData,
+  fitsServiceAvailable: true,
 };
