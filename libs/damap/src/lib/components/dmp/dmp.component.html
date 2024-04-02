@@ -9,6 +9,7 @@
   </mat-step>
   <mat-step label="{{ 'dmp.steps.people.label' | translate }}">
     <app-dmp-people
+      [config$]="config$"
       [projectMembers]="projectMembers"
       [dmpForm]="dmpForm"
       (contactPerson)="changeContactPerson($event)"
@@ -20,6 +21,7 @@
     label="{{ 'dmp.steps.data.specify.label' | translate }}"
     [hasError]="specifyDataStep.invalid || datasets.invalid">
     <app-dmp-specify-data
+      [config$]="config$"
       [specifyDataStep]="specifyDataStep"
       [datasets]="datasets"
       [fileUpload]="fileUpload"

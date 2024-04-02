@@ -27,23 +27,19 @@ import { PeopleComponent } from './people.component';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
 import { mockContributorSearchResult } from '../../../mocks/search';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
+import { Config } from '../../../domain/config';
 
 describe('PeopleComponent', () => {
   let component: PeopleComponent;
   let fixture: ComponentFixture<PeopleComponent>;
   let backendSpy;
-  let loadServiceConfigSpy;
   let loader: HarnessLoader;
 
   beforeEach(async () => {
     backendSpy = jasmine.createSpyObj('BackendService', [
-      'loadServiceConfig',
       'getPersonSearchResult',
     ]);
-    loadServiceConfigSpy = backendSpy.loadServiceConfig.and.returnValue(
-      of(configMockData),
-    );
     backendSpy.getPersonSearchResult.and.returnValue(
       of(mockContributorSearchResult),
     );
@@ -65,6 +61,7 @@ describe('PeopleComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PeopleComponent);
     component = fixture.componentInstance;
+    component.config$ = new BehaviorSubject<Config>(configMockData);
     component.dmpForm = new UntypedFormGroup({
       datasets: new UntypedFormArray([]),
       contributors: new UntypedFormArray([
@@ -84,8 +81,6 @@ describe('PeopleComponent', () => {
   describe('ngOnInit', () => {
     it('should load service config and set serviceConfigType to the first one', () => {
       component.ngOnInit();
-
-      expect(loadServiceConfigSpy).toHaveBeenCalled();
       expect(component.serviceConfig$).toEqual(serviceConfigMockData);
       expect(component.serviceConfigType).toEqual(serviceConfigMockData[0]);
     });
