@@ -18,11 +18,6 @@ jobs:
       - name: Install dependencies
         run: npm run ci:install
 
-      - run: npm ci
-      - run: npx nx workspace-lint
-      #format check currently does not signal what the issue is
-      #      - run: npx nx format:check
-
       - name: Merge - Lint all projects
         run: npm run ci:lint
 

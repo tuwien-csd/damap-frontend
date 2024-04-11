@@ -30,3 +30,7 @@ mat-form-field {
   position: relative;
   top: -10px; 
 }
+
+.mat-card-container {
+  margin: 15px;
+}

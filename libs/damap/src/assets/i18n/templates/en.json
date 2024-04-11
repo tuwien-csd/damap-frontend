@@ -238,11 +238,7 @@
             "prefix": "Was your research plan reviewed by an ethics committee, the ",
             "researchCommittee": {
               "text": "Ethics Committee of your institution",
-<<<<<<< HEAD
               "link": "https://www.tugraz.at/tu-graz/organisationsstruktur/vertretungen-der-tu-graz-angehoerigen/commission-for-scientific-integrity-and-ethics"
-=======
-              "link": "https://www.tuwien.at/forschung/fti-support/responsible-research-practices/research-ethics-committee"
->>>>>>> upstream/next
             },
             "suffix": ", or a similar body?"
           }
