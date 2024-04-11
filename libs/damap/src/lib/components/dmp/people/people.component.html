@@ -81,7 +81,7 @@
   <app-person-search
     [result]="
       (searchResult$ | async)?.items ?? []
-        | contributorFilter : dmpForm.controls.contributors.value
+        | contributorFilter: dmpForm.controls.contributors.value
     "
     (termToSearch)="searchContributor($event)"
     (personToAdd)="addContributor($event)">
@@ -108,7 +108,7 @@
   <mat-card
     *ngFor="
       let member of projectMembers
-        | contributorFilter : dmpForm.controls.contributors.value
+        | contributorFilter: dmpForm.controls.contributors.value
     ">
     <div class="mat-card-container">
       <div class="mat-card-left">
@@ -136,7 +136,8 @@
       </div>
     </div>
     <div class="mat-card-container" *ngIf="member.roleInProject">
-        {{ member.roleInProject }}
+      {{ member.roleInProject }}
+    </div>
   </mat-card>
 </div>
 <ng-template #empty>

@@ -211,13 +211,8 @@ svg {
   text-decoration: none;
   color: var(--main-color);
   text-transform: uppercase;
-<<<<<<< HEAD
   line-height: 100px;
   font-family: FFDINWebPro,sans-serif;
-=======
-  line-height: 70px;
-  font-family: FFDINWebPro, sans-serif;
->>>>>>> upstream/next
   font-weight: 700;
   display: none;
 }

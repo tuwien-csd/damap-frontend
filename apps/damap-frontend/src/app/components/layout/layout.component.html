@@ -8,8 +8,8 @@
     <div class="mm-navbars-top mat-focus-indicator">
       <div class="mm-navbar">
         <div class="logo">
-          <a title="Damap" id="damap-logo"  [routerLink]="'/'">
-            {{'title'| translate }}
+          <a title="Damap" id="damap-logo" [routerLink]="'/'">
+            {{ "title" | translate }}
           </a>
         </div>
         <div class="languageElement">
@@ -38,12 +38,6 @@
       </button>
     </div>
     <mat-nav-list>
-<<<<<<< HEAD
-      <a mat-list-item class="nav-item-mobile" [routerLink]="'/dashboard'"
-        routerLinkActive="active">{{'layout.menu.home' | translate }}</a>
-      <a mat-list-item class="nav-item-mobile" [routerLink]="'/plans'" routerLinkActive="active">{{'layout.menu.plans' |
-        translate }}</a>
-=======
       <a
         mat-list-item
         class="nav-item-mobile"
@@ -58,21 +52,12 @@
         routerLinkActive="active"
         >{{ "layout.menu.plans" | translate }}</a
       >
->>>>>>> upstream/next
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
       <mat-toolbar-row id="mainHeader" [style]="'padding: 0px;'">
         <div class="mainHeaderLeft">
-<<<<<<< HEAD
-          <button mat-icon-button title="{{'layout.menu.mobile.open'| translate }}"
-            (click)="sidenav.opened = !sidenav.opened" *ngIf="!sidenav.opened">
-            <mat-icon>menu</mat-icon>
-          </button>
-          <button mat-icon-button title="{{'layout.menu.mobile.close'| translate }}" class="sidenav-btn"
-            (click)="sidenav.opened = !sidenav.opened" *ngIf="sidenav.opened">
-=======
           <button
             mat-icon-button
             title="{{ 'layout.menu.mobile.open' | translate }}"
@@ -86,25 +71,18 @@
             class="sidenav-btn"
             (click)="sidenav.opened = !sidenav.opened"
             *ngIf="sidenav.opened">
->>>>>>> upstream/next
             <mat-icon>close</mat-icon>
           </button>
         </div>
         <div class="mainHeaderRight"></div>
         <!-- University Logo -->
         <div id="mainHeaderLogo">
-<<<<<<< HEAD
-          <a class="mat-focus-indicator" title="{{'layout.logo.text' | translate }}"
-            [href]="'layout.logo.link' | translate" rel="noopener">
-            <img src="assets/logo.svg" alt="Logo">
-=======
           <a
             class="mat-focus-indicator"
             title="{{ 'layout.logo.text' | translate }}"
             [href]="'layout.logo.link' | translate"
             rel="noopener">
             <img src="assets/logo.svg" alt="Logo" height="75" width="75" />
->>>>>>> upstream/next
           </a>
         </div>
         <!-- University Logo End -->
@@ -123,16 +101,6 @@
     <a [routerLink]="'/gdpr'" rel="noopener">{{ "layout.gdpr" | translate }}</a>
   </div>
   <div class="info">
-<<<<<<< HEAD
-    <a [href]="'layout.impressum.link' | translate" rel="noopener" target="_blank">{{'layout.impressum.text' |
-      translate}}</a>
-    <a [href]="'layout.termsandconditions.link' | translate" rel="noopener"
-      target="_blank">{{'layout.termsandconditions.text' | translate}}</a>
-    <a [href]="'layout.dataprotection.link' | translate" rel="noopener" target="_blank">{{'layout.dataprotection.text' |
-      translate}}</a>
-    <a [href]="'layout.accessibility.link' | translate" rel="noopener" target="_blank">{{'layout.accessibility.text' |
-      translate}}</a>
-=======
     <a
       [href]="'layout.impressum.link' | translate"
       rel="noopener"
@@ -151,6 +119,5 @@
       target="_blank"
       >{{ "layout.dataprotection.text" | translate }}</a
     >
->>>>>>> upstream/next
   </div>
 </div>
