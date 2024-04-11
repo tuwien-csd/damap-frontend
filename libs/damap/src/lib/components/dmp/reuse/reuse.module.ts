@@ -1,12 +1,12 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {TranslateModule} from '@ngx-translate/core';
-import {ReuseComponent} from './reuse.component';
-import {ReactiveFormsModule} from '@angular/forms';
-import {StepIntroModule} from '../../../widgets/step-intro/step-intro.module';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatInputModule} from '@angular/material/input';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { ReuseComponent } from './reuse.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { StepIntroModule } from '../../../widgets/step-intro/step-intro.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
@@ -18,7 +18,7 @@ import {MatInputModule} from '@angular/material/input';
     // Materials
     MatFormFieldModule,
     MatAutocompleteModule,
-    MatInputModule
+    MatInputModule,
   ],
   declarations: [ReuseComponent],
   exports: [
@@ -32,8 +32,7 @@ import {MatInputModule} from '@angular/material/input';
     // Materials
     MatFormFieldModule,
     MatAutocompleteModule,
-    MatInputModule
-  ]
+    MatInputModule,
+  ],
 })
-export class ReuseModule {
-}
+export class ReuseModule {}

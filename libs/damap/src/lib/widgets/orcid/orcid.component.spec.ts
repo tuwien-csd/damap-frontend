@@ -8,9 +8,8 @@ describe('OrcidComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OrcidComponent ]
-    })
-    .compileComponents();
+      declarations: [OrcidComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

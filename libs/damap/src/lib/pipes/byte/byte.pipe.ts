@@ -1,10 +1,9 @@
-import {Pipe, PipeTransform} from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'byte'
+  name: 'byte',
 })
 export class BytePipe implements PipeTransform {
-
   transform(value: number): string {
     if (!value) {
       return '';

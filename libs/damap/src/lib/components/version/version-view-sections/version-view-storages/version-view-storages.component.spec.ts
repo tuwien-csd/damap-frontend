@@ -8,9 +8,8 @@ describe('VersionViewStoragesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VersionViewStoragesComponent ]
-    })
-    .compileComponents();
+      declarations: [VersionViewStoragesComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

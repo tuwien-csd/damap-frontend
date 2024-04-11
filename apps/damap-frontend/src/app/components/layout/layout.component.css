@@ -22,7 +22,7 @@
 .footer a {
   color: white;
   text-decoration: none;
-  padding:0 0.5rem;
+  padding: 0 0.5rem;
 }
 
 mat-nav-list {
@@ -35,8 +35,6 @@ mat-nav-list {
 }
 
 .mm-navbars-top {
-  background: inherit;
-  border-color: inherit;
   background-color: var(--main-color);
   border-width: 0;
   overflow: hidden;
@@ -44,6 +42,11 @@ mat-nav-list {
   left: 0;
   right: 0;
   height: 50px;
+}
+
+.mm-navbar-button {
+  color: #fff;
+  height: 100%;
 }
 
 .info {
@@ -83,7 +86,7 @@ mat-nav-list {
   flex-basis: 110px;
   flex-shrink: 0;
   display: flex;
-  transition: color .3s ease;
+  transition: color 0.3s ease;
   justify-content: center;
 }
 
@@ -106,7 +109,7 @@ mat-nav-list {
   line-height: 26px;
   white-space: nowrap;
   background-color: var(--accent-color-darker);
-  transition: background .3s ease;
+  transition: background 0.3s ease;
 }
 
 .mm-navbars-top .languageElement A > SPAN::before {
@@ -126,7 +129,7 @@ mat-nav-list {
   width: 100%;
   padding-left: 2px;
   padding-right: 2px;
-  font-size: .7647058824rem;
+  font-size: 0.7647058824rem;
   line-height: 26px;
   position: relative;
   left: 1px;
@@ -208,8 +211,13 @@ svg {
   text-decoration: none;
   color: var(--main-color);
   text-transform: uppercase;
+<<<<<<< HEAD
   line-height: 100px;
   font-family: FFDINWebPro,sans-serif;
+=======
+  line-height: 70px;
+  font-family: FFDINWebPro, sans-serif;
+>>>>>>> upstream/next
   font-weight: 700;
   display: none;
 }
@@ -246,7 +254,6 @@ svg {
 }
 
 @media only screen and (min-width: 1024px) {
-
   .mm-navbars-top {
     line-height: 100px;
     height: 100px;
@@ -285,5 +292,4 @@ svg {
     color: #c5c5c5;
     padding: 0;
   }
-
 }

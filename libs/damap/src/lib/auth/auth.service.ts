@@ -1,13 +1,11 @@
-import {Injectable} from '@angular/core';
-import {OAuthService} from 'angular-oauth2-oidc';
+import { Injectable } from '@angular/core';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-  constructor(private oAuthService: OAuthService) {
-  }
+  constructor(private oAuthService: OAuthService) {}
 
   getName(): string {
     const claims = this.oAuthService.getIdentityClaims();
@@ -20,7 +18,10 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return this.oAuthService.hasValidIdToken() && this.oAuthService.hasValidAccessToken();
+    return (
+      this.oAuthService.hasValidIdToken() &&
+      this.oAuthService.hasValidAccessToken()
+    );
   }
 
   isAdmin(): boolean {

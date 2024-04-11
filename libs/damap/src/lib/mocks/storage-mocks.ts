@@ -1,6 +1,6 @@
-import {InternalStorage} from '../domain/internal-storage';
-import {Storage} from '../domain/storage';
-import {closedDatasetMock, restrictedDatasetMock} from './dataset-mocks';
+import { InternalStorage } from '../domain/internal-storage';
+import { Storage } from '../domain/storage';
+import { closedDatasetMock, restrictedDatasetMock } from './dataset-mocks';
 
 export const mockInternalStorage: InternalStorage = {
   id: -1,
@@ -10,12 +10,15 @@ export const mockInternalStorage: InternalStorage = {
   languageCode: 'eng',
   storageLocation: 'AUT',
   title: 'Internal storage mock',
-  url: 'www'
-}
+  url: 'www',
+};
 
 export const mockStorage: Storage = {
-  datasets: [closedDatasetMock.referenceHash, restrictedDatasetMock.referenceHash],
+  datasets: [
+    closedDatasetMock.referenceHash,
+    restrictedDatasetMock.referenceHash,
+  ],
   id: -2,
   internalStorageId: -1,
-  title: 'Internal storage mock'
-}
+  title: 'Internal storage mock',
+};

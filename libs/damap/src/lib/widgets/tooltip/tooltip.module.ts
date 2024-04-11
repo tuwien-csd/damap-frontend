@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {TooltipComponent} from './tooltip.component';
-import {MatIconModule} from '@angular/material/icon';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {TranslateModule} from '@ngx-translate/core';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TooltipComponent } from './tooltip.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import {TranslateModule} from '@ngx-translate/core';
 
     // Materials
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   declarations: [TooltipComponent],
   exports: [
@@ -22,7 +22,7 @@ import {TranslateModule} from '@ngx-translate/core';
 
     // Materials
     MatIconModule,
-    MatTooltipModule]
+    MatTooltipModule,
+  ],
 })
-export class TooltipModule {
-}
+export class TooltipModule {}

@@ -1,25 +1,26 @@
-import {AuthConfig, OAuthService} from 'angular-oauth2-oidc';
-import {Injectable, isDevMode} from '@angular/core';
+import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+import { Injectable, isDevMode } from '@angular/core';
 
-import {Config} from '@damap/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../environments/environment';
+import { Config } from '@damap/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConfigService {
-
   private config: Config;
 
-  constructor(private http: HttpClient,
-              private oauthService: OAuthService) {
-  }
+  constructor(
+    private http: HttpClient,
+    private oauthService: OAuthService,
+  ) {}
 
   public initializeApp(): Promise<boolean> {
-    return this.loadConfig().toPromise().then(
-      (config: Config) => {
+    return this.loadConfig()
+      .toPromise()
+      .then((config: Config) => {
         if (!config) {
           // eslint-disable-next-line no-console
           console.error('Config is missing!');
@@ -36,16 +37,17 @@ export class ConfigService {
             responseType: 'code',
             showDebugInformation: isDevMode(),
             // sessionChecksEnabled: true,
-          }
+          };
           this.oauthService.configure(authConfig);
           this.oauthService.setupAutomaticSilentRefresh();
           return this.oauthService.loadDiscoveryDocumentAndLogin();
         }
-      }
-    )
+      })
       .catch(error => {
         /* eslint-disable no-console */
-        console.error('Failed to load config - please make sure your backend is up and running!');
+        console.error(
+          'Failed to load config - please make sure your backend is up and running!',
+        );
         console.log('Backend: ' + environment.backendurl);
         console.error(error);
         /* eslint-disable no-console */

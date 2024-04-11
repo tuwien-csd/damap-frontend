@@ -10,7 +10,7 @@ export class FeedbackService {
   constructor(
     protected _snackBar: MatSnackBar,
     protected translate: TranslateService,
-    protected loggerService: LoggerService
+    protected loggerService: LoggerService,
   ) {}
 
   error(message: string, error?: Error) {
@@ -20,7 +20,7 @@ export class FeedbackService {
         horizontalPosition: 'center',
         verticalPosition: 'top',
         panelClass: 'snack-error',
-      })
+      }),
     );
 
     if (error) {
@@ -35,7 +35,7 @@ export class FeedbackService {
         horizontalPosition: 'center',
         verticalPosition: 'top',
         panelClass: 'snack-success',
-      })
+      }),
     );
   }
 }

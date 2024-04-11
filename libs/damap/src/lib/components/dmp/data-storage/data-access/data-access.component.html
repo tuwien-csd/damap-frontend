@@ -1,66 +1,79 @@
-<mat-accordion>
-  <mat-expansion-panel class="mat-panel" (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
-    <mat-expansion-panel-header>
-      <mat-panel-title class="mat-panel-title">
-        {{'dmp.steps.data.access.heading' | translate}}
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <div class="wrapper" [formGroup]="dmpForm">
-      <ng-container formArrayName="datasets">
-        <ng-container *ngIf="datasets?.controls.length">
-          <div class="one bold">
-            {{'dmp.steps.data.access.question.dataset' | translate}}
-          </div>
-          <div class="two bold">
-            {{'dmp.steps.data.access.question.selected' | translate}}
-          </div>
-          <div class="three bold">
-            {{'dmp.steps.data.access.question.other' | translate}}
-          </div>
-          <div class="four bold">
-            {{'dmp.steps.data.access.question.public' | translate}}
-          </div>
-          <ng-container *ngFor="let dataset of datasets.controls; index as j">
-            <ng-container [formGroupName]="j">
-              <div class="one">
-                {{dataset.value.title}}
-              </div>
-              <mat-form-field appearance="fill" class="two">
-                <mat-label>{{'dmp.steps.data.access.question.right' | translate}}</mat-label>
-                <mat-select
-                  aria-label="{{'dmp.steps.data.access.aria.selected' | translate: {dataset: dataset.value.title} }}"
-                  formControlName="selectedProjectMembersAccess">
-                  <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.key">
-                    {{translatePrefixEnum + right.value | translate}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field appearance="fill" class="three">
-                <mat-label>{{'dmp.steps.data.access.question.right' | translate}}</mat-label>
-                <mat-select
-                  aria-label="{{'dmp.steps.data.access.aria.other' | translate: {dataset: dataset.value.title} }}"
-                  formControlName="otherProjectMembersAccess">
-                  <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.key">
-                    {{translatePrefixEnum + right.value | translate}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field appearance="fill" class="four">
-                <mat-label>{{'dmp.steps.data.access.question.right' | translate}}</mat-label>
-                <mat-select
-                  aria-label="{{'dmp.steps.data.access.aria.public' | translate: {dataset: dataset.value.title} }}"
-                  formControlName="publicAccess">
-                  <mat-option *ngFor="let right of accessRight | keyvalue" [value]="right.key">
-                    {{translatePrefixEnum + right.value | translate}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </ng-container>
+<ng-container>
+  <div class="wrapper" [formGroup]="dmpForm">
+    <ng-container formArrayName="datasets">
+      <ng-container *ngIf="datasets?.controls.length">
+        <div class="one bold">
+          {{ "dmp.steps.data.access.question.dataset" | translate }}
+        </div>
+        <div class="two bold">
+          {{ "dmp.steps.data.access.question.selected" | translate }}
+        </div>
+        <div class="three bold">
+          {{ "dmp.steps.data.access.question.other" | translate }}
+        </div>
+        <div class="four bold">
+          {{ "dmp.steps.data.access.question.public" | translate }}
+        </div>
+        <ng-container *ngFor="let dataset of datasets.controls; index as j">
+          <ng-container [formGroupName]="j">
+            <div class="one">
+              {{ dataset.value.title }}
+            </div>
+            <mat-form-field appearance="fill" class="two">
+              <mat-label>{{
+                "dmp.steps.data.access.question.right" | translate
+              }}</mat-label>
+              <mat-select
+                aria-label="{{
+                  'dmp.steps.data.access.aria.selected'
+                    | translate: { dataset: dataset.value.title }
+                }}"
+                formControlName="selectedProjectMembersAccess">
+                <mat-option
+                  *ngFor="let right of accessRight | keyvalue"
+                  [value]="right.key">
+                  {{ translatePrefixEnum + right.value | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="three">
+              <mat-label>{{
+                "dmp.steps.data.access.question.right" | translate
+              }}</mat-label>
+              <mat-select
+                aria-label="{{
+                  'dmp.steps.data.access.aria.other'
+                    | translate: { dataset: dataset.value.title }
+                }}"
+                formControlName="otherProjectMembersAccess">
+                <mat-option
+                  *ngFor="let right of accessRight | keyvalue"
+                  [value]="right.key">
+                  {{ translatePrefixEnum + right.value | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="four">
+              <mat-label>{{
+                "dmp.steps.data.access.question.right" | translate
+              }}</mat-label>
+              <mat-select
+                aria-label="{{
+                  'dmp.steps.data.access.aria.public'
+                    | translate: { dataset: dataset.value.title }
+                }}"
+                formControlName="publicAccess">
+                <mat-option
+                  *ngFor="let right of accessRight | keyvalue"
+                  [value]="right.key">
+                  {{ translatePrefixEnum + right.value | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </ng-container>
-          <br>
         </ng-container>
+        <br />
       </ng-container>
-    </div>
-  </mat-expansion-panel>
-</mat-accordion>
+    </ng-container>
+  </div>
+</ng-container>

@@ -1,9 +1,19 @@
-import {Component, EventEmitter, Injectable, Input, OnInit, Output} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import {SelectionModel} from '@angular/cdk/collections';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {
+  Component,
+  EventEmitter,
+  Injectable,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import {
+  MatTreeFlatDataSource,
+  MatTreeFlattener,
+} from '@angular/material/tree';
+import { SelectionModel } from '@angular/cdk/collections';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 /**
  * Tree data
@@ -30,7 +40,7 @@ export class TreeNode {
 
 /** Flat tree node with expandable and level information */
 export class TreeFlatNode {
-  item: { id: string, label: string };
+  item: { id: string; label: string };
   level: number;
   visible: boolean;
   expandable: boolean;
@@ -43,14 +53,10 @@ export class TreeFlatNode {
  */
 @Injectable()
 export class TreeDatabase {
-
   dataChange = new BehaviorSubject<TreeNode[]>([]);
 
   get data(): TreeNode[] {
     return this.dataChange.value;
-  }
-
-  constructor() {
   }
 
   initialize(TREE_DATA: TreeData[]) {
@@ -69,7 +75,7 @@ export class TreeDatabase {
   buildFileTree(data: TreeData[], level: number): TreeNode[] {
     return Object.keys(data).reduce<TreeNode[]>((accumulator, key) => {
       const node = new TreeNode();
-      node.item = {id: data[key].id, label: data[key].label};
+      node.item = { id: data[key].id, label: data[key].label };
       node.visible = true;
 
       if (data[key].children) {
@@ -95,10 +101,9 @@ export class TreeDatabase {
   selector: 'app-tree-select-form-field',
   templateUrl: './tree-select-form-field.component.html',
   styleUrls: ['./tree-select-form-field.component.css'],
-  providers: [TreeDatabase]
+  providers: [TreeDatabase],
 })
 export class TreeSelectFormFieldComponent implements OnInit {
-
   /** Map from flat node to nested node. This helps us find the nested node to be modified */
   flatNodeMap = new Map<TreeFlatNode, TreeNode>();
 
@@ -130,20 +135,30 @@ export class TreeSelectFormFieldComponent implements OnInit {
   selectionList: TreeFlatNode[] = [];
 
   constructor(private _database: TreeDatabase) {
-    this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
-      this.isExpandable, this.getChildren);
-    this.treeControl = new FlatTreeControl<TreeFlatNode>(this.getLevel, this.isExpandable);
-    this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+    this.treeFlattener = new MatTreeFlattener(
+      this.transformer,
+      this.getLevel,
+      this.isExpandable,
+      this.getChildren,
+    );
+    this.treeControl = new FlatTreeControl<TreeFlatNode>(
+      this.getLevel,
+      this.isExpandable,
+    );
+    this.dataSource = new MatTreeFlatDataSource(
+      this.treeControl,
+      this.treeFlattener,
+    );
 
     // Update form field selection
-    this.checklistSelection.changed.pipe(
-      debounceTime(50) // emits twice on change
-    ).subscribe(
-      _ => {
+    this.checklistSelection.changed
+      .pipe(
+        debounceTime(50), // emits twice on change
+      )
+      .subscribe(_ => {
         this.setSelectionList();
         this.updateAndEmitParams();
-      }
-    );
+      });
   }
 
   ngOnInit(): void {
@@ -153,15 +168,15 @@ export class TreeSelectFormFieldComponent implements OnInit {
     this._database.dataChange.subscribe(data => {
       this.dataSource.data = data;
     });
-    this.searchFilter.pipe(debounceTime(300), distinctUntilChanged())
+    this.searchFilter
+      .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe(text => {
-          const data = this._database.data;
-          for (const node of data) {
-            this.filterTree(node, text);
-          }
-          this._database.filterTree();
+        const data = this._database.data;
+        for (const node of data) {
+          this.filterTree(node, text);
         }
-      );
+        this._database.filterTree();
+      });
     // Set initial selection
     if (this.state) {
       this.setSelection();
@@ -176,16 +191,18 @@ export class TreeSelectFormFieldComponent implements OnInit {
 
   hasChild = (_: number, _nodeData: TreeFlatNode) => _nodeData.expandable;
 
-  hasNoContent = (_: number, _nodeData: TreeFlatNode) => _nodeData.item.label === '';
+  hasNoContent = (_: number, _nodeData: TreeFlatNode) =>
+    _nodeData.item.label === '';
 
   /**
    * Transformer to convert nested node to flat node. Record the nodes in maps for later use.
    */
   transformer = (node: TreeNode, level: number) => {
     const existingNode = this.nestedNodeMap.get(node);
-    const flatNode = existingNode && existingNode.item === node.item
-      ? existingNode
-      : new TreeFlatNode();
+    const flatNode =
+      existingNode && existingNode.item === node.item
+        ? existingNode
+        : new TreeFlatNode();
     flatNode.item = node.item;
     flatNode.visible = node.visible;
     flatNode.level = level;
@@ -193,20 +210,25 @@ export class TreeSelectFormFieldComponent implements OnInit {
     this.flatNodeMap.set(flatNode, node);
     this.nestedNodeMap.set(node, flatNode);
     return flatNode;
-  }
+  };
 
   /** Whether all the descendants of the node are selected. */
   descendantsAllSelected(node: TreeFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
-    return descendants.length > 0 && descendants.every(child => {
-      return this.checklistSelection.isSelected(child);
-    });
+    return (
+      descendants.length > 0 &&
+      descendants.every(child => {
+        return this.checklistSelection.isSelected(child);
+      })
+    );
   }
 
   /** Whether part of the descendants are selected */
   descendantsPartiallySelected(node: TreeFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
-    const result = descendants.some(child => this.checklistSelection.isSelected(child));
+    const result = descendants.some(child =>
+      this.checklistSelection.isSelected(child),
+    );
     return result && !this.descendantsAllSelected(node);
   }
 
@@ -242,9 +264,11 @@ export class TreeSelectFormFieldComponent implements OnInit {
   checkRootNodeSelection(node: TreeFlatNode): void {
     const nodeSelected = this.checklistSelection.isSelected(node);
     const descendants = this.treeControl.getDescendants(node);
-    const descAllSelected = descendants.length > 0 && descendants.every(child => {
-      return this.checklistSelection.isSelected(child);
-    });
+    const descAllSelected =
+      descendants.length > 0 &&
+      descendants.every(child => {
+        return this.checklistSelection.isSelected(child);
+      });
     if (nodeSelected && !descAllSelected) {
       this.checklistSelection.deselect(node);
     } else if (!nodeSelected && descAllSelected) {
@@ -277,7 +301,10 @@ export class TreeSelectFormFieldComponent implements OnInit {
     this.selectionList = [];
     for (const item of this.checklistSelection.selected) {
       const parent = this.getParentNode(item);
-      if (parent == null || !this.checklistSelection.selected.includes(parent)) {
+      if (
+        parent == null ||
+        !this.checklistSelection.selected.includes(parent)
+      ) {
         this.selectionList.push(item);
       }
     }
@@ -293,18 +320,22 @@ export class TreeSelectFormFieldComponent implements OnInit {
 
   applyFilter(event: Event) {
     let filterText = (event.target as HTMLInputElement).value;
-    filterText = filterText == null ? '' : filterText;
+    filterText = filterText ?? '';
     this.searchFilter.next(filterText);
   }
 
   private filterTree(node: TreeNode, filterText: string) {
-    node.visible = node.item.label.toLowerCase().includes(filterText.toLowerCase())
+    node.visible = node.item.label
+      .toLowerCase()
+      .includes(filterText.toLowerCase());
     if (!node.visible && node.children) {
       for (const child of node.children) {
         if (child.children) {
           this.filterTree(child, filterText);
         } else {
-          child.visible = child.item.label.toLowerCase().includes(filterText.toLowerCase());
+          child.visible = child.item.label
+            .toLowerCase()
+            .includes(filterText.toLowerCase());
         }
         node.visible = child.visible || node.visible;
       }

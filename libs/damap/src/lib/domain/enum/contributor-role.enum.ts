@@ -18,5 +18,5 @@ export enum ContributorRole {
   SPONSOR = 'SPONSOR',
   SUPERVISOR = 'SUPERVISOR',
   WORK_PACKAGE_LEADER = 'WORK_PACKAGE_LEADER',
-  OTHER = 'OTHER'
+  OTHER = 'OTHER',
 }

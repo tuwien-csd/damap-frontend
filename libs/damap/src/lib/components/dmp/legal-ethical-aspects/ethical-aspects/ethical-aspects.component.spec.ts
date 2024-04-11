@@ -1,9 +1,13 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {EthicalAspectsComponent} from './ethical-aspects.component';
-import {UntypedFormControl, UntypedFormGroup, ReactiveFormsModule} from '@angular/forms';
-import {MatRadioModule} from '@angular/material/radio';
-import {TranslateTestingModule} from '../../../../testing/translate-testing/translate-testing.module';
+import { EthicalAspectsComponent } from './ethical-aspects.component';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
 
 describe('EthicalAspectsComponent', () => {
   let component: EthicalAspectsComponent;
@@ -12,9 +16,8 @@ describe('EthicalAspectsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, MatRadioModule, TranslateTestingModule],
-      declarations: [EthicalAspectsComponent]
-    })
-      .compileComponents();
+      declarations: [EthicalAspectsComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -23,7 +26,7 @@ describe('EthicalAspectsComponent', () => {
     component.legalEthicalStep = new UntypedFormGroup({
       humanParticipants: new UntypedFormControl(false),
       ethicalIssues: new UntypedFormControl(false),
-      committeeReviewed: new UntypedFormControl(false)
+      committeeReviewed: new UntypedFormControl(false),
     });
     fixture.detectChanges();
   });

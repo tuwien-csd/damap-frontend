@@ -1,10 +1,14 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {LegalEthicalAspectsComponent} from './legal-ethical-aspects.component';
-import {UntypedFormControl, UntypedFormGroup, ReactiveFormsModule} from '@angular/forms';
-import {MatRadioModule} from '@angular/material/radio';
-import {StepIntroComponent} from '../../../widgets/step-intro/step-intro.component';
-import {TranslateTestingModule} from '../../../testing/translate-testing/translate-testing.module';
+import { LegalEthicalAspectsComponent } from './legal-ethical-aspects.component';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
+import { StepIntroComponent } from '../../../widgets/step-intro/step-intro.component';
+import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
 
 describe('LegalEthicalAspectsComponent', () => {
   let component: LegalEthicalAspectsComponent;
@@ -13,9 +17,8 @@ describe('LegalEthicalAspectsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, MatRadioModule, TranslateTestingModule],
-      declarations: [LegalEthicalAspectsComponent, StepIntroComponent]
-    })
-      .compileComponents();
+      declarations: [LegalEthicalAspectsComponent, StepIntroComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

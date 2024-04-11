@@ -5,13 +5,13 @@ import { Contributor } from '../../domain/contributor';
 @Component({
   selector: 'app-person-search',
   templateUrl: './person-search.component.html',
-  styleUrls: ['./person-search.component.css'],
+  styleUrls: [],
 })
 export class PersonSearchComponent {
   @Input() result: Contributor[];
   @Output() termToSearch = new EventEmitter<string>();
   @Output() personToAdd = new EventEmitter<Contributor>();
-  
+
   currentSearchTerm: string;
 
   search(term: string) {

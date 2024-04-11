@@ -1,4 +1,7 @@
-import {ConfirmDeletionDialogComponent, PeopleComponent} from './people.component';
+import {
+  ConfirmDeletionDialogComponent,
+  PeopleComponent,
+} from './people.component';
 
 import {ContributorFilterPipe} from './contributor-filter.pipe';
 import {ContributorManualComponent} from './contributor-manual/contributor-manual.component';
@@ -27,7 +30,12 @@ import { TooltipModule } from '../../../widgets/tooltip/tooltip.module';
     MatDialogModule,
     TooltipModule
   ],
-  declarations: [PeopleComponent, ContributorManualComponent, ContributorFilterPipe, ConfirmDeletionDialogComponent],
+  declarations: [
+    PeopleComponent,
+    ContributorManualComponent,
+    ContributorFilterPipe,
+    ConfirmDeletionDialogComponent,
+  ],
   exports: [
     SharedModule,
     StepIntroModule,
@@ -43,5 +51,4 @@ import { TooltipModule } from '../../../widgets/tooltip/tooltip.module';
     TooltipModule
   ]
 })
-export class PeopleModule {
-}
+export class PeopleModule {}

@@ -1,20 +1,19 @@
 /* eslint no-console: "off" */
 
-import {Injectable} from '@angular/core';
-import {APP_ENV} from '../constants';
+import { Injectable } from '@angular/core';
+import { APP_ENV } from '../constants';
 
 export enum LogLevel {
   DEBUG = 0,
   INFO = 1,
   WARN = 2,
-  ERROR = 3
+  ERROR = 3,
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoggerService {
-
   get prod() {
     return APP_ENV.production;
   }

@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {TagComponent} from './tag.component';
+import { NgModule } from '@angular/core';
+import { TagComponent } from './tag.component';
 
 @NgModule({
   declarations: [TagComponent],
-  exports: [TagComponent]
+  exports: [TagComponent],
 })
 export class TagModule {}

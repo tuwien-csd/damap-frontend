@@ -1,15 +1,14 @@
-import {Component, Input} from '@angular/core';
-import {UntypedFormArray, UntypedFormGroup} from '@angular/forms';
-import {DataAccessType} from '../../../domain/enum/data-access-type.enum';
-import {DataSource} from '../../../domain/enum/data-source.enum';
+import { Component, Input } from '@angular/core';
+import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
+import { DataAccessType } from '../../../domain/enum/data-access-type.enum';
+import { DataSource } from '../../../domain/enum/data-source.enum';
 
 @Component({
   selector: 'app-dmp-reuse',
   templateUrl: './reuse.component.html',
-  styleUrls: ['./reuse.component.css']
+  styleUrls: ['./reuse.component.css'],
 })
 export class ReuseComponent {
-
   @Input() reuseStep: UntypedFormGroup;
   @Input() datasets: UntypedFormArray;
 
@@ -18,12 +17,14 @@ export class ReuseComponent {
     'Officers of local/national governments',
     'Decision makers in industry',
     'Students and general public',
-    'Others: '];
-
-  constructor() {
-  }
+    'Others: ',
+  ];
 
   get restricted() {
-    return this.datasets?.value.filter(item => item.dataAccess === DataAccessType.RESTRICTED && item.source === DataSource.NEW);
+    return this.datasets?.value.filter(
+      item =>
+        item.dataAccess === DataAccessType.RESTRICTED &&
+        item.source === DataSource.NEW,
+    );
   }
 }

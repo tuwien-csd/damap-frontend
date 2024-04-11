@@ -6,10 +6,9 @@ import { MatFormFieldAppearance } from '@angular/material/form-field';
 @Component({
   selector: 'app-textarea-wrapper [label] [control]',
   templateUrl: './textarea-wrapper.component.html',
-  styleUrls: ['./textarea-wrapper.component.css']
+  styleUrls: ['./textarea-wrapper.component.css'],
 })
 export class TextareaWrapperComponent implements OnInit {
-
   @Input() label: string;
   @Input() control: UntypedFormControl;
   @Input() placeholder: string;
@@ -20,11 +19,7 @@ export class TextareaWrapperComponent implements OnInit {
 
   required = false;
 
-  constructor() {
-  }
-
   ngOnInit(): void {
     this.required = this.control?.hasValidator(Validators.required);
   }
-
 }

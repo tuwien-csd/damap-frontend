@@ -41,6 +41,6 @@
   flex-direction: column;
 }
 
-.mat-dialog-container {
+.mat-mdc-dialog-container {
   width: 800px;
 }

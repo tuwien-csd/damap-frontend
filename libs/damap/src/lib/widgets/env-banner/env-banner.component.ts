@@ -1,13 +1,8 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-env-banner',
   templateUrl: './env-banner.component.html',
-  styleUrls: ['./env-banner.component.css']
+  styleUrls: ['./env-banner.component.css'],
 })
-export class EnvBannerComponent {
-
-  constructor() {
-  }
-
-}
+export class EnvBannerComponent {}

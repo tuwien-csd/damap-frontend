@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {VersionViewProjectComponent} from './version-view-project.component';
-import {mockProject} from '../../../../mocks/project-mocks';
+import { VersionViewProjectComponent } from './version-view-project.component';
+import { mockProject } from '../../../../mocks/project-mocks';
 
 describe('VersionViewProjectComponent', () => {
   let component: VersionViewProjectComponent;
@@ -9,7 +9,7 @@ describe('VersionViewProjectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [VersionViewProjectComponent]
+      declarations: [VersionViewProjectComponent],
     }).compileComponents();
   });
 

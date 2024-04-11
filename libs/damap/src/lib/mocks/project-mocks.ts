@@ -1,6 +1,6 @@
-import {FundingState} from '../domain/enum/funding-state.enum';
-import {IdentifierType} from '../domain/enum/identifier-type.enum';
-import {Project} from '../domain/project';
+import { FundingState } from '../domain/enum/funding-state.enum';
+import { IdentifierType } from '../domain/enum/identifier-type.enum';
+import { Project } from '../domain/project';
 
 export const mockProject: Project = {
   end: new Date(),
@@ -8,13 +8,15 @@ export const mockProject: Project = {
     fundingName: 'Funding name',
     fundingProgram: 'Funding program',
     funderId: {
-      identifier: '501100004955', type: IdentifierType.FUNDREF
+      identifier: '501100004955',
+      type: IdentifierType.FUNDREF,
     },
     fundingStatus: FundingState.GRANTED,
     grantId: {
       identifier: '123456',
-      type: null
-    }, id: 79
+      type: null,
+    },
+    id: 79,
   },
   id: 78,
   start: new Date(),
@@ -22,7 +24,7 @@ export const mockProject: Project = {
   universityId: 1234,
   description: '',
   dmpExists: true,
-  funderSupported: true
+  funderSupported: true,
 };
 
 export const mockRecommendedProject: Project = {
@@ -31,13 +33,15 @@ export const mockRecommendedProject: Project = {
     fundingName: 'Funding name',
     fundingProgram: 'Funding program',
     funderId: {
-      identifier: '501100004955', type: IdentifierType.FUNDREF
+      identifier: '501100004955',
+      type: IdentifierType.FUNDREF,
     },
     fundingStatus: FundingState.GRANTED,
     grantId: {
       identifier: '1337',
-      type: null
-    }, id: 1337
+      type: null,
+    },
+    id: 1337,
   },
   id: 1337,
   start: new Date(),
@@ -45,7 +49,7 @@ export const mockRecommendedProject: Project = {
   universityId: 1337,
   description: '',
   dmpExists: true,
-  funderSupported: false
+  funderSupported: false,
 };
 
 export const mockManualProject: Project = {
@@ -57,6 +61,5 @@ export const mockManualProject: Project = {
   universityId: undefined,
   description: '',
   dmpExists: undefined,
-  funderSupported: false
+  funderSupported: false,
 };
-

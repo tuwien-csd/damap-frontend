@@ -6,7 +6,7 @@ mat-form-field {
   width: 100%;
 }
 
-.custom-style ::ng-deep .mat-form-field-flex {
+.custom-style ::ng-deep .mat-mdc-text-field-wrapper {
   background-color: var(--main-color);
   background-image: linear-gradient(
     rgba(255, 255, 255, 0.9),
