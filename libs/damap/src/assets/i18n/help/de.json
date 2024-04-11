@@ -1,12 +1,12 @@
 {
-    "help": {
-        "legal": {
-            "sensitiveDataSecurity": "Bezieht sich auf die physische Sicherheit, Netzwerksicherheit und Sicherheit von Computer-Systemen und Dateien.",
-            "personalDataCompliance": "Stellen Sie sicher, dass Sie den Leitlinien Ihrer Institution zur informierten Zustimmung folgen."
-        },
-        "ethical": {
-            "humanParticipants": "Die Teilnahme kann Aktivitäten wie Interviews, Prototypentests, Beobachtungen, Umfragen usw. umfassen.",
-            "ethicalIssues": "Zum Beispiel: Ihre Forschung beinhaltet menschliche Embryonen, Feten, Zellen oder Gewebe, Tiere, Aktivitäten, die die Umwelt oder die Gesundheit und Sicherheit der beteiligten Personen beeinträchtigen können, künstliche Intelligenz, Aktivitäten außerhalb der EU oder es gibt doppelte Verwendung oder Missbrauchsaspekte, die angesprochen werden müssen."
-        }
+  "help": {
+    "legal": {
+      "sensitiveDataSecurity": "Bezieht sich auf die physische Sicherheit, Netzwerksicherheit und Sicherheit von Computer-Systemen und Dateien.",
+      "personalDataCompliance": "Stellen Sie sicher, dass Sie den Leitlinien Ihrer Institution zur informierten Zustimmung folgen."
+    },
+    "ethical": {
+      "humanParticipants": "Die Teilnahme kann Aktivitäten wie Interviews, Prototypentests, Beobachtungen, Umfragen usw. umfassen.",
+      "ethicalIssues": "Zum Beispiel: Ihre Forschung beinhaltet menschliche Embryonen, Feten, Zellen oder Gewebe, Tiere, Aktivitäten, die die Umwelt oder die Gesundheit und Sicherheit der beteiligten Personen beeinträchtigen können, künstliche Intelligenz, Aktivitäten außerhalb der EU oder es gibt doppelte Verwendung oder Missbrauchsaspekte, die angesprochen werden müssen."
     }
+  }
 }
