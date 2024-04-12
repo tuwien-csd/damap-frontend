@@ -6,14 +6,20 @@ import {
   OnChanges,
   Output,
   SimpleChanges,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {RepositoryDetails} from '../../../../domain/repository-details';
-import {LoadingState} from '../../../../domain/enum/loading-state.enum';
-import {MatPaginator} from '@angular/material/paginator';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {Repository} from '../../../../domain/repository';
+import { MatTableDataSource } from '@angular/material/table';
+import { RepositoryDetails } from '../../../../domain/repository-details';
+import { LoadingState } from '../../../../domain/enum/loading-state.enum';
+import { MatPaginator } from '@angular/material/paginator';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { Repository } from '../../../../domain/repository';
 
 @Component({
   selector: 'app-repo-table',
@@ -21,23 +27,27 @@ import {Repository} from '../../../../domain/repository';
   styleUrls: ['./repo-table.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'),
+      ),
     ]),
-  ]
+  ],
 })
 export class RepoTableComponent implements OnChanges, AfterViewInit {
-
   @Input() selectedRepos: Repository[];
   @Input() loaded: LoadingState;
-  @Input() filters: { [key: string]: { id: string, label: string }[] } = {};
+  @Input() filters: { [key: string]: { id: string; label: string }[] } = {};
   @Input() repositories: RepositoryDetails[]; // Repo list loaded from backend
   repoList: any = []; // Filtered repo list (repo list minus selected repos)
 
   @Output() repositoryToAdd = new EventEmitter<any>();
   @Output() repositoryDetails = new EventEmitter<any>();
-  @Output() filterChange = new EventEmitter<{ [key: string]: { id: string, label: string }[] }>();
+  @Output() filterChange = new EventEmitter<{
+    [key: string]: { id: string; label: string }[];
+  }>();
 
   readonly LoadingState = LoadingState;
   readonly tableHeaders: string[] = ['expand', 'title', 'add'];
@@ -88,13 +98,13 @@ export class RepoTableComponent implements OnChanges, AfterViewInit {
   private filterRepos(): void {
     this.repoList = Object.assign([], this.repositories);
     for (const entry of this.selectedRepos) {
-      this.repoList = this.repoList.filter(e => !(e.id === entry.repositoryId));
+      this.repoList = this.repoList.filter(e => e.id !== entry.repositoryId);
     }
     this.dataSource.paginator = this.paginator;
     this.dataSource.data = this.repoList;
   }
 
-  onFilterChange(filter: { [key: string]: { id: string, label: string }[] }) {
+  onFilterChange(filter: { [key: string]: { id: string; label: string }[] }) {
     this.filterChange.emit(filter);
   }
 

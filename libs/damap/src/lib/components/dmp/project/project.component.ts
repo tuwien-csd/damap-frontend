@@ -1,17 +1,22 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+
 import { MatTabGroup } from '@angular/material/tabs';
 import { Project } from '../../../domain/project';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-dmp-project',
   templateUrl: './project.component.html',
-  styleUrls: ['./project.component.css']
+  styleUrls: [],
 })
 export class ProjectComponent {
-
   @Input() projectStep: UntypedFormControl;
-
   @Output() project = new EventEmitter<any>();
 
   @ViewChild('tabGroup') tabGroup: MatTabGroup;

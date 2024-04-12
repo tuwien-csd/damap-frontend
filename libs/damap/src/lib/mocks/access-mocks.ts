@@ -1,5 +1,6 @@
-import { Access } from "../domain/access";
-import { FunctionRole, IdentifierType } from "@damap/core";
+import { Access } from '../domain/access';
+import { FunctionRole } from '../domain/enum/function-role.enum';
+import { IdentifierType } from '../domain/enum/identifier-type.enum';
 
 export const mockAccess: Access = {
   id: 100,
@@ -10,9 +11,9 @@ export const mockAccess: Access = {
   lastName: 'Mustermann',
   mbox: 'm.mustermann@university.ac.at',
   affiliation: 'TU Wien',
-  affiliationId: {identifier: 'XXX', type: IdentifierType.ROR},
+  affiliationId: { identifier: 'XXX', type: IdentifierType.ROR },
   contact: true,
   role: null,
   roleInProject: undefined,
-  access: FunctionRole.EDITOR
+  access: FunctionRole.EDITOR,
 };

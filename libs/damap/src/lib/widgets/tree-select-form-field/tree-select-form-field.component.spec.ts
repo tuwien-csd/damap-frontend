@@ -1,19 +1,19 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {TreeSelectFormFieldComponent} from './tree-select-form-field.component';
-import {HarnessLoader} from '@angular/cdk/testing';
-import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
-import {MatTreeModule} from '@angular/material/tree';
-import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatButtonModule} from '@angular/material/button';
-import {MatOptionModule} from '@angular/material/core';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {MatInputHarness} from '@angular/material/input/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TreeSelectFormFieldComponent } from './tree-select-form-field.component';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatTreeModule } from '@angular/material/tree';
+import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatOptionModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 describe('TreeSelectFormFieldComponent', () => {
   let component: TreeSelectFormFieldComponent;
@@ -24,22 +24,44 @@ describe('TreeSelectFormFieldComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        MatFormFieldModule, MatChipsModule, MatInputModule, MatAutocompleteModule, MatOptionModule, MatTreeModule,
-        MatButtonModule, MatCheckboxModule, MatIconModule, TranslateTestingModule, NoopAnimationsModule],
-      declarations: [TreeSelectFormFieldComponent]
+        MatFormFieldModule,
+        MatChipsModule,
+        MatInputModule,
+        MatAutocompleteModule,
+        MatOptionModule,
+        MatTreeModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatIconModule,
+        TranslateTestingModule,
+        NoopAnimationsModule,
+      ],
+      declarations: [TreeSelectFormFieldComponent],
     }).compileComponents();
     fixture = TestBed.createComponent(TreeSelectFormFieldComponent);
     component = fixture.componentInstance;
     component.label = 'Filter';
-    component.treeData = [{
-      id: 'tree',
-      label: 'Tree',
-      children: [
-        {id: 'node', label: 'Node', children: [{id: 'leaf', label: 'Leaf'}]},
-        {id: 'nodeWithOutChild', label: 'Node without child'}]
-    }];
+    component.treeData = [
+      {
+        id: 'tree',
+        label: 'Tree',
+        children: [
+          {
+            id: 'node',
+            label: 'Node',
+            children: [{ id: 'leaf', label: 'Leaf' }],
+          },
+          { id: 'nodeWithOutChild', label: 'Node without child' },
+        ],
+      },
+    ];
     // state = [{id:'node', label:'Node'}]
-    component.state = [{id: component.treeData[0].children[0].id, label: component.treeData[0].children[0].label}];
+    component.state = [
+      {
+        id: component.treeData[0].children[0].id,
+        label: component.treeData[0].children[0].label,
+      },
+    ];
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.loader(fixture);
   });
@@ -60,5 +82,5 @@ describe('TreeSelectFormFieldComponent', () => {
     input = await loader.getHarness(MatInputHarness);
 
     expect(component.params.emit).toHaveBeenCalledWith(component.state);
-  })
+  });
 });

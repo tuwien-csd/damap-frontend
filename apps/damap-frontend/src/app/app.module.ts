@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { AuthGuard, EnvBannerModule } from '@damap/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpBackend, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import { APP_ROUTES } from './app.routes';
@@ -22,16 +22,16 @@ import { TuGrazAuthService } from './services/tugrazAuth.service';
 import { environment } from '../environments/environment';
 
 // required for AOT compilation
-export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
+export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
   return new MultiTranslateHttpLoader(http, [
-    { prefix: './assets/i18n/layout/', suffix: '.json' },
-    { prefix: './assets/i18n/consent/', suffix: '.json' },
-    { prefix: './assets/damap-core/i18n/dashboard/', suffix: '.json' },
-    { prefix: './assets/damap-core/i18n/plans/', suffix: '.json' },
-    { prefix: './assets/damap-core/i18n/http/', suffix: '.json' },
-    { prefix: './assets/damap-core/i18n/gdpr/', suffix: '.json' },
-    { prefix: './assets/damap-core/i18n/', suffix: '.json' },
-    { prefix: './assets/i18n/', suffix: '.json' },
+    '/assets/i18n/layout/',
+    '/assets/i18n/consent/',
+    '/assets/damap-core/i18n/dashboard/',
+    '/assets/damap-core/i18n/plans/',
+    '/assets/damap-core/i18n/http/',
+    '/assets/damap-core/i18n/gdpr/',
+    '/assets/damap-core/i18n/',
+    '/assets/i18n/',
   ]);
 }
 
@@ -57,7 +57,7 @@ export function HttpLoaderFactory(http: HttpClient): MultiTranslateHttpLoader {
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
+        deps: [HttpBackend],
       },
     }),
 

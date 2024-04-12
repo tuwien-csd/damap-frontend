@@ -1,19 +1,25 @@
-<app-step-intro>{{'dmp.steps.data.reuse.intro' | translate}}
-</app-step-intro>
+<app-step-intro>{{ "dmp.steps.data.reuse.intro" | translate }} </app-step-intro>
 <div [formGroup]="reuseStep">
   <mat-form-field class="full-width" appearance="fill">
-    <mat-label class="wrap-label">{{'dmp.steps.data.reuse.question.targetAudience' | translate}}
+    <mat-label class="wrap-label"
+      >{{ "dmp.steps.data.reuse.question.targetAudience" | translate }}
     </mat-label>
-    <input type="text" matInput formControlName="targetAudience" [matAutocomplete]="auto" [maxLength]="4000"/>
+    <input
+      type="text"
+      matInput
+      formControlName="targetAudience"
+      [matAutocomplete]="auto"
+      [maxLength]="4000" />
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let option of optionsTargetAudience" [value]="option">
-        {{option}}
+        {{ option }}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
 
   <mat-form-field class="full-width" appearance="fill">
-    <mat-label class="wrap-label">{{'dmp.steps.data.reuse.question.tools' | translate}}
+    <mat-label class="wrap-label"
+      >{{ "dmp.steps.data.reuse.question.tools" | translate }}
     </mat-label>
     <textarea matInput formControlName="tools" [maxLength]="4000"></textarea>
   </mat-form-field>
@@ -21,10 +27,15 @@
   <ng-container *ngIf="restricted?.length > 0">
     <mat-form-field class="full-width" appearance="fill">
       <mat-label class="wrap-label">
-        {{'dmp.steps.data.reuse.question.restrictedDataAccess' | translate}}
-        <span *ngFor="let set of restricted, last as last"> "{{set.title}}"<span *ngIf="!last">, </span>. </span>
+        {{ "dmp.steps.data.reuse.question.restrictedDataAccess" | translate }}
+        <span *ngFor="let set of restricted; last as last">
+          "{{ set.title }}"<span *ngIf="!last">, </span>.
+        </span>
       </mat-label>
-      <textarea matInput formControlName="restrictedDataAccess" [maxLength]="4000"></textarea>
+      <textarea
+        matInput
+        formControlName="restrictedDataAccess"
+        [maxLength]="4000"></textarea>
     </mat-form-field>
   </ng-container>
 </div>

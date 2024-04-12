@@ -1,34 +1,40 @@
+<app-info-message *ngIf="!projectStep?.value?.funding">{{
+  "info.project.funder" | translate
+}}</app-info-message>
+
 <!-- Selected project -->
 <div *ngIf="projectStep?.value">
   <p>{{ "dmp.steps.project.selected" | translate }}:</p>
-  <mat-card class="mat-selected">
-    <div class="mat-card-container">
-      <div class="mat-card-left">
+  <mat-card appearance="raised" class="mat-mdc-selected">
+    <mat-card-header>
+      <mat-card-title>
+        <strong>{{ projectStep.value.title }}</strong>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="mat-card-container">
+        <p>
+          <mat-icon class="mat-icon-style">date_range</mat-icon>
+          {{ projectStep.value.start | date: "dd/MMMM/yy" }} -
+          {{ projectStep.value.end | date: "dd/MMMM/yy" }}
+        </p>
         <div>
-          <strong>{{ projectStep.value.title }}</strong>
+          <button mat-icon-button (click)="changeProject(null)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </div>
-        <mat-icon class="mat-icon-style">date_range</mat-icon>
-        {{ projectStep.value.start | date }} -
-        {{ projectStep.value.end | date }}
       </div>
-      <div class="mat-card-right">
-        <button mat-button (click)="changeProject(null)">
-          <mat-icon color="white">delete</mat-icon>
-        </button>
-      </div>
-    </div>
+    </mat-card-content>
   </mat-card>
 </div>
 
 <mat-tab-group #tabGroup mat-align-tabs="start" animationDuration="0ms">
   <!-- Project list -->
   <mat-tab label="{{ 'dmp.steps.project.list' | translate }}">
-    <div>
-      <app-project-list
-        [selectedProject]="projectStep?.value"
-        (projectToSet)="changeProject($event)">
-      </app-project-list>
-    </div>
+    <app-project-list
+      [selectedProject]="projectStep?.value"
+      (projectToSet)="changeProject($event)">
+    </app-project-list>
     <button mat-raised-button color="primary" (click)="changeTab(1)">
       {{ "dmp.steps.project.manual.input" | translate }}
     </button>

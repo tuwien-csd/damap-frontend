@@ -6,7 +6,6 @@ import { OAuthService } from 'angular-oauth2-oidc';
   providedIn: 'root',
 })
 export class TuGrazAuthService extends AuthService {
-
   constructor(private _oAuthService: OAuthService) {
     super(_oAuthService);
   }
@@ -14,6 +13,8 @@ export class TuGrazAuthService extends AuthService {
   isAdmin(): boolean {
     const parts: string[] = this._oAuthService.getAccessToken().split('.');
     const tokenBody: any = JSON.parse('' + window.atob(parts[1]));
-    return tokenBody.resource_access?.[this._oAuthService.clientId ?? ""]?.roles?.includes('Damap Admin');
+    return tokenBody.resource_access?.[
+      this._oAuthService.clientId ?? ''
+    ]?.roles?.includes('Damap Admin');
   }
 }

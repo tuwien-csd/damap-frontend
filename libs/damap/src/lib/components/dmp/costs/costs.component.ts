@@ -1,15 +1,18 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
 
-import {CostType} from '../../../domain/enum/cost-type.enum';
+import { CostType } from '../../../domain/enum/cost-type.enum';
 
 @Component({
   selector: 'app-dmp-costs',
   templateUrl: './costs.component.html',
-  styleUrls: ['./costs.component.css']
+  styleUrls: ['./costs.component.css'],
 })
 export class CostsComponent {
-
   @Input() costsStep: UntypedFormGroup;
 
   @Output() costToAdd = new EventEmitter();
@@ -17,15 +20,17 @@ export class CostsComponent {
 
   costType: any = CostType;
   costTypeObject = Object.values(CostType);
-  
-  translateEnumPrefix = 'enum.costs.'
-  
+
+  translateEnumPrefix = 'enum.costs.';
+
   get list() {
     return this.costsStep?.get('list') as UntypedFormArray;
   }
 
   getFormControl(index: number, controlName: string): UntypedFormControl {
-    return (this.list.at(index) as UntypedFormGroup)?.controls[controlName] as UntypedFormControl;
+    return (this.list.at(index) as UntypedFormGroup)?.controls[
+      controlName
+    ] as UntypedFormControl;
   }
 
   addCost() {

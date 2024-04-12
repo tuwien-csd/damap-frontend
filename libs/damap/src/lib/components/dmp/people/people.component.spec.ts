@@ -42,10 +42,10 @@ describe('PeopleComponent', () => {
       'getPersonSearchResult',
     ]);
     loadServiceConfigSpy = backendSpy.loadServiceConfig.and.returnValue(
-      of(configMockData)
+      of(configMockData),
     );
     backendSpy.getPersonSearchResult.and.returnValue(
-      of(mockContributorSearchResult)
+      of(mockContributorSearchResult),
     );
     await TestBed.configureTestingModule({
       imports: [
@@ -95,7 +95,7 @@ describe('PeopleComponent', () => {
     spyOn(component, 'onServiceConfigChange').and.callThrough();
 
     const selectHarness = await loader.getHarness<MatSelectHarness>(
-      MatSelectHarness.with({ selector: '#serviceSelect' })
+      MatSelectHarness.with({ selector: '#serviceSelect' }),
     );
 
     await selectHarness.open();
@@ -132,7 +132,7 @@ describe('PeopleComponent', () => {
 
     component.addContributor(mockContributor1);
     expect(component.contributorToAdd.emit).toHaveBeenCalledOnceWith(
-      mockContributor1
+      mockContributor1,
     );
   });
 

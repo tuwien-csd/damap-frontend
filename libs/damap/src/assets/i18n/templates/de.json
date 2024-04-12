@@ -1,832 +1,832 @@
 {
-    "dmp": {
-        "steps": {
-            "project": {
-                "input": {
-                    "title": "Projekttitel",
-                    "description": "Projektbeschreibung",
-                    "button": "Projekt aktualisieren"
-                },
-                "manual.input": "Projekt manuell eingeben",
-                "list": "Projekt aus der Projekt-Datenbank auswählen",
-                "label": "Projekt auswählen",
-                "search": "Projekt suchen...",
-                "select": "Bitte wählen Sie das Projekt aus, für das Sie einen DMP erstellen möchten:",
-                "selected": "Sie haben ausgewählt",
-                "warning.dmp": "Für dieses Projekt existiert bereits ein DMP",
-                "noprojects": "Es sind keine Projekte Ihnen zugewiesen.",
-                "loading": {
-                    "load": "Projekte laden...",
-                    "failed": "Projekte konnten nicht geladen werden."
-                }
-            },
-            "people": {
-                "label": "Beteiligte Personen an der Datenverwaltung",
-                "intro": "Dieser Schritt hilft Ihnen, Informationen zu den beteiligten Personen und deren speziellen Rollen in Bezug auf das Forschungsdatenmanagement innerhalb dieses Projekts bereitzustellen. Basierend auf den Informationen in der Projekt-Datenbank haben wir den Namen des Projektleiters bereits eingegeben und ihn als Kontaktperson für Fragen im Zusammenhang mit der Datenverwaltung und dem DMP markiert (Symbol mit Person und Briefumschlag). Sie können die voreingestellten Informationen bei Bedarf ändern und weitere Mitwirkende über die Suche (Beginnen Sie mit der Eingabe des Namens) und manuell hinzufügen. Geben Sie mindestens eine Kontaktperson sowie einen Datenmanager (kann dieselbe Person sein) an.",
-                "search": "Person suchen...",
-                "search.service": "Suchdienstleistungsfeld durchsuchen",
-                "contributor": {
-                    "add": "Als Mitwirkender hinzufügen",
-                    "remove": "Aus Mitwirkenden entfernen",
-                    "role": "Rolle",
-                    "warning": " Personen, die nicht Angehörige der TU Graz sind, müssen von Ihnen persönlich über die Erfassung ihrer Daten in diesem Tool informiert werden."
-                },
-                "contact": {
-                    "person": "Kontaktperson",
-                    "add": "Als Kontakt festlegen",
-                    "remove": "Als Kontakt entfernen"
-                },
-                "manual.input": {
-                    "show": "Manuelle Eingabe des Mitwirkenden anzeigen",
-                    "hide": "Manuelle Eingabe des Mitwirkenden ausblenden",
-                    "question": {
-                        "firstname": "Vorname",
-                        "lastname": "Nachname",
-                        "mbox": "E-Mail-Adresse",
-                        "orcid": "ORCID-ID"
-                    }
-                },
-                "nopeople": "Keine Projektmitglieder verfügbar.",
-                "confirm.dialog": {
-                    "heading": "Mitwirkenden entfernen",
-                    "question": "Sind Sie sicher, dass Sie diesen Mitwirkenden entfernen möchten?\n Sie sind verantwortlich für die Löschung der folgenden Datensätze:",
-                    "button": {
-                        "confirm": "Bestätigen",
-                        "cancel": "Abbrechen"
-                    }
-                }
-            },
-            "data": {
-                "specify": {
-                    "label": "Forschungsdaten spezifizieren",
-                    "intro": {
-                        "default": "Forschungsdaten gibt es in allen Formen und Größen. Die Tabelle unten hilft Ihnen dabei, die Datensätze zu beschreiben (d.h. Gruppen von Daten mit ähnlichen Eigenschaften), die Sie während des Projekts erstellen möchten.",
-                        "reused": "Forschungsdaten gibt es in allen Formen und Größen. Die Tabelle unten hilft Ihnen dabei, die Datensätze zu beschreiben (d.h. Gruppen von Daten mit ähnlichen Eigenschaften), die Sie während des Projekts wiederverwenden möchten."
-                    },
-                    "question": {
-                        "kind": "Welche Arten von Forschungsdaten werden Sie erstellen?",
-                        "datasets": "Benennen Sie Ihre Datensätze",
-                        "nodata": "Bitte erklären Sie, warum Sie keine Forschungsdaten erstellen oder analysieren werden.",
-                        "reused": "Welche Arten von Forschungsdaten werden Sie wiederverwenden?"
-                    },
-                    "answer": {
-                        "kind": {
-                            "unknown": "Ich weiß es noch nicht.",
-                            "none": "Es werden keine Daten erstellt oder analysiert.",
-                            "reuse.none": "Es werden keine Daten wiederverwendet.",
-                            "specify": "Spezifizieren Sie Datensätze."
-                        }
-                    },
-                    "tab": {
-                        "manual": "Manuell",
-                        "upload": "Beispieldaten hochladen",
-                        "doi": "DOI eingeben"
-                    },
-                    "button": {
-                        "add": {
-                            "manual": "Datensatz manuell hinzufügen",
-                            "doi": "Datensatz finden"
-                        }
-                    },
-                    "table": {
-                        "heading": {
-                            "default": "Daten",
-                            "reused": "Wiederverwendete Daten",
-                            "new": "Neue Daten"
-                        },
-                        "header": {
-                            "dataset": "Datensatz",
-                            "datatype": "Datentyp",
-                            "size": "Größe",
-                            "comment": "Kommentar",
-                            "actions": "Aktionen",
-                            "description": "Beschreibung",
-                            "pid": "PID"
-                        }
-                    },
-                    "dialog": {
-                        "add": "Datensatz hinzufügen",
-                        "edit": "Datensatz bearbeiten",
-                        "title": "Datensatztitel",
-                        "type": "Geschätzter Typ",
-                        "size": "Geschätzte Größe",
-                        "description": "Beschreibung",
-                        "source": "Quelle",
-                        "identifier": "Kennung",
-                        "button": {
-                            "add": "Hinzufügen",
-                            "update": "Aktualisieren",
-                            "cancel": "Abbrechen"
-                        }
-                    },
-                    "doi": {
-                        "search": "DOI eingeben...",
-                        "not.found": "Kein Datensatz gefunden."
-                    }
-                },
-                "access": {
-                    "heading": "Zugriffsrechte für alle Datensätze festlegen",
-                    "question": {
-                        "dataset": "Datensatz",
-                        "selected": "für ausgewählte Projektmitglieder",
-                        "other": "für andere Projektmitglieder",
-                        "public": "Öffentlich",
-                        "right": "Zugriffsrecht"
-                    },
-                    "aria": {
-                        "selected": "Zugriffsrecht für ausgewählte Projektmitglieder für Datensatz {{dataset}}",
-                        "other": "Zugriffsrecht für andere Projektmitglieder für Datensatz {{dataset}}",
-                        "public": "Zugriffsrecht für die Öffentlichkeit für Datensatz {{dataset}}"
-                    }
-                }
-            },
-            "reuse": {
-                "label": "Wiederverwendung von Daten",
-                "intro": "Dieser Schritt hilft Ihnen, über vorhersehbare Forschungsverwendungen oder Nutzer Ihrer Datensätze nachzudenken und was potenzielle Wiederverwender benötigen, um auf Ihre Daten zuzugreifen.",
-                "question": {
-                    "targetAudience": "Wer ist die Zielgruppe und wer könnte an der Wiederverwendung der Daten interessiert sein und warum?",
-                    "tools": "Geben Sie an, ob potenzielle Benutzer spezielle Tools oder Software benötigen, um auf die Daten zuzugreifen und sie (wieder) zu verwenden.",
-                    "restrictedDataAccess": "Für die folgenden Datensätze wurde beschränkter Zugriff ausgewählt. Erläutern Sie, wie andere Zugang zu den Daten erhalten werden:"
-                }
-            },
-            "deletion": {
-                "warning": {
-                    "published": "Dieser Datensatz wurde zur Veröffentlichung ausgewählt. Sind Sie sicher, dass er gelöscht werden soll?"
-                },
-                "question": {
-                    "label": "Muss dieser Datensatz gelöscht werden, z. B. aus vertraglichen, regulatorischen oder ethischen Gründen? Wenn ja, fügen Sie bitte ein geschätztes Datum für die Löschung, den Grund für die Löschung und eine verantwortliche Person hinzu.",
-                    "delete": "Datensatz zum Löschen markieren",
-                    "date": "Löschungsdatum",
-                    "reason": "Grund für die Löschung",
-                    "person": "Verantwortliche Person für die Löschung"
-                }
-            },
-            "documentation": {
-                "label": "Dokumentation und Datenqualität",
-                "intro": "Dieser Schritt hilft Ihnen dabei, die Beschreibung Ihrer Datensätze und deren Erzeugung zu spezifizieren. Dazu können Informationen über die verwendete Methodik zur Datenerhebung, analytische und Verfahrensinformationen, Definitionen von Variablen, Maßeinheiten, Informationen zur Datenorganisation usw. gehören.",
-                "question": {
-                    "metadata": "Bitte geben Sie an, welche Metadaten bereitgestellt werden, um anderen zu helfen, Daten zu identifizieren, zu entdecken und wiederzuverwenden.",
-                    "datageneration": "Wie werden die Forschungsdaten generiert oder wiederverwendet und welche Methoden und Software werden verwendet?",
-                    "structure": "Wie werden die Daten strukturiert und Versionen behandelt?",
-                    "documentation": "Wie wird die Dokumentation bereitgestellt, die für die Validierung der Datenanalyse und die Erleichterung der Wiederverwendung der Daten erforderlich ist?",
-                    "dataQuality": "Wie wird die Konsistenz und Qualität der Datenerfassung kontrolliert?",
-                    "otherDataQuality": "Bitte geben Sie an, welche anderen Maßnahmen ergriffen werden:"
-                }
-            },
-            "storage": {
-                "label": "Speicherung und Backup während des Forschungsprozesses",
-                "intro": "Wählen Sie die beste Speicheroption für jeden Datensatz aus.",
-                "link": "Weitere Informationen...",
-                "question": {
-                    "datasets": "Entsprechende Datensätze auswählen"
-                },
-                "remove": "Speicher entfernen",
-                "external": {
-                    "add": "Andere Speicherorte hinzufügen",
-                    "remove": "Externe Speicher entfernen",
-                    "question": {
-                        "name": "Speichername",
-                        "location": "Speicherort",
-                        "backup": {
-                            "location": "Backup-Speicherort",
-                            "frequency": "Backup-Frequenz"
-                        },
-                        "info": "Bitte erläutern Sie, warum institutioneller Speicher nicht verwendet wird."
-                    }
-                }
-            },
-            "legal": {
-                "label": "Rechts- und ethische Aspekte",
-                "intro": "Dieser Schritt hilft Ihnen, potenzielle Probleme im Zusammenhang mit personenbezogenen Daten, geistigen Eigentumsrechten und Eigentumsrechten zu berücksichtigen und fragt Sie nach grundlegenden Informationen zur Behandlung ethischer Fragen innerhalb dieses Projekts.",
-                "heading": "Rechtsaspekte",
-                "question": {
-                    "sensitiveData": {
-                        "prefix": "Sind Ihre Daten oder ein Teil davon sensibel, zum Beispiel",
-                        "link": "sensible persönliche Daten",
-                        "suffix": ", politisch sensible Informationen oder Geschäftsgeheimnisse?"
-                    },
-                    "dataset": {
-                        "sensitiveData": "Bitte wählen Sie die Datensätze mit sensiblen Daten aus",
-                        "personalData": "Bitte wählen Sie die Datensätze mit personenbezogenen Daten aus",
-                        "legalRestrictions": "Bitte wählen Sie die betroffenen Datensätze:"
-                    },
-                    "personalData": "Werden im Rahmen des Projekts personenbezogene Daten erhoben/verwendet?",
-                    "sensitiveDataSecurity": "Welche zusätzlichen Sicherheitsmaßnahmen werden ergriffen, um sicherzustellen, dass gespeicherte und übertragene sensible Daten sicher sind?",
-                    "otherDataSecurityMeasures": "Bitte geben Sie an, welche anderen Maßnahmen ergriffen werden:",
-                    "sensitiveDataAccess": "Wer ist berechtigt, auf sensible Daten zuzugreifen?",
-                    "personalDataCompliance": "Wie wird die Einhaltung des Datenschutzes sichergestellt?",
-                    "otherPersonalDataCompliance": "Bitte geben Sie an, welche anderen Maßnahmen ergriffen werden:",
-                    "legalRestrictions": "Gibt es weitere rechtliche Beschränkungen für die Verarbeitung oder Weitergabe von Daten?",
-                    "legalRestrictionsComment": "Bitte geben Sie die rechtlichen Beschränkungen an:",
-                    "legalRestrictionsDocuments": "In welchem/von welchen Dokument(en) sind diese Beschränkungen festgelegt?",
-                    "otherLegalRestrictionsDocuments": "Bitte geben Sie die anderen Dokumente an:",
-                    "dataRightsAndAccessControl": "Wer ist der Eigentümer der Daten und wer kontrolliert den Zugang zu den Daten?"
-                },
-                "link": {
-                    "sensitiveData": "https://ec.europa.eu/info/law/law-topic/data-protection/reform/rules-business-and-organisations/legal-grounds-processing-data/sensitive-data/what-personal-data-considered-sensitive_en"
-                }
-            },
-            "ethical": {
-                "heading": "Ethical aspects",
-                "question": {
-                    "humanParticipants": "Werden menschliche Teilnehmer in das Projekt einbezogen und damit ihre personenbezogenen Daten erhoben oder verarbeitet?",
-                    "ethicalIssues": "Gibt es neben der Verwendung sensibler personenbezogener Daten weitere ethische Fragen im Zusammenhang mit Ihrer Forschung?",
-                    "committeeReviewed": {
-                        "prefix": "Wurde Ihr Forschungsplan von einem Ethikkomitee, dem ",
-                        "researchCommittee": {
-                            "text": "Ethikkomitee Ihrer Institution",
-                            "link": "https://www.tugraz.at/tu-graz/organisationsstruktur/vertretungen-der-tu-graz-angehoerigen/commission-for-scientific-integrity-and-ethics"
-                        },
-                        "suffix": " oder einer ähnlichen Stelle überprüft?"
-                    }
-                }
-            },
-            "licensing": {
-                "label": "Datenzugriff und Lizenzierung",
-                "intro": "Dieser Schritt hilft Ihnen dabei, den Zugriff auf Ihre Forschungsergebnisse in der Zukunft zu spezifizieren: Welche Ihrer Datensätze werden veröffentlicht, welche werden interessierten Personen nur auf Anfrage zur Verfügung gestellt und welche müssen aus vertraglichen, regulatorischen oder ethischen Gründen unter Verschluss gehalten werden? Es erinnert Sie auch daran, eine Lizenz für Ihre offenen Daten zu wählen, die die Bedingungen für eine mögliche Wiederverwendung klar beschreibt. Um den FAIR-Prinzipien zu entsprechen, sollten Metadaten veröffentlicht werden, auch wenn die Daten geschlossen oder eingeschränkt sind.",
-                "hint": "Bitte geben Sie an, welche Datensätze Sie geschlossen halten oder veröffentlichen möchten. Wählen Sie eine Lizenz für die Datensätze aus, die Sie veröffentlichen möchten, und schätzen Sie das Veröffentlichungsdatum.",
-                "info": "Wählen Sie eine Lizenz aus der Liste oder verwenden Sie den Lizenz-Selektor, um eine geeignete Lizenz zu finden.",
-                "question": {
-                    "dataAccess": "Datenzugang",
-                    "license": "Geplante Lizenz",
-                    "startDate": "Wählen Sie ein Veröffentlichungsdatum",
-                    "hint": "Das Veröffentlichungsdatum wurde auf das Projektende festgelegt. Sie können es gerne ändern.",
-                    "restrictedAccessInfo": "Die folgenden Datensätze haben Zugangsbeschränkungen, erläutern Sie warum und beschreiben Sie die Zugangsbedingungen klar:",
-                    "closedAccessInfo": "Erläutern Sie, warum die Daten nicht zugänglich sein werden (geschlossener Zugang):"
-                },
-                "warning": {
-                    "personalData": "Sie haben in Schritt 6 angegeben, dass dieser Datensatz sensible personenbezogene Daten enthält. Möchten Sie den Datensatz wirklich offen und ohne Einschränkungen veröffentlichen?",
-                    "pseudonymisation": "Haben Sie eine Anonymisierung/Pseudonymisierung in Betracht gezogen?",
-                    "legalRestrictions": "Sie haben in Schritt 6 angegeben, dass dieser Datensatz rechtlichen Beschränkungen unterliegt. Möchten Sie den Datensatz wirklich ohne Einschränkungen veröffentlichen?"
-                }
-            },
-            "retentionPeriod": {
-                "title": "Retention-Periode für Datensätze festlegen",
-                "question": {
-                    "retentionPeriod": "Retention-Periode"
-                },
-                "years": "Jahre"
-            },
-            "repositories": {
-                "label": "Spezifizieren Sie Repositories für Veröffentlichung und Archivierung",
-                "intro": "Repositories werden für nachhaltiges Datenmanagement über die Lebensdauer des Projekts hinaus und zur Wiederverwendbarkeit von Daten für andere verwendet. Verwenden Sie, wenn möglich, ein repositories für Ihr spezielles Thema. Der Suchfilter unten kann Ihnen dabei helfen, eines zu finden.",
-                "heading": "Repositories",
-                "search": "Repository suchen",
-                "add": "Repository hinzufügen",
-                "remove": "Repository entfernen",
-                "selected": "Sie haben ausgewählt:",
-                "question": {
-                    "datasets": "Datensatz/-sätze zur Einreichung",
-                    "date": "Verfügbar bis"
-                },
-                "warning": {
-                    "deletion": "Folgende Datensätze wurden zur Löschung markiert: {{value}}. Sind Sie sicher, dass sie im Repository erhalten bleiben sollen?"
-                },
-                "loading": {
-                    "load": {
-                        "all": "Lade Repositories...",
-                        "recommended": "Lade empfohlene Repositories..."
-                    },
-                    "failed": {
-                        "all": "Empfohlene Repositories konnten nicht geladen werden.",
-                        "recommended": "Empfohlene Repositories konnten nicht geladen werden."
-                    }
-                },
-                "filter": "Repositories filtern",
-                "filter.search": "Suchfilter",
-                "filter.find": "Repositories finden",
-                "filter.reset": "Filter zurücksetzen",
-                "filters": "Filter",
-                "table.header.title": "Titel",
-                "nodatafilter": "Keine Daten entsprechen dem Filter \"{{value}}\"",
-                "norepositories": "Keine Repositories gefunden.",
-                "recommended": "Empfohlen",
-                "recommended.none": "Keine weiteren empfohlenen Repositories.",
-                "find": "Repository finden",
-                "find.other": "Anderes Repository finden"
-            },
-            "costs": {
-                "label": "Kosten",
-                "intro": "In diesem Schritt werden Sie gebeten, eine realistische Schätzung der notwendigen Ressourcen für das Datenmanagement abzugeben und eine klare Aussage darüber zu machen, wie diese Kosten gedeckt werden.",
-                "question": {
-                    "exist": {
-                        "label": "Wählen Sie die Aussage aus, die am besten die Situation in Ihrem Projekt in Bezug auf die Kosten des Datenmanagements beschreibt.",
-                        "no": "Es gibt keine Kosten für das Datenmanagement.",
-                        "yes": "Wie unten beschrieben, gibt es Kosten für das Datenmanagement."
-                    },
-                    "title": "Titel",
-                    "value": "Geschätzte Kosten",
-                    "type": "Kostenart",
-                    "other": "Bitte geben Sie die Kostenart an",
-                    "description": "Beschreibung"
-                }
-            },
-            "end": {
-                "label": "Zusammenfassung"
-            },
-            "summary": {
-                "title": "Zusammenfassung der von Ihnen bereitgestellten Informationen:",
-                "table.header": {
-                    "step": "Schritt",
-                    "completeness": "Vollständigkeit",
-                    "status": "Status"
-                },
-                "nodatasets": "Keine Datensätze definiert",
-                "notspecified": "Noch nicht angegeben.",
-                "partially": "Teilweise ausgefüllt.",
-                "noinfo": "Keine Informationen bereitgestellt.",
-                "someinfo": "Einige Informationen bereitgestellt.",
-                "allinfo": "Alle notwendigen Informationen bereitgestellt.",
-                "project": {
-                    "none": "Kein Projekt ausgewählt.",
-                    "selected": "Projekt: {{project}}."
-                },
-                "people": {
-                    "contact": {
-                        "set": "Kontaktperson festgelegt. ",
-                        "missing": "Kontaktperson fehlt. "
-                    },
-                    "contributor": {
-                        "none": "Noch keine Mitwirkenden ausgewählt.",
-                        "one": "Ein Mitwirkender ausgewählt.",
-                        "multiple": "Mitwirkende ausgewählt: "
-                    }
-                },
-                "data": {
-                    "specify": {
-                        "datasets": {
-                            "produced": "Erstellte Datensätze: ",
-                            "reused": "Wiederverwendete Datensätze: ",
-                            "unknown": {
-                                "produced": "Noch nicht bekannt, ob Daten produziert werden.",
-                                "reused": "Noch nicht bekannt, ob Daten wiederverwendet werden."
-                            },
-                            "none": {
-                                "produced": "Es werden keine Daten produziert.",
-                                "reused": "Es werden keine Daten wiederverwendet.",
-                                "none": "Keine Forschungsdaten angegeben."
-                            },
-                            "missingexplanation": "Erklärung fehlt.",
-                            "datageneration": "Informationen zur Datengenerierung/-wiederverwendung fehlen."
-                        }
-                    }
-                },
-                "storage": {
-                    "nonestored": "Keine (erstellten) Datensätze zur Speicherung vorgesehen.",
-                    "nodata": "Noch keine Daten definiert.",
-                    "alldata": "Alle (erstellten) Datensätze werden gespeichert.",
-                    "missingexplanation": "Nutzungserklärung fehlt."
-                },
-                "licensing": {
-                    "complete": "Alle notwendigen Informationen bereitgestellt.",
-                    "incomplete": "Einige Informationen fehlen."
-                },
-                "repositories": {
-                    "nodata": "Keine Daten zur Einreichung vorgesehen.",
-                    "nodataspecified": "Noch keine Daten definiert.",
-                    "deposited": {
-                        "incomplete": "Nicht alle Daten wurden bereits eingereicht.",
-                        "complete": "Alle Daten wurden eingereicht."
-                    },
-                    "missingexplanation": "Erklärung für Datensätze mit eingeschränktem/geschlossenem Zugriff fehlt."
-                },
-                "costs": {
-                    "none": "Es gibt keine Kosten."
-                }
+  "dmp": {
+    "steps": {
+      "project": {
+        "input": {
+          "title": "Projekttitel",
+          "description": "Projektbeschreibung",
+          "button": "Projekt aktualisieren"
+        },
+        "manual.input": "Projekt manuell eingeben",
+        "list": "Projekt aus der Projekt-Datenbank auswählen",
+        "label": "Projekt auswählen",
+        "search": "Projekt suchen...",
+        "select": "Bitte wählen Sie das Projekt aus, für das Sie einen DMP erstellen möchten:",
+        "selected": "Sie haben ausgewählt",
+        "warning.dmp": "Für dieses Projekt existiert bereits ein DMP",
+        "noprojects": "Es sind keine Projekte Ihnen zugewiesen.",
+        "loading": {
+          "load": "Projekte laden...",
+          "failed": "Projekte konnten nicht geladen werden."
+        }
+      },
+      "people": {
+        "label": "Beteiligte Personen an der Datenverwaltung",
+        "intro": "Dieser Schritt hilft Ihnen, Informationen zu den beteiligten Personen und deren speziellen Rollen in Bezug auf das Forschungsdatenmanagement innerhalb dieses Projekts bereitzustellen. Basierend auf den Informationen in der Projekt-Datenbank haben wir den Namen des Projektleiters bereits eingegeben und ihn als Kontaktperson für Fragen im Zusammenhang mit der Datenverwaltung und dem DMP markiert (Symbol mit Person und Briefumschlag). Sie können die voreingestellten Informationen bei Bedarf ändern und weitere Mitwirkende über die Suche (Beginnen Sie mit der Eingabe des Namens) und manuell hinzufügen. Geben Sie mindestens eine Kontaktperson sowie einen Datenmanager (kann dieselbe Person sein) an.",
+        "search": "Person suchen...",
+        "search.service": "Suchdienstleistungsfeld durchsuchen",
+        "contributor": {
+          "add": "Als Mitwirkender hinzufügen",
+          "remove": "Aus Mitwirkenden entfernen",
+          "role": "Rolle",
+          "warning": " Personen, die nicht Angehörige der TU Graz sind, müssen von Ihnen persönlich über die Erfassung ihrer Daten in diesem Tool informiert werden."
+        },
+        "contact": {
+          "person": "Kontaktperson",
+          "add": "Als Kontakt festlegen",
+          "remove": "Als Kontakt entfernen"
+        },
+        "manual.input": {
+          "show": "Manuelle Eingabe des Mitwirkenden anzeigen",
+          "hide": "Manuelle Eingabe des Mitwirkenden ausblenden",
+          "question": {
+            "firstname": "Vorname",
+            "lastname": "Nachname",
+            "mbox": "E-Mail-Adresse",
+            "orcid": "ORCID-ID"
+          }
+        },
+        "nopeople": "Keine Projektmitglieder verfügbar.",
+        "confirm.dialog": {
+          "heading": "Mitwirkenden entfernen",
+          "question": "Sind Sie sicher, dass Sie diesen Mitwirkenden entfernen möchten?\n Sie sind verantwortlich für die Löschung der folgenden Datensätze:",
+          "button": {
+            "confirm": "Bestätigen",
+            "cancel": "Abbrechen"
+          }
+        }
+      },
+      "data": {
+        "specify": {
+          "label": "Forschungsdaten spezifizieren",
+          "intro": {
+            "default": "Forschungsdaten gibt es in allen Formen und Größen. Die Tabelle unten hilft Ihnen dabei, die Datensätze zu beschreiben (d.h. Gruppen von Daten mit ähnlichen Eigenschaften), die Sie während des Projekts erstellen möchten.",
+            "reused": "Forschungsdaten gibt es in allen Formen und Größen. Die Tabelle unten hilft Ihnen dabei, die Datensätze zu beschreiben (d.h. Gruppen von Daten mit ähnlichen Eigenschaften), die Sie während des Projekts wiederverwenden möchten."
+          },
+          "question": {
+            "kind": "Welche Arten von Forschungsdaten werden Sie erstellen?",
+            "datasets": "Benennen Sie Ihre Datensätze",
+            "nodata": "Bitte erklären Sie, warum Sie keine Forschungsdaten erstellen oder analysieren werden.",
+            "reused": "Welche Arten von Forschungsdaten werden Sie wiederverwenden?"
+          },
+          "answer": {
+            "kind": {
+              "unknown": "Ich weiß es noch nicht.",
+              "none": "Es werden keine Daten erstellt oder analysiert.",
+              "reuse.none": "Es werden keine Daten wiederverwendet.",
+              "specify": "Spezifizieren Sie Datensätze."
             }
-        },
-        "nodatasets": "Bitte definieren Sie zuerst Datensätze.",
-        "success": {
-            "update": "DMP wurde aktualisiert!",
-            "save": "DMP wurde gespeichert!",
-            "version.save": "Version wurde gespeichert!"
-        },
-        "dialog": {
-            "title": "Neue Version speichern",
-            "description": "Bitte geben Sie einen Versionsnamen ein",
-            "label": "Versionsname",
+          },
+          "tab": {
+            "manual": "Manuell",
+            "upload": "Beispieldaten hochladen",
+            "doi": "DOI eingeben"
+          },
+          "button": {
+            "add": {
+              "manual": "Datensatz manuell hinzufügen",
+              "doi": "Datensatz finden"
+            }
+          },
+          "table": {
+            "heading": {
+              "default": "Daten",
+              "reused": "Wiederverwendete Daten",
+              "new": "Neue Daten"
+            },
+            "header": {
+              "dataset": "Datensatz",
+              "datatype": "Datentyp",
+              "size": "Größe",
+              "comment": "Kommentar",
+              "actions": "Aktionen",
+              "description": "Beschreibung",
+              "pid": "PID"
+            }
+          },
+          "dialog": {
+            "add": "Datensatz hinzufügen",
+            "edit": "Datensatz bearbeiten",
+            "title": "Datensatztitel",
+            "type": "Geschätzter Typ",
+            "size": "Geschätzte Größe",
+            "description": "Beschreibung",
+            "source": "Quelle",
+            "identifier": "Kennung",
             "button": {
-                "cancel": "Abbrechen",
-                "save": "Speichern"
+              "add": "Hinzufügen",
+              "update": "Aktualisieren",
+              "cancel": "Abbrechen"
             }
-        }
-    },
-    "button": {
-        "save": "Änderungen speichern",
-        "discard": "Änderungen verwerfen",
-        "version": "Neue Version speichern",
-        "export": "Dokument exportieren"
-    },
-    "form": {
-        "error": {
-            "required": "Bitte geben Sie einen Wert an.",
-            "empty": "Bitte geben Sie einen gültigen Wert an.",
-            "maxlength": "Wert darf nicht länger als {{value}} Zeichen sein.",
-            "pattern.currency": "Ungültige Eingabe, verwenden Sie bitte das folgende Format: 1234.56",
-            "orcid": "Ungültige ORCID iD.",
-            "doi": "Ungültige DOI. Muss im Format 10.1234/56789 oder https://doi.org/10.1234/56789 oder doi:10.1234/56789 formatiert sein."
+          },
+          "doi": {
+            "search": "DOI eingeben...",
+            "not.found": "Kein Datensatz gefunden."
+          }
         },
-        "changes": {
-            "saved": "Alle Änderungen wurden gespeichert.",
-            "unsaved": "Sie haben nicht gespeicherte Änderungen."
+        "access": {
+          "heading": "Zugriffsrechte für alle Datensätze festlegen",
+          "question": {
+            "dataset": "Datensatz",
+            "selected": "für ausgewählte Projektmitglieder",
+            "other": "für andere Projektmitglieder",
+            "public": "Öffentlich",
+            "right": "Zugriffsrecht"
+          },
+          "aria": {
+            "selected": "Zugriffsrecht für ausgewählte Projektmitglieder für Datensatz {{dataset}}",
+            "other": "Zugriffsrecht für andere Projektmitglieder für Datensatz {{dataset}}",
+            "public": "Zugriffsrecht für die Öffentlichkeit für Datensatz {{dataset}}"
+          }
         }
-    },
-    "upload": {
-        "file": {
-            "choose": "Datei auswählen",
-            "dragdrop": "Dateien hier ablegen"
-        }
-    },
-    "license.wizard": {
-        "select": "Lizenz mit Lizenzauswahl treffen",
-        "title": "Lizenz auswählen",
-        "info": "Mehr Info",
-        "none.found": "Keine Lizenz gefunden",
+      },
+      "reuse": {
+        "label": "Wiederverwendung von Daten",
+        "intro": "Dieser Schritt hilft Ihnen, über vorhersehbare Forschungsverwendungen oder Nutzer Ihrer Datensätze nachzudenken und was potenzielle Wiederverwender benötigen, um auf Ihre Daten zuzugreifen.",
         "question": {
-            "root": "Was möchten Sie hinterlegen?",
-            "data": "Fällt Ihre Daten in den Geltungsbereich des Urheberrechts und verwandter Schutzrechte?",
-            "ownIPR": "Besitzen Sie Urheber- und ähnliche Rechte an Ihrem Datensatz und allen seinen Bestandteilen?",
-            "ensureLicensing": "Sind alle Elemente Ihres Datensatzes unter einer öffentlichen Lizenz oder im Public Domain lizenziert?",
-            "cantLicense": "Sie benötigen zusätzliche Genehmigungen, bevor Sie die Daten hinterlegen können!",
-            "licenseInteropData": "Wählen Sie Lizenzen in Ihrem Datensatz:",
-            "allowDerivativeWorks": "Erlauben Sie anderen, abgeleitete Werke zu erstellen?",
-            "shareAlike": "Fordern Sie andere auf, abgeleitete Werke basierend auf Ihren Daten unter einer kompatiblen Lizenz zu teilen?",
-            "commercialUse": "Erlauben Sie anderen, Ihre Daten kommerziell zu nutzen?",
-            "decideAttributes": "Möchten Sie, dass andere Ihre Daten Ihnen zuordnen?",
-            "software": "Basieren Ihr Code auf vorhandener Software oder ist es Ihr eigenes Werk?",
-            "licenseInteropSoftware": "Wählen Sie Lizenzen in Ihrem Code:",
-            "copyleft": "Fordern Sie andere auf, modifizierten Code unter einer kompatiblen Lizenz freizugeben?",
-            "strongCopyleft": "Wird Ihr Code direkt als ausführbare Datei verwendet oder lizenzieren Sie eine Bibliothek (Ihr Code wird verlinkt)?"
-        },
-        "answer": {
-            "data": "Daten",
-            "software": "Software",
-            "next": "Weiter",
-            "licenseInteropSoftware": "Basierend auf bestehender Software",
-            "copyleft": "Mein eigener Code",
-            "executable": "Ausführbar",
-            "library": "Bibliothek"
-        },
-        "license": {
-            "ccPublicDomain": {
-                "name": "Public Domain Mark (PD)",
-                "description": "Das Werk, das als frei von bekannten Beschränkungen des Urheberrechts identifiziert wurde, einschließlich aller verwandten und benachbarten Rechte."
-            },
-            "ccZero": {
-                "name": "Public Domain Dedication (CC Zero)",
-                "description": "CC Zero ermöglicht Wissenschaftlern, Lehrern, Künstlern und anderen Schöpfern und Eigentümern von urheberrechtlich oder datenbankgeschützten Inhalten, diese Interessen an ihren Werken zu verzichten und sie damit so vollständig wie möglich in die Gemeinfreiheit zu stellen, damit andere die Werke frei aufbauen, erweitern und wieder verwenden können, ohne Einschränkungen durch Urheberrecht oder Datenbankrecht."
-            },
-            "pddl": {
-                "name": "Open Data Commons Public Domain Dedication and License (PDDL)",
-                "description": "Diese Lizenz soll ein internationales, datenbankspezifisches Äquivalent zur Public Domain sein. Sie können keine Datenbank unter dieser Lizenz erneut lizenzieren oder unterlizenzieren, da Sie nach der Widmung keine Rechte mehr an der Datenbank besitzen, ähnlich wie bei der Public Domain."
-            },
-            "ccBy": {
-                "name": "Creative Commons Attribution (CC BY)",
-                "description": "Dies ist die Standard-Creative-Commons-Lizenz, die anderen maximale Freiheit gibt, mit Ihrem Werk zu tun, was sie wollen."
-            },
-            "odcBy": {
-                "name": "Open Data Commons Attribution License (ODC-By)",
-                "description": ""
-            },
-            "ccBySa": {
-                "name": "Creative Commons Attribution-ShareAlike (CC BY-SA)",
-                "description": "Diese Creative Commons-Lizenz ähnelt sehr der regulären Attribution-Lizenz, erfordert jedoch, dass Sie alle abgeleiteten Werke unter dieser gleichen Lizenz veröffentlichen."
-            },
-            "odbl": {
-                "name": "Open Data Commons Open Database License (ODbL)",
-                "description": "Eine Copyleft-Lizenz, die von OpenStreetMap und anderen mit sehr spezifischen Bedingungen für Datenbanken verwendet wird."
-            },
-            "ccByNd": {
-                "name": "Creative Commons Attribution-NoDerivs (CC BY-ND)",
-                "description": "Die Creative Commons-Lizenz ohne Abwandlungen ist unkompliziert; Sie können ein Werk, das unter dieser Lizenz veröffentlicht wurde, neu verteilen, aber Sie können es nicht ändern."
-            },
-            "ccByNc": {
-                "name": "Creative Commons Namensnennung - Nicht-kommerziell (CC BY-NC)",
-                "description": "Eine Creative Commons-Lizenz, die die kommerzielle Nutzung verbietet."
-            },
-            "ccByNcSa": {
-                "name": "Creative Commons Namensnennung - Nicht-kommerziell - Weitergabe unter gleichen Bedingungen (CC BY-NC-SA)",
-                "description": "Eine Creative Commons-Lizenz, die die kommerzielle Nutzung verbietet und erfordert, dass modifizierte Werke unter dieser Lizenz veröffentlicht werden."
-            },
-            "ccByNcNd": {
-                "name": "Creative Commons Namensnennung - Nicht-kommerziell - Keine Bearbeitung (CC BY-NC-ND)",
-                "description": "Die restriktivste Creative Commons-Lizenz. Sie erlaubt nur das Herunterladen und Teilen Ihrer Arbeit ohne kommerziellen Gewinn und für keinen anderen Zweck."
-            },
-            "perlArtistic1": {
-                "name": "Artistic License 1.0",
-                "description": "HINWEIS: Diese Lizenz wurde durch die Artistic License, Version 2.0 ersetzt. Dies ist eine Lizenz für Softwarepakete mit dem Ziel, dem ursprünglichen Urheberrechtshalter eine gewisse Kontrolle über seine Software zu geben, während sie trotzdem Open Source bleibt. Sie ist flexibel und erlaubt es Ihnen, modifizierte Versionen zu verteilen oder zu verkaufen, solange Sie eine der verschiedenen Bedingungen erfüllen. Schauen Sie sich Abschnitt 4 im vollständigen Text für eine bessere Erklärung an."
-            },
-            "perlArtistic2": {
-                "name": "Artistic License 2.0",
-                "description": "Dies ist eine Lizenz für Softwarepakete mit dem Ziel, dem ursprünglichen Urheberrechtshalter eine gewisse Kontrolle über seine Software zu geben, während sie trotzdem Open Source bleibt. Sie ist flexibel und erlaubt es Ihnen, modifizierte Versionen zu verteilen oder zu verkaufen, solange Sie eine der verschiedenen Bedingungen erfüllen. Schauen Sie sich Abschnitt 4 im vollständigen Text für eine bessere Erklärung an."
-            },
-            "gpl2plus": {
-                "name": "GNU General Public License 2 oder später (GPL-2.0)",
-                "description": "Sie dürfen die Software kopieren, verbreiten und ändern, solange Sie Änderungen/Daten in Quellcode-Dateien verfolgen und alle Modifikationen unter GPL behalten. Sie können Ihre Anwendung unter Verwendung einer GPL-Bibliothek kommerziell vertreiben, müssen jedoch auch den Quellcode offenlegen."
-            },
-            "gpl2": {
-                "name": "GNU General Public License 2 (GPL-2.0)",
-                "description": "Standard GNU GPL Version 2, jedoch ohne Unterstützung für spätere Versionen, d. h. Sie können nicht unter GPL 3 umlizenziert werden."
-            },
-            "gpl3": {
-                "name": "GNU General Public License 3 (GPL-3.0)",
-                "description": "Du darfst die Software kopieren, verbreiten und verändern, solange du Änderungen/Daten in den Quelltextdateien verfolgst und Modifikationen unter GPL behältst. Du kannst deine Anwendung unter Verwendung einer GPL-Bibliothek kommerziell vertreiben, musst aber auch den Quellcode bereitstellen. GPL 3 versucht, einige Schlupflöcher in GPL 2 zu schließen."
-            },
-            "agpl1": {
-                "name": "Affero General Public License 1 (AGPL-1.0)",
-                "description": "werfds"
-            },
-            "agpl3": {
-                "name": "Affero General Public License 3 (AGPL-3.0)",
-                "description": "Die AGPL-Lizenz unterscheidet sich von den anderen GNU-Lizenzen darin, dass sie für Netzwerksoftware entwickelt wurde. Sie können modifizierte Versionen verteilen, wenn Sie Änderungen und das Datum, an dem Sie sie vorgenommen haben, verfolgen. Wie bei den GNU-Lizenzen üblich, müssen Sie Derivate unter AGPL lizenzieren. Sie bietet dieselben Einschränkungen und Freiheiten wie die GPLv3, jedoch mit einer zusätzlichen Klausel, die besagt, dass der Quellcode zusammen mit der Webveröffentlichung verteilt werden muss. Da Websites und Dienste niemals im herkömmlichen Sinne verteilt werden, ist die AGPL die GPL des Webs."
-            },
-            "mpl2": {
-                "name": "Mozilla Public License 2.0",
-                "description": "Dies ist eine nachsichtige Lizenz, die von der Mozilla Corporation verwendet wird und Ihnen eine Vielzahl expliziter Freiheiten mit der Software einräumt, solange Sie Modifikationen unter dieser Lizenz behalten und den Originalquellcode neben ausführbaren Dateien verteilen. Es ist eine gute Mittelwegslizenz; sie ist nicht sehr streng und hat nur klare Anforderungen."
-            },
-            "lgpl21plus": {
-                "name": "GNU Library oder \"Lesser\" General Public License 2.1 oder später (LGPL-2.1)",
-                "description": "Sie dürfen die Software kopieren, verteilen und ändern, sofern Änderungen in den geänderten Dateien beschrieben und kostenlos unter LGPL-2.1 lizenziert werden. Derivate oder nicht getrennte (statisch verknüpfte) Werke der Software müssen unter LGPL lizenziert werden, separate Elternprojekte jedoch nicht."
-            },
-            "lgpl21": {
-                "name": "GNU Library oder \"Lesser\"  General Public License 2.1 (LGPL-2.1)",
-                "description": "Standard GNU LGPL Version 2.1, jedoch ohne Unterstützung für spätere Versionen, dh Sie können nicht unter LGPL 3 neu lizenzieren."
-            },
-            "lgpl3": {
-                "name": "GNU Library or \"Lesser\"  General Public License 3.0 (LGPL-3.0)",
-                "description": "Sie können die Software kopieren, verteilen und ändern, vorausgesetzt, dass Änderungen in den modifizierten Dateien beschrieben und kostenlos unter der LGPL-2.1 lizenziert sind. Abgeleitete oder nicht separate (statisch verknüpfte) Werke der Software müssen unter der LGPL lizenziert sein, separate, übergeordnete Projekte müssen es jedoch nicht sein. LGPL 3 versucht, einige Schlupflöcher in LGPL 2.1 zu schließen."
-            },
-            "epl1": {
-                "name": "Eclipse Public License 1.0 (EPL-1.0)",
-                "description": "Diese Lizenz, die von der Eclipse Foundation erstellt und verwendet wird, ist nicht allzu streng und gibt sowohl das Urheberrecht als auch explizite Patentrechte. Überprüfen Sie den vollständigen Text der Lizenz, um zu sehen, wie die Haftung geregelt ist."
-            },
-            "cddl1": {
-                "name": "Common Development and Distribution License (CDDL-1.0)",
-                "description": "Dies ist eine sehr großzügige und beliebte Lizenz, die von Sun Microsystems erstellt wurde und auch explizite Patentgewährungen enthält. Es ist relativ einfach in seinen Bedingungen und erfordert nur eine geringe Menge an Dokumentation für die Weiterverteilung (gilt für Quellcode sowie modifizierten Code)."
-            },
-            "mit": {
-                "name": "The MIT License (MIT)",
-                "description": "Eine kurze, großzügige Softwarelizenz. Im Grunde können Sie tun, was Sie wollen, solange Sie das Originalurheberrecht und die Lizenz einschließen."
-            },
-            "bsd3c": {
-                "name": "The BSD 3-Clause \"New\"  or \"Revised\"  License (BSD)",
-                "description": "Die BSD 3-Klausel-Lizenz erlaubt Ihnen nahezu uneingeschränkte Freiheit bei der Verwendung der Software, solange Sie den BSD-Copyright-Hinweis darin einschließen. \"Verwendung von Markenzeichen\" bedeutet in diesem Fall, dass Sie die Namen des ursprünglichen Unternehmens oder seiner Mitglieder nicht verwenden dürfen, um abgeleitete Produkte zu bewerben."
-            },
-            "bsd2c": {
-                "name": "The BSD 2-Clause \"Simplified\"  or \"FreeBSD\" License",
-                "description": "Die BSD 2-Klausel-Lizenz erlaubt Ihnen nahezu uneingeschränkte Freiheit bei der Verwendung der Software, solange Sie den BSD-Copyright-Hinweis darin einschließen."
-            },
-            "apache2": {
-                "name": "Apache License 2",
-                "description": "Eine Lizenz, die Ihnen viele Freiheiten bei der Verwendung der Software einräumt, einschließlich eines expliziten Rechts auf ein Patent.  \"Staatliche Änderungen\"  bedeutet, dass Sie in jeder von Ihnen modifizierten Datei einen Hinweis einschließen müssen."
-            }
-        },
-        "search": "Lizenz suchen...",
-        "reset": "Formular zurücksetzen"
-    },
-    "versions": {
-        "versionId": "Version",
-        "versionName": "Name",
-        "versionDate": "Datum",
-        "revisionNumber": "Revision",
-        "list": {
-            "no.data": "Keine Versionen verfügbar."
-        },
-        "view": {
-            "button": {
-                "goto.latest": "Zum aktuellen Dokument gehen",
-                "versions": "Zurück zur Versionsübersicht",
-                "expand": "Alle erweitern",
-                "collapse": "Alle minimieren"
-            },
-            "project": {
-                "heading": "Projekt"
-            },
-            "contributors": {
-                "heading": "Beteiligte Personen"
-            },
-            "datasets": {
-                "heading": "Datensätze",
-                "size": "Größe",
-                "description": "Beschreibung",
-                "license": "Lizenz",
-                "retention.period": "Aufbewahrungsfrist",
-                "data.none": "Warum keine Daten erstellt oder analysiert werden",
-                "data.unknown": "Noch nicht bekannt, ob Daten erstellt oder analysiert werden.",
-                "restrictions": {
-                    "label": "Einschränkungen",
-                    "sensitive": "Enthält sensible Daten",
-                    "personal": "Enthält personenbezogene Daten",
-                    "legal": "Rechtliche Einschränkungen bei der Datenverarbeitung oder -freigabe"
-                },
-                "data.access": {
-                    "label": "Datenzugriff",
-                    "public": "Öffentlich",
-                    "selected": "Für ausgewählte Projektmitglieder",
-                    "other": "Für andere Projektmitglieder"
-                },
-                "deletion": {
-                    "date": "Datum der Löschung",
-                    "reason": "Grund für die Löschung",
-                    "person": "Person, die für die Löschung verantwortlich ist"
-                }
-            },
-            "documentation": {
-                "heading": "Dokumentation und Datenqualität",
-                "data.generation": "Generierung/Wiederverwendung von Forschungsdaten und verwendete Methoden und Software",
-                "structure": "Datenstruktur und Versionierung",
-                "documentation": "Dokumentation für Datenanalyse und -wiederverwendung",
-                "metadata": "Metadaten, die bereitgestellt werden",
-                "data.quality": "Kontrolle der Datenkonsistenz und -qualität"
-            },
-            "legal": {
-                "heading": "Rechtliche und ethische Aspekte",
-                "sensitive.data": {
-                    "present": "Daten oder Teile davon sind sensibel",
-                    "security": "Sicherheitsmaßnahmen zur Gewährleistung der Datensicherheit",
-                    "other.security": "Andere Sicherheitsmaßnahmen",
-                    "access": "Berechtigt, auf sensible Daten zuzugreifen"
-                },
-                "personal.data": {
-                    "present": "Personenbezogene Daten werden erhoben/verwendet",
-                    "compliance": "Datenschutz wird sichergestellt durch",
-                    "other.compliance": "Andere Maßnahmen"
-                },
-                "restrictions": {
-                    "present": "Es gibt gesetzliche Einschränkungen bei der Verarbeitung / Weitergabe von Daten",
-                    "comment": "Einschränkungen",
-                    "documents": "Dokumente, die Einschränkungen spezifizieren",
-                    "other.documents": "Andere Dokumente",
-                    "data.rights.access": "Rechte und Kontrolle über den Zugang zu erstellten Daten"
-                }
-            },
-            "ethical": {
-                "human.participants": "Es sind menschliche Teilnehmer beteiligt",
-                "issues": "Weitere ethische Fragen sind mit der Forschung verbunden",
-                "committee.reviewed": "Der Forschungsplan wurde von einem Ethikkomitee überprüft"
-            },
-            "storage": {
-                "heading": "Lagerung",
-                "datasets": "Datensätze",
-                "url": "URL",
-                "location": "Speicherort",
-                "backup": {
-                    "location": "Backup-Speicherort",
-                    "frequency": "Backup-Frequenz"
-                }
-            },
-            "reuse": {
-                "heading": "Wiederverwendung",
-                "target.audience": "Zielgruppe",
-                "tools": "Tools oder Software, die benötigt werden, um auf Daten zuzugreifen",
-                "restricted.data.access": "Eingeschränkter Datenzugriff",
-                "access.info": {
-                    "restricted": "Warum einige Datensätze Zugangsbeschränkungen haben",
-                    "closed": "Warum einige Datensätze geschlossen und nicht zugänglich sind"
-                }
-            },
-            "repositories": {
-                "heading": "Repositorien",
-                "datasets": "Datensätze"
-            },
-            "costs": {
-                "heading": "Kosten"
-            }
+          "targetAudience": "Wer ist die Zielgruppe und wer könnte an der Wiederverwendung der Daten interessiert sein und warum?",
+          "tools": "Geben Sie an, ob potenzielle Benutzer spezielle Tools oder Software benötigen, um auf die Daten zuzugreifen und sie (wieder) zu verwenden.",
+          "restrictedDataAccess": "Für die folgenden Datensätze wurde beschränkter Zugriff ausgewählt. Erläutern Sie, wie andere Zugang zu den Daten erhalten werden:"
         }
-    },
-    "enum": {
-        "accessright": {
-            "READ": "nur Leserecht",
-            "WRITE": "Schreibrecht",
-            "NONE": "kein Zugang"
+      },
+      "deletion": {
+        "warning": {
+          "published": "Dieser Datensatz wurde zur Veröffentlichung ausgewählt. Sind Sie sicher, dass er gelöscht werden soll?"
         },
-        "agreement": {
-            "CONSORTIUM_AGREEMENT": "Konsortialvereinbarung",
-            "DATA_PROCESSING_AGREEMENT": "Vereinbarung zur Datenverarbeitung",
-            "JOINT_CONTROL_AGREEMENT": "Vereinbarung zur gemeinsamen Kontrolle",
-            "CONFIDENTIALITY_AGREEMENT": "Vertraulichkeitsvereinbarung",
-            "OTHER": "andere"
+        "question": {
+          "label": "Muss dieser Datensatz gelöscht werden, z. B. aus vertraglichen, regulatorischen oder ethischen Gründen? Wenn ja, fügen Sie bitte ein geschätztes Datum für die Löschung, den Grund für die Löschung und eine verantwortliche Person hinzu.",
+          "delete": "Datensatz zum Löschen markieren",
+          "date": "Löschungsdatum",
+          "reason": "Grund für die Löschung",
+          "person": "Verantwortliche Person für die Löschung"
+        }
+      },
+      "documentation": {
+        "label": "Dokumentation und Datenqualität",
+        "intro": "Dieser Schritt hilft Ihnen dabei, die Beschreibung Ihrer Datensätze und deren Erzeugung zu spezifizieren. Dazu können Informationen über die verwendete Methodik zur Datenerhebung, analytische und Verfahrensinformationen, Definitionen von Variablen, Maßeinheiten, Informationen zur Datenorganisation usw. gehören.",
+        "question": {
+          "metadata": "Bitte geben Sie an, welche Metadaten bereitgestellt werden, um anderen zu helfen, Daten zu identifizieren, zu entdecken und wiederzuverwenden.",
+          "datageneration": "Wie werden die Forschungsdaten generiert oder wiederverwendet und welche Methoden und Software werden verwendet?",
+          "structure": "Wie werden die Daten strukturiert und Versionen behandelt?",
+          "documentation": "Wie wird die Dokumentation bereitgestellt, die für die Validierung der Datenanalyse und die Erleichterung der Wiederverwendung der Daten erforderlich ist?",
+          "dataQuality": "Wie wird die Konsistenz und Qualität der Datenerfassung kontrolliert?",
+          "otherDataQuality": "Bitte geben Sie an, welche anderen Maßnahmen ergriffen werden:"
+        }
+      },
+      "storage": {
+        "label": "Speicherung und Backup während des Forschungsprozesses",
+        "intro": "Wählen Sie die beste Speicheroption für jeden Datensatz aus.",
+        "link": "Weitere Informationen...",
+        "question": {
+          "datasets": "Entsprechende Datensätze auswählen"
         },
-        "compliance": {
-            "INFORMED_CONSENT": "durch die Einholung informierter Zustimmung zur Verarbeitung personenbezogener Daten",
-            "ANONYMISATION": "durch Anonymisierung personenbezogener Daten zur Aufbewahrung und/oder Weitergabe (wirklich anonyme Daten gelten nicht mehr als personenbezogene Daten)",
-            "PSEUDONYMISATION": "durch Pseudonymisierung personenbezogener Daten (der Hauptunterschied zur Anonymisierung besteht darin, dass Pseudonymisierung umkehrbar ist)",
-            "ENCRYPTION": "durch Verschlüsselung personenbezogener Daten (der Verschlüsselungsschlüssel muss getrennt von den Daten gespeichert werden, beispielsweise von einem vertrauenswürdigen Dritten)",
-            "OTHER": "andere Maßnahmen"
+        "remove": "Speicher entfernen",
+        "external": {
+          "add": "Andere Speicherorte hinzufügen",
+          "remove": "Externe Speicher entfernen",
+          "question": {
+            "name": "Speichername",
+            "location": "Speicherort",
+            "backup": {
+              "location": "Backup-Speicherort",
+              "frequency": "Backup-Frequenz"
+            },
+            "info": "Bitte erläutern Sie, warum institutioneller Speicher nicht verwendet wird."
+          }
+        }
+      },
+      "legal": {
+        "label": "Rechts- und ethische Aspekte",
+        "intro": "Dieser Schritt hilft Ihnen, potenzielle Probleme im Zusammenhang mit personenbezogenen Daten, geistigen Eigentumsrechten und Eigentumsrechten zu berücksichtigen und fragt Sie nach grundlegenden Informationen zur Behandlung ethischer Fragen innerhalb dieses Projekts.",
+        "heading": "Rechtsaspekte",
+        "question": {
+          "sensitiveData": {
+            "prefix": "Sind Ihre Daten oder ein Teil davon sensibel, zum Beispiel",
+            "link": "sensible persönliche Daten",
+            "suffix": ", politisch sensible Informationen oder Geschäftsgeheimnisse?"
+          },
+          "dataset": {
+            "sensitiveData": "Bitte wählen Sie die Datensätze mit sensiblen Daten aus",
+            "personalData": "Bitte wählen Sie die Datensätze mit personenbezogenen Daten aus",
+            "legalRestrictions": "Bitte wählen Sie die betroffenen Datensätze:"
+          },
+          "personalData": "Werden im Rahmen des Projekts personenbezogene Daten erhoben/verwendet?",
+          "sensitiveDataSecurity": "Welche zusätzlichen Sicherheitsmaßnahmen werden ergriffen, um sicherzustellen, dass gespeicherte und übertragene sensible Daten sicher sind?",
+          "otherDataSecurityMeasures": "Bitte geben Sie an, welche anderen Maßnahmen ergriffen werden:",
+          "sensitiveDataAccess": "Wer ist berechtigt, auf sensible Daten zuzugreifen?",
+          "personalDataCompliance": "Wie wird die Einhaltung des Datenschutzes sichergestellt?",
+          "otherPersonalDataCompliance": "Bitte geben Sie an, welche anderen Maßnahmen ergriffen werden:",
+          "legalRestrictions": "Gibt es weitere rechtliche Beschränkungen für die Verarbeitung oder Weitergabe von Daten?",
+          "legalRestrictionsComment": "Bitte geben Sie die rechtlichen Beschränkungen an:",
+          "legalRestrictionsDocuments": "In welchem/von welchen Dokument(en) sind diese Beschränkungen festgelegt?",
+          "otherLegalRestrictionsDocuments": "Bitte geben Sie die anderen Dokumente an:",
+          "dataRightsAndAccessControl": "Wer ist der Eigentümer der Daten und wer kontrolliert den Zugang zu den Daten?"
         },
-        "contributor.role": {
-            "DATA_COLLECTOR": "Daten-Sammler",
-            "DATA_CURATOR": "Daten-Kurator",
-            "DATA_MANAGER": "Daten-Manager",
-            "DISTRIBUTOR": "Verteiler",
-            "EDITOR": "Editor",
-            "HOSTING_INSTITUTION": "Host-Institution",
-            "PRODUCER": "Produzent",
-            "PROJECT_LEADER": "Projektleiter",
-            "PROJECT_MANAGER": "Projektmanager",
-            "PROJECT_MEMBER": "Projektmitglied",
-            "REGISTRATION_AGENCY": "Registrierungsstelle",
-            "REGISTRATION_AUTHORITY": "Registrierungsbehörde",
-            "RELATED_PERSON": "verwandte Person",
-            "RESEARCHER": "Forscher",
-            "RESEARCH_GROUP": "Forschungsgruppe",
-            "RIGHTS_HOLDER": "Rechteinhaber",
-            "SPONSOR": "Sponsor",
-            "SUPERVISOR": "Supervisor",
-            "WORK_PACKAGE_LEADER": "Leiter des Arbeitspakets",
-            "OTHER": "andere"
+        "link": {
+          "sensitiveData": "https://ec.europa.eu/info/law/law-topic/data-protection/reform/rules-business-and-organisations/legal-grounds-processing-data/sensitive-data/what-personal-data-considered-sensitive_en"
+        }
+      },
+      "ethical": {
+        "heading": "Ethical aspects",
+        "question": {
+          "humanParticipants": "Werden menschliche Teilnehmer in das Projekt einbezogen und damit ihre personenbezogenen Daten erhoben oder verarbeitet?",
+          "ethicalIssues": "Gibt es neben der Verwendung sensibler personenbezogener Daten weitere ethische Fragen im Zusammenhang mit Ihrer Forschung?",
+          "committeeReviewed": {
+            "prefix": "Wurde Ihr Forschungsplan von einem Ethikkomitee, dem ",
+            "researchCommittee": {
+              "text": "Ethikkomitee Ihrer Institution",
+              "link": "https://www.tugraz.at/tu-graz/organisationsstruktur/vertretungen-der-tu-graz-angehoerigen/commission-for-scientific-integrity-and-ethics"
+            },
+            "suffix": " oder einer ähnlichen Stelle überprüft?"
+          }
+        }
+      },
+      "licensing": {
+        "label": "Datenzugriff und Lizenzierung",
+        "intro": "Dieser Schritt hilft Ihnen dabei, den Zugriff auf Ihre Forschungsergebnisse in der Zukunft zu spezifizieren: Welche Ihrer Datensätze werden veröffentlicht, welche werden interessierten Personen nur auf Anfrage zur Verfügung gestellt und welche müssen aus vertraglichen, regulatorischen oder ethischen Gründen unter Verschluss gehalten werden? Es erinnert Sie auch daran, eine Lizenz für Ihre offenen Daten zu wählen, die die Bedingungen für eine mögliche Wiederverwendung klar beschreibt. Um den FAIR-Prinzipien zu entsprechen, sollten Metadaten veröffentlicht werden, auch wenn die Daten geschlossen oder eingeschränkt sind.",
+        "hint": "Bitte geben Sie an, welche Datensätze Sie geschlossen halten oder veröffentlichen möchten. Wählen Sie eine Lizenz für die Datensätze aus, die Sie veröffentlichen möchten, und schätzen Sie das Veröffentlichungsdatum.",
+        "info": "Wählen Sie eine Lizenz aus der Liste oder verwenden Sie den Lizenz-Selektor, um eine geeignete Lizenz zu finden.",
+        "question": {
+          "dataAccess": "Datenzugang",
+          "license": "Geplante Lizenz",
+          "startDate": "Wählen Sie ein Veröffentlichungsdatum",
+          "hint": "Das Veröffentlichungsdatum wurde auf das Projektende festgelegt. Sie können es gerne ändern.",
+          "restrictedAccessInfo": "Die folgenden Datensätze haben Zugangsbeschränkungen, erläutern Sie warum und beschreiben Sie die Zugangsbedingungen klar:",
+          "closedAccessInfo": "Erläutern Sie, warum die Daten nicht zugänglich sein werden (geschlossener Zugang):"
+        },
+        "warning": {
+          "personalData": "Sie haben in Schritt 6 angegeben, dass dieser Datensatz sensible personenbezogene Daten enthält. Möchten Sie den Datensatz wirklich offen und ohne Einschränkungen veröffentlichen?",
+          "pseudonymisation": "Haben Sie eine Anonymisierung/Pseudonymisierung in Betracht gezogen?",
+          "legalRestrictions": "Sie haben in Schritt 6 angegeben, dass dieser Datensatz rechtlichen Beschränkungen unterliegt. Möchten Sie den Datensatz wirklich ohne Einschränkungen veröffentlichen?"
+        }
+      },
+      "retentionPeriod": {
+        "title": "Retention-Periode für Datensätze festlegen",
+        "question": {
+          "retentionPeriod": "Retention-Periode"
+        },
+        "years": "Jahre"
+      },
+      "repositories": {
+        "label": "Spezifizieren Sie Repositories für Veröffentlichung und Archivierung",
+        "intro": "Repositories werden für nachhaltiges Datenmanagement über die Lebensdauer des Projekts hinaus und zur Wiederverwendbarkeit von Daten für andere verwendet. Verwenden Sie, wenn möglich, ein repositories für Ihr spezielles Thema. Der Suchfilter unten kann Ihnen dabei helfen, eines zu finden.",
+        "heading": "Repositories",
+        "search": "Repository suchen",
+        "add": "Repository hinzufügen",
+        "remove": "Repository entfernen",
+        "selected": "Sie haben ausgewählt:",
+        "question": {
+          "datasets": "Datensatz/-sätze zur Einreichung",
+          "date": "Verfügbar bis"
+        },
+        "warning": {
+          "deletion": "Folgende Datensätze wurden zur Löschung markiert: {{value}}. Sind Sie sicher, dass sie im Repository erhalten bleiben sollen?"
+        },
+        "loading": {
+          "load": {
+            "all": "Lade Repositories...",
+            "recommended": "Lade empfohlene Repositories..."
+          },
+          "failed": {
+            "all": "Empfohlene Repositories konnten nicht geladen werden.",
+            "recommended": "Empfohlene Repositories konnten nicht geladen werden."
+          }
+        },
+        "filter": "Repositories filtern",
+        "filter.search": "Suchfilter",
+        "filter.find": "Repositories finden",
+        "filter.reset": "Filter zurücksetzen",
+        "filters": "Filter",
+        "table.header.title": "Titel",
+        "nodatafilter": "Keine Daten entsprechen dem Filter \"{{value}}\"",
+        "norepositories": "Keine Repositories gefunden.",
+        "recommended": "Empfohlen",
+        "recommended.none": "Keine weiteren empfohlenen Repositories.",
+        "find": "Repository finden",
+        "find.other": "Anderes Repository finden"
+      },
+      "costs": {
+        "label": "Kosten",
+        "intro": "In diesem Schritt werden Sie gebeten, eine realistische Schätzung der notwendigen Ressourcen für das Datenmanagement abzugeben und eine klare Aussage darüber zu machen, wie diese Kosten gedeckt werden.",
+        "question": {
+          "exist": {
+            "label": "Wählen Sie die Aussage aus, die am besten die Situation in Ihrem Projekt in Bezug auf die Kosten des Datenmanagements beschreibt.",
+            "no": "Es gibt keine Kosten für das Datenmanagement.",
+            "yes": "Wie unten beschrieben, gibt es Kosten für das Datenmanagement."
+          },
+          "title": "Titel",
+          "value": "Geschätzte Kosten",
+          "type": "Kostenart",
+          "other": "Bitte geben Sie die Kostenart an",
+          "description": "Beschreibung"
+        }
+      },
+      "end": {
+        "label": "Zusammenfassung"
+      },
+      "summary": {
+        "title": "Zusammenfassung der von Ihnen bereitgestellten Informationen:",
+        "table.header": {
+          "step": "Schritt",
+          "completeness": "Vollständigkeit",
+          "status": "Status"
+        },
+        "nodatasets": "Keine Datensätze definiert",
+        "notspecified": "Noch nicht angegeben.",
+        "partially": "Teilweise ausgefüllt.",
+        "noinfo": "Keine Informationen bereitgestellt.",
+        "someinfo": "Einige Informationen bereitgestellt.",
+        "allinfo": "Alle notwendigen Informationen bereitgestellt.",
+        "project": {
+          "none": "Kein Projekt ausgewählt.",
+          "selected": "Projekt: {{project}}."
+        },
+        "people": {
+          "contact": {
+            "set": "Kontaktperson festgelegt. ",
+            "missing": "Kontaktperson fehlt. "
+          },
+          "contributor": {
+            "none": "Noch keine Mitwirkenden ausgewählt.",
+            "one": "Ein Mitwirkender ausgewählt.",
+            "multiple": "Mitwirkende ausgewählt: "
+          }
+        },
+        "data": {
+          "specify": {
+            "datasets": {
+              "produced": "Erstellte Datensätze: ",
+              "reused": "Wiederverwendete Datensätze: ",
+              "unknown": {
+                "produced": "Noch nicht bekannt, ob Daten produziert werden.",
+                "reused": "Noch nicht bekannt, ob Daten wiederverwendet werden."
+              },
+              "none": {
+                "produced": "Es werden keine Daten produziert.",
+                "reused": "Es werden keine Daten wiederverwendet.",
+                "none": "Keine Forschungsdaten angegeben."
+              },
+              "missingexplanation": "Erklärung fehlt.",
+              "datageneration": "Informationen zur Datengenerierung/-wiederverwendung fehlen."
+            }
+          }
+        },
+        "storage": {
+          "nonestored": "Keine (erstellten) Datensätze zur Speicherung vorgesehen.",
+          "nodata": "Noch keine Daten definiert.",
+          "alldata": "Alle (erstellten) Datensätze werden gespeichert.",
+          "missingexplanation": "Nutzungserklärung fehlt."
+        },
+        "licensing": {
+          "complete": "Alle notwendigen Informationen bereitgestellt.",
+          "incomplete": "Einige Informationen fehlen."
+        },
+        "repositories": {
+          "nodata": "Keine Daten zur Einreichung vorgesehen.",
+          "nodataspecified": "Noch keine Daten definiert.",
+          "deposited": {
+            "incomplete": "Nicht alle Daten wurden bereits eingereicht.",
+            "complete": "Alle Daten wurden eingereicht."
+          },
+          "missingexplanation": "Erklärung für Datensätze mit eingeschränktem/geschlossenem Zugriff fehlt."
         },
         "costs": {
-            "DATA_ACQUISITION": "Datenbeschaffung",
-            "DATABASE": "Datenbank",
-            "FILE_BASED_STORAGE": "Dateibasierte Speicherung",
-            "HARDWARE_AND_INFRASTRUCTURE": "Hardware und Infrastruktur",
-            "LEGAL_ADVICE": "Rechtsberatung",
-            "PERSONNEL": "Personal",
-            "REPOSITORY": "Repository",
-            "SOFTWARE_LICENSE": "Software-Lizenz",
-            "TRAINING": "Training",
-            "OTHER": "Andere"
-        },
-        "dataaccess": {
-            "OPEN": "Offen",
-            "RESTRICTED": "Eingeschränkt",
-            "CLOSED": "Geschlossen"
-        },
-        "datakind": {
-            "UNKNOWN": "unbekannt",
-            "NONE": "keine",
-            "SPECIFY": "angeben"
-        },
-        "dataquality": {
-            "CALIBRATION": "Kalibrierung",
-            "REPEATED_SAMPLES_OR_MEASUREMENTS": "wiederholte Proben oder Messungen",
-            "STANDARDISED_DATA_CAPTURE": "standardisierte Datenerfassung",
-            "DATA_ENTRY_VALIDATION": "Validierung der Dateneingabe",
-            "PEER_REVIEW_OF_DATA": "peer-review von Daten",
-            "REPRESENTATION_WITH_CONTROLLED_VOCABULARIES": "Darstellung mit kontrollierten Vokabularien",
-            "OTHERS": "andere"
-        },
-        "dataset.type": {
-            "STANDARD_OFFICE_DOCUMENTS": "STANDARD OFFICE DOKUMENTE",
-            "STRUCTURED_TEXT": "STRUKTURIERTER TEXT",
-            "IMAGES": "BILDER",
-            "AUDIOVISUAL_DATA": "AUDIOVISUELLE DATEN",
-            "RAW_DATA": "ROHE DATEN",
-            "NETWORKBASED_DATA": "NETZWERKBASIERTE DATEN",
-            "DATABASES": "DATENBANKEN",
-            "STRUCTURED_GRAPHICS": "STRUKTURIERTE GRAFIKEN",
-            "SCIENTIFIC_STATISTICAL_DATA": "WISSENSCHAFTLICH STATISTISCHE DATEN",
-            "PLAIN_TEXT": "KLARER TEXT",
-            "ARCHIVED_DATA": "ARCHIVIERTE DATEN",
-            "SOFTWARE_APPLICATIONS": "SOFTWARE-ANWENDUNGEN",
-            "SOURCE_CODE": "QUELLCODE",
-            "CONFIGURATION_DATA": "KONFIGURATIONSDATEN",
-            "OTHER": "ANDERE"
-        },
-        "functionrole": {
-            "ADMIN": "Administrator",
-            "EDITOR": "Redakteur",
-            "GUEST": "Gast",
-            "OWNER": "Eigentümer",
-            "SUPPORT": "Support"
-        },
-        "fundingstate": {
-            "PLANNED": "geplant",
-            "APPLIED": "beantragt",
-            "GRANTED": "genehmigt",
-            "REJECTED": "abgelehnt",
-            "UNSPECIFIED": "unbestimmt"
-        },
-        "identifier": {
-            "ORCID": "ORCID",
-            "ISNI": "ISNI",
-            "OPENID": "OpenID",
-            "HANDLE": "Handle",
-            "DOI": "DOI",
-            "ARK": "ARK",
-            "URL": "URL",
-            "FUNDREF": "FundRef",
-            "ROR": "ROR",
-            "OTHER": "Andere"
-        },
-        "securitymeasure": {
-            "INDIVIDUAL_LOGIN": "Individuelle Anmeldung und Passwort",
-            "ADDITIONAL_LOGIN": "Zusätzliche Anmeldung für spezifische Anwendungen",
-            "AUTOMATIC_LOCKING_OF_CLIENTS": "Automatische Sperrung von Clients (Timeout)",
-            "ENCRYPTION_OF_SYSTEMS": "Verschlüsselung von Systemen",
-            "LOCKED_STORAGE": "Aufbewahrung von Ausdrucken sensibler Daten in verschlossenem Aufbewahrungsort",
-            "OTHER": "Andere Maßnahmen"
-        },
-        "exportDmpTemplatetype": {
-            "FWF": "FWF",
-            "SCIENCE_EUROPE": "Wissenschaft Europa"
+          "none": "Es gibt keine Kosten."
         }
+      }
     },
-    "yes": "Ja",
-    "no": "Nein",
-    "fair": "FAIR",
-    "contenttypes": "Inhaltstypen",
-    "metadatastandards": "Metadatenstandards",
-    "or": "oder"
+    "nodatasets": "Bitte definieren Sie zuerst Datensätze.",
+    "success": {
+      "update": "DMP wurde aktualisiert!",
+      "save": "DMP wurde gespeichert!",
+      "version.save": "Version wurde gespeichert!"
+    },
+    "dialog": {
+      "title": "Neue Version speichern",
+      "description": "Bitte geben Sie einen Versionsnamen ein",
+      "label": "Versionsname",
+      "button": {
+        "cancel": "Abbrechen",
+        "save": "Speichern"
+      }
+    }
+  },
+  "button": {
+    "save": "Änderungen speichern",
+    "discard": "Änderungen verwerfen",
+    "version": "Neue Version speichern",
+    "export": "Dokument exportieren"
+  },
+  "form": {
+    "error": {
+      "required": "Bitte geben Sie einen Wert an.",
+      "empty": "Bitte geben Sie einen gültigen Wert an.",
+      "maxlength": "Wert darf nicht länger als {{value}} Zeichen sein.",
+      "pattern.currency": "Ungültige Eingabe, verwenden Sie bitte das folgende Format: 1234.56",
+      "orcid": "Ungültige ORCID iD.",
+      "doi": "Ungültige DOI. Muss im Format 10.1234/56789 oder https://doi.org/10.1234/56789 oder doi:10.1234/56789 formatiert sein."
+    },
+    "changes": {
+      "saved": "Alle Änderungen wurden gespeichert.",
+      "unsaved": "Sie haben nicht gespeicherte Änderungen."
+    }
+  },
+  "upload": {
+    "file": {
+      "choose": "Datei auswählen",
+      "dragdrop": "Dateien hier ablegen"
+    }
+  },
+  "license.wizard": {
+    "select": "Lizenz mit Lizenzauswahl treffen",
+    "title": "Lizenz auswählen",
+    "info": "Mehr Info",
+    "none.found": "Keine Lizenz gefunden",
+    "question": {
+      "root": "Was möchten Sie hinterlegen?",
+      "data": "Fällt Ihre Daten in den Geltungsbereich des Urheberrechts und verwandter Schutzrechte?",
+      "ownIPR": "Besitzen Sie Urheber- und ähnliche Rechte an Ihrem Datensatz und allen seinen Bestandteilen?",
+      "ensureLicensing": "Sind alle Elemente Ihres Datensatzes unter einer öffentlichen Lizenz oder im Public Domain lizenziert?",
+      "cantLicense": "Sie benötigen zusätzliche Genehmigungen, bevor Sie die Daten hinterlegen können!",
+      "licenseInteropData": "Wählen Sie Lizenzen in Ihrem Datensatz:",
+      "allowDerivativeWorks": "Erlauben Sie anderen, abgeleitete Werke zu erstellen?",
+      "shareAlike": "Fordern Sie andere auf, abgeleitete Werke basierend auf Ihren Daten unter einer kompatiblen Lizenz zu teilen?",
+      "commercialUse": "Erlauben Sie anderen, Ihre Daten kommerziell zu nutzen?",
+      "decideAttributes": "Möchten Sie, dass andere Ihre Daten Ihnen zuordnen?",
+      "software": "Basieren Ihr Code auf vorhandener Software oder ist es Ihr eigenes Werk?",
+      "licenseInteropSoftware": "Wählen Sie Lizenzen in Ihrem Code:",
+      "copyleft": "Fordern Sie andere auf, modifizierten Code unter einer kompatiblen Lizenz freizugeben?",
+      "strongCopyleft": "Wird Ihr Code direkt als ausführbare Datei verwendet oder lizenzieren Sie eine Bibliothek (Ihr Code wird verlinkt)?"
+    },
+    "answer": {
+      "data": "Daten",
+      "software": "Software",
+      "next": "Weiter",
+      "licenseInteropSoftware": "Basierend auf bestehender Software",
+      "copyleft": "Mein eigener Code",
+      "executable": "Ausführbar",
+      "library": "Bibliothek"
+    },
+    "license": {
+      "ccPublicDomain": {
+        "name": "Public Domain Mark (PD)",
+        "description": "Das Werk, das als frei von bekannten Beschränkungen des Urheberrechts identifiziert wurde, einschließlich aller verwandten und benachbarten Rechte."
+      },
+      "ccZero": {
+        "name": "Public Domain Dedication (CC Zero)",
+        "description": "CC Zero ermöglicht Wissenschaftlern, Lehrern, Künstlern und anderen Schöpfern und Eigentümern von urheberrechtlich oder datenbankgeschützten Inhalten, diese Interessen an ihren Werken zu verzichten und sie damit so vollständig wie möglich in die Gemeinfreiheit zu stellen, damit andere die Werke frei aufbauen, erweitern und wieder verwenden können, ohne Einschränkungen durch Urheberrecht oder Datenbankrecht."
+      },
+      "pddl": {
+        "name": "Open Data Commons Public Domain Dedication and License (PDDL)",
+        "description": "Diese Lizenz soll ein internationales, datenbankspezifisches Äquivalent zur Public Domain sein. Sie können keine Datenbank unter dieser Lizenz erneut lizenzieren oder unterlizenzieren, da Sie nach der Widmung keine Rechte mehr an der Datenbank besitzen, ähnlich wie bei der Public Domain."
+      },
+      "ccBy": {
+        "name": "Creative Commons Attribution (CC BY)",
+        "description": "Dies ist die Standard-Creative-Commons-Lizenz, die anderen maximale Freiheit gibt, mit Ihrem Werk zu tun, was sie wollen."
+      },
+      "odcBy": {
+        "name": "Open Data Commons Attribution License (ODC-By)",
+        "description": ""
+      },
+      "ccBySa": {
+        "name": "Creative Commons Attribution-ShareAlike (CC BY-SA)",
+        "description": "Diese Creative Commons-Lizenz ähnelt sehr der regulären Attribution-Lizenz, erfordert jedoch, dass Sie alle abgeleiteten Werke unter dieser gleichen Lizenz veröffentlichen."
+      },
+      "odbl": {
+        "name": "Open Data Commons Open Database License (ODbL)",
+        "description": "Eine Copyleft-Lizenz, die von OpenStreetMap und anderen mit sehr spezifischen Bedingungen für Datenbanken verwendet wird."
+      },
+      "ccByNd": {
+        "name": "Creative Commons Attribution-NoDerivs (CC BY-ND)",
+        "description": "Die Creative Commons-Lizenz ohne Abwandlungen ist unkompliziert; Sie können ein Werk, das unter dieser Lizenz veröffentlicht wurde, neu verteilen, aber Sie können es nicht ändern."
+      },
+      "ccByNc": {
+        "name": "Creative Commons Namensnennung - Nicht-kommerziell (CC BY-NC)",
+        "description": "Eine Creative Commons-Lizenz, die die kommerzielle Nutzung verbietet."
+      },
+      "ccByNcSa": {
+        "name": "Creative Commons Namensnennung - Nicht-kommerziell - Weitergabe unter gleichen Bedingungen (CC BY-NC-SA)",
+        "description": "Eine Creative Commons-Lizenz, die die kommerzielle Nutzung verbietet und erfordert, dass modifizierte Werke unter dieser Lizenz veröffentlicht werden."
+      },
+      "ccByNcNd": {
+        "name": "Creative Commons Namensnennung - Nicht-kommerziell - Keine Bearbeitung (CC BY-NC-ND)",
+        "description": "Die restriktivste Creative Commons-Lizenz. Sie erlaubt nur das Herunterladen und Teilen Ihrer Arbeit ohne kommerziellen Gewinn und für keinen anderen Zweck."
+      },
+      "perlArtistic1": {
+        "name": "Artistic License 1.0",
+        "description": "HINWEIS: Diese Lizenz wurde durch die Artistic License, Version 2.0 ersetzt. Dies ist eine Lizenz für Softwarepakete mit dem Ziel, dem ursprünglichen Urheberrechtshalter eine gewisse Kontrolle über seine Software zu geben, während sie trotzdem Open Source bleibt. Sie ist flexibel und erlaubt es Ihnen, modifizierte Versionen zu verteilen oder zu verkaufen, solange Sie eine der verschiedenen Bedingungen erfüllen. Schauen Sie sich Abschnitt 4 im vollständigen Text für eine bessere Erklärung an."
+      },
+      "perlArtistic2": {
+        "name": "Artistic License 2.0",
+        "description": "Dies ist eine Lizenz für Softwarepakete mit dem Ziel, dem ursprünglichen Urheberrechtshalter eine gewisse Kontrolle über seine Software zu geben, während sie trotzdem Open Source bleibt. Sie ist flexibel und erlaubt es Ihnen, modifizierte Versionen zu verteilen oder zu verkaufen, solange Sie eine der verschiedenen Bedingungen erfüllen. Schauen Sie sich Abschnitt 4 im vollständigen Text für eine bessere Erklärung an."
+      },
+      "gpl2plus": {
+        "name": "GNU General Public License 2 oder später (GPL-2.0)",
+        "description": "Sie dürfen die Software kopieren, verbreiten und ändern, solange Sie Änderungen/Daten in Quellcode-Dateien verfolgen und alle Modifikationen unter GPL behalten. Sie können Ihre Anwendung unter Verwendung einer GPL-Bibliothek kommerziell vertreiben, müssen jedoch auch den Quellcode offenlegen."
+      },
+      "gpl2": {
+        "name": "GNU General Public License 2 (GPL-2.0)",
+        "description": "Standard GNU GPL Version 2, jedoch ohne Unterstützung für spätere Versionen, d. h. Sie können nicht unter GPL 3 umlizenziert werden."
+      },
+      "gpl3": {
+        "name": "GNU General Public License 3 (GPL-3.0)",
+        "description": "Du darfst die Software kopieren, verbreiten und verändern, solange du Änderungen/Daten in den Quelltextdateien verfolgst und Modifikationen unter GPL behältst. Du kannst deine Anwendung unter Verwendung einer GPL-Bibliothek kommerziell vertreiben, musst aber auch den Quellcode bereitstellen. GPL 3 versucht, einige Schlupflöcher in GPL 2 zu schließen."
+      },
+      "agpl1": {
+        "name": "Affero General Public License 1 (AGPL-1.0)",
+        "description": "werfds"
+      },
+      "agpl3": {
+        "name": "Affero General Public License 3 (AGPL-3.0)",
+        "description": "Die AGPL-Lizenz unterscheidet sich von den anderen GNU-Lizenzen darin, dass sie für Netzwerksoftware entwickelt wurde. Sie können modifizierte Versionen verteilen, wenn Sie Änderungen und das Datum, an dem Sie sie vorgenommen haben, verfolgen. Wie bei den GNU-Lizenzen üblich, müssen Sie Derivate unter AGPL lizenzieren. Sie bietet dieselben Einschränkungen und Freiheiten wie die GPLv3, jedoch mit einer zusätzlichen Klausel, die besagt, dass der Quellcode zusammen mit der Webveröffentlichung verteilt werden muss. Da Websites und Dienste niemals im herkömmlichen Sinne verteilt werden, ist die AGPL die GPL des Webs."
+      },
+      "mpl2": {
+        "name": "Mozilla Public License 2.0",
+        "description": "Dies ist eine nachsichtige Lizenz, die von der Mozilla Corporation verwendet wird und Ihnen eine Vielzahl expliziter Freiheiten mit der Software einräumt, solange Sie Modifikationen unter dieser Lizenz behalten und den Originalquellcode neben ausführbaren Dateien verteilen. Es ist eine gute Mittelwegslizenz; sie ist nicht sehr streng und hat nur klare Anforderungen."
+      },
+      "lgpl21plus": {
+        "name": "GNU Library oder \"Lesser\" General Public License 2.1 oder später (LGPL-2.1)",
+        "description": "Sie dürfen die Software kopieren, verteilen und ändern, sofern Änderungen in den geänderten Dateien beschrieben und kostenlos unter LGPL-2.1 lizenziert werden. Derivate oder nicht getrennte (statisch verknüpfte) Werke der Software müssen unter LGPL lizenziert werden, separate Elternprojekte jedoch nicht."
+      },
+      "lgpl21": {
+        "name": "GNU Library oder \"Lesser\"  General Public License 2.1 (LGPL-2.1)",
+        "description": "Standard GNU LGPL Version 2.1, jedoch ohne Unterstützung für spätere Versionen, dh Sie können nicht unter LGPL 3 neu lizenzieren."
+      },
+      "lgpl3": {
+        "name": "GNU Library or \"Lesser\"  General Public License 3.0 (LGPL-3.0)",
+        "description": "Sie können die Software kopieren, verteilen und ändern, vorausgesetzt, dass Änderungen in den modifizierten Dateien beschrieben und kostenlos unter der LGPL-2.1 lizenziert sind. Abgeleitete oder nicht separate (statisch verknüpfte) Werke der Software müssen unter der LGPL lizenziert sein, separate, übergeordnete Projekte müssen es jedoch nicht sein. LGPL 3 versucht, einige Schlupflöcher in LGPL 2.1 zu schließen."
+      },
+      "epl1": {
+        "name": "Eclipse Public License 1.0 (EPL-1.0)",
+        "description": "Diese Lizenz, die von der Eclipse Foundation erstellt und verwendet wird, ist nicht allzu streng und gibt sowohl das Urheberrecht als auch explizite Patentrechte. Überprüfen Sie den vollständigen Text der Lizenz, um zu sehen, wie die Haftung geregelt ist."
+      },
+      "cddl1": {
+        "name": "Common Development and Distribution License (CDDL-1.0)",
+        "description": "Dies ist eine sehr großzügige und beliebte Lizenz, die von Sun Microsystems erstellt wurde und auch explizite Patentgewährungen enthält. Es ist relativ einfach in seinen Bedingungen und erfordert nur eine geringe Menge an Dokumentation für die Weiterverteilung (gilt für Quellcode sowie modifizierten Code)."
+      },
+      "mit": {
+        "name": "The MIT License (MIT)",
+        "description": "Eine kurze, großzügige Softwarelizenz. Im Grunde können Sie tun, was Sie wollen, solange Sie das Originalurheberrecht und die Lizenz einschließen."
+      },
+      "bsd3c": {
+        "name": "The BSD 3-Clause \"New\"  or \"Revised\"  License (BSD)",
+        "description": "Die BSD 3-Klausel-Lizenz erlaubt Ihnen nahezu uneingeschränkte Freiheit bei der Verwendung der Software, solange Sie den BSD-Copyright-Hinweis darin einschließen. \"Verwendung von Markenzeichen\" bedeutet in diesem Fall, dass Sie die Namen des ursprünglichen Unternehmens oder seiner Mitglieder nicht verwenden dürfen, um abgeleitete Produkte zu bewerben."
+      },
+      "bsd2c": {
+        "name": "The BSD 2-Clause \"Simplified\"  or \"FreeBSD\" License",
+        "description": "Die BSD 2-Klausel-Lizenz erlaubt Ihnen nahezu uneingeschränkte Freiheit bei der Verwendung der Software, solange Sie den BSD-Copyright-Hinweis darin einschließen."
+      },
+      "apache2": {
+        "name": "Apache License 2",
+        "description": "Eine Lizenz, die Ihnen viele Freiheiten bei der Verwendung der Software einräumt, einschließlich eines expliziten Rechts auf ein Patent.  \"Staatliche Änderungen\"  bedeutet, dass Sie in jeder von Ihnen modifizierten Datei einen Hinweis einschließen müssen."
+      }
+    },
+    "search": "Lizenz suchen...",
+    "reset": "Formular zurücksetzen"
+  },
+  "versions": {
+    "versionId": "Version",
+    "versionName": "Name",
+    "versionDate": "Datum",
+    "revisionNumber": "Revision",
+    "list": {
+      "no.data": "Keine Versionen verfügbar."
+    },
+    "view": {
+      "button": {
+        "goto.latest": "Zum aktuellen Dokument gehen",
+        "versions": "Zurück zur Versionsübersicht",
+        "expand": "Alle erweitern",
+        "collapse": "Alle minimieren"
+      },
+      "project": {
+        "heading": "Projekt"
+      },
+      "contributors": {
+        "heading": "Beteiligte Personen"
+      },
+      "datasets": {
+        "heading": "Datensätze",
+        "size": "Größe",
+        "description": "Beschreibung",
+        "license": "Lizenz",
+        "retention.period": "Aufbewahrungsfrist",
+        "data.none": "Warum keine Daten erstellt oder analysiert werden",
+        "data.unknown": "Noch nicht bekannt, ob Daten erstellt oder analysiert werden.",
+        "restrictions": {
+          "label": "Einschränkungen",
+          "sensitive": "Enthält sensible Daten",
+          "personal": "Enthält personenbezogene Daten",
+          "legal": "Rechtliche Einschränkungen bei der Datenverarbeitung oder -freigabe"
+        },
+        "data.access": {
+          "label": "Datenzugriff",
+          "public": "Öffentlich",
+          "selected": "Für ausgewählte Projektmitglieder",
+          "other": "Für andere Projektmitglieder"
+        },
+        "deletion": {
+          "date": "Datum der Löschung",
+          "reason": "Grund für die Löschung",
+          "person": "Person, die für die Löschung verantwortlich ist"
+        }
+      },
+      "documentation": {
+        "heading": "Dokumentation und Datenqualität",
+        "data.generation": "Generierung/Wiederverwendung von Forschungsdaten und verwendete Methoden und Software",
+        "structure": "Datenstruktur und Versionierung",
+        "documentation": "Dokumentation für Datenanalyse und -wiederverwendung",
+        "metadata": "Metadaten, die bereitgestellt werden",
+        "data.quality": "Kontrolle der Datenkonsistenz und -qualität"
+      },
+      "legal": {
+        "heading": "Rechtliche und ethische Aspekte",
+        "sensitive.data": {
+          "present": "Daten oder Teile davon sind sensibel",
+          "security": "Sicherheitsmaßnahmen zur Gewährleistung der Datensicherheit",
+          "other.security": "Andere Sicherheitsmaßnahmen",
+          "access": "Berechtigt, auf sensible Daten zuzugreifen"
+        },
+        "personal.data": {
+          "present": "Personenbezogene Daten werden erhoben/verwendet",
+          "compliance": "Datenschutz wird sichergestellt durch",
+          "other.compliance": "Andere Maßnahmen"
+        },
+        "restrictions": {
+          "present": "Es gibt gesetzliche Einschränkungen bei der Verarbeitung / Weitergabe von Daten",
+          "comment": "Einschränkungen",
+          "documents": "Dokumente, die Einschränkungen spezifizieren",
+          "other.documents": "Andere Dokumente",
+          "data.rights.access": "Rechte und Kontrolle über den Zugang zu erstellten Daten"
+        }
+      },
+      "ethical": {
+        "human.participants": "Es sind menschliche Teilnehmer beteiligt",
+        "issues": "Weitere ethische Fragen sind mit der Forschung verbunden",
+        "committee.reviewed": "Der Forschungsplan wurde von einem Ethikkomitee überprüft"
+      },
+      "storage": {
+        "heading": "Lagerung",
+        "datasets": "Datensätze",
+        "url": "URL",
+        "location": "Speicherort",
+        "backup": {
+          "location": "Backup-Speicherort",
+          "frequency": "Backup-Frequenz"
+        }
+      },
+      "reuse": {
+        "heading": "Wiederverwendung",
+        "target.audience": "Zielgruppe",
+        "tools": "Tools oder Software, die benötigt werden, um auf Daten zuzugreifen",
+        "restricted.data.access": "Eingeschränkter Datenzugriff",
+        "access.info": {
+          "restricted": "Warum einige Datensätze Zugangsbeschränkungen haben",
+          "closed": "Warum einige Datensätze geschlossen und nicht zugänglich sind"
+        }
+      },
+      "repositories": {
+        "heading": "Repositorien",
+        "datasets": "Datensätze"
+      },
+      "costs": {
+        "heading": "Kosten"
+      }
+    }
+  },
+  "enum": {
+    "accessright": {
+      "READ": "nur Leserecht",
+      "WRITE": "Schreibrecht",
+      "NONE": "kein Zugang"
+    },
+    "agreement": {
+      "CONSORTIUM_AGREEMENT": "Konsortialvereinbarung",
+      "DATA_PROCESSING_AGREEMENT": "Vereinbarung zur Datenverarbeitung",
+      "JOINT_CONTROL_AGREEMENT": "Vereinbarung zur gemeinsamen Kontrolle",
+      "CONFIDENTIALITY_AGREEMENT": "Vertraulichkeitsvereinbarung",
+      "OTHER": "andere"
+    },
+    "compliance": {
+      "INFORMED_CONSENT": "durch die Einholung informierter Zustimmung zur Verarbeitung personenbezogener Daten",
+      "ANONYMISATION": "durch Anonymisierung personenbezogener Daten zur Aufbewahrung und/oder Weitergabe (wirklich anonyme Daten gelten nicht mehr als personenbezogene Daten)",
+      "PSEUDONYMISATION": "durch Pseudonymisierung personenbezogener Daten (der Hauptunterschied zur Anonymisierung besteht darin, dass Pseudonymisierung umkehrbar ist)",
+      "ENCRYPTION": "durch Verschlüsselung personenbezogener Daten (der Verschlüsselungsschlüssel muss getrennt von den Daten gespeichert werden, beispielsweise von einem vertrauenswürdigen Dritten)",
+      "OTHER": "andere Maßnahmen"
+    },
+    "contributor.role": {
+      "DATA_COLLECTOR": "Daten-Sammler",
+      "DATA_CURATOR": "Daten-Kurator",
+      "DATA_MANAGER": "Daten-Manager",
+      "DISTRIBUTOR": "Verteiler",
+      "EDITOR": "Editor",
+      "HOSTING_INSTITUTION": "Host-Institution",
+      "PRODUCER": "Produzent",
+      "PROJECT_LEADER": "Projektleiter",
+      "PROJECT_MANAGER": "Projektmanager",
+      "PROJECT_MEMBER": "Projektmitglied",
+      "REGISTRATION_AGENCY": "Registrierungsstelle",
+      "REGISTRATION_AUTHORITY": "Registrierungsbehörde",
+      "RELATED_PERSON": "verwandte Person",
+      "RESEARCHER": "Forscher",
+      "RESEARCH_GROUP": "Forschungsgruppe",
+      "RIGHTS_HOLDER": "Rechteinhaber",
+      "SPONSOR": "Sponsor",
+      "SUPERVISOR": "Supervisor",
+      "WORK_PACKAGE_LEADER": "Leiter des Arbeitspakets",
+      "OTHER": "andere"
+    },
+    "costs": {
+      "DATA_ACQUISITION": "Datenbeschaffung",
+      "DATABASE": "Datenbank",
+      "FILE_BASED_STORAGE": "Dateibasierte Speicherung",
+      "HARDWARE_AND_INFRASTRUCTURE": "Hardware und Infrastruktur",
+      "LEGAL_ADVICE": "Rechtsberatung",
+      "PERSONNEL": "Personal",
+      "REPOSITORY": "Repository",
+      "SOFTWARE_LICENSE": "Software-Lizenz",
+      "TRAINING": "Training",
+      "OTHER": "Andere"
+    },
+    "dataaccess": {
+      "OPEN": "Offen",
+      "RESTRICTED": "Eingeschränkt",
+      "CLOSED": "Geschlossen"
+    },
+    "datakind": {
+      "UNKNOWN": "unbekannt",
+      "NONE": "keine",
+      "SPECIFY": "angeben"
+    },
+    "dataquality": {
+      "CALIBRATION": "Kalibrierung",
+      "REPEATED_SAMPLES_OR_MEASUREMENTS": "wiederholte Proben oder Messungen",
+      "STANDARDISED_DATA_CAPTURE": "standardisierte Datenerfassung",
+      "DATA_ENTRY_VALIDATION": "Validierung der Dateneingabe",
+      "PEER_REVIEW_OF_DATA": "peer-review von Daten",
+      "REPRESENTATION_WITH_CONTROLLED_VOCABULARIES": "Darstellung mit kontrollierten Vokabularien",
+      "OTHERS": "andere"
+    },
+    "dataset.type": {
+      "STANDARD_OFFICE_DOCUMENTS": "STANDARD OFFICE DOKUMENTE",
+      "STRUCTURED_TEXT": "STRUKTURIERTER TEXT",
+      "IMAGES": "BILDER",
+      "AUDIOVISUAL_DATA": "AUDIOVISUELLE DATEN",
+      "RAW_DATA": "ROHE DATEN",
+      "NETWORKBASED_DATA": "NETZWERKBASIERTE DATEN",
+      "DATABASES": "DATENBANKEN",
+      "STRUCTURED_GRAPHICS": "STRUKTURIERTE GRAFIKEN",
+      "SCIENTIFIC_STATISTICAL_DATA": "WISSENSCHAFTLICH STATISTISCHE DATEN",
+      "PLAIN_TEXT": "KLARER TEXT",
+      "ARCHIVED_DATA": "ARCHIVIERTE DATEN",
+      "SOFTWARE_APPLICATIONS": "SOFTWARE-ANWENDUNGEN",
+      "SOURCE_CODE": "QUELLCODE",
+      "CONFIGURATION_DATA": "KONFIGURATIONSDATEN",
+      "OTHER": "ANDERE"
+    },
+    "functionrole": {
+      "ADMIN": "Administrator",
+      "EDITOR": "Redakteur",
+      "GUEST": "Gast",
+      "OWNER": "Eigentümer",
+      "SUPPORT": "Support"
+    },
+    "fundingstate": {
+      "PLANNED": "geplant",
+      "APPLIED": "beantragt",
+      "GRANTED": "genehmigt",
+      "REJECTED": "abgelehnt",
+      "UNSPECIFIED": "unbestimmt"
+    },
+    "identifier": {
+      "ORCID": "ORCID",
+      "ISNI": "ISNI",
+      "OPENID": "OpenID",
+      "HANDLE": "Handle",
+      "DOI": "DOI",
+      "ARK": "ARK",
+      "URL": "URL",
+      "FUNDREF": "FundRef",
+      "ROR": "ROR",
+      "OTHER": "Andere"
+    },
+    "securitymeasure": {
+      "INDIVIDUAL_LOGIN": "Individuelle Anmeldung und Passwort",
+      "ADDITIONAL_LOGIN": "Zusätzliche Anmeldung für spezifische Anwendungen",
+      "AUTOMATIC_LOCKING_OF_CLIENTS": "Automatische Sperrung von Clients (Timeout)",
+      "ENCRYPTION_OF_SYSTEMS": "Verschlüsselung von Systemen",
+      "LOCKED_STORAGE": "Aufbewahrung von Ausdrucken sensibler Daten in verschlossenem Aufbewahrungsort",
+      "OTHER": "Andere Maßnahmen"
+    },
+    "exportDmpTemplatetype": {
+      "FWF": "FWF",
+      "SCIENCE_EUROPE": "Wissenschaft Europa"
+    }
+  },
+  "yes": "Ja",
+  "no": "Nein",
+  "fair": "FAIR",
+  "contenttypes": "Inhaltstypen",
+  "metadatastandards": "Metadatenstandards",
+  "or": "oder"
 }

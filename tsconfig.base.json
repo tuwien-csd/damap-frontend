@@ -14,9 +14,9 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "resolveJsonModule": true,
-    "target": "es2020",
-    "module": "es2020",
-    "lib": ["es2018", "dom"],
+    "target": "ES2022",
+    "module": "ES2022",
+    "lib": ["ES2022", "dom"],
     "paths": {
       "@damap/core": ["libs/damap/src/index.ts"]
     },

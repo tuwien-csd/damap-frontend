@@ -101,7 +101,7 @@ describe('PlanComponent', () => {
     spyOn(component, 'getDocument').and.callThrough();
     spyOn(component, 'openExportWarningDialog').and.callThrough();
     backendSpy.getDmpById.and.returnValue(
-      of({ project: { funderSupported: true } })
+      of({ project: { funderSupported: true } }),
     );
 
     const id = 1;
@@ -116,7 +116,7 @@ describe('PlanComponent', () => {
     spyOn(component, 'getDocument').and.callThrough();
     spyOn(component, 'openExportWarningDialog').and.callThrough();
     backendSpy.getDmpById.and.returnValue(
-      of({ project: { funderSupported: false } })
+      of({ project: { funderSupported: false } }),
     );
 
     const id = 1;
@@ -135,7 +135,7 @@ describe('PlanComponent', () => {
     expect(component.openExportWarningDialog).toHaveBeenCalledWith(false, id);
     expect(backendSpy.exportDmpTemplate).toHaveBeenCalledWith(
       id,
-      'some_template'
+      'some_template',
     );
   }));
 });

@@ -1,55 +1,93 @@
 <h1 mat-dialog-title>
-  <ng-container *ngIf="mode === 'edit' else add">{{'dmp.steps.data.specify.dialog.edit' | translate}}</ng-container>
-  <ng-template #add>{{'dmp.steps.data.specify.dialog.add' | translate}}</ng-template>
+  <ng-container *ngIf="mode === 'edit'; else add">{{
+    "dmp.steps.data.specify.dialog.edit" | translate
+  }}</ng-container>
+  <ng-template #add>{{
+    "dmp.steps.data.specify.dialog.add" | translate
+  }}</ng-template>
 </h1>
 
-<div mat-dialog-content id="datasetDialog">
+<mat-dialog-content id="datasetDialog">
   <div [formGroup]="dataset">
-    <app-input-wrapper [label]="'dmp.steps.data.specify.dialog.title' | translate" [control]="title"></app-input-wrapper>
-    <div class="dialogRow" *ngIf="dataset.controls.source.value === datasetSource.NEW">
+    <app-input-wrapper
+      [label]="'dmp.steps.data.specify.dialog.title' | translate"
+      [control]="title"></app-input-wrapper>
+    <div
+      class="dialogRow"
+      *ngIf="dataset.controls.source.value === datasetSource.NEW">
       <mat-form-field>
-        <mat-label>{{'dmp.steps.data.specify.dialog.type' | translate}}</mat-label>
+        <mat-label>{{
+          "dmp.steps.data.specify.dialog.type" | translate
+        }}</mat-label>
         <mat-select formControlName="type" required multiple>
-          <mat-option *ngFor="let type of FILE_TYPES | keyvalue: originalOrder"
-                      [value]="type.value.id">
-            {{type.value.label}}
-            <span *ngIf="type.value.description"> [{{type.value.description}}]</span>
+          <mat-option
+            *ngFor="let type of FILE_TYPES | keyvalue: originalOrder"
+            [value]="type.value.id">
+            {{ type.value.label }}
+            <span *ngIf="type.value.description">
+              [{{ type.value.description }}]</span
+            >
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="dialogRow" *ngIf="dataset.controls.source.value === datasetSource.NEW">
+    <div
+      class="dialogRow"
+      *ngIf="dataset.controls.source.value === datasetSource.NEW">
       <mat-form-field>
-        <mat-label>{{'dmp.steps.data.specify.dialog.size' | translate}}</mat-label>
+        <mat-label>{{
+          "dmp.steps.data.specify.dialog.size" | translate
+        }}</mat-label>
         <mat-select formControlName="size">
           <mat-option *ngFor="let size of FILE_SIZES" [value]="size.size">
-            {{size.label}}<br/>
+            {{ size.label }}<br />
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-    <app-input-wrapper [label]="'dmp.steps.data.specify.dialog.description' | translate" [control]="description" [maxLength]="4000"></app-input-wrapper>
+    <app-input-wrapper
+      [label]="'dmp.steps.data.specify.dialog.description' | translate"
+      [control]="description"
+      [maxLength]="4000"></app-input-wrapper>
   </div>
-  <div class="dialogRow" *ngIf="dataset.controls.source.value === datasetSource.REUSED">
+  <div
+    class="dialogRow"
+    *ngIf="dataset.controls.source.value === datasetSource.REUSED">
     <mat-form-field>
-      <mat-label>{{'dmp.steps.data.specify.dialog.identifier' | translate}}</mat-label>
+      <mat-label>{{
+        "dmp.steps.data.specify.dialog.identifier" | translate
+      }}</mat-label>
       <mat-select [(ngModel)]="datasetId.type">
-        <mat-option *ngFor="let id of identifierTypeReusedData | keyvalue: originalOrder" [value]="id.key">
-          {{id.key}}<br/>
+        <mat-option
+          *ngFor="let id of identifierTypeReusedData | keyvalue: originalOrder"
+          [value]="id.key">
+          {{ id.key }}<br />
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>{{'dmp.steps.data.specify.dialog.source' | translate}}</mat-label>
-      <input matInput [(ngModel)]="datasetId.identifier" maxlength="255">
+      <mat-label>{{
+        "dmp.steps.data.specify.dialog.source" | translate
+      }}</mat-label>
+      <input matInput [(ngModel)]="datasetId.identifier" maxlength="255" />
     </mat-form-field>
   </div>
-</div>
+</mat-dialog-content>
 
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">{{'dmp.steps.data.specify.dialog.button.cancel' | translate}}</button>
-  <button mat-button (click)="onDialogClose()" mat-raised-button color="primary" [disabled]="dataset.invalid">
-    <ng-container *ngIf="mode === 'edit'">{{'dmp.steps.data.specify.dialog.button.update' | translate}}</ng-container>
-    <ng-container *ngIf="mode === 'add'">{{'dmp.steps.data.specify.dialog.button.add' | translate}}</ng-container>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">
+    {{ "dmp.steps.data.specify.dialog.button.cancel" | translate }}
   </button>
-</div>
+  <button
+    (click)="onDialogClose()"
+    mat-raised-button
+    color="primary"
+    [disabled]="dataset.invalid">
+    <ng-container *ngIf="mode === 'edit'">{{
+      "dmp.steps.data.specify.dialog.button.update" | translate
+    }}</ng-container>
+    <ng-container *ngIf="mode === 'add'">{{
+      "dmp.steps.data.specify.dialog.button.add" | translate
+    }}</ng-container>
+  </button>
+</mat-dialog-actions>

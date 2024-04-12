@@ -1,8 +1,8 @@
-@use '@angular/material' as mat;
+@use "node_modules/@angular/material/index" as mat;
 // Plus imports for other components in your app.
 // Depending on your layout you will want to include your own palettes or import an
 // Angular Material prebuilt theme of your choice.
-@import 'custom-palettes';
+@import "apps/damap-frontend/src/themes/custom-palettes";
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -36,4 +36,52 @@ $app-dark-theme: mat.define-dark-theme($app-primary, $app-accent, $app-warn);
 .dark-theme {
   @include mat.all-component-colors($app-dark-theme);
   @include mat.strong-focus-indicators-theme($app-dark-theme);
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(../assets/fonts/Roboto/Roboto-Medium.ttf);
+  font-weight: 500;
+}
+@font-face {
+  font-family: Roboto;
+  src: url(../assets/fonts/Roboto/Roboto-Regular.ttf);
+  font-weight: 400;
+}
+@font-face {
+  font-family: Roboto;
+  src: url(../assets/fonts/Roboto/Roboto-Light.ttf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  src: url(../assets/icons/material/MaterialIcons-Regular.ttf)
+    format("truetype");
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: "liga";
 }

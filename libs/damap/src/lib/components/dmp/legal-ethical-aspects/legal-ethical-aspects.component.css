@@ -1,7 +1,6 @@
 ::ng-deep .boolean-mat-radio-button {
   display: flex;
   flex-direction: column;
-  margin: 15px 0;
 }
 
 .dataset-checkbox-section {
@@ -34,7 +33,7 @@ hr {
   opacity: 0.5;
 }
 
-::ng-deep .mat-select-panel:not([class*="mat-elevation-z"]){
-   transform: translate(2em, 2em) !important; 
-   min-width: 100% !important;
+::ng-deep .mat-mdc-select-panel:not([class*="mat-elevation-z"]) {
+  transform: translate(2em, 2em) !important;
+  min-width: 100% !important;
 }

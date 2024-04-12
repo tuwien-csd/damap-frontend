@@ -27,7 +27,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
   @Input() stepChanged$: Subject<any>;
   @Input() admin = false;
 
-  dmpForm: FormGroup = this.formService.dmpForm;
+  dmpForm: FormGroup;
 
   formChanged$: Observable<boolean>;
   formChanged: boolean;
@@ -41,17 +41,19 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
   constructor(
     private formService: FormService,
     private dialog: MatDialog,
-    private store: Store<AppState>
-  ) {}
+    private store: Store<AppState>,
+  ) {
+    this.dmpForm = this.formService.dmpForm;
+  }
 
   ngOnInit(): void {
     this.formChanged$ = this.store.pipe(select(selectFormChanged));
     this.savingDmp$ = this.store.pipe(select(selectDmpSaving));
     this.subscriptions.push(
-      this.formChanged$.subscribe(value => (this.formChanged = value))
+      this.formChanged$.subscribe(value => (this.formChanged = value)),
     );
     this.subscriptions.push(
-      this.savingDmp$.subscribe(value => (this.savingDmp = value))
+      this.savingDmp$.subscribe(value => (this.savingDmp = value)),
     );
     // Prevent autosave for admins
     if (!this.admin) {
@@ -85,7 +87,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
           saveDmpVersion({
             dmp: this.formService.exportFormToDmp(),
             versionName,
-          })
+          }),
         );
       }
     });
@@ -112,7 +114,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
             exportDmpTemplate({
               dmp: this.formService.exportFormToDmp(),
               dmpTemplateType: this.exportDmpType,
-            })
+            }),
           );
         } else {
           this.dispatchExportDmp();

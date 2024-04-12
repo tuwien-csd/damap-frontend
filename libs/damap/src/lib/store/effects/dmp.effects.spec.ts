@@ -10,7 +10,6 @@ import { of, throwError } from 'rxjs';
 import { BackendService } from '../../services/backend.service';
 import { DmpEffects } from './dmp.effects';
 import { ETemplateType } from '../../domain/enum/export-template-type.enum';
-import { FeedbackService } from '../../services/feedback.service';
 import { FormService } from '../../services/form.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoadingState } from '../../domain/enum/loading-state.enum';
@@ -35,9 +34,7 @@ describe('DmpEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        FeedbackTestingModule,
-      ],
+      imports: [FeedbackTestingModule],
       providers: [
         DmpEffects,
         provideMockActions(() => actions$),
@@ -85,7 +82,7 @@ describe('DmpEffects', () => {
   it('should load dmps and fail', () => {
     actions$ = of(loadDmps(false));
     backendService.getDmps.and.returnValue(
-      throwError(() => new HttpErrorResponse({}))
+      throwError(() => new HttpErrorResponse({})),
     );
 
     effects.loadDmps$.subscribe((action: any) => {
@@ -116,7 +113,7 @@ describe('DmpEffects', () => {
       exportDmpTemplate({
         dmp: completeDmp,
         dmpTemplateType: ETemplateType.FWF,
-      })
+      }),
     );
     backendService.editDmp.and.returnValue(of(completeDmp));
 
@@ -140,7 +137,7 @@ describe('DmpEffects', () => {
       exportDmpTemplate({
         dmp: completeDmp,
         dmpTemplateType: ETemplateType.FWF,
-      })
+      }),
     );
     backendService.editDmp.and.returnValue(of(completeDmp));
     const storeSpy = spyOn(effects.store$, 'dispatch').and.callThrough();
@@ -166,10 +163,10 @@ describe('DmpEffects', () => {
       exportDmpTemplate({
         dmp: completeDmp,
         dmpTemplateType: ETemplateType.FWF,
-      })
+      }),
     );
     backendService.editDmp.and.returnValue(
-      throwError(() => new HttpErrorResponse({}))
+      throwError(() => new HttpErrorResponse({})),
     );
     const storeSpy = spyOn(effects.store$, 'dispatch').and.callThrough();
 

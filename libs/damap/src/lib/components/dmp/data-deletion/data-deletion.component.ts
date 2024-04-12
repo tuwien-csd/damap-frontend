@@ -19,7 +19,7 @@ export class DataDeletionComponent {
   setDateOfDeletion($event: MatSlideToggleChange) {
     if ($event.checked) {
       this.dataset.controls.dateOfDeletion.setValue(
-        this.dmpForm.value.project?.end
+        this.dmpForm.value.project?.end,
       );
     }
   }

@@ -19,16 +19,19 @@ export interface Completeness {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SummaryService {
-
   static dmpSummary(dmp: Dmp): Completeness[] {
     const projectStep = this.evaluateProjectStep(dmp.project);
     const peopleStep = this.evaluatePeopleStep(dmp.contributors);
     const dataStep = this.evaluateDataStep(dmp);
 
-    if ((dmp.dataKind !== DataKind.SPECIFY && dmp.reusedDataKind !== DataKind.SPECIFY) || !dmp.datasets.length) {
+    if (
+      (dmp.dataKind !== DataKind.SPECIFY &&
+        dmp.reusedDataKind !== DataKind.SPECIFY) ||
+      !dmp.datasets.length
+    ) {
       let summary = [projectStep, peopleStep];
       return summary.concat(this.noDatasetsSummary());
     }
@@ -50,12 +53,16 @@ export class SummaryService {
       licenseStep,
       repositoryStep,
       reuseStep,
-      costStep
+      costStep,
     ];
   }
 
   static evaluateProjectStep(project: Project): Completeness {
-    const projectsLevel: Completeness = { step: 'dmp.steps.project.label', completeness: 0, status: [] };
+    const projectsLevel: Completeness = {
+      step: 'dmp.steps.project.label',
+      completeness: 0,
+      status: [],
+    };
 
     if (!project) {
       projectsLevel.completeness = 0;
@@ -69,7 +76,11 @@ export class SummaryService {
   }
 
   static evaluatePeopleStep(contributors: Contributor[]): Completeness {
-    const peopleLevel: Completeness = { step: 'dmp.steps.people.label', completeness: 0, status: [] };
+    const peopleLevel: Completeness = {
+      step: 'dmp.steps.people.label',
+      completeness: 0,
+      status: [],
+    };
     const contact = contributors.find(c => c.contact);
 
     if (contact) {
@@ -87,7 +98,9 @@ export class SummaryService {
       if (contributors.length === 1) {
         peopleLevel.status.push('dmp.steps.summary.people.contributor.one');
       } else {
-        peopleLevel.status.push('dmp.steps.summary.people.contributor.multiple');
+        peopleLevel.status.push(
+          'dmp.steps.summary.people.contributor.multiple',
+        );
         peopleLevel.status.push(`${contributors.length}`);
       }
     }
@@ -96,7 +109,11 @@ export class SummaryService {
   }
 
   static evaluateDataStep(dmp: Dmp): Completeness {
-    const datasetLevel: Completeness = { step: 'dmp.steps.data.specify.label', completeness: 0, status: [] };
+    const datasetLevel: Completeness = {
+      step: 'dmp.steps.data.specify.label',
+      completeness: 0,
+      status: [],
+    };
 
     const kinds = ['dataKind', 'reusedDataKind'];
 
@@ -104,31 +121,51 @@ export class SummaryService {
       const datakind = kind === 'dataKind' ? 'produced' : 'reused';
       if (dmp[kind] === DataKind.NONE) {
         datasetLevel.completeness += 50;
-        datasetLevel.status.push(`dmp.steps.summary.data.specify.datasets.none.${datakind}`);
+        datasetLevel.status.push(
+          `dmp.steps.summary.data.specify.datasets.none.${datakind}`,
+        );
       } else if (dmp[kind] === DataKind.SPECIFY) {
         // check if datasets exist
-        const dataSource = kind === 'dataKind' ? DataSource.NEW : DataSource.REUSED;
+        const dataSource =
+          kind === 'dataKind' ? DataSource.NEW : DataSource.REUSED;
         const datasets = this.getDatasetsBySource(dmp.datasets, dataSource);
         if (datasets.length > 0) {
           datasetLevel.completeness += 50;
         }
-        datasetLevel.status.push(`dmp.steps.summary.data.specify.datasets.${datakind}`);
+        datasetLevel.status.push(
+          `dmp.steps.summary.data.specify.datasets.${datakind}`,
+        );
         datasetLevel.status.push(`${datasets.length}. `);
       } else if (dmp[kind] === DataKind.UNKNOWN) {
-        datasetLevel.status.push(`dmp.steps.summary.data.specify.datasets.unknown.${datakind}`);
+        datasetLevel.status.push(
+          `dmp.steps.summary.data.specify.datasets.unknown.${datakind}`,
+        );
       }
     }
 
     // check if missing explanation is set
-    if (dmp.dataKind === DataKind.NONE && dmp.reusedDataKind === DataKind.NONE) {
+    if (
+      dmp.dataKind === DataKind.NONE &&
+      dmp.reusedDataKind === DataKind.NONE
+    ) {
       if (!dmp.noDataExplanation) {
         datasetLevel.completeness -= 50;
-        datasetLevel.status.push('dmp.steps.summary.data.specify.datasets.missingexplanation');
+        datasetLevel.status.push(
+          'dmp.steps.summary.data.specify.datasets.missingexplanation',
+        );
       }
-    } else if (dmp.dataKind === DataKind.SPECIFY || dmp.reusedDataKind === DataKind.SPECIFY) {
+    } else if (
+      dmp.dataKind === DataKind.SPECIFY ||
+      dmp.reusedDataKind === DataKind.SPECIFY
+    ) {
       if (!dmp.dataGeneration) {
-        datasetLevel.completeness = datasetLevel.completeness >= 20 ? datasetLevel.completeness - 20 : datasetLevel.completeness;
-        datasetLevel.status.push('dmp.steps.summary.data.specify.datasets.datageneration');
+        datasetLevel.completeness =
+          datasetLevel.completeness >= 20
+            ? datasetLevel.completeness - 20
+            : datasetLevel.completeness;
+        datasetLevel.status.push(
+          'dmp.steps.summary.data.specify.datasets.datageneration',
+        );
       }
     } else if (!dmp.dataKind && !dmp.reusedDataKind) {
       datasetLevel.status.push('dmp.steps.summary.data.specify.none.none');
@@ -138,7 +175,11 @@ export class SummaryService {
   }
 
   static evaluateDocumentationStep(dmp: Dmp): Completeness {
-    const docDataQualityLevel: Completeness = { step: 'dmp.steps.documentation.label', completeness: 0, status: [] };
+    const docDataQualityLevel: Completeness = {
+      step: 'dmp.steps.documentation.label',
+      completeness: 0,
+      status: [],
+    };
     const docPercent = 100 / 4;
     if (dmp.metadata) {
       docDataQualityLevel.completeness += docPercent;
@@ -152,7 +193,10 @@ export class SummaryService {
     if (dmp.dataQuality.length > 0) {
       docDataQualityLevel.completeness += docPercent;
     }
-    if (dmp.dataQuality.includes(DataQualityType.OTHERS) && !dmp.otherDataQuality) {
+    if (
+      dmp.dataQuality.includes(DataQualityType.OTHERS) &&
+      !dmp.otherDataQuality
+    ) {
       docDataQualityLevel.completeness -= 15;
     }
     if (docDataQualityLevel.completeness === 0) {
@@ -167,7 +211,11 @@ export class SummaryService {
   }
 
   static evaluateStorageStep(dmp: Dmp): Completeness {
-    const storageLevel: Completeness = { step: 'dmp.steps.storage.label', completeness: 0, status: [] };
+    const storageLevel: Completeness = {
+      step: 'dmp.steps.storage.label',
+      completeness: 0,
+      status: [],
+    };
     const datasets = this.getDatasetsBySource(dmp.datasets, DataSource.NEW);
     if (datasets.length == 0) {
       storageLevel.completeness = 100;
@@ -177,21 +225,27 @@ export class SummaryService {
 
     const storage = dmp.storage;
     const eStorage = dmp.externalStorage;
-    const storageDatasets: string[] =
-      [...new Set([...SummaryService.getAllHostDatasets(storage), ...SummaryService.getAllHostDatasets(eStorage)])];
+    const storageDatasets: string[] = [
+      ...new Set([
+        ...SummaryService.getAllHostDatasets(storage),
+        ...SummaryService.getAllHostDatasets(eStorage),
+      ]),
+    ];
 
     if (!storage.length && !eStorage.length && !storageDatasets.length) {
       storageLevel.completeness = 0;
       storageLevel.status.push('dmp.steps.summary.noinfo');
     } else if (storageDatasets.length < datasets.length) {
-      storageLevel.completeness = 100 * (storageDatasets.length / datasets.length);
+      storageLevel.completeness =
+        100 * (storageDatasets.length / datasets.length);
       storageLevel.status.push('dmp.steps.summary.someinfo');
     } else {
       storageLevel.completeness = 100;
       storageLevel.status.push('dmp.steps.summary.storage.alldata');
     }
     if (eStorage.length && !dmp.externalStorageInfo) {
-      storageLevel.completeness = storageLevel.completeness > 0 ? storageLevel.completeness * 0.5 : 0;
+      storageLevel.completeness =
+        storageLevel.completeness > 0 ? storageLevel.completeness * 0.5 : 0;
       storageLevel.status.push('dmp.steps.summary.storage.missingexplanation');
     }
 
@@ -199,12 +253,24 @@ export class SummaryService {
   }
 
   static evaluateLegalStep(dmp: Dmp): Completeness {
-    const legalEthicalAspectsLevel: Completeness = { step: 'dmp.steps.legal.label', completeness: 0, status: [] };
+    const legalEthicalAspectsLevel: Completeness = {
+      step: 'dmp.steps.legal.label',
+      completeness: 0,
+      status: [],
+    };
     const legalPercent = 25;
     // Sensitive Data
     if (dmp.sensitiveData) {
       legalEthicalAspectsLevel.completeness +=
-        this.conditionalInfo(dmp, 'sensitiveData', dmp.sensitiveDataSecurity, SecurityMeasure.OTHER, dmp.otherDataSecurityMeasures) * legalPercent / 3;
+        (this.conditionalInfo(
+          dmp,
+          'sensitiveData',
+          dmp.sensitiveDataSecurity,
+          SecurityMeasure.OTHER,
+          dmp.otherDataSecurityMeasures,
+        ) *
+          legalPercent) /
+        3;
       if (dmp.sensitiveDataAccess) {
         legalEthicalAspectsLevel.completeness += legalPercent / 3;
       }
@@ -215,7 +281,15 @@ export class SummaryService {
     // Personal Data
     if (dmp.personalData) {
       legalEthicalAspectsLevel.completeness +=
-        this.conditionalInfo(dmp, 'personalData', dmp.personalDataCompliance, ComplianceType.OTHER, dmp.otherPersonalDataCompliance) * legalPercent / 2;
+        (this.conditionalInfo(
+          dmp,
+          'personalData',
+          dmp.personalDataCompliance,
+          ComplianceType.OTHER,
+          dmp.otherPersonalDataCompliance,
+        ) *
+          legalPercent) /
+        2;
     } else {
       legalEthicalAspectsLevel.completeness += legalPercent;
     }
@@ -223,7 +297,15 @@ export class SummaryService {
     // Legal Restrictions
     if (dmp.legalRestrictions) {
       legalEthicalAspectsLevel.completeness +=
-        this.conditionalInfo(dmp, 'legalRestrictions', dmp.legalRestrictionsDocuments, Agreement.OTHER, dmp.otherLegalRestrictionsDocument) * legalPercent / 3;
+        (this.conditionalInfo(
+          dmp,
+          'legalRestrictions',
+          dmp.legalRestrictionsDocuments,
+          Agreement.OTHER,
+          dmp.otherLegalRestrictionsDocument,
+        ) *
+          legalPercent) /
+        3;
       if (dmp.legalRestrictionsComment) {
         legalEthicalAspectsLevel.completeness += legalPercent / 3;
       }
@@ -246,24 +328,41 @@ export class SummaryService {
   }
 
   static evaluateLicenseStep(dmp: Dmp): Completeness {
-    const licensesLevel: Completeness = { step: 'dmp.steps.licensing.label', completeness: 100, status: [] };
+    const licensesLevel: Completeness = {
+      step: 'dmp.steps.licensing.label',
+      completeness: 100,
+      status: [],
+    };
 
     const newDatasets = this.getDatasetsBySource(dmp.datasets, DataSource.NEW);
-    const publishedDatasets = newDatasets.filter(d => d.dataAccess === DataAccessType.OPEN);
-    const restrictedCount = newDatasets.filter(d => d.dataAccess === DataAccessType.RESTRICTED).length;
-    const closedCount = newDatasets.filter(d => d.dataAccess === DataAccessType.CLOSED).length;
+    const publishedDatasets = newDatasets.filter(
+      d => d.dataAccess === DataAccessType.OPEN,
+    );
+    const restrictedCount = newDatasets.filter(
+      d => d.dataAccess === DataAccessType.RESTRICTED,
+    ).length;
+    const closedCount = newDatasets.filter(
+      d => d.dataAccess === DataAccessType.CLOSED,
+    ).length;
     const deletedDatasets = newDatasets.filter(d => d.delete);
 
-    const incompleteDataset = publishedDatasets.find(d => !d.license || !d.startDate);
+    const incompleteDataset = publishedDatasets.find(
+      d => !d.license || !d.startDate,
+    );
     if (incompleteDataset) {
       licensesLevel.completeness -= 30;
     }
 
-    if ((restrictedCount && !dmp.restrictedAccessInfo) || (closedCount && !dmp.closedAccessInfo)) {
+    if (
+      (restrictedCount && !dmp.restrictedAccessInfo) ||
+      (closedCount && !dmp.closedAccessInfo)
+    ) {
       licensesLevel.completeness -= 30;
     }
 
-    const incompleteDeletedDataset = deletedDatasets.find(d => !d.deletionPerson || !d.dateOfDeletion || !d.reasonForDeletion);
+    const incompleteDeletedDataset = deletedDatasets.find(
+      d => !d.deletionPerson || !d.dateOfDeletion || !d.reasonForDeletion,
+    );
     if (deletedDatasets.length > 0 && incompleteDeletedDataset) {
       licensesLevel.completeness -= 30;
     }
@@ -277,26 +376,48 @@ export class SummaryService {
   }
 
   static evaluateRepositoryStep(dmp: Dmp): Completeness {
-    const repositoriesLevel: Completeness = { step: 'dmp.steps.repositories.label', completeness: 0, status: [] };
+    const repositoriesLevel: Completeness = {
+      step: 'dmp.steps.repositories.label',
+      completeness: 0,
+      status: [],
+    };
 
-    const repoDatasets: string[] = [...new Set([...this.getAllHostDatasets(dmp.repositories)])];
-    const newDatasets = dmp.datasets.filter(d => d.source === DataSource.NEW && d.dataAccess === DataAccessType.OPEN);
-    const undepositedDataset = newDatasets.find(d => !repoDatasets.includes(d.referenceHash));
+    const repoDatasets: string[] = [
+      ...new Set([...this.getAllHostDatasets(dmp.repositories)]),
+    ];
+    const newDatasets = dmp.datasets.filter(
+      d => d.source === DataSource.NEW && d.dataAccess === DataAccessType.OPEN,
+    );
+    const undepositedDataset = newDatasets.find(
+      d => !repoDatasets.includes(d.referenceHash),
+    );
 
     if (newDatasets.length && undepositedDataset) {
       repositoriesLevel.completeness = 0;
-      repositoriesLevel.status.push('dmp.steps.summary.repositories.deposited.incomplete');
+      repositoriesLevel.status.push(
+        'dmp.steps.summary.repositories.deposited.incomplete',
+      );
     } else {
       repositoriesLevel.completeness = 100;
-      repositoriesLevel.status.push('dmp.steps.summary.repositories.deposited.complete');
+      repositoriesLevel.status.push(
+        'dmp.steps.summary.repositories.deposited.complete',
+      );
     }
 
     return repositoriesLevel;
   }
 
   static evaluateReuseStep(dmp: Dmp): Completeness {
-    const reuseLevel: Completeness = { step: 'dmp.steps.data.reuse.label', completeness: 0, status: [] };
-    const restrictedDatasets = !!dmp.datasets.filter(d => d.dataAccess === DataAccessType.RESTRICTED && d.source === DataSource.NEW).length;
+    const reuseLevel: Completeness = {
+      step: 'dmp.steps.data.reuse.label',
+      completeness: 0,
+      status: [],
+    };
+    const restrictedDatasets = !!dmp.datasets.filter(
+      d =>
+        d.dataAccess === DataAccessType.RESTRICTED &&
+        d.source === DataSource.NEW,
+    ).length;
     const reusePercent = 100 / (restrictedDatasets ? 3 : 2);
     if (dmp.targetAudience) {
       reuseLevel.completeness += reusePercent;
@@ -318,7 +439,11 @@ export class SummaryService {
   }
 
   static evaluateCostStep(dmp: Dmp): Completeness {
-    const costsLevel: Completeness = { step: 'dmp.steps.costs.label', completeness: 0, status: [] };
+    const costsLevel: Completeness = {
+      step: 'dmp.steps.costs.label',
+      completeness: 0,
+      status: [],
+    };
     if (dmp.costsExist == null) {
       costsLevel.completeness = 0;
       costsLevel.status.push('dmp.steps.summary.notspecified');
@@ -340,7 +465,7 @@ export class SummaryService {
       { step: 'dmp.steps.licensing.label', completeness: 0, status: [] },
       { step: 'dmp.steps.repositories.label', completeness: 0, status: [] },
       { step: 'dmp.steps.data.reuse.label', completeness: 0, status: [] },
-      { step: 'dmp.steps.costs.label', completeness: 0, status: [] }
+      { step: 'dmp.steps.costs.label', completeness: 0, status: [] },
     ];
     for (const step of summary) {
       step.status = ['dmp.steps.summary.nodatasets'];
@@ -348,7 +473,10 @@ export class SummaryService {
     return summary;
   }
 
-  private static getDatasetsBySource(datasets: Dataset[], source: DataSource): Dataset[] {
+  private static getDatasetsBySource(
+    datasets: Dataset[],
+    source: DataSource,
+  ): Dataset[] {
     return datasets.filter(d => d.source === source);
   }
 
@@ -368,7 +496,13 @@ export class SummaryService {
     return datasets;
   }
 
-  private static conditionalInfo(dmp: Dmp, condition: string, enumList: string[], otherEnum: string, otherField: string): number {
+  private static conditionalInfo(
+    dmp: Dmp,
+    condition: string,
+    enumList: string[],
+    otherEnum: string,
+    otherField: string,
+  ): number {
     let completeness = 0;
     for (const item of dmp.datasets) {
       if (item[condition]) {
@@ -377,7 +511,10 @@ export class SummaryService {
       }
     }
     if (enumList.length) {
-      if (!enumList.includes(otherEnum) || (enumList.includes(otherEnum) && otherField)) {
+      if (
+        !enumList.includes(otherEnum) ||
+        (enumList.includes(otherEnum) && otherField)
+      ) {
         completeness += 1;
       }
     }

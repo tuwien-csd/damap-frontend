@@ -1,15 +1,16 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {DocDataQualityComponent} from './doc-data-quality.component';
-import {TranslateModule} from '@ngx-translate/core';
-import {ReactiveFormsModule} from '@angular/forms';
-import {StepIntroModule} from '../../../widgets/step-intro/step-intro.module';
-import {SharedModule} from '../../../shared/shared.module';
-import {TooltipModule} from '../../../widgets/tooltip/tooltip.module';
-import {MatSelectModule} from '@angular/material/select';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DocDataQualityComponent } from './doc-data-quality.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { StepIntroModule } from '../../../widgets/step-intro/step-intro.module';
+import { SharedModule } from '../../../shared/shared.module';
+import { TooltipModule } from '../../../widgets/tooltip/tooltip.module';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     TranslateModule,
     ReactiveFormsModule,
     StepIntroModule,
@@ -17,11 +18,9 @@ import {MatSelectModule} from '@angular/material/select';
     SharedModule,
 
     // Materials
-    MatSelectModule
+    MatSelectModule,
   ],
-  declarations: [
-    DocDataQualityComponent
-  ],
+  declarations: [DocDataQualityComponent],
   exports: [
     CommonModule,
     TranslateModule,
@@ -32,8 +31,7 @@ import {MatSelectModule} from '@angular/material/select';
     DocDataQualityComponent,
 
     // Materials
-    MatSelectModule
-  ]
+    MatSelectModule,
+  ],
 })
-export class DocDataQualityModule {
-}
+export class DocDataQualityModule {}

@@ -1,17 +1,13 @@
 {
   "tabWidth": 2,
-  "tabs": false,
+  "useTabs": false,
   "singleQuote": true,
   "bracketSpacing": true,
   "bracketSameLine": true,
   "arrowParens": "avoid",
   "overrides": [
     {
-      "files": [
-        "**/*.css",
-        "**/*.scss",
-        "**/*.html"
-      ],
+      "files": ["**/*.css", "**/*.scss", "**/*.html", "**/*.json", "**/*.yml"],
       "options": {
         "singleQuote": false
       }

@@ -1,14 +1,15 @@
-<app-step-intro>{{'dmp.steps.costs.intro' | translate}}
-</app-step-intro>
+<app-step-intro>{{ "dmp.steps.costs.intro" | translate }} </app-step-intro>
 <div [formGroup]="costsStep" class="flex-radio">
   <label id="costsFormGroup">
-    {{'dmp.steps.costs.question.exist.label' | translate}}
+    {{ "dmp.steps.costs.question.exist.label" | translate }}
   </label>
   <mat-radio-group aria-labelledby="costsFormGroup" formControlName="exist">
     <app-cris-tag [cris]="costsStep.value.existCris"></app-cris-tag>
-    <mat-radio-button [value]="false">{{'dmp.steps.costs.question.exist.no' | translate}}
+    <mat-radio-button [value]="false"
+      >{{ "dmp.steps.costs.question.exist.no" | translate }}
     </mat-radio-button>
-    <mat-radio-button [value]="true">{{'dmp.steps.costs.question.exist.yes' | translate}}
+    <mat-radio-button [value]="true"
+      >{{ "dmp.steps.costs.question.exist.yes" | translate }}
     </mat-radio-button>
   </mat-radio-group>
 </div>
@@ -22,47 +23,63 @@
       <mat-expansion-panel *ngFor="let item of list.controls; let i = index">
         <mat-expansion-panel-header>
           <mat-panel-title [class.form-error]="item.invalid">
-            {{item.value.title}}
+            {{ item.value.title }}
           </mat-panel-title>
           <mat-panel-description>
-            {{item.value.value | currency: item.value.currencyCode}}
+            {{ item.value.value | currency: item.value.currencyCode }}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div [formArrayName]="i">
           <div class="form-row">
             <div class="form-row-group">
-              <app-input-wrapper [label]="'dmp.steps.costs.question.title'" [control]="getFormControl(i, 'title')">
+              <app-input-wrapper
+                [label]="'dmp.steps.costs.question.title'"
+                [control]="getFormControl(i, 'title')">
               </app-input-wrapper>
-              <button mat-icon-button color="accent" aria-label="Remove cost" (click)="removeCost(i)">
+              <button
+                mat-icon-button
+                color="accent"
+                aria-label="Remove cost"
+                (click)="removeCost(i)">
                 <mat-icon>cancel</mat-icon>
               </button>
             </div>
           </div>
           <div class="form-row">
             <div class="form-row-group">
-              <app-input-wrapper [label]="'dmp.steps.costs.question.value'" [prefix]="'€ &nbsp;'"
-                                 [placeholder]="'1000.00'"
-                                 [type]="'number'" [control]="getFormControl(i, 'value')">
+              <app-input-wrapper
+                [label]="'dmp.steps.costs.question.value'"
+                [prefix]="'€ &nbsp;'"
+                [placeholder]="'1000.00'"
+                [type]="'number'"
+                [control]="getFormControl(i, 'value')">
               </app-input-wrapper>
               <mat-form-field class="costType">
-                <mat-label >{{'dmp.steps.costs.question.type' | translate}}</mat-label>
+                <mat-label>{{
+                  "dmp.steps.costs.question.type" | translate
+                }}</mat-label>
                 <mat-select formControlName="type">
-                  <mat-option *ngFor="let type of costTypeObject | keyvalue" [value]="type.value">
-                    {{translateEnumPrefix + type.value | translate}}
+                  <mat-option
+                    *ngFor="let type of costTypeObject | keyvalue"
+                    [value]="type.value">
+                    {{ translateEnumPrefix + type.value | translate }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
               <ng-container *ngIf="item.value.type === costType.OTHER">
-                <app-input-wrapper [label]="'dmp.steps.costs.question.other'" [type]="'text'"
-                                   [control]="getFormControl(i, 'customType')">
+                <app-input-wrapper
+                  [label]="'dmp.steps.costs.question.other'"
+                  [type]="'text'"
+                  [control]="getFormControl(i, 'customType')">
                 </app-input-wrapper>
               </ng-container>
             </div>
           </div>
           <div class="form-row">
             <div class="form-row-group">
-              <app-textarea-wrapper [label]="'dmp.steps.costs.question.description'"
-                                    [control]="getFormControl(i, 'description')">
+              <app-textarea-wrapper
+                [label]="'dmp.steps.costs.question.description'"
+                [control]="getFormControl(i, 'description')">
               </app-textarea-wrapper>
             </div>
           </div>

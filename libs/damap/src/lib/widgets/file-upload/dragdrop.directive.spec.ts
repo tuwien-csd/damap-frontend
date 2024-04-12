@@ -1,27 +1,23 @@
-import {DragdropDirective} from './dragdrop.directive';
-import {Component, DebugElement} from '@angular/core';
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {By} from '@angular/platform-browser';
+import { DragdropDirective } from './dragdrop.directive';
+import { Component, DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 @Component({
-  template: `
-    <div appDragdrop>Drag and drop div</div>
-    <div>Standard div</div>`
+  template: ` <div appDragdrop>Drag and drop div</div>
+    <div>Standard div</div>`,
 })
-class TestComponent {
-}
+class TestComponent {}
 
 describe('DragdropDirective', () => {
-
   let fixture: ComponentFixture<TestComponent>;
   let decorated: DebugElement; // the div with the directive
   let bare: DebugElement; // the div without the directive
 
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
-      declarations: [DragdropDirective, TestComponent]
-    })
-      .createComponent(TestComponent);
+      declarations: [DragdropDirective, TestComponent],
+    }).createComponent(TestComponent);
 
     fixture.detectChanges(); // initial binding
 
@@ -46,7 +42,7 @@ describe('DragdropDirective', () => {
   });
 
   it('should have same fileOver value', () => {
-    const item = decorated.injector.get(DragdropDirective) as DragdropDirective;
+    const item = decorated.injector.get(DragdropDirective);
     const bgColor = decorated.nativeElement.fileOver;
     expect(bgColor).toBe(item.fileOver);
   });

@@ -1,6 +1,6 @@
-import {Project} from './project';
-import {FunctionRole} from './enum/function-role.enum';
-import {Contributor} from './contributor';
+import { Project } from './project';
+import { FunctionRole } from './enum/function-role.enum';
+import { Contributor } from './contributor';
 
 export interface DmpListItem {
   readonly id: number;

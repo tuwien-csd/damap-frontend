@@ -19,17 +19,17 @@ declare namespace Cypress {
 //
 // -- This is a parent command --
 Cypress.Commands.add('login', (user, password) => {
-  cy.intercept("GET", "/api/consent").as("consent");
-  cy.visit("/");
+  cy.intercept('GET', '/api/consent').as('consent');
+  cy.visit('/');
   // For Keycloak login mask
   cy.get('input#username').type(user);
   cy.get('input#password').type(password);
   cy.get('input#kc-login').click();
   cy.get('a#damap-logo').contains('DAMAP');
   // Check if consent popup is shown
-  cy.wait("@consent").then((interception) => {
+  cy.wait('@consent').then(interception => {
     if (interception.response.body.consentGiven !== true) {
-      cy.get("app-consent button").click();
+      cy.get('app-consent button').click();
     }
   });
 });

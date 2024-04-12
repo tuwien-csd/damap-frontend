@@ -8,9 +8,10 @@ export interface DmpState extends EntityState<DmpListItem> {
   saving: boolean;
 }
 
-export const adapter: EntityAdapter<DmpListItem> = createEntityAdapter<DmpListItem>();
+export const adapter: EntityAdapter<DmpListItem> =
+  createEntityAdapter<DmpListItem>();
 
 export const initialDmpState: DmpState = adapter.getInitialState({
   loaded: LoadingState.NOT_LOADED,
-  saving: false
-})
+  saving: false,
+});

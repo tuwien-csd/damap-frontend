@@ -1,9 +1,9 @@
 .mat-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
 
-  .color-icon{
-    color: #006699
-  }
+.color-icon {
+  color: #006699;
+}

@@ -1,13 +1,16 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {LicenseSelectorDialogComponent, LicenseWizardComponent} from './license-wizard.component';
-import {HarnessLoader} from '@angular/cdk/testing';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {MatDialogModule} from '@angular/material/dialog';
-import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
-import {MatDialogHarness} from '@angular/material/dialog/testing';
-import {TranslateTestingModule} from '../../testing/translate-testing/translate-testing.module';
-import {LicenseFilterPipe} from './license-filter.pipe';
+import {
+  LicenseSelectorDialogComponent,
+  LicenseWizardComponent,
+} from './license-wizard.component';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatDialogHarness } from '@angular/material/dialog/testing';
+import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
+import { LicenseFilterPipe } from './license-filter.pipe';
 
 describe('LicenseWizardComponent', () => {
   let component: LicenseWizardComponent;
@@ -17,7 +20,11 @@ describe('LicenseWizardComponent', () => {
   beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
       imports: [MatDialogModule, NoopAnimationsModule, TranslateTestingModule],
-      declarations: [LicenseWizardComponent, LicenseSelectorDialogComponent, LicenseFilterPipe]
+      declarations: [
+        LicenseWizardComponent,
+        LicenseSelectorDialogComponent,
+        LicenseFilterPipe,
+      ],
     }).compileComponents();
     fixture = TestBed.createComponent(LicenseWizardComponent);
     component = fixture.componentInstance;

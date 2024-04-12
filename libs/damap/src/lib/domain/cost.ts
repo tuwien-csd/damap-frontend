@@ -1,4 +1,4 @@
-import {CostType} from './enum/cost-type.enum';
+import { CostType } from './enum/cost-type.enum';
 
 export interface Cost {
   readonly id: number;
@@ -7,5 +7,5 @@ export interface Cost {
   currencyCode: string; // controlled vocabulary: ISO 4217
   description: string;
   type: CostType;
-  customType: string
+  customType: string;
 }

@@ -14,18 +14,17 @@
     }
   ],
   "compilerOptions": {
-    "target": "es2020",
     "forceConsistentCasingInFileNames": true,
-//    "strict": true, FIXME
+    //    "strict": true, FIXME
     "noImplicitOverride": true,
-//    "noPropertyAccessFromIndexSignature": true, FIXME
+    //    "noPropertyAccessFromIndexSignature": true, FIXME
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-//    "strictTemplates": true FIXME
+    "strictInputAccessModifiers": true
+    //    "strictTemplates": true FIXME
   }
 }

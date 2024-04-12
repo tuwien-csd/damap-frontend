@@ -2,7 +2,7 @@ table {
   width: 100%;
 }
 
-.mat-row:hover {
-  background-color: #E8EAF6;
+.mat-mdc-row:hover {
+  background-color: #e8eaf6;
   cursor: pointer;
 }

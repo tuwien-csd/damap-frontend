@@ -11,7 +11,7 @@
   overflow: auto;
 }
 
-.mat-search-form-field{
+.mat-search-form-field {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -28,5 +28,9 @@ mat-form-field {
 .contributor-warning {
   font-size: 13pt;
   position: relative;
-  top: -10px; 
+  top: -10px;
+}
+
+.mat-card-container {
+  margin: 15px;
 }
