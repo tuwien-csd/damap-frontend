@@ -4,7 +4,11 @@
 <ng-container *ngIf="kind.value === dataKind.SPECIFY">
   <mat-tab-group dynamicHeight>
     <mat-tab label="{{ 'dmp.steps.data.specify.tab.manual' | translate }}">
-      <button mat-raised-button color="primary" (click)="openDatasetDialog()">
+      <button
+        style="margin: 5px"
+        mat-raised-button
+        color="primary"
+        (click)="openDatasetDialog()">
         {{ "dmp.steps.data.specify.button.add.manual" | translate }}
       </button>
     </mat-tab>

@@ -19,7 +19,10 @@
           {{ projectStep.value.end | date: "dd/MMMM/yy" }}
         </p>
         <div>
-          <button mat-icon-button (click)="changeProject(null)">
+          <button
+            style="margin: 5px"
+            mat-icon-button
+            (click)="changeProject(null)">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
@@ -35,7 +38,11 @@
       [selectedProject]="projectStep?.value"
       (projectToSet)="changeProject($event)">
     </app-project-list>
-    <button mat-raised-button color="primary" (click)="changeTab(1)">
+    <button
+      style="margin: 5px"
+      mat-raised-button
+      color="primary"
+      (click)="changeTab(1)">
       {{ "dmp.steps.project.manual.input" | translate }}
     </button>
   </mat-tab>

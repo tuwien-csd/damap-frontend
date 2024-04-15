@@ -5,6 +5,7 @@
 
 .action-buttons {
   padding-bottom: 20px;
+  margin: 5px;
 }
 
 .action-buttons > button {
