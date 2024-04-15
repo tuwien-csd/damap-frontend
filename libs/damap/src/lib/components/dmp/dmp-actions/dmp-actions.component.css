@@ -21,3 +21,10 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.action-button {
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
