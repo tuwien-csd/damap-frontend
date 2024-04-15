@@ -6,7 +6,7 @@ FROM trion/ng-cli:17.1.2 AS deps
 
 # This Dockerfile uses labels from the label-schema namespace from http://label-schema.org/rc1/
 LABEL maintainer="rdmteam@tugraz.at" \
-        org.label-schema.name="DAMAP-backend" \
+        org.label-schema.name="DAMAP-frontend" \
         org.label-schema.description="DAMAP is a tool that aims to facilitate the creation of data management plans (DMPs) for researchers." \
         org.label-schema.usage="https://github.com/tugraz-rdm/damap-frontend/tree/main/README.md" \
         org.label-schema.vendor="Graz University of Technology" \
