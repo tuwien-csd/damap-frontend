@@ -8,10 +8,10 @@ FROM trion/ng-cli:17.1.2 AS deps
 LABEL maintainer="rdmteam@tugraz.at" \
         org.label-schema.name="DAMAP-backend" \
         org.label-schema.description="DAMAP is a tool that aims to facilitate the creation of data management plans (DMPs) for researchers." \
-        org.label-schema.usage="https://github.com/tugraz-rdm/damap-backend-tugraz/tree/main/doc" \
+        org.label-schema.usage="https://github.com/tugraz-rdm/damap-frontend/tree/main/README.md" \
         org.label-schema.vendor="Graz University of Technology" \
-        org.label-schema.url="https://github.com/tugraz-rdm/damap-backend-tugraz" \
-        org.label-schema.vcs-url="https://github.com/tugraz-rdm/damap-backend-tugraz" \
+        org.label-schema.url="https://github.com/tugraz-rdm/damap-frontend" \
+        org.label-schema.vcs-url="https://github.com/tugraz-rdm/damap-frontend" \
         org.label-schema.schema-version="1.0" \
         org.label-schema.docker.cmd="docker run -d -p 8080:8080 damap"        
 
