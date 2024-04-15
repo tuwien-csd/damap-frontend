@@ -6,25 +6,25 @@
         "prefix": "An informed consent for participation (in addition to an informed consent to data processing) is required. For more information, see an ",
         "researchEthicsCoordination": {
           "text": "research ethics coordination",
-          "link": "ethikkommission@tugraz.at"
+          "link": "mailto:ethikkommission@tugraz.at"
         },
         "middle": " or consult your institution's ",
         "researchEthics": {
-          "link": "ethikkommission@tugraz.at"
+          "link": "mailto:ethikkommission@tugraz.at"
         }
       },
       "ethicalIssues": {
         "text": "Your research plan may require ethical review. Inform yourself by consulting your ",
         "researchEthics": {
           "text": "ethikkommission@tugraz.at",
-          "link": "ethikkommission@tugraz.at"
+          "link": "mailto:ethikkommission@tugraz.at"
         }
       },
       "committeeReviewed": {
         "prefix": "Please note that you must address (potential) ethical issues in separate documents according to the requirements of the relevant funding body. The DMP only serves to help identify some ethical issues.\nPlease contact your ",
         "mail": {
           "text": "ethikkommission@tugraz.at",
-          "link": "ethikkommission@tugraz.at"
+          "link": "mailto:ethikkommission@tugraz.at"
         },
         "suffix": " for additional information and support. You must do so if your planned research involves any human participation."
       }
