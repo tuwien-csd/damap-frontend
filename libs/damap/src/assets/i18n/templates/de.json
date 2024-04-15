@@ -80,7 +80,10 @@
           "tab": {
             "manual": "Manuell",
             "upload": "Beispieldaten hochladen",
-            "doi": "DOI eingeben"
+            "doi": "DOI eingeben",
+            "access": "Zugriffsrechte",
+            "storage": "Speicher",
+            "introStorage": "Dieser Schritt hilft dabei zu dokumentieren, wer berechtigt ist die Daten während der Projektlaufzeit zu sehen und zu bearbeiten, sowie passende Speicher- und Backuplösungen zu finden."
           },
           "button": {
             "add": {
@@ -273,6 +276,7 @@
         "heading": "Repositories",
         "search": "Repository suchen",
         "add": "Repository hinzufügen",
+        "use": "Repository nutzen",
         "remove": "Repository entfernen",
         "selected": "Sie haben ausgewählt:",
         "question": {
@@ -588,7 +592,7 @@
     "versionId": "Version",
     "versionName": "Name",
     "versionDate": "Datum",
-    "revisionNumber": "Revision",
+    "editor": "Editor",
     "list": {
       "no.data": "Keine Versionen verfügbar."
     },
@@ -820,7 +824,8 @@
     },
     "exportDmpTemplatetype": {
       "FWF": "FWF",
-      "SCIENCE_EUROPE": "Wissenschaft Europa"
+      "SCIENCE_EUROPE": "Science Europe",
+      "HORIZON_EUROPE": "Horizon Europe"
     }
   },
   "yes": "Ja",

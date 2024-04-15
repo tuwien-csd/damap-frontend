@@ -27,7 +27,8 @@
             "link": "https://www.scienceeurope.org/our-resources/practical-guide-to-the-international-alignment-of-research-data-management"
           }
         },
-        "document": "exportiert einen vorausgefüllten DMP als Word-Dokument, das Sie anpassen und für die Einreichung bei europäischen und nationalen Förderern verwenden können, wie zum Beispiel FWF und FFG",
+        "document": "exportiert einen vorausgefüllten DMP als Word-Dokument, das Sie anpassen und für die Einreichung bei europäischen und nationalen Förderern verwenden können",
+        "supports": "liefert DMPs für FWF Projekte im fördergeberspezifischen Format",
         "benefits": {
           "text": "spart Ihnen Arbeit durch",
           "one": "vorausgefüllten Inhalt mit detaillierten Informationen aus Ihrer CRIS-Anwendung und anderen Systemen",
@@ -43,25 +44,25 @@
           "suffix": "."
         }
       }
-    }
-  },
-  "instructions": {
-    "heading": "Wie erstellt man einen DMP",
-    "steps": {
-      "heading": "Folgen Sie dem Tool durch die Schritte 1-10, um die erforderlichen Informationen zu liefern.",
-      "body": "Sie müssen nicht alle Schritte auf einmal durchführen, speichern Sie einfach den Status und setzen Sie später fort. Sie können jederzeit zurückkehren und zwischen den Schritten wechseln. Sie können sogar Kollegen aus Ihrer Einrichtung einladen, Informationen hinzuzufügen. Wenn Sie möchten, können Sie Ihren DMP versionieren."
     },
-    "export": {
-      "heading": "Exportieren Sie den DMP-Entwurf als Dokument.",
-      "body": "Abhängig vom Geldgeber Ihres Projekts wird der exportierte DMP entweder das DMP-Template des Geldgebers (FWF) oder die DMP-Empfehlungen von Science Europe widerspiegeln. Dies geschieht automatisch bei importierten Projekten."
-    },
-    "finalise": {
-      "heading": "Finalisieren Sie Ihren DMP in einem Texteditor.",
-      "body": "Der exportierte DMP ist ein automatisch erstellter Entwurf, den Sie noch fertigstellen müssen. Wenn Sie die Wahl haben, empfehlen wir die Bearbeitung in Word. Überprüfen Sie den Inhalt sorgfältig und vervollständigen Sie fehlende Informationen, einschließlich der DMP-Version Details auf dem Deckblatt. Wenn Sie fertig sind, können Sie Ihren DMP als PDF speichern und dem Geldgeber zur Verfügung stellen. Bitte beachten Sie, dass Sie Ihre Änderungen nicht zurück in das DMP-Tool übertragen müssen, da das erstellte DMP-Dokument die Grundlage für nachfolgende Versionen ist, nicht das Tool."
-    },
-    "update": {
-      "heading": "Aktualisieren Sie Ihren DMP regelmäßig.",
-      "body": "Ein DMP ist ein lebendes Dokument und es wird empfohlen, es aktuell zu halten - für sich selbst, das Projektteam und den Geldgeber. Die Geldgeber fragen in der Regel bei bestimmten Meilensteinen und am Ende des Projekts nach Aktualisierungen. Änderungen können leicht innerhalb des Dokuments vorgenommen werden, Sie benötigen das Tool nicht für Aktualisierungen. Wenn Sie jedoch Details hinzufügen oder ändern und eine neue Version im DMP-Tool erstellen möchten, zum Beispiel um die maschinenlesbaren Informationen zu aktualisieren, denken Sie daran, den exportierten DMP sorgfältig zu überprüfen und zu vervollständigen, wie oben beschrieben."
+    "instructions": {
+      "heading": "Wie erstellt man einen DMP",
+      "steps": {
+        "heading": "Folgen Sie dem Tool durch die Schritte 1-10, um die erforderlichen Informationen zu liefern.",
+        "body": "Sie müssen nicht alle Schritte auf einmal durchführen, speichern Sie einfach den Status und setzen Sie später fort. Sie können jederzeit zurückkehren und zwischen den Schritten wechseln. Sie können sogar Kollegen aus Ihrer Einrichtung einladen, Informationen hinzuzufügen. Wenn Sie möchten, können Sie Ihren DMP versionieren."
+      },
+      "export": {
+        "heading": "Exportieren Sie den DMP-Entwurf als Dokument.",
+        "body": "Abhängig vom Geldgeber Ihres Projekts wird der exportierte DMP entweder das DMP-Template des Geldgebers (FWF) oder die DMP-Empfehlungen von Science Europe widerspiegeln. Dies geschieht automatisch bei importierten Projekten."
+      },
+      "finalise": {
+        "heading": "Finalisieren Sie Ihren DMP in einem Texteditor.",
+        "body": "Der exportierte DMP ist ein automatisch erstellter Entwurf, den Sie noch fertigstellen müssen. Wenn Sie die Wahl haben, empfehlen wir die Bearbeitung in Word. Überprüfen Sie den Inhalt sorgfältig und vervollständigen Sie fehlende Informationen, einschließlich der DMP-Version Details auf dem Deckblatt. Wenn Sie fertig sind, können Sie Ihren DMP als PDF speichern und dem Geldgeber zur Verfügung stellen. Bitte beachten Sie, dass Sie Ihre Änderungen nicht zurück in das DMP-Tool übertragen müssen, da das erstellte DMP-Dokument die Grundlage für nachfolgende Versionen ist, nicht das Tool."
+      },
+      "update": {
+        "heading": "Aktualisieren Sie Ihren DMP regelmäßig.",
+        "body": "Ein DMP ist ein lebendes Dokument und es wird empfohlen, es aktuell zu halten - für sich selbst, das Projektteam und den Geldgeber. Die Geldgeber fragen in der Regel bei bestimmten Meilensteinen und am Ende des Projekts nach Aktualisierungen. Änderungen können leicht innerhalb des Dokuments vorgenommen werden, Sie benötigen das Tool nicht für Aktualisierungen. Wenn Sie jedoch Details hinzufügen oder ändern und eine neue Version im DMP-Tool erstellen möchten, zum Beispiel um die maschinenlesbaren Informationen zu aktualisieren, denken Sie daran, den exportierten DMP sorgfältig zu überprüfen und zu vervollständigen, wie oben beschrieben."
+      }
     }
   }
 }

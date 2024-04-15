@@ -27,7 +27,8 @@
             "link": "https://www.scienceeurope.org/our-resources/practical-guide-to-the-international-alignment-of-research-data-management"
           }
         },
-        "document": "exports a pre-filled DMP as a Word document that you can customize and use for submission to European and national funders, for example FWF and FFG",
+        "document": "exports a pre-filled DMP as a document that you can customize and use for submission to European and national funders",
+        "supports": "delivers DMPs for FWF projects in the funder-specific format",
         "benefits": {
           "text": "saves you work by",
           "one": "pre-filling content with detailed information from your CRIS application and other systems",
