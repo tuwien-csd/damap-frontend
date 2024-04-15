@@ -5,25 +5,25 @@
         "prefix": "Für die Teilnahme ist eine informierte Einwilligung erforderlich (zusätzlich zur informierten Einwilligung zur Datenverarbeitung). Für weitere Informationen kontaktieren Sie die ",
         "researchEthicsCoordination": {
           "text": "Ethikkommission für Forschungskoordination",
-          "link": "ethikkommission@tugraz.at"
+          "link": "mailto:ethikkommission@tugraz.at"
         },
         "middle": " oder konsultieren Sie: ",
         "researchEthics": {
-          "link": "ethikkommission@tugraz.at"
+          "link": "mailto:ethikkommission@tugraz.at"
         }
       },
       "ethicalIssues": {
         "text": "Ihr Forschungsplan kann eine ethische Überprüfung erfordern. Informieren Sie sich durch Konsultation der",
         "researchEthics": {
           "text": "Ethikkommission",
-          "link": "ethikkommission@tugraz.at"
+          "link": "mailto:ethikkommission@tugraz.at"
         }
       },
       "committeeReviewed": {
         "prefix": "Bitte beachten Sie, dass Sie (potenzielle) ethische Fragen gemäß den Anforderungen des relevanten Fördergebers in separaten Dokumenten behandeln müssen. Das DMP dient nur dazu, einige ethische Fragen zu identifizieren.\nBitte kontaktieren Sie Ihren zuständigen Ethikkoordinator unter ",
         "mail": {
           "text": "ethikkommission@tugraz.at",
-          "link": "ethikkommission@tugraz.at"
+          "link": "mailto:ethikkommission@tugraz.at"
         },
         "suffix": ", um weitere Informationen und Unterstützung zu erhalten. Sie müssen dies tun, wenn Ihre geplante Forschung eine menschliche Teilnahme beinhaltet."
       }

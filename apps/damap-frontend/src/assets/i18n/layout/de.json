@@ -13,7 +13,7 @@
     "version": "Version",
     "logo": {
       "text": "Zurück zur Hauptseite",
-      "link": "https://www.damap.org"
+      "link": "/"
     },
     "dataprotection": {
       "text": "Datenschutzerklärung",
