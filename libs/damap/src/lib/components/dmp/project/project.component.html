@@ -20,7 +20,7 @@
         </p>
         <div>
           <button
-            style="margin: 5px"
+            class="button-position"
             mat-icon-button
             (click)="changeProject(null)">
             <mat-icon>delete</mat-icon>
@@ -39,7 +39,7 @@
       (projectToSet)="changeProject($event)">
     </app-project-list>
     <button
-      style="margin: 5px"
+      class="button-position"
       mat-raised-button
       color="primary"
       (click)="changeTab(1)">
