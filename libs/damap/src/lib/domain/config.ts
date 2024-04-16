@@ -7,4 +7,5 @@ export interface Config {
   readonly authUser: string;
   readonly env: string;
   readonly personSearchServiceConfigs: ServiceConfig[];
+  readonly fitsServiceAvailable: boolean;
 }

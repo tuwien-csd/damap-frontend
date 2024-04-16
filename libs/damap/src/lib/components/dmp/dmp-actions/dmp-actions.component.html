@@ -3,6 +3,7 @@
   <app-save-status [saved]="!formChanged"></app-save-status>
   <div id="save-dmp">
     <button
+      class="action-button"
       mat-button
       color="primary"
       [routerLink]="'/plans'"
@@ -11,6 +12,7 @@
       {{ "button.discard" | translate }}
     </button>
     <button
+      class="action-button"
       mat-raised-button
       color="primary"
       (click)="saveDmp()"
@@ -18,6 +20,7 @@
       {{ "button.save" | translate }}
     </button>
     <button
+      class="action-button"
       mat-raised-button
       color="primary"
       (click)="saveDmpVersion()"
@@ -25,6 +28,7 @@
       {{ "button.version" | translate }}
     </button>
     <button
+      class="action-button"
       mat-raised-button
       color="primary"
       (click)="exportDmpTemplate()"

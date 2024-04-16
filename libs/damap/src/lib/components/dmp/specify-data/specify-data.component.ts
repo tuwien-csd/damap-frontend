@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractBaseDataComponent } from './abstract-base-data.component';
 import { UntypedFormControl } from '@angular/forms';
+import { Config } from '../../../domain/config';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dmp-specify-data',
@@ -9,6 +11,7 @@ import { UntypedFormControl } from '@angular/forms';
 })
 export class SpecifyDataComponent extends AbstractBaseDataComponent {
   @Input() fileUpload: { file: File; progress: number; finalized: boolean }[];
+  @Input() config$: Observable<Config>;
 
   @Output() fileToAnalyse = new EventEmitter<File>();
   @Output() uploadToCancel = new EventEmitter<number>();
