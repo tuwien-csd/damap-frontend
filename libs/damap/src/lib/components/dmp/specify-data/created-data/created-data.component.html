@@ -4,11 +4,17 @@
 <ng-container *ngIf="kind.value === dataKind.SPECIFY">
   <mat-tab-group dynamicHeight>
     <mat-tab label="{{ 'dmp.steps.data.specify.tab.manual' | translate }}">
-      <button mat-raised-button color="primary" (click)="openDatasetDialog()">
+      <button
+        class="button-position"
+        mat-raised-button
+        color="primary"
+        (click)="openDatasetDialog()">
         {{ "dmp.steps.data.specify.button.add.manual" | translate }}
       </button>
     </mat-tab>
-    <mat-tab label="{{ 'dmp.steps.data.specify.tab.upload' | translate }}">
+    <mat-tab
+      *ngIf="fitsServiceAvailable"
+      label="{{ 'dmp.steps.data.specify.tab.upload' | translate }}">
       <app-file-upload
         [fileUpload]="fileUpload"
         (fileToUpload)="analyseFile($event)"

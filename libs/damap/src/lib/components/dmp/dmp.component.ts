@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
   UntypedFormArray,
@@ -27,6 +27,7 @@ import { LoggerService } from '../../services/logger.service';
 import { MatStepper } from '@angular/material/stepper';
 import { Project } from '../../domain/project';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { Config } from '../../domain/config';
 
 @Component({
   selector: 'app-dmp',
@@ -34,6 +35,8 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
   styleUrls: ['./dmp.component.css'],
 })
 export class DmpComponent implements OnInit, OnDestroy {
+  config$: Observable<Config> = new Observable<Config>();
+
   get username(): string {
     return this.auth.getUsername();
   }
@@ -80,6 +83,7 @@ export class DmpComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.config$ = this.backendService.loadServiceConfig();
     this.getDmpById();
 
     this.dmpForm.valueChanges.subscribe(value => {
