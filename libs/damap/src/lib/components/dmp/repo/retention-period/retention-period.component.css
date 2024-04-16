@@ -5,5 +5,5 @@
 }
 
 .color-icon {
-  color: #006699;
+  color: var(--main-color);
 }
