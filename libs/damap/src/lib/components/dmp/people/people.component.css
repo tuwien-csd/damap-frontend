@@ -24,3 +24,7 @@ mat-form-field {
   width: 100%;
   top: -0.4rem;
 }
+
+.mat-card-container {
+  margin: 15px;
+}

@@ -6,12 +6,13 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { Project } from '../../../../domain/project';
 import {
   UntypedFormControl,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+
+import { Project } from '../../../../domain/project';
 
 @Component({
   selector: 'app-manual-project-input',
