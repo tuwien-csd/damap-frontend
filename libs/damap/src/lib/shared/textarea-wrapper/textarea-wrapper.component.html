@@ -1,7 +1,9 @@
-<mat-form-field [appearance]="appearance" [class.custom-style]="applyCustomStyle">
+<mat-form-field
+  [appearance]="appearance"
+  [class.custom-style]="applyCustomStyle">
   <mat-label class="wrap-label">
     {{ label | translate }}
-   </mat-label>
+  </mat-label>
 
   <ng-template #standard>
     <textarea
@@ -14,7 +16,9 @@
       rows="4"
       #message>
     </textarea>
-    <mat-hint align="end">{{ message.value.length }} / {{ maxLength }}</mat-hint>
+    <mat-hint align="end"
+      >{{ message.value.length }} / {{ maxLength }}</mat-hint
+    >
   </ng-template>
 
   <!-- AUTOCOMPLETE -->
@@ -28,10 +32,14 @@
       [required]="required"
       rows="4"
       #message></textarea>
-    <mat-hint align="end">{{ message.value.length }} / {{ maxLength }}</mat-hint>
+    <mat-hint align="end"
+      >{{ message.value.length }} / {{ maxLength }}</mat-hint
+    >
 
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of autocompleteOptions" [value]="option | translate">
+      <mat-option
+        *ngFor="let option of autocompleteOptions"
+        value="{{ option | translate }}">
         {{ option | translate }}
       </mat-option>
     </mat-autocomplete>
@@ -45,7 +53,10 @@
     {{ "form.error.required" | translate }}
   </mat-error>
   <mat-error *ngIf="control?.errors?.maxlength">
-    {{ "form.error.maxlength" | translate: { value: control.errors.maxlength?.requiredLength } }}
+    {{
+      "form.error.maxlength"
+        | translate: { value: control.errors.maxlength?.requiredLength }
+    }}
   </mat-error>
   <mat-error *ngIf="control?.errors?.pattern">
     {{ "form.error.pattern.currency" | translate }}

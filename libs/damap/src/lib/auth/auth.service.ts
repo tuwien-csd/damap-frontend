@@ -27,7 +27,7 @@ export class AuthService {
   isAdmin(): boolean {
     const parts: string[] = this.oAuthService.getAccessToken().split('.');
     const tokenBody: any = JSON.parse('' + window.atob(parts[1]));
-    return tokenBody.realm_access?.roles?.includes('DMP Tool Admin');
+    return tokenBody.realm_access?.roles?.includes('Damap Admin');
   }
 
   logout() {

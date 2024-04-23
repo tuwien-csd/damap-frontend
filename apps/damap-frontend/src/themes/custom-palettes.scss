@@ -3,22 +3,21 @@
 $light-primary-text: white;
 $dark-primary-text: rgba(black, 0.87);
 
-
 $custom-primary-color: (
-  50: #ffd9c2,  
-  100: #ffcaa0, 
-  200: #ffbb7f, 
-  300: #ffac5d, 
-  400: #ff9e4c, 
-  500: #ff7f45, 
-  600: #e6713d, 
-  700: #cc6335, 
-  800: #b3552d, 
-  900: #993d20, 
-  A100: #ffcaa0, 
-  A200: #ffac5d, 
-  A400: #cc6335, 
-  A700: #993d20, 
+  50: #ffd9c2,
+  100: #ffcaa0,
+  200: #ffbb7f,
+  300: #ffac5d,
+  400: #ff9e4c,
+  500: #ff7f45,
+  600: #e6713d,
+  700: #cc6335,
+  800: #b3552d,
+  900: #993d20,
+  A100: #ffcaa0,
+  A200: #ffac5d,
+  A400: #cc6335,
+  A700: #993d20,
   contrast: (
     50: $dark-primary-text,
     100: $dark-primary-text,
@@ -34,7 +33,7 @@ $custom-primary-color: (
     A200: $dark-primary-text,
     A400: $light-primary-text,
     A700: $light-primary-text,
-),
+  ),
 );
 $custom-accent-color: (
   50: #e7e7e7,
