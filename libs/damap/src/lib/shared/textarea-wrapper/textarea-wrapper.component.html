@@ -1,7 +1,7 @@
-<mat-form-field
-  [appearance]="appearance"
-  [class.custom-style]="applyCustomStyle">
-  <mat-label class="wrap-label">{{ label | translate }}</mat-label>
+<mat-form-field [appearance]="appearance" [class.custom-style]="applyCustomStyle">
+  <mat-label class="wrap-label">
+    {{ label | translate }}
+   </mat-label>
 
   <ng-template #standard>
     <textarea
@@ -14,9 +14,7 @@
       rows="4"
       #message>
     </textarea>
-    <mat-hint align="end"
-      >{{ message.value.length }} / {{ maxLength }}</mat-hint
-    >
+    <mat-hint align="end">{{ message.value.length }} / {{ maxLength }}</mat-hint>
   </ng-template>
 
   <!-- AUTOCOMPLETE -->
@@ -30,20 +28,16 @@
       [required]="required"
       rows="4"
       #message></textarea>
-    <mat-hint align="end"
-      >{{ message.value.length }} / {{ maxLength }}</mat-hint
-    >
+    <mat-hint align="end">{{ message.value.length }} / {{ maxLength }}</mat-hint>
 
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option
-        *ngFor="let option of autocompleteOptions"
-        value="{{ option | translate }}">
+      <mat-option *ngFor="let option of autocompleteOptions" [value]="option | translate">
         {{ option | translate }}
       </mat-option>
     </mat-autocomplete>
   </ng-container>
 
-  <!-- ERROR -->
+  <!-- ERROR MESSAGES -->
   <mat-error *ngIf="!control?.errors?.required && control?.errors?.empty">
     {{ "form.error.empty" | translate }}
   </mat-error>
@@ -51,17 +45,9 @@
     {{ "form.error.required" | translate }}
   </mat-error>
   <mat-error *ngIf="control?.errors?.maxlength">
-    {{
-      "form.error.maxlength"
-        | translate: { value: control.errors.maxlength?.requiredLength }
-    }}
-    <!-- "maxlength": { "requiredLength": 255, "actualLength": 273 } -->
+    {{ "form.error.maxlength" | translate: { value: control.errors.maxlength?.requiredLength } }}
   </mat-error>
   <mat-error *ngIf="control?.errors?.pattern">
     {{ "form.error.pattern.currency" | translate }}
-
-    <!-- { "pattern": { "requiredPattern": "^[0-9]*.?[0-9]{0,2}$", "actualValue": "123,345" } } false -->
   </mat-error>
 </mat-form-field>
-<!--{{control.errors | json}}-->
-<!--{{control.valid}}-->

@@ -1,1 +1,74 @@
-{}
+{
+  "dashboard": {
+    "welcome.message": "Willkommen beim DMP Tool, einem Dienst, der Ihnen hilft, den Datenmanagementplan (DMP) für Ihr Projekt zu erstellen.",
+    "dmp": {
+      "heading": "Was ist ein Datenmanagementplan (DMP)?",
+      "text": {
+        "prefix": "Ein Datenmanagementplan (DMP) übersetzt datenbezogene Aspekte von ",
+        "dmp": {
+          "text": "DMP",
+          "link": "https://www.tuwien.at/en/research/rti-support/research-data/rdm-infos-tips/dmp"
+        },
+        "gsp": {
+          "text": "Guter Wissenschaftlicher Praxis ",
+          "link": "https://idp.medunigraz.at/idp/profile/SAML2/Redirect/SSO?execution=e1s1",
+          "body": "(GWP) sowie allgemeine Konzepte von "
+        },
+        "openScience": {
+          "title": "Offene Wissenschaft",
+          "link": "https://www.fosteropenscience.eu/resources",
+          "body": "und unserer institutionellen "
+        },
+        "rdmPolicy": {
+          "title": "RDM-Richtlinie",
+          "link": "https://muniverse.medunigraz.at/uploads/rl_research_data_mgmt_policy_3ac6a2cb94.pdf",
+          "body": "in Handlungen um. Es ist ein lebendiges Dokument, das beschreibt, wie Ihre Forschungsdaten erstellt, verwaltet, analysiert, gespeichert oder - falls eine Weitergabe nicht möglich ist - jegliche Zugriffsbeschränkungen gerechtfertigt werden."
+        },
+        "rdm": {
+          "prefix": "Ein DMP ist Ihr wesentliches Werkzeug für nachhaltiges ",
+          "title": "Forschungsdatenmanagement ",
+          "link": "https://idp.medunigraz.at/idp/profile/SAML2/Redirect/SSO?execution=e4s1",
+          "body": "und hilft bei der Planung Ihres Forschungsprozesses, um sicherzustellen, dass Ihre Forschungsdaten ordnungsgemäß strukturiert und dokumentiert sind und während und nach dem Ende Ihres Projekts auffindbar, zugänglich, interoperabel und wiederverwendbar (d.h. FAIR) sind."
+        },
+        "middle": " ist ein strukturiertes Dokument, das Aufzeichnungen darüber führt, welche Forschungsdaten erstellt werden und was während und nach einem Projekt mit diesen Daten geschieht. Es hilft bei der Planung des Forschungsprozesses, bei der Verwaltung Ihrer Daten gemäß den ",
+        "fairprinciples": {
+          "text": "FAIR-Prinzipien",
+          "link": "https://www.go-fair.org/fair-principles/"
+        },
+        "suffix": ", und definiert Rechte und Pflichten in einem Forschungsprojekt mit mehreren Forschenden oder Institutionen."
+      }
+    },
+    "instructions": {
+      "heading": "Wie man einen DMP erstellt",
+      "steps": {
+        "heading": "Folgen Sie dem Tool durch die Schritte 1-10, um die erforderlichen Informationen bereitzustellen.",
+        "body": "Sie müssen nicht alle Schritte auf einmal machen, speichern Sie einfach den Status und setzen Sie später fort. Sie können jederzeit zurückgehen und zwischen den Schritten springen. Sie können auch Kollegen aus Ihrer Institution einladen, Informationen hinzuzufügen. Wenn Sie möchten, können Sie Ihren DMP versionieren.",
+        "body1": "Wenn Sie das Datenmanagement für Ihr Projekt planen, stellen Sie sicher, dass Sie mit unseren institutionellen Richtlinien und Verfahren sowie mit nationalen und internationalen Standards, Richtlinien und Anforderungen vertraut sind und entsprechend handeln! Hier finden Sie relevante Richtlinien und Standards."
+      },
+      "export": {
+        "heading": "Exportieren Sie den DMP-Entwurf als Dokument.",
+        "body": "Abhängig vom Förderer Ihres Projekts spiegelt der exportierte DMP entweder die DMP-Vorlage des Förderers (FWF) oder die DMP-Empfehlungen von Science Europe wider. Dies geschieht automatisch für importierte Projekte."
+      },
+      "finalise": {
+        "heading": "Finalisieren Sie Ihren DMP in einem Texteditor.",
+        "body": "Der exportierte DMP ist ein automatisch erstellter Entwurf, zu dem Sie noch den letzten Schliff hinzufügen müssen. Wenn Sie die Wahl haben, empfehlen wir die Bearbeitung in Word. Überprüfen Sie den Inhalt sorgfältig und vervollständigen Sie fehlende Informationen, einschließlich der DMP-Versiondetails auf dem Deckblatt. Wenn Sie fertig sind, können Sie Ihren DMP als PDF speichern und dem Förderer vorlegen. Bitte beachten Sie, dass Sie Ihre Änderungen nicht zurück in das DMP-Tool übertragen müssen, da das erstellte DMP-Dokument die Grundlage für nachfolgende Versionen bildet, nicht das Tool."
+      },
+      "update": {
+        "heading": "Aktualisieren Sie Ihren DMP regelmäßig.",
+        "body": "Ein DMP ist ein lebendiges Dokument und es wird empfohlen, ihn aktuell zu halten – für Sie selbst, das Projektteam und den Förderer. Die Förderer fordern normalerweise Updates zu bestimmten Meilensteinen und am Ende des Projekts. Änderungen können leicht innerhalb des Dokuments vorgenommen werden, Sie benötigen dafür nicht das Tool. Dennoch, wenn Sie Details hinzufügen oder ändern und eine neue Version im DMP-Tool erstellen möchten, zum Beispiel um die maschinenverarbeitbaren Informationen zu aktualisieren, denken Sie daran, den exportierten DMP wie oben beschrieben sorgfältig zu überprüfen und zu vervollständigen."
+      }
+    },
+    "help": {
+      "heading": "Weitere Hilfe?",
+      "prefix": "In",
+      "MUni": {
+        "title": "MUniverse ",
+        "link": "https://idp.medunigraz.at/idp/profile/SAML2/Redirect/SSO?execution=e5s1"
+      },
+      "body": "finden Sie weitere Hilfe zur Erstellung Ihres DMP. Hier finden Sie ein 30-minütiges DMP-Tutorial, unsere Schnellhilfe zur Erstellung eines FWF-DMP, öffentliche Beispiel-DMPs sowie Informationen zu DMP-Schulungen. Wenn Sie Feedback zu Ihrem DMP wünschen oder weitere Fragen haben, schreiben Sie bitte eine E-Mail an",
+      "endPrefix": {
+        "title": "rdmsupport@medunigraz.at"
+      }
+    }
+  }
+}
