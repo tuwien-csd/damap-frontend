@@ -22,52 +22,41 @@
       <h2 translate>dashboard.dmp.heading</h2>
       <p>
         {{ "dashboard.dmp.text.prefix" | translate }}
-        <a [href]="'dashboard.dmp.text.dmp.link' | translate" target="_blank">
-          {{ "dashboard.dmp.text.dmp.text" | translate }}</a
-        >{{ "dashboard.dmp.text.middle" | translate }}
+        <a [href]="'dashboard.dmp.text.gsp.link' | translate" target="_blank">
+          {{ "dashboard.dmp.text.gsp.text" | translate }}</a
+        >{{ "dashboard.dmp.text.gsp.body" | translate }}
         <a
           [href]="'dashboard.dmp.text.fairprinciples.link' | translate"
           target="_blank">
-          {{ "dashboard.dmp.text.fairprinciples.text" | translate }}</a
-        >{{ "dashboard.dmp.text.suffix" | translate }}
+          {{ "dashboard.dmp.text.openScience.title" | translate }}</a
+        >{{ "dashboard.dmp.text.openScience.body" | translate }}
+
+        <a
+          [href]="'dashboard.dmp.text.rdmPolicy.link' | translate"
+          target="_blank">
+          {{ "dashboard.dmp.text.rdmPolicy.title" | translate }}</a
+        >{{ "dashboard.dmp.text.rdmPolicy.body" | translate }}
+
+        {{ "dashboard.dmp.text.rdm.prefix" | translate }}
+        <a [href]="'dashboard.dmp.text.rdm.link' | translate" target="_blank">
+          {{ "dashboard.dmp.text.rdm.title" | translate }}</a
+        >{{ "dashboard.dmp.text.rdm.body" | translate }}
       </p>
-    </section>
-    <section>
-      <h2 translate>dashboard.tool.heading</h2>
-      <ul>
-        <li>
-          {{ "dashboard.tool.bulletpoints.dmp.text" | translate }}
-          <a
-            [href]="'dashboard.tool.bulletpoints.dmp.sepg.link' | translate"
-            target="_blank">
-            {{ "dashboard.tool.bulletpoints.dmp.sepg.text" | translate }}</a
-          >
-        </li>
-        <li translate>dashboard.tool.bulletpoints.document</li>
-        <li translate>dashboard.tool.bulletpoints.supports</li>
-        <li translate>
-          dashboard.tool.bulletpoints.benefits.text
-          <ul>
-            <li translate>dashboard.tool.bulletpoints.benefits.one</li>
-            <li translate>dashboard.tool.bulletpoints.benefits.two</li>
-            <li translate>dashboard.tool.bulletpoints.benefits.three</li>
-          </ul>
-        </li>
-        <li>
-          {{ "dashboard.tool.bulletpoints.madmp.prefix" | translate }}
-          <a
-            [href]="'dashboard.tool.bulletpoints.madmp.rda.link' | translate"
-            target="_blank">
-            {{ "dashboard.tool.bulletpoints.madmp.rda.text" | translate }}</a
-          >{{ "dashboard.tool.bulletpoints.madmp.suffix" | translate }}
-        </li>
-      </ul>
     </section>
     <section>
       <h2 translate>dashboard.instructions.heading</h2>
       <ol>
         <u><li translate>dashboard.instructions.steps.heading</li></u>
         <p translate>dashboard.instructions.steps.body</p>
+        <p>
+          {{ "dashboard.instructions.steps.text.prefix" | translate }}
+          <a
+            [href]="'dashboard.instructions.steps.text.link' | translate"
+            target="_blank">
+            {{ "dashboard.instructions.steps.text.title" | translate }}</a
+          >
+          {{ "dashboard.instructions.steps.text.endPrefix" | translate }}
+        </p>
         <u><li translate>dashboard.instructions.export.heading</li></u>
         <p translate>dashboard.instructions.export.body</p>
         <u><li translate>dashboard.instructions.finalise.heading</li></u>
@@ -75,6 +64,21 @@
         <u><li translate>dashboard.instructions.update.heading</li></u>
         <p translate>dashboard.instructions.update.body</p>
       </ol>
+    </section>
+    <section>
+      <h2 translate>dashboard.help.heading</h2>
+      <p>
+        {{ "dashboard.help.prefix" | translate }}
+        <a [href]="'dashboard.help.MUni.link' | translate" target="_blank">
+          {{ "dashboard.help.MUni.title" | translate }}</a
+        >
+        {{ "dashboard.help.body" | translate }}
+        <a
+          [href]="'mailto:' + ('dashboard.help.endPrefix.title' | translate)"
+          target="_blank">
+          {{ "dashboard.help.endPrefix.title" | translate }}
+        </a>
+      </p>
     </section>
   </section>
 </div>

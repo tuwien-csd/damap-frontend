@@ -1,13 +1,34 @@
 {
   "dashboard": {
-    "welcome.message": "Welcome to DAMAP, a service that helps you to create the Data Management Plan (DMP) for your project.",
+    "welcome.message": "Welcome to DMP Tool, a service that helps you to create the Data Management Plan (DMP) for your project.",
     "dmp": {
-      "heading": "What is a DMP?",
+      "heading": "What is a Data Management Plan (DMP)?",
       "text": {
-        "prefix": "A ",
+        "prefix": "A data managment plan (DMP) translates data aspects of ",
         "dmp": {
           "text": "DMP",
           "link": "https://www.tuwien.at/en/research/rti-support/research-data/rdm-infos-tips/dmp"
+        },
+        "gsp": {
+          "text": "Good Scientific Practice",
+          "link": "https://muniverse.medunigraz.at/page/227",
+          "body": " (GSP) as well as general concepts of "
+        },
+        "openScience": {
+          "title": "Open Science",
+          "link": "https://www.fosteropenscience.eu/resources",
+          "body": " and our institutional "
+        },
+        "rdmPolicy": {
+          "title": "RDM-Policy",
+          "link": "https://muniverse.medunigraz.at/uploads/rl_research_data_mgmt_policy_3ac6a2cb94.pdf",
+          "body": " into actions. It's a living document that describes how your research data will be created, managed, analyzed, stored with others or - if sharing is not possible - justifying any access restrictions that have to be applied."
+        },
+        "rdm": {
+          "prefix": "A DMP is your essential tool for sustainable ",
+          "title": "Research Data Management",
+          "link": "https://muniverse.medunigraz.at/forschung/forschungsdatenmanagement",
+          "body": " and helps with planning your research process to ensure that your research data is properly structured and documented and will be finable, accessible, interoperable and reusable (i.e. FAIR) during and after end of your project."
         },
         "middle": " is a structured document that keeps record of what research data is created and what happens to that data during and after a project. It helps with planning the research process, managing your data in accordance with the ",
         "fairprinciples": {
@@ -17,39 +38,17 @@
         "suffix": ", and defining rights and responsibilities in a research project involving several researchers or institutions."
       }
     },
-    "tool": {
-      "heading": "DAMAP",
-      "bulletpoints": {
-        "dmp": {
-          "text": "guides you step by step through the different sections of a DMP following the ",
-          "sepg": {
-            "text": "Science Europe Practical Guide",
-            "link": "https://www.scienceeurope.org/our-resources/practical-guide-to-the-international-alignment-of-research-data-management"
-          }
-        },
-        "document": "exports a pre-filled DMP as a document that you can customize and use for submission to European and national funders",
-        "supports": "delivers DMPs for FWF projects in the funder-specific format",
-        "benefits": {
-          "text": "saves you work by",
-          "one": "pre-filling content with detailed information from your CRIS application and other systems",
-          "two": "providing wizards, guidance, and item lists to choose from",
-          "three": "suggesting answers that you can either comply with or adjust to your needs"
-        },
-        "madmp": {
-          "prefix": "is compatible with the",
-          "rda": {
-            "text": "RDA recommendation on machine actionable DMPs",
-            "link": "https://doi.org/10.15497/rda00039"
-          },
-          "suffix": "."
-        }
-      }
-    },
     "instructions": {
       "heading": "How to create a DMP",
       "steps": {
         "heading": "Follow the tool through steps 1-10 to provide the required information.",
-        "body": "You do not have to do all steps in one go, simply save the status and continue later. You can always go back and jump between steps. You may even invite colleagues from your institution to add information. If you wish, you can version your DMP."
+        "body": "You do not have to do all steps in one go, simply save the status and continue later. You can always go back and jump between steps. You may even invite colleagues from your institution to add information. If you wish, you can version your DMP.",
+        "text": {
+          "prefix": "When planning the data management for your project make sure that you are familiar with our insitu onal policies and procedures as well as na onal and interna onal standards, policies and requirements and that you act accordingly! ",
+          "link": "https://muniverse.medunigraz.at/forschung/forschungsdatenmanagement/richtlinien",
+          "title": "Here",
+          "endPrefix": "you will find relevant policies and standards."
+        }
       },
       "export": {
         "heading": "Export the DMP draft as a document.",
@@ -62,6 +61,18 @@
       "update": {
         "heading": "Regularly update your DMP.",
         "body": "A DMP is a living document and it is recommended to keep it up to date – for yourself, the project team, and the funder. The funders usually ask for updates at certain milestones and at the end of the project. Any changes can easily be done within the document, you do not need the tool for updates. Nevertheless, if you wish to add or change details and create a new version in the DMP tool, for example to update the machine-actionable information, remember to carefully check and complete the exported DMP as described above."
+      }
+    },
+    "help": {
+      "heading": "Further help?",
+      "prefix": "In",
+      "MUni": {
+        "title": "MUniverse",
+        "link": "https://muniverse.medunigraz.at/forschung/forschungsdatenmanagement/dm-plan"
+      },
+      "body": "you will find further help for your DMP creation. You will find a 30 minute DMP tutorial, our quick help for creating a FWF-DMP, public example DMPs as well as information regarding DMP training courses. If you would like feedback on your DMP or if you have further questions please write an email to",
+      "endPrefix": {
+        "title": "rdmsupport@medunigraz.at"
       }
     }
   }

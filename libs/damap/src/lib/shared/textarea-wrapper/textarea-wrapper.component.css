@@ -7,10 +7,6 @@ mat-form-field {
 }
 
 .custom-style ::ng-deep .mat-mdc-text-field-wrapper {
-  background-color: var(--main-color);
-  background-image: linear-gradient(
-    rgba(255, 255, 255, 0.9),
-    rgba(255, 255, 255, 0.9)
-  );
+  background-color: var(--info-bg);
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
 }

@@ -1,4 +1,4 @@
-# Theming in Damap
+# Theming in DMP Tool
 
 ## Custom theme
 
