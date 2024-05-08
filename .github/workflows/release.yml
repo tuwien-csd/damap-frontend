@@ -8,6 +8,8 @@ on:
     branches:
       - master
       - next
+    tags:
+      - v*
   workflow_dispatch:
 
 permissions:
