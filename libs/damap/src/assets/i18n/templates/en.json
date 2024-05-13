@@ -103,7 +103,7 @@
               "comment": "Comment",
               "actions": "Actions",
               "description": "Description",
-              "pid": "PID"
+              "source": "Source"
             }
           },
           "dialog": {
