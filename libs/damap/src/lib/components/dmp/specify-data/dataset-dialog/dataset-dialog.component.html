@@ -55,18 +55,6 @@
     *ngIf="dataset.controls.source.value === datasetSource.REUSED">
     <mat-form-field>
       <mat-label>{{
-        "dmp.steps.data.specify.dialog.identifier" | translate
-      }}</mat-label>
-      <mat-select [(ngModel)]="datasetId.type">
-        <mat-option
-          *ngFor="let id of identifierTypeReusedData | keyvalue: originalOrder"
-          [value]="id.key">
-          {{ id.key }}<br />
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>{{
         "dmp.steps.data.specify.dialog.source" | translate
       }}</mat-label>
       <input matInput [(ngModel)]="datasetId.identifier" maxlength="255" />
