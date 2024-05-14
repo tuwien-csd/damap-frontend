@@ -12,6 +12,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
 import { StepIntroComponent } from '../../../widgets/step-intro/step-intro.component';
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('CostsComponent', () => {
   let component: CostsComponent;
@@ -26,6 +27,7 @@ describe('CostsComponent', () => {
         MatIconModule,
         TranslateTestingModule,
       ],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [CostsComponent, StepIntroComponent],
     }).compileComponents();
   });

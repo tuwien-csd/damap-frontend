@@ -11,6 +11,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatDialogHarness } from '@angular/material/dialog/testing';
 import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
 import { LicenseFilterPipe } from './license-filter.pipe';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('LicenseWizardComponent', () => {
   let component: LicenseWizardComponent;
@@ -20,6 +21,7 @@ describe('LicenseWizardComponent', () => {
   beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
       imports: [MatDialogModule, NoopAnimationsModule, TranslateTestingModule],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [
         LicenseWizardComponent,
         LicenseSelectorDialogComponent,

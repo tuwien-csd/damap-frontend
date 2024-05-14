@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { IdentifierType } from '../../../../domain/enum/identifier-type.enum';
 import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('DatasetDialogComponent', () => {
   let component: DatasetDialogComponent;
@@ -53,6 +54,7 @@ describe('DatasetDialogComponent', () => {
         TranslateTestingModule,
         NoopAnimationsModule,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [DatasetDialogComponent],
       providers: [
         { provide: MatDialogRef, useValue: { close: (value?: any) => value } },

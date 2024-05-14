@@ -29,6 +29,7 @@ import { TranslateTestingModule } from '../../../testing/translate-testing/trans
 import { mockContributorSearchResult } from '../../../mocks/search';
 import { BehaviorSubject, of } from 'rxjs';
 import { Config } from '../../../domain/config';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('PeopleComponent', () => {
   let component: PeopleComponent;
@@ -53,6 +54,7 @@ describe('PeopleComponent', () => {
         MatSelectModule,
         NoopAnimationsModule,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [PeopleComponent, ContributorFilterPipe],
       providers: [{ provide: BackendService, useValue: backendSpy }],
     }).compileComponents();

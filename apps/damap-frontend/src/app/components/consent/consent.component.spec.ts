@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateTestingModule } from '@damap/core';
 import { ConsentComponent } from './consent.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ConsentComponent', () => {
   let component: ConsentComponent;
@@ -10,6 +11,7 @@ describe('ConsentComponent', () => {
     await TestBed.configureTestingModule({
       imports: [TranslateTestingModule],
       declarations: [ConsentComponent],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 

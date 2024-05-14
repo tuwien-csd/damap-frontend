@@ -24,6 +24,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
 import { mockProject } from '../../../../mocks/project-mocks';
 import { of } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ProjectListComponent', () => {
   let component: ProjectListComponent;
@@ -53,6 +54,7 @@ describe('ProjectListComponent', () => {
         MatListModule,
         NoopAnimationsModule,
       ],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [ProjectListComponent],
       providers: [{ provide: BackendService, useValue: backendSpy }],
     }).compileComponents();

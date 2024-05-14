@@ -11,6 +11,7 @@ import { Config } from '../../../../domain/config';
 import { configMockData } from '../../../../mocks/config-service-mocks';
 import { By } from '@angular/platform-browser';
 import { FileUploadComponent } from '../../../../widgets/file-upload/file-upload.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('CreatedDataComponent', () => {
   let component: CreatedDataComponent;
@@ -19,6 +20,7 @@ describe('CreatedDataComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MatDialogModule, TranslateTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [CreatedDataComponent, DatasetDialogComponent],
     }).compileComponents();
   });

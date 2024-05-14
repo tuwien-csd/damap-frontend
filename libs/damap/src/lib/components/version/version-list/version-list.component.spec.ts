@@ -8,6 +8,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { selectDmpById } from '../../../store/selectors/dmp.selectors';
 import { completeDmp } from '../../../mocks/dmp-mocks';
 import { AuthService } from '../../../auth/auth.service';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('VersionListComponent', () => {
   let component: VersionListComponent;
@@ -24,6 +25,7 @@ describe('VersionListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, TranslateTestingModule],
       declarations: [VersionListComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [
         { provide: AuthService, useValue: authSpy },
         { provide: BackendService, useValue: backendSpy },

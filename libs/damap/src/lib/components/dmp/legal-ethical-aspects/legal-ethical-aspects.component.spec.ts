@@ -9,6 +9,7 @@ import {
 import { MatRadioModule } from '@angular/material/radio';
 import { StepIntroComponent } from '../../../widgets/step-intro/step-intro.component';
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('LegalEthicalAspectsComponent', () => {
   let component: LegalEthicalAspectsComponent;
@@ -17,6 +18,7 @@ describe('LegalEthicalAspectsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, MatRadioModule, TranslateTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [LegalEthicalAspectsComponent, StepIntroComponent],
     }).compileComponents();
   });

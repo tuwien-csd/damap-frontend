@@ -20,6 +20,7 @@ import { of, Subject } from 'rxjs';
 import { mockContributor1 } from '../../mocks/contributor-mocks';
 import { configMockData } from '../../mocks/config-service-mocks';
 import { Config } from '../../domain/config';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('DmpComponent', () => {
   let component: DmpComponent;
@@ -62,6 +63,7 @@ describe('DmpComponent', () => {
         FormTestingModule,
       ],
       declarations: [DmpComponent],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: AuthService, useValue: authSpy },
         provideMockStore({ initialState }),

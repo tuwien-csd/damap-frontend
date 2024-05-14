@@ -6,6 +6,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { restrictedDatasetMock } from '../../../../mocks/dataset-mocks';
 import { of } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ReusedDataComponent', () => {
   let component: ReusedDataComponent;
@@ -17,6 +18,7 @@ describe('ReusedDataComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MatDialogModule],
       declarations: [ReusedDataComponent],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [{ provide: BackendService, useValue: backendSpy }],
     }).compileComponents();
   });

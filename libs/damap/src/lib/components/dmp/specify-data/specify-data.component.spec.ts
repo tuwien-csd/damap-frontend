@@ -15,6 +15,7 @@ import {
   closedDatasetMock,
   restrictedDatasetMock,
 } from '../../../mocks/dataset-mocks';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('SpecifyDataComponent', () => {
   let component: SpecifyDataComponent;
@@ -28,6 +29,7 @@ describe('SpecifyDataComponent', () => {
         MatRadioModule,
         TranslateTestingModule,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [SpecifyDataComponent, StepIntroComponent],
     }).compileComponents();
   });

@@ -7,6 +7,7 @@ import { TextareaWrapperComponent } from '../../../shared/textarea-wrapper/texta
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { DataQualityType } from '../../../domain/enum/data-quality-type.enum';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('DocDataQualityComponent', () => {
   let component: DocDataQualityComponent;
@@ -15,6 +16,7 @@ describe('DocDataQualityComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MatAutocompleteModule, TranslateTestingModule],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [
         DocDataQualityComponent,
         StepIntroComponent,
