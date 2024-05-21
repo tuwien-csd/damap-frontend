@@ -21,6 +21,7 @@
   <app-info-message *ngIf="legalEthicalStep.controls.humanParticipants.value">
     {{ "info.ethical.humanParticipants.prefix" | translate }}
     <a
+      class="info-link-custom"
       href="{{
         'info.ethical.humanParticipants.researchEthicsCoordination.link'
           | translate
@@ -32,21 +33,11 @@
           | translate
       }}</a
     >
-    {{ "info.ethical.humanParticipants.middle" | translate }}
-    <a
-      href="{{
-        'info.ethical.humanParticipants.researchEthics.link' | translate
-      }}"
-      target="_blank"
-      rel="noopener"
-      >{{ "info.ethical.humanParticipants.researchEthics.text" | translate }}</a
-    >.
   </app-info-message>
 
   <label id="ethicalIssues">
     {{ "dmp.steps.ethical.question.ethicalIssues" | translate }}
   </label>
-  <app-tooltip [tooltip]="'help.ethical.ethicalIssues'"></app-tooltip>
   <div class="flex-radio">
     <mat-radio-group
       aria-labelledby="ethicalIssues"
@@ -64,6 +55,7 @@
   <app-info-message *ngIf="legalEthicalStep.controls.ethicalIssues.value">
     {{ "info.ethical.ethicalIssues.text" | translate }}
     <a
+      class="info-link-custom"
       href="{{ 'info.ethical.ethicalIssues.researchEthics.link' | translate }}"
       target="_blank"
       rel="noopener"
@@ -74,10 +66,16 @@
   <label id="committeeReviewed">
     {{ "dmp.steps.ethical.question.committeeReviewed.prefix" | translate }}
     <a
+      class="info-link-custom"
       href="{{
         'dmp.steps.ethical.question.committeeReviewed.researchCommittee.link'
           | translate
       }}"
+      [href]="
+        'mailto:' +
+        ('dmp.steps.ethical.question.committeeReviewed.researchCommittee.link'
+          | translate)
+      "
       target="_blank"
       rel="noopener"
       >{{
@@ -103,7 +101,10 @@
   <app-info-message>
     {{ "info.ethical.committeeReviewed.prefix" | translate }}
     <a
-      href="{{ 'info.ethical.committeeReviewed.mail.link' | translate }}"
+      class="info-link-custom"
+      [href]="
+        'mailto:' + ('info.ethical.committeeReviewed.mail.link' | translate)
+      "
       rel="noopener">
       {{ "info.ethical.committeeReviewed.mail.text" | translate }}</a
     >

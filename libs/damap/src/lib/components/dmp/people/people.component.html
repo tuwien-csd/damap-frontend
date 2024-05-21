@@ -1,5 +1,31 @@
 <app-step-intro>{{ "dmp.steps.people.intro" | translate }} </app-step-intro>
+<app-info-message iconName="info-link-custom"
+  >{{ "info.people.prefix" | translate }}
 
+  <a
+    class="info-link-custom"
+    [href]="'info.people.orcid.link' | translate"
+    target="_blank">
+    {{ "info.people.orcid.title" | translate }}</a
+  >
+  {{ "info.people.orcid.text" | translate }}
+  <a
+    class="info-link-custom"
+    [href]="'info.people.id.link' | translate"
+    target="_blank">
+    {{ "info.people.id.title" | translate }}</a
+  >
+  {{ "info.people.id.text" | translate }}
+  <p>
+    {{ "info.people.endPrefix" | translate }}
+    <a
+      class="info-link-custom"
+      [href]="'info.people.mUni.link' | translate"
+      target="_blank">
+      {{ "info.people.mUni.title" | translate }}</a
+    >
+  </p>
+</app-info-message>
 <!-- CONTRIBUTORS -->
 <div [formGroup]="dmpForm">
   <ng-container formArrayName="contributors">

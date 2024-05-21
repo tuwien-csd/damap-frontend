@@ -7,11 +7,17 @@
   --main-color-contrast: #{map-get($app-primary, "500-contrast")};
   --accent-color-lighter: #{map-get($app-primary, 400)};
   --accent-color-darker: #{map-get($app-primary, 700)};
+  --custom-accent-color-50: #{map-get($custom-accent-color, 50)};
+  --custom-accent-color-100: #{map-get($custom-accent-color, 100)};
   --secondary-color: #{map-get($app-accent, 500)};
-  --secondary-color-light: #{map-get($app-accent, 50)};
+  --secondary-color-light: #{map-get($app-accent, 400)};
   --step-intro-color: #9b9b9b;
   --error-bg: #ffdac9;
   --success-bg: #e9f5d2;
-  --info-bg: #ffd9c2;
+  --info-bg: #ddebe4;
   --warning-bg: #fff4cb;
+  --active-color: #007934;
+  --inactive-colo: #34b233;
+  --primary-text: #393b41;
+  --white-smoke-text: #f5f5f5;
 }

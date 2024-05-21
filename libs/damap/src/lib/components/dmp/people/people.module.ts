@@ -5,6 +5,7 @@ import {
 
 import { ContributorFilterPipe } from './contributor-filter.pipe';
 import { ContributorManualComponent } from './contributor-manual/contributor-manual.component';
+import { InfoMessageModule } from '../../../widgets/info-message/info-message.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -21,6 +22,7 @@ import { StepIntroModule } from '../../../widgets/step-intro/step-intro.module';
     StepIntroModule,
     OrcidModule,
     PersonSearchModule,
+    InfoMessageModule,
 
     // Materials
     MatCardModule,
@@ -40,6 +42,7 @@ import { StepIntroModule } from '../../../widgets/step-intro/step-intro.module';
     OrcidModule,
     PersonSearchModule,
     PeopleComponent,
+    InfoMessageModule,
 
     // Materials
     MatCardModule,

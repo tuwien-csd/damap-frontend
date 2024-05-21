@@ -1,5 +1,7 @@
 <app-step-intro>{{ "dmp.steps.licensing.intro" | translate }} </app-step-intro>
-<p>{{ "dmp.steps.licensing.hint" | translate }}</p>
+<app-info-message>{{
+  "dmp.steps.licensing.hint" | translate
+}}</app-info-message>
 <div [formGroup]="dmpForm">
   <ng-container
     formArrayName="datasets"

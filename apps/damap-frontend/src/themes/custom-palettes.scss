@@ -1,23 +1,23 @@
 /* Custom Color Palettes */
 
 $light-primary-text: white;
-$dark-primary-text: rgba(black, 0.87);
+$dark-primary-text: rgba(57, 59, 65);
 
 $custom-primary-color: (
-  50: #ffd9c2,
-  100: #ffcaa0,
-  200: #ffbb7f,
-  300: #ffac5d,
-  400: #ff9e4c,
-  500: #ff7f45,
-  600: #e6713d,
-  700: #cc6335,
-  800: #b3552d,
-  900: #993d20,
-  A100: #ffcaa0,
-  A200: #ffac5d,
-  A400: #cc6335,
-  A700: #993d20,
+  50: #e3e4e7,
+  100: #dbdce0,
+  200: #bfc0c2,
+  300: #94959a,
+  400: #909296,
+  500: #6b6d74,
+  600: #62656b,
+  700: #585a60,
+  800: #4e5156,
+  900: #393b41,
+  A100: #dbdce0,
+  A200: #94959a,
+  A400: #585a60,
+  A700: #393b41,
   contrast: (
     50: $dark-primary-text,
     100: $dark-primary-text,
@@ -35,13 +35,14 @@ $custom-primary-color: (
     A700: $light-primary-text,
   ),
 );
+
 $custom-accent-color: (
   50: #e7e7e7,
   100: #dbdce0,
   200: #bfc0c2,
   300: #94959a,
-  400: #6b6d74,
-  500: #373737,
+  400: #e7e7e7,
+  500: #007934,
   600: #393b41,
   700: #393b41,
   800: #393b41,

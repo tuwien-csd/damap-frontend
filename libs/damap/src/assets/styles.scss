@@ -32,6 +32,7 @@ body {
 
 .material-icons.mat-icon {
   overflow: initial;
+  color: var(--active-color) !important;
 }
 
 .mat-icon-contact {
@@ -49,11 +50,6 @@ body {
 .mat-card-left {
   flex-direction: column;
   flex-grow: 1;
-  /*width: 90%;*/
-}
-
-.mat-card-right {
-  /*float: right;*/
 }
 
 .mat-mdc-selected {
@@ -153,4 +149,24 @@ mat-card {
 
 .button-position {
   margin: 5px;
+}
+
+.tooltip-position {
+  position: absolute;
+  right: 30px;
+  margin: 5px;
+}
+
+.button-position-custom {
+  color: var(--white-smoke-text) !important;
+  font-weight: 400 !important;
+}
+
+.info-link-custom {
+  color: var(--main-color);
+  font-weight: bold;
+}
+
+.mdc-button__label {
+  font-weight: 400 !important;
 }

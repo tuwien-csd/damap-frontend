@@ -20,7 +20,10 @@
       {{ "plans.table.header.title" | translate }}
     </th>
     <td mat-cell *matCellDef="let element">
-      <a class="title" routerLink="/dmp/{{ element.id }}">
+      <a
+        class="info-link-custom"
+        class="title"
+        routerLink="/dmp/{{ element.id }}">
         <h3 matTooltip="Edit DMP">
           {{ element.project?.title || "DMP ID: " + element.id }}
         </h3>

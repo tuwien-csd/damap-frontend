@@ -37,10 +37,12 @@
       specifyDataStep.value.kind === dataKind.SPECIFY ||
       specifyDataStep.value['reusedKind'] === dataKind.SPECIFY
     ">
-    <app-textarea-wrapper
-      [applyCustomStyle]="true"
-      [label]="'dmp.steps.documentation.question.datageneration'"
-      [control]="dataGeneration">
-    </app-textarea-wrapper>
+    <mat-form-field hintLabel="Max 4000 characters" [style]="'width: 100%'">
+      <mat-label>{{
+        "dmp.steps.documentation.question.datageneration" | translate
+      }}</mat-label>
+      <input matInput #input maxlength="4000" />
+      <mat-hint align="end">{{ input.value.length }}/4000</mat-hint>
+    </mat-form-field>
   </ng-container>
 </div>

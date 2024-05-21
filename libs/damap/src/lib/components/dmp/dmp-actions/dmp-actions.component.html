@@ -5,7 +5,7 @@
     <button
       class="action-button"
       mat-button
-      color="primary"
+      color="accent"
       [routerLink]="'/plans'"
       [disabled]="!this.formChanged"
       routerLinkActive="active">
@@ -14,7 +14,7 @@
     <button
       class="action-button"
       mat-raised-button
-      color="primary"
+      color="accent"
       (click)="saveDmp()"
       [disabled]="dmpForm.invalid || !this.formChanged || this.savingDmp">
       {{ "button.save" | translate }}
@@ -22,7 +22,7 @@
     <button
       class="action-button"
       mat-raised-button
-      color="primary"
+      color="accent"
       (click)="saveDmpVersion()"
       [disabled]="dmpForm.invalid || this.savingDmp">
       {{ "button.version" | translate }}
@@ -30,7 +30,7 @@
     <button
       class="action-button"
       mat-raised-button
-      color="primary"
+      color="accent"
       (click)="exportDmpTemplate()"
       [disabled]="dmpForm.invalid || this.savingDmp">
       {{ "button.export" | translate }}

@@ -56,7 +56,7 @@ a.title {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-  color: black;
+  color: var(--primary-text);
 }
 
 button.mat-focus-indicator .mat-mdc-unelevated-button.mat-primary,

@@ -1,0 +1,156 @@
+{
+  "info": {
+    "project.funder": "Wenn Ihr Projekt fehlt, kontaktieren Sie bitte rdmsupport@medunigraz.at. Sie können Projektinformationen manuell hinzufügen, müssen jedoch beim Export ein Förderer-Template auswählen, da Förderinformationen nicht verfügbar sind.",
+    "people": {
+      "prefix": "Wir empfehlen im Allgemeinen, sich für eine ",
+      "orcid": {
+        "link": "https://orcid.org/",
+        "title": "ORCiD-ID",
+        "text": "(Open Researcher and Contributor ID). Eine ORCiD-ID ist eine "
+      },
+      "id": {
+        "title": "dauerhafte Kennung",
+        "link": "https://www.tuwien.at/en/research/rti-support/research-data/rdm-infos-tips/persistent-identifiers",
+        "text": "(wie DOI für Fachartikel), die Forscher und Forschungsergebnisse dauerhaft verbindet. "
+      },
+      "endPrefix": "Im Falle eines Projekts mit mehreren Partnern weisen Sie kurz die Verantwortlichkeiten für das Datenmanagement den Projektteilnehmern zu und stellen Sie sicher, dass jede Daten- oder Materialübertragung an externe Projektpartner in einem Datenübertragungsabkommen (DTA) und/oder Materialübertragungsabkommen (MTA) dokumentiert ist, sofern nicht anders im Konsortialvertrag festgelegt. Für weitere Informationen zur Datenweitergabe an Dritte siehe ",
+      "mUni": {
+        "title": "MUniversum.",
+        "link": "https://muniverse.medunigraz.at/forschung/forschungsdatenmanagement/datenweitergabe?language=DE"
+      }
+    },
+    "ethical": {
+      "humanParticipants": {
+        "prefix": " Eine informierte Einwilligung zur Teilnahme (zusätzlich zu einer Einwilligung zur Datenverarbeitung) ist erforderlich. Für weitere Informationen kontaktieren Sie bitte unsere ",
+        "researchEthicsCoordination": {
+          "text": "lokale Ethikkommission.",
+          "link": "https://muniverse.medunigraz.at/struktur/kommissionen-und-vertretungen/ethikkommission?language=DE"
+        }
+      },
+      "ethicalIssues": {
+        "text": "Ihr Forschungsplan kann eine ethische Prüfung erfordern. Informieren Sie sich durch Konsultation Ihres ",
+        "researchEthics": {
+          "text": "institutionellen Verhaltenskodex",
+          "link": "https://www.tuwien.at/index.php?eID=dms&s=4&path=Richtlinien%20und%20Verordnungen/Code%20of%20Conduct%20fuer%20wissenschaftliches%20Arbeiten.pdf"
+        }
+      },
+      "committeeReviewed": {
+        "prefix": " Bitte beachten Sie, dass Sie (potenzielle) ethische Probleme in separaten Dokumenten gemäß den Anforderungen des zuständigen Förderers behandeln müssen. Der DMP dient nur dazu, einige ethische Probleme zu identifizieren.\nBitte kontaktieren Sie ",
+        "mail": {
+          "text": "ethikkommission@medunigraz.at",
+          "link": "ethikkommission@medunigraz.at"
+        },
+        "suffix": " für zusätzliche Informationen und Unterstützung. Dies müssen Sie tun, wenn Ihre geplante Forschung eine Beteiligung von Menschen umfasst."
+      }
+    },
+    "cris": "Derzeit im CRIS-System ausgewählte Option: {{value}}.",
+    "documentation": {
+      "overview": {
+        "introduction": "Beachten Sie, dass die Aufzeichnung und Bereitstellung umfangreicher Dokumentation und Metadaten, die wesentliche Informationen über die Datenerfassung, -verarbeitung und -analyse erfassen, wesentlich sind und anderen Forschern helfen, Ihre Daten zu finden, zu verstehen und wiederzuverwenden! Biomedizinische Metadaten, die typischerweise erfasst werden sollten, umfassen:",
+        "metadataCategories": {
+          "reagentMetadata": "Reagenzienmetadaten: Informationen über die verwendeten klinischen Proben, biologischen Reagenzien (z. B. Zelllinien, Antikörper, siRNAs) und chemischen Reagenzien (z. B. Medikamente), die zur Datengenerierung verwendet wurden.",
+          "technicalMetadata": "Technische Metadaten: Informationen, die automatisch von Forschungsinstrumenten und zugehöriger Software generiert werden.",
+          "analyticalMetadata": "Analytische Metadaten: Informationen über Methoden der Datenanalyse, einschließlich Softwarename und -version, Algorithmen zur Transformation und Verarbeitung von Daten, Qualitätskontrollparameter und Details zum Ausgabedateityp."
+        },
+        "reportingGuidelines": {
+          "description": "Gegebenenfalls könnten Sie auf Berichtsrichtlinien wie die ",
+          "links": [
+            {
+              "url": "https://mfr.osf.io/render?url=https://osf.io/xfpn4/?direct&mode=render&action=download&mode=render",
+              "title": "MDAR",
+              "text": " MDAR-Richtlinien (Materialien, Design, Analyse, Berichterstattung) für die präklinische Forschung oder die "
+            },
+            {
+              "url": "https://www.strobe-statement.org/",
+              "title": "STROBE",
+              "text": " (STrengthening the Reporting of OBservational Studies in Epidemiology) Checklisten für klinische Studien, die Forschern helfen, wesentliche Informationen zu erfassen."
+            }
+          ]
+        },
+        "disciplineSpecificStandards": {
+          "description": "Für einige (Omics-)Disziplinen ist die Verwendung disziplinspezifischer Metadatenstandards üblich.",
+          "standards": [
+            {
+              "url": "http://miaca.sourceforge.net/",
+              "title": "MIACA",
+              "text": "(Mindestinformationen über ein Zell-Assay) Standard wird beispielsweise in der Genomik-Forschungsgemeinschaft verwendet und ist Teil der "
+            },
+            {
+              "url": "https://www.ebi.ac.uk/training/online/courses/bioinformatics-terrified/what-makes-a-good-bioinformatics-database/minimum-information-standards/",
+              "title": "MIBBI",
+              "text": "(Mindestinformationen über eine biomedizinische oder biologische Untersuchung) Sammlung."
+            }
+          ]
+        }
+      },
+      "validation": {
+        "documentationGuidance": "Geben Sie alle Dokumentationsformate an und lokalisieren Sie sie (z. B. Dateipfade oder URLs), die anderen helfen könnten, Ihre (veröffentlichten) Daten zu verstehen und wiederzuverwenden. Dokumentationsformate können Lab-Protokolle, Standardbetriebsverfahren (SOPs), Codebücher usw. umfassen.",
+        "sharingOptions": {
+          "description": "Sie könnten auch die Nutzung kollaborativer und offener Plattformen wie",
+          "links": [
+            {
+              "url": "https://osf.io/",
+              "title": "OSF",
+              "text": "(Open Science Framework) oder"
+            },
+            {
+              "url": "http://protocols.io",
+              "title": "protocols.io",
+              "text": "zum Teilen von Laborprotokollen oder Methoden mit anderen Forschern in Erwägung ziehen – dann leisten Sie definitiv einen Beitrag zur offenen Wissenschaft und Transparenz in Ihrem Forschungsprozess!"
+            }
+          ]
+        }
+      },
+      "dataOwnership": {
+        "description": "Die Dateninhaberschaft muss fallweise überprüft werden aufgrund unterschiedlicher Parameter, die mit Förderkörpern, Vertragsforschung, Kooperationen, mehreren Projektpartnern oder speziellen Vereinbarungen in Verträgen verbunden sind. Für allgemeine Informationen lesen Sie bitte unseren RDM-Richtlinienabschnitt 2 zu Nutzungsrechten.",
+        "links": [
+          {
+            "url": "https://muniverse.medunigraz.at/struktur/organisationseinheiten/recht-risikomanagement?language=DE",
+            "title": "Abteilung für Recht und Risikomanagement",
+            "text": "für rechtliche Aspekte."
+          },
+          {
+            "url": "https://muniverse.medunigraz.at/struktur/organisationseinheiten/forschungsmanagement/forschungsfoerderung-technologietransfer?language=DE",
+            "title": "Team Tech Transfer",
+            "text": "für Anfragen zum Technologietransfer."
+          },
+          {
+            "url": "https://muniverse.medunigraz.at/struktur/organisationseinheiten/rdm-policy",
+            "title": "RDM-Richtlinien",
+            "text": "Abschnitt 2. Nutzungsrechte."
+          }
+        ]
+      },
+      "repositoryGuidance": {
+        "description": "Die Datenrepository-Anleitung von Scientific Data könnte Ihnen helfen, ein disziplinspezifisches Repository für Ihre Daten zu finden. Wenn Sie kein geeignetes disziplinspezifisches Repository finden können, empfehlen wir Zenodo, ein einfach zu nutzendes Universal-Repository, das für Datensätze bis zu 50 GB kostenlos ist (mehrere Datensätze erlaubt, größere Datensätze auf Anfrage).",
+        "links": [
+          {
+            "url": "https://www.nature.com/sdata/policies/repositories",
+            "title": "Scientific Data Repository Guidance",
+            "text": "für disziplinspezifische Repositories."
+          },
+          {
+            "url": "https://zenodo.org/",
+            "title": "Zenodo",
+            "text": "für Datensätze bis zu 50 GB."
+          }
+        ]
+      },
+      "itKnowledgeBase": {
+        "description": "Die IT-Wissensdatenbank unserer IT-Abteilung bietet detaillierte Spezifikationen (z. B. bezüglich Backup- und Speicherkapazität standardmäßig) zu allen Speicheroptionen an der Med Uni Graz. Stellen Sie außerdem sicher, dass Sie Daten gemäß unseren institutionellen Richtlinien zum Datenschutz und zur IT-Sicherheit speichern.",
+        "links": [
+          {
+            "url": "https://confluence.medunigraz.at/display/ITKB/Datenablage+-+Fileservices",
+            "title": "IT-Wissensdatenbank",
+            "text": "für detaillierte Spezifikationen zu Speicheroptionen."
+          },
+          {
+            "url": "https://confluence.medunigraz.at/pages/viewpage.action?pageId=64392119",
+            "title": "Richtlinien für Datenschutz und IT-Sicherheit",
+            "text": "um sicherzustellen, dass Daten sicher gemäß institutionellen Richtlinien gespeichert werden."
+          }
+        ]
+      }
+    }
+  }
+}

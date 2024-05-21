@@ -4,9 +4,12 @@ import {
   UntypedFormControl,
   UntypedFormGroup,
 } from '@angular/forms';
-import { ComplianceType } from '../../../domain/enum/compliance-type.enum';
-import { SecurityMeasure } from '../../../domain/enum/security-measure.enum';
+
 import { Agreement } from '../../../domain/enum/agreement.enum';
+import { ComplianceType } from '../../../domain/enum/compliance-type.enum';
+import { LegalAspectsDialogInfoComponent } from '../../../shared/question-dialogs/legal-aspects-dialog-info.component';
+import { MatDialog } from '@angular/material/dialog';
+import { SecurityMeasure } from '../../../domain/enum/security-measure.enum';
 
 @Component({
   selector: 'app-dmp-legal-ethical-aspects',
@@ -44,6 +47,11 @@ export class LegalEthicalAspectsComponent {
   agreementOptions: any = Agreement;
 
   originalOrder = (): number => 0;
+  constructor(public dialog: MatDialog) {}
+
+  openLegalAspectsDialogInfo() {
+    this.dialog.open(LegalAspectsDialogInfoComponent).afterClosed().subscribe();
+  }
 
   get sensitiveDataAccess(): UntypedFormControl {
     return this.legalEthicalStep.get(

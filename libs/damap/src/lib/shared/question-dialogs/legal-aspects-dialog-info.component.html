@@ -1,0 +1,15 @@
+<mat-dialog-content>
+  <p>
+    {{ "info.documentation.dataOwnership.description" | translate }}
+    <ng-container
+      *ngFor="let link of 'info.documentation.dataOwnership.links' | translate">
+      <a class="info-link-custom" [href]="link.url" target="_blank">{{
+        link.title
+      }}</a>
+      {{ link.text }}
+    </ng-container>
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

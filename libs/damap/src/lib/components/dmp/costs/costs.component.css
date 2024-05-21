@@ -6,3 +6,8 @@ mat-radio-button {
 .costType {
   width: 50%;
 }
+
+.button-position-custom {
+  color: var(--white-smoke-text) !important;
+  font-weight: 400 !important;
+}

@@ -169,10 +169,26 @@
         "question": {
           "metadata": "Please indicate which metadata will be provided to help others identify, discover and reuse the data.",
           "datageneration": "How will the research data be generated or reused and which methods and software will be used?",
-          "structure": "How will you structure the data and handle versioning?",
-          "documentation": "How will you provide documentation needed to validate data analysis and facilitate data reuse?",
+          "structure": "Which folder structure do you follow? ",
+          "convention": "Which file naming convention do you follow? ",
+          "version": "Which method of version control will you apply",
+          "documentation": "How and where will you provide documentation needed to validate data analysis and facilitate data reuse?",
           "dataQuality": "How will the consistency and quality of data collection be controlled?",
-          "otherDataQuality": "Please specify what other measures are taken:"
+          "otherDataQuality": "Please specify what other measures are taken:",
+          "placeholder": {
+            "firstQuestion": "e.g. “Files will be organized as following (Folder Structure): One main folder will exist (‘FWF-7589’). Within this main folder, there will be subfolders for ‘Results’, ‘Data analysis’ and ‘Output’, termed either ‘7589_results’, ’7589_analysis’, and ’7589_output’.”   "
+          }
+        },
+        "messageInfo": {
+          "dataOrganization": {
+            "text": "Try to establish group-internal conventions for the naming of files, the creation of folder structures and the versioning of files in order to facilitate the retrieval of files. Also consider to capture these conventions in a central document (e.g. write a SOP for data organization). If you need best practices for file and folder naming we recommend the article ",
+            "link": "https://exadox.com/files/pdf/en/Folder-File-Naming-Convention-10Rules-Best-Practice.pdf",
+            "linkTitle": "„Folder and File Naming Convention – 10 Rules for Best Practice“. ",
+            "paragraph": "Please also take into account the ",
+            "paragraphLink": "https://confluence.medunigraz.at/display/ITKB/Ordner-+und+Dateinamen+am+Filesystem",
+            "paragraphTitle": "specifications of the Med Uni Graz O-IT",
+            "paragraphEnd": " with regard to folders and file names on the file system."
+          }
         }
       },
       "storage": {
@@ -237,7 +253,7 @@
             "prefix": "Was your research plan reviewed by an ethics committee, the ",
             "researchCommittee": {
               "text": "Ethics Committee of your institution",
-              "link": "https://www.tuwien.at/forschung/fti-support/responsible-research-practices/research-ethics-committee"
+              "link": "https://muniverse.medunigraz.at/struktur/kommissionen-und-vertretungen/ethikkommission?language=DE"
             },
             "suffix": ", or a similar body?"
           }

@@ -4,17 +4,17 @@
     <div class="button-row-left">
       <button
         mat-raised-button
-        class="big-button"
+        class="big-button, button-position-custom"
         routerLink="/plans"
         color="primary">
         {{ "plans.mydmps" | translate }}
       </button>
       <button
         mat-raised-button
-        class="big-button"
+        class="big-button, button-position-custom"
         routerLink="/dmp"
         color="primary">
-        <mat-icon>add</mat-icon>
+        <mat-icon class="button-position-custom">add</mat-icon>
         {{ "plans.create.dmp" | translate }}
       </button>
     </div>
@@ -22,23 +22,31 @@
       <h2 translate>dashboard.dmp.heading</h2>
       <p>
         {{ "dashboard.dmp.text.prefix" | translate }}
-        <a [href]="'dashboard.dmp.text.gsp.link' | translate" target="_blank">
+        <a
+          class="info-link-custom"
+          [href]="'dashboard.dmp.text.gsp.link' | translate"
+          target="_blank">
           {{ "dashboard.dmp.text.gsp.text" | translate }}</a
         >{{ "dashboard.dmp.text.gsp.body" | translate }}
         <a
+          class="info-link-custom"
           [href]="'dashboard.dmp.text.fairprinciples.link' | translate"
           target="_blank">
           {{ "dashboard.dmp.text.openScience.title" | translate }}</a
         >{{ "dashboard.dmp.text.openScience.body" | translate }}
 
         <a
+          class="info-link-custom"
           [href]="'dashboard.dmp.text.rdmPolicy.link' | translate"
           target="_blank">
           {{ "dashboard.dmp.text.rdmPolicy.title" | translate }}</a
         >{{ "dashboard.dmp.text.rdmPolicy.body" | translate }}
 
         {{ "dashboard.dmp.text.rdm.prefix" | translate }}
-        <a [href]="'dashboard.dmp.text.rdm.link' | translate" target="_blank">
+        <a
+          class="info-link-custom"
+          [href]="'dashboard.dmp.text.rdm.link' | translate"
+          target="_blank">
           {{ "dashboard.dmp.text.rdm.title" | translate }}</a
         >{{ "dashboard.dmp.text.rdm.body" | translate }}
       </p>
@@ -51,6 +59,7 @@
         <p>
           {{ "dashboard.instructions.steps.text.prefix" | translate }}
           <a
+            class="info-link-custom"
             [href]="'dashboard.instructions.steps.text.link' | translate"
             target="_blank">
             {{ "dashboard.instructions.steps.text.title" | translate }}</a
@@ -69,11 +78,15 @@
       <h2 translate>dashboard.help.heading</h2>
       <p>
         {{ "dashboard.help.prefix" | translate }}
-        <a [href]="'dashboard.help.MUni.link' | translate" target="_blank">
+        <a
+          class="info-link-custom"
+          [href]="'dashboard.help.MUni.link' | translate"
+          target="_blank">
           {{ "dashboard.help.MUni.title" | translate }}</a
         >
         {{ "dashboard.help.body" | translate }}
         <a
+          class="info-link-custom"
           [href]="'mailto:' + ('dashboard.help.endPrefix.title' | translate)"
           target="_blank">
           {{ "dashboard.help.endPrefix.title" | translate }}

@@ -3,3 +3,12 @@ div#content {
   padding-right: 20px;
   padding-bottom: 50px;
 }
+
+.text-content {
+  color: var(--primary-text);
+}
+
+.button-position-custom {
+  color: var(--white-smoke-text) !important;
+  font-weight: 400 !important;
+}

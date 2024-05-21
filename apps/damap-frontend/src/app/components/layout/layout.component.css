@@ -69,6 +69,7 @@ mat-nav-list {
   flex-direction: row;
   flex-grow: 0;
   height: 100%;
+  font-weight: 500;
 }
 
 .logo {
@@ -164,7 +165,7 @@ A[data-lang-active-en] {
 }
 
 #user > div {
-  font-weight: 400;
+  font-weight: 500;
 }
 
 #user .mat-icon {

@@ -1,0 +1,57 @@
+<mat-dialog-content>
+  <p>
+    {{ "info.documentation.overview.introduction" | translate }}
+  </p>
+  <ul>
+    <li>
+      {{
+        "info.documentation.overview.metadataCategories.reagentMetadata"
+          | translate
+      }}
+    </li>
+    <li>
+      {{
+        "info.documentation.overview.metadataCategories.technicalMetadata"
+          | translate
+      }}
+    </li>
+    <li>
+      {{
+        "info.documentation.overview.metadataCategories.analyticalMetadata"
+          | translate
+      }}
+    </li>
+  </ul>
+
+  <p>
+    {{
+      "info.documentation.overview.reportingGuidelines.description" | translate
+    }}
+    <ng-container
+      *ngFor="
+        let link of 'info.documentation.overview.reportingGuidelines.links'
+          | translate
+      ">
+      <a class="info-link-custom" [href]="link.url" target="_blank">
+        {{ link.title }}</a>{{ link.text }}
+    </ng-container>
+  </p>
+
+  <p>
+    {{
+      "info.documentation.overview.disciplineSpecificStandards.description"
+        | translate
+    }}
+    <ng-container
+      *ngFor="
+        let standard of 'info.documentation.overview.disciplineSpecificStandards.standards'
+          | translate
+      ">
+      <a class="info-link-custom" [href]="standard.url" target="_blank">
+        {{ standard.title }}</a>{{ standard.text }}
+    </ng-container>
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

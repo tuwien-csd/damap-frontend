@@ -53,6 +53,17 @@
           {{ "dmp.steps.data.specify.tab.introStorage" | translate }}
         </app-step-intro>
       </div>
+      <app-info-message>
+        <ng-container
+          *ngFor="
+            let link of 'info.documentation.itKnowledgeBase.links' | translate
+          ">
+          <a class="info-link-custom" [href]="link.url" target="_blank">{{
+            link.title
+          }}</a>
+          {{ link.text }}
+        </ng-container>
+      </app-info-message>
       <mat-tab-group dynamicHeight animationDuration="0ms">
         <mat-tab label="{{ 'dmp.steps.data.specify.tab.access' | translate }}">
           <app-data-access [dmpForm]="dmpForm" [datasets]="datasets">
@@ -101,6 +112,19 @@
     label="{{ 'dmp.steps.repositories.label' | translate }}"
     [hasError]="repoStep.invalid">
     <ng-container *ngIf="showStepIfNewDatasets; else noDatasets">
+      <app-info-message>
+        {{ "info.documentation.repositoryGuidance.description" | translate }}
+        <ng-container
+          *ngFor="
+            let link of 'info.documentation.repositoryGuidance.links'
+              | translate
+          ">
+          <a class="info-link-custom" [href]="link.url" target="_blank">{{
+            link.title
+          }}</a>
+          {{ link.text }}
+        </ng-container>
+      </app-info-message>
       <app-dmp-repo
         [dmpForm]="dmpForm"
         [repoStep]="repoStep"

@@ -23,6 +23,8 @@
   </div>
 
   <div *ngIf="repo.repositoryURL">
-    <a [href]="repo.repositoryURL" target="_blank">{{ repo.repositoryURL }}</a>
+    <a class="info-link-custom" [href]="repo.repositoryURL" target="_blank">{{
+      repo.repositoryURL
+    }}</a>
   </div>
 </div>

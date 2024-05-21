@@ -16,9 +16,13 @@
       </mat-card-header>
       <ng-container *ngIf="element.url">
         <mat-card-content
-          ><a href="{{ element.url }}" target="_blank" rel="noopener">{{
-            "dmp.steps.storage.link" | translate
-          }}</a>
+          ><a
+            class="info-link-custom"
+            href="{{ element.url }}"
+            target="_blank"
+            rel="noopener"
+            >{{ "dmp.steps.storage.link" | translate }}</a
+          >
         </mat-card-content>
       </ng-container>
     </mat-card>

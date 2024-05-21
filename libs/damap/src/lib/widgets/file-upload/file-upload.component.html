@@ -12,13 +12,15 @@
 
 <div class="file-input">
   <button
-    class="button-position"
+    class="button-position button-position-custom"
     mat-raised-button
     color="primary"
     class="upload-btn"
     (click)="fileDrop.click()">
-    <label for="fileDrop">{{ "upload.file.choose" | translate }}</label>
-    <mat-icon>attach_file</mat-icon>
+    <label class="button-position-custom" for="fileDrop">{{
+      "upload.file.choose" | translate
+    }}</label>
+    <mat-icon class="button-position-custom">attach_file</mat-icon>
   </button>
 </div>
 

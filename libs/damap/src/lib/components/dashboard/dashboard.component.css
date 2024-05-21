@@ -2,3 +2,12 @@
   font-size: 1.2em;
   padding: 1rem 1rem;
 }
+
+.content {
+  color: var(--primary-text);
+}
+
+.button-position-custom {
+  color: var(--white-smoke-text) !important;
+  font-weight: 400 !important;
+}

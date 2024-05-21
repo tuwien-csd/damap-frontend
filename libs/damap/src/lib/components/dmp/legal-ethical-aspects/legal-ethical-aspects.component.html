@@ -6,6 +6,7 @@
     <label id="sensitiveData"
       >{{ "dmp.steps.legal.question.sensitiveData.prefix" | translate }}
       <a
+        class="info-link-custom"
         href="{{ 'dmp.steps.legal.link.sensitiveData' | translate }}"
         target="_blank"
         rel="noopener"
@@ -59,8 +60,10 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <app-tooltip [tooltip]="'help.legal.sensitiveDataSecurity'">
-          </app-tooltip>
+          <app-tooltip
+            class="tooltip-position"
+            [tooltip]="'help.legal.sensitiveDataSecurity'"
+            onkeyup />
         </div>
         <ng-container *ngIf="isOtherMeasureSelected">
           <app-input-wrapper
@@ -73,7 +76,8 @@
           [label]="'dmp.steps.legal.question.sensitiveDataAccess'"
           [control]="sensitiveDataAccess"
           [maxLength]="4000"
-          appearance="fill"></app-input-wrapper>
+          appearance="fill">
+        </app-input-wrapper>
       </div>
     </ng-container>
     <hr />
@@ -201,7 +205,15 @@
     [label]="'dmp.steps.legal.question.dataRightsAndAccessControl'"
     [maxLength]="4000"
     appearance="fill"
-    [control]="dataRightsAndAccessControl"></app-input-wrapper>
+    [control]="dataRightsAndAccessControl">
+  </app-input-wrapper>
+  <mat-icon
+    class="tooltip-position"
+    color="primary"
+    (click)="openLegalAspectsDialogInfo()"
+    onkeyup>
+    info
+  </mat-icon>
 </div>
 
 <app-ethical-aspects

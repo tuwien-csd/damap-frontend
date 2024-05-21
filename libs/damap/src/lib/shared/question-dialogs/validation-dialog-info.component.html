@@ -1,0 +1,19 @@
+<mat-dialog-content>
+  <p>
+    {{ "info.documentation.validation.documentationGuidance" | translate }}
+  </p>
+  <p>
+    {{ "info.documentation.validation.sharingOptions.description" | translate }}
+    <ng-container
+      *ngFor="
+        let link of 'info.documentation.validation.sharingOptions.links'
+          | translate
+      ">
+      <a class="info-link-custom" [href]="link.url" target="_blank">
+        {{link.title}}</a>{{ link.text }}
+    </ng-container>
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

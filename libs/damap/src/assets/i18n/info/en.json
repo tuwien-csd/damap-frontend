@@ -1,17 +1,30 @@
 {
   "info": {
-    "project.funder": "If your project is missing, please contact [mail@address.example]. You can add project information manually, however you will have to select a funder template when exporting as funder information is not available.",
+    "project.funder": "If your project is missing, please contact rdmsupport@medunigraz.at. You can add project information manually, however you will have to select a funder template when exporting as funder information is not available.",
+    "people": {
+      "prefix": "We generally recommend, to register for an ",
+      "orcid": {
+        "link": "https://orcid.org/",
+        "title": "ORCiD iD",
+        "text": "(Open Researcher and Contributor ID). An ORCiD iD is a "
+      },
+      "id": {
+        "title": "persistent identifier",
+        "link": "https://www.tuwien.at/en/research/rti-support/research-data/rdm-infos-tips/persistent-identifiers",
+        "text": "(such as DOI for journal articles) that connects researchers and research (output) permanently. "
+      },
+      "endPrefix": "In case of a multi-partner project briefly assign the data management responsibilities/roles among the project partners and make sure that any data or material transfer to external project partners is documented in a data (DTA) and/or material (MTA) transfer agreement unless otherwise stated in a consortium agreement. For further information regarding data transfer to third parties see ",
+      "mUni": {
+        "title": "MUniverse.",
+        "link": "https://muniverse.medunigraz.at/forschung/forschungsdatenmanagement/datenweitergabe?language=DE"
+      }
+    },
     "ethical": {
       "humanParticipants": {
-        "prefix": "An informed consent for participation (in addition to an informed consent to data processing) is required. For more information, see an ",
+        "prefix": " An informed consent for participation (in addition to an informed consent to data processing) is required. For more information, please contact our  ",
         "researchEthicsCoordination": {
-          "text": "Example Informed Consent Guide",
-          "link": "https://www.tuwien.at/fileadmin/Assets/forschung/Forschungsethik/Guidance_Document_Informed_Consent.pdf"
-        },
-        "middle": " or consult your institution's ",
-        "researchEthics": {
-          "text": "center for responsible research practices",
-          "link": "https://www.tuwien.at/forschung/fti-support/responsible-research-practices"
+          "text": "local ethics committee.",
+          "link": "https://muniverse.medunigraz.at/struktur/kommissionen-und-vertretungen/ethikkommission?language=DE"
         }
       },
       "ethicalIssues": {
@@ -22,17 +35,122 @@
         }
       },
       "committeeReviewed": {
-        "prefix": "Please note that you must address (potential) ethical issues in separate documents according to the requirements of the relevant funding body. The DMP only serves to help identify some ethical issues.\nPlease contact your ",
+        "prefix": " Please note that you must address (potential) ethical issues in separate documents according to the requirements of the relevant funding body. The DMP only serves to help identify some ethical issues.\nPlease contact ",
         "mail": {
-          "text": "institution's Ethic's Committee",
-          "link": "https://www.tuwien.at/forschung/fti-support/responsible-research-practices/research-ethics-committee"
+          "text": "ethikkommission@medunigraz.at",
+          "link": "ethikkommission@medunigraz.at"
         },
         "suffix": " for additional information and support. You must do so if your planned research involves any human participation."
       }
     },
     "cris": "Option currently selected in the CRIS system: {{value}}.",
     "documentation": {
-      "metadata": "In archives, metadata is used to create consistent and structured descriptions of resources and their characteristics. Metadata is independent and can either be stored together with the resources it describes or separately. Metadata plays a key role in the future of your stored research data: it contains important information which for example enables you and others to search for and find your data.\nA metadata set consists mainly of descriptive categories, the so-called elements and their values. To facilitate communication with other systems, predefined standards are used for the elements and controlled vocabularies for the values."
+      "overview": {
+        "introduction": "Be aware that recording and providing rich documentation and metadata that capture essential information about data collection, processing, and analysis are essential and help other researchers to find, understand and reuse your data! Biomedical metadata that should be captured typically includes:",
+        "metadataCategories": {
+          "reagentMetadata": "Reagent Metadata: Information about the clinical samples, biological reagents (e.g., cell lines, antibodies, siRNAs), and chemical reagents (e.g., drugs) used to generate the data.",
+          "technicalMetadata": "Technical Metadata: Information automatically generated by research instruments and associated software.",
+          "analyticalMetadata": "Analytical Metadata: Information about data analysis methods including software name and version, algorithms for transformation and processing of data, quality control parameters, and output file type details."
+        },
+        "reportingGuidelines": {
+          "description": "If applicable, you might refer to reporting guidelines such as the ",
+          "links": [
+            {
+              "url": "https://mfr.osf.io/render?url=https://osf.io/xfpn4/?direct&mode=render&action=download&mode=render",
+              "title": "MDAR",
+              "text": " (Materials, Design, Analysis, Reporting) guidelines for preclinical research or the "
+            },
+            {
+              "url": "https://www.strobe-statement.org/",
+              "title": "STROBE",
+              "text": " (STrengthening the Reporting of OBservational Studies in Epidemiology) checklists for clinical trials which help researchers to capture essential information."
+            }
+          ]
+        },
+        "disciplineSpecificStandards": {
+          "description": "For some (omics) disciplines, it is common to use discipline-specific metadata standards.",
+          "standards": [
+            {
+              "url": "http://miaca.sourceforge.net/",
+              "title": "MIACA",
+              "text": " (Minimum Information About a Cellular Assay) standard for example is used in the genomics research community and part of the "
+            },
+            {
+              "url": "https://www.ebi.ac.uk/training/online/courses/bioinformatics-terrified/what-makes-a-good-bioinformatics-database/minimum-information-standards/",
+              "title": "MIBBI",
+              "text": " (Minimum Information about a Biomedical or Biological Investigation) collection."
+            }
+          ]
+        }
+      },
+      "validation": {
+        "documentationGuidance": "Indicate and locate all documentation formats (e.g., file paths or URLs) that may help others understand and reuse your (published) data. Documentation formats can include lab protocols, standard operating procedures (SOPs), codebooks, etc.",
+        "sharingOptions": {
+          "description": "You might also consider using collaborative and open platforms such as",
+          "links": [
+            {
+              "url": "https://osf.io/",
+              "title": "OSF",
+              "text": " (Open Science Framework) or"
+            },
+            {
+              "url": "http://protocols.io",
+              "title": "protocols.io",
+              "text": " to share lab protocols or methods with other researchers – then you will definitely contribute to open science and transparency in your research process!"
+            }
+          ]
+        }
+      },
+      "dataOwnership": {
+        "description": "Data ownership must be verified on a case to case basis due to varying parameters related to funding bodies, contract research, cooperations, several project partners, or special agreements in contracts. For general information, please read our RDM-Policy paragraph 2 on Usage rights.",
+        "links": [
+          {
+            "url": "https://muniverse.medunigraz.at/struktur/organisationseinheiten/recht-risikomanagement?language=DE",
+            "title": "Legal and Risk Management Department",
+            "text": "for legal aspects."
+          },
+          {
+            "url": "https://muniverse.medunigraz.at/struktur/organisationseinheiten/forschungsmanagement/forschungsfoerderung-technologietransfer?language=DE",
+            "title": "Team Tech Transfer",
+            "text": "for technology transfer queries."
+          },
+          {
+            "url": "https://muniverse.medunigraz.at/struktur/organisationseinheiten/rdm-policy",
+            "title": "RDM-Policy",
+            "text": "paragraph 2. Usage rights."
+          }
+        ]
+      },
+      "repositoryGuidance": {
+        "description": "The Data Repository Guidance by Scientific Data might help you to find a discipline-specific repository for your data. If you cannot find a suitable disciplinary repository, we recommend zenodo, an easy to use catch-all and free of charge repository for datasets up to 50 GB (multiple datasets allowed, larger datasets on request).",
+        "links": [
+          {
+            "url": "https://www.nature.com/sdata/policies/repositories",
+            "title": "Scientific Data Repository Guidance",
+            "text": "for discipline-specific repositories."
+          },
+          {
+            "url": "https://zenodo.org/",
+            "title": "Zenodo",
+            "text": "for datasets up to 50 GB."
+          }
+        ]
+      },
+      "itKnowledgeBase": {
+        "description": "The IT-Knowledge Base of our IT-department provides detailed specifications (e.g., regarding backup and storage capacity by default) on all storage options at Med Uni Graz. Also make sure that you store data according to our institutional Guidelines for data protection and IT security.",
+        "links": [
+          {
+            "url": "https://confluence.medunigraz.at/display/ITKB/Datenablage+-+Fileservices",
+            "title": "IT-Knowledge Base",
+            "text": "for detailed specifications on storage options."
+          },
+          {
+            "url": "https://confluence.medunigraz.at/pages/viewpage.action?pageId=64392119elines.medunigraz/",
+            "title": "Guidelines for data protection and IT security",
+            "text": "to ensure data is stored securely according to institutional guidelines."
+          }
+        ]
+      }
     }
   }
 }

@@ -1,24 +1,109 @@
 <app-step-intro
   >{{ "dmp.steps.documentation.intro" | translate }}
 </app-step-intro>
+<app-info-message>
+  {{ "dmp.steps.documentation.messageInfo.dataOrganization.text" | translate }}
+  <a
+    class="info-link-custom"
+    [href]="
+      'dmp.steps.documentation.messageInfo.dataOrganization.link' | translate
+    "
+    target="_blank">
+    {{
+      "dmp.steps.documentation.messageInfo.dataOrganization.linkTitle"
+        | translate
+    }}</a
+  >
+  <p>
+    {{
+      "dmp.steps.documentation.messageInfo.dataOrganization.paragraph"
+        | translate
+    }}
+    <a
+      class="info-link-custom"
+      [href]="
+        'dmp.steps.documentation.messageInfo.dataOrganization.paragraphLink'
+          | translate
+      "
+      target="_blank">
+      {{
+        "dmp.steps.documentation.messageInfo.dataOrganization.paragraphTitle"
+          | translate
+      }}</a
+    >
+    {{
+      "dmp.steps.documentation.messageInfo.dataOrganization.paragraphEnd"
+        | translate
+    }}
+  </p>
+</app-info-message>
+<mat-form-field
+  appearance="fill"
+  [style]="'width: 100%'"
+  [floatLabel]="getFloatLabelValue()">
+  <mat-label>{{
+    "dmp.steps.documentation.question.structure" | translate
+  }}</mat-label>
+  <input matInput [placeholder]="optionsStructureAndVersioningPlaceholder" />
+</mat-form-field>
 
-<app-textarea-wrapper
-  [label]="'dmp.steps.documentation.question.structure'"
-  [control]="structure"
-  [autocompleteOptions]="optionsStructureAndVersioning">
-</app-textarea-wrapper>
+<mat-form-field
+  appearance="fill"
+  [style]="'width: 100%'"
+  [floatLabel]="getFloatLabelValue()">
+  <mat-label>{{
+    "dmp.steps.documentation.question.convention" | translate
+  }}</mat-label>
+  <input matInput [placeholder]="optionsConventionPlaceholder" />
+</mat-form-field>
+
+<mat-form-field
+  appearance="fill"
+  [style]="'width: 100%'"
+  [floatLabel]="getFloatLabelValue()">
+  <mat-label>{{
+    "dmp.steps.documentation.question.version" | translate
+  }}</mat-label>
+  <input matInput [placeholder]="optionsVersionPlaceholder" />
+</mat-form-field>
+
 <div class="form-field-hint">
-  <app-textarea-wrapper
-    [label]="'dmp.steps.documentation.question.metadata'"
-    [control]="metadata"
-    [autocompleteOptions]="optionsMetadata">
-  </app-textarea-wrapper>
-  <app-tooltip [tooltip]="'info.documentation.metadata'"></app-tooltip>
+  <mat-form-field hintLabel="Max 4000 characters" [style]="'width: 100%'">
+    <mat-label>{{
+      "dmp.steps.documentation.question.metadata" | translate
+    }}</mat-label>
+    <input
+      matInput
+      #input
+      maxlength="4000"
+      placeholder=" As there are no domain specific metadata standards applicable, we will provide a README file with an explanation of all values and terms used [at file level/at dataset level/at project level]" />
+    <mat-hint align="end">{{ input.value.length }}/4000</mat-hint>
+  </mat-form-field>
+  <mat-icon
+    class="tooltip-position"
+    color="primary"
+    (click)="openMetadataDialog()"
+    onkeyup>
+    info
+  </mat-icon>
 </div>
-<app-textarea-wrapper
-  [label]="'dmp.steps.documentation.question.documentation'"
-  [control]="documentation">
-</app-textarea-wrapper>
+
+<div class="form-field-hint">
+  <mat-form-field hintLabel="Max 4000 characters" [style]="'width: 100%'">
+    <mat-label>{{
+      "dmp.steps.documentation.question.documentation" | translate
+    }}</mat-label>
+    <input matInput #input maxlength="4000" />
+    <mat-hint align="end">{{ input.value.length }}/4000</mat-hint>
+  </mat-form-field>
+  <mat-icon
+    class="tooltip-position"
+    color="primary"
+    (click)="openDocumentationDialog()"
+    onkeyup>
+    info
+  </mat-icon>
+</div>
 <mat-form-field
   appearance="fill"
   [style]="'width: 100%'"

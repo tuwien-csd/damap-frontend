@@ -26,7 +26,6 @@
           </button>
           <mat-menu #language="matMenu">
             <button mat-menu-item (click)="useLanguage('en')">EN</button>
-            <button mat-menu-item (click)="useLanguage('de')">DE</button>
           </mat-menu>
         </div>
       </div>
@@ -102,7 +101,9 @@
 <div class="footer">
   <div class="version-information">
     {{ "layout.version" | translate }}: {{ version }}
-    <a [routerLink]="'/gdpr'" rel="noopener">{{ "layout.gdpr" | translate }}</a>
+    <a class="info-link-custom" [routerLink]="'/gdpr'" rel="noopener">{{
+      "layout.gdpr" | translate
+    }}</a>
   </div>
   <div class="info">
     <a
