@@ -34,10 +34,6 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}
           
-      - name: Modify the dockerfile
-        run: |
-          sed -i '/# create a second/,$d' Dockerfile
-          
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
