@@ -77,7 +77,7 @@ mat-nav-list {
   display: flex;
   align-items: center;
   text-align: left;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 500;
 }
 
@@ -184,8 +184,8 @@ A[data-lang-active-en] {
 }
 
 #mainHeaderLogo A svg {
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
 }
 
 svg {
@@ -269,7 +269,7 @@ svg {
   }
 
   #mainHeader #mainHeaderLogo A {
-    top: 15px;
+    top: -50px;
     padding-right: 15px;
     position: relative;
   }
