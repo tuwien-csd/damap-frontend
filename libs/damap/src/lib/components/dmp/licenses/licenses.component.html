@@ -73,7 +73,8 @@
           </mat-card-content>
         </ng-container>
 
-        <mat-card-content>
+        <mat-card-content
+          *ngIf="dataset.value.dataAccess !== accessType.CLOSED">
           <mat-form-field>
             <mat-label>{{
               "dmp.steps.licensing.question.startDate" | translate
