@@ -406,7 +406,7 @@ export class FormService {
           notEmptyValidator(),
         ],
       ],
-      license: [ccBy.id, Validators.maxLength(this.TEXT_SHORT_LENGTH)],
+      license: [null],
       startDate: [null],
       type: [[]],
       size: [null],
