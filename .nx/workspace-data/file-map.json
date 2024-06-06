@@ -85,6 +85,68 @@
   "nxJsonPlugins": [],
   "fileMap": {
     "projectFileMap": {
+      "damap-frontend-e2e": [
+        {
+          "file": "apps/damap-frontend-e2e/.eslintrc.json",
+          "hash": "15523834149352881398"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/cypress.config.ts",
+          "hash": "6431336458232571759",
+          "deps": [
+            "npm:cypress",
+            "npm:@nrwl/cypress"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend-e2e/project.json",
+          "hash": "4179474831674639375"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/e2e/access.cy.ts",
+          "hash": "4966169072924143809"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/e2e/app.cy.ts",
+          "hash": "14186985911946705060"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/e2e/delete-dmp.cy.ts",
+          "hash": "4637643107114317421"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/e2e/dmp.cy.ts",
+          "hash": "11291123351569327187"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/e2e/gdpr.cy.ts",
+          "hash": "10632302840573832010"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/fixtures/example.json",
+          "hash": "11614668686582597233"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/fixtures/users.json",
+          "hash": "14124238025464055386"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/support/app.po.ts",
+          "hash": "11157016311132186162"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/support/commands.ts",
+          "hash": "3233650173452907661"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/support/e2e.ts",
+          "hash": "3666078656922506009"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/tsconfig.json",
+          "hash": "1788248097864730386"
+        }
+      ],
       "damap-frontend": [
         {
           "file": "apps/damap-frontend/.eslintrc.json",
@@ -383,7 +445,7 @@
         },
         {
           "file": "apps/damap-frontend/src/styles.scss",
-          "hash": "12315766290875385914"
+          "hash": "13101942842273243369"
         },
         {
           "file": "apps/damap-frontend/src/test.ts",
@@ -404,7 +466,7 @@
         },
         {
           "file": "apps/damap-frontend/src/themes/custom-theme.scss",
-          "hash": "10540082335284494979"
+          "hash": "8619941518298337900"
         },
         {
           "file": "apps/damap-frontend/src/typing.d.ts",
@@ -421,68 +483,6 @@
         {
           "file": "apps/damap-frontend/tsconfig.spec.json",
           "hash": "18437357720176710301"
-        }
-      ],
-      "damap-frontend-e2e": [
-        {
-          "file": "apps/damap-frontend-e2e/.eslintrc.json",
-          "hash": "15523834149352881398"
-        },
-        {
-          "file": "apps/damap-frontend-e2e/cypress.config.ts",
-          "hash": "6431336458232571759",
-          "deps": [
-            "npm:cypress",
-            "npm:@nrwl/cypress"
-          ]
-        },
-        {
-          "file": "apps/damap-frontend-e2e/project.json",
-          "hash": "4179474831674639375"
-        },
-        {
-          "file": "apps/damap-frontend-e2e/src/e2e/access.cy.ts",
-          "hash": "4966169072924143809"
-        },
-        {
-          "file": "apps/damap-frontend-e2e/src/e2e/app.cy.ts",
-          "hash": "14186985911946705060"
-        },
-        {
-          "file": "apps/damap-frontend-e2e/src/e2e/delete-dmp.cy.ts",
-          "hash": "4637643107114317421"
-        },
-        {
-          "file": "apps/damap-frontend-e2e/src/e2e/dmp.cy.ts",
-          "hash": "11291123351569327187"
-        },
-        {
-          "file": "apps/damap-frontend-e2e/src/e2e/gdpr.cy.ts",
-          "hash": "10632302840573832010"
-        },
-        {
-          "file": "apps/damap-frontend-e2e/src/fixtures/example.json",
-          "hash": "11614668686582597233"
-        },
-        {
-          "file": "apps/damap-frontend-e2e/src/fixtures/users.json",
-          "hash": "14124238025464055386"
-        },
-        {
-          "file": "apps/damap-frontend-e2e/src/support/app.po.ts",
-          "hash": "11157016311132186162"
-        },
-        {
-          "file": "apps/damap-frontend-e2e/src/support/commands.ts",
-          "hash": "3233650173452907661"
-        },
-        {
-          "file": "apps/damap-frontend-e2e/src/support/e2e.ts",
-          "hash": "3666078656922506009"
-        },
-        {
-          "file": "apps/damap-frontend-e2e/tsconfig.json",
-          "hash": "1788248097864730386"
         }
       ],
       "damap": [
