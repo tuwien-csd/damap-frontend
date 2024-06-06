@@ -1,17 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
-@import "themes/custom-theme";
+@import 'themes/custom-theme';
 
-/* Theme colors as CSS variables */
 :root {
-  --main-color: #{map-get($app-primary, 500)};
-  --main-color-contrast: #{map-get($app-primary, "500-contrast")};
-  --accent-color-lighter: #{map-get($app-primary, 400)};
-  --accent-color-darker: #{map-get($app-primary, 700)};
-  --secondary-color: #{map-get($app-accent, 500)};
-  --secondary-color-light: #{map-get($app-accent, 50)};
-  --step-intro-color: #9b9b9b;
-  --error-bg: #fad1d5;
-  --success-bg: #e9f5d2;
-  --info-bg: #c4d8e2;
-  --warning-bg: #fff4cb;
+  //  --main-color: #{mat-theme.get-color-from-palette($app-primary, 500)};
+  //  --main-color-contrast: #{mat-theme.get-contrast-color-from-palette($app-primary, 500)};
+  //  --accent-color-lighter: #{mat-theme.get-color-from-palette($app-accent, 400)};
+  //  --accent-color-darker: #{mat-theme.get-color-from-palette($app-accent, 700)};
+  //  --secondary-color: #{mat-theme.get-color-from-palette($app-accent, 500)};
+  //  --secondary-color-light: #{mat-theme.get-color-from-palette($app-accent, 50)};
+  //  // Additional variables...
+  // @include mat.all-component-themes($angular-material-3-theme);
 }

@@ -1,0 +1,26 @@
+Error: write EPIPE
+
+Messages from the log:
+[NX Daemon Server] - 2024-06-06T11:24:17.603Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-06-06T11:24:17.603Z - [REQUEST]: apps/damap-frontend/src/themes/custom-theme.scss
+[NX Daemon Server] - 2024-06-06T11:24:17.603Z - [REQUEST]: 
+[NX Daemon Server] - 2024-06-06T11:24:17.673Z - Time taken for 'hash changed files from watcher' 2.058000000193715ms
+[NX Daemon Server] - 2024-06-06T11:24:29.925Z - [WATCHER]: apps/damap-frontend/src/themes/custom-theme.scss was modified
+[NX Daemon Server] - 2024-06-06T11:24:29.926Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-06-06T11:24:32.839Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-06-06T11:24:36.342Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX Daemon Server] - 2024-06-06T11:24:36.342Z - [REQUEST]: apps/damap-frontend/src/themes/custom-theme.scss
+[NX Daemon Server] - 2024-06-06T11:24:36.342Z - [REQUEST]: 
+[NX Daemon Server] - 2024-06-06T11:24:36.434Z - Time taken for 'hash changed files from watcher' 0.8554999998304993ms
+[NX Daemon Server] - 2024-06-06T11:25:02.416Z - Closed a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-06-06T11:25:02.419Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-06-06T11:25:17.076Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-06-06T11:25:17.078Z - [WATCHER]: package.json was modified
+[NX Daemon Server] - 2024-06-06T11:25:17.576Z - [WATCHER]: Processing file changes in outputs
+[NX Daemon Server] - 2024-06-06T11:25:17.595Z - [WATCHER]: Stopping the watcher for c:\Users\rdm\Documents\work\rdm\damap\damap-frontend\damap-frontend (sources)
+[NX Daemon Server] - 2024-06-06T11:25:17.595Z - [WATCHER]: Stopping the watcher for c:\Users\rdm\Documents\work\rdm\damap\damap-frontend\damap-frontend (outputs)
+[NX Daemon Server] - 2024-06-06T11:25:17.595Z - Server stopped because: "LOCK_FILES_CHANGED"
+
+
+
+More information: c:\Users\rdm\Documents\work\rdm\damap\damap-frontend\damap-frontend\.nx\workspace-data\d\daemon.log

@@ -9,6 +9,7 @@
     "@angular/core": "18.0.2",
     "@angular/forms": "18.0.2",
     "@angular/material": "^18.0.2",
+    "@angular/material-experimental": "^18.0.2",
     "@angular/material-moment-adapter": "^18.0.2",
     "@angular/platform-browser": "18.0.2",
     "@angular/platform-browser-dynamic": "18.0.2",
@@ -24,6 +25,7 @@
     "angular-oauth2-oidc": "17.0.2",
     "cors": "2.8.5",
     "deepmerge-ts": "^7.0.3",
+    "moment": "^2.24.0",
     "ngx-translate-multi-http-loader": "17.0.0",
     "rxjs": "7.8.1",
     "tslib": "2.6.3",
@@ -66,6 +68,7 @@
     "karma-jasmine-html-reporter": "2.1.0",
     "karma-junit-reporter": "2.0.1",
     "ng-packagr": "18.0.0",
+    "node-sass": "^9.0.0",
     "nx": "19.2.0",
     "postcss": "8.4.38",
     "postcss-import": "16.1.0",
@@ -81,128 +84,6 @@
   },
   "nxJsonPlugins": [],
   "fileMap": {
-    "nonProjectFiles": [
-      {
-        "file": ".ci/Jenkinsfile",
-        "hash": "15133615239552236578"
-      },
-      {
-        "file": "CUSTOMISING.md",
-        "hash": "3129354703907997394"
-      },
-      {
-        "file": "package.json",
-        "hash": "7821958784596863408"
-      },
-      {
-        "file": ".github/ISSUE_TEMPLATE/feature_request.md",
-        "hash": "16206322104142586860"
-      },
-      {
-        "file": ".dockerignore",
-        "hash": "11824676522640949798"
-      },
-      {
-        "file": ".vscode/extensions.json",
-        "hash": "17824784343261341590"
-      },
-      {
-        "file": "Dockerfile",
-        "hash": "9011795825111327525"
-      },
-      {
-        "file": "karma.conf.js",
-        "hash": "11365708082890734609"
-      },
-      {
-        "file": ".github/ISSUE_TEMPLATE/question.md",
-        "hash": "7804231690729846179"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "13403225145620367397"
-      },
-      {
-        "file": "tools/tsconfig.tools.json",
-        "hash": "16088922570277978783"
-      },
-      {
-        "file": ".ci/config.yaml",
-        "hash": "12295261914492214998"
-      },
-      {
-        "file": "tsconfig.base.json",
-        "hash": "14600190466433409737"
-      },
-      {
-        "file": ".prettierignore",
-        "hash": "1772088410855450625"
-      },
-      {
-        "file": "LICENSE",
-        "hash": "15937924384476874581"
-      },
-      {
-        "file": ".eslintrc.json",
-        "hash": "11771077953543409059"
-      },
-      {
-        "file": "nx.json",
-        "hash": "5982333500533808251"
-      },
-      {
-        "file": "libs/.gitkeep",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": ".prettierrc",
-        "hash": "15433954852939612048"
-      },
-      {
-        "file": ".github/workflows/release.yml",
-        "hash": "1789347563870188561"
-      },
-      {
-        "file": "README.md",
-        "hash": "11096314049154406187"
-      },
-      {
-        "file": ".github/pull_request_template.md",
-        "hash": "7387782319448689320"
-      },
-      {
-        "file": "package-lock.json",
-        "hash": "15302345999520665248"
-      },
-      {
-        "file": "docker/conf.d/default.conf",
-        "hash": "13119343319768215258"
-      },
-      {
-        "file": "custom-webpack-config.js",
-        "hash": "11656400164619711791"
-      },
-      {
-        "file": "tools/generators/.gitkeep",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": ".github/workflows/test.yml",
-        "hash": "15632448088574894351"
-      },
-      {
-        "file": ".editorconfig",
-        "hash": "11791638009474165083"
-      },
-      {
-        "file": ".github/ISSUE_TEMPLATE/bug_report.md",
-        "hash": "8850379227685096762"
-      },
-      {
-        "file": ".github/ISSUE_TEMPLATE/change-request.md",
-        "hash": "6033505092240566636"
-      }
-    ],
     "projectFileMap": {
       "damap-frontend": [
         {
@@ -236,6 +117,10 @@
             [
               "npm:karma-coverage",
               "dynamic"
+            ],
+            [
+              "npm:@angular-devkit/build-angular",
+              "dynamic"
             ]
           ]
         },
@@ -249,26 +134,39 @@
         },
         {
           "file": "apps/damap-frontend/src/app/app.component.spec.ts",
-          "hash": "14730106106153330897"
+          "hash": "14730106106153330897",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "apps/damap-frontend/src/app/app.component.ts",
-          "hash": "1990853130142176547"
+          "hash": "1990853130142176547",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "apps/damap-frontend/src/app/app.module.ts",
           "hash": "9628294140755666593",
           "deps": [
+            "npm:@angular/core",
             "damap",
+            "npm:@angular/common",
             "npm:@ngx-translate/core",
+            "npm:@angular/platform-browser",
+            "npm:@angular/material",
             "npm:ngx-translate-multi-http-loader",
-            "npm:angular-oauth2-oidc"
+            "npm:angular-oauth2-oidc",
+            "npm:@angular/forms",
+            "npm:@angular/router"
           ]
         },
         {
           "file": "apps/damap-frontend/src/app/app.routes.ts",
           "hash": "9659004289017387260",
           "deps": [
+            "npm:@angular/router",
             "damap"
           ]
         },
@@ -280,6 +178,7 @@
           "file": "apps/damap-frontend/src/app/components/consent/consent.component.spec.ts",
           "hash": "2948405124692231213",
           "deps": [
+            "npm:@angular/core",
             "damap"
           ]
         },
@@ -287,6 +186,7 @@
           "file": "apps/damap-frontend/src/app/components/consent/consent.component.ts",
           "hash": "13304978629432901029",
           "deps": [
+            "npm:@angular/core",
             "npm:@ngx-translate/core",
             "damap"
           ]
@@ -295,7 +195,10 @@
           "file": "apps/damap-frontend/src/app/components/consent/consent.module.ts",
           "hash": "10417375654270411690",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/material"
           ]
         },
         {
@@ -310,7 +213,10 @@
           "file": "apps/damap-frontend/src/app/components/layout/layout.component.spec.ts",
           "hash": "625172227370562596",
           "deps": [
+            "npm:@angular/core",
             "npm:angular-oauth2-oidc",
+            "npm:@angular/material",
+            "npm:@angular/platform-browser",
             "damap"
           ]
         },
@@ -318,6 +224,7 @@
           "file": "apps/damap-frontend/src/app/components/layout/layout.component.ts",
           "hash": "17690559720123974447",
           "deps": [
+            "npm:@angular/core",
             "npm:@ngx-translate/core",
             "damap"
           ]
@@ -326,21 +233,30 @@
           "file": "apps/damap-frontend/src/app/components/layout/layout.module.ts",
           "hash": "8890956580185179341",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
             "npm:@ngx-translate/core",
-            "damap"
+            "damap",
+            "npm:@angular/router",
+            "npm:@angular/material"
           ]
         },
         {
           "file": "apps/damap-frontend/src/app/guard/consent.guard.ts",
           "hash": "12599896274151766656",
           "deps": [
-            "damap"
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "damap",
+            "npm:@angular/material"
           ]
         },
         {
           "file": "apps/damap-frontend/src/app/services/config.service.spec.ts",
           "hash": "6371801594214054397",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
             "npm:angular-oauth2-oidc"
           ]
         },
@@ -349,7 +265,9 @@
           "hash": "3214711610513343255",
           "deps": [
             "npm:angular-oauth2-oidc",
+            "npm:@angular/core",
             "damap",
+            "npm:@angular/common",
             "npm:rxjs"
           ]
         },
@@ -357,6 +275,8 @@
           "file": "apps/damap-frontend/src/app/store/app-store.module.ts",
           "hash": "10606164199227829628",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
             "npm:@ngrx/store",
             "npm:@ngrx/effects",
             "npm:@ngrx/store-devtools"
@@ -448,7 +368,11 @@
         },
         {
           "file": "apps/damap-frontend/src/main.ts",
-          "hash": "11115688907842927236"
+          "hash": "11115688907842927236",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/platform-browser-dynamic"
+          ]
         },
         {
           "file": "apps/damap-frontend/src/polyfills.ts",
@@ -459,13 +383,15 @@
         },
         {
           "file": "apps/damap-frontend/src/styles.scss",
-          "hash": "10431421459486552148"
+          "hash": "12315766290875385914"
         },
         {
           "file": "apps/damap-frontend/src/test.ts",
           "hash": "16418080260848022337",
           "deps": [
-            "npm:zone.js"
+            "npm:zone.js",
+            "npm:@angular/core",
+            "npm:@angular/platform-browser-dynamic"
           ]
         },
         {
@@ -478,7 +404,7 @@
         },
         {
           "file": "apps/damap-frontend/src/themes/custom-theme.scss",
-          "hash": "11957342982534409397"
+          "hash": "10540082335284494979"
         },
         {
           "file": "apps/damap-frontend/src/typing.d.ts",
@@ -506,7 +432,8 @@
           "file": "apps/damap-frontend-e2e/cypress.config.ts",
           "hash": "6431336458232571759",
           "deps": [
-            "npm:cypress"
+            "npm:cypress",
+            "npm:@nrwl/cypress"
           ]
         },
         {
@@ -590,6 +517,10 @@
             [
               "npm:karma-coverage",
               "dynamic"
+            ],
+            [
+              "npm:@angular-devkit/build-angular",
+              "dynamic"
             ]
           ]
         },
@@ -601,6 +532,8 @@
           "file": "libs/damap/package.json",
           "hash": "4377274685144932897",
           "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
             "npm:tslib"
           ]
         },
@@ -684,6 +617,7 @@
           "file": "libs/damap/src/lib/auth/auth.service.spec.ts",
           "hash": "12037070964057877310",
           "deps": [
+            "npm:@angular/core",
             "npm:angular-oauth2-oidc"
           ]
         },
@@ -691,6 +625,7 @@
           "file": "libs/damap/src/lib/auth/auth.service.ts",
           "hash": "6438473730705463700",
           "deps": [
+            "npm:@angular/core",
             "npm:angular-oauth2-oidc"
           ]
         },
@@ -706,6 +641,9 @@
           "file": "libs/damap/src/lib/components/access/access.component.spec.ts",
           "hash": "5415814669054711310",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/router",
             "npm:rxjs"
           ]
         },
@@ -713,7 +651,11 @@
           "file": "libs/damap/src/lib/components/access/access.component.ts",
           "hash": "8231488511326759349",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
             "npm:rxjs",
+            "npm:@angular/router",
+            "npm:@angular/material",
             "npm:@ngx-translate/core"
           ]
         },
@@ -727,17 +669,28 @@
         },
         {
           "file": "libs/damap/src/lib/components/dashboard/dashboard.component.spec.ts",
-          "hash": "2173326319702835998"
+          "hash": "2173326319702835998",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dashboard/dashboard.component.ts",
-          "hash": "8163790069264739030"
+          "hash": "8163790069264739030",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dashboard/dashboard.module.ts",
           "hash": "1889394299247064447",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/material",
+            "npm:@angular/router"
           ]
         },
         {
@@ -750,17 +703,30 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/costs/costs.component.spec.ts",
-          "hash": "6382214137351013957"
+          "hash": "6382214137351013957",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/costs/costs.component.ts",
-          "hash": "9450154790668695206"
+          "hash": "9450154790668695206",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/costs/costs.module.ts",
           "hash": "1309985942024678146",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
           ]
         },
         {
@@ -773,17 +739,31 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/data-deletion/data-deletion.component.spec.ts",
-          "hash": "516789483522202560"
+          "hash": "516789483522202560",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/data-deletion/data-deletion.component.ts",
-          "hash": "5859420273028255126"
+          "hash": "5859420273028255126",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/data-deletion/data-deletion.module.ts",
           "hash": "9444052806819559883",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
           ]
         },
         {
@@ -796,17 +776,30 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/data-storage/data-access/data-access.component.spec.ts",
-          "hash": "14305964028430979747"
+          "hash": "14305964028430979747",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/platform-browser"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/data-storage/data-access/data-access.component.ts",
-          "hash": "491431669384787692"
+          "hash": "491431669384787692",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/data-storage/data-storage.module.ts",
           "hash": "6580613006483008720",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
           ]
         },
         {
@@ -819,11 +812,18 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/data-storage/external-storage/external-storage.component.spec.ts",
-          "hash": "2339497422479083302"
+          "hash": "2339497422479083302",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/data-storage/external-storage/external-storage.component.ts",
-          "hash": "6516886722531989633"
+          "hash": "6516886722531989633",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/data-storage/storage/storage-filter.pipe.spec.ts",
@@ -831,7 +831,10 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/data-storage/storage/storage-filter.pipe.ts",
-          "hash": "11987159784316317723"
+          "hash": "11987159784316317723",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/data-storage/storage/storage.component.css",
@@ -845,6 +848,7 @@
           "file": "libs/damap/src/lib/components/dmp/data-storage/storage/storage.component.spec.ts",
           "hash": "3861798394987654655",
           "deps": [
+            "npm:@angular/core",
             "npm:@ngrx/store"
           ]
         },
@@ -852,7 +856,9 @@
           "file": "libs/damap/src/lib/components/dmp/data-storage/storage/storage.component.ts",
           "hash": "15079970170913181775",
           "deps": [
-            "npm:@ngrx/store"
+            "npm:@angular/core",
+            "npm:@ngrx/store",
+            "npm:@angular/forms"
           ]
         },
         {
@@ -867,22 +873,35 @@
           "file": "libs/damap/src/lib/components/dmp/dmp-actions/dmp-actions.component.spec.ts",
           "hash": "1379184959117371285",
           "deps": [
+            "npm:@angular/core",
             "npm:@ngrx/store",
-            "npm:rxjs"
+            "npm:rxjs",
+            "npm:@angular/forms",
+            "npm:@angular/cdk",
+            "npm:@angular/material",
+            "npm:@angular/platform-browser"
           ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/dmp-actions/dmp-actions.component.ts",
           "hash": "8799456040596135312",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
             "npm:rxjs",
-            "npm:@ngrx/store"
+            "npm:@ngrx/store",
+            "npm:@angular/forms"
           ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/dmp-actions/dmp-actions.module.ts",
           "hash": "4660500764944847179",
           "deps": [
+            "npm:@angular/common",
+            "npm:@angular/forms",
+            "npm:@angular/material",
+            "npm:@angular/core",
+            "npm:@angular/router",
             "npm:@ngx-translate/core"
           ]
         },
@@ -902,7 +921,13 @@
           "file": "libs/damap/src/lib/components/dmp/dmp.component.spec.ts",
           "hash": "3247848487031076588",
           "deps": [
+            "npm:@angular/core",
             "npm:@ngrx/store",
+            "npm:@angular/router",
+            "npm:@angular/forms",
+            "npm:@angular/material",
+            "npm:@angular/platform-browser",
+            "npm:@angular/cdk",
             "npm:rxjs"
           ]
         },
@@ -910,8 +935,14 @@
           "file": "libs/damap/src/lib/components/dmp/dmp.component.ts",
           "hash": "17815932348189455106",
           "deps": [
+            "npm:@angular/router",
+            "npm:@angular/core",
             "npm:rxjs",
-            "npm:@ngrx/store"
+            "npm:@ngrx/store",
+            "npm:@angular/forms",
+            "npm:@angular/common",
+            "npm:@angular/material",
+            "npm:@angular/cdk"
           ]
         },
         {
@@ -919,12 +950,20 @@
           "hash": "10248987794189620379",
           "deps": [
             "npm:@ngx-translate/core",
-            "npm:ngx-translate-multi-http-loader"
+            "npm:@angular/common",
+            "npm:@angular/forms",
+            "npm:@angular/material",
+            "npm:ngx-translate-multi-http-loader",
+            "npm:@angular/core",
+            "npm:@angular/router"
           ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/dmp.routes.ts",
-          "hash": "11022444587731836833"
+          "hash": "11022444587731836833",
+          "deps": [
+            "npm:@angular/router"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/doc-data-quality/doc-data-quality.component.css",
@@ -936,17 +975,30 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/doc-data-quality/doc-data-quality.component.spec.ts",
-          "hash": "357371318467552097"
+          "hash": "357371318467552097",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/doc-data-quality/doc-data-quality.component.ts",
-          "hash": "17688905500806740958"
+          "hash": "17688905500806740958",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/doc-data-quality/doc-data-quality.module.ts",
           "hash": "12803000566748840396",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
           ]
         },
         {
@@ -959,11 +1011,20 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/ethical-aspects/ethical-aspects.component.spec.ts",
-          "hash": "5807064787720074093"
+          "hash": "5807064787720074093",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/ethical-aspects/ethical-aspects.component.ts",
-          "hash": "17128801896082743175"
+          "hash": "17128801896082743175",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/legal-ethical-aspects.component.css",
@@ -975,17 +1036,29 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/legal-ethical-aspects.component.spec.ts",
-          "hash": "17677376766844187570"
+          "hash": "17677376766844187570",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/legal-ethical-aspects.component.ts",
-          "hash": "11988803999001256574"
+          "hash": "11988803999001256574",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/legal-ethical-aspects.module.ts",
           "hash": "4909060006955562677",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/material"
           ]
         },
         {
@@ -998,17 +1071,30 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/licenses/licenses.component.spec.ts",
-          "hash": "16579691148682951764"
+          "hash": "16579691148682951764",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/licenses/licenses.component.ts",
-          "hash": "9464779290253635191"
+          "hash": "9464779290253635191",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/licenses/licenses.module.ts",
           "hash": "7738588856457023818",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/common",
+            "npm:@angular/material",
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@ngx-translate/core",
+            "npm:@angular/material-moment-adapter"
           ]
         },
         {
@@ -1021,7 +1107,10 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/people/contributor-filter.pipe.ts",
-          "hash": "16384572137686026589"
+          "hash": "16384572137686026589",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/people/contributor-manual/contributor-manual.component.css",
@@ -1033,11 +1122,20 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/people/contributor-manual/contributor-manual.component.spec.ts",
-          "hash": "2398004612566980713"
+          "hash": "2398004612566980713",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/people/contributor-manual/contributor-manual.component.ts",
-          "hash": "17162236118303178855"
+          "hash": "17162236118303178855",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/people/people.component.css",
@@ -1051,6 +1149,11 @@
           "file": "libs/damap/src/lib/components/dmp/people/people.component.spec.ts",
           "hash": "9994295058847301282",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/cdk",
+            "npm:@angular/material",
+            "npm:@angular/platform-browser",
             "npm:rxjs"
           ]
         },
@@ -1058,12 +1161,19 @@
           "file": "libs/damap/src/lib/components/dmp/people/people.component.ts",
           "hash": "4687351644670046449",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material",
             "npm:rxjs"
           ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/people/people.module.ts",
-          "hash": "11952334309314140772"
+          "hash": "11952334309314140772",
+          "deps": [
+            "npm:@angular/material",
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/project/manual-project-input/manual-project-input.component.html",
@@ -1071,11 +1181,21 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/project/manual-project-input/manual-project-input.component.spec.ts",
-          "hash": "7977766317080455694"
+          "hash": "7977766317080455694",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/cdk",
+            "npm:@angular/material",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/project/manual-project-input/manual-project-input.component.ts",
-          "hash": "10105336213362390933"
+          "hash": "10105336213362390933",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/project/project-list/project-list.component.css",
@@ -1089,6 +1209,10 @@
           "file": "libs/damap/src/lib/components/dmp/project/project-list/project-list.component.spec.ts",
           "hash": "6976126677386911709",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/cdk",
+            "npm:@angular/material",
+            "npm:@angular/platform-browser",
             "npm:rxjs"
           ]
         },
@@ -1096,7 +1220,9 @@
           "file": "libs/damap/src/lib/components/dmp/project/project-list/project-list.component.ts",
           "hash": "8800869957614146063",
           "deps": [
-            "npm:rxjs"
+            "npm:@angular/core",
+            "npm:rxjs",
+            "npm:@angular/material"
           ]
         },
         {
@@ -1107,18 +1233,30 @@
           "file": "libs/damap/src/lib/components/dmp/project/project.component.spec.ts",
           "hash": "17613658110287030573",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/forms",
             "npm:rxjs"
           ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/project/project.component.ts",
-          "hash": "14526229706712177671"
+          "hash": "14526229706712177671",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/project/project.module.ts",
           "hash": "2848217727718219720",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/common",
+            "npm:@angular/material",
+            "npm:@angular/core",
+            "npm:@ngx-translate/core",
+            "npm:@angular/material-moment-adapter"
           ]
         },
         {
@@ -1131,11 +1269,17 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/repo-details/repo-details.component.spec.ts",
-          "hash": "6064765189645563874"
+          "hash": "6064765189645563874",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/repo-details/repo-details.component.ts",
-          "hash": "2714771982333777735"
+          "hash": "2714771982333777735",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/repo-filter/filter-dialog.html",
@@ -1153,12 +1297,18 @@
           "file": "libs/damap/src/lib/components/dmp/repo/repo-filter/repo-filter.component.spec.ts",
           "hash": "16852315654776148783",
           "deps": [
-            "npm:@ngrx/store"
+            "npm:@angular/core",
+            "npm:@ngrx/store",
+            "npm:@angular/material"
           ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/repo-filter/repo-filter.component.ts",
-          "hash": "8561032826286600664"
+          "hash": "8561032826286600664",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/repo-filters.ts",
@@ -1170,11 +1320,17 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/repo-recommendation/repo-recommendation.component.spec.ts",
-          "hash": "6702617525961604875"
+          "hash": "6702617525961604875",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/repo-recommendation/repo-recommendation.component.ts",
-          "hash": "5053752945736752576"
+          "hash": "5053752945736752576",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/repo-table/repo-table.component.css",
@@ -1186,11 +1342,19 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/repo-table/repo-table.component.spec.ts",
-          "hash": "7064288004975612184"
+          "hash": "7064288004975612184",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/repo-table/repo-table.component.ts",
-          "hash": "13724597626578077305"
+          "hash": "13724597626578077305",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/animations"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/repo.component.css",
@@ -1204,13 +1368,17 @@
           "file": "libs/damap/src/lib/components/dmp/repo/repo.component.spec.ts",
           "hash": "3383056594344891872",
           "deps": [
-            "npm:@ngrx/store"
+            "npm:@angular/core",
+            "npm:@ngrx/store",
+            "npm:@angular/forms"
           ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/repo.component.ts",
           "hash": "7397899475633902860",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
             "npm:@ngrx/store",
             "npm:rxjs"
           ]
@@ -1219,7 +1387,11 @@
           "file": "libs/damap/src/lib/components/dmp/repo/repo.module.ts",
           "hash": "7678623347661496219",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
           ]
         },
         {
@@ -1228,7 +1400,10 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/repo.pipe.ts",
-          "hash": "7147998599388955594"
+          "hash": "7147998599388955594",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/retention-period/retention-period.component.css",
@@ -1240,11 +1415,21 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/retention-period/retention-period.component.spec.ts",
-          "hash": "8236881432103793035"
+          "hash": "8236881432103793035",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material",
+            "npm:@angular/platform-browser"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/repo/retention-period/retention-period.component.ts",
-          "hash": "17330319440279574960"
+          "hash": "17330319440279574960",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/reuse/reuse.component.css",
@@ -1256,22 +1441,39 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/reuse/reuse.component.spec.ts",
-          "hash": "14381795220710187140"
+          "hash": "14381795220710187140",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/platform-browser"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/reuse/reuse.component.ts",
-          "hash": "6550322998913633659"
+          "hash": "6550322998913633659",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/reuse/reuse.module.ts",
           "hash": "1604959753637089493",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
           ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/specify-data/abstract-base-data.component.ts",
-          "hash": "3003901034911404841"
+          "hash": "3003901034911404841",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/specify-data/created-data/created-data.component.html",
@@ -1281,13 +1483,20 @@
           "file": "libs/damap/src/lib/components/dmp/specify-data/created-data/created-data.component.spec.ts",
           "hash": "579651908982693094",
           "deps": [
-            "npm:rxjs"
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material",
+            "npm:rxjs",
+            "npm:@angular/platform-browser"
           ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/specify-data/created-data/created-data.component.ts",
           "hash": "2577326976150685745",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material",
             "npm:rxjs"
           ]
         },
@@ -1301,11 +1510,18 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/specify-data/data-mc/data-mc.component.spec.ts",
-          "hash": "9998376151643750046"
+          "hash": "9998376151643750046",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/specify-data/data-mc/data-mc.component.ts",
-          "hash": "16084484222273167288"
+          "hash": "16084484222273167288",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/specify-data/data-specs.ts",
@@ -1321,11 +1537,22 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/specify-data/dataset-dialog/dataset-dialog.component.spec.ts",
-          "hash": "7188049843641415020"
+          "hash": "7188049843641415020",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/forms",
+            "npm:@angular/platform-browser"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/specify-data/dataset-dialog/dataset-dialog.component.ts",
-          "hash": "14726599905469481556"
+          "hash": "14726599905469481556",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/specify-data/dataset-table/dataset-table.component.css",
@@ -1339,12 +1566,21 @@
           "file": "libs/damap/src/lib/components/dmp/specify-data/dataset-table/dataset-table.component.spec.ts",
           "hash": "3533742189400376598",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/forms",
+            "npm:@angular/platform-browser",
             "npm:rxjs"
           ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/specify-data/dataset-table/dataset-table.component.ts",
-          "hash": "8587659657021722319"
+          "hash": "8587659657021722319",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/specify-data/reused-data/reused-data.component.css",
@@ -1358,6 +1594,9 @@
           "file": "libs/damap/src/lib/components/dmp/specify-data/reused-data/reused-data.component.spec.ts",
           "hash": "15251711254642672009",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/forms",
             "npm:rxjs"
           ]
         },
@@ -1365,7 +1604,10 @@
           "file": "libs/damap/src/lib/components/dmp/specify-data/reused-data/reused-data.component.ts",
           "hash": "17299828332301711860",
           "deps": [
-            "npm:rxjs"
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:rxjs",
+            "npm:@angular/material"
           ]
         },
         {
@@ -1378,12 +1620,19 @@
         },
         {
           "file": "libs/damap/src/lib/components/dmp/specify-data/specify-data.component.spec.ts",
-          "hash": "5419236898428035798"
+          "hash": "5419236898428035798",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/dmp/specify-data/specify-data.component.ts",
           "hash": "12846698091955166043",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
             "npm:rxjs"
           ]
         },
@@ -1391,7 +1640,11 @@
           "file": "libs/damap/src/lib/components/dmp/specify-data/specify-data.module.ts",
           "hash": "3331541674053860755",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
           ]
         },
         {
@@ -1406,6 +1659,8 @@
           "file": "libs/damap/src/lib/components/dmp/summary/summary.component.spec.ts",
           "hash": "7976111309532838800",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
             "npm:@ngrx/store"
           ]
         },
@@ -1413,6 +1668,7 @@
           "file": "libs/damap/src/lib/components/dmp/summary/summary.component.ts",
           "hash": "8129232994571580235",
           "deps": [
+            "npm:@angular/core",
             "npm:@ngrx/store",
             "npm:rxjs"
           ]
@@ -1421,7 +1677,10 @@
           "file": "libs/damap/src/lib/components/dmp/summary/summary.module.ts",
           "hash": "6942076361338425634",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/material"
           ]
         },
         {
@@ -1434,14 +1693,20 @@
         },
         {
           "file": "libs/damap/src/lib/components/gdpr/gdpr.component.spec.ts",
-          "hash": "10962802302268286624"
+          "hash": "10962802302268286624",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/gdpr/gdpr.component.ts",
           "hash": "1394669532703939291",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
             "npm:rxjs",
-            "npm:@ngx-translate/core"
+            "npm:@ngx-translate/core",
+            "npm:@angular/material"
           ]
         },
         {
@@ -1456,7 +1721,12 @@
           "file": "libs/damap/src/lib/components/plans/plans.component.spec.ts",
           "hash": "9342039771716014986",
           "deps": [
+            "npm:@angular/core",
             "npm:@ngrx/store",
+            "npm:@angular/cdk",
+            "npm:@angular/material",
+            "npm:@angular/platform-browser",
+            "npm:@angular/forms",
             "npm:rxjs"
           ]
         },
@@ -1464,7 +1734,10 @@
           "file": "libs/damap/src/lib/components/plans/plans.component.ts",
           "hash": "11034491806677365400",
           "deps": [
+            "npm:@angular/core",
             "npm:@ngrx/store",
+            "npm:@angular/forms",
+            "npm:@angular/material",
             "npm:rxjs"
           ]
         },
@@ -1472,6 +1745,10 @@
           "file": "libs/damap/src/lib/components/plans/plans.module.ts",
           "hash": "12186026568529561235",
           "deps": [
+            "npm:@angular/common",
+            "npm:@angular/material",
+            "npm:@angular/core",
+            "npm:@angular/router",
             "npm:@ngx-translate/core"
           ]
         },
@@ -1483,6 +1760,8 @@
           "file": "libs/damap/src/lib/components/version/version-list/version-list.component.spec.ts",
           "hash": "2749334206568124233",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
             "npm:@ngrx/store"
           ]
         },
@@ -1490,6 +1769,8 @@
           "file": "libs/damap/src/lib/components/version/version-list/version-list.component.ts",
           "hash": "357950330106516526",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
             "npm:rxjs",
             "npm:@ngrx/store"
           ]
@@ -1504,11 +1785,17 @@
         },
         {
           "file": "libs/damap/src/lib/components/version/version-table/version-table.component.spec.ts",
-          "hash": "2036152083708225057"
+          "hash": "2036152083708225057",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-table/version-table.component.ts",
-          "hash": "4502703311032250027"
+          "hash": "4502703311032250027",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-contributors/version-view-contributors.component.css",
@@ -1520,11 +1807,17 @@
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-contributors/version-view-contributors.component.spec.ts",
-          "hash": "1334717184848277539"
+          "hash": "1334717184848277539",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-contributors/version-view-contributors.component.ts",
-          "hash": "15095117621530392360"
+          "hash": "15095117621530392360",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-costs/version-view-costs.component.html",
@@ -1532,11 +1825,17 @@
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-costs/version-view-costs.component.spec.ts",
-          "hash": "18416961474214139987"
+          "hash": "18416961474214139987",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-costs/version-view-costs.component.ts",
-          "hash": "1192428765081336903"
+          "hash": "1192428765081336903",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-datasets/version-view-datasets.component.css",
@@ -1548,11 +1847,17 @@
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-datasets/version-view-datasets.component.spec.ts",
-          "hash": "15008116286434134812"
+          "hash": "15008116286434134812",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-datasets/version-view-datasets.component.ts",
-          "hash": "18001605436984121145"
+          "hash": "18001605436984121145",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-doc-data-quality/version-view-doc-data-quality.component.html",
@@ -1560,11 +1865,17 @@
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-doc-data-quality/version-view-doc-data-quality.component.spec.ts",
-          "hash": "9522972366487783288"
+          "hash": "9522972366487783288",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-doc-data-quality/version-view-doc-data-quality.component.ts",
-          "hash": "8274643018040238392"
+          "hash": "8274643018040238392",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-legal-ethical-aspects/version-view-legal-ethical-aspects.component.html",
@@ -1572,11 +1883,17 @@
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-legal-ethical-aspects/version-view-legal-ethical-aspects.component.spec.ts",
-          "hash": "12100044785354190228"
+          "hash": "12100044785354190228",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-legal-ethical-aspects/version-view-legal-ethical-aspects.component.ts",
-          "hash": "9825199916823494334"
+          "hash": "9825199916823494334",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-project/version-view-project.component.html",
@@ -1584,11 +1901,17 @@
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-project/version-view-project.component.spec.ts",
-          "hash": "17954022281649324106"
+          "hash": "17954022281649324106",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-project/version-view-project.component.ts",
-          "hash": "2762187445262898961"
+          "hash": "2762187445262898961",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-repositories/version-view-repositories.component.html",
@@ -1596,11 +1919,17 @@
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-repositories/version-view-repositories.component.spec.ts",
-          "hash": "16174762210874260469"
+          "hash": "16174762210874260469",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-repositories/version-view-repositories.component.ts",
-          "hash": "5914941738410562523"
+          "hash": "5914941738410562523",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-reuse/version-view-reuse.component.html",
@@ -1608,11 +1937,17 @@
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-reuse/version-view-reuse.component.spec.ts",
-          "hash": "14118234496032822598"
+          "hash": "14118234496032822598",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-reuse/version-view-reuse.component.ts",
-          "hash": "8121909287830965082"
+          "hash": "8121909287830965082",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-storages/version-view-storages.component.html",
@@ -1620,11 +1955,17 @@
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-storages/version-view-storages.component.spec.ts",
-          "hash": "14035921591439842899"
+          "hash": "14035921591439842899",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-storages/version-view-storages.component.ts",
-          "hash": "15024465986839831116"
+          "hash": "15024465986839831116",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view/version-view.component.css",
@@ -1636,20 +1977,31 @@
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view/version-view.component.spec.ts",
-          "hash": "10327166478092637068"
+          "hash": "10327166478092637068",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version-view/version-view.component.ts",
           "hash": "2489079459034287142",
           "deps": [
-            "npm:rxjs"
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:rxjs",
+            "npm:@angular/material"
           ]
         },
         {
           "file": "libs/damap/src/lib/components/version/version.module.ts",
           "hash": "6190182070417005557",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/material",
+            "npm:@angular/router"
           ]
         },
         {
@@ -1664,6 +2016,9 @@
           "file": "libs/damap/src/lib/damap.module.ts",
           "hash": "5282163441697457647",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/router",
             "npm:@ngx-translate/core"
           ]
         },
@@ -1833,7 +2188,11 @@
         },
         {
           "file": "libs/damap/src/lib/guards/auth.guard.ts",
-          "hash": "3198848839376597702"
+          "hash": "3198848839376597702",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
         },
         {
           "file": "libs/damap/src/lib/mocks/access-mocks.ts",
@@ -1877,7 +2236,10 @@
         },
         {
           "file": "libs/damap/src/lib/pipes/byte/byte.module.ts",
-          "hash": "12159580468797027286"
+          "hash": "12159580468797027286",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/pipes/byte/byte.pipe.spec.ts",
@@ -1885,11 +2247,18 @@
         },
         {
           "file": "libs/damap/src/lib/pipes/byte/byte.pipe.ts",
-          "hash": "3415992489527969931"
+          "hash": "3415992489527969931",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/pipes/dataset-source/dataset-source.module.ts",
-          "hash": "15875555699797173107"
+          "hash": "15875555699797173107",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common"
+          ]
         },
         {
           "file": "libs/damap/src/lib/pipes/dataset-source/dataset-source.pipe.spec.ts",
@@ -1897,57 +2266,90 @@
         },
         {
           "file": "libs/damap/src/lib/pipes/dataset-source/dataset-source.pipe.ts",
-          "hash": "8560076774494175820"
+          "hash": "8560076774494175820",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/services/backend.service.spec.ts",
           "hash": "14893946946374447962",
           "deps": [
-            "npm:rxjs"
+            "npm:@angular/common",
+            "npm:rxjs",
+            "npm:@angular/core"
           ]
         },
         {
           "file": "libs/damap/src/lib/services/backend.service.ts",
           "hash": "8609571908891479767",
           "deps": [
+            "npm:@angular/common",
             "npm:rxjs",
+            "npm:@angular/core",
             "npm:@ngx-translate/core"
           ]
         },
         {
           "file": "libs/damap/src/lib/services/feedback.service.spec.ts",
-          "hash": "7868959009635066387"
+          "hash": "7868959009635066387",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/services/feedback.service.ts",
           "hash": "9869230970319752869",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
             "npm:@ngx-translate/core"
           ]
         },
         {
           "file": "libs/damap/src/lib/services/form.service.spec.ts",
-          "hash": "15074830000151129274"
+          "hash": "15074830000151129274",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/services/form.service.ts",
-          "hash": "11666401290365212662"
+          "hash": "11666401290365212662",
+          "deps": [
+            "npm:@angular/forms",
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/services/logger.service.spec.ts",
-          "hash": "1910643307959900425"
+          "hash": "1910643307959900425",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/services/logger.service.ts",
-          "hash": "17301024609774143296"
+          "hash": "17301024609774143296",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/services/summary.service.spec.ts",
-          "hash": "4413576591456182047"
+          "hash": "4413576591456182047",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/services/summary.service.ts",
-          "hash": "10057948916227576466"
+          "hash": "10057948916227576466",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/shared/input-wrapper/input-wrapper.component.css",
@@ -1959,16 +2361,31 @@
         },
         {
           "file": "libs/damap/src/lib/shared/input-wrapper/input-wrapper.component.spec.ts",
-          "hash": "5333141563497649750"
+          "hash": "5333141563497649750",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/forms",
+            "npm:@angular/platform-browser"
+          ]
         },
         {
           "file": "libs/damap/src/lib/shared/input-wrapper/input-wrapper.component.ts",
-          "hash": "9367753205573315448"
+          "hash": "9367753205573315448",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/shared/shared.module.ts",
           "hash": "252808106765165153",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/material",
+            "npm:@angular/forms",
             "npm:@ngx-translate/core"
           ]
         },
@@ -1982,11 +2399,22 @@
         },
         {
           "file": "libs/damap/src/lib/shared/textarea-wrapper/textarea-wrapper.component.spec.ts",
-          "hash": "1586638390869908840"
+          "hash": "1586638390869908840",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/forms",
+            "npm:@angular/platform-browser"
+          ]
         },
         {
           "file": "libs/damap/src/lib/shared/textarea-wrapper/textarea-wrapper.component.ts",
-          "hash": "3488977932581013099"
+          "hash": "3488977932581013099",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/store/actions/dmp.actions.ts",
@@ -2028,6 +2456,8 @@
           "file": "libs/damap/src/lib/store/damap-store.module.ts",
           "hash": "13022576361471075384",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
             "npm:@ngrx/store",
             "npm:@ngrx/store-devtools",
             "npm:@ngrx/effects"
@@ -2038,6 +2468,8 @@
           "hash": "18185001877426981253",
           "deps": [
             "npm:rxjs",
+            "npm:@angular/common",
+            "npm:@angular/core",
             "npm:@ngrx/effects",
             "npm:@ngrx/store"
           ]
@@ -2048,6 +2480,7 @@
           "deps": [
             "npm:@ngrx/effects",
             "npm:rxjs",
+            "npm:@angular/core",
             "npm:@ngrx/store"
           ]
         },
@@ -2055,14 +2488,17 @@
           "file": "libs/damap/src/lib/store/effects/internal-storage.effects.spec.ts",
           "hash": "13815655291679264095",
           "deps": [
+            "npm:@angular/core",
             "npm:@ngrx/effects",
-            "npm:rxjs"
+            "npm:rxjs",
+            "npm:@angular/common"
           ]
         },
         {
           "file": "libs/damap/src/lib/store/effects/internal-storage.effects.ts",
           "hash": "15695509190940448771",
           "deps": [
+            "npm:@angular/core",
             "npm:@ngrx/effects",
             "npm:rxjs"
           ]
@@ -2071,15 +2507,18 @@
           "file": "libs/damap/src/lib/store/effects/repository.effects.spec.ts",
           "hash": "11624604450790403589",
           "deps": [
+            "npm:@angular/core",
             "npm:@ngrx/effects",
             "npm:rxjs",
-            "npm:@ngrx/store"
+            "npm:@ngrx/store",
+            "npm:@angular/common"
           ]
         },
         {
           "file": "libs/damap/src/lib/store/effects/repository.effects.ts",
           "hash": "1223295912680760224",
           "deps": [
+            "npm:@angular/core",
             "npm:@ngrx/effects",
             "npm:rxjs",
             "npm:@ngrx/store"
@@ -2216,35 +2655,57 @@
         },
         {
           "file": "libs/damap/src/lib/testing/form-testing/form-testing.module.ts",
-          "hash": "11164769474993991999"
+          "hash": "11164769474993991999",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/testing/services-testing/feedback-testing.ts",
-          "hash": "1716308273831092285"
+          "hash": "1716308273831092285",
+          "deps": [
+            "npm:@angular/cdk",
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/testing/translate-testing/translate-testing.module.ts",
           "hash": "17678258690947970726",
           "deps": [
+            "npm:@angular/core",
             "npm:@ngx-translate/core",
             "npm:rxjs"
           ]
         },
         {
           "file": "libs/damap/src/lib/validators/currency.validator.ts",
-          "hash": "13478306781844372601"
+          "hash": "13478306781844372601",
+          "deps": [
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/validators/doi.validator.ts",
-          "hash": "12674615283415350206"
+          "hash": "12674615283415350206",
+          "deps": [
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/validators/not-empty.validator.ts",
-          "hash": "8811591295741912424"
+          "hash": "8811591295741912424",
+          "deps": [
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/validators/orcid.validator.ts",
-          "hash": "10236531943074577176"
+          "hash": "10236531943074577176",
+          "deps": [
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/cris-tag/cris-tag.component.css",
@@ -2256,16 +2717,24 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/cris-tag/cris-tag.component.spec.ts",
-          "hash": "5014201251180182899"
+          "hash": "5014201251180182899",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/cris-tag/cris-tag.component.ts",
-          "hash": "10688381595600067349"
+          "hash": "10688381595600067349",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/cris-tag/cris-tag.module.ts",
           "hash": "9550058592298851671",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
             "npm:@ngx-translate/core"
           ]
         },
@@ -2273,6 +2742,9 @@
           "file": "libs/damap/src/lib/widgets/delete-warning-dialog/delete-warning-dialog.component.ts",
           "hash": "13386568677053987937",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/material",
             "npm:@ngx-translate/core"
           ]
         },
@@ -2286,16 +2758,28 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/dmp-table/dmp-table.component.spec.ts",
-          "hash": "2569537976866025103"
+          "hash": "2569537976866025103",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/dmp-table/dmp-table.component.ts",
-          "hash": "7784658257796761053"
+          "hash": "7784658257796761053",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/dmp-table/dmp-table.module.ts",
           "hash": "2581120544091116416",
           "deps": [
+            "npm:@angular/common",
+            "npm:@angular/material",
+            "npm:@angular/core",
+            "npm:@angular/router",
             "npm:@ngx-translate/core"
           ]
         },
@@ -2309,17 +2793,30 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/doi-search/doi-search.component.spec.ts",
-          "hash": "7117847950812970779"
+          "hash": "7117847950812970779",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/platform-browser"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/doi-search/doi-search.component.ts",
-          "hash": "6490868943341352387"
+          "hash": "6490868943341352387",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/doi-search/doi-search.module.ts",
           "hash": "13020147126499834459",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/material",
+            "npm:@angular/forms"
           ]
         },
         {
@@ -2332,17 +2829,27 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/env-banner/env-banner.component.spec.ts",
-          "hash": "9371593876138893958"
+          "hash": "9371593876138893958",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/env-banner/env-banner.component.ts",
-          "hash": "16417445936984038776"
+          "hash": "16417445936984038776",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/env-banner/env-banner.module.ts",
           "hash": "8504582436530511755",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/material"
           ]
         },
         {
@@ -2355,29 +2862,47 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/error-message/error-message.component.spec.ts",
-          "hash": "14863027079359477789"
+          "hash": "14863027079359477789",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/error-message/error-message.component.ts",
-          "hash": "10990572257061819089"
+          "hash": "10990572257061819089",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/error-message/error-message.module.ts",
           "hash": "1044811252549842665",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/material"
           ]
         },
         {
           "file": "libs/damap/src/lib/widgets/export-warning-dialog/export-warning-dialog.component.spec.ts",
           "hash": "9411778633779389909",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/compiler",
+            "npm:@angular/platform-browser",
             "npm:@ngrx/store"
           ]
         },
         {
           "file": "libs/damap/src/lib/widgets/export-warning-dialog/export-warning-dialog.component.ts",
-          "hash": "8974397022209130107"
+          "hash": "8974397022209130107",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/forms"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/export-warning-dialog/export-warning-dialog.css",
@@ -2391,16 +2916,27 @@
           "file": "libs/damap/src/lib/widgets/export-warning-dialog/export-warning.module.ts",
           "hash": "2943244553340215399",
           "deps": [
+            "npm:@angular/forms",
+            "npm:@angular/material",
+            "npm:@angular/common",
+            "npm:@angular/core",
             "npm:@ngx-translate/core"
           ]
         },
         {
           "file": "libs/damap/src/lib/widgets/file-upload/dragdrop.directive.spec.ts",
-          "hash": "10102617679605066933"
+          "hash": "10102617679605066933",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/platform-browser"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/file-upload/dragdrop.directive.ts",
-          "hash": "14978825721216169039"
+          "hash": "14978825721216169039",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/file-upload/file-upload.component.css",
@@ -2412,16 +2948,26 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/file-upload/file-upload.component.spec.ts",
-          "hash": "10502599077236708533"
+          "hash": "10502599077236708533",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/file-upload/file-upload.component.ts",
-          "hash": "5665155696093216914"
+          "hash": "5665155696093216914",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/file-upload/file-upload.module.ts",
           "hash": "3397092809220440057",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/material",
             "npm:@ngx-translate/core"
           ]
         },
@@ -2435,15 +2981,26 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/info-message/info-message.component.spec.ts",
-          "hash": "3322779198624769347"
+          "hash": "3322779198624769347",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/info-message/info-message.component.ts",
-          "hash": "3009729199382544199"
+          "hash": "3009729199382544199",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/info-message/info-message.module.ts",
-          "hash": "15555325555340401431"
+          "hash": "15555325555340401431",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/license-wizard/license-filter.pipe.spec.ts",
@@ -2451,7 +3008,10 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/license-wizard/license-filter.pipe.ts",
-          "hash": "6766094229396777294"
+          "hash": "6766094229396777294",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/license-wizard/license-wizard-dialog.html",
@@ -2475,16 +3035,29 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/license-wizard/license-wizard.component.spec.ts",
-          "hash": "9527688027233410515"
+          "hash": "9527688027233410515",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/cdk",
+            "npm:@angular/platform-browser",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/license-wizard/license-wizard.component.ts",
-          "hash": "15006324912808845027"
+          "hash": "15006324912808845027",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/license-wizard/license-wizard.module.ts",
           "hash": "13213544729889895831",
           "deps": [
+            "npm:@angular/common",
+            "npm:@angular/material",
+            "npm:@angular/core",
             "npm:@ngx-translate/core"
           ]
         },
@@ -2498,15 +3071,25 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/orcid/orcid.component.spec.ts",
-          "hash": "10821435920384687508"
+          "hash": "10821435920384687508",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/orcid/orcid.component.ts",
-          "hash": "17043285557930243542"
+          "hash": "17043285557930243542",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/orcid/orcid.module.ts",
-          "hash": "16056336018290208491"
+          "hash": "16056336018290208491",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/person-card/person-card.component.html",
@@ -2514,12 +3097,19 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/person-card/person-card.component.spec.ts",
-          "hash": "11645000927699945205"
+          "hash": "11645000927699945205",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/person-card/person-card.component.ts",
           "hash": "2164509601000916686",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/material",
             "npm:@ngx-translate/core"
           ]
         },
@@ -2529,17 +3119,30 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/person-search/person-search.component.spec.ts",
-          "hash": "1294540392796384363"
+          "hash": "1294540392796384363",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material",
+            "npm:@angular/platform-browser",
+            "npm:@angular/cdk"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/person-search/person-search.component.ts",
-          "hash": "14846354936823210515"
+          "hash": "14846354936823210515",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/person-search/person-search.module.ts",
           "hash": "9270946435208956799",
           "deps": [
-            "npm:@ngx-translate/core"
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@ngx-translate/core",
+            "npm:@angular/material",
+            "npm:@angular/forms"
           ]
         },
         {
@@ -2552,16 +3155,26 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/save-status/save-status.component.spec.ts",
-          "hash": "16812724240469208176"
+          "hash": "16812724240469208176",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/save-status/save-status.component.ts",
-          "hash": "3389211944460103465"
+          "hash": "3389211944460103465",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/save-status/save-status.module.ts",
           "hash": "14768010155617325185",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/material",
             "npm:@ngx-translate/core"
           ]
         },
@@ -2575,15 +3188,25 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/step-intro/step-intro.component.spec.ts",
-          "hash": "125922847923214395"
+          "hash": "125922847923214395",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/step-intro/step-intro.component.ts",
-          "hash": "12213097405437664371"
+          "hash": "12213097405437664371",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/step-intro/step-intro.module.ts",
-          "hash": "11745026443119149829"
+          "hash": "11745026443119149829",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/tag/tag.component.css",
@@ -2595,15 +3218,24 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/tag/tag.component.spec.ts",
-          "hash": "5661078159423617605"
+          "hash": "5661078159423617605",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/tag/tag.component.ts",
-          "hash": "11139029819776611650"
+          "hash": "11139029819776611650",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/tag/tag.module.ts",
-          "hash": "10342996860695538075"
+          "hash": "10342996860695538075",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/tooltip/tooltip.component.css",
@@ -2615,16 +3247,28 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/tooltip/tooltip.component.spec.ts",
-          "hash": "9447508586430249505"
+          "hash": "9447508586430249505",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/cdk",
+            "npm:@angular/platform-browser",
+            "npm:@angular/material"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/tooltip/tooltip.component.ts",
-          "hash": "8389443546741104937"
+          "hash": "8389443546741104937",
+          "deps": [
+            "npm:@angular/core"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/tooltip/tooltip.module.ts",
           "hash": "11852503853485105867",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/material",
             "npm:@ngx-translate/core"
           ]
         },
@@ -2638,19 +3282,31 @@
         },
         {
           "file": "libs/damap/src/lib/widgets/tree-select-form-field/tree-select-form-field.component.spec.ts",
-          "hash": "10478639939259784602"
+          "hash": "10478639939259784602",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/cdk",
+            "npm:@angular/material",
+            "npm:@angular/platform-browser"
+          ]
         },
         {
           "file": "libs/damap/src/lib/widgets/tree-select-form-field/tree-select-form-field.component.ts",
           "hash": "477469065101501292",
           "deps": [
-            "npm:rxjs"
+            "npm:@angular/core",
+            "npm:rxjs",
+            "npm:@angular/cdk",
+            "npm:@angular/material"
           ]
         },
         {
           "file": "libs/damap/src/lib/widgets/tree-select-form-field/tree-select-form-field.module.ts",
           "hash": "4300698238557235452",
           "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/material",
             "npm:@ngx-translate/core"
           ]
         },
@@ -2665,7 +3321,9 @@
           "file": "libs/damap/src/test.ts",
           "hash": "7246338234327689234",
           "deps": [
-            "npm:zone.js"
+            "npm:zone.js",
+            "npm:@angular/core",
+            "npm:@angular/platform-browser-dynamic"
           ]
         },
         {
@@ -2685,6 +3343,128 @@
           "hash": "11852434985737381252"
         }
       ]
-    }
+    },
+    "nonProjectFiles": [
+      {
+        "file": ".ci/Jenkinsfile",
+        "hash": "15133615239552236578"
+      },
+      {
+        "file": ".ci/config.yaml",
+        "hash": "12295261914492214998"
+      },
+      {
+        "file": ".dockerignore",
+        "hash": "11824676522640949798"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "11791638009474165083"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "11771077953543409059"
+      },
+      {
+        "file": ".github/ISSUE_TEMPLATE/bug_report.md",
+        "hash": "8850379227685096762"
+      },
+      {
+        "file": ".github/ISSUE_TEMPLATE/change-request.md",
+        "hash": "6033505092240566636"
+      },
+      {
+        "file": ".github/ISSUE_TEMPLATE/feature_request.md",
+        "hash": "16206322104142586860"
+      },
+      {
+        "file": ".github/ISSUE_TEMPLATE/question.md",
+        "hash": "7804231690729846179"
+      },
+      {
+        "file": ".github/pull_request_template.md",
+        "hash": "7387782319448689320"
+      },
+      {
+        "file": ".github/workflows/release.yml",
+        "hash": "1789347563870188561"
+      },
+      {
+        "file": ".github/workflows/test.yml",
+        "hash": "15632448088574894351"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "13403225145620367397"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "1772088410855450625"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "15433954852939612048"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "17824784343261341590"
+      },
+      {
+        "file": "CUSTOMISING.md",
+        "hash": "3129354703907997394"
+      },
+      {
+        "file": "Dockerfile",
+        "hash": "9011795825111327525"
+      },
+      {
+        "file": "LICENSE",
+        "hash": "15937924384476874581"
+      },
+      {
+        "file": "README.md",
+        "hash": "11096314049154406187"
+      },
+      {
+        "file": "custom-webpack-config.js",
+        "hash": "11656400164619711791"
+      },
+      {
+        "file": "docker/conf.d/default.conf",
+        "hash": "13119343319768215258"
+      },
+      {
+        "file": "karma.conf.js",
+        "hash": "11365708082890734609"
+      },
+      {
+        "file": "libs/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "nx.json",
+        "hash": "5982333500533808251"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "7391164156916882669"
+      },
+      {
+        "file": "package.json",
+        "hash": "16089305550720279346"
+      },
+      {
+        "file": "tools/generators/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "tools/tsconfig.tools.json",
+        "hash": "16088922570277978783"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "14600190466433409737"
+      }
+    ]
   }
 }
