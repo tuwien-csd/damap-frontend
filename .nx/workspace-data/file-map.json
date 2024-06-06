@@ -1,0 +1,2690 @@
+{
+  "version": "6.0",
+  "nxVersion": "19.2.0",
+  "deps": {
+    "@angular/animations": "18.0.2",
+    "@angular/cdk": "18.0.2",
+    "@angular/common": "18.0.2",
+    "@angular/compiler": "18.0.2",
+    "@angular/core": "18.0.2",
+    "@angular/forms": "18.0.2",
+    "@angular/material": "^18.0.2",
+    "@angular/material-moment-adapter": "^18.0.2",
+    "@angular/platform-browser": "18.0.2",
+    "@angular/platform-browser-dynamic": "18.0.2",
+    "@angular/router": "18.0.2",
+    "@ngrx/component-store": "17.2.0",
+    "@ngrx/effects": "17.2.0",
+    "@ngrx/entity": "17.2.0",
+    "@ngrx/store": "17.2.0",
+    "@ngrx/store-devtools": "17.2.0",
+    "@ngx-translate/core": "15.0.0",
+    "@ngx-translate/http-loader": "8.0.0",
+    "@nrwl/angular": "19.2.0",
+    "angular-oauth2-oidc": "17.0.2",
+    "cors": "2.8.5",
+    "deepmerge-ts": "^7.0.3",
+    "ngx-translate-multi-http-loader": "17.0.0",
+    "rxjs": "7.8.1",
+    "tslib": "2.6.3",
+    "zone.js": "0.14.6",
+    "@angular-builders/custom-webpack": "^18.0.0-beta.3",
+    "@angular-builders/dev-server": "7.3.1",
+    "@angular-devkit/build-angular": "18.0.3",
+    "@angular-devkit/core": "18.0.3",
+    "@angular-devkit/schematics": "18.0.3",
+    "@angular-eslint/eslint-plugin": "18.0.1",
+    "@angular-eslint/eslint-plugin-template": "18.0.1",
+    "@angular-eslint/template-parser": "18.0.1",
+    "@angular/cli": "^18.0.3",
+    "@angular/compiler-cli": "18.0.2",
+    "@angular/language-service": "18.0.2",
+    "@ngrx/schematics": "17.2.0",
+    "@nrwl/cypress": "19.2.0",
+    "@nrwl/eslint-plugin-nx": "19.2.0",
+    "@nrwl/linter": "19.2.0",
+    "@nrwl/workspace": "19.2.0",
+    "@nx/angular": "19.2.0",
+    "@nx/workspace": "19.2.0",
+    "@schematics/angular": "18.0.3",
+    "@types/jasmine": "5.1.4",
+    "@types/jasminewd2": "2.0.13",
+    "@types/node": "^20.14.2",
+    "@typescript-eslint/eslint-plugin": "7.12.0",
+    "@typescript-eslint/parser": "7.12.0",
+    "cypress": "13.11.0",
+    "eslint": "9.4.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-cypress": "3.3.0",
+    "jasmine-core": "5.1.2",
+    "jasmine-marbles": "0.9.2",
+    "jasmine-spec-reporter": "7.0.0",
+    "karma": "6.4.3",
+    "karma-chrome-launcher": "3.2.0",
+    "karma-coverage": "2.2.1",
+    "karma-jasmine": "5.1.0",
+    "karma-jasmine-html-reporter": "2.1.0",
+    "karma-junit-reporter": "2.0.1",
+    "ng-packagr": "18.0.0",
+    "nx": "19.2.0",
+    "postcss": "8.4.38",
+    "postcss-import": "16.1.0",
+    "postcss-preset-env": "9.5.14",
+    "postcss-url": "10.1.3",
+    "prettier": "3.3.1",
+    "typescript": "5.4.5"
+  },
+  "pathMappings": {
+    "@damap/core": [
+      "libs/damap/src/index.ts"
+    ]
+  },
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": ".ci/Jenkinsfile",
+        "hash": "15133615239552236578"
+      },
+      {
+        "file": "CUSTOMISING.md",
+        "hash": "3129354703907997394"
+      },
+      {
+        "file": "package.json",
+        "hash": "7821958784596863408"
+      },
+      {
+        "file": ".github/ISSUE_TEMPLATE/feature_request.md",
+        "hash": "16206322104142586860"
+      },
+      {
+        "file": ".dockerignore",
+        "hash": "11824676522640949798"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "17824784343261341590"
+      },
+      {
+        "file": "Dockerfile",
+        "hash": "9011795825111327525"
+      },
+      {
+        "file": "karma.conf.js",
+        "hash": "11365708082890734609"
+      },
+      {
+        "file": ".github/ISSUE_TEMPLATE/question.md",
+        "hash": "7804231690729846179"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "13403225145620367397"
+      },
+      {
+        "file": "tools/tsconfig.tools.json",
+        "hash": "16088922570277978783"
+      },
+      {
+        "file": ".ci/config.yaml",
+        "hash": "12295261914492214998"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "14600190466433409737"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "1772088410855450625"
+      },
+      {
+        "file": "LICENSE",
+        "hash": "15937924384476874581"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "11771077953543409059"
+      },
+      {
+        "file": "nx.json",
+        "hash": "5982333500533808251"
+      },
+      {
+        "file": "libs/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "15433954852939612048"
+      },
+      {
+        "file": ".github/workflows/release.yml",
+        "hash": "1789347563870188561"
+      },
+      {
+        "file": "README.md",
+        "hash": "11096314049154406187"
+      },
+      {
+        "file": ".github/pull_request_template.md",
+        "hash": "7387782319448689320"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "15302345999520665248"
+      },
+      {
+        "file": "docker/conf.d/default.conf",
+        "hash": "13119343319768215258"
+      },
+      {
+        "file": "custom-webpack-config.js",
+        "hash": "11656400164619711791"
+      },
+      {
+        "file": "tools/generators/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": ".github/workflows/test.yml",
+        "hash": "15632448088574894351"
+      },
+      {
+        "file": ".editorconfig",
+        "hash": "11791638009474165083"
+      },
+      {
+        "file": ".github/ISSUE_TEMPLATE/bug_report.md",
+        "hash": "8850379227685096762"
+      },
+      {
+        "file": ".github/ISSUE_TEMPLATE/change-request.md",
+        "hash": "6033505092240566636"
+      }
+    ],
+    "projectFileMap": {
+      "damap-frontend": [
+        {
+          "file": "apps/damap-frontend/.eslintrc.json",
+          "hash": "1896885406837974431"
+        },
+        {
+          "file": "apps/damap-frontend/browserslist",
+          "hash": "15525697355818847451"
+        },
+        {
+          "file": "apps/damap-frontend/karma.conf.js",
+          "hash": "10853727945647542625",
+          "deps": [
+            [
+              "npm:karma-jasmine",
+              "dynamic"
+            ],
+            [
+              "npm:karma-chrome-launcher",
+              "dynamic"
+            ],
+            [
+              "npm:karma-jasmine-html-reporter",
+              "dynamic"
+            ],
+            [
+              "npm:karma-junit-reporter",
+              "dynamic"
+            ],
+            [
+              "npm:karma-coverage",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/project.json",
+          "hash": "13106232052351570069"
+        },
+        {
+          "file": "apps/damap-frontend/src/app/app.component.html",
+          "hash": "17816966185630879015"
+        },
+        {
+          "file": "apps/damap-frontend/src/app/app.component.spec.ts",
+          "hash": "14730106106153330897"
+        },
+        {
+          "file": "apps/damap-frontend/src/app/app.component.ts",
+          "hash": "1990853130142176547"
+        },
+        {
+          "file": "apps/damap-frontend/src/app/app.module.ts",
+          "hash": "9628294140755666593",
+          "deps": [
+            "damap",
+            "npm:@ngx-translate/core",
+            "npm:ngx-translate-multi-http-loader",
+            "npm:angular-oauth2-oidc"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/src/app/app.routes.ts",
+          "hash": "9659004289017387260",
+          "deps": [
+            "damap"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/src/app/components/consent/consent.component.html",
+          "hash": "3272923368267581636"
+        },
+        {
+          "file": "apps/damap-frontend/src/app/components/consent/consent.component.spec.ts",
+          "hash": "2948405124692231213",
+          "deps": [
+            "damap"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/src/app/components/consent/consent.component.ts",
+          "hash": "13304978629432901029",
+          "deps": [
+            "npm:@ngx-translate/core",
+            "damap"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/src/app/components/consent/consent.module.ts",
+          "hash": "10417375654270411690",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/src/app/components/layout/layout.component.css",
+          "hash": "3568446847560888373"
+        },
+        {
+          "file": "apps/damap-frontend/src/app/components/layout/layout.component.html",
+          "hash": "17188441895295279979"
+        },
+        {
+          "file": "apps/damap-frontend/src/app/components/layout/layout.component.spec.ts",
+          "hash": "625172227370562596",
+          "deps": [
+            "npm:angular-oauth2-oidc",
+            "damap"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/src/app/components/layout/layout.component.ts",
+          "hash": "17690559720123974447",
+          "deps": [
+            "npm:@ngx-translate/core",
+            "damap"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/src/app/components/layout/layout.module.ts",
+          "hash": "8890956580185179341",
+          "deps": [
+            "npm:@ngx-translate/core",
+            "damap"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/src/app/guard/consent.guard.ts",
+          "hash": "12599896274151766656",
+          "deps": [
+            "damap"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/src/app/services/config.service.spec.ts",
+          "hash": "6371801594214054397",
+          "deps": [
+            "npm:angular-oauth2-oidc"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/src/app/services/config.service.ts",
+          "hash": "3214711610513343255",
+          "deps": [
+            "npm:angular-oauth2-oidc",
+            "damap",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/src/app/store/app-store.module.ts",
+          "hash": "10606164199227829628",
+          "deps": [
+            "npm:@ngrx/store",
+            "npm:@ngrx/effects",
+            "npm:@ngrx/store-devtools"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/ORCIDiD_iconvector.svg",
+          "hash": "5219492170837394403"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/fonts/Roboto/LICENSE.txt",
+          "hash": "9630801356268031432"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/fonts/Roboto/Roboto-Light.ttf",
+          "hash": "11743008747391677234"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/fonts/Roboto/Roboto-Medium.ttf",
+          "hash": "12534942947226036357"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/fonts/Roboto/Roboto-Regular.ttf",
+          "hash": "9500555408324524103"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/i18n/consent/de.json",
+          "hash": "12296336411934412868"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/i18n/consent/en.json",
+          "hash": "15432831389558321222"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/i18n/de.json",
+          "hash": "15753941481085060538"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/i18n/en.json",
+          "hash": "15753941481085060538"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/i18n/layout/de.json",
+          "hash": "2697374589196196930"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/i18n/layout/en.json",
+          "hash": "11121995366191650907"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/icons/material/LICENSE",
+          "hash": "8376741277543790987"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/icons/material/MaterialIcons-Regular.ttf",
+          "hash": "1845634491442634811"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/logo.svg",
+          "hash": "17217825519412246383"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/logo1.svg",
+          "hash": "2497836817808011505"
+        },
+        {
+          "file": "apps/damap-frontend/src/assets/logo2.svg",
+          "hash": "9800771395446730119"
+        },
+        {
+          "file": "apps/damap-frontend/src/environments/environment.prod.ts",
+          "hash": "8441402299248628763"
+        },
+        {
+          "file": "apps/damap-frontend/src/environments/environment.ts",
+          "hash": "13317348794451995428"
+        },
+        {
+          "file": "apps/damap-frontend/src/favicon.ico",
+          "hash": "7560352845795333150"
+        },
+        {
+          "file": "apps/damap-frontend/src/index.html",
+          "hash": "1811443457576871980"
+        },
+        {
+          "file": "apps/damap-frontend/src/main.ts",
+          "hash": "11115688907842927236"
+        },
+        {
+          "file": "apps/damap-frontend/src/polyfills.ts",
+          "hash": "2908177964561583612",
+          "deps": [
+            "npm:zone.js"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/src/styles.scss",
+          "hash": "10431421459486552148"
+        },
+        {
+          "file": "apps/damap-frontend/src/test.ts",
+          "hash": "16418080260848022337",
+          "deps": [
+            "npm:zone.js"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend/src/themes/README.md",
+          "hash": "2099910223626081825"
+        },
+        {
+          "file": "apps/damap-frontend/src/themes/custom-palettes.scss",
+          "hash": "4303693449794396448"
+        },
+        {
+          "file": "apps/damap-frontend/src/themes/custom-theme.scss",
+          "hash": "11957342982534409397"
+        },
+        {
+          "file": "apps/damap-frontend/src/typing.d.ts",
+          "hash": "17889384759314298950"
+        },
+        {
+          "file": "apps/damap-frontend/tsconfig.app.json",
+          "hash": "11077869467724048919"
+        },
+        {
+          "file": "apps/damap-frontend/tsconfig.eslint.json",
+          "hash": "13675466176821219020"
+        },
+        {
+          "file": "apps/damap-frontend/tsconfig.spec.json",
+          "hash": "18437357720176710301"
+        }
+      ],
+      "damap-frontend-e2e": [
+        {
+          "file": "apps/damap-frontend-e2e/.eslintrc.json",
+          "hash": "15523834149352881398"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/cypress.config.ts",
+          "hash": "6431336458232571759",
+          "deps": [
+            "npm:cypress"
+          ]
+        },
+        {
+          "file": "apps/damap-frontend-e2e/project.json",
+          "hash": "4179474831674639375"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/e2e/access.cy.ts",
+          "hash": "4966169072924143809"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/e2e/app.cy.ts",
+          "hash": "14186985911946705060"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/e2e/delete-dmp.cy.ts",
+          "hash": "4637643107114317421"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/e2e/dmp.cy.ts",
+          "hash": "11291123351569327187"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/e2e/gdpr.cy.ts",
+          "hash": "10632302840573832010"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/fixtures/example.json",
+          "hash": "11614668686582597233"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/fixtures/users.json",
+          "hash": "14124238025464055386"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/support/app.po.ts",
+          "hash": "11157016311132186162"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/support/commands.ts",
+          "hash": "3233650173452907661"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/src/support/e2e.ts",
+          "hash": "3666078656922506009"
+        },
+        {
+          "file": "apps/damap-frontend-e2e/tsconfig.json",
+          "hash": "1788248097864730386"
+        }
+      ],
+      "damap": [
+        {
+          "file": "libs/damap/.eslintrc.json",
+          "hash": "12633487037592990908"
+        },
+        {
+          "file": "libs/damap/README.md",
+          "hash": "2892456967541474373"
+        },
+        {
+          "file": "libs/damap/karma.conf.js",
+          "hash": "10853727945647542625",
+          "deps": [
+            [
+              "npm:karma-jasmine",
+              "dynamic"
+            ],
+            [
+              "npm:karma-chrome-launcher",
+              "dynamic"
+            ],
+            [
+              "npm:karma-jasmine-html-reporter",
+              "dynamic"
+            ],
+            [
+              "npm:karma-junit-reporter",
+              "dynamic"
+            ],
+            [
+              "npm:karma-coverage",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": "libs/damap/ng-package.json",
+          "hash": "17038259732387577351"
+        },
+        {
+          "file": "libs/damap/package.json",
+          "hash": "4377274685144932897",
+          "deps": [
+            "npm:tslib"
+          ]
+        },
+        {
+          "file": "libs/damap/project.json",
+          "hash": "7145658616257823304"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/access/de.json",
+          "hash": "15753941481085060538"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/access/en.json",
+          "hash": "11177305583088191364"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/dashboard/de.json",
+          "hash": "15753941481085060538"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/dashboard/en.json",
+          "hash": "10755286890557749188"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/de.json",
+          "hash": "14225500589856666655"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/en.json",
+          "hash": "11270311020153669431"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/gdpr/de.json",
+          "hash": "2727063746756993556"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/gdpr/en.json",
+          "hash": "8867019371478035179"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/help/en.json",
+          "hash": "8889101222616757189"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/http/de.json",
+          "hash": "15753941481085060538"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/http/en.json",
+          "hash": "10590732344744466508"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/info/en.json",
+          "hash": "1262768281184533648"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/plans/de.json",
+          "hash": "7272545095042339685"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/plans/en.json",
+          "hash": "2497244015753302008"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/templates/de.json",
+          "hash": "6562429863464593805"
+        },
+        {
+          "file": "libs/damap/src/assets/i18n/templates/en.json",
+          "hash": "7241480119531257720"
+        },
+        {
+          "file": "libs/damap/src/assets/styles.scss",
+          "hash": "3344925481021086880"
+        },
+        {
+          "file": "libs/damap/src/index.ts",
+          "hash": "16470360325179031047"
+        },
+        {
+          "file": "libs/damap/src/lib/auth/auth.service.spec.ts",
+          "hash": "12037070964057877310",
+          "deps": [
+            "npm:angular-oauth2-oidc"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/auth/auth.service.ts",
+          "hash": "6438473730705463700",
+          "deps": [
+            "npm:angular-oauth2-oidc"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/access/access.component.css",
+          "hash": "16850996513260216865"
+        },
+        {
+          "file": "libs/damap/src/lib/components/access/access.component.html",
+          "hash": "17120632284025457831"
+        },
+        {
+          "file": "libs/damap/src/lib/components/access/access.component.spec.ts",
+          "hash": "5415814669054711310",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/access/access.component.ts",
+          "hash": "8231488511326759349",
+          "deps": [
+            "npm:rxjs",
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dashboard/dashboard.component.css",
+          "hash": "10632865113260390059"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dashboard/dashboard.component.html",
+          "hash": "2526976042410386964"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dashboard/dashboard.component.spec.ts",
+          "hash": "2173326319702835998"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dashboard/dashboard.component.ts",
+          "hash": "8163790069264739030"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dashboard/dashboard.module.ts",
+          "hash": "1889394299247064447",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/costs/costs.component.css",
+          "hash": "329972679419303034"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/costs/costs.component.html",
+          "hash": "8724741763828681995"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/costs/costs.component.spec.ts",
+          "hash": "6382214137351013957"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/costs/costs.component.ts",
+          "hash": "9450154790668695206"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/costs/costs.module.ts",
+          "hash": "1309985942024678146",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-deletion/data-deletion.component.css",
+          "hash": "15187514948504459545"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-deletion/data-deletion.component.html",
+          "hash": "6804616399569309577"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-deletion/data-deletion.component.spec.ts",
+          "hash": "516789483522202560"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-deletion/data-deletion.component.ts",
+          "hash": "5859420273028255126"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-deletion/data-deletion.module.ts",
+          "hash": "9444052806819559883",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/data-access/data-access.component.css",
+          "hash": "1993748342900674819"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/data-access/data-access.component.html",
+          "hash": "7651528049646690185"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/data-access/data-access.component.spec.ts",
+          "hash": "14305964028430979747"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/data-access/data-access.component.ts",
+          "hash": "491431669384787692"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/data-storage.module.ts",
+          "hash": "6580613006483008720",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/external-storage/external-storage.component.css",
+          "hash": "11593836416951021069"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/external-storage/external-storage.component.html",
+          "hash": "9455723744465949323"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/external-storage/external-storage.component.spec.ts",
+          "hash": "2339497422479083302"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/external-storage/external-storage.component.ts",
+          "hash": "6516886722531989633"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/storage/storage-filter.pipe.spec.ts",
+          "hash": "11983217133298879310"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/storage/storage-filter.pipe.ts",
+          "hash": "11987159784316317723"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/storage/storage.component.css",
+          "hash": "9110379040663364401"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/storage/storage.component.html",
+          "hash": "15978081328422879804"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/storage/storage.component.spec.ts",
+          "hash": "3861798394987654655",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/data-storage/storage/storage.component.ts",
+          "hash": "15079970170913181775",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/dmp-actions/dmp-actions.component.css",
+          "hash": "4111652517468004754"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/dmp-actions/dmp-actions.component.html",
+          "hash": "12817857405136604264"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/dmp-actions/dmp-actions.component.spec.ts",
+          "hash": "1379184959117371285",
+          "deps": [
+            "npm:@ngrx/store",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/dmp-actions/dmp-actions.component.ts",
+          "hash": "8799456040596135312",
+          "deps": [
+            "npm:rxjs",
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/dmp-actions/dmp-actions.module.ts",
+          "hash": "4660500764944847179",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/dmp-actions/save-version-dialog.html",
+          "hash": "13188985385445835866"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/dmp.component.css",
+          "hash": "7415231031571347505"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/dmp.component.html",
+          "hash": "7736751809015408287"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/dmp.component.spec.ts",
+          "hash": "3247848487031076588",
+          "deps": [
+            "npm:@ngrx/store",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/dmp.component.ts",
+          "hash": "17815932348189455106",
+          "deps": [
+            "npm:rxjs",
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/dmp.module.ts",
+          "hash": "10248987794189620379",
+          "deps": [
+            "npm:@ngx-translate/core",
+            "npm:ngx-translate-multi-http-loader"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/dmp.routes.ts",
+          "hash": "11022444587731836833"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/doc-data-quality/doc-data-quality.component.css",
+          "hash": "17440408983469872387"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/doc-data-quality/doc-data-quality.component.html",
+          "hash": "2846975161613203313"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/doc-data-quality/doc-data-quality.component.spec.ts",
+          "hash": "357371318467552097"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/doc-data-quality/doc-data-quality.component.ts",
+          "hash": "17688905500806740958"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/doc-data-quality/doc-data-quality.module.ts",
+          "hash": "12803000566748840396",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/ethical-aspects/ethical-aspects.component.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/ethical-aspects/ethical-aspects.component.html",
+          "hash": "10644760607263982436"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/ethical-aspects/ethical-aspects.component.spec.ts",
+          "hash": "5807064787720074093"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/ethical-aspects/ethical-aspects.component.ts",
+          "hash": "17128801896082743175"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/legal-ethical-aspects.component.css",
+          "hash": "15110979135795635685"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/legal-ethical-aspects.component.html",
+          "hash": "1541079586347679111"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/legal-ethical-aspects.component.spec.ts",
+          "hash": "17677376766844187570"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/legal-ethical-aspects.component.ts",
+          "hash": "11988803999001256574"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/legal-ethical-aspects/legal-ethical-aspects.module.ts",
+          "hash": "4909060006955562677",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/licenses/licenses.component.css",
+          "hash": "7528804596480963926"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/licenses/licenses.component.html",
+          "hash": "1298974429672926642"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/licenses/licenses.component.spec.ts",
+          "hash": "16579691148682951764"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/licenses/licenses.component.ts",
+          "hash": "9464779290253635191"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/licenses/licenses.module.ts",
+          "hash": "7738588856457023818",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/people/confirm-deletion-dialog.html",
+          "hash": "5723977243581013226"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/people/contributor-filter.pipe.spec.ts",
+          "hash": "8966566479464078285"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/people/contributor-filter.pipe.ts",
+          "hash": "16384572137686026589"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/people/contributor-manual/contributor-manual.component.css",
+          "hash": "12249169827323513792"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/people/contributor-manual/contributor-manual.component.html",
+          "hash": "7604738789513786860"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/people/contributor-manual/contributor-manual.component.spec.ts",
+          "hash": "2398004612566980713"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/people/contributor-manual/contributor-manual.component.ts",
+          "hash": "17162236118303178855"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/people/people.component.css",
+          "hash": "11632292526743178453"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/people/people.component.html",
+          "hash": "2006983023750817384"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/people/people.component.spec.ts",
+          "hash": "9994295058847301282",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/people/people.component.ts",
+          "hash": "4687351644670046449",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/people/people.module.ts",
+          "hash": "11952334309314140772"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/project/manual-project-input/manual-project-input.component.html",
+          "hash": "11493884049882298371"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/project/manual-project-input/manual-project-input.component.spec.ts",
+          "hash": "7977766317080455694"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/project/manual-project-input/manual-project-input.component.ts",
+          "hash": "10105336213362390933"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/project/project-list/project-list.component.css",
+          "hash": "6682490259625353524"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/project/project-list/project-list.component.html",
+          "hash": "1546025555913786918"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/project/project-list/project-list.component.spec.ts",
+          "hash": "6976126677386911709",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/project/project-list/project-list.component.ts",
+          "hash": "8800869957614146063",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/project/project.component.html",
+          "hash": "17902621691786901266"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/project/project.component.spec.ts",
+          "hash": "17613658110287030573",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/project/project.component.ts",
+          "hash": "14526229706712177671"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/project/project.module.ts",
+          "hash": "2848217727718219720",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-details/repo-details.component.css",
+          "hash": "12007650617388639079"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-details/repo-details.component.html",
+          "hash": "17670978147783409852"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-details/repo-details.component.spec.ts",
+          "hash": "6064765189645563874"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-details/repo-details.component.ts",
+          "hash": "2714771982333777735"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-filter/filter-dialog.html",
+          "hash": "16776237510840234885"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-filter/repo-filter.component.css",
+          "hash": "10007358938598010208"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-filter/repo-filter.component.html",
+          "hash": "2750703972083464699"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-filter/repo-filter.component.spec.ts",
+          "hash": "16852315654776148783",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-filter/repo-filter.component.ts",
+          "hash": "8561032826286600664"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-filters.ts",
+          "hash": "5517131788329331201"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-recommendation/repo-recommendation.component.html",
+          "hash": "11906530732400482122"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-recommendation/repo-recommendation.component.spec.ts",
+          "hash": "6702617525961604875"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-recommendation/repo-recommendation.component.ts",
+          "hash": "5053752945736752576"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-table/repo-table.component.css",
+          "hash": "407959434273562615"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-table/repo-table.component.html",
+          "hash": "5198405377992335553"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-table/repo-table.component.spec.ts",
+          "hash": "7064288004975612184"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo-table/repo-table.component.ts",
+          "hash": "13724597626578077305"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo.component.css",
+          "hash": "17852345198027790138"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo.component.html",
+          "hash": "10823343228345111552"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo.component.spec.ts",
+          "hash": "3383056594344891872",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo.component.ts",
+          "hash": "7397899475633902860",
+          "deps": [
+            "npm:@ngrx/store",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo.module.ts",
+          "hash": "7678623347661496219",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo.pipe.spec.ts",
+          "hash": "16783208553490268846"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/repo.pipe.ts",
+          "hash": "7147998599388955594"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/retention-period/retention-period.component.css",
+          "hash": "1071943124698211673"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/retention-period/retention-period.component.html",
+          "hash": "4448198304277703474"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/retention-period/retention-period.component.spec.ts",
+          "hash": "8236881432103793035"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/repo/retention-period/retention-period.component.ts",
+          "hash": "17330319440279574960"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/reuse/reuse.component.css",
+          "hash": "17440408983469872387"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/reuse/reuse.component.html",
+          "hash": "95640400003743683"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/reuse/reuse.component.spec.ts",
+          "hash": "14381795220710187140"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/reuse/reuse.component.ts",
+          "hash": "6550322998913633659"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/reuse/reuse.module.ts",
+          "hash": "1604959753637089493",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/abstract-base-data.component.ts",
+          "hash": "3003901034911404841"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/created-data/created-data.component.html",
+          "hash": "16424848296929665236"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/created-data/created-data.component.spec.ts",
+          "hash": "579651908982693094",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/created-data/created-data.component.ts",
+          "hash": "2577326976150685745",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/data-mc/data-mc.component.css",
+          "hash": "698610839231947146"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/data-mc/data-mc.component.html",
+          "hash": "14214046101650400065"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/data-mc/data-mc.component.spec.ts",
+          "hash": "9998376151643750046"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/data-mc/data-mc.component.ts",
+          "hash": "16084484222273167288"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/data-specs.ts",
+          "hash": "11306682254872376553"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/dataset-dialog/dataset-dialog.component.css",
+          "hash": "9290754608458238687"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/dataset-dialog/dataset-dialog.component.html",
+          "hash": "8042977941052605791"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/dataset-dialog/dataset-dialog.component.spec.ts",
+          "hash": "7188049843641415020"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/dataset-dialog/dataset-dialog.component.ts",
+          "hash": "14726599905469481556"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/dataset-table/dataset-table.component.css",
+          "hash": "1932745972356366722"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/dataset-table/dataset-table.component.html",
+          "hash": "13778744500260934610"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/dataset-table/dataset-table.component.spec.ts",
+          "hash": "3533742189400376598",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/dataset-table/dataset-table.component.ts",
+          "hash": "8587659657021722319"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/reused-data/reused-data.component.css",
+          "hash": "3044227269811235140"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/reused-data/reused-data.component.html",
+          "hash": "17141097603686206985"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/reused-data/reused-data.component.spec.ts",
+          "hash": "15251711254642672009",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/reused-data/reused-data.component.ts",
+          "hash": "17299828332301711860",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/specify-data.component.css",
+          "hash": "4366122803469810683"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/specify-data.component.html",
+          "hash": "17211128089170112215"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/specify-data.component.spec.ts",
+          "hash": "5419236898428035798"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/specify-data.component.ts",
+          "hash": "12846698091955166043",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/specify-data/specify-data.module.ts",
+          "hash": "3331541674053860755",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/summary/summary.component.css",
+          "hash": "10819929353810578416"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/summary/summary.component.html",
+          "hash": "10153197724420233157"
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/summary/summary.component.spec.ts",
+          "hash": "7976111309532838800",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/summary/summary.component.ts",
+          "hash": "8129232994571580235",
+          "deps": [
+            "npm:@ngrx/store",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/dmp/summary/summary.module.ts",
+          "hash": "6942076361338425634",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/gdpr/gdpr.component.css",
+          "hash": "17707284333432222404"
+        },
+        {
+          "file": "libs/damap/src/lib/components/gdpr/gdpr.component.html",
+          "hash": "15483761411971386093"
+        },
+        {
+          "file": "libs/damap/src/lib/components/gdpr/gdpr.component.spec.ts",
+          "hash": "10962802302268286624"
+        },
+        {
+          "file": "libs/damap/src/lib/components/gdpr/gdpr.component.ts",
+          "hash": "1394669532703939291",
+          "deps": [
+            "npm:rxjs",
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/plans/plans.component.css",
+          "hash": "8468916841406515437"
+        },
+        {
+          "file": "libs/damap/src/lib/components/plans/plans.component.html",
+          "hash": "4818142101338227734"
+        },
+        {
+          "file": "libs/damap/src/lib/components/plans/plans.component.spec.ts",
+          "hash": "9342039771716014986",
+          "deps": [
+            "npm:@ngrx/store",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/plans/plans.component.ts",
+          "hash": "11034491806677365400",
+          "deps": [
+            "npm:@ngrx/store",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/plans/plans.module.ts",
+          "hash": "12186026568529561235",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-list/version-list.component.html",
+          "hash": "1389603448862691906"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-list/version-list.component.spec.ts",
+          "hash": "2749334206568124233",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-list/version-list.component.ts",
+          "hash": "357950330106516526",
+          "deps": [
+            "npm:rxjs",
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-table/version-table.component.css",
+          "hash": "13069130947032421821"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-table/version-table.component.html",
+          "hash": "14662299660105206300"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-table/version-table.component.spec.ts",
+          "hash": "2036152083708225057"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-table/version-table.component.ts",
+          "hash": "4502703311032250027"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-contributors/version-view-contributors.component.css",
+          "hash": "16892564017889332470"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-contributors/version-view-contributors.component.html",
+          "hash": "4959781755084984666"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-contributors/version-view-contributors.component.spec.ts",
+          "hash": "1334717184848277539"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-contributors/version-view-contributors.component.ts",
+          "hash": "15095117621530392360"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-costs/version-view-costs.component.html",
+          "hash": "6571326196494106047"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-costs/version-view-costs.component.spec.ts",
+          "hash": "18416961474214139987"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-costs/version-view-costs.component.ts",
+          "hash": "1192428765081336903"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-datasets/version-view-datasets.component.css",
+          "hash": "2878439570507164212"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-datasets/version-view-datasets.component.html",
+          "hash": "2342091271784975717"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-datasets/version-view-datasets.component.spec.ts",
+          "hash": "15008116286434134812"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-datasets/version-view-datasets.component.ts",
+          "hash": "18001605436984121145"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-doc-data-quality/version-view-doc-data-quality.component.html",
+          "hash": "5650174935909475610"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-doc-data-quality/version-view-doc-data-quality.component.spec.ts",
+          "hash": "9522972366487783288"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-doc-data-quality/version-view-doc-data-quality.component.ts",
+          "hash": "8274643018040238392"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-legal-ethical-aspects/version-view-legal-ethical-aspects.component.html",
+          "hash": "7746863021129841223"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-legal-ethical-aspects/version-view-legal-ethical-aspects.component.spec.ts",
+          "hash": "12100044785354190228"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-legal-ethical-aspects/version-view-legal-ethical-aspects.component.ts",
+          "hash": "9825199916823494334"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-project/version-view-project.component.html",
+          "hash": "15361261972171289809"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-project/version-view-project.component.spec.ts",
+          "hash": "17954022281649324106"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-project/version-view-project.component.ts",
+          "hash": "2762187445262898961"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-repositories/version-view-repositories.component.html",
+          "hash": "4684431746226483488"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-repositories/version-view-repositories.component.spec.ts",
+          "hash": "16174762210874260469"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-repositories/version-view-repositories.component.ts",
+          "hash": "5914941738410562523"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-reuse/version-view-reuse.component.html",
+          "hash": "5261967463540042888"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-reuse/version-view-reuse.component.spec.ts",
+          "hash": "14118234496032822598"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-reuse/version-view-reuse.component.ts",
+          "hash": "8121909287830965082"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-storages/version-view-storages.component.html",
+          "hash": "13352013781220799"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-storages/version-view-storages.component.spec.ts",
+          "hash": "14035921591439842899"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view-sections/version-view-storages/version-view-storages.component.ts",
+          "hash": "15024465986839831116"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view/version-view.component.css",
+          "hash": "10656563120639678758"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view/version-view.component.html",
+          "hash": "12855426381036895664"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view/version-view.component.spec.ts",
+          "hash": "10327166478092637068"
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version-view/version-view.component.ts",
+          "hash": "2489079459034287142",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/components/version/version.module.ts",
+          "hash": "6190182070417005557",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/constants.prod.ts",
+          "hash": "7058811060905378973"
+        },
+        {
+          "file": "libs/damap/src/lib/constants.ts",
+          "hash": "13419354869126829330"
+        },
+        {
+          "file": "libs/damap/src/lib/damap.module.ts",
+          "hash": "5282163441697457647",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/domain/access.ts",
+          "hash": "891396174555285010"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/config-services.ts",
+          "hash": "10598987463979795286"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/config.ts",
+          "hash": "267633565950084564"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/consent.ts",
+          "hash": "8431511609538869755"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/contributor.ts",
+          "hash": "758864543033735229"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/cost.ts",
+          "hash": "11812691955075325412"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/dataset.ts",
+          "hash": "12334707239935897653"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/dmp-list-item.ts",
+          "hash": "12529818848459820377"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/dmp.ts",
+          "hash": "12050693292289292925"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/access-right.enum.ts",
+          "hash": "8364223426714885617"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/agreement.enum.ts",
+          "hash": "6669328848447240328"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/compliance-type.enum.ts",
+          "hash": "2761519724905236195"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/contributor-role.enum.ts",
+          "hash": "15586501389104062690"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/cost-type.enum.ts",
+          "hash": "15231163118814228089"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/data-access-type.enum.ts",
+          "hash": "6320449162114350961"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/data-kind.enum.ts",
+          "hash": "13213961366212681103"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/data-quality-type.enum.ts",
+          "hash": "4030619930734422636"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/data-source.enum.ts",
+          "hash": "16982212386288248656"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/data-type.enum.ts",
+          "hash": "3103639221252772209"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/export-template-type.enum.ts",
+          "hash": "11844042039963746919"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/function-role.enum.ts",
+          "hash": "16589065499049412931"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/funding-state.enum.ts",
+          "hash": "794366122163468821"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/identifier-type.enum.ts",
+          "hash": "2577808817825228861"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/loading-state.enum.ts",
+          "hash": "501744728114391448"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/enum/security-measure.enum.ts",
+          "hash": "11672823115139883428"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/external-storage.ts",
+          "hash": "6233247238920265430"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/funding.ts",
+          "hash": "10266204432302360866"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/gdpr.ts",
+          "hash": "15874852378511964546"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/host.ts",
+          "hash": "8303099386030833761"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/identifier-type.ts",
+          "hash": "9182983684620588501"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/identifier.ts",
+          "hash": "13436601563599454327"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/internal-storage.ts",
+          "hash": "17775511068291549493"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/license-details.ts",
+          "hash": "8418874717650431963"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/project.ts",
+          "hash": "16007748002832046863"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/repository-details.ts",
+          "hash": "4268890951352792738"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/repository.ts",
+          "hash": "13848050205296516786"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/search/pagination.ts",
+          "hash": "15537397510289109140"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/search/search-result.ts",
+          "hash": "13435013322008290055"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/search/search.ts",
+          "hash": "10699655266870588011"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/storage.ts",
+          "hash": "5461910761433526756"
+        },
+        {
+          "file": "libs/damap/src/lib/domain/version.ts",
+          "hash": "7177913133709213965"
+        },
+        {
+          "file": "libs/damap/src/lib/guards/auth.guard.ts",
+          "hash": "3198848839376597702"
+        },
+        {
+          "file": "libs/damap/src/lib/mocks/access-mocks.ts",
+          "hash": "4303958124083728949"
+        },
+        {
+          "file": "libs/damap/src/lib/mocks/config-service-mocks.ts",
+          "hash": "3593064432384089814"
+        },
+        {
+          "file": "libs/damap/src/lib/mocks/contributor-mocks.ts",
+          "hash": "14297696597947311862"
+        },
+        {
+          "file": "libs/damap/src/lib/mocks/dataset-mocks.ts",
+          "hash": "13512458713817867111"
+        },
+        {
+          "file": "libs/damap/src/lib/mocks/dmp-list-mocks.ts",
+          "hash": "4961008200435184427"
+        },
+        {
+          "file": "libs/damap/src/lib/mocks/dmp-mocks.ts",
+          "hash": "16436414352982346420"
+        },
+        {
+          "file": "libs/damap/src/lib/mocks/project-mocks.ts",
+          "hash": "12111892983492860543"
+        },
+        {
+          "file": "libs/damap/src/lib/mocks/repository-mocks.ts",
+          "hash": "17387003274127406203"
+        },
+        {
+          "file": "libs/damap/src/lib/mocks/search.ts",
+          "hash": "11637064322283250686"
+        },
+        {
+          "file": "libs/damap/src/lib/mocks/storage-mocks.ts",
+          "hash": "3162863555132825082"
+        },
+        {
+          "file": "libs/damap/src/lib/pipes/byte/byte.module.ts",
+          "hash": "12159580468797027286"
+        },
+        {
+          "file": "libs/damap/src/lib/pipes/byte/byte.pipe.spec.ts",
+          "hash": "6418115268148471355"
+        },
+        {
+          "file": "libs/damap/src/lib/pipes/byte/byte.pipe.ts",
+          "hash": "3415992489527969931"
+        },
+        {
+          "file": "libs/damap/src/lib/pipes/dataset-source/dataset-source.module.ts",
+          "hash": "15875555699797173107"
+        },
+        {
+          "file": "libs/damap/src/lib/pipes/dataset-source/dataset-source.pipe.spec.ts",
+          "hash": "7163269597342538399"
+        },
+        {
+          "file": "libs/damap/src/lib/pipes/dataset-source/dataset-source.pipe.ts",
+          "hash": "8560076774494175820"
+        },
+        {
+          "file": "libs/damap/src/lib/services/backend.service.spec.ts",
+          "hash": "14893946946374447962",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/services/backend.service.ts",
+          "hash": "8609571908891479767",
+          "deps": [
+            "npm:rxjs",
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/services/feedback.service.spec.ts",
+          "hash": "7868959009635066387"
+        },
+        {
+          "file": "libs/damap/src/lib/services/feedback.service.ts",
+          "hash": "9869230970319752869",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/services/form.service.spec.ts",
+          "hash": "15074830000151129274"
+        },
+        {
+          "file": "libs/damap/src/lib/services/form.service.ts",
+          "hash": "11666401290365212662"
+        },
+        {
+          "file": "libs/damap/src/lib/services/logger.service.spec.ts",
+          "hash": "1910643307959900425"
+        },
+        {
+          "file": "libs/damap/src/lib/services/logger.service.ts",
+          "hash": "17301024609774143296"
+        },
+        {
+          "file": "libs/damap/src/lib/services/summary.service.spec.ts",
+          "hash": "4413576591456182047"
+        },
+        {
+          "file": "libs/damap/src/lib/services/summary.service.ts",
+          "hash": "10057948916227576466"
+        },
+        {
+          "file": "libs/damap/src/lib/shared/input-wrapper/input-wrapper.component.css",
+          "hash": "17411706772153358287"
+        },
+        {
+          "file": "libs/damap/src/lib/shared/input-wrapper/input-wrapper.component.html",
+          "hash": "5694367345869763070"
+        },
+        {
+          "file": "libs/damap/src/lib/shared/input-wrapper/input-wrapper.component.spec.ts",
+          "hash": "5333141563497649750"
+        },
+        {
+          "file": "libs/damap/src/lib/shared/input-wrapper/input-wrapper.component.ts",
+          "hash": "9367753205573315448"
+        },
+        {
+          "file": "libs/damap/src/lib/shared/shared.module.ts",
+          "hash": "252808106765165153",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/shared/textarea-wrapper/textarea-wrapper.component.css",
+          "hash": "11212774722202087215"
+        },
+        {
+          "file": "libs/damap/src/lib/shared/textarea-wrapper/textarea-wrapper.component.html",
+          "hash": "6859373259757542180"
+        },
+        {
+          "file": "libs/damap/src/lib/shared/textarea-wrapper/textarea-wrapper.component.spec.ts",
+          "hash": "1586638390869908840"
+        },
+        {
+          "file": "libs/damap/src/lib/shared/textarea-wrapper/textarea-wrapper.component.ts",
+          "hash": "3488977932581013099"
+        },
+        {
+          "file": "libs/damap/src/lib/store/actions/dmp.actions.ts",
+          "hash": "5655007367605437194",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/actions/form.actions.ts",
+          "hash": "16655262803983309144",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/actions/internal-storage.actions.ts",
+          "hash": "5166018881146240225",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/actions/login.actions.ts",
+          "hash": "4382378562662041281",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/actions/repository.actions.ts",
+          "hash": "11284599856198278010",
+          "deps": [
+            "npm:@ngrx/store",
+            "npm:@ngrx/entity"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/damap-store.module.ts",
+          "hash": "13022576361471075384",
+          "deps": [
+            "npm:@ngrx/store",
+            "npm:@ngrx/store-devtools",
+            "npm:@ngrx/effects"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/effects/dmp.effects.spec.ts",
+          "hash": "18185001877426981253",
+          "deps": [
+            "npm:rxjs",
+            "npm:@ngrx/effects",
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/effects/dmp.effects.ts",
+          "hash": "12873646549662358877",
+          "deps": [
+            "npm:@ngrx/effects",
+            "npm:rxjs",
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/effects/internal-storage.effects.spec.ts",
+          "hash": "13815655291679264095",
+          "deps": [
+            "npm:@ngrx/effects",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/effects/internal-storage.effects.ts",
+          "hash": "15695509190940448771",
+          "deps": [
+            "npm:@ngrx/effects",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/effects/repository.effects.spec.ts",
+          "hash": "11624604450790403589",
+          "deps": [
+            "npm:@ngrx/effects",
+            "npm:rxjs",
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/effects/repository.effects.ts",
+          "hash": "1223295912680760224",
+          "deps": [
+            "npm:@ngrx/effects",
+            "npm:rxjs",
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/main.ts",
+          "hash": "938456426388436951",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/reducers/dmp.reducer.spec.ts",
+          "hash": "7718776076969918481"
+        },
+        {
+          "file": "libs/damap/src/lib/store/reducers/dmp.reducer.ts",
+          "hash": "16272778324078729684",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/reducers/form.reducer.spec.ts",
+          "hash": "3086007487988092643"
+        },
+        {
+          "file": "libs/damap/src/lib/store/reducers/form.reducer.ts",
+          "hash": "14531441846292228672",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/reducers/internal-storage.reducer.spec.ts",
+          "hash": "17897704117529035832"
+        },
+        {
+          "file": "libs/damap/src/lib/store/reducers/internal-storage.reducer.ts",
+          "hash": "18032235523699292612",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/reducers/login.reducer.ts",
+          "hash": "1130387394473045297",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/reducers/repository.reducer.spec.ts",
+          "hash": "11756730743820460432"
+        },
+        {
+          "file": "libs/damap/src/lib/store/reducers/repository.reducer.ts",
+          "hash": "14885061554026448918",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/selectors/dmp.selectors.ts",
+          "hash": "14828673226710271821",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/selectors/form.selectors.ts",
+          "hash": "18350936182093071097",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/selectors/internal-storage.selectors.ts",
+          "hash": "6551356840899034678",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/selectors/login.selector.ts",
+          "hash": "2212619178472003352",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/selectors/repository.selectors.ts",
+          "hash": "17071925968891454351",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/states/app.state.ts",
+          "hash": "306073813081739545",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/states/dmp.state.ts",
+          "hash": "9189118891263201295",
+          "deps": [
+            "npm:@ngrx/entity"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/states/form.state.ts",
+          "hash": "15092465683062521135"
+        },
+        {
+          "file": "libs/damap/src/lib/store/states/internal-storage.state.ts",
+          "hash": "5384141182913545309",
+          "deps": [
+            "npm:@ngrx/entity"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/store/states/login.state.ts",
+          "hash": "15994254280350541530"
+        },
+        {
+          "file": "libs/damap/src/lib/store/states/repository.state.ts",
+          "hash": "16917040870906694690",
+          "deps": [
+            "npm:@ngrx/entity"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/testing/form-testing/form-testing.module.ts",
+          "hash": "11164769474993991999"
+        },
+        {
+          "file": "libs/damap/src/lib/testing/services-testing/feedback-testing.ts",
+          "hash": "1716308273831092285"
+        },
+        {
+          "file": "libs/damap/src/lib/testing/translate-testing/translate-testing.module.ts",
+          "hash": "17678258690947970726",
+          "deps": [
+            "npm:@ngx-translate/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/validators/currency.validator.ts",
+          "hash": "13478306781844372601"
+        },
+        {
+          "file": "libs/damap/src/lib/validators/doi.validator.ts",
+          "hash": "12674615283415350206"
+        },
+        {
+          "file": "libs/damap/src/lib/validators/not-empty.validator.ts",
+          "hash": "8811591295741912424"
+        },
+        {
+          "file": "libs/damap/src/lib/validators/orcid.validator.ts",
+          "hash": "10236531943074577176"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/cris-tag/cris-tag.component.css",
+          "hash": "2312053632215436329"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/cris-tag/cris-tag.component.html",
+          "hash": "9476327247914104095"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/cris-tag/cris-tag.component.spec.ts",
+          "hash": "5014201251180182899"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/cris-tag/cris-tag.component.ts",
+          "hash": "10688381595600067349"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/cris-tag/cris-tag.module.ts",
+          "hash": "9550058592298851671",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/delete-warning-dialog/delete-warning-dialog.component.ts",
+          "hash": "13386568677053987937",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/dmp-table/dmp-table.component.css",
+          "hash": "11031877019978239873"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/dmp-table/dmp-table.component.html",
+          "hash": "17723422231956761829"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/dmp-table/dmp-table.component.spec.ts",
+          "hash": "2569537976866025103"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/dmp-table/dmp-table.component.ts",
+          "hash": "7784658257796761053"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/dmp-table/dmp-table.module.ts",
+          "hash": "2581120544091116416",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/doi-search/doi-search.component.css",
+          "hash": "9572606025822068699"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/doi-search/doi-search.component.html",
+          "hash": "1971709119948580118"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/doi-search/doi-search.component.spec.ts",
+          "hash": "7117847950812970779"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/doi-search/doi-search.component.ts",
+          "hash": "6490868943341352387"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/doi-search/doi-search.module.ts",
+          "hash": "13020147126499834459",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/env-banner/env-banner.component.css",
+          "hash": "14107996241873453676"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/env-banner/env-banner.component.html",
+          "hash": "5798601337713891587"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/env-banner/env-banner.component.spec.ts",
+          "hash": "9371593876138893958"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/env-banner/env-banner.component.ts",
+          "hash": "16417445936984038776"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/env-banner/env-banner.module.ts",
+          "hash": "8504582436530511755",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/error-message/error-message.component.css",
+          "hash": "6979935207542587756"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/error-message/error-message.component.html",
+          "hash": "10143354879644762548"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/error-message/error-message.component.spec.ts",
+          "hash": "14863027079359477789"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/error-message/error-message.component.ts",
+          "hash": "10990572257061819089"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/error-message/error-message.module.ts",
+          "hash": "1044811252549842665",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/export-warning-dialog/export-warning-dialog.component.spec.ts",
+          "hash": "9411778633779389909",
+          "deps": [
+            "npm:@ngrx/store"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/export-warning-dialog/export-warning-dialog.component.ts",
+          "hash": "8974397022209130107"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/export-warning-dialog/export-warning-dialog.css",
+          "hash": "10477229113707239010"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/export-warning-dialog/export-warning-dialog.html",
+          "hash": "12786978050369786755"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/export-warning-dialog/export-warning.module.ts",
+          "hash": "2943244553340215399",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/file-upload/dragdrop.directive.spec.ts",
+          "hash": "10102617679605066933"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/file-upload/dragdrop.directive.ts",
+          "hash": "14978825721216169039"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/file-upload/file-upload.component.css",
+          "hash": "10494887872323781611"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/file-upload/file-upload.component.html",
+          "hash": "6426678279710757880"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/file-upload/file-upload.component.spec.ts",
+          "hash": "10502599077236708533"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/file-upload/file-upload.component.ts",
+          "hash": "5665155696093216914"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/file-upload/file-upload.module.ts",
+          "hash": "3397092809220440057",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/info-message/info-message.component.css",
+          "hash": "2321598043729088425"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/info-message/info-message.component.html",
+          "hash": "563642759716554494"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/info-message/info-message.component.spec.ts",
+          "hash": "3322779198624769347"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/info-message/info-message.component.ts",
+          "hash": "3009729199382544199"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/info-message/info-message.module.ts",
+          "hash": "15555325555340401431"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/license-wizard/license-filter.pipe.spec.ts",
+          "hash": "10833420030551286113"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/license-wizard/license-filter.pipe.ts",
+          "hash": "6766094229396777294"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/license-wizard/license-wizard-dialog.html",
+          "hash": "8350795000164951963"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/license-wizard/license-wizard-list.ts",
+          "hash": "8998023886848341583"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/license-wizard/license-wizard-questions.ts",
+          "hash": "17250393829796419828"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/license-wizard/license-wizard.component.css",
+          "hash": "8299150618924715338"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/license-wizard/license-wizard.component.html",
+          "hash": "14738921275469365287"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/license-wizard/license-wizard.component.spec.ts",
+          "hash": "9527688027233410515"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/license-wizard/license-wizard.component.ts",
+          "hash": "15006324912808845027"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/license-wizard/license-wizard.module.ts",
+          "hash": "13213544729889895831",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/orcid/orcid.component.css",
+          "hash": "17403312362316024913"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/orcid/orcid.component.html",
+          "hash": "4285605353226202044"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/orcid/orcid.component.spec.ts",
+          "hash": "10821435920384687508"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/orcid/orcid.component.ts",
+          "hash": "17043285557930243542"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/orcid/orcid.module.ts",
+          "hash": "16056336018290208491"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/person-card/person-card.component.html",
+          "hash": "9906802378899673164"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/person-card/person-card.component.spec.ts",
+          "hash": "11645000927699945205"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/person-card/person-card.component.ts",
+          "hash": "2164509601000916686",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/person-search/person-search.component.html",
+          "hash": "8668013547000823037"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/person-search/person-search.component.spec.ts",
+          "hash": "1294540392796384363"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/person-search/person-search.component.ts",
+          "hash": "14846354936823210515"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/person-search/person-search.module.ts",
+          "hash": "9270946435208956799",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/save-status/save-status.component.css",
+          "hash": "3247378037213954342"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/save-status/save-status.component.html",
+          "hash": "12607851667505578278"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/save-status/save-status.component.spec.ts",
+          "hash": "16812724240469208176"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/save-status/save-status.component.ts",
+          "hash": "3389211944460103465"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/save-status/save-status.module.ts",
+          "hash": "14768010155617325185",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/step-intro/step-intro.component.css",
+          "hash": "15122686219028140859"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/step-intro/step-intro.component.html",
+          "hash": "16005368091897601604"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/step-intro/step-intro.component.spec.ts",
+          "hash": "125922847923214395"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/step-intro/step-intro.component.ts",
+          "hash": "12213097405437664371"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/step-intro/step-intro.module.ts",
+          "hash": "11745026443119149829"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tag/tag.component.css",
+          "hash": "6489459590986337552"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tag/tag.component.html",
+          "hash": "12622370932840544318"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tag/tag.component.spec.ts",
+          "hash": "5661078159423617605"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tag/tag.component.ts",
+          "hash": "11139029819776611650"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tag/tag.module.ts",
+          "hash": "10342996860695538075"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tooltip/tooltip.component.css",
+          "hash": "3270306435884263792"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tooltip/tooltip.component.html",
+          "hash": "4769783745184560009"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tooltip/tooltip.component.spec.ts",
+          "hash": "9447508586430249505"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tooltip/tooltip.component.ts",
+          "hash": "8389443546741104937"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tooltip/tooltip.module.ts",
+          "hash": "11852503853485105867",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tree-select-form-field/tree-select-form-field.component.css",
+          "hash": "10312891816863872936"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tree-select-form-field/tree-select-form-field.component.html",
+          "hash": "16168578153761586124"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tree-select-form-field/tree-select-form-field.component.spec.ts",
+          "hash": "10478639939259784602"
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tree-select-form-field/tree-select-form-field.component.ts",
+          "hash": "477469065101501292",
+          "deps": [
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "libs/damap/src/lib/widgets/tree-select-form-field/tree-select-form-field.module.ts",
+          "hash": "4300698238557235452",
+          "deps": [
+            "npm:@ngx-translate/core"
+          ]
+        },
+        {
+          "file": "libs/damap/src/polyfills.ts",
+          "hash": "2908177964561583612",
+          "deps": [
+            "npm:zone.js"
+          ]
+        },
+        {
+          "file": "libs/damap/src/test.ts",
+          "hash": "7246338234327689234",
+          "deps": [
+            "npm:zone.js"
+          ]
+        },
+        {
+          "file": "libs/damap/tsconfig.json",
+          "hash": "10924136857916701746"
+        },
+        {
+          "file": "libs/damap/tsconfig.lib.json",
+          "hash": "13612473354229446341"
+        },
+        {
+          "file": "libs/damap/tsconfig.lib.prod.json",
+          "hash": "174503844014784742"
+        },
+        {
+          "file": "libs/damap/tsconfig.spec.json",
+          "hash": "11852434985737381252"
+        }
+      ]
+    }
+  }
+}
