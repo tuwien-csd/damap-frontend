@@ -14,7 +14,7 @@
   </mat-radio-group>
 </div>
 <ng-container *ngIf="costsStep.controls.exist.value">
-  <button mat-raised-button color="primary" (click)="addCost()">
+  <button mat-raised-button class="button-color-primary" (click)="addCost()">
     <mat-icon>add_circle</mat-icon>
     Add cost
   </button>
@@ -38,7 +38,6 @@
               </app-input-wrapper>
               <button
                 mat-icon-button
-                color="accent"
                 aria-label="Remove cost"
                 (click)="removeCost(i)">
                 <mat-icon>cancel</mat-icon>

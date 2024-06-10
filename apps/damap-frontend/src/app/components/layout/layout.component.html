@@ -1,5 +1,6 @@
 <mat-sidenav-container>
   <mat-sidenav
+    class="mat-sidenav-divider-grey"
     #sidenav
     [fixedInViewport]="true"
     (window:resize)="widescreen()"
@@ -31,31 +32,23 @@
         </div>
       </div>
     </div>
-    <div id="user" class="dark-theme">
+    <div id="user">
       <div>{{ name }}</div>
       <button
         mat-icon-button
         id="logout"
         [attr.aria-label]="'layout.logout' | translate"
         (click)="logout()">
-        <mat-icon>logout</mat-icon>
+        <mat-icon class="material-icon-white">logout</mat-icon>
       </button>
     </div>
     <mat-nav-list>
-      <a
-        mat-list-item
-        class="nav-item-mobile"
-        [routerLink]="'/dashboard'"
-        routerLinkActive="active"
-        >{{ "layout.menu.home" | translate }}</a
-      >
-      <a
-        mat-list-item
-        class="nav-item-mobile"
-        [routerLink]="'/plans'"
-        routerLinkActive="active"
-        >{{ "layout.menu.plans" | translate }}</a
-      >
+      <a mat-list-item [routerLink]="'/dashboard'" routerLinkActive="active">{{
+        "layout.menu.home" | translate
+      }}</a>
+      <a mat-list-item [routerLink]="'/plans'" routerLinkActive="active">{{
+        "layout.menu.plans" | translate
+      }}</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -67,7 +60,9 @@
             title="{{ 'layout.menu.mobile.open' | translate }}"
             (click)="sidenav.opened = !sidenav.opened"
             *ngIf="!sidenav.opened">
-            <mat-icon>menu</mat-icon>
+            <mat-icon class="material-icon-on-secondary-container"
+              >menu</mat-icon
+            >
           </button>
           <button
             mat-icon-button
@@ -75,7 +70,9 @@
             class="sidenav-btn"
             (click)="sidenav.opened = !sidenav.opened"
             *ngIf="sidenav.opened">
-            <mat-icon>close</mat-icon>
+            <mat-icon class="material-icon-on-secondary-container"
+              >close</mat-icon
+            >
           </button>
         </div>
         <div class="mainHeaderRight"></div>
@@ -95,7 +92,7 @@
         </div>
         <!-- University Logo End -->
       </mat-toolbar-row>
-      <mat-toolbar-row>
+      <mat-toolbar-row class="mat-toolbar-row-grey">
         <strong translate>title</strong>
       </mat-toolbar-row>
     </mat-toolbar>

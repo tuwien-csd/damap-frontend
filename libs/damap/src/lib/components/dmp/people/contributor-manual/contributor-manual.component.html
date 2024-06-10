@@ -28,17 +28,15 @@
           mat-icon-button
           [disabled]="form.invalid"
           (click)="changeContactPerson()"
-          title="{{ 'dmp.steps.people.contact.add' | translate }}"
-          color="primary">
-          <mat-icon>contact_mail</mat-icon>
+          title="{{ 'dmp.steps.people.contact.add' | translate }}">
+          <mat-icon class="material-icon-primary">contact_mail</mat-icon>
         </button>
         <button
           mat-icon-button
           [disabled]="form.invalid"
           (click)="addContributor()"
-          title="{{ 'dmp.steps.people.contributor.add' | translate }}"
-          color="primary">
-          <mat-icon>person_add</mat-icon>
+          title="{{ 'dmp.steps.people.contributor.add' | translate }}">
+          <mat-icon class="material-icon-primary">person_add</mat-icon>
         </button>
       </div>
     </mat-card-content>
