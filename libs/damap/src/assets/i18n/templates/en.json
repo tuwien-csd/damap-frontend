@@ -861,6 +861,9 @@
       "DOI": "doi",
       "ARK": "ark",
       "URL": "url",
+      "HDL": "hdl",
+      "PURL": "purl",
+      "URN": "urn",
       "FUNDREF": "fundref",
       "ROR": "ror",
       "OTHER": "other"
