@@ -135,6 +135,7 @@ describe('DmpActionsComponent', () => {
     const dialogRefMock = {
       componentInstance: { funderSupported: false },
       beforeClosed: () => of('show popup'),
+      afterClosed: () => of(null),
       close: () => {},
     };
 
