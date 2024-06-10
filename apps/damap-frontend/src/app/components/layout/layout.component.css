@@ -7,9 +7,13 @@
   overflow: visible;
 }
 
+.mat-sidenav {
+  width: 301px;
+}
+
 .footer {
-  background-color: #2a2a2a;
-  color: white;
+  background-color: var(--footer-color);
+  color: var(--on-footer-color);
   font-size: small;
   padding: 1rem 2rem;
   z-index: 10;
@@ -20,7 +24,7 @@
 }
 
 .footer a {
-  color: white;
+  color: var(--on-footer-color);
   text-decoration: none;
   padding: 0 0.5rem;
 }
@@ -31,11 +35,10 @@ mat-nav-list {
 }
 
 .mm-navbars-top a {
-  color: #fff;
+  color: var(--on-primary);
 }
 
 .mm-navbars-top {
-  background-color: var(--main-color);
   border-width: 0;
   overflow: hidden;
   position: absolute;
@@ -45,7 +48,7 @@ mat-nav-list {
 }
 
 .mm-navbar-button {
-  color: #fff;
+  color: var(--on-primary);
   height: 100%;
 }
 
@@ -59,8 +62,8 @@ mat-nav-list {
   padding: 0;
   border: none;
   position: relative;
-  background-color: var(--main-color);
-  color: #fff;
+  background-color: var(--primary);
+  color: var(--on-primary);
   width: 100%;
   float: left;
   clear: both;
@@ -90,59 +93,6 @@ mat-nav-list {
   justify-content: center;
 }
 
-.mm-navbars-top .languageElement A {
-  line-height: 50px;
-  height: 50px;
-  text-decoration: none;
-  align-items: center;
-  display: flex;
-}
-
-.mm-navbars-top .languageElement A > SPAN {
-  display: block;
-  position: relative;
-  width: 50px;
-  height: 26px;
-  border-radius: 12px;
-  padding-left: 4px;
-  padding-right: 4px;
-  line-height: 26px;
-  white-space: nowrap;
-  background-color: var(--accent-color-darker);
-  transition: background 0.3s ease;
-}
-
-.mm-navbars-top .languageElement A > SPAN::before {
-  content: "";
-  display: inline-block;
-  height: 18px;
-  width: 18px;
-  border-radius: 12px;
-  background: #fff;
-  position: absolute;
-  top: 4px;
-  right: 4px;
-}
-
-.mm-navbars-top .languageElement A > SPAN > SPAN {
-  display: block;
-  width: 100%;
-  padding-left: 2px;
-  padding-right: 2px;
-  font-size: 0.7647058824rem;
-  line-height: 26px;
-  position: relative;
-  left: 1px;
-}
-
-A[data-lang-active-de] > SPAN::before {
-  left: 4px;
-}
-
-A[data-lang-active-en] {
-  text-align: left;
-}
-
 .logo A {
   margin-left: 30px;
   transition:
@@ -159,8 +109,7 @@ A[data-lang-active-en] {
   justify-content: space-between;
   align-items: center;
   padding: 8px 16px;
-  background-color: #373737;
-  color: white;
+  background-color: var(--user-navbar-color);
 }
 
 #user > div {
@@ -173,7 +122,6 @@ A[data-lang-active-en] {
 
 #mainHeader {
   height: 50px;
-  background-color: white;
   overflow: visible;
 }
 
@@ -204,7 +152,7 @@ svg {
 .nav-item-desktop {
   padding: 0 15px 0 15px;
   text-decoration: none;
-  color: var(--main-color);
+  color: var(--primary);
   text-transform: uppercase;
   line-height: 70px;
   font-family: FFDINWebPro, sans-serif;
@@ -234,8 +182,7 @@ svg {
 }
 
 .mainHeaderLeft {
-  background-color: var(--secondary-color);
-  color: #c5c5c5;
+  background-color: var(--secondary-container);
   padding: 5px;
 }
 
@@ -244,18 +191,14 @@ svg {
 }
 
 .active {
-  background-color: #f5f5f5;
+  background-color: var(--surface-container-low);
   padding-left: 22px;
-  border-left: 8px solid var(--main-color);
+  border-left: 8px solid var(--primary);
   font-weight: 400;
 }
 
 .sidenav-btn {
   display: block;
-}
-
-.logo > .mat-focus-indicator::before {
-  border-color: var(--main-color-contrast);
 }
 
 @media only screen and (min-width: 1024px) {
@@ -278,6 +221,12 @@ svg {
     height: 70px;
   }
 
+  #mainHeader #mainHeaderLogo A {
+    top: -50px;
+    padding-right: 15px;
+    position: relative;
+  }
+
   .nav-item-desktop {
     display: block;
   }
@@ -288,7 +237,6 @@ svg {
 
   .mainHeaderLeft {
     background-color: var(--secondary-color);
-    color: #c5c5c5;
     padding: 0;
   }
 }

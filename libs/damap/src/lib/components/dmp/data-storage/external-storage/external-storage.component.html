@@ -2,7 +2,7 @@
   <div class="storage-grid">
     <button
       mat-raised-button
-      color="primary"
+      class="button-color-primary"
       (click)="addExternalStorage()"
       [style]="'margin: 5px; font-weight: normal'">
       {{ "dmp.steps.storage.external.add" | translate }}
@@ -28,12 +28,11 @@
                 [control]="getFormControl(i, 'title')"></app-input-wrapper>
               <button
                 mat-icon-button
-                color="primary"
                 aria-label="{{
                   'dmp.steps.storage.external.remove' | translate
                 }}"
                 (click)="removeExternalStorage(i)">
-                <mat-icon>cancel</mat-icon>
+                <mat-icon class="material-icon-primary">cancel</mat-icon>
               </button>
             </div>
           </div>

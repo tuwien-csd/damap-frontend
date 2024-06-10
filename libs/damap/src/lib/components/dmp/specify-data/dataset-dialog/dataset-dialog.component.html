@@ -69,7 +69,7 @@
   <button
     (click)="onDialogClose()"
     mat-raised-button
-    color="primary"
+    class="button-color-primary"
     [disabled]="dataset.invalid">
     <ng-container *ngIf="mode === 'edit'">{{
       "dmp.steps.data.specify.dialog.button.update" | translate
