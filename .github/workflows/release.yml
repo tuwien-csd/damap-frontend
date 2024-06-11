@@ -5,10 +5,8 @@ env:
 
 on:
   push:
-    branches:
-      - master
-      - next-mug
-  workflow_dispatch:
+    tags:
+      - v*
 
 permissions:
   contents: read
