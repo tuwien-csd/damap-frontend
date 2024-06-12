@@ -56,14 +56,14 @@
           "description": "If applicable, you might refer to reporting guidelines such as the ",
           "links": [
             {
-              "url": "https://mfr.osf.io/render?url=https://osf.io/xfpn4/?direct&mode=render&action=download&mode=render",
+              "url": "https://osf.io/xfpn4",
               "title": "MDAR",
-              "text": " (Materials, Design, Analysis, Reporting) guidelines for preclinical research or the "
+              "text": "guidelines for preclinical research or the "
             },
             {
               "url": "https://www.strobe-statement.org/",
               "title": "STROBE",
-              "text": " (STrengthening the Reporting of OBservational Studies in Epidemiology) checklists for clinical trials which help researchers to capture essential information."
+              "textStrobe": "checklists for clinical trials which help researchers to capture essential information."
             }
           ]
         },
@@ -73,18 +73,18 @@
             {
               "url": "http://miaca.sourceforge.net/",
               "title": "MIACA",
-              "text": " (Minimum Information About a Cellular Assay) standard for example is used in the genomics research community and part of the "
+              "text": "standard for example is used in the genomics research community and part of the "
             },
             {
               "url": "https://www.ebi.ac.uk/training/online/courses/bioinformatics-terrified/what-makes-a-good-bioinformatics-database/minimum-information-standards/",
               "title": "MIBBI",
-              "text": " (Minimum Information about a Biomedical or Biological Investigation) collection."
+              "textMibbi": "collection."
             }
           ]
         }
       },
       "validation": {
-        "documentationGuidance": "Indicate and locate all documentation formats (e.g., file paths or URLs) that may help others understand and reuse your (published) data. Documentation formats can include lab protocols, standard operating procedures (SOPs), codebooks, etc.",
+        "documentationGuidance": "Indicate and locate all documentation formats (e.g. by indicating the file path or URL) that may help others to understand and reuse your (published) data. Documentation formats you can refer to may include documentation such as lab protocols, standard operating procedures (SOPs), codebooks etc.",
         "sharingOptions": {
           "description": "You might also consider using collaborative and open platforms such as",
           "links": [
@@ -102,37 +102,36 @@
         }
       },
       "dataOwnership": {
-        "description": "Data ownership must be verified on a case to case basis due to varying parameters related to funding bodies, contract research, cooperations, several project partners, or special agreements in contracts. For general information, please read our RDM-Policy paragraph 2 on Usage rights.",
+        "description": "Data ownership must be verified on a case to case basis because of varying parameters related to funding bodies, contract research, cooperations, several project partners or special agreements in contracts. If you have any questions regarding legal aspects please contact the ",
         "links": [
           {
             "url": "https://muniverse.medunigraz.at/struktur/organisationseinheiten/recht-risikomanagement?language=DE",
             "title": "Legal and Risk Management Department",
-            "text": "for legal aspects."
+            "text": "or the "
           },
           {
             "url": "https://muniverse.medunigraz.at/struktur/organisationseinheiten/forschungsmanagement/forschungsfoerderung-technologietransfer?language=DE",
-            "title": "Team Tech Transfer",
-            "text": "for technology transfer queries."
+            "title": "Team Tech Transfer.",
+            "text": "For general information, please read point 2 on usage rights in our "
           },
           {
             "url": "https://muniverse.medunigraz.at/struktur/organisationseinheiten/rdm-policy",
-            "title": "RDM-Policy",
-            "text": "paragraph 2. Usage rights."
+            "title": "RDM-Policy."
           }
         ]
       },
       "repositoryGuidance": {
-        "description": "The Data Repository Guidance by Scientific Data might help you to find a discipline-specific repository for your data. If you cannot find a suitable disciplinary repository, we recommend zenodo, an easy to use catch-all and free of charge repository for datasets up to 50 GB (multiple datasets allowed, larger datasets on request).",
+        "start": "The ",
         "links": [
           {
             "url": "https://www.nature.com/sdata/policies/repositories",
-            "title": "Scientific Data Repository Guidance",
-            "text": "for discipline-specific repositories."
+            "title": "Data Repository Guidance by Scientific Data",
+            "text": "might also help you to find a domain-specific repository for your data. If you can not find a suitable disciplinary repository, we recommend "
           },
           {
             "url": "https://zenodo.org/",
-            "title": "Zenodo",
-            "text": "for datasets up to 50 GB."
+            "title": "zenodo",
+            "text": ", an easy to use catch-all and free of charge repository for datasets up to 50 GB (multiple datasets allowed, larger datasets on request)."
           }
         ]
       },

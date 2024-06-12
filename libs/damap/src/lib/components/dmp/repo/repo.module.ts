@@ -1,35 +1,37 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RepoDetailsComponent } from './repo-details/repo-details.component';
 import {
   FilterDialogComponent,
   RepoFilterComponent,
 } from './repo-filter/repo-filter.component';
+
+import { CommonModule } from '@angular/common';
+import { DatasetSourceModule } from '../../../pipes/dataset-source/dataset-source.module';
+import { ErrorMessageModule } from '../../../widgets/error-message/error-message.module';
+import { InfoMessageModule } from '../../../widgets/info-message/info-message.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RepoComponent } from './repo.component';
+import { RepoDetailsComponent } from './repo-details/repo-details.component';
+import { RepoPipe } from './repo.pipe';
 import { RepoRecommendationComponent } from './repo-recommendation/repo-recommendation.component';
 import { RepoTableComponent } from './repo-table/repo-table.component';
 import { RetentionPeriodComponent } from './retention-period/retention-period.component';
-import { RepoComponent } from './repo.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { RepoPipe } from './repo.pipe';
-import { ReactiveFormsModule } from '@angular/forms';
 import { StepIntroModule } from '../../../widgets/step-intro/step-intro.module';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
-import { ErrorMessageModule } from '../../../widgets/error-message/error-message.module';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { TreeSelectFormFieldModule } from '../../../widgets/tree-select-form-field/tree-select-form-field.module';
-import { DatasetSourceModule } from '../../../pipes/dataset-source/dataset-source.module';
-import { MatDialogModule } from '@angular/material/dialog';
 import { TagModule } from '../../../widgets/tag/tag.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { TreeSelectFormFieldModule } from '../../../widgets/tree-select-form-field/tree-select-form-field.module';
 
 @NgModule({
   imports: [
@@ -56,6 +58,7 @@ import { TagModule } from '../../../widgets/tag/tag.module';
     MatPaginatorModule,
     MatExpansionModule,
     MatDialogModule,
+    InfoMessageModule,
   ],
   declarations: [
     RepoDetailsComponent,
@@ -77,6 +80,7 @@ import { TagModule } from '../../../widgets/tag/tag.module';
     DatasetSourceModule,
     TagModule,
     RepoComponent,
+    InfoMessageModule,
 
     // Materials
     MatCardModule,

@@ -33,8 +33,22 @@
           | translate
       ">
       <a class="info-link-custom" [href]="link.url" target="_blank">
-        {{ link.title }}</a
-      >{{ link.text }}
+        {{ link.title }}
+      </a>
+      <ng-container *ngIf="link.title === 'MDAR'">
+        (<span style="font-weight: bold">M</span>aterials,
+        <span style="font-weight: bold">D</span>esign,
+        <span style="font-weight: bold">A</span>nalysis,
+        <span style="font-weight: bold">R</span>eporting)
+        {{ link.text }}
+      </ng-container>
+      <ng-container *ngIf="link.title === 'STROBE'">
+        (<span style="font-weight: bold">ST</span>rengthening the
+        <span style="font-weight: bold">R</span>eporting of
+        <span style="font-weight: bold">OB</span>servational studies in
+        <span style="font-weight: bold">E</span>pidemiology)
+        {{ link.textStrobe }}
+      </ng-container>
     </ng-container>
   </p>
 
@@ -49,8 +63,24 @@
           | translate
       ">
       <a class="info-link-custom" [href]="standard.url" target="_blank">
-        {{ standard.title }}</a
-      >{{ standard.text }}
+        {{ standard.title }}
+      </a>
+      <ng-container *ngIf="standard.title === 'MIACA'">
+        (<span style="font-weight: bold">M</span>inimum
+        <span style="font-weight: bold">I</span>nformation
+        <span style="font-weight: bold">A</span>bout a
+        <span style="font-weight: bold">C</span>ellular
+        <span style="font-weight: bold">A</span>ssay)
+        {{ standard.text }}
+      </ng-container>
+      <ng-container *ngIf="standard.title === 'MIBBI'">
+        (<span style="font-weight: bold">M</span>inimum
+        <span style="font-weight: bold">I</span>nformation about a
+        <span style="font-weight: bold">B</span>iomedical or
+        <span style="font-weight: bold">B</span>iological
+        <span style="font-weight: bold">I</span>nvestigation)
+        {{ standard.textMibbi }}
+      </ng-container>
     </ng-container>
   </p>
 </mat-dialog-content>

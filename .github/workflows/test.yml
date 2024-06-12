@@ -1,12 +1,15 @@
 name: test
 
 env:
-  is-master-branch: ${{ github.ref == 'refs/heads/master' }}
+  is-next-mug-branch: ${{ github.ref == 'refs/heads/next-mug' }}
   is-next-branch: ${{ github.ref == 'refs/heads/next' }}
   is-pull-request: ${{ github.event_name == 'pull_request' }}
 
 on:
   push:
+    branches:
+      - next
+      - next-mug
   pull_request:
   workflow_dispatch:
 
@@ -33,7 +36,7 @@ jobs:
       - run: npm run format:check
 
       - name: Merge - Lint all projects
-        if: ${{ env.is-master-branch == 'true' || env.is-next-branch == 'true' }}
+        if: ${{ env.is-next-mug-branch == 'true' || env.is-next-branch == 'true' }}
         run: npm run ci:lint
 
       - name: PR - Lint affected
@@ -41,7 +44,7 @@ jobs:
         run: npm run affected:lint
 
       - name: Merge - Build all projects
-        if: ${{ env.is-master-branch == 'true' || env.is-next-branch == 'true' }}
+        if: ${{ env.is-next-mug-branch == 'true' || env.is-next-branch == 'true' }}
         run: npm run ci:build
 
       - name: PR - Build affected
@@ -49,7 +52,7 @@ jobs:
         run: npm run affected:build
 
       - name: Merge - Test all projects
-        if: ${{ env.is-master-branch == 'true' || env.is-next-branch == 'true' }}
+        if: ${{ env.is-next-mug-branch == 'true' || env.is-next-branch == 'true' }}
         run: npm run ci:test
 
       - name: PR - Test affected

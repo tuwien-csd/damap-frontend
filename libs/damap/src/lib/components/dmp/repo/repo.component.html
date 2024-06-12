@@ -11,6 +11,21 @@
 <app-step-intro>
   {{ "dmp.steps.repositories.intro" | translate }}
 </app-step-intro>
+<app-info-message>
+  {{ "info.documentation.repositoryGuidance.start" | translate }}
+  <ng-container
+    *ngFor="
+      let link of 'info.documentation.repositoryGuidance.links'
+        | translate
+        | keyvalue
+    ">
+    <a class="info-link-custom" [href]="link.url" target="_blank">{{
+      link.title
+    }}</a>
+    {{ link.text }}
+  </ng-container>
+</app-info-message>
+
 <div *ngIf="repoStep.controls.length" [formGroup]="dmpForm">
   <p translate>dmp.steps.repositories.selected</p>
   <mat-card
