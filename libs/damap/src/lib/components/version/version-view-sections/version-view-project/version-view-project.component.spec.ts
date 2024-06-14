@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VersionViewProjectComponent } from './version-view-project.component';
 import { mockProject } from '../../../../mocks/project-mocks';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('VersionViewProjectComponent', () => {
   let component: VersionViewProjectComponent;
@@ -10,6 +11,7 @@ describe('VersionViewProjectComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [VersionViewProjectComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   });
 

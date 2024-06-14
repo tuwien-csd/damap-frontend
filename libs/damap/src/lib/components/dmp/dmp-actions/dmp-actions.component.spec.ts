@@ -18,6 +18,7 @@ import { MatInputHarness } from '@angular/material/input/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('DmpActionsComponent', () => {
   let component: DmpActionsComponent;
@@ -42,6 +43,7 @@ describe('DmpActionsComponent', () => {
         TranslateTestingModule,
         FormTestingModule,
       ],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [DmpActionsComponent, SaveVersionDialogComponent],
       providers: [provideMockStore({ initialState })],
     }).compileComponents();

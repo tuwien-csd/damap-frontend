@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RepoTableComponent } from './repo-table.component';
 import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('RepoTableComponent', () => {
   let component: RepoTableComponent;
@@ -10,6 +11,7 @@ describe('RepoTableComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TranslateTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [RepoTableComponent],
     }).compileComponents();
   });

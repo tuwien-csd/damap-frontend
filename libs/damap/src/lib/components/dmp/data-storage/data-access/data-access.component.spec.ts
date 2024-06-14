@@ -4,6 +4,7 @@ import { DataAccessComponent } from './data-access.component';
 import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('DataAccessComponent', () => {
   let component: DataAccessComponent;
@@ -16,6 +17,7 @@ describe('DataAccessComponent', () => {
         NoopAnimationsModule,
         TranslateTestingModule,
       ],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [DataAccessComponent],
     }).compileComponents();
   });

@@ -8,6 +8,7 @@ import { TranslateTestingModule } from '@damap/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ConfigService } from '../../services/config.service';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
@@ -28,9 +29,9 @@ describe('LayoutComponent', () => {
         MatToolbarModule,
         MatMenuModule,
         NoopAnimationsModule,
-        TranslateTestingModule,
       ],
       declarations: [LayoutComponent],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: OAuthService, useValue: oauthSpy },
         { provide: ConfigService, useValue: configSpy },

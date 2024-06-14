@@ -16,6 +16,7 @@ import { mockAccess } from '../../mocks/access-mocks';
 import { completeDmp } from '../../mocks/dmp-mocks';
 import { EMPTY, of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AccessComponent', () => {
   let component: AccessComponent;
@@ -42,6 +43,7 @@ describe('AccessComponent', () => {
         MatCheckboxModule,
         MatIconModule,
       ],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: BackendService, useValue: backendSpy },
         {

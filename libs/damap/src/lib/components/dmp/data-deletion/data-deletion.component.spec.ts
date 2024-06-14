@@ -12,6 +12,7 @@ import {
 import { DataDeletionComponent } from './data-deletion.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('DataDeletionComponent', () => {
   let component: DataDeletionComponent;
@@ -20,6 +21,7 @@ describe('DataDeletionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MatSliderModule, TranslateTestingModule],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [DataDeletionComponent],
     }).compileComponents();
   });

@@ -25,8 +25,9 @@ import { TranslateTestingModule } from '../../testing/translate-testing/translat
 import { UntypedFormBuilder } from '@angular/forms';
 import { mockDmpList } from '../../mocks/dmp-list-mocks';
 import { of } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-describe('PlanComponent', () => {
+describe('PlansComponent', () => {
   let component: PlansComponent;
   let fixture: ComponentFixture<PlansComponent>;
   let loader: HarnessLoader;
@@ -61,6 +62,7 @@ describe('PlanComponent', () => {
         DeleteWarningDialogComponent,
         NoopAnimationsModule,
       ],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [PlansComponent],
       providers: [
         provideMockStore({ initialState }),

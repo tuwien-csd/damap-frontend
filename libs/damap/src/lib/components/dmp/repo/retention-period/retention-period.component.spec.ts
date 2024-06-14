@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('RetentionPeriodComponent', () => {
   let component: RetentionPeriodComponent;
@@ -25,6 +26,7 @@ describe('RetentionPeriodComponent', () => {
         NoopAnimationsModule,
         TranslateTestingModule,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [RetentionPeriodComponent],
     }).compileComponents();
   });

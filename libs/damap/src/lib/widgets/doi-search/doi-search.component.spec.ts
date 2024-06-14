@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { restrictedDatasetMock } from '../../mocks/dataset-mocks';
 import { LoadingState } from '../../domain/enum/loading-state.enum';
-import { SimpleChange } from '@angular/core';
+import { NO_ERRORS_SCHEMA, SimpleChange } from '@angular/core';
 
 describe('DoiSearchComponent', () => {
   let component: DoiSearchComponent;
@@ -23,6 +23,7 @@ describe('DoiSearchComponent', () => {
         MatIconModule,
         NoopAnimationsModule,
       ],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [DoiSearchComponent],
     }).compileComponents();
   });

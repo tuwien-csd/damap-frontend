@@ -10,6 +10,7 @@ import {
   selectInternalStoragesLoaded,
 } from '../../../../store/selectors/internal-storage.selectors';
 import { mockInternalStorage } from '../../../../mocks/storage-mocks';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('StorageComponent', () => {
   let component: StorageComponent;
@@ -18,6 +19,7 @@ describe('StorageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TranslateTestingModule],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [StorageComponent, StorageFilterPipe],
       providers: [
         provideMockStore({

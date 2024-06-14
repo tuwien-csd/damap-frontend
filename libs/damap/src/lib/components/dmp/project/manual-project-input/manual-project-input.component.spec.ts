@@ -6,7 +6,7 @@ import {
   mockManualProject,
   mockProject,
 } from '../../../../mocks/project-mocks';
-import { SimpleChange } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from '@angular/core';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,6 +26,7 @@ describe('ManualProjectInputComponent', () => {
         FormsModule,
         ReactiveFormsModule,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [ManualProjectInputComponent],
     }).compileComponents();
   });

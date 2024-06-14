@@ -91,6 +91,7 @@
     "karma-jasmine": "5.1.0",
     "karma-jasmine-html-reporter": "2.1.0",
     "karma-junit-reporter": "2.0.1",
+    "karma-spec-reporter": "^0.0.36",
     "ng-packagr": "17.1.2",
     "nx": "18.0.8",
     "postcss": "8.4.35",

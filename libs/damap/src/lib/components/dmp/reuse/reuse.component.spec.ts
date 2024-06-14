@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ReuseComponent', () => {
   let component: ReuseComponent;
@@ -21,6 +22,7 @@ describe('ReuseComponent', () => {
         NoopAnimationsModule,
         TranslateTestingModule,
       ],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [ReuseComponent, StepIntroComponent],
     }).compileComponents();
   });

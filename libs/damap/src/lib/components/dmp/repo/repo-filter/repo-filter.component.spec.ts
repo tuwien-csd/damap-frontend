@@ -7,6 +7,7 @@ import {
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('RepoFilterComponent', () => {
   let component: RepoFilterComponent;
@@ -16,6 +17,7 @@ describe('RepoFilterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MatDialogModule, TranslateTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [RepoFilterComponent, FilterDialogComponent],
       providers: [provideMockStore({ initialState })],
     }).compileComponents();

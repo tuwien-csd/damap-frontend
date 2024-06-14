@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('EthicalAspectsComponent', () => {
   let component: EthicalAspectsComponent;
@@ -16,6 +17,7 @@ describe('EthicalAspectsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, MatRadioModule, TranslateTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [EthicalAspectsComponent],
     }).compileComponents();
   });
