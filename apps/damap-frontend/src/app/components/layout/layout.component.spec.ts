@@ -29,7 +29,6 @@ describe('LayoutComponent', () => {
         MatToolbarModule,
         MatMenuModule,
         NoopAnimationsModule,
-        TranslateTestingModule,
       ],
       declarations: [LayoutComponent],
       schemas: [NO_ERRORS_SCHEMA],
