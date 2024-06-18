@@ -1,0 +1,42 @@
+<div class="background">
+  <div class="container">
+    <div class="logo-info-bar fadeInTop">
+      <img class="logo" src="assets/logo-cropped.svg" alt="Logo" />
+      <!--
+      For now commented out, until we have some info we can display here
+          -->
+      <div class="info-bar">
+        <div class="info-bar-typography">
+          Usage 29 | DMPs 311 | Related Organizations 322
+        </div>
+      </div>
+    </div>
+    <div class="double-items">
+      <div class="left-side-container">
+        <div class="title-typography fadeInTop">
+          {{ "landing-page.title" | translate }}
+        </div>
+        <div class="double-items fadeInLeft">
+          <a mat-raised-button class="start-btn button-color-primary" routerLink="/dashboard">
+            <mat-icon>chevron_right</mat-icon>
+            {{ "landing-page.start" | translate }}
+          </a>
+          <a
+            mat-fab
+            class="play-video-btn fab-button-color-primary"
+            href="https://www.youtube.com/watch?v=IxQzqy26ZO4"
+            target="_blank"
+            rel="noopener noreferrer">
+            <mat-icon>play_arrow</mat-icon>
+          </a>
+        </div>
+      </div>
+      <div class="landing-page-graphic-container fadeInTop">
+        <img
+          class="landing-page-graphic"
+          src="../../../assets/landing-page-graphic.png"
+          alt="Thumb" />
+      </div>
+    </div>
+  </div>
+</div>
