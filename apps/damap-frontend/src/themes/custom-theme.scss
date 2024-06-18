@@ -1,5 +1,5 @@
 @use "node_modules/@angular/material/index" as mat;
-@use '@angular/material-experimental' as matx;
+@use "@angular/material-experimental" as matx;
 // Plus imports for other components in your app.
 // Depending on your layout you will want to include your own palettes or import an
 // Angular Material prebuilt theme of your choice.
@@ -11,20 +11,21 @@
 @include mat.core();
 @include mat.strong-focus-indicators();
 // Define custom primary color based on Material Experimental
-$m3-custom-primary-color: matx.define-palette($m3-custom-primary-color); 
-
+$m3-custom-primary-color: matx.define-palette($m3-custom-primary-color);
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 
 //https://blog.angular.dev/material-3-experimental-support-in-angular-17-2-8e681dde650e
-$m3-dark-theme: matx.define-theme((
-  color: (
-    theme-type: dark,
-    primary: matx.$m3-custom-primary-color,
+$m3-dark-theme: matx.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: matx.$m3-custom-primary-color,
+    ),
   )
-));
+);
 // https://blog.angular.dev/material-3-experimental-support-in-angular-17-2-8e681dde650e
 .dark-theme {
   @include mat.all-component-themes($m3-dark-theme);
