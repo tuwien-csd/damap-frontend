@@ -1,59 +1,55 @@
-@use "node_modules/@angular/material/index" as mat;
-@use "@angular/material-experimental" as matx;
-// Plus imports for other components in your app.
-// Depending on your layout you will want to include your own palettes or import an
-// Angular Material prebuilt theme of your choice.
+@use "@angular/material" as mat; 
 @import "apps/damap-frontend/src/themes/custom-palettes";
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.core();
-@include mat.strong-focus-indicators();
-// Define custom primary color based on Material Experimental
-$m3-custom-primary-color: matx.define-palette($m3-custom-primary-color);
+// Define palettes using Material Design palettes as per your existing setup or with M3 considerations.
+$app-primary: mat.get-theme-color($custom-primary-color);
+$app-accent: mat.get-theme-color($custom-accent-color);
+$app-warn: mat.get-theme-color($red-palette);
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-
-//https://blog.angular.dev/material-3-experimental-support-in-angular-17-2-8e681dde650e
-$m3-dark-theme: matx.define-theme(
-  (
-    color: (
-      theme-type: dark,
-      primary: matx.$m3-custom-primary-color,
-    ),
+$app-light-theme: mat.define-light-theme((
+  color: (
+    primary: $app-primary,
+    accent: $app-accent,
   )
-);
-// https://blog.angular.dev/material-3-experimental-support-in-angular-17-2-8e681dde650e
-.dark-theme {
-  @include mat.all-component-themes($m3-dark-theme);
+));
+$app-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $app-primary,
+    accent: $app-accent,
+  )
+));
+
+// Check for theme version and apply styles accordingly using a custom mixin.
+@mixin app-component-theme($theme) {
+  @if (mat.get-theme-version($theme) == 1) {
+    // M3-specific styles
+    @include mat.core-theme($theme);
+    @include mat.button-theme($theme);
+    @include mat.icon-theme($theme);
+  } @else {
+    // Fallback for M2
+    @include mat.core();
+    @include mat.button();
+    @include mat.icon();
+  }
 }
 
-$app-primary: mat.define-palette($custom-primary-color);
-$app-accent: mat.define-palette($custom-accent-color);
-/* You can also replace the lines above and use Angular Material colors instead: */
-//$app-primary: mat.define-palette(mat.$deep-purple-palette);
-//$app-accent: mat.define-palette(mat.$amber-palette);
+// Apply the theme mixins based on the theme version
+@include app-component-theme($app-light-theme);
 
-// The warn palette is optional (defaults to red).
-$app-warn: mat.define-palette(mat.$red-palette);
+.dark-theme {
+  @include mat.all-component-colors($app-dark-theme);
+  @include mat.strong-focus-indicators-theme($app-dark-theme);
+}
 
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as `color` or `typography`.
-$app-light-theme: mat.define-light-theme($app-primary, $app-accent, $app-warn);
-$app-dark-theme: mat.define-dark-theme($app-primary, $app-accent, $app-warn);
+// Ensure backward compatibility
+html {
+  @include mat.all-component-themes($app-light-theme);
+  @include mat.strong-focus-indicators-theme($app-light-theme);
+}
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($app-light-theme);
-@include mat.strong-focus-indicators-theme($app-light-theme);
-// .dark-theme {
-//   @include mat.all-component-colors($app-dark-theme);
-//   @include mat.strong-focus-indicators-theme($app-dark-theme);
-// }
+// Custom typography setup with backwards compatibility
+@include mat.typography-hierarchy($app-light-theme, $back-compat: true);
 
 @font-face {
   font-family: Roboto;
