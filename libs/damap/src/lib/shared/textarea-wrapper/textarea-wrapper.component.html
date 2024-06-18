@@ -11,7 +11,10 @@
       type="text"
       [required]="required"
       [maxLength]="maxLength"
-      rows="4"
+      cdkTextareaAutosize
+      cdkAutosizeMinRows="5"
+      cdkAutosizeMaxRows="9"
+      class="no-resize"
       #message>
     </textarea>
     <mat-hint align="end"
@@ -28,7 +31,11 @@
       type="text"
       [matAutocomplete]="auto"
       [required]="required"
-      rows="4"
+      cdkTextareaAutosize
+      cdkAutosizeMinRows="5"
+      cdkAutosizeMaxRows="9"
+      class="no-resize"
+      (input)="this.updateAutocompletePosition()"
       #message></textarea>
     <mat-hint align="end"
       >{{ message.value.length }} / {{ maxLength }}</mat-hint
