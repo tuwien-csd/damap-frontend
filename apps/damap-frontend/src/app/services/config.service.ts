@@ -1,10 +1,11 @@
-import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
+import { AuthConfig, OAuthService, OAuthSuccessEvent } from "angular-oauth2-oidc";
 import { Injectable, isDevMode } from '@angular/core';
 
 import { Config } from '@damap/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from "rxjs";
 import { environment } from '../../environments/environment';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root',
@@ -15,22 +16,24 @@ export class ConfigService {
   constructor(
     private http: HttpClient,
     private oauthService: OAuthService,
+    private router: Router,
   ) {}
 
-  public initializeApp(): Promise<boolean> {
-    return this.loadConfig()
-      .toPromise()
+  public initializeApp(): void {
+    this.loadConfig()
       .then((config: Config) => {
         if (!config) {
           // eslint-disable-next-line no-console
           console.error('Config is missing!');
           return new Promise<boolean>(_ => false);
         } else {
+          console.log(this.oauthService.state);
           this.config = config;
           const authConfig: AuthConfig = {
             issuer: config.authUrl,
             clientId: config.authClient,
             redirectUri: window.location.origin,
+            logoutUrl: window.location.origin,
             oidc: true,
             scope: config.authScope,
             // useSilentRefresh: true,
@@ -39,8 +42,14 @@ export class ConfigService {
             // sessionChecksEnabled: true,
           };
           this.oauthService.configure(authConfig);
+          this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+            if (this.oauthService.hasValidIdToken() && this.oauthService.hasValidAccessToken()) {
+              const url = decodeURIComponent(this.oauthService.state);
+              this.router.navigateByUrl(url);
+            }
+          });
           this.oauthService.setupAutomaticSilentRefresh();
-          return this.oauthService.loadDiscoveryDocumentAndLogin();
+          return new Promise<boolean>(_ => true);
         }
       })
       .catch(error => {
@@ -59,8 +68,9 @@ export class ConfigService {
     return this.config.env;
   }
 
-  private loadConfig(): Observable<Config> {
+  private async loadConfig(): Promise<Config> {
     const host = environment.backendurl;
-    return this.http.get<Config>(`${host}config`);
+    const config$ = this.http.get<Config>(`${host}config`);
+    return await lastValueFrom(config$);
   }
 }
