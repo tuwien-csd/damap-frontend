@@ -11,7 +11,6 @@ import { APP_ENV } from './constants';
 import { GdprComponent } from './components/gdpr/gdpr.component';
 
 export const DAMAP_ROUTES: Route[] = [
-  { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'plans', component: PlansComponent },
   {
