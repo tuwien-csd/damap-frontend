@@ -35,7 +35,7 @@ mat-nav-list {
 }
 
 .mm-navbars-top {
-  background-color: var(--main-color);
+  background-color: #006699;
   border-width: 0;
   overflow: hidden;
   position: absolute;
@@ -59,7 +59,7 @@ mat-nav-list {
   padding: 0;
   border: none;
   position: relative;
-  background-color: var(--main-color);
+  background-color: #006699;
   color: #fff;
   width: 100%;
   float: left;

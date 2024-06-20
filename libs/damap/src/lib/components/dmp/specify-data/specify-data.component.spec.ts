@@ -1,28 +1,28 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SpecifyDataComponent } from './specify-data.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
+  ReactiveFormsModule,
   UntypedFormArray,
   UntypedFormControl,
   UntypedFormGroup,
-  ReactiveFormsModule,
 } from '@angular/forms';
-import { MatRadioModule } from '@angular/material/radio';
-import { StepIntroComponent } from '../../../widgets/step-intro/step-intro.component';
-import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
-import { MatTabsModule } from '@angular/material/tabs';
 import {
   closedDatasetMock,
   restrictedDatasetMock,
 } from '../../../mocks/dataset-mocks';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTabsModule } from '@angular/material/tabs';
+import { SpecifyDataComponent } from './specify-data.component';
+import { StepIntroComponent } from '../../../widgets/step-intro/step-intro.component';
+import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
+
 describe('SpecifyDataComponent', () => {
   let component: SpecifyDataComponent;
   let fixture: ComponentFixture<SpecifyDataComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [
         ReactiveFormsModule,
         MatTabsModule,
@@ -32,7 +32,7 @@ describe('SpecifyDataComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [SpecifyDataComponent, StepIntroComponent],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SpecifyDataComponent);

@@ -1,25 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ManualProjectInputComponent } from './manual-project-input.component';
-import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
+import { CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   mockManualProject,
   mockProject,
 } from '../../../../mocks/project-mocks';
-import { CUSTOM_ELEMENTS_SCHEMA, SimpleChange } from '@angular/core';
+
 import { HarnessLoader } from '@angular/cdk/testing';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { MatButtonModule } from '@angular/material/button';
+import { ManualProjectInputComponent } from './manual-project-input.component';
 import { MatButtonHarness } from '@angular/material/button/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
 
 describe('ManualProjectInputComponent', () => {
   let component: ManualProjectInputComponent;
   let fixture: ComponentFixture<ManualProjectInputComponent>;
   let loader: HarnessLoader;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [
         TranslateTestingModule,
         MatButtonModule,
@@ -29,7 +29,7 @@ describe('ManualProjectInputComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [ManualProjectInputComponent],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ManualProjectInputComponent);
@@ -59,7 +59,7 @@ describe('ManualProjectInputComponent', () => {
     expect(component.form.patchValue).toHaveBeenCalledWith(mockManualProject);
   });
 
-  it('should emit updated project', async () => {
+  it('should emit updated project', waitForAsync(async () => {
     spyOn(component.projectUpdate, 'emit');
     const buttons = await loader.getAllHarnesses(MatButtonHarness);
     expect(buttons.length).toBe(1);
@@ -73,5 +73,5 @@ describe('ManualProjectInputComponent', () => {
 
     await button.click();
     expect(component.projectUpdate.emit).toHaveBeenCalledTimes(1);
-  });
+  }));
 });

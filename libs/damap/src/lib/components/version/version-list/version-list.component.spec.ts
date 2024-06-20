@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { VersionListComponent } from './version-list.component';
-import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
-import { RouterTestingModule } from '@angular/router/testing';
-import { BackendService } from '../../../services/backend.service';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { selectDmpById } from '../../../store/selectors/dmp.selectors';
-import { completeDmp } from '../../../mocks/dmp-mocks';
+
 import { AuthService } from '../../../auth/auth.service';
+import { BackendService } from '../../../services/backend.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
+import { VersionListComponent } from './version-list.component';
+import { completeDmp } from '../../../mocks/dmp-mocks';
+import { selectDmpById } from '../../../store/selectors/dmp.selectors';
 
 describe('VersionListComponent', () => {
   let component: VersionListComponent;
@@ -19,10 +19,10 @@ describe('VersionListComponent', () => {
   };
   const authSpy = jasmine.createSpyObj('AuthService', ['isAdmin']);
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(() => {
     authSpy.isAdmin.and.returnValue(false);
     backendSpy = jasmine.createSpyObj('BackendService', ['getDmpVersions']);
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       imports: [RouterTestingModule, TranslateTestingModule],
       declarations: [VersionListComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -37,7 +37,7 @@ describe('VersionListComponent', () => {
         }),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(VersionListComponent);

@@ -25,7 +25,6 @@ import { TranslateTestingModule } from '../../testing/translate-testing/translat
 import { UntypedFormBuilder } from '@angular/forms';
 import { mockDmpList } from '../../mocks/dmp-list-mocks';
 import { of } from 'rxjs';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('PlansComponent', () => {
   let component: PlansComponent;
@@ -38,52 +37,53 @@ describe('PlansComponent', () => {
     damap: { dmps: { loaded: true, entities: mockDmpList, ids: [1] } },
   };
 
-  beforeEach(waitForAsync(async () => {
-    backendSpy = jasmine.createSpyObj('BackendService', [
-      'getDmpDocument',
-      'getMaDmpJsonFile',
-      'getDmpById',
-      'getAllDmps',
-      'deleteDmp',
-      'exportDmpTemplate',
-    ]);
-    backendSpy.getAllDmps.and.returnValue(of(mockDmpList));
-    authSpy = jasmine.createSpyObj('AuthService', [
-      'hasValidAccessToken',
-      'isAdmin',
-    ]);
-    await TestBed.configureTestingModule({
-      imports: [
-        MatIconModule,
-        MatProgressBarModule,
-        MatDialogModule,
-        MatButtonModule,
-        TranslateTestingModule,
-        DeleteWarningDialogComponent,
-        NoopAnimationsModule,
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-      declarations: [PlansComponent],
-      providers: [
-        provideMockStore({ initialState }),
-        { provide: BackendService, useValue: backendSpy },
-        { provide: AuthService, useValue: authSpy },
-        UntypedFormBuilder,
-        FormService,
-      ],
-    }).compileComponents();
-    fixture = TestBed.createComponent(PlansComponent);
-    component = fixture.componentInstance;
-    store = TestBed.inject(MockStore);
-    fixture.detectChanges();
-    loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
-  }));
+  beforeEach(waitForAsync(
+    waitForAsync(() => {
+      backendSpy = jasmine.createSpyObj('BackendService', [
+        'getDmpDocument',
+        'getMaDmpJsonFile',
+        'getDmpById',
+        'getAllDmps',
+        'deleteDmp',
+        'exportDmpTemplate',
+      ]);
+      backendSpy.getAllDmps.and.returnValue(of(mockDmpList));
+      authSpy = jasmine.createSpyObj('AuthService', [
+        'hasValidAccessToken',
+        'isAdmin',
+      ]);
+      TestBed.configureTestingModule({
+        imports: [
+          MatIconModule,
+          MatProgressBarModule,
+          MatDialogModule,
+          MatButtonModule,
+          TranslateTestingModule,
+          DeleteWarningDialogComponent,
+          NoopAnimationsModule,
+        ],
+        declarations: [PlansComponent],
+        providers: [
+          provideMockStore({ initialState }),
+          { provide: BackendService, useValue: backendSpy },
+          { provide: AuthService, useValue: authSpy },
+          UntypedFormBuilder,
+          FormService,
+        ],
+      }).compileComponents();
+      fixture = TestBed.createComponent(PlansComponent);
+      component = fixture.componentInstance;
+      store = TestBed.inject(MockStore);
+      fixture.detectChanges();
+      loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
+    }),
+  ));
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should remove dmps', async () => {
+  it('should remove dmps', waitForAsync(async () => {
     spyOn(store, 'dispatch');
     authSpy.isAdmin.and.returnValue(true);
     backendSpy.deleteDmp.and.returnValue(of({ status: 204 }));
@@ -97,7 +97,7 @@ describe('PlansComponent', () => {
 
     expect(backendSpy.deleteDmp).toHaveBeenCalledWith(1);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
-  });
+  }));
 
   it('should call getDmpDocument if funderSupported is true', fakeAsync(() => {
     spyOn(component, 'getDocument').and.callThrough();

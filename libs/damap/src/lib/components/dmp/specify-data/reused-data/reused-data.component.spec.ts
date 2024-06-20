@@ -1,27 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
-import { ReusedDataComponent } from './reused-data.component';
 import { BackendService } from '../../../../services/backend.service';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { restrictedDatasetMock } from '../../../../mocks/dataset-mocks';
-import { of } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ReusedDataComponent } from './reused-data.component';
+import { of } from 'rxjs';
+import { restrictedDatasetMock } from '../../../../mocks/dataset-mocks';
 
 describe('ReusedDataComponent', () => {
   let component: ReusedDataComponent;
   let fixture: ComponentFixture<ReusedDataComponent>;
   let backendSpy;
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(() => {
     backendSpy = jasmine.createSpyObj('BackendService', ['searchDataset']);
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       imports: [MatDialogModule],
       declarations: [ReusedDataComponent],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [{ provide: BackendService, useValue: backendSpy }],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ReusedDataComponent);

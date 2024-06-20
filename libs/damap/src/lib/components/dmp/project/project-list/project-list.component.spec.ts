@@ -3,6 +3,7 @@ import {
   TestBed,
   fakeAsync,
   tick,
+  waitForAsync,
 } from '@angular/core/testing';
 import {
   mockProjectSearchResult,
@@ -32,7 +33,7 @@ describe('ProjectListComponent', () => {
   let loader: HarnessLoader;
   let backendSpy;
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(() => {
     backendSpy = jasmine.createSpyObj('BackendService', [
       'getProjectSearchResult',
       'getRecommendedProjects',
@@ -44,7 +45,7 @@ describe('ProjectListComponent', () => {
       of(mockRecommendedProjectSearchResult),
     );
 
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       imports: [
         TranslateTestingModule,
         MatDialogModule,
@@ -64,19 +65,19 @@ describe('ProjectListComponent', () => {
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.loader(fixture);
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should fetch recommended projects after creation', async () => {
+  it('should fetch recommended projects after creation', waitForAsync(async () => {
     // making sure that the input is initialized
     await loader.getHarness(MatInputHarness);
     expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
-  });
+  }));
 
-  it('should load projects on text input', async () => {
+  it('should load projects on text input', waitForAsync(async () => {
     const input = await loader.getHarness(MatInputHarness);
 
     await input.setValue(mockProject.title);
@@ -84,9 +85,9 @@ describe('ProjectListComponent', () => {
 
     await input.setValue('');
     expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
-  });
+  }));
 
-  it('should change project on selection', async () => {
+  it('should change project on selection', waitForAsync(async () => {
     spyOn(component.projectToSet, 'emit');
 
     const input = await loader.getHarness(MatInputHarness);
@@ -100,7 +101,7 @@ describe('ProjectListComponent', () => {
 
     await options[0].select();
     expect(component.projectToSet.emit).toHaveBeenCalled();
-  });
+  }));
 
   it('should call fetchRecommendedProjects when selectedProject is set to null', () => {
     spyOn(component, 'fetchRecommendedProjects');
@@ -117,9 +118,9 @@ describe('ProjectListComponent', () => {
     expect(backendSpy.getRecommendedProjects).toHaveBeenCalled();
   }));
 
-  it('should load projects on text input', async () => {
+  it('should load projects on text input', waitForAsync(async () => {
     const input = await loader.getHarness(MatInputHarness);
     await input.setValue(mockProject.title);
     expect(backendSpy.getProjectSearchResult).toHaveBeenCalled();
-  });
+  }));
 });

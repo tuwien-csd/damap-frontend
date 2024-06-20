@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { LegalEthicalAspectsComponent } from './legal-ethical-aspects.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
+  ReactiveFormsModule,
   UntypedFormControl,
   UntypedFormGroup,
-  ReactiveFormsModule,
 } from '@angular/forms';
+
+import { LegalEthicalAspectsComponent } from './legal-ethical-aspects.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { StepIntroComponent } from '../../../widgets/step-intro/step-intro.component';
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
@@ -15,13 +15,13 @@ describe('LegalEthicalAspectsComponent', () => {
   let component: LegalEthicalAspectsComponent;
   let fixture: ComponentFixture<LegalEthicalAspectsComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, MatRadioModule, TranslateTestingModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [LegalEthicalAspectsComponent, StepIntroComponent],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LegalEthicalAspectsComponent);
