@@ -1,100 +1,87 @@
-@use "@angular/material" as mat;
+@use "node_modules/@angular/material/index" as mat;
+// Plus imports for other components in your app.
+// Depending on your layout you will want to include your own palettes or import an
+// Angular Material prebuilt theme of your choice.
 @import "apps/damap-frontend/src/themes/custom-palettes";
 
-// Define palettes using Material Design palettes as per your existing setup or with M3 considerations.
-$theme: mat.define-theme();
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+@include mat.strong-focus-indicators();
 
-// Check for theme version and apply styles accordingly using a custom mixin.
-@mixin app-component-theme($theme) {
-  @if (mat.get-theme-version($theme) == 1) {
-    // M3-specific styles
-    @include mat.core-theme($theme);
-    @include mat.button-theme($theme);
-    @include mat.icon-theme($theme);
-    html {
-      @include mat.all-component-themes($theme);
-      @include mat.color-variants-backwards-compatibility($theme);
-    }
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
 
-    // Custom typography setup with backwards compatibility
-    @include mat.typography-hierarchy($theme, $back-compat: true);
-  } @else {
-    // Fallback for M2
-    @include mat.core();
-    @include mat.button();
-    @include mat.icon();
-    @include mat.strong-focus-indicators();
+$app-primary: mat.m2-define-palette($custom-primary-color);
+$app-accent: mat.m2-define-palette($custom-accent-color);
+/* You can also replace the lines above and use Angular Material colors instead: */
+//$app-primary: mat.define-palette(mat.$deep-purple-palette);
+//$app-accent: mat.define-palette(mat.$amber-palette);
 
-    $app-primary: mat.define-palette($custom-primary-color);
-    $app-accent: mat.define-palette($custom-accent-color);
-    /* You can also replace the lines above and use Angular Material colors instead: */
-    // The warn palette is optional (defaults to red).
-    $app-warn: mat.define-palette(mat.$red-palette);
+// The warn palette is optional (defaults to red).
+// $app-warn: mat.m2-define-palette($red-palette);
 
-    // Create the theme object. A theme consists of configurations for individual
-    // theming systems such as `color` or `typography`.
-    $app-light-theme: mat.define-light-theme(
-      $app-primary,
-      $app-accent,
-      $app-warn
-    );
-    $app-dark-theme: mat.define-dark-theme(
-      $app-primary,
-      $app-accent,
-      $app-warn
-    );
-    @include mat.all-component-themes($app-light-theme);
-    @include mat.strong-focus-indicators-theme($app-light-theme);
-    .dark-theme {
-      @include mat.all-component-colors($app-dark-theme);
-      @include mat.strong-focus-indicators-theme($app-dark-theme);
-    }
-    @font-face {
-      font-family: Roboto;
-      src: url(../assets/fonts/Roboto/Roboto-Medium.ttf);
-      font-weight: 500;
-    }
-    @font-face {
-      font-family: Roboto;
-      src: url(../assets/fonts/Roboto/Roboto-Regular.ttf);
-      font-weight: 400;
-    }
-    @font-face {
-      font-family: Roboto;
-      src: url(../assets/fonts/Roboto/Roboto-Light.ttf);
-      font-weight: 300;
-    }
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as `color` or `typography`.
+$app-light-theme: mat.m2-define-light-theme($app-primary, $app-accent);
+$app-dark-theme: mat.m2-define-dark-theme($app-primary, $app-accent);
 
-    @font-face {
-      font-family: "Material Icons";
-      font-style: normal;
-      src: url(../assets/icons/material/MaterialIcons-Regular.ttf)
-        format("truetype");
-    }
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($app-light-theme);
+@include mat.strong-focus-indicators-theme($app-light-theme);
+.dark-theme {
+  @include mat.all-component-colors($app-dark-theme);
+  @include mat.strong-focus-indicators-theme($app-dark-theme);
+}
 
-    .material-icons {
-      font-family: "Material Icons";
-      font-weight: normal;
-      font-style: normal;
-      font-size: 24px; /* Preferred icon size */
-      display: inline-block;
-      line-height: 1;
-      text-transform: none;
-      letter-spacing: normal;
-      word-wrap: normal;
-      white-space: nowrap;
-      direction: ltr;
+@font-face {
+  font-family: Roboto;
+  src: url(../assets/fonts/Roboto/Roboto-Medium.ttf);
+  font-weight: 500;
+}
+@font-face {
+  font-family: Roboto;
+  src: url(../assets/fonts/Roboto/Roboto-Regular.ttf);
+  font-weight: 400;
+}
+@font-face {
+  font-family: Roboto;
+  src: url(../assets/fonts/Roboto/Roboto-Light.ttf);
+  font-weight: 300;
+}
 
-      /* Support for all WebKit browsers. */
-      -webkit-font-smoothing: antialiased;
-      /* Support for Safari and Chrome. */
-      text-rendering: optimizeLegibility;
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  src: url(../assets/icons/material/MaterialIcons-Regular.ttf)
+    format("truetype");
+}
 
-      /* Support for Firefox. */
-      -moz-osx-font-smoothing: grayscale;
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
 
-      /* Support for IE. */
-      font-feature-settings: "liga";
-    }
-  }
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: "liga";
 }
