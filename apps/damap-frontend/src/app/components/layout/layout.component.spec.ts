@@ -5,7 +5,6 @@ import { LayoutComponent } from './layout.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ConfigService } from '../../services/config.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { OAuthService } from 'angular-oauth2-oidc';
