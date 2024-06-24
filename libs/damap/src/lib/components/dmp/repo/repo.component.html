@@ -13,17 +13,20 @@
 </app-step-intro>
 <app-info-message>
   {{ "info.documentation.repositoryGuidance.start" | translate }}
-  <ng-container
-    *ngFor="
-      let link of 'info.documentation.repositoryGuidance.links'
-        | translate
-        | keyvalue
-    ">
-    <a class="info-link-custom" [href]="link.url" target="_blank">{{
-      link.title
-    }}</a>
-    {{ link.text }}
-  </ng-container>
+  <a
+    class="info-link-custom"
+    [href]="'info.documentation.repositoryGuidance.links.0.url' | translate"
+    target="_blank">
+    {{ "info.documentation.repositoryGuidance.links.0.title" | translate }}
+  </a>
+  {{ "info.documentation.repositoryGuidance.links.0.text" | translate }}
+  <a
+    class="info-link-custom"
+    [href]="'info.documentation.repositoryGuidance.links.1.url' | translate"
+    target="_blank">
+    {{ "info.documentation.repositoryGuidance.links.1.title" | translate }}
+  </a>
+  {{ "info.documentation.repositoryGuidance.links.1.text" | translate }}
 </app-info-message>
 
 <div *ngIf="repoStep.controls.length" [formGroup]="dmpForm">

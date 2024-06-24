@@ -31,7 +31,7 @@
           "body": " and helps with planning your research process to ensure that your research data is properly structured and documented and will be findable, accessible, interoperable and reusable (i.e. ",
           "subPrefix": " FAIR ",
           "subPrefixLink": "https://www.go-fair.org/fair-principles/ ",
-          "endPrefixBody": ") during and after end of your project."
+          "endPrefixBody": ") during and after the end of your project."
         },
         "middle": " is a structured document that keeps record of what research data is created and what happens to that data during and after a project. It helps with planning the research process, managing your data in accordance with the ",
         "fairprinciples": {
