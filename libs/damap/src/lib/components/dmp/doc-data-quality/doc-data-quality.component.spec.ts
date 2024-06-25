@@ -1,20 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
+import { DataQualityType } from '../../../domain/enum/data-quality-type.enum';
 import { DocDataQualityComponent } from './doc-data-quality.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { StepIntroComponent } from '../../../widgets/step-intro/step-intro.component';
 import { TextareaWrapperComponent } from '../../../shared/textarea-wrapper/textarea-wrapper.component';
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { DataQualityType } from '../../../domain/enum/data-quality-type.enum';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('DocDataQualityComponent', () => {
   let component: DocDataQualityComponent;
   let fixture: ComponentFixture<DocDataQualityComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [MatAutocompleteModule, TranslateTestingModule],
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [
@@ -23,7 +23,7 @@ describe('DocDataQualityComponent', () => {
         TextareaWrapperComponent,
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DocDataQualityComponent);

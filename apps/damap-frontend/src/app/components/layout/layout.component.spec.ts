@@ -1,20 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
+import { ConfigService } from '../../services/config.service';
 import { LayoutComponent } from './layout.component';
-import { OAuthService } from 'angular-oauth2-oidc';
 import { MatMenuModule } from '@angular/material/menu';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateTestingModule } from '@damap/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ConfigService } from '../../services/config.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { TranslateTestingModule } from '@damap/core';
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
   let fixture: ComponentFixture<LayoutComponent>;
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(() => {
     const oauthSpy = jasmine.createSpyObj('OAuthService', [
       'getIdentityClaims',
     ]);
@@ -22,7 +22,7 @@ describe('LayoutComponent', () => {
     const configSpy = jasmine.createSpyObj('ConfigService', ['getEnvironment']);
     configSpy.getEnvironment.and.returnValue('DEV');
 
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       imports: [
         TranslateTestingModule,
         MatSidenavModule,
@@ -37,7 +37,7 @@ describe('LayoutComponent', () => {
         { provide: ConfigService, useValue: configSpy },
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LayoutComponent);

@@ -1,27 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { PersonSearchComponent } from './person-search.component';
-import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
   mockContributor1,
   mockContributor2,
 } from '../../mocks/contributor-mocks';
+
 import { HarnessLoader } from '@angular/cdk/testing';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { PersonSearchComponent } from './person-search.component';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
 
 describe('PersonSearchComponent', () => {
   let component: PersonSearchComponent;
   let fixture: ComponentFixture<PersonSearchComponent>;
   let loader: HarnessLoader;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [
         TranslateTestingModule,
         MatFormFieldModule,
@@ -32,7 +32,7 @@ describe('PersonSearchComponent', () => {
       ],
       declarations: [PersonSearchComponent],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PersonSearchComponent);
@@ -46,7 +46,7 @@ describe('PersonSearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit contributor on selection', async () => {
+  it('should emit contributor on selection', waitForAsync(async () => {
     spyOn(component.personToAdd, 'emit');
     const input = await loader.getHarness(MatAutocompleteHarness);
     await input.enterText(mockContributor1.firstName);
@@ -62,5 +62,5 @@ describe('PersonSearchComponent', () => {
 
     await options[0].click();
     expect(component.personToAdd.emit).toHaveBeenCalledWith(mockContributor1);
-  });
+  }));
 });
