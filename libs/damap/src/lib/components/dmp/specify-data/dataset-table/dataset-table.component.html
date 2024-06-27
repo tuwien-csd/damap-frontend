@@ -36,7 +36,7 @@
         {{ "dmp.steps.data.specify.table.header.size" | translate }}
       </th>
       <td mat-cell *matCellDef="let dataset">
-        <div>{{ dataset.size | byte }}</div>
+        <div>{{ getSizeLabel(dataset.size) }}</div>
       </td>
     </ng-container>
 

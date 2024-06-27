@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
+
 import { DataSource } from '../../../../domain/enum/data-source.enum';
-import { DatasetDialogComponent } from '../dataset-dialog/dataset-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
 import { Dataset } from '../../../../domain/dataset';
+import { DatasetDialogComponent } from '../dataset-dialog/dataset-dialog.component';
+import { FILE_SIZES } from '../data-specs';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dataset-table',
@@ -11,6 +13,7 @@ import { Dataset } from '../../../../domain/dataset';
   styleUrls: ['./dataset-table.component.css'],
 })
 export class DatasetTableComponent {
+  readonly FILE_SIZES = FILE_SIZES;
   @Input() datasets: UntypedFormArray;
   @Input() sourceType: DataSource = DataSource.NEW;
 
@@ -27,6 +30,14 @@ export class DatasetTableComponent {
   readonly datasetSource: any = DataSource;
 
   constructor(public dialog: MatDialog) {}
+
+  getSizeLabel(size: number): string {
+    if (size === -1) {
+      return "I don't know yet";
+    }
+    const foundSize = this.FILE_SIZES.find(option => size <= option.size);
+    return foundSize ? foundSize.label : 'Size not defined';
+  }
 
   openDatasetDialog(dataset: Dataset) {
     const index = this.findFormArrayIndex(dataset);
