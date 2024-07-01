@@ -183,11 +183,6 @@ A[data-lang-active-en] {
   display: block;
 }
 
-#mainHeaderLogo A svg {
-  width: 100px;
-  height: 100px;
-}
-
 svg {
   overflow: hidden;
   vertical-align: middle;
@@ -217,10 +212,25 @@ svg {
   display: none;
 }
 
+@media (max-width: 800px) {
+  #mainHeader #mainHeaderLogo A {
+    position: relative;
+    margin-top: 0;
+  }
+}
+
 #mainHeader #mainHeaderLogo {
-  padding-right: 5px;
+  top: 5px;
+  position: relative;
   display: flex;
-  align-self: flex-start;
+  align-items: center;
+  justify-content: end;
+  width: 100px;
+}
+
+#mainHeaderLogo A svg {
+  width: 100%;
+  height: auto;
 }
 
 .mainHeaderLeft {
@@ -266,12 +276,6 @@ svg {
 
   #mainHeader {
     height: 70px;
-  }
-
-  #mainHeader #mainHeaderLogo A {
-    top: -50px;
-    padding-right: 15px;
-    position: relative;
   }
 
   .nav-item-desktop {
