@@ -200,6 +200,16 @@ svg {
   display: block;
 }
 
+.version-information {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.logo > .mat-focus-indicator::before {
+  border-color: var(--main-color-contrast);
+}
+
 @media only screen and (min-width: 1024px) {
   .mm-navbars-top {
     line-height: 100px;
