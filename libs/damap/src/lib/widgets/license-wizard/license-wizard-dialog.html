@@ -9,7 +9,7 @@
           <mat-icon>replay</mat-icon>
           {{'license.wizard.reset' | translate}}
         </button>
-        <h3>{{step.question | translate}}</h3>
+        <h4>{{step.question | translate}}</h4>
         <!-- Software: License Matrix -->
         <ng-container
           *ngIf="step.question === 'license.wizard.question.licenseInteropSoftware'">
@@ -66,7 +66,7 @@
         *ngFor="let license of (licenseList | licenseFilter:searchBox.value)">
         <mat-card-content>
           <div class="ls-item-header">
-            <h3 [mat-dialog-close]="license">{{license.name | translate}}</h3>
+            <h4 [mat-dialog-close]="license">{{license.name | translate}}</h4>
             <div>
               <a
                 href="{{license.url}}"

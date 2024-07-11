@@ -193,7 +193,6 @@ svg {
 .active {
   background-color: var(--surface-container-low);
   padding-left: 22px;
-  border-left: 8px solid var(--primary);
   font-weight: 400;
 }
 
