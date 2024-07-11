@@ -60,5 +60,9 @@
   --golden-tag: palegoldenrod;
   --lavender-tag: lavender;
 
-  --body-typography: #{mat.get-theme-typography($app-light-theme, body-medium, font)};
+  --body-typography: #{mat.get-theme-typography(
+      $app-light-theme,
+      body-medium,
+      font
+    )};
 }

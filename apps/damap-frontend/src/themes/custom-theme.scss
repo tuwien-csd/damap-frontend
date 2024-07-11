@@ -9,8 +9,13 @@
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat.core();
-@include mat.strong-focus-indicators();
-
+@include mat.strong-focus-indicators(
+  (
+    border-style: solid,
+    border-width: 2px,
+    border-radius: 40px,
+  )
+);
 // Define the palettes for your theme using the Material Design palettes available in custom-palettes.scss
 // (imported above). Information on how these colors should be used: https://m3.material.io/styles/color/roles
 
@@ -51,7 +56,7 @@ $app-accent: map.merge(map.get($_palettes, tertiary), $_rest);
   font-family: "Material Icons";
   font-style: normal;
   src: url(../assets/icons/material/MaterialIcons-Regular.ttf)
-  format("truetype");
+    format("truetype");
 }
 
 // Create the theme object. A theme consists of configurations for individual
@@ -64,8 +69,8 @@ $app-light-theme: mat.define-theme(
       tertiary: $app-accent,
     ),
     typography: (
-      brand-family: 'Roboto',
-      plain-family: 'Roboto',
+      brand-family: "Roboto",
+      plain-family: "Roboto",
       regular-weight: 400,
       medium-weight: 500,
       bold-weight: 700,
@@ -98,7 +103,7 @@ html {
   font-family: "Material Icons";
   font-weight: normal;
   font-style: normal;
-  font-size: 24px; /* Preferred icon size */
+  font-size: 24px;
   display: inline-block;
   line-height: 1;
   text-transform: none;
