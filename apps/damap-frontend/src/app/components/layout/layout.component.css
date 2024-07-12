@@ -217,12 +217,7 @@ svg {
     height: 70px;
   }
 
-  #mainHeader {
-    height: 70px;
-  }
-
   #mainHeader #mainHeaderLogo A {
-    top: -50px;
     padding-right: 15px;
     position: relative;
   }
