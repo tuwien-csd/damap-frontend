@@ -26,6 +26,34 @@ $app-accent: map.merge(map.get($_palettes, tertiary), $_rest);
 // You can also replace the lines above and use Angular Material colors instead:
 // Information on available pre-built palettes: https://material.angular.io/guide/theming#pre-defined-palettes
 
+@font-face {
+  font-family: Roboto;
+  src: url(../assets/fonts/Roboto/Roboto-Bold.ttf);
+  font-weight: 700;
+}
+@font-face {
+  font-family: Roboto;
+  src: url(../assets/fonts/Roboto/Roboto-Medium.ttf);
+  font-weight: 500;
+}
+@font-face {
+  font-family: Roboto;
+  src: url(../assets/fonts/Roboto/Roboto-Regular.ttf);
+  font-weight: 400;
+}
+@font-face {
+  font-family: Roboto;
+  src: url(../assets/fonts/Roboto/Roboto-Light.ttf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  src: url(../assets/icons/material/MaterialIcons-Regular.ttf)
+  format("truetype");
+}
+
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as `color` or `typography`.
 $app-light-theme: mat.define-theme(
@@ -36,8 +64,11 @@ $app-light-theme: mat.define-theme(
       tertiary: $app-accent,
     ),
     typography: (
-      brand-family: "Roboto",
-      bold-weight: 900,
+      brand-family: 'Roboto',
+      plain-family: 'Roboto',
+      regular-weight: 400,
+      medium-weight: 500,
+      bold-weight: 700,
     ),
   )
 );
@@ -60,29 +91,7 @@ $app-dark-theme: mat.define-theme(
 html {
   @include mat.all-component-themes($app-light-theme);
   @include mat.strong-focus-indicators-theme($app-light-theme);
-}
-
-@font-face {
-  font-family: Roboto;
-  src: url(../assets/fonts/Roboto/Roboto-Medium.ttf);
-  font-weight: 500;
-}
-@font-face {
-  font-family: Roboto;
-  src: url(../assets/fonts/Roboto/Roboto-Regular.ttf);
-  font-weight: 400;
-}
-@font-face {
-  font-family: Roboto;
-  src: url(../assets/fonts/Roboto/Roboto-Light.ttf);
-  font-weight: 300;
-}
-
-@font-face {
-  font-family: "Material Icons";
-  font-style: normal;
-  src: url(../assets/icons/material/MaterialIcons-Regular.ttf)
-    format("truetype");
+  @include mat.typography-hierarchy($app-light-theme);
 }
 
 .material-icons {
