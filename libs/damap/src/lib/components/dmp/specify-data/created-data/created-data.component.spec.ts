@@ -1,27 +1,29 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CreatedDataComponent } from './created-data.component';
-import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { DataKind } from '../../../../domain/enum/data-kind.enum';
-import { MatDialogModule } from '@angular/material/dialog';
-import { DatasetDialogComponent } from '../dataset-dialog/dataset-dialog.component';
+
 import { BehaviorSubject } from 'rxjs';
-import { Config } from '../../../../domain/config';
-import { configMockData } from '../../../../mocks/config-service-mocks';
 import { By } from '@angular/platform-browser';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Config } from '../../../../domain/config';
+import { CreatedDataComponent } from './created-data.component';
+import { DataKind } from '../../../../domain/enum/data-kind.enum';
+import { DatasetDialogComponent } from '../dataset-dialog/dataset-dialog.component';
 import { FileUploadComponent } from '../../../../widgets/file-upload/file-upload.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
+import { configMockData } from '../../../../mocks/config-service-mocks';
 
 describe('CreatedDataComponent', () => {
   let component: CreatedDataComponent;
   let fixture: ComponentFixture<CreatedDataComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [MatDialogModule, TranslateTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       declarations: [CreatedDataComponent, DatasetDialogComponent],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CreatedDataComponent);

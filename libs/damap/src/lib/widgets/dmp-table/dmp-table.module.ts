@@ -37,7 +37,6 @@ import { TranslateModule } from '@ngx-translate/core';
   declarations: [DmpTableComponent],
   exports: [
     CommonModule,
-    TranslateModule,
     RouterModule,
     DmpTableComponent,
 

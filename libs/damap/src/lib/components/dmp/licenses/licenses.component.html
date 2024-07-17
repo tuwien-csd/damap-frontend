@@ -7,7 +7,7 @@
     <mat-card
       appearance="raised"
       *ngIf="dataset.value.source === datasetSource.NEW"
-      class="mat-mdc-selected">
+      class="card-selected">
       <ng-container [formGroupName]="i">
         <mat-card-header>
           <mat-card-title>
@@ -73,7 +73,8 @@
           </mat-card-content>
         </ng-container>
 
-        <mat-card-content>
+        <mat-card-content
+          *ngIf="dataset.value.dataAccess !== accessType.CLOSED">
           <mat-form-field>
             <mat-label>{{
               "dmp.steps.licensing.question.startDate" | translate

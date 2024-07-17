@@ -5,32 +5,28 @@
     <button
       class="action-button"
       mat-button
-      color="primary"
       [routerLink]="'/plans'"
       [disabled]="!this.formChanged"
       routerLinkActive="active">
       {{ "button.discard" | translate }}
     </button>
     <button
-      class="action-button"
+      class="action-button button-color-primary"
       mat-raised-button
-      color="primary"
       (click)="saveDmp()"
       [disabled]="dmpForm.invalid || !this.formChanged || this.savingDmp">
       {{ "button.save" | translate }}
     </button>
     <button
-      class="action-button"
+      class="action-button button-color-primary"
       mat-raised-button
-      color="primary"
       (click)="saveDmpVersion()"
       [disabled]="dmpForm.invalid || this.savingDmp">
       {{ "button.version" | translate }}
     </button>
     <button
-      class="action-button"
+      class="action-button button-color-primary"
       mat-raised-button
-      color="primary"
       (click)="exportDmpTemplate()"
       [disabled]="dmpForm.invalid || this.savingDmp">
       {{ "button.export" | translate }}

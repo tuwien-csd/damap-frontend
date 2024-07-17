@@ -1,4 +1,4 @@
-import { Contributor, compareContributors } from '../domain/contributor';
+import { compareContributors, Contributor } from '../domain/contributor';
 import {
   FormControl,
   UntypedFormArray,
@@ -238,7 +238,7 @@ export class FormService {
       reusedDataKind: formValue.data.reusedKind,
       dataQuality: formValue.documentation.dataQuality || [],
       documentation: formValue.documentation.documentation,
-      datasets: formValue.datasets,
+      datasets: formValue.datasets.map(this.setStartDateToNullWhenClosed),
       ethicalIssuesExist: formValue.legal.ethicalIssues,
       ethicalIssuesExistCris: formValue.legal.ethicalIssuesCris,
       externalStorage: formValue.externalStorage,
@@ -406,7 +406,7 @@ export class FormService {
           notEmptyValidator(),
         ],
       ],
-      license: [ccBy.id, Validators.maxLength(this.TEXT_SHORT_LENGTH)],
+      license: [null],
       startDate: [null],
       type: [[]],
       size: [null],
@@ -649,5 +649,12 @@ export class FormService {
     } else {
       return null;
     }
+  }
+
+  private setStartDateToNullWhenClosed(dataset: Dataset): Dataset {
+    if (dataset.dataAccess === DataAccessType.CLOSED) {
+      dataset.startDate = null;
+    }
+    return dataset;
   }
 }

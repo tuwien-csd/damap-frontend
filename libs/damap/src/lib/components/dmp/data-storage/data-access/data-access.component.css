@@ -24,6 +24,10 @@
   font-weight: bold;
 }
 
+.mat-expansion-panel {
+  outline: 1px solid var(--primary);
+}
+
 .mat-panel-title {
   font-weight: 800;
 }

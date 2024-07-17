@@ -36,7 +36,7 @@
         {{ "dmp.steps.data.specify.table.header.size" | translate }}
       </th>
       <td mat-cell *matCellDef="let dataset">
-        <div>{{ dataset.size | byte }}</div>
+        <div>{{ getSizeLabel(dataset.size) }}</div>
       </td>
     </ng-container>
 
@@ -49,9 +49,9 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="pid">
+    <ng-container matColumnDef="source">
       <th mat-header-cell *matHeaderCellDef>
-        {{ "dmp.steps.data.specify.table.header.pid" | translate }}
+        {{ "dmp.steps.data.specify.table.header.source" | translate }}
       </th>
       <td mat-cell *matCellDef="let dataset">
         <div>
@@ -68,10 +68,10 @@
       </th>
       <td mat-cell *matCellDef="let element" [style]="'text-align: right'">
         <button mat-icon-button (click)="openDatasetDialog(element)">
-          <mat-icon color="primary">edit</mat-icon>
+          <mat-icon class="material-icon-primary">edit</mat-icon>
         </button>
         <button mat-icon-button (click)="remove(element)">
-          <mat-icon color="primary">delete</mat-icon>
+          <mat-icon class="material-icon-primary">delete</mat-icon>
         </button>
       </td>
     </ng-container>

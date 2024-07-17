@@ -1,5 +1,5 @@
 .warning {
-  background-color: lightgrey;
+  background-color: var(--warning-bg);
   border-radius: 4px;
   padding: 0.75rem;
   display: flex;
@@ -29,7 +29,7 @@
 }
 
 .custom-style ::ng-deep .mat-mdc-text-field-wrapper {
-  background-color: var(--main-color);
+  background-color: var(--primary);
   background-image: linear-gradient(
     rgba(255, 255, 255, 0.9),
     rgba(255, 255, 255, 0.9)

@@ -5,9 +5,8 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  letter-spacing: 0.03rem;
-  font-weight: 300;
+  font: var(--body-typography);
+  font-size: 1rem;
 }
 
 .content {
@@ -56,24 +55,8 @@ body {
   /*float: right;*/
 }
 
-.mat-mdc-selected {
-  background-color: #f5f5f5 !important;
-}
-
 mat-card {
   margin: 5px;
-}
-
-.snack-error {
-  background-color: var(--error-bg);
-  color: black;
-  font-weight: bold;
-}
-
-.snack-success {
-  background-color: var(--success-bg);
-  color: black;
-  font-weight: bold;
 }
 
 .full-width {
@@ -84,12 +67,6 @@ mat-card {
 .wrap-normal-label {
   white-space: normal;
   height: auto;
-}
-
-.mat-mdc-tooltip {
-  font-size: 0.75rem !important;
-  line-height: 1rem;
-  background: #2a2a2a;
 }
 
 .flex-radio {
@@ -132,10 +109,6 @@ mat-card {
   display: flex;
 }
 
-.form-error {
-  color: red;
-}
-
 .form-error::before {
   font-family: "Material Icons", sans-serif;
   content: "warning";
@@ -153,4 +126,8 @@ mat-card {
 
 .button-position {
   margin: 5px;
+}
+
+.mat-step-header {
+  border-radius: 40px !important;
 }
