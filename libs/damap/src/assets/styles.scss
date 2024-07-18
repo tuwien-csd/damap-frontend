@@ -131,3 +131,7 @@ mat-card {
 .mat-step-header {
   border-radius: 40px !important;
 }
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--tertiary-color-very-light) !important;
+}

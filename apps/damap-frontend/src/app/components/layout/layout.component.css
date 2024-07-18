@@ -15,10 +15,9 @@
   background-color: var(--footer-color);
   color: var(--on-footer-color);
   font-size: small;
-  padding: 2rem 2rem;
+  padding: 2rem;
   z-index: 10;
   position: relative;
-  height: 50px;
   display: flex;
   justify-content: space-between;
 }
@@ -80,7 +79,7 @@ mat-nav-list {
   display: flex;
   align-items: center;
   text-align: left;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 500;
 }
 

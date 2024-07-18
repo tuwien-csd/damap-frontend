@@ -8,10 +8,7 @@
   --on-primary: #{mat.get-theme-color($app-light-theme, on-primary)};
   --accent-color-lighter: #{mat.get-theme-color($app-light-theme, primary, 60)};
   --secondary: #{mat.get-theme-color($app-light-theme, secondary)};
-  --secondary-container: #{mat.get-theme-color(
-      $app-light-theme,
-      secondary-container
-    )};
+  --secondary-container: #{mat.get-theme-color($app-light-theme, primary, 99)};
   --on-secondary-container: #{mat.get-theme-color(
       $app-light-theme,
       on-secondary-container
