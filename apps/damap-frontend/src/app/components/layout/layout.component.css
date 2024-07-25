@@ -225,10 +225,6 @@ svg {
     display: block;
   }
 
-  .sidenav-btn {
-    display: none;
-  }
-
   .mainHeaderLeft {
     background-color: var(--secondary-color);
     padding: 0;

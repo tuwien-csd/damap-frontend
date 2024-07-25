@@ -2,9 +2,7 @@
   <mat-sidenav
     class="mat-sidenav-divider-grey"
     #sidenav
-    [fixedInViewport]="true"
-    (window:resize)="widescreen()"
-    [opened]="widescreen()"
+    [opened]="!isSmallScreen"
     mode="side">
     <div class="mm-navbars-top mat-focus-indicator">
       <div class="mm-navbar">
@@ -54,27 +52,6 @@
   <mat-sidenav-content>
     <mat-toolbar>
       <mat-toolbar-row id="mainHeader" [style]="'padding: 0px;'">
-        <div class="mainHeaderLeft">
-          <button
-            mat-icon-button
-            title="{{ 'layout.menu.mobile.open' | translate }}"
-            (click)="sidenav.opened = !sidenav.opened"
-            *ngIf="!sidenav.opened">
-            <mat-icon class="material-icon-on-secondary-container"
-              >menu</mat-icon
-            >
-          </button>
-          <button
-            mat-icon-button
-            title="{{ 'layout.menu.mobile.close' | translate }}"
-            class="sidenav-btn"
-            (click)="sidenav.opened = !sidenav.opened"
-            *ngIf="sidenav.opened">
-            <mat-icon class="material-icon-on-secondary-container"
-              >close</mat-icon
-            >
-          </button>
-        </div>
         <div class="mainHeaderRight"></div>
         <!-- University Logo -->
         <div id="mainHeaderLogo">
@@ -93,6 +70,15 @@
         <!-- University Logo End -->
       </mat-toolbar-row>
       <mat-toolbar-row class="mat-toolbar-row-grey">
+        <button
+          mat-icon-button
+          title="{{ 'layout.menu.mobile.close' | translate }}"
+          class="sidenav-btn"
+          (click)="toggleSidenav()">
+          <mat-icon class="material-icon-on-secondary-container">
+            {{ sidenav.opened ? "close" : "menu" }}
+          </mat-icon>
+        </button>
         <strong translate>title</strong>
       </mat-toolbar-row>
     </mat-toolbar>
