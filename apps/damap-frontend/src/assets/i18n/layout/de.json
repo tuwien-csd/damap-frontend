@@ -15,6 +15,10 @@
       "text": "Zurück zur Hauptseite",
       "link": "https://www.medunigraz.at"
     },
+    "baseLogo": {
+      "text": "DAMAP",
+      "link": "https://damap.org/"
+    },
     "dataprotection": {
       "text": "Datenschutzerklärung",
       "link": "https://www.medunigraz.at"

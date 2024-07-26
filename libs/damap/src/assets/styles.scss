@@ -32,7 +32,6 @@ body {
 
 .material-icons.mat-icon {
   overflow: initial;
-  color: var(--active-color) !important;
 }
 
 .mat-icon-contact {
@@ -53,23 +52,11 @@ body {
 }
 
 .mat-mdc-selected {
-  background-color: #f5f5f5 !important;
+  background-color: var(--tertiary-color-very-light) !important;
 }
 
 mat-card {
   margin: 5px;
-}
-
-.snack-error {
-  background-color: var(--error-bg);
-  color: black;
-  font-weight: bold;
-}
-
-.snack-success {
-  background-color: var(--success-bg);
-  color: black;
-  font-weight: bold;
 }
 
 .full-width {
@@ -80,12 +67,6 @@ mat-card {
 .wrap-normal-label {
   white-space: normal;
   height: auto;
-}
-
-.mat-mdc-tooltip {
-  font-size: 0.75rem !important;
-  line-height: 1rem;
-  background: #2a2a2a;
 }
 
 .flex-radio {
@@ -128,10 +109,6 @@ mat-card {
   display: flex;
 }
 
-.form-error {
-  color: red;
-}
-
 .form-error::before {
   font-family: "Material Icons", sans-serif;
   content: "warning";
@@ -158,15 +135,27 @@ mat-card {
 }
 
 .button-position-custom {
-  color: var(--white-smoke-text) !important;
+  color: white !important;
   font-weight: 400 !important;
 }
 
 .info-link-custom {
-  color: var(--main-color);
+  color: var(--secondary);
   font-weight: bold;
 }
 
 .mdc-button__label {
   font-weight: 400 !important;
+}
+
+.mdc-list-item:hover::before {
+  background-color: var(--tertiary-color-very-light) !important;
+}
+
+.mat-step-header {
+  border-radius: 40px !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--tertiary-color-very-light) !important;
 }

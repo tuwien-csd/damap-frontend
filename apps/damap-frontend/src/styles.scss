@@ -1,23 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
 @import "themes/custom-theme";
 
 /* Theme colors as CSS variables */
 :root {
-  --main-color: #{map-get($app-primary, 500)};
-  --main-color-contrast: #{map-get($app-primary, "500-contrast")};
-  --accent-color-lighter: #{map-get($app-primary, 400)};
-  --accent-color-darker: #{map-get($app-primary, 700)};
-  --custom-accent-color-50: #{map-get($custom-accent-color, 50)};
-  --custom-accent-color-100: #{map-get($custom-accent-color, 100)};
-  --secondary-color: #{map-get($app-accent, 500)};
-  --secondary-color-light: #{map-get($app-accent, 400)};
-  --step-intro-color: #9b9b9b;
-  --error-bg: #ffdac9;
-  --success-bg: #e9f5d2;
-  --info-bg: #ddebe4;
+  --primary: #{mat.get-theme-color($app-light-theme, primary, 50)};
+  --on-primary: #{mat.get-theme-color($app-light-theme, on-primary)};
+  --accent-color-lighter: #{mat.get-theme-color($app-light-theme, primary, 60)};
+  --secondary: #{mat.get-theme-color($app-light-theme, secondary, 40)};
+  --secondary-container: #{mat.get-theme-color($app-light-theme, primary, 99)};
+  --on-secondary-container: #{mat.get-theme-color(
+      $app-light-theme,
+      on-secondary-container
+    )};
+  --tertiary-color-very-light: #{mat.get-theme-color(
+      $app-light-theme,
+      tertiary,
+      98
+    )};
+
+  --on-surface: #{mat.get-theme-color($app-light-theme, on-surface)};
+  --surface-container-low: #{mat.get-theme-color(
+      $app-light-theme,
+      surface-container-low
+    )};
+  --surface-container-high: #{mat.get-theme-color(
+      $app-light-theme,
+      surface-container-high
+    )};
+  --outline-variant: #{mat.get-theme-color($app-light-theme, outline-variant)};
+
+  --error-color: #{mat.get-theme-color($app-light-theme, error)};
+  --error-container: #{mat.get-theme-color($app-light-theme, error-container)};
+  --on-error-container: #{mat.get-theme-color(
+      $app-light-theme,
+      on-error-container
+    )};
+
+  --footer-color: #{mat.get-theme-color($app-light-theme, inverse-surface)};
+  --on-footer-color: #{mat.get-theme-color($app-light-theme, inverse-on-surface)};
+  --user-navbar-color: #{mat.get-theme-color($app-light-theme, neutral, 25)};
+  --step-intro-color: #{mat.get-theme-color(
+      $app-light-theme,
+      neutral-variant,
+      60
+    )};
+
+  // mat3 provides colors for error states, but not for success or warning...
+  // so it is set to predefined values here
+  --success-container: #e9f5d2;
+  --on-success-container: black;
   --warning-bg: #fff4cb;
-  --active-color: #007934;
-  --inactive-colo: #34b233;
-  --primary-text: #393b41;
-  --white-smoke-text: #f5f5f5;
+  // some values can not be generated from themes - they can be hardcoded here
+  --blue-tag: #dbdce0;
+  --green-tag: #d1eee1;
+  --golden-tag: palegoldenrod;
+  --lavender-tag: #dbdce0;
+
+  --body-typography: #{mat.get-theme-typography(
+      $app-light-theme,
+      body-medium,
+      font
+    )};
 }

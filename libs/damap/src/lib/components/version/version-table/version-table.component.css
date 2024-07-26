@@ -3,6 +3,6 @@ table {
 }
 
 .mat-mdc-row:hover {
-  background-color: #e8eaf6;
+  background-color: var(--surface-container-low);
   cursor: pointer;
 }

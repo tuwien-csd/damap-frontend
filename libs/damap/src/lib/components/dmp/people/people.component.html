@@ -33,7 +33,7 @@
       <mat-card
         appearance="raised"
         *ngFor="let contributor of contributors.controls; index as i"
-        class="mat-mdc-selected">
+        class="card-selected">
         <mat-card-content>
           <div class="mat-card-container">
             <div class="mat-card-left">
@@ -43,8 +43,7 @@
                 {{ contributor.value.lastName }}
                 <mat-icon
                   *ngIf="contributor.value.contact"
-                  class="mat-icon-contact"
-                  color="primary">
+                  class="mat-icon-contact button-color-primary">
                   contact_mail
                 </mat-icon>
                 <span class="sr-only">{{

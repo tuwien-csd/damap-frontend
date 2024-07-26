@@ -3,11 +3,17 @@ import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FILE_SIZES, FILE_TYPES } from '../data-specs';
 import { FormService } from '../../../../services/form.service';
-import { Dataset } from '../../../../domain/dataset';
-import { DataSource } from '../../../../domain/enum/data-source.enum';
 
 import { IdentifierTypeReusedData } from '../../../../domain/identifier-type';
+import {
+  ccBy,
+  mit,
+} from '../../../../widgets/license-wizard/license-wizard-list';
+
+import { Dataset } from '../../../../domain/dataset';
+import { DataSource } from '../../../../domain/enum/data-source.enum';
 import { Identifier } from '../../../../domain/identifier';
+import { DataType } from '../../../../domain/enum/data-type.enum';
 
 @Component({
   selector: 'app-dataset-dialog',
@@ -65,6 +71,18 @@ export class DatasetDialogComponent {
     ) {
       dataset.datasetId = this.datasetId;
     }
+
+    if (dataset.license === null) {
+      if (
+        dataset.type.includes(DataType.SOURCE_CODE) &&
+        dataset.type.length === 1
+      ) {
+        dataset.license = mit.id;
+      } else {
+        dataset.license = ccBy.id;
+      }
+    }
+
     this.dialogRef.close(dataset);
   }
 }

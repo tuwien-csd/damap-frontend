@@ -19,9 +19,6 @@
             <mat-card-title [class.form-error]="item.invalid">
               {{ item.value.title }}
             </mat-card-title>
-            <mat-panel-description>
-              {{ item.value.backupLocation }}
-            </mat-panel-description>
           </mat-card-header>
         </div>
         <mat-card-content>
@@ -32,12 +29,11 @@
                 [control]="getFormControl(i, 'title')"></app-input-wrapper>
               <button
                 mat-icon-button
-                color="primary"
                 aria-label="{{
                   'dmp.steps.storage.external.remove' | translate
                 }}"
                 (click)="removeExternalStorage(i)">
-                <mat-icon>cancel</mat-icon>
+                <mat-icon class="material-icon-primary">cancel</mat-icon>
               </button>
             </div>
           </div>

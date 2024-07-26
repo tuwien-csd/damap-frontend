@@ -23,7 +23,7 @@ export class ReusedDataComponent
 
   result: Dataset;
 
-  readonly tableHeaders: string[] = ['dataset', 'pid', 'actions'];
+  readonly tableHeaders: string[] = ['dataset', 'source', 'actions'];
 
   constructor(
     private backendService: BackendService,

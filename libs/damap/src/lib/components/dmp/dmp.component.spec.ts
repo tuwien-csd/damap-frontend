@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { Subject, of } from 'rxjs';
 
@@ -13,6 +13,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperHarness } from '@angular/material/stepper/testing';
 import { MatStepperModule } from '@angular/material/stepper';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
@@ -36,7 +37,7 @@ describe('DmpComponent', () => {
     },
   };
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(() => {
     authSpy = jasmine.createSpyObj('AuthService', ['getUsername', 'isAdmin']);
     authSpy.getUsername.and.returnValue('name');
     authSpy.isAdmin.and.returnValue(false);
@@ -50,7 +51,7 @@ describe('DmpComponent', () => {
     backendSpy.getDmpById.and.returnValue(of(completeDmp));
     backendSpy.getProjectMembers.and.returnValue(of([mockContributor1]));
 
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       imports: [
         ReactiveFormsModule,
         MatStepperModule,
@@ -63,6 +64,7 @@ describe('DmpComponent', () => {
         FormTestingModule,
       ],
       declarations: [DmpComponent],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: AuthService, useValue: authSpy },
         provideMockStore({ initialState }),
@@ -76,7 +78,7 @@ describe('DmpComponent', () => {
         { provide: FeedbackService, useValue: feedbackSpy },
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DmpComponent);
@@ -100,14 +102,14 @@ describe('DmpComponent', () => {
     });
   });
 
-  it('should load all stepper harnesses and get steps of stepper', async () => {
+  it('should load all stepper harnesses and get steps of stepper', waitForAsync(async () => {
     const steppers = await loader.getAllHarnesses(MatStepperHarness);
     expect(steppers.length).toBe(1);
 
     const stepper = await loader.getHarness(MatStepperHarness);
     const steps = await stepper.getSteps();
     expect(steps.length).toEqual(11);
-  });
+  }));
 
   it('should reset form and dispatch store calls on destroy', () => {
     spyOn(component, 'ngOnDestroy');

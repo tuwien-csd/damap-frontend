@@ -15,6 +15,10 @@
       "text": "Go back to main page",
       "link": "https://www.medunigraz.at"
     },
+    "baseLogo": {
+      "text": "DAMAP",
+      "link": "https://damap.org/"
+    },
     "dataprotection": {
       "text": "Data Protection Declaration",
       "link": "https://www.medunigraz.at"

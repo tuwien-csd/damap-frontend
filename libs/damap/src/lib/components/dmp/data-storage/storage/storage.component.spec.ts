@@ -1,23 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { StorageComponent } from './storage.component';
-import { StorageFilterPipe } from './storage-filter.pipe';
-import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
-import { provideMockStore } from '@ngrx/store/testing';
-import { LoadingState } from '../../../../domain/enum/loading-state.enum';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
   selectInternalStorages,
   selectInternalStoragesLoaded,
 } from '../../../../store/selectors/internal-storage.selectors';
+
+import { LoadingState } from '../../../../domain/enum/loading-state.enum';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { StorageComponent } from './storage.component';
+import { StorageFilterPipe } from './storage-filter.pipe';
+import { TranslateTestingModule } from '../../../../testing/translate-testing/translate-testing.module';
 import { mockInternalStorage } from '../../../../mocks/storage-mocks';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('StorageComponent', () => {
   let component: StorageComponent;
   let fixture: ComponentFixture<StorageComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [TranslateTestingModule],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [StorageComponent, StorageFilterPipe],
       providers: [
         provideMockStore({
@@ -31,7 +33,7 @@ describe('StorageComponent', () => {
         }),
       ],
     }).compileComponents();
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(StorageComponent);

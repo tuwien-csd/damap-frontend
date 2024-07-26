@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
   DmpActionsComponent,
   SaveVersionDialogComponent,
@@ -18,6 +18,7 @@ import { MatInputHarness } from '@angular/material/input/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('DmpActionsComponent', () => {
   let component: DmpActionsComponent;
@@ -31,8 +32,8 @@ describe('DmpActionsComponent', () => {
     },
   };
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [
         ExportWarningModule,
         MatButtonModule,
@@ -42,11 +43,12 @@ describe('DmpActionsComponent', () => {
         TranslateTestingModule,
         FormTestingModule,
       ],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [DmpActionsComponent, SaveVersionDialogComponent],
       providers: [provideMockStore({ initialState })],
     }).compileComponents();
     store = TestBed.inject(MockStore);
-  });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DmpActionsComponent);
@@ -60,7 +62,7 @@ describe('DmpActionsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should save dmp on step and form change', async () => {
+  it('should save dmp on step and form change', waitForAsync(async () => {
     spyOn(component, 'saveDmp').and.callThrough();
     spyOn(store, 'dispatch');
 
@@ -74,9 +76,9 @@ describe('DmpActionsComponent', () => {
 
     expect(component.saveDmp).toHaveBeenCalledTimes(2);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
-  });
+  }));
 
-  it('should dispatch save dmp version action', async () => {
+  it('should dispatch save dmp version action', waitForAsync(async () => {
     spyOn(store, 'dispatch');
 
     let dialogs = await loader.getAllHarnesses(MatDialogHarness);
@@ -99,9 +101,9 @@ describe('DmpActionsComponent', () => {
     dialogs = await loader.getAllHarnesses(MatDialogHarness);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(dialogs.length).toBe(0);
-  });
+  }));
 
-  it('should call dispatchExportDmp if funderSupported is true', async () => {
+  it('should call dispatchExportDmp if funderSupported is true', waitForAsync(async () => {
     spyOn(component, 'dispatchExportDmp').and.callThrough();
     spyOn(component, 'exportDmpTemplate').and.callThrough();
 
@@ -122,9 +124,9 @@ describe('DmpActionsComponent', () => {
 
     expect(component.exportDmpTemplate).toHaveBeenCalledTimes(1);
     expect(component.dispatchExportDmp).toHaveBeenCalledTimes(1);
-  });
+  }));
 
-  it('should call dispatchExportDmp if funderSupported is false', async () => {
+  it('should call dispatchExportDmp if funderSupported is false', waitForAsync(async () => {
     spyOn(component, 'dispatchExportDmp').and.callThrough();
     spyOn(component, 'exportDmpTemplate').and.callThrough();
 
@@ -135,6 +137,7 @@ describe('DmpActionsComponent', () => {
     const dialogRefMock = {
       componentInstance: { funderSupported: false },
       beforeClosed: () => of('show popup'),
+      afterClosed: () => of(null),
       close: () => {},
     };
 
@@ -147,5 +150,5 @@ describe('DmpActionsComponent', () => {
     expect(component.dispatchExportDmp).not.toHaveBeenCalled();
     expect((component as any).dialog.open).toHaveBeenCalled();
     expect(component.dmpForm.controls.project.getRawValue).toHaveBeenCalled();
-  });
+  }));
 });

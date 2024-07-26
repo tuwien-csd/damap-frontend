@@ -5,7 +5,7 @@
 <!-- Selected project -->
 <div *ngIf="projectStep?.value">
   <p>{{ "dmp.steps.project.selected" | translate }}:</p>
-  <mat-card appearance="raised" class="mat-mdc-selected">
+  <mat-card appearance="raised" class="card-selected">
     <mat-card-header>
       <mat-card-title>
         <strong>{{ projectStep.value.title }}</strong>
@@ -39,9 +39,8 @@
       (projectToSet)="changeProject($event)">
     </app-project-list>
     <button
-      class="button-position button-position-custom"
-      mat-raised-button
-      color="primary"
+      class="button-position button-position-custom, action-button"
+      mat-flat-button
       (click)="changeTab(1)">
       {{ "dmp.steps.project.manual.input" | translate }}
     </button>
