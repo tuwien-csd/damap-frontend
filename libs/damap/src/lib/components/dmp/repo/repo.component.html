@@ -72,7 +72,7 @@
       <ng-container
         *ngIf="(recommended | repo: repoStep.value).length; else noRecommended">
         <app-repo-recommendation
-          [recommended]="recommended"
+          [recommended]="recommended | repo: repoStep.value"
           [loaded]="recommendedLoaded$ | async"
           (repositoryToAdd)="addRepository($event)">
         </app-repo-recommendation>
