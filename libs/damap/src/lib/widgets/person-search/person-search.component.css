@@ -1,0 +1,35 @@
+.search-field {
+  width: 100%;
+}
+
+.person-container {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+}
+
+.person-name {
+  font-weight: bold;
+}
+
+.person-details {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+.person-info {
+  margin-left: 10px;
+  color: gray;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.identifier-info {
+  margin-top: 5px;
+}
+
+.mat-autocomplete-panel {
+  width: 400px !important;
+}
