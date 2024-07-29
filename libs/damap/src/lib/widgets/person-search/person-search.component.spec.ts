@@ -48,15 +48,17 @@ describe('PersonSearchComponent', () => {
 
   it('should emit contributor on selection', waitForAsync(async () => {
     spyOn(component.personToAdd, 'emit');
-    const input = await loader.getHarness(MatAutocompleteHarness);
-    await input.enterText(mockContributor1.firstName);
-    const options = await input.getOptions({
-      text: mockContributor1.firstName + ' ' + mockContributor1.lastName,
-    });
 
-    expect(await input.getValue()).toBe(mockContributor1.firstName);
-    expect(options.length).toBe(1);
-    expect(await options[0].getText()).toBe(
+    const input = await loader.getHarness(
+      MatAutocompleteHarness.with({ selector: 'input' }),
+    );
+    await input.focus();
+    await input.enterText(mockContributor1.firstName);
+
+    const options = await input.getOptions();
+    expect(options.length).toBe(2);
+    const optionText = await options[0].getText();
+    expect(optionText).toContain(
       `${mockContributor1.firstName} ${mockContributor1.lastName}`,
     );
 

@@ -5,7 +5,7 @@ import { Contributor } from '../../domain/contributor';
 @Component({
   selector: 'app-person-search',
   templateUrl: './person-search.component.html',
-  styleUrls: [],
+  styleUrls: ['./person-search.component.css'],
 })
 export class PersonSearchComponent {
   @Input() result: Contributor[];

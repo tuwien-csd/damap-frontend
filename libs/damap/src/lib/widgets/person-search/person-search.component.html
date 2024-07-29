@@ -1,5 +1,5 @@
 <form>
-  <mat-form-field>
+  <mat-form-field class="search-field">
     <mat-label>{{ "dmp.steps.people.search" | translate }}</mat-label>
     <input
       #searchBox
@@ -12,7 +12,23 @@
       <mat-option
         *ngFor="let person of result"
         (onSelectionChange)="selectPerson(person)">
-        {{ person.firstName }} {{ person.lastName }}
+        <div class="person-container">
+          <span class="person-name">
+            {{ person.firstName }} {{ person.lastName }}
+          </span>
+          <div
+            *ngIf="person.mbox || person.personId?.identifier"
+            class="person-details">
+            <span *ngIf="person.mbox" class="person-info">{{
+              person.mbox
+            }}</span>
+            <span
+              *ngIf="person.personId?.identifier"
+              class="person-info identifier-info">
+              {{ person.personId?.type }}: {{ person.personId.identifier }}
+            </span>
+          </div>
+        </div>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
