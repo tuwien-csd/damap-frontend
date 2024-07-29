@@ -5,7 +5,9 @@
         "input": {
           "title": "Project title",
           "description": "Project description",
-          "button": "Update project"
+          "button": "Update project",
+          "date": "Enter start and end date",
+          "datehint": "DD/MM/YYYY – DD/MM/YYYY"
         },
         "manual.input": "Input project manually",
         "list": "Choose project from the project database",
