@@ -1,10 +1,4 @@
 <div [formGroup]="dataset">
-  <div class="warning" *ngIf="dataset.value.delete">
-    <div class="warning-icon">
-      <mat-icon>error_outline</mat-icon>
-    </div>
-    {{ "dmp.steps.data.deletion.warning.published" | translate }}
-  </div>
   <div>
     <p>{{ "dmp.steps.data.deletion.question.label" | translate }}</p>
     <mat-slide-toggle
