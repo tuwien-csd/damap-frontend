@@ -5,14 +5,19 @@
       #searchBox
       type="search"
       matInput
-      [matAutocomplete]="auto"
       (input)="search(searchBox.value)" />
     <mat-icon matSuffix>search</mat-icon>
-    <mat-autocomplete #auto="matAutocomplete" class="search-result">
-      <mat-option
+  </mat-form-field>
+  <div
+    *ngIf="currentSearchTerm && result.length > 0"
+    class="full-width-result-list-container">
+    <div class="result-list">
+      <div
+        onkeyup
         *ngFor="let person of result"
-        (onSelectionChange)="selectPerson(person)">
-        <div class="person-container">
+        (click)="selectPerson(person)"
+        class="person-item">
+        <div class="person-content">
           <span class="person-name">
             {{ person.firstName }} {{ person.lastName }}
           </span>
@@ -29,7 +34,7 @@
             </span>
           </div>
         </div>
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+      </div>
+    </div>
+  </div>
 </form>

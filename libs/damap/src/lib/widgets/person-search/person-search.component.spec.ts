@@ -4,9 +4,8 @@ import {
   mockContributor2,
 } from '../../mocks/contributor-mocks';
 
+import { By } from '@angular/platform-browser';
 import { HarnessLoader } from '@angular/cdk/testing';
-import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -27,7 +26,6 @@ describe('PersonSearchComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatIconModule,
-        MatAutocompleteModule,
         NoopAnimationsModule,
       ],
       declarations: [PersonSearchComponent],
@@ -49,20 +47,39 @@ describe('PersonSearchComponent', () => {
   it('should emit contributor on selection', waitForAsync(async () => {
     spyOn(component.personToAdd, 'emit');
 
-    const input = await loader.getHarness(
-      MatAutocompleteHarness.with({ selector: 'input' }),
-    );
-    await input.focus();
-    await input.enterText(mockContributor1.firstName);
+    const inputElement = fixture.debugElement.query(
+      By.css('input'),
+    ).nativeElement;
+    inputElement.value = mockContributor1.firstName;
+    inputElement.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
 
-    const options = await input.getOptions();
-    expect(options.length).toBe(2);
-    const optionText = await options[0].getText();
-    expect(optionText).toContain(
-      `${mockContributor1.firstName} ${mockContributor1.lastName}`,
-    );
+    const personItems = fixture.debugElement.queryAll(By.css('.person-item'));
+    expect(personItems.length).toBe(2);
 
-    await options[0].click();
+    personItems[0].triggerEventHandler('click', null);
     expect(component.personToAdd.emit).toHaveBeenCalledWith(mockContributor1);
+  }));
+
+  it('should clear results when input is empty', waitForAsync(async () => {
+    spyOn(component.termToSearch, 'emit');
+
+    const inputElement = fixture.debugElement.query(
+      By.css('input'),
+    ).nativeElement;
+    inputElement.value = 'Some text';
+    inputElement.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    let personItems = fixture.debugElement.queryAll(By.css('.person-item'));
+    expect(personItems.length).toBeGreaterThan(0);
+
+    inputElement.value = '';
+    inputElement.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    personItems = fixture.debugElement.queryAll(By.css('.person-item'));
+    expect(personItems.length).toBe(0);
+    expect(component.result.length).toBe(0);
   }));
 });
