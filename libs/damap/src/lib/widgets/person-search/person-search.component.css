@@ -1,11 +1,40 @@
+.mat-search-form-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .search-field {
   width: 100%;
+}
+
+.full-width-result-list-container {
+  width: 100%;
+}
+
+.result-list {
+  width: 100vw;
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.person-item {
+  width: 100%;
+  cursor: pointer;
+}
+
+.person-item:hover {
+  background-color: var(--surface-container-high);
+}
+
+.person-content {
+  padding: 10px 20px;
 }
 
 .person-container {
   display: flex;
   flex-direction: column;
-  padding: 5px 0;
 }
 
 .person-name {
@@ -15,21 +44,18 @@
 .person-details {
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
+  padding: 0px 5px 0px;
+  line-height: 1;
 }
 
 .person-info {
-  margin-left: 10px;
-  color: gray;
+  color: var(--secondary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin: 5px 0;
 }
 
 .identifier-info {
   margin-top: 5px;
-}
-
-.mat-autocomplete-panel {
-  width: 400px !important;
 }

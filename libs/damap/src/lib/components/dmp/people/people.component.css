@@ -13,18 +13,87 @@
 
 .mat-search-form-field {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-top: 1.25rem;
-  gap: 1.25rem;
+  flex-direction: column;
+  width: 100%;
 }
 
 mat-form-field {
-  transform: translateY(0em) scale(0.95);
   width: 100%;
-  top: -0.4rem;
 }
 
 .mat-card-container {
   margin: 15px;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.search-and-service-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 15px;
+  width: 100%;
+  gap: 15px;
+}
+
+.service-select-container,
+.app-person-search {
+  flex: 1;
+  min-width: 100px;
+}
+
+.full-width-result-list-container {
+  width: 100%;
+}
+
+.result-list {
+  width: 100%;
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.person-item {
+  width: 100%;
+  background-color: var(--surface-container-high);
+  cursor: pointer;
+}
+
+.person-item:hover {
+  background-color: var(--surface-container-high-dark);
+}
+
+.person-content {
+  padding: 10px 20px;
+}
+
+.person-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.person-name {
+  font-weight: bold;
+}
+
+.person-details {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+.person-info {
+  color: var(--secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 5px 0;
+}
+
+.identifier-info {
+  margin-top: 5px;
 }

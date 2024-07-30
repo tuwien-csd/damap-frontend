@@ -8,17 +8,20 @@ import { Contributor } from '../../domain/contributor';
   styleUrls: ['./person-search.component.css'],
 })
 export class PersonSearchComponent {
-  @Input() result: Contributor[];
+  @Input() result: Contributor[] = [];
   @Output() termToSearch = new EventEmitter<string>();
   @Output() personToAdd = new EventEmitter<Contributor>();
 
-  currentSearchTerm: string;
+  currentSearchTerm: string = '';
 
   search(term: string) {
-    if (term.trim()) {
-      this.termToSearch.emit(term);
+    this.currentSearchTerm = term.trim();
+    if (this.currentSearchTerm) {
+      this.termToSearch.emit(this.currentSearchTerm);
+    } else {
+      this.termToSearch.emit('');
+      this.result = [];
     }
-    this.currentSearchTerm = term;
   }
 
   selectPerson(person: Contributor) {
