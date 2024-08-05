@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Contributor } from '../../domain/contributor';
+import { MatSelectionListChange } from '@angular/material/list';
 
 @Component({
   selector: 'app-person-search',
@@ -24,7 +25,10 @@ export class PersonSearchComponent {
     }
   }
 
-  selectPerson(person: Contributor) {
-    this.personToAdd.emit(person);
+  selectPerson(event: MatSelectionListChange): void {
+    let person = event.source.selectedOptions.selected[0]?.value;
+    if (person) {
+      this.personToAdd.emit(person);
+    }
   }
 }
