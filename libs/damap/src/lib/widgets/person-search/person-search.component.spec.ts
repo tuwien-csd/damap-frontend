@@ -13,6 +13,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PersonSearchComponent } from './person-search.component';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectionListHarness } from '@angular/material/list/testing';
 
 describe('PersonSearchComponent', () => {
   let component: PersonSearchComponent;
@@ -26,6 +28,7 @@ describe('PersonSearchComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         MatIconModule,
+        MatListModule,
         NoopAnimationsModule,
       ],
       declarations: [PersonSearchComponent],
@@ -51,13 +54,17 @@ describe('PersonSearchComponent', () => {
       By.css('input'),
     ).nativeElement;
     inputElement.value = mockContributor1.firstName;
-    inputElement.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
+    const itemList = await loader.getHarness(MatSelectionListHarness);
+    const options = await itemList.getItems();
 
-    const personItems = fixture.debugElement.queryAll(By.css('.person-item'));
-    expect(personItems.length).toBe(2);
+    expect(options.length).toBe(2);
+    let firstItem = options[0];
 
-    personItems[0].triggerEventHandler('click', null);
+    expect(await firstItem.getTitle()).toBe(
+      `${mockContributor1.firstName} ${mockContributor1.lastName}`,
+    );
+
+    await firstItem.select();
     expect(component.personToAdd.emit).toHaveBeenCalledWith(mockContributor1);
   }));
 
@@ -68,18 +75,17 @@ describe('PersonSearchComponent', () => {
       By.css('input'),
     ).nativeElement;
     inputElement.value = 'Some text';
-    inputElement.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
 
-    let personItems = fixture.debugElement.queryAll(By.css('.person-item'));
-    expect(personItems.length).toBeGreaterThan(0);
+    const itemList = await loader.getHarness(MatSelectionListHarness);
+    let options = await itemList.getItems();
+    expect(options.length).toBe(2);
 
     inputElement.value = '';
     inputElement.dispatchEvent(new Event('input'));
     fixture.detectChanges();
 
-    personItems = fixture.debugElement.queryAll(By.css('.person-item'));
-    expect(personItems.length).toBe(0);
+    options = await itemList.getItems();
+    expect(options.length).toBe(2);
     expect(component.result.length).toBe(0);
   }));
 });

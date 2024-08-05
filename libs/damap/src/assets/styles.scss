@@ -25,12 +25,14 @@ body {
   border: 0;
 }
 
+// TODO: rename to .scale-50 for general purpose?
 .mat-icon-style {
-  font-size: smaller;
+  transform: scale(50%);
 }
 
 .material-icons.mat-icon {
   overflow: initial;
+  vertical-align: middle;
 }
 
 .mat-icon-contact {

@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule } from '@angular/forms';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [PersonSearchComponent],
@@ -22,6 +23,7 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatAutocompleteModule,
     MatOptionModule,
+    MatListModule,
   ],
   exports: [
     CommonModule,

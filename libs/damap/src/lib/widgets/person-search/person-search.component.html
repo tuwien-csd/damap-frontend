@@ -8,33 +8,29 @@
       (input)="search(searchBox.value)" />
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
-  <div
-    *ngIf="currentSearchTerm && result.length > 0"
-    class="full-width-result-list-container">
-    <div class="result-list">
-      <div
-        onkeyup
+  <div class="result-list" *ngIf="result.length > 0">
+    <mat-selection-list
+      hideSingleSelectionIndicator
+      [multiple]="false"
+      style="overflow: scroll"
+      (selectionChange)="selectPerson($event)">
+      <mat-list-option
         *ngFor="let person of result"
-        (click)="selectPerson(person)"
-        class="person-item">
-        <div class="person-content">
-          <span class="person-name">
-            {{ person.firstName }} {{ person.lastName }}
-          </span>
-          <div
-            *ngIf="person.mbox || person.personId?.identifier"
-            class="person-details">
-            <span *ngIf="person.mbox" class="person-info">{{
-              person.mbox
-            }}</span>
-            <span
-              *ngIf="person.personId?.identifier"
-              class="person-info identifier-info">
-              {{ person.personId?.type }}: {{ person.personId.identifier }}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+        [style]="'height: auto;'"
+        [selected]="false"
+        [value]="person">
+        <p matListItemTitle>
+          <strong> {{ person.firstName }} {{ person.lastName }} </strong>
+        </p>
+        <span matListItemLine *ngIf="person.mbox">
+          <mat-icon inline="true">mail_outline</mat-icon>
+          {{ person.mbox }}
+        </span>
+        <span matListItemLine *ngIf="person.personId?.identifier">
+          <mat-icon inline="true">fingerprint</mat-icon>
+          {{ person.personId?.type }}: {{ person.personId.identifier }}
+        </span>
+      </mat-list-option>
+    </mat-selection-list>
   </div>
 </form>
