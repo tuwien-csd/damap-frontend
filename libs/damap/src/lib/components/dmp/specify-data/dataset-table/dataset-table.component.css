@@ -41,6 +41,13 @@ tr.element-row:not(.expanded-row):active {
   display: flex;
 }
 
+.mat-column-dataset,
+.mat-column-source,
+.mat-column-description {
+  max-width: 20vw;
+  word-wrap: break-word;
+  white-space: normal;
+}
 /*th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
   width: 80%;
 }*/
