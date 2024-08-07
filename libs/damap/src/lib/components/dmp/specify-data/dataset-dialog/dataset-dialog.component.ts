@@ -47,7 +47,7 @@ export class DatasetDialogComponent {
     this.dataset.patchValue(data.dataset);
     this.mode = data.mode ?? this.mode;
     if (data.dataset.datasetId) {
-      this.datasetId = data.dataset.datasetId;
+      this.datasetId = { ...data.dataset.datasetId };
     }
   }
 
