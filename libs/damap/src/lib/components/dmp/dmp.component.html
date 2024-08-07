@@ -130,7 +130,7 @@
     </ng-container>
   </mat-step>
   <mat-step label="{{ 'dmp.steps.end.label' | translate }}">
-    <app-dmp-summary></app-dmp-summary>
+    <app-dmp-summary [stepper]="stepper"></app-dmp-summary>
   </mat-step>
 </mat-vertical-stepper>
 
