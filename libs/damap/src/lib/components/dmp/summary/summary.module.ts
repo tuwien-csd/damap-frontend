@@ -4,6 +4,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SummaryComponent } from './summary.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -13,6 +15,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     // Materials
     MatTableModule,
     MatProgressBarModule,
+    MatTooltipModule,
   ],
   declarations: [SummaryComponent],
   exports: [
@@ -23,6 +26,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     // Materials
     MatTableModule,
     MatProgressBarModule,
+    MatStepperModule,
   ],
 })
 export class SummaryModule {}
