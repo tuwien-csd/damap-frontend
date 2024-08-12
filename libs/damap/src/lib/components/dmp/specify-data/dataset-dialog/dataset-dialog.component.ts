@@ -1,5 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import {
+  FormControl,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FILE_SIZES, FILE_TYPES } from '../data-specs';
 import { FormService } from '../../../../services/form.service';
@@ -57,6 +61,10 @@ export class DatasetDialogComponent {
 
   get description(): UntypedFormControl {
     return this.dataset.get('description') as UntypedFormControl;
+  }
+
+  get fileFormat(): FormControl<string> {
+    return this.dataset.get('fileFormat') as FormControl<string>;
   }
 
   onNoClick(): void {

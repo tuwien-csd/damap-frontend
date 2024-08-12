@@ -417,6 +417,7 @@ export class FormService {
       license: [null],
       startDate: [null],
       type: [[]],
+      fileFormat: [''],
       size: [null],
       description: [''],
       personalData: [false],

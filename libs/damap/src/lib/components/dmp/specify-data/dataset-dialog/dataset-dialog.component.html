@@ -31,6 +31,11 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <app-input-wrapper
+      *ngIf="dataset.controls.source.value === datasetSource.NEW"
+      [label]="'dmp.steps.data.specify.dialog.fileFormat' | translate"
+      [info]="'dmp.steps.data.specify.dialog.fileFormat.info' | translate"
+      [control]="fileFormat"></app-input-wrapper>
     <div
       class="dialogRow"
       *ngIf="dataset.controls.source.value === datasetSource.NEW">

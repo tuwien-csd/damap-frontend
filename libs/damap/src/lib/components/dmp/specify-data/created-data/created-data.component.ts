@@ -34,6 +34,7 @@ export class CreatedDataComponent
   readonly tableHeaders: string[] = [
     'dataset',
     'datatype',
+    'fileFormat',
     'size',
     'description',
     'actions',

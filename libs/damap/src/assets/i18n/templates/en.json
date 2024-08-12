@@ -103,6 +103,7 @@
             "header": {
               "dataset": "Dataset",
               "datatype": "Datatype",
+              "fileFormat": "File Format",
               "size": "Size",
               "comment": "Comment",
               "actions": "Actions",
@@ -114,6 +115,8 @@
             "add": "Add dataset",
             "edit": "Edit dataset",
             "title": "Dataset title",
+            "fileFormat": "File Format",
+            "fileFormat.info": "Specify mime type (e.g. image/png) or file format (png)",
             "type": "Estimated type",
             "size": "Estimated size",
             "description": "Description",
