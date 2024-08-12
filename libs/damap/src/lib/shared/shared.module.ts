@@ -7,6 +7,7 @@ import { TextareaWrapperComponent } from './textarea-wrapper/textarea-wrapper.co
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { TooltipModule } from '../widgets/tooltip/tooltip.module';
 
 @NgModule({
   declarations: [InputWrapperComponent, TextareaWrapperComponent],
@@ -15,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
+    TooltipModule,
 
     // Materials
     MatFormFieldModule,
@@ -28,6 +30,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     InputWrapperComponent,
     TextareaWrapperComponent,
+    TooltipModule,
 
     // Materials
     MatFormFieldModule,

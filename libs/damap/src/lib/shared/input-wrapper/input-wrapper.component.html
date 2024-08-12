@@ -1,5 +1,8 @@
 <mat-form-field [appearance]="appearance">
-  <mat-label class="wrap-label">{{ label | translate }}</mat-label>
+  <mat-label class="wrap-label"
+    >{{ label | translate }}
+    <app-tooltip *ngIf="info?.length" [tooltip]="info"></app-tooltip>
+  </mat-label>
   <span matTextPrefix>{{ prefix }}</span>
   <input
     matInput
