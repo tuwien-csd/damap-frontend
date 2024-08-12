@@ -18,6 +18,7 @@ import { LoadingState } from '../../domain/enum/loading-state.enum';
 })
 export class DoiSearchComponent implements OnChanges {
   @Input() result: Dataset = undefined;
+  @Input() duplicate: boolean = false;
   @Input() loading: LoadingState;
   @Output() termToSearch = new EventEmitter<string>();
   @Output() datasetToAdd = new EventEmitter<Dataset>();

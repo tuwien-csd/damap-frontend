@@ -426,7 +426,8 @@
       "maxlength": "Value must not exceed {{value}} characters.",
       "pattern.currency": "Invalid input, please use the following format: 1234.56",
       "orcid": "Invalid ORCID iD.",
-      "doi": "Invalid DOI. Must be formatted as 10.1234/56789 or https://doi.org/10.1234/56789 or doi:10.1234/56789"
+      "doi": "Invalid DOI. Must be formatted as 10.1234/56789 or https://doi.org/10.1234/56789 or doi:10.1234/56789",
+      "duplicateDoi": "DOI already added."
     },
     "changes": {
       "saved": "All changes have been saved.",

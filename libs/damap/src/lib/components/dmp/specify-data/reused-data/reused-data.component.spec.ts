@@ -1,5 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import {
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+} from '@angular/forms';
 
 import { BackendService } from '../../../../services/backend.service';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -29,6 +33,7 @@ describe('ReusedDataComponent', () => {
     component.specifyDataStep = new UntypedFormGroup({
       reusedKind: new UntypedFormControl(undefined),
     });
+    component.datasets = new UntypedFormArray([]); // Initialize the datasets FormArray
     fixture.detectChanges();
   });
 
@@ -47,5 +52,37 @@ describe('ReusedDataComponent', () => {
     expect(component.datasetToAdd.emit).toHaveBeenCalledOnceWith(
       restrictedDatasetMock,
     );
+  });
+
+  it('should remove duplicate DOI datasets', () => {
+    backendSpy.searchDataset.and.returnValue(of(restrictedDatasetMock));
+
+    expect(component.duplicate).toBeFalse();
+    expect(component.result).toBeUndefined();
+    expect(component.datasets.length).toBe(0);
+
+    component.searchDataset('doi:10.12345/12345');
+    expect(component.duplicate).toBeFalse();
+    expect(component.result).toEqual(restrictedDatasetMock);
+    expect(component.datasets.length).toBe(0);
+    component.datasets.push(
+      new UntypedFormGroup({
+        datasetId: new UntypedFormControl({ identifier: 'doi:10.12345/12345' }),
+      }),
+    );
+
+    component.searchDataset('doi:10.12345/12345');
+    expect(component.duplicate).toBeTrue();
+    expect(component.datasets.length).toBe(1);
+
+    component.searchDataset('doi:10.12345/12346');
+    expect(component.duplicate).toBeFalse();
+    expect(component.datasets.length).toBe(1);
+    component.datasets.push(
+      new UntypedFormGroup({
+        datasetId: new UntypedFormControl({ identifier: 'doi:10.12345/12346' }),
+      }),
+    );
+    expect(component.datasets.length).toBe(2);
   });
 });
