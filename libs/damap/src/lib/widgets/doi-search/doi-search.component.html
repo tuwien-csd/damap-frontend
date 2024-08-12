@@ -30,3 +30,6 @@
 <app-error-message
   *ngIf="result === null"
   message="dmp.steps.data.specify.doi.not.found"></app-error-message>
+<app-error-message
+  *ngIf="duplicate"
+  message="form.error.duplicateDoi"></app-error-message>
