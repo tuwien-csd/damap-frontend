@@ -9,6 +9,7 @@ export interface Dataset {
   readonly id: number;
   title: string;
   type: DataType[];
+  fileFormat: string;
   size: number;
   description: string;
   personalData: boolean;
