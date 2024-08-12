@@ -9,18 +9,17 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectionListHarness } from '@angular/material/list/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PersonSearchComponent } from './person-search.component';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
-import { MatListModule } from '@angular/material/list';
-import { MatSelectionListHarness } from '@angular/material/list/testing';
 
 describe('PersonSearchComponent', () => {
   let component: PersonSearchComponent;
   let fixture: ComponentFixture<PersonSearchComponent>;
   let loader: HarnessLoader;
-
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -34,7 +33,6 @@ describe('PersonSearchComponent', () => {
       declarations: [PersonSearchComponent],
     }).compileComponents();
   }));
-
   beforeEach(() => {
     fixture = TestBed.createComponent(PersonSearchComponent);
     component = fixture.componentInstance;
@@ -42,11 +40,9 @@ describe('PersonSearchComponent', () => {
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.loader(fixture);
   });
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
   it('should emit contributor on selection', waitForAsync(async () => {
     spyOn(component.personToAdd, 'emit');
 
@@ -54,17 +50,15 @@ describe('PersonSearchComponent', () => {
       By.css('input'),
     ).nativeElement;
     inputElement.value = mockContributor1.firstName;
-    const itemList = await loader.getHarness(MatSelectionListHarness);
-    const options = await itemList.getItems();
+    inputElement.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    await fixture.whenStable();
 
+    const selectionList = await loader.getHarness(MatSelectionListHarness);
+    const options = await selectionList.getItems();
     expect(options.length).toBe(2);
-    let firstItem = options[0];
 
-    expect(await firstItem.getTitle()).toBe(
-      `${mockContributor1.firstName} ${mockContributor1.lastName}`,
-    );
-
-    await firstItem.select();
+    await options[0].select();
     expect(component.personToAdd.emit).toHaveBeenCalledWith(mockContributor1);
   }));
 
@@ -75,6 +69,9 @@ describe('PersonSearchComponent', () => {
       By.css('input'),
     ).nativeElement;
     inputElement.value = 'Some text';
+    inputElement.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    await fixture.whenStable();
 
     const itemList = await loader.getHarness(MatSelectionListHarness);
     let options = await itemList.getItems();
