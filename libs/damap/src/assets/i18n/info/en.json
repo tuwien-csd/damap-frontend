@@ -33,6 +33,9 @@
     "cris": "Option currently selected in the CRIS system: {{value}}.",
     "documentation": {
       "metadata": "In archives, metadata is used to create consistent and structured descriptions of resources and their characteristics. Metadata is independent and can either be stored together with the resources it describes or separately. Metadata plays a key role in the future of your stored research data: it contains important information which for example enables you and others to search for and find your data.\nA metadata set consists mainly of descriptive categories, the so-called elements and their values. To facilitate communication with other systems, predefined standards are used for the elements and controlled vocabularies for the values."
+    },
+    "repositories": {
+      "retention": "Set the time for how long your data should remain in the repository"
     }
   }
 }
