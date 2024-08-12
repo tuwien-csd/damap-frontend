@@ -30,6 +30,8 @@ import { TreeSelectFormFieldModule } from '../../../widgets/tree-select-form-fie
 import { DatasetSourceModule } from '../../../pipes/dataset-source/dataset-source.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TagModule } from '../../../widgets/tag/tag.module';
+import { InfoMessageModule } from '../../../widgets/info-message/info-message.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -41,6 +43,7 @@ import { TagModule } from '../../../widgets/tag/tag.module';
     TreeSelectFormFieldModule,
     DatasetSourceModule,
     TagModule,
+    InfoMessageModule,
 
     // Materials
     MatCardModule,
@@ -56,6 +59,7 @@ import { TagModule } from '../../../widgets/tag/tag.module';
     MatPaginatorModule,
     MatExpansionModule,
     MatDialogModule,
+    MatTooltipModule,
   ],
   declarations: [
     RepoDetailsComponent,
