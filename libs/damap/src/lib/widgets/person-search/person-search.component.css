@@ -9,8 +9,13 @@
 }
 
 .result-list {
-  width: 100%;
+  width: 100% !important;
   border-radius: 4px;
   max-height: 300px;
   overflow-y: auto;
+}
+
+.mat-card-container {
+  display: inline-block;
+  margin: 10px;
 }
