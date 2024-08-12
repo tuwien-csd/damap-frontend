@@ -14,6 +14,7 @@ import { OrcidModule } from '../../../widgets/orcid/orcid.module';
 import { PersonSearchModule } from '../../../widgets/person-search/person-search.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { StepIntroModule } from '../../../widgets/step-intro/step-intro.module';
+import { InfoMessageModule } from '../../../widgets/info-message/info-message.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { StepIntroModule } from '../../../widgets/step-intro/step-intro.module';
     StepIntroModule,
     OrcidModule,
     PersonSearchModule,
+    InfoMessageModule,
 
     // Materials
     MatCardModule,

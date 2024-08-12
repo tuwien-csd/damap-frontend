@@ -8,6 +8,9 @@
     }}</ng-container>
   </button>
   <mat-card appearance="raised" *ngIf="show">
+    <app-info-message class="tooltip-box">{{
+      "dmp.steps.people.manual.input.tooltip" | translate
+    }}</app-info-message>
     <mat-card-content>
       <div [formGroup]="form" class="form-row">
         <app-input-wrapper

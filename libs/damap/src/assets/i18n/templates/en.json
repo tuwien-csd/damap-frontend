@@ -24,7 +24,7 @@
       },
       "people": {
         "label": "People involved in data management",
-        "intro": "This step helps you to provide information on involved persons and their particular roles regarding research data management within this project. Based on the information provided in the Project Database, we have already entered the name of the Project Leader and marked them as the Contact Person for questions related to data management and the DMP (icon with person and envelope). You can change the preset information if needed and add more contributors via the search (start typing the name) and manually. Provide a minimum of one Contact Person as well as a Data Manager (may be the same person).",
+        "intro": "In this step, you add people involved in the project and provide additional info about them, e.g., their role. In this example, the project leader’s info has already been added and marked as the contact person (note icon with person and envelope next to their name). You can add more contributors via the search field (ensure you select the appropriate database, e.g., ORCID), or manually via the “Add contributor manually button”. Please provide a minimum of one contact person as well as a data manager (it can be the same person).",
         "search": "Search for person...",
         "search.service": "Search service",
         "contributor": {
@@ -38,8 +38,9 @@
           "remove": "Remove as contact"
         },
         "manual.input": {
-          "show": "Show manual contributor input",
+          "show": "Add contributor manually",
           "hide": "Hide manual contributor input",
+          "tooltip": "Use to add project contributor not found in database above",
           "question": {
             "firstname": "First name",
             "lastname": "Last name",
@@ -270,7 +271,7 @@
       },
       "repositories": {
         "label": "Specify repositories for publication and preservation",
-        "intro": "Repositories are used for sustainable data management beyond the lifetime of the project and to make data discoverable and reusable to others. If available, use a domain specific repository for your data. The search filter below may help you to find one.",
+        "intro": "Use repositories to sustainably manage your data after the project’s life and to make your data discoverable and reusable. If possible, use a domain specific repository for your data. The search filter below can help you to find one. You’ll also want to set the time for how long your data should remain in the repository. This retention period can be selected in the Set retention period for datasets section",
         "heading": "Repositories",
         "search": "Search repository",
         "add": "Add repository",
