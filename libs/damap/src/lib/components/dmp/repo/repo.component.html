@@ -1,11 +1,3 @@
-<div *ngIf="!datasets.controls.length; else retentionPeriod">
-  {{ "dmps.nodatasets" | translate }}
-</div>
-<ng-template #retentionPeriod>
-  <app-retention-period
-    [dmpForm]="dmpForm"
-    [datasets]="datasets"></app-retention-period>
-</ng-template>
 <!-- SELECTED REPOS-->
 <h2 translate>dmp.steps.repositories.heading</h2>
 <app-step-intro>
@@ -60,6 +52,15 @@
     </mat-card-content>
   </mat-card>
 </div>
+<div *ngIf="!datasets.controls.length; else retentionPeriod">
+  {{ "dmps.nodatasets" | translate }}
+</div>
+<!-- RETENTION PERIOD-->
+<ng-template #retentionPeriod>
+  <app-retention-period
+    [dmpForm]="dmpForm"
+    [datasets]="datasets"></app-retention-period>
+</ng-template>
 
 <!-- TABS -->
 <ng-container *ngIf="recommended$ | async as recommended">
