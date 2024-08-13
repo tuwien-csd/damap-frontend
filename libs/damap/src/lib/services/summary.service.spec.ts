@@ -44,6 +44,7 @@ describe('SummaryService', () => {
       title: '',
       universityId: 0,
       funderSupported: false,
+      acronym: '',
     };
     let summary = SummaryService.evaluateProjectStep(null);
     expect(summary.completeness).toEqual(0);

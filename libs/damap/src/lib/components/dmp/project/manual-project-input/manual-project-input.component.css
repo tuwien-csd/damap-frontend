@@ -1,0 +1,18 @@
+.form-row {
+  display: flex;
+}
+
+.input-60 {
+  flex: 0 0 60%;
+}
+
+.input-fill {
+  flex: 1;
+}
+
+@media (max-width: 1650px) {
+  .input-60,
+  .input-fill {
+    flex: 1;
+  }
+}

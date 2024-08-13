@@ -6,6 +6,7 @@
           "title": "Project title",
           "description": "Project description",
           "button": "Update project",
+          "acronym": "Update acronym",
           "date": "Enter start and end date",
           "datehint": "DD/MM/YYYY – DD/MM/YYYY"
         },
