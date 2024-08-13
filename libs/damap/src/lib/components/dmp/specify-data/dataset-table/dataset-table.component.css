@@ -53,3 +53,8 @@ tr.element-row:not(.expanded-row):active {
 }*/
 
 /* End Table Styles */
+
+.action-button-cell {
+  display: flex;
+  justify-content: flex-end;
+}
