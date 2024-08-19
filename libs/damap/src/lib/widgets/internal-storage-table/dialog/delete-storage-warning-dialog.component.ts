@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
+import { DeleteWarningDialogComponent } from '../../delete-warning-dialog/delete-warning-dialog.component';
 
 @Component({
-  selector: 'damap-delete-warning-dialog',
+  selector: 'damap-delete-storage-warning-dialog',
   standalone: true,
   imports: [CommonModule, TranslateModule, MatDialogModule, MatButtonModule],
   template: `
@@ -23,8 +24,8 @@ import { TranslateModule } from '@ngx-translate/core';
     </mat-dialog-actions>
   `,
 })
-export class DeleteWarningDialogComponent {
-  getDeleteContent(): string {
-    return 'dialog.delete.content.dmp';
+export class DeleteStorageWarningDialogComponent extends DeleteWarningDialogComponent {
+  override getDeleteContent(): string {
+    return 'dialog.delete.content.storage';
   }
 }
