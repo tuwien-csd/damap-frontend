@@ -1,5 +1,5 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { AuthGuard, EnvBannerModule } from '@damap/core';
+import { EnvBannerModule, AuthGuard } from '@damap/core';
 import { HttpBackend, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
@@ -28,7 +28,9 @@ export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
     '/assets/damap-core/i18n/plans/',
     '/assets/damap-core/i18n/http/',
     '/assets/damap-core/i18n/gdpr/',
+    '/assets/damap-core/i18n/admin/',
     '/assets/damap-core/i18n/',
+    '/assets/damap-core/i18n/templates/',
     '/assets/i18n/',
   ]);
 }

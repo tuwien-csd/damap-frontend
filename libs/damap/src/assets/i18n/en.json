@@ -33,7 +33,11 @@
     },
     "delete": {
       "title": "Please note:",
-      "content": "You are about to delete this DMP. This action cannot be undone. Are you sure you want to proceed?",
+      "content": {
+        "dmp": "You are about to delete this DMP. This action cannot be undone. Are you sure you want to proceed?",
+        "storage": "You are about to delete this storage. This action cannot be undone. Are you sure you want to proceed?",
+        "storageTranslation": "You are about to delete this storage translation. This action cannot be undone. Are you sure you want to proceed?"
+      },
       "button": "Delete",
       "cancel": "Cancel"
     }

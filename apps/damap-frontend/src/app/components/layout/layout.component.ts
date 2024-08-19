@@ -103,6 +103,10 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
    * step changes of the DMP component.
    * @return {void}
    */
+  public isAdmin(): boolean {
+    return this.auth.isAdmin();
+  }
+
   private handleRouteChange(): void {
     // unsubscribe, if subscribed before. will subscribe again when redirecting to DMP component
     this.dataInfoService?.unsubscribe();
