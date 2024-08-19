@@ -343,9 +343,17 @@ export class FormService {
 
   public addStorageToForm(storage: InternalStorage) {
     const storageFormGroup = this.createStorageFormGroup();
+
+    const translation = storage.translations.find(
+      t => t.languageCode === 'eng',
+    );
+    const title: string = translation
+      ? translation.title
+      : storage.translations[0].title;
+
     storageFormGroup.patchValue({
       internalStorageId: storage.id,
-      title: storage.title,
+      title: title,
     });
     (this.form.get('storage') as UntypedFormArray).push(storageFormGroup);
   }

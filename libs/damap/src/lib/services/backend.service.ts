@@ -210,7 +210,9 @@ export class BackendService {
   getInternalStorages(): Observable<InternalStorage[]> {
     const langCode = 'eng'; // TODO: Replace with template lang in the future
     return this.http
-      .get<InternalStorage[]>(`${this.backendUrl}storages/${langCode}`)
+      .get<
+        InternalStorage[]
+      >(`${this.backendUrl}storages/languageCode/${langCode}`)
       .pipe(retry(3), catchError(this.handleError('http.error.storages')));
   }
 

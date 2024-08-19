@@ -52,4 +52,15 @@ export class StorageComponent implements OnInit {
       this.store.dispatch(loadInternalStorages());
     }
   }
+
+  get activeStorages() {
+    return this.internalStorages.filter(storage => storage.active);
+  }
+
+  public getStorageTitle(storage: InternalStorage) {
+    const translation = storage.translations.find(
+      t => t.languageCode === 'eng',
+    );
+    return translation ? translation.title : storage.translations[0].title;
+  }
 }
