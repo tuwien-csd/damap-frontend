@@ -28,6 +28,7 @@ export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
     '/assets/damap-core/i18n/plans/',
     '/assets/damap-core/i18n/http/',
     '/assets/damap-core/i18n/gdpr/',
+    '/assets/damap-core/i18n/admin/',
     '/assets/damap-core/i18n/',
     '/assets/i18n/',
   ]);

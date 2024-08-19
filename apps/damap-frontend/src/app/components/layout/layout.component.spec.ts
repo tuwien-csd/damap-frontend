@@ -42,10 +42,15 @@ describe('LayoutComponent', () => {
         .and.returnValue('mock-url'), // Mock serializeUrl if needed
     };
 
+    const mockToken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaXNBZG1pbiI6dHJ1ZX0.dummySignature';
+
     const oauthSpy = jasmine.createSpyObj('OAuthService', [
       'getIdentityClaims',
+      'getAccessToken',
     ]);
     oauthSpy.getIdentityClaims.and.returnValue({ name: 'name' });
+    oauthSpy.getAccessToken.and.returnValue(mockToken);
 
     const configSpy = jasmine.createSpyObj('ConfigService', ['getEnvironment']);
     configSpy.getEnvironment.and.returnValue('DEV');

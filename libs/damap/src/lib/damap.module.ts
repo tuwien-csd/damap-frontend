@@ -9,6 +9,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DamapStoreModule } from './store/damap-store.module';
 import { APP_ENV } from './constants';
 import { GdprComponent } from './components/gdpr/gdpr.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { AdminModule } from './components/admin/admin.module';
 
 export const DAMAP_ROUTES: Route[] = [
   { path: '', component: DashboardComponent },
@@ -20,9 +22,10 @@ export const DAMAP_ROUTES: Route[] = [
       import('./components/dmp/dmp.module').then(m => m.DmpModule),
   },
   { path: 'gdpr', component: GdprComponent },
+  { path: 'admin', component: AdminComponent },
 ];
 
-const MODULES = [DashboardModule, PlansModule];
+const MODULES = [DashboardModule, PlansModule, AdminModule];
 
 @NgModule({
   imports: [
