@@ -27,6 +27,9 @@
       "text": "Terms and Conditions",
       "link": "#"
     },
+    "icon": {
+      "dataAlert": "Expand the menu to access legal information"
+    },
     "gdpr": "GDPR Info"
   },
   "env": {
