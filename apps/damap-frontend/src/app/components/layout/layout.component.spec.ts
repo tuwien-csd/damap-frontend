@@ -130,6 +130,6 @@ describe('LayoutComponent', () => {
 
     component.isCollapsed = true;
     toggleMenu();
-    expect(component.isCollapsed).toBeTrue();
+    expect(component.isCollapsed).toBeFalse();
   }));
 });
