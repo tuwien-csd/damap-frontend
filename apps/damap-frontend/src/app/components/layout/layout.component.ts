@@ -63,8 +63,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
 
   toggleMenu(): void {
-    if (!this.isSmallScreen) {
-      this.isCollapsed = !this.isCollapsed;
-    }
+    this.isCollapsed = !this.isCollapsed;
   }
 }

@@ -1,9 +1,10 @@
 <mat-sidenav-container autosize>
   <mat-sidenav
     #sidenav
-    [mode]="isSmallScreen ? 'side' : 'side'"
+    [mode]="isSmallScreen && !isCollapsed ? 'over' : 'side'"
     [opened]="true"
     [class.collapsed]="isCollapsed"
+    [fixedInViewport]="true"
     [disableClose]="true"
     class="mat-sidenav">
     <div class="mm-navbars-top mat-focus-indicator">
@@ -13,7 +14,7 @@
           title="{{ 'layout.menu.mobile.close' | translate }}"
           class="sidenav-btn"
           (click)="toggleMenu()">
-          <mat-icon *ngIf="!isSmallScreen" style="color: white">{{
+          <mat-icon class="material-icon-white outline">{{
             isCollapsed ? "menu" : "menu_open"
           }}</mat-icon>
         </button>
@@ -35,7 +36,6 @@
       <div class="languageElement-desktop">
         <button
           mat-button
-          style="color: white"
           class="mm-navbar-button"
           [matMenuTriggerFor]="language">
           {{ lang }}
@@ -54,7 +54,7 @@
           [routerLink]="'/dashboard'"
           routerLinkActive="active-icon material-icon-primary"
           [routerLinkActiveOptions]="{ exact: true }">
-          <mat-icon class="menu-icon-size">home</mat-icon>
+          <mat-icon class="menu-icon-size outline">home</mat-icon>
           <span *ngIf="!isCollapsed" class="menu-icon-text">{{
             "layout.menu.home" | translate
           }}</span>
@@ -64,29 +64,65 @@
           [routerLink]="'/plans'"
           routerLinkActive="active-icon material-icon-primary"
           [routerLinkActiveOptions]="{ exact: true }">
-          <mat-icon class="menu-icon-size">table_view</mat-icon>
+          <mat-icon class="menu-icon-size outline">table_view</mat-icon>
           <span *ngIf="!isCollapsed" class="menu-icon-text">{{
             "layout.menu.plans" | translate
           }}</span>
         </a>
       </div>
+      <mat-divider></mat-divider>
     </mat-nav-list>
-    <div
-      [ngClass]="isSmallScreen ? 'footer-mobile' : 'footer-desktop'"
-      [ngStyle]="{
-        padding: isSmallScreen
-          ? '0.5rem 1.5rem'
-          : isCollapsed
-            ? '1.5rem 1.6rem'
-            : '1.5rem 1.3rem',
-      }">
+
+    <div class="bottom-section">
+      <mat-divider></mat-divider>
+      <div class="logout-container">
+        <button
+          mat-icon-button
+          id="logout"
+          class="material-icon-on-secondary-container"
+          [attr.aria-label]="'layout.logout' | translate"
+          (click)="logout()">
+          <mat-icon class="outline">logout</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="!isCollapsed" class="footer">
+      <div class="info">
+        <a
+          [href]="'layout.impressum.link' | translate"
+          rel="noopener"
+          target="_blank"
+          >{{ "layout.impressum.text" | translate }}</a
+        >
+        <a
+          [href]="'layout.termsandconditions.link' | translate"
+          rel="noopener"
+          target="_blank"
+          >{{ "layout.termsandconditions.text" | translate }}</a
+        >
+        <a
+          [href]="'layout.dataprotection.link' | translate"
+          rel="noopener"
+          target="_blank"
+          >{{ "layout.dataprotection.text" | translate }}</a
+        >
+      </div>
+      <div class="version-information">
+        <a [routerLink]="'/gdpr'" rel="noopener">{{
+          "layout.gdpr" | translate
+        }}</a>
+        <span class="version-text"
+          >{{ "layout.version" | translate }}: {{ version }}</span
+        >
+      </div>
+    </div>
+    <div *ngIf="isCollapsed" class="footer-icon">
       <button
         mat-icon-button
-        id="logout"
-        class="material-icon-on-secondary-container"
-        [attr.aria-label]="'layout.logout' | translate"
-        (click)="logout()">
-        <mat-icon>logout</mat-icon>
+        [matTooltip]="'layout.icon.dataAlert' | translate"
+        [aria-label]="'layout.icon.dataAlert' | translate">
+        <mat-icon class="md-light outline">data_alert</mat-icon>
       </button>
     </div>
   </mat-sidenav>

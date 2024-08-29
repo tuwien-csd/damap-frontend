@@ -26,7 +26,7 @@
                 <strong> {{ person.firstName }} {{ person.lastName }} </strong>
               </div>
               <div matListItemLine *ngIf="person.mbox">
-                <mat-icon inline="true">mail_outline</mat-icon>
+                <mat-icon class="outline" inline="true">mail</mat-icon>
                 {{ person.mbox }}
               </div>
               <div matListItemLine *ngIf="person.personId?.identifier">

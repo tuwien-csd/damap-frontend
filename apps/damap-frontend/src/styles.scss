@@ -6,6 +6,7 @@
 :root {
   --primary: #{mat.get-theme-color($app-light-theme, primary)};
   --on-primary: #{mat.get-theme-color($app-light-theme, on-primary)};
+  --primary-lightest: #{mat.get-theme-color($app-light-theme, primary, 100)};
   --accent-color-lighter: #{mat.get-theme-color($app-light-theme, primary, 60)};
   --secondary: #{mat.get-theme-color($app-light-theme, secondary)};
   --secondary-container: #{mat.get-theme-color(
@@ -43,6 +44,11 @@
   --footer-color: #{mat.get-theme-color($app-light-theme, inverse-surface)};
   --on-footer-color: #{mat.get-theme-color($app-light-theme, inverse-on-surface)};
   --user-navbar-color: #{mat.get-theme-color($app-light-theme, neutral, 25)};
+  --neutral-color-medium-light: #{mat.get-theme-color(
+      $app-light-theme,
+      neutral,
+      70
+    )};
   --step-intro-color: #{mat.get-theme-color(
       $app-light-theme,
       neutral-variant,
