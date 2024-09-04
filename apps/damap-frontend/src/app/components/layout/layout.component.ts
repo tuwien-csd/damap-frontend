@@ -34,7 +34,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.name = this.auth.getName();
+    this.name = this.auth.getUsername();
     const browserLang = this.translate.getBrowserLang();
     this.translate.use(browserLang?.match(/en|de/) ? browserLang : 'en');
     this.lang = this.translate.currentLang.toUpperCase();
