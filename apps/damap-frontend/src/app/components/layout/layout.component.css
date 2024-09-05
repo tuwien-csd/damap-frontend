@@ -1,4 +1,5 @@
 .mat-sidenav-container {
+  background-color: var(--background-body);
   min-height: calc(100% - 50px);
   overflow: clip;
 }
@@ -37,15 +38,11 @@
   margin-left: 90px;
 }
 
-@media (max-width: 1200px) {
-  .mat-sidenav.collapsed .bottom-section {
-    bottom: 70px !important;
-  }
-}
-
-.sidenav-btn {
-  display: block;
-  margin: 10px 25px;
+.info-box {
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 0px 20px;
 }
 
 .mat-sidenav.collapsed .bottom-section {
@@ -57,20 +54,37 @@
   background: transparent;
 }
 
-.footer-desktop {
-  font-size: small;
-  display: flex;
-  justify-content: flex-end;
-  position: sticky;
+.footer-icon {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--user-navbar-color);
+  color: var(--primary-lightest);
+  padding: 0.5rem 0 1rem;
+  position: absolute;
   bottom: 0;
+  width: 100%;
 }
 
-.footer-mobile {
-  font-size: small;
+#mainHeaderLogo svg {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+#mainHeaderLogo {
+  top: 5px;
   display: flex;
-  justify-content: flex-end;
-  position: sticky;
-  bottom: 0;
+  align-items: center;
+  justify-content: end;
+  width: 100px;
+  padding-right: 15px;
+}
+
+.sidenav-btn {
+  display: block;
+  margin: 10px 25px;
 }
 
 .mat-sidenav {
@@ -79,9 +93,7 @@
   flex-direction: column;
   justify-content: space-between;
   overflow-y: auto;
-  height: 100%;
   -ms-overflow-style: none;
-  box-shadow: 3px 0 6px rgba(255, 255, 255, 0.2);
 }
 
 .mat-nav-list {
@@ -94,7 +106,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 0.5rem 0;
+  padding: 1rem;
 }
 
 .mat-divider {
@@ -103,8 +115,7 @@
 
 .footer {
   background-color: var(--user-navbar-color);
-  color: white;
-  font-size: small;
+  color: var(--primary-lightest);
   padding: 1rem 1rem;
   z-index: 10;
   display: flex;
@@ -122,21 +133,8 @@
 }
 
 .footer a {
-  color: white;
+  color: var(--primary-lightest);
   text-decoration: none;
-  padding: 0 0.5rem;
-}
-
-.footer-icon {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--user-navbar-color);
-  color: white;
-  padding: 0.5rem 0 1rem;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
 }
 
 .version-text {
@@ -177,7 +175,6 @@ mat-nav-list {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  position: absolute;
   bottom: 130px;
   width: 100%;
 }
@@ -209,8 +206,7 @@ mat-nav-list {
   display: flex;
   align-items: center;
   text-align: left;
-  font-size: 2rem;
-  font-weight: 500;
+  margin: 0;
 }
 
 .languageElement-desktop {
@@ -240,7 +236,7 @@ mat-nav-list {
 }
 
 .logo A {
-  margin-left: 30px;
+  margin-left: 20px;
   transition:
     color 0.3s ease,
     background 0.3s ease;
@@ -257,7 +253,7 @@ mat-nav-list {
   align-items: center;
   padding: 8px 10px;
   background-color: var(--user-navbar-color);
-  color: var(--neutral-color-medium-light) !important;
+  color: var(--neutral-color-medium-light);
 }
 
 #user > div {
@@ -268,9 +264,17 @@ mat-nav-list {
   transform: scale(1);
 }
 
+.toolbar {
+  background-color: var(--background-body);
+}
+
 #mainHeader {
-  height: 70px;
-  overflow: visible;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+  margin: 0px 10px;
 }
 
 #mainHeader #mainHeaderLogo A {
@@ -279,77 +283,9 @@ mat-nav-list {
   display: block;
 }
 
-svg {
-  overflow: hidden;
-  vertical-align: middle;
-}
-
-#mainHeader .mainHeaderRight {
-  margin-left: auto;
-  display: flex;
-  align-content: flex-end;
-}
-
-.mainHeaderNav {
-  display: flex;
-  min-width: 50px;
-  margin-right: 20px;
-  font-size: 1.2rem;
-}
-
-.nav-item-desktop {
-  padding: 0 15px;
-  text-decoration: none;
-  color: var(--primary);
-  text-transform: uppercase;
-  line-height: 70px;
-  font-family: FFDINWebPro, sans-serif;
-  font-weight: 700;
-  display: block;
-}
-
 .mm-navbars-top .languageElement A {
   line-height: 70px;
   height: 70px;
-}
-
-@media (max-width: 800px) {
-  #mainHeader #mainHeaderLogo A {
-    position: relative;
-    margin-top: 0;
-  }
-
-  .sidenav-btn {
-    display: block;
-    margin: 10px 25px;
-  }
-
-  .mat-sidenav.collapsed .bottom-section {
-    bottom: 70px !important;
-  }
-
-  .mat-sidenav .logout-container {
-    justify-content: flex-end !important;
-  }
-
-  .logout-container {
-    justify-content: center;
-  }
-}
-
-#mainHeader #mainHeaderLogo {
-  top: 5px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  width: 100px;
-  padding-right: 15px;
-}
-
-#mainHeaderLogo A svg {
-  width: 100%;
-  height: auto;
 }
 
 .mainHeaderLeft {
@@ -365,4 +301,95 @@ svg {
   background-color: var(--surface-container-low);
   padding-left: 22px;
   font-weight: 400;
+}
+
+.flex-row-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-icon-background {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background-color: var(--surface-container-low);
+  border-radius: 50%;
+}
+
+.page-info-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.example-button-container button {
+  align-items: center;
+  justify-content: center;
+}
+
+.info-box-container {
+  flex-wrap: wrap;
+  width: 100%;
+  font-weight: 300;
+  color: var(--user-navbar-color);
+}
+
+.header-container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+}
+
+.header-title {
+  text-align: left;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.paragraph-section {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-align: left;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--neutral-color-medium-light);
+}
+
+@media (max-width: 800px) {
+  .header-container {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto;
+    justify-items: center;
+  }
+  .logo-header {
+    order: -1;
+    justify-self: center;
+    margin-bottom: 10px;
+  }
+
+  .header-title {
+    order: 1;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .paragraph-section {
+    text-align: center;
+  }
+
+  .toolbar {
+    margin-top: 0 !important;
+  }
+
+  #mainHeader {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
 }

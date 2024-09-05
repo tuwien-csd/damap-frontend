@@ -1,8 +1,8 @@
 {
   "plans": {
-    "mydmps": "Meine DMPs",
+    "mydmps": "MEINE DMPs",
     "alldmps": "Alle DMPs",
-    "create.dmp": "Neuen DMP erstellen",
+    "create.dmp": "NEUEN DMP ERSTELLEN",
     "loading": {
       "load": "DMPs werden geladen...",
       "failed": "Deine DMPs konnten nicht geladen werden!"

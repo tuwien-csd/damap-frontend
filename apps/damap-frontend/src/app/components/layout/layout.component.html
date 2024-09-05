@@ -19,7 +19,7 @@
           }}</mat-icon>
         </button>
 
-        <div class="logo">
+        <div class="logo mat-headline-large">
           <a
             title="Damap"
             id="damap-logo"
@@ -32,7 +32,9 @@
     </div>
 
     <div id="user">
-      <div *ngIf="!isCollapsed" class="user-name">{{ name }}</div>
+      <div *ngIf="!isCollapsed" class="user-name mat-title-small">
+        {{ name }}
+      </div>
       <div class="languageElement-desktop">
         <button
           mat-button
@@ -72,9 +74,7 @@
       </div>
       <mat-divider></mat-divider>
     </mat-nav-list>
-
     <div class="bottom-section">
-      <mat-divider></mat-divider>
       <div class="logout-container">
         <button
           mat-icon-button
@@ -86,8 +86,7 @@
         </button>
       </div>
     </div>
-
-    <div *ngIf="!isCollapsed" class="footer">
+    <div *ngIf="!isCollapsed" class="footer mat-title-small">
       <div class="info">
         <a
           [href]="'layout.impressum.link' | translate"
@@ -126,32 +125,54 @@
       </button>
     </div>
   </mat-sidenav>
-
-  <mat-sidenav-content>
-    <mat-toolbar>
-      <mat-toolbar-row id="mainHeader" style="padding: 0">
-        <div class="mainHeaderRight"></div>
-        <div id="mainHeaderLogo">
+  <mat-sidenav-content class="mat-sidenav-content">
+    <app-env-banner *ngIf="env === 'DEV'"></app-env-banner>
+    <mat-toolbar class="toolbar">
+      <mat-toolbar-row id="mainHeader">
+        <div class="header-container">
+          <div class="header-title">
+            <h1>
+              {{ "layout.menu.greeting" | translate }}, {{ name }},
+              {{ "layout.menu.titleDashboard" | translate }}
+            </h1>
+            <div class="paragraph-section mat-title-medium">
+              {{ "layout.menu.section" | translate }}
+            </div>
+          </div>
           <a
-            class="mat-focus-indicator"
+            class="logo-header"
             [title]="'layout.logo.text' | translate"
             [href]="'layout.logo.link' | translate"
             target="_blank"
-            rel="noopener noreferrer">
-            <img
-              src="assets/logo.svg"
-              alt="Logo"
-              height="250px"
-              width="300px" />
+            rel="noopener">
+            <img src="assets/logo.svg" alt="Logo" height="150px" width="auto" />
           </a>
         </div>
       </mat-toolbar-row>
-      <mat-toolbar-row class="mat-toolbar-row-grey">
-        <strong>{{ "title" | translate }}</strong>
-      </mat-toolbar-row>
     </mat-toolbar>
-
-    <app-env-banner *ngIf="env === 'DEV'"></app-env-banner>
+    <mat-card appearance="outlined" class="info-box mat-icon-shadow">
+      <mat-card-content>
+        <div class="flex-row-container">
+          <section>
+            <div class="example-button-row">
+              <div class="example-flex-container">
+                <div class="example-icon-container">
+                  <div class="info-icon-background">
+                    <mat-icon
+                      class="outline material-icon-primary page-info-icon"
+                      >info</mat-icon
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <div class="info-box-container mat-title-medium">
+            {{ "layout.menu.infoDashboard" | translate }}
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

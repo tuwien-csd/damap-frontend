@@ -4,10 +4,14 @@
     "menu": {
       "home": "Home",
       "plans": "DMPs",
+      "greeting": "Hi",
+      "titleDashboard": " let's get started!",
+      "section": "Welcome to DAMAP, a service that helps you create a Data Management Plan (DMP) for your project.",
       "mobile": {
         "open": "Open page navigation",
         "close": "Close page navigation"
-      }
+      },
+      "infoDashboard": "You can create a new DMP by clicking the 'Create New DMP' button"
     },
     "logout": "Logout",
     "version": "Version",
