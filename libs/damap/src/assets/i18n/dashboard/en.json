@@ -19,6 +19,7 @@
     },
     "tool": {
       "heading": "DAMAP",
+      "description": "DAMAP guides you through creating a DMP using pre-filled information and customizable templates. It aligns with Science Europe guidelines and national funder requirements, saving you time and effort.",
       "bulletpoints": {
         "dmp": {
           "text": "guides you step by step through the different sections of a DMP following the ",
@@ -46,7 +47,8 @@
       }
     },
     "instructions": {
-      "heading": "How to create a DMP",
+      "heading": "HOW TO CREATE A DMP",
+      "description": "Learn how to create a DMP step-by-step, including exporting drafts, editing, and updating your DMP according to funder requirements.",
       "steps": {
         "heading": "Follow the tool through steps 1-10 to provide the required information.",
         "body": "You do not have to do all steps in one go, simply save the status and continue later. You can always go back and jump between steps. You may even invite colleagues from your institution to add information. If you wish, you can version your DMP."
@@ -62,6 +64,10 @@
       "update": {
         "heading": "Regularly update your DMP.",
         "body": "A DMP is a living document and it is recommended to keep it up to date – for yourself, the project team, and the funder. The funders usually ask for updates at certain milestones and at the end of the project. Any changes can easily be done within the document, you do not need the tool for updates. Nevertheless, if you wish to add or change details and create a new version in the DMP tool, for example to update the machine-actionable information, remember to carefully check and complete the exported DMP as described above."
+      },
+      "create": {
+        "heading": "+ CREATE NEW DMP",
+        "description": "  Start creating a new DMP by following guided steps. Save your progress, invite colleagues, and export the DMP as a document for submission."
       }
     }
   }

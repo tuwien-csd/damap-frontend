@@ -1,8 +1,9 @@
 {
   "plans": {
-    "mydmps": "My DMPs",
+    "mydmps": "MY DMPs",
+    "myDmpsDescription": "View and manage your existing Data Management Plans (DMPs) in one place. Keep track of their status, updates, and versions.",
     "alldmps": "All DMPs",
-    "create.dmp": "Create new DMP",
+    "create.dmp": "CREATE NEW DMP",
     "loading": {
       "load": "Load DMPs...",
       "failed": "Your DMPs could not be loaded!"
