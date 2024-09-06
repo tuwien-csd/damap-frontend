@@ -157,6 +157,16 @@ html {
   @include mat.icon-color($app-light-theme, $color-variant: primary);
 }
 
+.material-icon-white-background-primary {
+  --mat-icon-color: white;
+  background-color: var(--primary);
+}
+
+.material-icon-white-background-success {
+  --mat-icon-color: white;
+  background-color: var(--success-icon-color);
+}
+
 .material-icon-on-secondary-container {
   --mat-icon-color: var(--on-secondary-container);
 }
@@ -167,6 +177,11 @@ html {
 
 .material-icon-warning {
   --mat-icon-color: darkorange;
+}
+
+.material-icon-white-background-gray-color {
+  --mat-icon-color: var(--mat-stepper-header-icon-foreground-color);
+  background-color: var(--mat-stepper-header-icon-background-color);
 }
 
 .material-btn-text-primary-lightest {
