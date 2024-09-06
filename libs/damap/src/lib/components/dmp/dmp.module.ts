@@ -14,6 +14,7 @@ import { HttpBackend } from '@angular/common/http';
 import { LegalEthicalAspectsModule } from './legal-ethical-aspects/legal-ethical-aspects.module';
 import { LicensesModule } from './licenses/licenses.module';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatIconModule } from '@angular/material/icon';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import { NgModule } from '@angular/core';
 import { PeopleModule } from './people/people.module';
@@ -71,6 +72,7 @@ export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
 
     // Materials
     MatStepperModule,
+    MatIconModule,
     DmpActionsModule,
   ],
   declarations: [DmpComponent],

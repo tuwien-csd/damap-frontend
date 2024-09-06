@@ -21,6 +21,7 @@ import { mockContributor1 } from '../../mocks/contributor-mocks';
 import { configMockData } from '../../mocks/config-service-mocks';
 import { Config } from '../../domain/config';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { selectForm } from '../../store/selectors/form.selectors';
 
 describe('DmpComponent', () => {
   let component: DmpComponent;
@@ -30,6 +31,7 @@ describe('DmpComponent', () => {
   let backendSpy: jasmine.SpyObj<BackendService>;
   let loadServiceConfigSpy;
   let feedbackSpy;
+  let storeMock;
   const initialState = {
     damap: {
       form: { dmp: null, changed: false },
@@ -49,6 +51,11 @@ describe('DmpComponent', () => {
     );
     backendSpy.getDmpById.and.returnValue(of(completeDmp));
     backendSpy.getProjectMembers.and.returnValue(of([mockContributor1]));
+
+    storeMock = {
+      pipe: jasmine.createSpy().and.returnValue(of({})),
+      dispatch: jasmine.createSpy(),
+    };
 
     TestBed.configureTestingModule({
       imports: [
@@ -75,6 +82,91 @@ describe('DmpComponent', () => {
         },
         { provide: BackendService, useValue: backendSpy },
         { provide: FeedbackService, useValue: feedbackSpy },
+        provideMockStore({
+          selectors: [
+            {
+              selector: selectForm,
+              value: {
+                id: 3,
+                title: null,
+                created: '2024-09-05T11:36:35.212Z',
+                modified: '2024-09-16T13:26:53.392Z',
+                description: null,
+                project: {
+                  id: 119,
+                  acronym: 'PROJ.HORIZON-EUROPE',
+                  universityId: 'uniProjectIdHorizonEurope0',
+                  description:
+                    'This project is funded by the EU and is recommended.',
+                  title: 'Horizon Europe Sample Project',
+                  funding: {
+                    id: 117,
+                    fundingName: null,
+                    fundingProgram: null,
+                    funderId: {
+                      identifier: '501100000780',
+                      type: 'FUNDREF',
+                    },
+                    grantId: {
+                      identifier: null,
+                      type: null,
+                    },
+                    fundingStatus: 'GRANTED',
+                  },
+                  start: '2022-01-01T00:00:00.000Z',
+                  end: '2024-12-31T00:00:00.000Z',
+                  dmpExists: false,
+                  funderSupported: true,
+                },
+                dataKind: 'SPECIFY',
+                reusedDataKind: 'UNKNOWN',
+                contributors: [],
+                noDataExplanation: null,
+                metadata: null,
+                dataGeneration: null,
+                structure: null,
+                dataQuality: [],
+                otherDataQuality: null,
+                targetAudience: null,
+                tools: null,
+                restrictedDataAccess: null,
+                personalData: true,
+                personalDataCris: true,
+                personalDataCompliance: [],
+                otherPersonalDataCompliance: null,
+                sensitiveData: true,
+                sensitiveDataCris: true,
+                sensitiveDataSecurity: [],
+                otherDataSecurityMeasures: null,
+                sensitiveDataAccess: null,
+                legalRestrictions: false,
+                legalRestrictionsCris: false,
+                legalRestrictionsDocuments: [],
+                otherLegalRestrictionsDocument: null,
+                legalRestrictionsComment: null,
+                dataRightsAndAccessControl: null,
+                humanParticipants: true,
+                humanParticipantsCris: true,
+                ethicalIssuesExist: true,
+                ethicalIssuesExistCris: true,
+                committeeReviewed: false,
+                committeeReviewedCris: false,
+                datasets: [],
+                repositories: [],
+                storage: [],
+                externalStorage: [],
+                externalStorageInfo: null,
+                restrictedAccessInfo: null,
+                closedAccessInfo: null,
+                costsExist: false,
+                costsExistCris: false,
+                costs: [],
+                documentation: null,
+                contact: null,
+              }, // Mock initial form state
+            },
+          ],
+        }),
       ],
     }).compileComponents();
   }));
