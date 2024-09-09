@@ -1,6 +1,49 @@
 <div id="content" style="max-width: 1440px">
-  <h2 translate>admin.title</h2>
-  <h3>Internal Storages</h3>
+  <h1 translate>admin.title</h1>
+  <h2 translate>admin.internal-storage</h2>
+  <button
+    class="button-position button-color-primary"
+    mat-raised-button
+    (click)="openStorageDialog()">
+    <mat-icon>add</mat-icon>
+    {{ "admin.create.storage" | translate }}
+  </button>
   <damap-internal-storage-table
-    [internalStorages]="internalStorages"></damap-internal-storage-table>
+    [internalStorages]="internalStorages"
+    (selectInternalStorage)="
+      selectStorage($event)
+    "></damap-internal-storage-table>
+  <h2 class="selected-storage">
+    {{
+      selectedInternalStorageUrl !== null
+        ? ("admin.internal-storage-translations" | translate)
+        : ("admin.internal-storage-translations-no-selected" | translate)
+    }}
+    {{ selectedInternalStorageUrl }}
+  </h2>
+  <div *ngIf="selectedInternalStorageId === null">
+    <p>
+      {{ "admin.translation-info" | translate }}
+    </p>
+  </div>
+  <div *ngIf="selectedInternalStorageId !== null">
+    <button
+      class="button-position button-color-primary"
+      mat-raised-button
+      (click)="openTranslationDialog()">
+      <mat-icon>add</mat-icon>
+      {{ "admin.create.translation" | translate }}
+    </button>
+    <button
+      class="button-position button-color-primary"
+      mat-raised-button
+      (click)="resetStorageSelection()">
+      {{ "admin.reset-selection" | translate }}
+    </button>
+    <damap-internal-storage-translation-table
+      [internalStorageTranslations]="internalStorageTranslations"
+      [selectedInternalStorageId]="
+        selectedInternalStorageId
+      "></damap-internal-storage-translation-table>
+  </div>
 </div>

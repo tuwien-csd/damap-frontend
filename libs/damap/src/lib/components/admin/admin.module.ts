@@ -14,6 +14,12 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AdminComponent } from './admin.component';
 import { InternalStorageTableModule } from '../../widgets/internal-storage-table/internal-storage-table.module';
+import { InternalStorageDialogComponent } from './internal-storage-dialog/internal-storage-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from "../../shared/shared.module";
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { InternalStoragaTranslationTableModule } from '../../widgets/internal-storage-translation-table/internal-storage-translation-table.module';
+import { InternalStorageTranslationDialogComponent } from './internal-storage-translation-dialog/internal-storage-translation-dialog.component';
 
 @NgModule({
   imports: [
@@ -24,7 +30,8 @@ import { InternalStorageTableModule } from '../../widgets/internal-storage-table
     ErrorMessageModule,
     ExportWarningModule,
     InternalStorageTableModule,
-
+    InternalStoragaTranslationTableModule,
+    ReactiveFormsModule,
     // Materials
     MatIconModule,
     MatButtonModule,
@@ -33,8 +40,14 @@ import { InternalStorageTableModule } from '../../widgets/internal-storage-table
     MatTableModule,
     MatPaginatorModule,
     MatSelectModule,
+    SharedModule,
+    MatCheckboxModule
   ],
-  declarations: [AdminComponent],
+  declarations: [
+    AdminComponent,
+    InternalStorageDialogComponent,
+    InternalStorageTranslationDialogComponent
+  ],
   exports: [
     CommonModule,
     TranslateModule,
@@ -43,6 +56,7 @@ import { InternalStorageTableModule } from '../../widgets/internal-storage-table
     ErrorMessageModule,
     AdminComponent,
     ExportWarningModule,
+    InternalStorageTableModule,
 
     // Materials
     MatIconModule,

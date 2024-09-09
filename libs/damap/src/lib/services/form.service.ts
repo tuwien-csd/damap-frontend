@@ -438,6 +438,76 @@ export class FormService {
     });
   }
 
+  public createInternalStorageFormGroup(): UntypedFormGroup {
+    return this.formBuilder.group({
+      id: [null, { disabled: true }],
+      url: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+      storageLocation: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+      backupLocation: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+      active: [true],
+    });
+  }
+
+  public createInternalStorageTranslationFormGroup(): UntypedFormGroup {
+    return this.formBuilder.group({
+      id: [null, { disabled: true }],
+      storageId: [null, { disabled: true }],
+      title: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+      languageCode: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+      description: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_MAX_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+      backupFrequency: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+    });
+  }
+
   public presetStartDateOnDatasets() {
     if (this.form.value.project?.end || null) {
       const startDate = new Date(this.form.value.project.end);

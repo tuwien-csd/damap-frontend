@@ -48,9 +48,12 @@ export class StorageComponent implements OnInit {
   }
 
   private getInternalStorages() {
+    /*
     if (this.internalStoragesLoaded !== LoadingState.LOADED) {
       this.store.dispatch(loadInternalStorages());
     }
+      */
+    this.store.dispatch(loadInternalStorages());
   }
 
   get activeStorages() {

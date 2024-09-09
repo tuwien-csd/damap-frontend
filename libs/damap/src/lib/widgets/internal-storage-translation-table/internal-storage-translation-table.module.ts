@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { InternalStorageTableComponent } from './internal-storage-table.component';
+import { InternalStorageTranslationTableComponent } from './internal-storage-translation-table.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,7 +14,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
@@ -34,13 +33,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSortModule,
     MatMenuModule,
     MatTooltipModule,
-    MatSlideToggleModule
   ],
-  declarations: [InternalStorageTableComponent],
+  declarations: [InternalStorageTranslationTableComponent],
   exports: [
     CommonModule,
     RouterModule,
-    InternalStorageTableComponent,
+    InternalStorageTranslationTableComponent,
 
     // Materials
     MatFormFieldModule,
@@ -56,4 +54,4 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatTooltipModule,
   ],
 })
-export class InternalStorageTableModule {}
+export class InternalStoragaTranslationTableModule {}
