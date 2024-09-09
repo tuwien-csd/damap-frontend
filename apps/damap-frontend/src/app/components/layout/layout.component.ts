@@ -65,4 +65,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   toggleMenu(): void {
     this.isCollapsed = !this.isCollapsed;
   }
+
+  public isAdmin(): boolean {
+    return this.auth.isAdmin();
+  }
 }

@@ -69,6 +69,17 @@
             "layout.menu.plans" | translate
           }}</span>
         </a>
+        <a
+          *ngIf="isAdmin()"
+          mat-list-item
+          [routerLink]="'/admin'"
+          routerLinkActive="active-icon material-icon-primary"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon class="menu-icon-size outline">shield_person</mat-icon>
+          <span *ngIf="!isCollapsed" class="menu-icon-text">{{
+            "layout.menu.admin" | translate
+          }}</span>
+        </a>
       </div>
       <mat-divider></mat-divider>
     </mat-nav-list>

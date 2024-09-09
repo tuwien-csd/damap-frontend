@@ -34,6 +34,9 @@
     },
     "@nrwl/angular:component": {
       "style": "css"
+    },
+    "@nx/angular:component": {
+      "style": "css"
     }
   },
   "namedInputs": {
