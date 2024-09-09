@@ -8,6 +8,7 @@ import { ReuseComponent } from './reuse.component';
 import { StepIntroComponent } from '../../../widgets/step-intro/step-intro.component';
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 describe('ReuseComponent', () => {
   let component: ReuseComponent;
@@ -30,6 +31,8 @@ describe('ReuseComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ReuseComponent);
     component = fixture.componentInstance;
+    component.reuseStep = new UntypedFormGroup({});
+
     fixture.detectChanges();
   });
 

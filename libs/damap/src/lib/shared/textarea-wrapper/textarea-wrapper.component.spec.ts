@@ -37,4 +37,14 @@ describe('TextareaWrapperComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should change the value of isAutocompleteOpen to false', () => {
+    component.closeAutocomplete();
+    expect(component.isAutocompleteOpen).toBe(false);
+  });
+
+  it('should change the value to isAutocompleteOpen to true', () => {
+    component.openAutocomplete();
+    expect(component.isAutocompleteOpen).toBe(true);
+  });
 });
