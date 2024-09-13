@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { filter, Observable, Subject, Subscription, take } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import {
   createDmp,
@@ -16,7 +16,11 @@ import { ExportWarningDialogComponent } from '../../../widgets/export-warning-di
 import { FormGroup } from '@angular/forms';
 import { FormService } from '../../../services/form.service';
 import { selectDmpSaving } from '../../../store/selectors/dmp.selectors';
-import { selectFormChanged } from '../../../store/selectors/form.selectors';
+import {
+  selectForm,
+  selectFormChanged,
+} from '../../../store/selectors/form.selectors';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-actions',
@@ -42,6 +46,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
     private formService: FormService,
     private dialog: MatDialog,
     private store: Store<AppState>,
+    private location: Location,
   ) {
     this.dmpForm = this.formService.dmpForm;
   }
@@ -72,6 +77,16 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
         this.store.dispatch(updateDmp({ dmp }));
       } else {
         this.store.dispatch(createDmp({ dmp }));
+        this.store
+          .select(selectForm)
+          .pipe(
+            filter(formState => !!formState?.id),
+            take(1),
+          )
+          .subscribe(formState => {
+            const newDmpId = formState?.id;
+            this.location.go(`/dmp/${newDmpId}`);
+          });
       }
     }
   }
