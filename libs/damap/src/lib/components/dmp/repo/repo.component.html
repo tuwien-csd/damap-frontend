@@ -1,8 +1,6 @@
 <!-- SELECTED REPOS-->
 <h2 translate>dmp.steps.repositories.heading</h2>
-<app-step-intro>
-  {{ "dmp.steps.repositories.intro" | translate }}
-</app-step-intro>
+
 <div *ngIf="repoStep.controls.length" [formGroup]="dmpForm">
   <p translate>dmp.steps.repositories.selected</p>
   <mat-card

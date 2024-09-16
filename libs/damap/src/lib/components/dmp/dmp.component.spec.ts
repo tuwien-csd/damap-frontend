@@ -20,7 +20,7 @@ import { of, Subject } from 'rxjs';
 import { mockContributor1 } from '../../mocks/contributor-mocks';
 import { configMockData } from '../../mocks/config-service-mocks';
 import { Config } from '../../domain/config';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, ChangeDetectionStrategy } from '@angular/core';
 
 describe('DmpComponent', () => {
   let component: DmpComponent;
@@ -76,7 +76,11 @@ describe('DmpComponent', () => {
         { provide: BackendService, useValue: backendSpy },
         { provide: FeedbackService, useValue: feedbackSpy },
       ],
-    }).compileComponents();
+    })
+      .overrideComponent(DmpComponent, {
+        set: { changeDetection: ChangeDetectionStrategy.OnPush },
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -84,10 +88,11 @@ describe('DmpComponent', () => {
     component = fixture.componentInstance;
     component.config$ = new Subject<Config>();
     fixture.detectChanges();
+
     loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
-  it('should create', () => {
+  it('should create', async () => {
     expect(component).toBeTruthy();
   });
 

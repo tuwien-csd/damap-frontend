@@ -7,11 +7,15 @@ import { ConfigService } from '../../services/config.service';
 import { LayoutComponent } from './layout.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { TranslateTestingModule } from '@damap/core';
 import { of } from 'rxjs';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
+
+@Component({ template: '' })
+class DummyComponent {}
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
@@ -20,6 +24,24 @@ describe('LayoutComponent', () => {
   let sidenav: MatSidenav;
 
   beforeEach(waitForAsync(() => {
+    const mockRouterOutlet = {
+      component: DummyComponent,
+      isActivated: true,
+      activate: jasmine.createSpy('activate'),
+    };
+
+    const mockRouter = {
+      events: of({}),
+      routerState: {
+        root: {},
+      },
+      navigate: jasmine.createSpy('navigate'),
+      createUrlTree: jasmine.createSpy('createUrlTree').and.returnValue({}), // Mock createUrlTree
+      serializeUrl: jasmine
+        .createSpy('serializeUrl')
+        .and.returnValue('mock-url'), // Mock serializeUrl if needed
+    };
+
     const oauthSpy = jasmine.createSpyObj('OAuthService', [
       'getIdentityClaims',
     ]);
@@ -40,16 +62,18 @@ describe('LayoutComponent', () => {
         MatToolbarModule,
         MatMenuModule,
         NoopAnimationsModule,
+        RouterModule.forRoot([]),
       ],
-      declarations: [LayoutComponent],
+      declarations: [LayoutComponent, DummyComponent],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: OAuthService, useValue: oauthSpy },
         { provide: ConfigService, useValue: configSpy },
         { provide: BreakpointObserver, useValue: breakpointObserverSpy },
+        { provide: Router, useValue: mockRouter },
+        { provide: RouterOutlet, useValue: mockRouterOutlet },
       ],
     }).compileComponents();
-
     breakpointObserver = TestBed.inject(BreakpointObserver);
   }));
 
@@ -131,5 +155,18 @@ describe('LayoutComponent', () => {
     component.isCollapsed = true;
     toggleMenu();
     expect(component.isCollapsed).toBeFalse();
+  }));
+
+  it('should replace the firstname word for the user name', waitForAsync(() => {
+    const result = component.replaceFirstname(
+      'User',
+      'Hi Firstname, let’s get started',
+    );
+    expect(result).toBe('Hi User, let’s get started');
+  }));
+
+  it('should not replace any word', waitForAsync(() => {
+    const result = component.replaceFirstname('User', 'Hi, let’s get started');
+    expect(result).toBe('Hi, let’s get started');
   }));
 });
