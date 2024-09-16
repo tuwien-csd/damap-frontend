@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { InfoCardComponent } from '../../widgets/info-card/info-card.component';
 
 @NgModule({
   declarations: [DashboardComponent, FlipCardComponent],
@@ -18,6 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    InfoCardComponent,
   ],
   exports: [
     CommonModule,

@@ -132,11 +132,10 @@
         <div class="header-container">
           <div class="header-title">
             <h1>
-              {{ "layout.menu.greeting" | translate }}, {{ name }},
-              {{ "layout.menu.titleDashboard" | translate }}
+              {{ greeting | translate }}
             </h1>
             <div class="paragraph-section mat-title-medium">
-              {{ "layout.menu.section" | translate }}
+              {{ summaryLine | translate }}
             </div>
           </div>
           <a
@@ -150,29 +149,7 @@
         </div>
       </mat-toolbar-row>
     </mat-toolbar>
-    <mat-card appearance="outlined" class="info-box mat-icon-shadow">
-      <mat-card-content>
-        <div class="flex-row-container">
-          <section>
-            <div class="example-button-row">
-              <div class="example-flex-container">
-                <div class="example-icon-container">
-                  <div class="info-icon-background">
-                    <mat-icon
-                      class="outline material-icon-primary page-info-icon"
-                      >info</mat-icon
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-          <div class="info-box-container mat-title-medium">
-            {{ "layout.menu.infoDashboard" | translate }}
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-    <router-outlet></router-outlet>
+
+    <router-outlet #outlet="outlet"></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

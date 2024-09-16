@@ -7,6 +7,11 @@
   --primary: #{mat.get-theme-color($app-light-theme, primary)};
   --on-primary: #{mat.get-theme-color($app-light-theme, on-primary)};
   --primary-lightest: #{mat.get-theme-color($app-light-theme, primary, 100)};
+  --primary-lightest-shadow: #{mat.get-theme-color(
+      $app-light-theme,
+      primary,
+      95
+    )};
   --accent-color-lighter: #{mat.get-theme-color($app-light-theme, primary, 60)};
   --secondary: #{mat.get-theme-color($app-light-theme, secondary)};
   --secondary-container: #{mat.get-theme-color(

@@ -333,6 +333,7 @@ mat-nav-list {
   width: 100%;
   font-weight: 300;
   color: var(--user-navbar-color);
+  padding: 0 16px;
 }
 
 .header-container {
@@ -351,13 +352,14 @@ mat-nav-list {
 }
 
 .paragraph-section {
+  padding-top: 5px;
   white-space: normal;
   word-wrap: break-word;
   overflow-wrap: break-word;
   text-align: left;
   font-weight: 300;
   line-height: 1.2;
-  color: var(--neutral-color-medium-light);
+  color: var(--step-intro-color);
 }
 
 @media (max-width: 800px) {

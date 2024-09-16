@@ -1,8 +1,9 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
@@ -10,7 +11,7 @@ import { Component } from '@angular/core';
 export class DashboardComponent {
   isSmallScreen = false;
 
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(readonly breakpointObserver: BreakpointObserver) {
     this.breakpointObserver
       .observe([Breakpoints.Handset, Breakpoints.Tablet])
       .subscribe(result => {

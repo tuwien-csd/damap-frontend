@@ -1,6 +1,13 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ChangeDetectorRef,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
   UntypedFormArray,
@@ -28,8 +35,11 @@ import { MatStepper } from '@angular/material/stepper';
 import { Project } from '../../domain/project';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Config } from '../../domain/config';
+import { InfoLabelService } from '../../services/infoLabel.service';
+import { InfoBoxDetails } from '../../domain/infoBox-details';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-dmp',
   templateUrl: './dmp.component.html',
   styleUrls: ['./dmp.component.css'],
@@ -70,6 +80,9 @@ export class DmpComponent implements OnInit, OnDestroy {
   fileUpload: { file: File; progress: number; finalized: boolean }[] = [];
   fileUploadSubscription: Subscription[] = [];
 
+  instructionStep$ = new BehaviorSubject<any>('');
+  infoInstruction: InfoBoxDetails = {};
+
   constructor(
     private logger: LoggerService,
     private auth: AuthService,
@@ -78,11 +91,14 @@ export class DmpComponent implements OnInit, OnDestroy {
     private router: Router,
     private backendService: BackendService,
     public store: Store<AppState>,
+    private infoLabelService: InfoLabelService,
+    private cdr: ChangeDetectorRef,
   ) {
     this.dmpForm = this.formService.dmpForm;
   }
 
   ngOnInit() {
+    this.getIntruction(0);
     this.config$ = this.backendService.loadServiceConfig();
     this.getDmpById();
 
@@ -114,8 +130,8 @@ export class DmpComponent implements OnInit, OnDestroy {
     const stepElement = document.getElementById(stepId);
     if (stepElement) {
       stepElement.scrollIntoView({
-        block: 'start',
-        inline: 'nearest',
+        block: 'center',
+        inline: 'center',
         behavior: 'smooth',
       });
     }
@@ -142,6 +158,7 @@ export class DmpComponent implements OnInit, OnDestroy {
   }
   changeStep($event) {
     this.stepChanged$.next($event);
+    this.getIntruction($event.selectedIndex);
   }
 
   changeProject(project: Project) {
@@ -274,5 +291,10 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   private generateReferenceHash(): string {
     return this.username + (+new Date()).toString(36);
+  }
+
+  getIntruction(index: number) {
+    this.infoInstruction = this.infoLabelService.getInfo(index);
+    this.instructionStep$.next(this.infoInstruction);
   }
 }
