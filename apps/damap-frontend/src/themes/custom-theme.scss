@@ -169,6 +169,10 @@ html {
   --mat-icon-color: darkorange;
 }
 
+.material-btn-text-primary-lightest {
+  --mdc-text-button-label-text-color: var(--primary-lightest);
+}
+
 .snack-error {
   --mdc-snackbar-container-color: var(--error-container);
   --mdc-snackbar-supporting-text-color: var(--on-error-container);
