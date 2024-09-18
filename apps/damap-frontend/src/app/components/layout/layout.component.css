@@ -180,7 +180,6 @@ mat-nav-list {
 }
 
 .mm-navbar-button {
-  color: var(--primary-lightest) !important;
   height: 100%;
 }
 
