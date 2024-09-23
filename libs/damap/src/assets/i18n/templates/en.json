@@ -226,7 +226,7 @@
           "legalRestrictionsComment": "Please specify the legal restrictions:",
           "legalRestrictionsDocuments": "In which document(s) are these restrictions specified?",
           "otherLegalRestrictionsDocuments": "Please specify the other documents:",
-          "dataRightsAndAccessControl": "Who is the owner of the data and who controls access to the data?"
+          "dataRightsAndAccessControl": "List who will have the rights to control access over which dataset(s)."
         },
         "link": {
           "sensitiveData": "https://ec.europa.eu/info/law/law-topic/data-protection/reform/rules-business-and-organisations/legal-grounds-processing-data/sensitive-data/what-personal-data-considered-sensitive_en"
