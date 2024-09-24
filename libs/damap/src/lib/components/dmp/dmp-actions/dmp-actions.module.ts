@@ -14,6 +14,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SaveStatusModule } from '../../../widgets/save-status/save-status.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { LivePreviewModule } from '../live-preview/live-preview.module';
 
 @NgModule({
   declarations: [DmpActionsComponent, SaveVersionDialogComponent],
@@ -32,6 +33,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TranslateModule,
     RouterModule,
     SaveStatusModule,
+    LivePreviewModule,
 
     // Materials
     MatDialogModule,

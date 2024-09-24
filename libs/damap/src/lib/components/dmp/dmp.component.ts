@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
   UntypedFormArray,
@@ -28,6 +28,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { Project } from '../../domain/project';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Config } from '../../domain/config';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dmp',
