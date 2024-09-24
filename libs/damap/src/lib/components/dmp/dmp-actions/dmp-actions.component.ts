@@ -21,6 +21,8 @@ import {
   selectFormChanged,
 } from '../../../store/selectors/form.selectors';
 import { Location } from '@angular/common';
+import { LivePreviewComponent } from '../live-preview/live-preview.component';
+import { BackendService } from '../../../services/backend.service';
 
 @Component({
   selector: 'app-actions',
@@ -47,6 +49,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private store: Store<AppState>,
     private location: Location,
+    private backendService: BackendService,
   ) {
     this.dmpForm = this.formService.dmpForm;
   }
@@ -136,6 +139,30 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  showPreview(): void {
+    if (this.dmpForm.controls.project?.getRawValue()?.funderSupported) {
+      this.backendService
+        .getTemplateType(this.dmpForm.value.id)
+        .subscribe(response => {
+          const dialogRef = this.dialog.open(LivePreviewComponent, {
+            maxHeight: '90vh',
+            maxWidth: '70vw',
+            width: '70vw',
+            height: '90vh',
+          });
+
+          dialogRef.componentInstance.selectedTemplate = response;
+        });
+    } else {
+      const dialogRef = this.dialog.open(LivePreviewComponent, {
+        maxHeight: '90vh',
+        maxWidth: '70vw',
+        width: '70vw',
+        height: '90vh',
+      });
+    }
   }
 }
 

@@ -27,6 +27,12 @@
     <button
       class="action-button button-color-primary"
       mat-raised-button
+      (click)="showPreview()">
+      {{ "button.preview" | translate }}
+    </button>
+    <button
+      class="action-button button-color-primary"
+      mat-raised-button
       (click)="exportDmpTemplate()"
       [disabled]="dmpForm.invalid || this.savingDmp">
       {{ "button.export" | translate }}
