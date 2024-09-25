@@ -1,14 +1,13 @@
 import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
   ViewChild,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy,
 } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
 import {
   UntypedFormArray,
   UntypedFormControl,
@@ -23,20 +22,23 @@ import {
 import { AppState } from '../../store/states/app.state';
 import { AuthService } from '../../auth/auth.service';
 import { BackendService } from '../../services/backend.service';
+import { Config } from '../../domain/config';
 import { Contributor } from '../../domain/contributor';
 import { DataKind } from '../../domain/enum/data-kind.enum';
 import { DataSource } from '../../domain/enum/data-source.enum';
 import { Dataset } from '../../domain/dataset';
 import { FormService } from '../../services/form.service';
 import { HttpEventType } from '@angular/common/http';
+import { InfoBoxDetails } from '../../domain/infoBox-details';
+import { InfoLabelService } from '../../services/infoLabel.service';
 import { InternalStorage } from '../../domain/internal-storage';
 import { LoggerService } from '../../services/logger.service';
 import { MatStepper } from '@angular/material/stepper';
+import { PeopleComponent } from './people/people.component';
 import { Project } from '../../domain/project';
+import { ProjectComponent } from './project/project.component';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { Config } from '../../domain/config';
-import { InfoLabelService } from '../../services/infoLabel.service';
-import { InfoBoxDetails } from '../../domain/infoBox-details';
+import { Store } from '@ngrx/store';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,6 +48,8 @@ import { InfoBoxDetails } from '../../domain/infoBox-details';
 })
 export class DmpComponent implements OnInit, OnDestroy {
   config$: Observable<Config> = new Observable<Config>();
+  @ViewChild('projectComponent') projectComponent: ProjectComponent;
+  @ViewChild('peopleComponent') peopleComponent: PeopleComponent;
 
   get username(): string {
     return this.auth.getUsername();
@@ -82,6 +86,8 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   instructionStep$ = new BehaviorSubject<any>('');
   infoInstruction: InfoBoxDetails = {};
+  selectedStep: number = 0;
+  peopleView: 'primaryView' | 'secondaryView' = 'primaryView';
 
   constructor(
     private logger: LoggerService,
@@ -95,6 +101,14 @@ export class DmpComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
   ) {
     this.dmpForm = this.formService.dmpForm;
+  }
+
+  onStepChange(selectedStep: number) {
+    this.selectedStep = selectedStep;
+  }
+
+  onPeopleViewChange(view: 'primaryView' | 'secondaryView') {
+    this.peopleView = view;
   }
 
   ngOnInit() {

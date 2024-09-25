@@ -1,11 +1,18 @@
-import { CommonModule } from '@angular/common';
-import { ErrorMessageModule } from '../../../widgets/error-message/error-message.module';
-import { InfoMessageModule } from '../../../widgets/info-message/info-message.module';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MAT_MOMENT_DATE_FORMATS,
+  MatMomentDateModule,
+  MomentDateAdapter,
+} from '@angular/material-moment-adapter';
+
+import { CommonModule } from '@angular/common';
+import { ErrorMessageModule } from '../../../widgets/error-message/error-message.module';
+import { InfoMessageModule } from '../../../widgets/info-message/info-message.module';
 import { ManualProjectInputComponent } from './manual-project-input/manual-project-input.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -18,15 +25,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgModule } from '@angular/core';
 import { ProjectComponent } from './project.component';
+import { ProjectDetailedComponent } from './project-detailed/project-detailed.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { SharedModule } from '../../../shared/shared.module';
+import { ToggleButtonsModule } from '../../../widgets/toggle-buttons/toggle-buttons.module';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-  MAT_MOMENT_DATE_FORMATS,
-  MatMomentDateModule,
-  MomentDateAdapter,
-} from '@angular/material-moment-adapter';
 
 @NgModule({
   imports: [
@@ -35,6 +38,7 @@ import {
     ErrorMessageModule,
     SharedModule,
     InfoMessageModule,
+    ToggleButtonsModule,
 
     // Materials
     MatCardModule,
@@ -52,6 +56,7 @@ import {
     ProjectComponent,
     ManualProjectInputComponent,
     ProjectListComponent,
+    ProjectDetailedComponent,
   ],
   exports: [
     CommonModule,
@@ -60,8 +65,9 @@ import {
     SharedModule,
     ProjectComponent,
     InfoMessageModule,
+    ProjectComponent,
+    ProjectDetailedComponent,
 
-    // Materials
     MatCardModule,
     MatButtonModule,
     MatProgressBarModule,

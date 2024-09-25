@@ -42,6 +42,7 @@ export class PeopleComponent implements OnInit, OnDestroy {
   @Input() config$: Observable<Config>;
   @Input() projectMembers: Contributor[];
   @Input() dmpForm: UntypedFormGroup;
+  @Input() selectedView: 'primaryView' | 'secondaryView' = 'primaryView';
 
   @Output() contactPerson = new EventEmitter<any>();
   @Output() contributorToAdd = new EventEmitter<any>();

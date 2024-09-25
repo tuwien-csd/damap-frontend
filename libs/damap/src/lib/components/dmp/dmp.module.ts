@@ -23,6 +23,7 @@ import { ReuseModule } from './reuse/reuse.module';
 import { RouterModule } from '@angular/router';
 import { SpecifyDataModule } from './specify-data/specify-data.module';
 import { SummaryModule } from './summary/summary.module';
+import { ToggleButtonsModule } from '../../widgets/toggle-buttons/toggle-buttons.module';
 import { VersionModule } from '../version/version.module';
 import { InfoCardComponent } from '../../widgets/info-card/info-card.component';
 
@@ -43,6 +44,8 @@ export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
     CommonModule,
     RouterModule.forChild(DMP_ROUTES),
     FormsModule,
+    ToggleButtonsModule,
+    ProjectModule,
     TranslateModule.forChild({
       defaultLanguage: 'en',
       loader: {
@@ -56,7 +59,6 @@ export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
     VersionModule,
     AccessComponent,
     // Steps
-    ProjectModule,
     PeopleModule,
     SpecifyDataModule,
     DocDataQualityModule,

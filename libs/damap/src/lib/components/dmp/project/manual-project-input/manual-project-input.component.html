@@ -1,38 +1,50 @@
-<form>
-  <div class="form-row">
-    <app-input-wrapper
-      class="input-60"
-      [control]="title"
-      label="{{
-        'dmp.steps.project.input.button' | translate
-      }}"></app-input-wrapper>
-    <app-input-wrapper
-      class="input-fill"
-      [control]="acronym"
-      label="{{
-        'dmp.steps.project.input.acronym' | translate
-      }}"></app-input-wrapper>
-    <mat-form-field appearance="fill" class="input-fill">
-      <mat-label>{{ "dmp.steps.project.input.date" | translate }}</mat-label>
-      <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
-        <input matStartDate formControlName="start" placeholder="Start date" />
-        <input matEndDate formControlName="end" placeholder="End date" />
-      </mat-date-range-input>
-      <mat-hint>{{ "dmp.steps.project.input.datehint" | translate }}</mat-hint>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-date-range-picker #picker></mat-date-range-picker>
-    </mat-form-field>
-  </div>
-  <app-textarea-wrapper
-    [control]="description"
-    label="{{
-      'dmp.steps.project.input.description' | translate
-    }}"></app-textarea-wrapper>
-  <button
-    class="button-position-left button-color-primary"
-    mat-raised-button
-    [disabled]="form.invalid"
-    (click)="updateProject()">
-    {{ "dmp.steps.project.input.button" | translate }}
-  </button>
-</form>
+<mat-card class="manual-project-input-card card-shadow">
+  <mat-card-header>
+    <mat-card-title>{{
+      "dmp.steps.project.input.title" | translate
+    }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <div class="form-row">
+        <app-input-wrapper
+          class="input-half"
+          [control]="title"
+          label="{{ 'dmp.steps.project.input.button' | translate }}">
+        </app-input-wrapper>
+        <app-input-wrapper
+          class="input-half"
+          [control]="acronym"
+          label="{{ 'dmp.steps.project.input.acronym' | translate }}">
+        </app-input-wrapper>
+      </div>
+      <mat-form-field appearance="fill" class="input-full">
+        <mat-label>{{ "dmp.steps.project.input.date" | translate }}</mat-label>
+        <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+          <input
+            matStartDate
+            formControlName="start"
+            placeholder="Start date" />
+          <input matEndDate formControlName="end" placeholder="End date" />
+        </mat-date-range-input>
+        <mat-hint>{{
+          "dmp.steps.project.input.datehint" | translate
+        }}</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <app-textarea-wrapper
+        [control]="description"
+        label="{{ 'dmp.steps.project.input.description' | translate }}">
+      </app-textarea-wrapper>
+      <!-- Submit Button -->
+      <button
+        class="button-position-left button-color-primary"
+        mat-raised-button
+        [disabled]="form.invalid"
+        (click)="updateProject()">
+        {{ "dmp.steps.project.input.button" | translate }}
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

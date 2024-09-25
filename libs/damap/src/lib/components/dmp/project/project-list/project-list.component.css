@@ -2,6 +2,7 @@
   position: relative;
   max-height: 300px;
   overflow: auto;
+  width: 100%;
 }
 
 .mat-list-option-right {

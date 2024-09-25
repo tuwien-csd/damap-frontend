@@ -35,6 +35,7 @@
         "search": "Search for person...",
         "search.service": "Search service",
         "contributor": {
+          "search": "Search contributor",
           "add": "Add as contributor",
           "remove": "Remove from contributors",
           "role": "Role"
