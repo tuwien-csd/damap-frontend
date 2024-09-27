@@ -1,14 +1,14 @@
-<div class="example-button-row buttons">
+<div class="button-row">
   <section class="button-section">
     <button
       mat-flat-button
-      [disabled]="isDisabled('primaryView')"
+      [disabled]="selectedView === 'primaryView'"
       (click)="emitSelection('primaryView')">
       {{ primaryLabel | translate }}
     </button>
     <button
       mat-flat-button
-      [disabled]="isDisabled('secondaryView')"
+      [disabled]="selectedView === 'secondaryView'"
       (click)="emitSelection('secondaryView')">
       {{ secondaryLabel | translate }}
     </button>

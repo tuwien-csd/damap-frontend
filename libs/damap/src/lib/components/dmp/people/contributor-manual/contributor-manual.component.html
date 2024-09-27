@@ -8,23 +8,28 @@
     }}</ng-container>
   </button>
   <mat-card appearance="raised" *ngIf="show">
-    <app-info-message class="tooltip-box">{{
-      "dmp.steps.people.manual.input.tooltip" | translate
-    }}</app-info-message>
     <mat-card-content>
       <div [formGroup]="form" class="form-row">
         <app-input-wrapper
           [label]="'dmp.steps.people.manual.input.question.firstname'"
-          [control]="firstName()"></app-input-wrapper>
+          [control]="firstName()"
+          class="input-wrapper">
+        </app-input-wrapper>
         <app-input-wrapper
           [label]="'dmp.steps.people.manual.input.question.lastname'"
-          [control]="lastName()"></app-input-wrapper>
+          [control]="lastName()"
+          class="input-wrapper">
+        </app-input-wrapper>
         <app-input-wrapper
           [label]="'dmp.steps.people.manual.input.question.mbox'"
-          [control]="mbox()"></app-input-wrapper>
+          [control]="mbox()"
+          class="input-wrapper">
+        </app-input-wrapper>
         <app-input-wrapper
           [label]="'dmp.steps.people.manual.input.question.orcid'"
-          [control]="identifier()"></app-input-wrapper>
+          [control]="identifier()"
+          class="input-wrapper">
+        </app-input-wrapper>
       </div>
       <div class="button-row">
         <button

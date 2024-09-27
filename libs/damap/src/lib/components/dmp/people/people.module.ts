@@ -12,7 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { NgModule } from '@angular/core';
 import { OrcidModule } from '../../../widgets/orcid/orcid.module';
-import { PeopleDetailedComponent } from './people-detailed/people-detailed.component';
+import { PeopleInstructionComponent } from './people-instruction/people-instruction.component';
 import { PersonSearchModule } from '../../../widgets/person-search/person-search.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { StepIntroModule } from '../../../widgets/step-intro/step-intro.module';
@@ -32,13 +32,14 @@ import { ToggleButtonsModule } from '../../../widgets/toggle-buttons/toggle-butt
     MatSelectModule,
     MatButtonModule,
     MatDialogModule,
+    MatCardModule,
   ],
   declarations: [
     PeopleComponent,
     ContributorManualComponent,
     ContributorFilterPipe,
     ConfirmDeletionDialogComponent,
-    PeopleDetailedComponent,
+    PeopleInstructionComponent,
   ],
   exports: [
     SharedModule,
@@ -46,7 +47,7 @@ import { ToggleButtonsModule } from '../../../widgets/toggle-buttons/toggle-butt
     OrcidModule,
     PersonSearchModule,
     PeopleComponent,
-    PeopleDetailedComponent,
+    PeopleInstructionComponent,
 
     // Materials
     MatCardModule,

@@ -7,56 +7,35 @@
       [linear]="false"
       orientation="vertical"
       (selectionChange)="changeStep($event); changeStepPosition($event)">
-      <!-- Project Step 1 - detailed view -->
       <mat-step label="{{ 'dmp.steps.project.label' | translate }}">
         <ng-container *ngIf="selectedStep === 0">
-          <app-project-detailed
+          <app-project-instruction
             (selectionChange)="
               projectComponent.onViewChange($event)
-            "></app-project-detailed>
+            "></app-project-instruction>
         </ng-container>
       </mat-step>
-
-      <!-- People Step 2 - detailed view -->
-      <mat-step label="{{ 'dmp.steps.project.label' | translate }}">
+      <mat-step label="{{ 'dmp.steps.people.label' | translate }}">
         <ng-container *ngIf="selectedStep === 1">
-          <app-people-detailed
+          <app-people-instruction
             (selectionChange)="
-              onPeopleViewChange($event)
-            "></app-people-detailed>
+              peopleComponent.onViewChange($event)
+            "></app-people-instruction>
         </ng-container>
       </mat-step>
-
-      <!-- Data Specification Step -->
       <mat-step label="{{ 'dmp.steps.data.specify.label' | translate }}">
       </mat-step>
-
-      <!-- Documentation Step -->
       <mat-step label="{{ 'dmp.steps.documentation.label' | translate }}">
       </mat-step>
-
-      <!-- Storage Step -->
       <mat-step label="{{ 'dmp.steps.storage.label' | translate }}"> </mat-step>
-
-      <!-- Legal and Ethical Aspects Step -->
       <mat-step label="{{ 'dmp.steps.legal.label' | translate }}"> </mat-step>
-
-      <!-- Licensing Step -->
       <mat-step label="{{ 'dmp.steps.licensing.label' | translate }}">
       </mat-step>
-
-      <!-- Repositories Step -->
       <mat-step label="{{ 'dmp.steps.repositories.label' | translate }}">
       </mat-step>
-
-      <!-- Data Reuse Step -->
       <mat-step label="{{ 'dmp.steps.data.reuse.label' | translate }}">
       </mat-step>
-
-      <!-- Costs Step -->
       <mat-step label="{{ 'dmp.steps.costs.label' | translate }}"> </mat-step>
-
-      <!-- End Step -->
       <mat-step label="{{ 'dmp.steps.end.label' | translate }}"> </mat-step>
     </mat-vertical-stepper>
   </div>
@@ -73,6 +52,7 @@
     <!-- Step 2: People -->
     <ng-container *ngIf="selectedStep === 1">
       <app-dmp-people
+        #peopleComponent
         [config$]="config$"
         [projectMembers]="projectMembers"
         [dmpForm]="dmpForm"

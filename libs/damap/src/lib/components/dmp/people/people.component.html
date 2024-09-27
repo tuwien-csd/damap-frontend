@@ -16,9 +16,9 @@
                 {{ contributor.value.lastName }}
                 <mat-icon
                   *ngIf="contributor.value.contact"
-                  class="mat-icon-contact button-color-primary">
-                  contact_mail
-                </mat-icon>
+                  class="mat-icon-contact button-color-primary"
+                  >contact_mail</mat-icon
+                >
                 <span class="sr-only">{{
                   "dmp.steps.people.contact.person" | translate
                 }}</span>
@@ -154,6 +154,5 @@
 <div *ngIf="selectedView === 'secondaryView'">
   <app-contributor-manual
     (contactPerson)="changeContactPerson($event)"
-    (contributorToAdd)="addContributor($event)">
-  </app-contributor-manual>
+    (contributorToAdd)="addContributor($event)"></app-contributor-manual>
 </div>

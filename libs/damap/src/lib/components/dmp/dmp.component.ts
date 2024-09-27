@@ -87,7 +87,6 @@ export class DmpComponent implements OnInit, OnDestroy {
   instructionStep$ = new BehaviorSubject<any>('');
   infoInstruction: InfoBoxDetails = {};
   selectedStep: number = 0;
-  peopleView: 'primaryView' | 'secondaryView' = 'primaryView';
 
   constructor(
     private logger: LoggerService,
@@ -105,10 +104,6 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   onStepChange(selectedStep: number) {
     this.selectedStep = selectedStep;
-  }
-
-  onPeopleViewChange(view: 'primaryView' | 'secondaryView') {
-    this.peopleView = view;
   }
 
   ngOnInit() {

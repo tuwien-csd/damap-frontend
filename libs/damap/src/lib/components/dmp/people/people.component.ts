@@ -42,7 +42,6 @@ export class PeopleComponent implements OnInit, OnDestroy {
   @Input() config$: Observable<Config>;
   @Input() projectMembers: Contributor[];
   @Input() dmpForm: UntypedFormGroup;
-  @Input() selectedView: 'primaryView' | 'secondaryView' = 'primaryView';
 
   @Output() contactPerson = new EventEmitter<any>();
   @Output() contributorToAdd = new EventEmitter<any>();
@@ -72,6 +71,8 @@ export class PeopleComponent implements OnInit, OnDestroy {
       Validators.maxLength(19),
     ]),
   });
+
+  selectedView: 'primaryView' | 'secondaryView' = 'primaryView';
 
   constructor(
     private backendService: BackendService,
@@ -195,6 +196,10 @@ export class PeopleComponent implements OnInit, OnDestroy {
   private getDatasetsForContributor(contributor: Contributor): Dataset[] {
     const datasets = this.dmpForm.controls.datasets.value;
     return datasets.filter(item => item.deletionPerson?.id === contributor?.id);
+  }
+
+  onViewChange(view: 'primaryView' | 'secondaryView'): void {
+    this.selectedView = view;
   }
 }
 

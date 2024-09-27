@@ -25,7 +25,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgModule } from '@angular/core';
 import { ProjectComponent } from './project.component';
-import { ProjectDetailedComponent } from './project-detailed/project-detailed.component';
+import { ProjectInstructionComponent } from './project-instruction/project-instruction.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { ToggleButtonsModule } from '../../../widgets/toggle-buttons/toggle-buttons.module';
@@ -56,7 +56,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ProjectComponent,
     ManualProjectInputComponent,
     ProjectListComponent,
-    ProjectDetailedComponent,
+    ProjectInstructionComponent,
   ],
   exports: [
     CommonModule,
@@ -66,8 +66,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ProjectComponent,
     InfoMessageModule,
     ProjectComponent,
-    ProjectDetailedComponent,
-
+    ProjectInstructionComponent,
     MatCardModule,
     MatButtonModule,
     MatProgressBarModule,

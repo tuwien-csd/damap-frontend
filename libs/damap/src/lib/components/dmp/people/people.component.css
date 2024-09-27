@@ -9,6 +9,9 @@
   position: relative;
   max-height: 300px;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .mat-search-form-field {
@@ -23,6 +26,22 @@ mat-form-field {
 
 .mat-card-container {
   margin: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.mat-card-left {
+  flex: 1;
+}
+
+.mat-card-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
 }
 
 .search-container {
@@ -46,20 +65,49 @@ mat-form-field {
   min-width: 100px;
 }
 
-.form-fields {
-  display: flex;
-  justify-content: space-between;
-  gap: 1em;
-  margin: 1em 0.5em -0.5em 0.5em;
+@media (max-width: 768px) {
+  .mat-card-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mat-card-left,
+  .mat-card-right {
+    width: 100%;
+  }
+
+  .mat-card-right {
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .search-and-service-container {
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
-.form-field {
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.input-half {
+  flex: 0 0 50%;
+}
+
+.input-full {
   flex: 1;
 }
 
-.form-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.25em;
-  margin-right: 0.5em;
+@media (max-width: 1650px) {
+  .input-half,
+  .input-full {
+    flex: 1;
+  }
+}
+
+.manual-project-input-card {
+  margin: 20px 5px;
 }
