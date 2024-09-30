@@ -24,6 +24,7 @@ import { RouterModule } from '@angular/router';
 import { SpecifyDataModule } from './specify-data/specify-data.module';
 import { SummaryModule } from './summary/summary.module';
 import { VersionModule } from '../version/version.module';
+import { LivePreviewModule } from './live-preview/live-preview.module';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
@@ -68,6 +69,9 @@ export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
     ReuseModule,
     CostsModule,
     SummaryModule,
+
+    // Live preview
+    LivePreviewModule,
 
     // Materials
     MatStepperModule,
