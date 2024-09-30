@@ -11,6 +11,7 @@ import { APP_ENV } from './constants';
 import { GdprComponent } from './components/gdpr/gdpr.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminModule } from './components/admin/admin.module';
+import { AdminGuard } from './guards/admin.guard';
 
 export const DAMAP_ROUTES: Route[] = [
   { path: '', component: DashboardComponent },
@@ -22,7 +23,7 @@ export const DAMAP_ROUTES: Route[] = [
       import('./components/dmp/dmp.module').then(m => m.DmpModule),
   },
   { path: 'gdpr', component: GdprComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
 ];
 
 const MODULES = [DashboardModule, PlansModule, AdminModule];

@@ -10,6 +10,7 @@ import { InternalStorageDialogComponent } from './internal-storage-dialog/intern
 import { FeedbackService } from '../../services/feedback.service';
 import { Router } from '@angular/router';
 import { InternalStorageTranslationDialogComponent } from './internal-storage-translation-dialog/internal-storage-translation-dialog.component';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'damap-admin',
@@ -19,10 +20,8 @@ import { InternalStorageTranslationDialogComponent } from './internal-storage-tr
 export class AdminComponent implements OnInit {
   constructor(
     private backendService: BackendService,
-    private authService: AuthService,
     private dialog: MatDialog,
     private feedbackService: FeedbackService,
-    private router: Router,
   ) {}
 
   showOnlyActive = true;
@@ -35,39 +34,32 @@ export class AdminComponent implements OnInit {
     this.selectedInternalStorageId = null;
     this.selectedInternalStorageUrl = null;
 
-    if (!this.authService.isAdmin()) {
-      this.router.navigate(['/dashboard']);
-    }
-
     this.backendService.searchInternalStorage({}).subscribe(data => {
       this.internalStorages = data.items;
     });
   }
 
-  openStorageDialog() {
+  async openStorageDialog() {
     const dialogRef = this.dialog.open(InternalStorageDialogComponent, {
       width: '75%',
       maxWidth: '800px',
       data: { mode: 'add' },
     });
 
-    dialogRef.afterClosed().subscribe(storage => {
-      if (storage) {
-        this.backendService.createInternalStorage(storage).subscribe(
-          () => {
-            this.backendService.searchInternalStorage({}).subscribe(data => {
-              this.internalStorages = data.items;
-              this.selectStorage(
-                data.items.find(s => s.url === storage.url).id,
-              );
-            });
-          },
-          error => {
-            this.feedbackService.error(error);
-          },
-        );
-      }
-    });
+    const storage = await firstValueFrom(dialogRef.afterClosed());
+    if (storage) {
+      this.backendService.createInternalStorage(storage).subscribe(
+        () => {
+          this.backendService.searchInternalStorage({}).subscribe(data => {
+            this.internalStorages = data.items;
+            this.selectStorage(data.items.find(s => s.url === storage.url).id);
+          });
+        },
+        error => {
+          this.feedbackService.error(error);
+        },
+      );
+    }
   }
 
   openTranslationDialog() {

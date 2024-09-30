@@ -497,22 +497,8 @@ export class FormService {
           notEmptyValidator(),
         ],
       ],
-      description: [
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(this.TEXT_MAX_LENGTH),
-          notEmptyValidator(),
-        ],
-      ],
-      backupFrequency: [
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(this.TEXT_SHORT_LENGTH),
-          notEmptyValidator(),
-        ],
-      ],
+      description: ['', [Validators.maxLength(this.TEXT_MAX_LENGTH)]],
+      backupFrequency: ['', [Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
     });
   }
 

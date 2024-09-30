@@ -215,7 +215,7 @@ export class BackendService {
     return this.http
       .get<
         InternalStorage[]
-      >(`${this.backendUrl}storages/languageCode/${langCode}`)
+      >(`${this.backendUrl}storages?languageCode=${langCode}`)
       .pipe(retry(3), catchError(this.handleError('http.error.storages')));
   }
 
@@ -368,7 +368,7 @@ export class BackendService {
       }
     }
     return this.http.get<SearchResult<InternalStorage>>(
-      `${this.backendUrl}storages/search`,
+      `${this.backendUrl}storages`,
       {
         params,
       },
@@ -379,7 +379,7 @@ export class BackendService {
     translation: InternalStorageTranslation,
   ): Observable<InternalStorageTranslation> {
     return this.http.post<InternalStorageTranslation>(
-      `${this.backendUrl}storages/translations`,
+      `${this.backendUrl}storages/${translation.storageId}/translations`,
       translation,
     );
   }
@@ -388,7 +388,7 @@ export class BackendService {
     id: number,
   ): Observable<InternalStorageTranslation[]> {
     return this.http.get<InternalStorageTranslation[]>(
-      `${this.backendUrl}storages/${id}/translations`,
+      `${this.backendUrl}storages/${id}/translations/all`,
     );
   }
 
@@ -396,16 +396,17 @@ export class BackendService {
     translation: InternalStorageTranslation,
   ): Observable<InternalStorageTranslation> {
     return this.http.put<InternalStorageTranslation>(
-      `${this.backendUrl}storages/translations/${translation.id}`,
+      `${this.backendUrl}storages/${translation.storageId}/translations/${translation.id}`,
       translation,
     );
   }
 
   deleteInternalStorageTranslation(
+    storageId: number,
     id: number,
   ): Observable<InternalStorageTranslation> {
     return this.http.delete<InternalStorageTranslation>(
-      `${this.backendUrl}storages/translations/${id}`,
+      `${this.backendUrl}storages/${storageId}/translations/${id}`,
     );
   }
 
@@ -413,7 +414,7 @@ export class BackendService {
     id: number,
   ): Observable<InternalStorageTranslation[]> {
     return this.http.get<InternalStorageTranslation[]>(
-      `${this.backendUrl}storages/translations/all/${id}`,
+      `${this.backendUrl}storages/${id}/translations/all`,
     );
   }
 

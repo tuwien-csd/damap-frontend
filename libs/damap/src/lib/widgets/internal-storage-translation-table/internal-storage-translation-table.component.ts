@@ -68,16 +68,19 @@ export class InternalStorageTranslationTableComponent
   }
 
   deleteStorageTranslation(id: number) {
-    this.backendService.deleteInternalStorageTranslation(id).subscribe(
-      () => {
-        this.internalStorageTranslations =
-          this.internalStorageTranslations.filter(t => t.id !== id);
-        this.dataSource.data = this.internalStorageTranslations;
-      },
-      error => {
-        this.feedbackService.error(error.message);
-      },
-    );
+    const translation = this.internalStorageTranslations.find(t => t.id === id);
+    this.backendService
+      .deleteInternalStorageTranslation(translation.storageId, id)
+      .subscribe(
+        () => {
+          this.internalStorageTranslations =
+            this.internalStorageTranslations.filter(t => t.id !== id);
+          this.dataSource.data = this.internalStorageTranslations;
+        },
+        error => {
+          this.feedbackService.error(error.message);
+        },
+      );
   }
 
   editStorageTranslation(id: number) {
