@@ -6,3 +6,11 @@ table {
   background-color: var(--surface-container-low);
   cursor: pointer;
 }
+
+.action-buttons {
+  padding-bottom: 20px;
+}
+
+.action-buttons > button {
+  margin-right: 1rem;
+}
