@@ -37,6 +37,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { PeopleComponent } from './people/people.component';
 import { Project } from '../../domain/project';
 import { ProjectComponent } from './project/project.component';
+import { SpecifyDataComponent } from './specify-data/specify-data.component';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Store } from '@ngrx/store';
 
@@ -50,6 +51,7 @@ export class DmpComponent implements OnInit, OnDestroy {
   config$: Observable<Config> = new Observable<Config>();
   @ViewChild('projectComponent') projectComponent: ProjectComponent;
   @ViewChild('peopleComponent') peopleComponent: PeopleComponent;
+  @ViewChild('specifyData') specifyDataComponent: SpecifyDataComponent;
 
   get username(): string {
     return this.auth.getUsername();

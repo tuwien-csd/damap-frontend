@@ -24,6 +24,12 @@
         </ng-container>
       </mat-step>
       <mat-step label="{{ 'dmp.steps.data.specify.label' | translate }}">
+        <ng-container *ngIf="selectedStep === 2">
+          <app-specify-data-instruction
+            (selectionChange)="
+              specifyDataComponent.onViewChange($event)
+            "></app-specify-data-instruction>
+        </ng-container>
       </mat-step>
       <mat-step label="{{ 'dmp.steps.documentation.label' | translate }}">
       </mat-step>
@@ -52,7 +58,7 @@
     <!-- Step 2: People -->
     <ng-container *ngIf="selectedStep === 1">
       <app-dmp-people
-        #peopleComponent
+        #specifyDataComponent
         [config$]="config$"
         [projectMembers]="projectMembers"
         [dmpForm]="dmpForm"
@@ -66,6 +72,7 @@
     <!-- Step 3: Data Specification -->
     <ng-container *ngIf="selectedStep === 2">
       <app-dmp-specify-data
+        #specifyData
         [config$]="config$"
         [specifyDataStep]="specifyDataStep"
         [datasets]="datasets"

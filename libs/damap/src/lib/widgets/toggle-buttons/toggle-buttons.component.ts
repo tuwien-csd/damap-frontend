@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./toggle-buttons.component.css'],
 })
 export class ToggleButtonsComponent {
-  @Input() selectedView: 'primaryView' | 'secondaryView';
+  @Input() selectedView: 'primaryView' | 'secondaryView' = 'primaryView';
   @Input() primaryLabel: string;
   @Input() secondaryLabel: string;
 
