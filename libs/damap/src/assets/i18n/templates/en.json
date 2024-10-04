@@ -185,6 +185,7 @@
       },
       "documentation": {
         "label": "Documentation and data quality",
+        "instruction": "Complete Documentation",
         "greeting": "Now onto Step 4, Firstname",
         "summaryLine": "Outline how your data will be organised throughout the project.",
         "instructions": "This step helps you to provide information on how data will be organised during the project, which data quality control measures will be used, what documentation will be prepared and made available to enable the reuse of data, and which metadata will be provided.",

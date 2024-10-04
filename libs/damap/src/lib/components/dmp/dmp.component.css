@@ -26,10 +26,6 @@
   padding: 20px !important;
 }
 
-::ng-deep .mat-mdc-card-content:last-child {
-  padding-bottom: 0 !important;
-}
-
 @media (max-width: 768px) {
   .dmp-container {
     flex-direction: column;

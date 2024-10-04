@@ -76,3 +76,7 @@
   padding-top: 0px;
   padding-bottom: 0px;
 }
+
+.custom-card .mat-mdc-card-content:last-child {
+  padding-bottom: 0 !important;
+}

@@ -32,6 +32,13 @@
         </ng-container>
       </mat-step>
       <mat-step label="{{ 'dmp.steps.documentation.label' | translate }}">
+        <ng-container *ngIf="selectedStep === 3">
+          <div class="example-button-row">
+            <button mat-flat-button disabled>
+              {{ "dmp.steps.documentation.instruction" | translate }}
+            </button>
+          </div>
+        </ng-container>
       </mat-step>
       <mat-step label="{{ 'dmp.steps.storage.label' | translate }}"> </mat-step>
       <mat-step label="{{ 'dmp.steps.legal.label' | translate }}"> </mat-step>
@@ -47,15 +54,12 @@
   </div>
 
   <div class="detailed-view-container card-shadow">
-    <!-- Step 1: Project -->
     <ng-container *ngIf="selectedStep === 0">
       <app-dmp-project
         #projectComponent
         [projectStep]="projectStep"
         (project)="changeProject($event)"></app-dmp-project>
     </ng-container>
-
-    <!-- Step 2: People -->
     <ng-container *ngIf="selectedStep === 1">
       <app-dmp-people
         #peopleComponent
@@ -68,8 +72,6 @@
         (contributorToUpdate)="updateContributorDetails($event)">
       </app-dmp-people>
     </ng-container>
-
-    <!-- Step 3: Data Specification -->
     <ng-container *ngIf="selectedStep === 2">
       <app-dmp-specify-data
         #specifyData
@@ -89,8 +91,6 @@
         {{ "dmp.steps.data.specify.error" | translate }}
       </div>
     </ng-container>
-
-    <!-- Step 4: Documentation -->
     <ng-container *ngIf="selectedStep === 3">
       <ng-container *ngIf="showStep; else noDatasets">
         <app-dmp-doc-data-quality [docDataStep]="docDataStep">
@@ -100,8 +100,6 @@
         {{ "dmp.steps.documentation.error" | translate }}
       </div>
     </ng-container>
-
-    <!-- Step 5: Storage -->
     <ng-container *ngIf="selectedStep === 4">
       <ng-container *ngIf="showStep; else noDatasets">
         <div class="intro-step">
@@ -109,7 +107,6 @@
             "dmp.steps.data.specify.tab.introStorage" | translate
           }}</app-step-intro>
         </div>
-
         <mat-tab-group dynamicHeight animationDuration="0ms">
           <mat-tab
             label="{{ 'dmp.steps.data.specify.tab.access' | translate }}">
@@ -146,8 +143,6 @@
         </div>
       </ng-container>
     </ng-container>
-
-    <!-- Step 6: Legal and Ethical Aspects -->
     <ng-container *ngIf="selectedStep === 5">
       <ng-container *ngIf="showStep; else noDatasets">
         <app-dmp-legal-ethical-aspects
@@ -161,8 +156,6 @@
         </div>
       </ng-container>
     </ng-container>
-
-    <!-- Step 7: Licensing  -->
     <ng-container *ngIf="selectedStep === 6">
       <ng-container *ngIf="showStepIfNewDatasets; else noDatasets">
         <app-dmp-licenses
@@ -173,8 +166,6 @@
         </div>
       </ng-container>
     </ng-container>
-
-    <!-- Step 8: Repositories -->
     <ng-container *ngIf="selectedStep === 7">
       <ng-container *ngIf="showStepIfNewDatasets; else noDatasets">
         <app-dmp-repo
@@ -189,8 +180,6 @@
         </div>
       </ng-container>
     </ng-container>
-
-    <!-- Step 9: Data Reuse  -->
     <ng-container *ngIf="selectedStep === 8">
       <ng-container *ngIf="showStep; else noDatasets">
         <app-dmp-reuse
@@ -201,8 +190,6 @@
         </div>
       </ng-container>
     </ng-container>
-
-    <!-- Step 10: Costs -->
     <ng-container *ngIf="selectedStep === 9">
       <ng-container *ngIf="showStep; else noDatasets">
         <app-dmp-costs
@@ -216,8 +203,6 @@
         </div>
       </ng-container>
     </ng-container>
-
-    <!-- Step 11: End/Summary -->
     <ng-container *ngIf="selectedStep === 10">
       <app-dmp-summary [stepper]="stepper"></app-dmp-summary>
     </ng-container>
