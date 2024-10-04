@@ -22,7 +22,12 @@
 }
 
 ::ng-deep .mat-vertical-content {
+  display: flex;
   padding: 20px !important;
+}
+
+::ng-deep .mat-mdc-card-content:last-child {
+  padding-bottom: 0 !important;
 }
 
 @media (max-width: 768px) {

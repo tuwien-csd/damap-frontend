@@ -2,7 +2,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -91,15 +90,14 @@ export class DmpComponent implements OnInit, OnDestroy {
   selectedStep: number = 0;
 
   constructor(
-    private logger: LoggerService,
-    private auth: AuthService,
-    private formService: FormService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private backendService: BackendService,
+    private readonly logger: LoggerService,
+    private readonly auth: AuthService,
+    private readonly formService: FormService,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly backendService: BackendService,
     public store: Store<AppState>,
-    private infoLabelService: InfoLabelService,
-    private cdr: ChangeDetectorRef,
+    private readonly infoLabelService: InfoLabelService,
   ) {
     this.dmpForm = this.formService.dmpForm;
   }
@@ -109,7 +107,7 @@ export class DmpComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getIntruction(0);
+    this.getInstruction(0);
     this.config$ = this.backendService.loadServiceConfig();
     this.getDmpById();
 
@@ -167,9 +165,16 @@ export class DmpComponent implements OnInit, OnDestroy {
       this.datasets.length
     );
   }
-  changeStep($event) {
+
+  changeStep($event: StepperSelectionEvent) {
     this.stepChanged$.next($event);
-    this.getIntruction($event.selectedIndex);
+    this.getInstruction($event.selectedIndex);
+  }
+
+  handleStepChange(event: StepperSelectionEvent) {
+    this.changeStep(event);
+    this.changeStepPosition(event);
+    this.onStepChange(event.selectedIndex);
   }
 
   changeProject(project: Project) {
@@ -308,7 +313,7 @@ export class DmpComponent implements OnInit, OnDestroy {
     return this.username + (+new Date()).toString(36);
   }
 
-  getIntruction(index: number) {
+  getInstruction(index: number) {
     this.infoInstruction = this.infoLabelService.getInfo(index);
     this.instructionStep$.next(this.infoInstruction);
   }

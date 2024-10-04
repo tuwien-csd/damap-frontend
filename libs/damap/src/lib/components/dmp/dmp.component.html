@@ -6,7 +6,7 @@
       class="verticalStepper card-shadow"
       [linear]="false"
       orientation="vertical"
-      (selectionChange)="changeStep($event); changeStepPosition($event)">
+      (selectionChange)="handleStepChange($event)">
       <mat-step label="{{ 'dmp.steps.project.label' | translate }}">
         <ng-container *ngIf="selectedStep === 0">
           <app-project-instruction
@@ -58,7 +58,7 @@
     <!-- Step 2: People -->
     <ng-container *ngIf="selectedStep === 1">
       <app-dmp-people
-        #specifyDataComponent
+        #peopleComponent
         [config$]="config$"
         [projectMembers]="projectMembers"
         [dmpForm]="dmpForm"
