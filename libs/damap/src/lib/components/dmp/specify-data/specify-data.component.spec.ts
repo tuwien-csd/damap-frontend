@@ -9,8 +9,8 @@ import {
   closedDatasetMock,
   restrictedDatasetMock,
 } from '../../../mocks/dataset-mocks';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SpecifyDataComponent } from './specify-data.component';
@@ -49,24 +49,20 @@ describe('SpecifyDataComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  /* Test AbstractBaseDataComponent */
   it('should test abstract components functionality', () => {
     spyOn(component.datasetToAdd, 'emit');
     spyOn(component.updateDataset, 'emit');
     spyOn(component.removeDataset, 'emit');
 
-    // Test add dataset
     component.add(closedDatasetMock);
     expect(component.datasetToAdd.emit).toHaveBeenCalledOnceWith(
       closedDatasetMock,
     );
-    // Test update dataset
     component.update({ index: 0, update: restrictedDatasetMock });
     expect(component.updateDataset.emit).toHaveBeenCalledOnceWith({
       index: 0,
       update: restrictedDatasetMock,
     });
-    // Test remove dataset
     component.remove(0);
     expect(component.removeDataset.emit).toHaveBeenCalledOnceWith(0);
   });

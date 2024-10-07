@@ -1,4 +1,4 @@
-import { ActivatedRoute, RouterModule } from '@angular/router'; // Update here
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatStepperHarness } from '@angular/material/stepper/testing';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
 import { completeDmp } from '../../mocks/dmp-mocks';
@@ -121,6 +122,25 @@ describe('DmpComponent', () => {
     fixture.destroy();
 
     expect(storeSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should handle step change correctly', () => {
+    const event: StepperSelectionEvent = {
+      selectedIndex: 2,
+      previouslySelectedIndex: 1,
+      selectedStep: {} as any,
+      previouslySelectedStep: {} as any,
+    };
+
+    spyOn(component, 'changeStep');
+    spyOn(component, 'changeStepPosition');
+    spyOn(component, 'onStepChange');
+
+    component.handleStepChange(event);
+
+    expect(component.changeStep).toHaveBeenCalledWith(event);
+    expect(component.changeStepPosition).toHaveBeenCalledWith(event);
+    expect(component.onStepChange).toHaveBeenCalledWith(event.selectedIndex);
   });
 
   it('should test showStep', () => {

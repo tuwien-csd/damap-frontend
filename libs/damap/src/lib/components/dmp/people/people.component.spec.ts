@@ -44,6 +44,7 @@ describe('PeopleComponent', () => {
     backendSpy.getPersonSearchResult.and.returnValue(
       of(mockContributorSearchResult),
     );
+
     TestBed.configureTestingModule({
       imports: [
         TranslateTestingModule,
@@ -61,6 +62,10 @@ describe('PeopleComponent', () => {
   }));
 
   beforeEach(() => {
+    createComponent();
+  });
+
+  function createComponent(): void {
     fixture = TestBed.createComponent(PeopleComponent);
     component = fixture.componentInstance;
     component.config$ = new BehaviorSubject<Config>(configMockData);
@@ -74,9 +79,9 @@ describe('PeopleComponent', () => {
     });
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
-  });
+  }
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 

@@ -1,4 +1,11 @@
-<div>
+<div class="form-column">
+  <mat-label
+    class="label-title mat-title-large"
+    id="example-radio-group-label"
+    >{{
+      "dmp.steps.summary.people.contributor.additional" | translate
+    }}</mat-label
+  >
   <button mat-raised-button (click)="show = !show">
     <ng-container *ngIf="show">{{
       "dmp.steps.people.manual.input.hide" | translate

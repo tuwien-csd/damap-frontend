@@ -18,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ReusedDataComponent } from './reused-data/reused-data.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { SpecifyDataComponent } from './specify-data.component';
-import { SpecifyDataInstructionComponent } from './specify-data-instruction/specify-data-instrcution.component';
+import { SpecifyDataInstructionComponent } from './specify-data-instruction/specify-data-instruction.component';
 import { StepIntroModule } from '../../../widgets/step-intro/step-intro.module';
 import { ToggleButtonsModule } from '../../../widgets/toggle-buttons/toggle-buttons.module';
 import { TranslateModule } from '@ngx-translate/core';

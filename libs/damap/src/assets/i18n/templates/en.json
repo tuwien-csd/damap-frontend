@@ -412,7 +412,8 @@
           "contributor": {
             "none": "No contributors selected yet.",
             "one": "One contributor selected.",
-            "multiple": "Contributors selected: "
+            "multiple": "Contributors selected: ",
+            "additional": "Additional contributors:"
           }
         },
         "data": {
