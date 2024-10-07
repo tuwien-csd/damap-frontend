@@ -56,6 +56,13 @@
         </ng-container>
       </mat-step>
       <mat-step label="{{ 'dmp.steps.licensing.label' | translate }}">
+        <ng-container *ngIf="selectedStep === 6">
+          <div class="example-button-row">
+            <button mat-flat-button disabled>
+              {{ "dmp.steps.licensing.instruction" | translate }}
+            </button>
+          </div>
+        </ng-container>
       </mat-step>
       <mat-step label="{{ 'dmp.steps.repositories.label' | translate }}">
       </mat-step>

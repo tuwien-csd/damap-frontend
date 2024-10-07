@@ -1,5 +1,7 @@
-<p>{{ "dmp.steps.licensing.hint" | translate }}</p>
 <div [formGroup]="dmpForm">
+  <mat-label class="label-title" id="example-radio-group-label">{{
+    "dmp.steps.licensing.rightLabel" | translate
+  }}</mat-label>
   <ng-container
     formArrayName="datasets"
     *ngFor="let dataset of datasets?.controls; index as i">

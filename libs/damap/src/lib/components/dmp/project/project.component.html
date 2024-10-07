@@ -1,8 +1,8 @@
 <!-- Selected project -->
 <div *ngIf="projectStep?.value">
-  <p class="mat-title-medium title-thin">
-    {{ "dmp.steps.project.selected" | translate }}:
-  </p>
+  <mat-label class="label-title" id="example-radio-group-label">{{
+    "dmp.steps.project.selected" | translate
+  }}</mat-label>
   <mat-card appearance="raised" class="card-selected">
     <mat-card-header>
       <mat-card-title>

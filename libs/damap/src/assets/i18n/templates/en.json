@@ -275,6 +275,8 @@
       },
       "licensing": {
         "label": "Data access and licensing",
+        "rightLabel": "Access Control and Licensing Overview",
+        "instruction": "Dataset Licensing and Permissions",
         "greeting": "Advancing to Step 7, Firstname",
         "summaryLine": "Elaborate on future access to your data. ",
         "instructions": "This step helps you to specify the access to your research output in the future: Which of your datasets will be published, which will be provided to interested persons on request only, and which need to be under lock and key, for contractual, regulatory, or ethical reasons? It also reminds you to choose a license for your open data that clearly describes the reuse conditions for potential users. To comply with the FAIR principles, metadata should be published, even if the data is closed or restricted.",

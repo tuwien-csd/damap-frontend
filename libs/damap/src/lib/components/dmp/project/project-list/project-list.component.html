@@ -1,6 +1,9 @@
-<p class="mat-title-medium title-thin" *ngIf="!selectedProject" translate>
-  dmp.steps.project.select
-</p>
+<mat-label
+  class="label-title"
+  *ngIf="!selectedProject"
+  id="example-radio-group-label"
+  >{{ "dmp.steps.project.select" | translate }}</mat-label
+>
 <ng-container *ngIf="!selectedProject">
   <mat-form-field>
     <mat-label translate>dmp.steps.project.search</mat-label>
