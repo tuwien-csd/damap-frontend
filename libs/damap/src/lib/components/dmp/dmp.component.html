@@ -40,7 +40,13 @@
           </div>
         </ng-container>
       </mat-step>
-      <mat-step label="{{ 'dmp.steps.storage.label' | translate }}"> </mat-step>
+      <mat-step label="{{ 'dmp.steps.storage.label' | translate }}">
+        <ng-container *ngIf="selectedStep === 4">
+          <app-data-storage-instruction
+            (selectionChange)="onViewChangeStorage($event)">
+          </app-data-storage-instruction>
+        </ng-container>
+      </mat-step>
       <mat-step label="{{ 'dmp.steps.legal.label' | translate }}"> </mat-step>
       <mat-step label="{{ 'dmp.steps.licensing.label' | translate }}">
       </mat-step>
@@ -102,36 +108,27 @@
     </ng-container>
     <ng-container *ngIf="selectedStep === 4">
       <ng-container *ngIf="showStep; else noDatasets">
-        <div class="intro-step">
-          <app-step-intro>{{
-            "dmp.steps.data.specify.tab.introStorage" | translate
-          }}</app-step-intro>
+        <div *ngIf="selectedViewStorage === 'primaryView'">
+          <app-data-access
+            [dmpForm]="dmpForm"
+            [datasets]="datasets"></app-data-access>
         </div>
-        <mat-tab-group dynamicHeight animationDuration="0ms">
-          <mat-tab
-            label="{{ 'dmp.steps.data.specify.tab.access' | translate }}">
-            <app-data-access
-              [dmpForm]="dmpForm"
-              [datasets]="datasets"></app-data-access>
-          </mat-tab>
-          <mat-tab
-            label="{{ 'dmp.steps.data.specify.tab.storage' | translate }}">
-            <app-dmp-storage
-              [dmpForm]="dmpForm"
-              [storageStep]="storageStep"
-              [datasets]="datasets"
-              (storageToAdd)="addStorage($event)"
-              (storageToRemove)="removeStorage($event)">
-            </app-dmp-storage>
-            <app-dmp-external-storage
-              [externalStorageStep]="externalStorageStep"
-              [externalStorageInfo]="externalStorageInfo"
-              [datasets]="datasets"
-              (externalStorageToAdd)="addExternalStorage()"
-              (externalStorageToRemove)="removeExternalStorage($event)">
-            </app-dmp-external-storage>
-          </mat-tab>
-        </mat-tab-group>
+        <div *ngIf="selectedViewStorage === 'secondaryView'">
+          <app-dmp-storage
+            [dmpForm]="dmpForm"
+            [storageStep]="storageStep"
+            [datasets]="datasets"
+            (storageToAdd)="addStorage($event)"
+            (storageToRemove)="removeStorage($event)">
+          </app-dmp-storage>
+          <app-dmp-external-storage
+            [externalStorageStep]="externalStorageStep"
+            [externalStorageInfo]="externalStorageInfo"
+            [datasets]="datasets"
+            (externalStorageToAdd)="addExternalStorage()"
+            (externalStorageToRemove)="removeExternalStorage($event)">
+          </app-dmp-external-storage>
+        </div>
         <div
           *ngIf="
             storageStep.invalid ||

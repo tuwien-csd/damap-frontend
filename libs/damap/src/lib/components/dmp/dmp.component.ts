@@ -52,6 +52,8 @@ export class DmpComponent implements OnInit, OnDestroy {
   @ViewChild('peopleComponent') peopleComponent: PeopleComponent;
   @ViewChild('specifyData') specifyDataComponent: SpecifyDataComponent;
 
+  selectedViewStorage: 'primaryView' | 'secondaryView' = 'primaryView';
+
   get username(): string {
     return this.auth.getUsername();
   }
@@ -90,12 +92,12 @@ export class DmpComponent implements OnInit, OnDestroy {
   selectedStep: number = 0;
 
   constructor(
-    private readonly logger: LoggerService,
-    private readonly auth: AuthService,
-    private readonly formService: FormService,
-    private readonly route: ActivatedRoute,
-    private readonly router: Router,
-    private readonly backendService: BackendService,
+    private logger: LoggerService,
+    private auth: AuthService,
+    private formService: FormService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private backendService: BackendService,
     public store: Store<AppState>,
     private readonly infoLabelService: InfoLabelService,
   ) {
@@ -283,6 +285,10 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   removeCost(index: number) {
     this.formService.removeCostFromForm(index);
+  }
+
+  onViewChangeStorage(view: 'primaryView' | 'secondaryView'): void {
+    this.selectedViewStorage = view;
   }
 
   private getDmpById() {

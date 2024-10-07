@@ -204,7 +204,7 @@
         "greeting": "Step 5, Let’s elaborate on your storage, Firstname",
         "summaryLine": "Define who can access and modify your data and describe your storage and backup strategies.",
         "instructions": "This step helps you 1) document who is allowed to see or edit your data in the project phase and 2) find appropriate storage and backup solutions for your data.",
-        "intro": "Choose the best storage option for each dataset.",
+        "intro": "Choose the best storage option for each dataset:",
         "link": "More information...",
         "question": {
           "datasets": "Select corresponding datasets"
