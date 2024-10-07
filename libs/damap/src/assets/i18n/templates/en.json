@@ -18,7 +18,7 @@
         "instructions": "In this step, you choose a project from your institution’s project database (if integrated) or manually input your project.",
         "search": "Search project...",
         "select": "Please select the project you want to create a DMP for:",
-        "selected": "You selected",
+        "selected": "You selected:",
         "warning.dmp": "A DMP already exists for this project",
         "noprojects": "No projects are assigned to you.",
         "loading": {
@@ -163,6 +163,8 @@
           }
         },
         "reuse": {
+          "rightLabel": "Data reuse planning",
+          "instruction": "Specify data reuse and accessibility",
           "label": "Reuse of data",
           "greeting": "On to Step 9, Firstname",
           "summaryLine": "Image/Describe potential reuse opportunities of your data. or  Imagine/Describe conceivable purposes for the reuse of your data.",
@@ -349,6 +351,9 @@
       },
       "costs": {
         "label": "Costs",
+        "rightLabel": "Data management costs",
+        "instruction": "Specify costs for data management",
+        "addButton": "Add cost",
         "greeting": "Step 10, you’re almost there, Firstname!",
         "summaryLine": "Estimate the costs for data management in this project. ",
         "instructions": "In this step, you will provide information on the resources required to manage your data and a clear statement on how these costs will be covered.",

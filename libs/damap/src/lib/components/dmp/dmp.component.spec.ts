@@ -1,26 +1,26 @@
+import { ActivatedRoute, RouterModule } from '@angular/router'; // Update here
+import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { DmpComponent } from './dmp.component';
-import { provideMockStore } from '@ngrx/store/testing';
-import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { BackendService } from '../../services/backend.service';
-import { FeedbackService } from '../../services/feedback.service';
 import { ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatButtonModule } from '@angular/material/button';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { HarnessLoader } from '@angular/cdk/testing';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { MatStepperHarness } from '@angular/material/stepper/testing';
-import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
-import { FormTestingModule } from '../../testing/form-testing/form-testing.module';
+import { Subject, of } from 'rxjs';
+
 import { AuthService } from '../../auth/auth.service';
-import { completeDmp } from '../../mocks/dmp-mocks';
-import { of, Subject } from 'rxjs';
-import { mockContributor1 } from '../../mocks/contributor-mocks';
-import { configMockData } from '../../mocks/config-service-mocks';
+import { BackendService } from '../../services/backend.service';
 import { Config } from '../../domain/config';
-import { NO_ERRORS_SCHEMA, ChangeDetectionStrategy } from '@angular/core';
+import { DmpComponent } from './dmp.component';
+import { FeedbackService } from '../../services/feedback.service';
+import { FormTestingModule } from '../../testing/form-testing/form-testing.module';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatStepperHarness } from '@angular/material/stepper/testing';
+import { MatStepperModule } from '@angular/material/stepper';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
+import { completeDmp } from '../../mocks/dmp-mocks';
+import { configMockData } from '../../mocks/config-service-mocks';
+import { mockContributor1 } from '../../mocks/contributor-mocks';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('DmpComponent', () => {
   let component: DmpComponent;
@@ -56,9 +56,7 @@ describe('DmpComponent', () => {
         MatStepperModule,
         MatButtonModule,
         NoopAnimationsModule,
-        RouterTestingModule.withRoutes([
-          /*{path: 'plans', component: PlansComponent}*/
-        ]),
+        RouterModule.forRoot([]),
         TranslateTestingModule,
         FormTestingModule,
       ],

@@ -1,3 +1,4 @@
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { EMPTY, of } from 'rxjs';
 import {
@@ -6,14 +7,12 @@ import {
 } from '@angular/material/checkbox';
 
 import { AccessComponent } from './access.component';
-import { ActivatedRoute } from '@angular/router';
 import { BackendService } from '../../services/backend.service';
 import { InfoMessageModule } from '../../widgets/info-message/info-message.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { PersonCardComponent } from '../../widgets/person-card/person-card.component';
-import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
 import { completeDmp } from '../../mocks/dmp-mocks';
 import { mockAccess } from '../../mocks/access-mocks';
@@ -32,13 +31,14 @@ describe('AccessComponent', () => {
     ]);
     backendSpy.getDmpById.and.returnValue(of([completeDmp]));
     backendSpy.getAccess.and.returnValue(of([mockAccess]));
+
     TestBed.configureTestingModule({
       imports: [
         AccessComponent,
         TranslateTestingModule,
         PersonCardComponent,
         InfoMessageModule,
-        RouterTestingModule.withRoutes([]),
+        RouterModule.forRoot([]),
         MatButtonModule,
         MatCheckboxModule,
         MatIconModule,

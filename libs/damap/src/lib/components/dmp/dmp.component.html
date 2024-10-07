@@ -72,8 +72,23 @@
         </ng-container>
       </mat-step>
       <mat-step label="{{ 'dmp.steps.data.reuse.label' | translate }}">
+        <ng-container *ngIf="selectedStep === 8">
+          <div class="example-button-row">
+            <button mat-flat-button disabled>
+              {{ "dmp.steps.data.reuse.instruction" | translate }}
+            </button>
+          </div>
+        </ng-container>
       </mat-step>
-      <mat-step label="{{ 'dmp.steps.costs.label' | translate }}"> </mat-step>
+      <mat-step label="{{ 'dmp.steps.costs.label' | translate }}">
+        <ng-container *ngIf="selectedStep === 9">
+          <div class="example-button-row">
+            <button mat-flat-button disabled>
+              {{ "dmp.steps.costs.instruction" | translate }}
+            </button>
+          </div>
+        </ng-container>
+      </mat-step>
       <mat-step label="{{ 'dmp.steps.end.label' | translate }}"> </mat-step>
     </mat-vertical-stepper>
   </div>
