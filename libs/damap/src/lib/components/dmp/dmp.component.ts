@@ -31,6 +31,7 @@ import { HttpEventType } from '@angular/common/http';
 import { InfoBoxDetails } from '../../domain/infoBox-details';
 import { InfoLabelService } from '../../services/infoLabel.service';
 import { InternalStorage } from '../../domain/internal-storage';
+import { LegalEthicalAspectsComponent } from './legal-ethical-aspects/legal-ethical-aspects.component';
 import { LoggerService } from '../../services/logger.service';
 import { MatStepper } from '@angular/material/stepper';
 import { PeopleComponent } from './people/people.component';
@@ -51,6 +52,8 @@ export class DmpComponent implements OnInit, OnDestroy {
   @ViewChild('projectComponent') projectComponent: ProjectComponent;
   @ViewChild('peopleComponent') peopleComponent: PeopleComponent;
   @ViewChild('specifyData') specifyDataComponent: SpecifyDataComponent;
+  @ViewChild('legalEthicalAspects')
+  legalEthicalAspectsComponent: LegalEthicalAspectsComponent;
 
   selectedViewStorage: 'primaryView' | 'secondaryView' = 'primaryView';
 

@@ -47,7 +47,14 @@
           </app-data-storage-instruction>
         </ng-container>
       </mat-step>
-      <mat-step label="{{ 'dmp.steps.legal.label' | translate }}"> </mat-step>
+      <mat-step label="{{ 'dmp.steps.legal.label' | translate }}">
+        <ng-container *ngIf="selectedStep === 5">
+          <app-legal-ethical-instruction
+            (selectionChange)="
+              legalEthicalAspectsComponent.onViewChange($event)
+            "></app-legal-ethical-instruction>
+        </ng-container>
+      </mat-step>
       <mat-step label="{{ 'dmp.steps.licensing.label' | translate }}">
       </mat-step>
       <mat-step label="{{ 'dmp.steps.repositories.label' | translate }}">
@@ -143,11 +150,11 @@
     <ng-container *ngIf="selectedStep === 5">
       <ng-container *ngIf="showStep; else noDatasets">
         <app-dmp-legal-ethical-aspects
+          #legalEthicalAspects
           [dmpForm]="dmpForm"
           [legalEthicalStep]="legalEthicalStep"
           [datasets]="datasets">
         </app-dmp-legal-ethical-aspects>
-
         <div *ngIf="legalEthicalStep.invalid" class="error-message">
           {{ "dmp.steps.legal.error" | translate }}
         </div>
