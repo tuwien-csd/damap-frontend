@@ -65,6 +65,24 @@ mat-form-field {
   min-width: 100px;
 }
 
+.form-fields {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  margin: 1em 0.5em -0.5em 0.5em;
+}
+
+.form-field {
+  flex: 1;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.25em;
+  margin-right: 0.5em;
+}
+
 @media (max-width: 768px) {
   .mat-card-container {
     flex-direction: column;

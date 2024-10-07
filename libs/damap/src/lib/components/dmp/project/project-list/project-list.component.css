@@ -1,10 +1,15 @@
 .list-container {
   position: relative;
   max-height: 300px;
-  overflow: auto;
+  overflow-y: scroll;
   width: 100%;
+  scrollbar-width: none;
 }
 
 .mat-list-option-right {
   float: right;
+}
+
+.list-container::-webkit-scrollbar {
+  display: none;
 }

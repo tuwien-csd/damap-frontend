@@ -1,8 +1,8 @@
 <mat-label
-  class="label-title"
+  class="label-title mat-title-large"
   *ngIf="!selectedProject"
   id="example-radio-group-label"
-  >{{ "dmp.steps.project.select" | translate }}</mat-label
+  >{{ "dmp.steps.people.rightLabel" | translate }}</mat-label
 >
 <ng-container *ngIf="!selectedProject">
   <mat-form-field>
@@ -18,7 +18,7 @@
     <mat-selection-list
       hideSingleSelectionIndicator
       [multiple]="false"
-      style="overflow: scroll"
+      style="overflow: hidden"
       (selectionChange)="changeProject($event)">
       <mat-list-option
         *ngFor="let project of (searchResult$ | async)?.items ?? []"

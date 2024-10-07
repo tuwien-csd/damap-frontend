@@ -28,6 +28,7 @@
       },
       "people": {
         "label": "People involved in data management",
+        "rightLabel": "Identify data management contributors",
         "greeting": "Welcome to Step 2, Firstname",
         "summaryLine": "Identify team members in your project.",
         "instructions": "In this step, you add individuals to the project and provide additional information about them, for example, their role in the project. To mark someone as the contact person click the person-with-envelope icon next to their role. You can change the existing information and add more contributors via the search (choose a search service and start typing the name). Please provide a minimum of one contact person as well as a data manager (it can be the same person).",
@@ -275,8 +276,8 @@
       },
       "licensing": {
         "label": "Data access and licensing",
-        "rightLabel": "Access Control and Licensing Overview",
-        "instruction": "Dataset Licensing and Permissions",
+        "rightLabel": "Access control and licensing overview",
+        "instruction": "Dataset licensing and permissions",
         "greeting": "Advancing to Step 7, Firstname",
         "summaryLine": "Elaborate on future access to your data. ",
         "instructions": "This step helps you to specify the access to your research output in the future: Which of your datasets will be published, which will be provided to interested persons on request only, and which need to be under lock and key, for contractual, regulatory, or ethical reasons? It also reminds you to choose a license for your open data that clearly describes the reuse conditions for potential users. To comply with the FAIR principles, metadata should be published, even if the data is closed or restricted.",

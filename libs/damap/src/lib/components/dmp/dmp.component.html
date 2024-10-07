@@ -65,6 +65,11 @@
         </ng-container>
       </mat-step>
       <mat-step label="{{ 'dmp.steps.repositories.label' | translate }}">
+        <ng-container *ngIf="selectedStep === 7">
+          <app-repo-instruction
+            (selectionChange)="repoComponent.onViewChange($event)">
+          </app-repo-instruction>
+        </ng-container>
       </mat-step>
       <mat-step label="{{ 'dmp.steps.data.reuse.label' | translate }}">
       </mat-step>
@@ -180,6 +185,7 @@
     <ng-container *ngIf="selectedStep === 7">
       <ng-container *ngIf="showStepIfNewDatasets; else noDatasets">
         <app-dmp-repo
+          #repo
           [dmpForm]="dmpForm"
           [repoStep]="repoStep"
           [datasets]="datasets"

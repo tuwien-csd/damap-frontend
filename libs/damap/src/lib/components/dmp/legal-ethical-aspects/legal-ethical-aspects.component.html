@@ -1,7 +1,9 @@
 <div *ngIf="selectedView === 'primaryView'">
-  <mat-label class="label-title" id="example-radio-group-label">{{
-    "dmp.steps.legal.heading" | translate
-  }}</mat-label>
+  <mat-label
+    class="label-title mat-title-large"
+    id="example-radio-group-label"
+    >{{ "dmp.steps.legal.heading" | translate }}</mat-label
+  >
   <mat-card class="legal-ethical-card card-shadow">
     <mat-card-content>
       <div *ngIf="selectedView === 'primaryView'">
@@ -254,9 +256,11 @@
 </div>
 
 <div *ngIf="selectedView === 'secondaryView'">
-  <mat-label class="label-title" id="example-radio-group-label">{{
-    "dmp.steps.ethical.heading" | translate
-  }}</mat-label>
+  <mat-label
+    class="label-title mat-title-large"
+    id="example-radio-group-label"
+    >{{ "dmp.steps.ethical.heading" | translate }}</mat-label
+  >
   <app-ethical-aspects
     [legalEthicalStep]="legalEthicalStep"></app-ethical-aspects>
 </div>

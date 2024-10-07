@@ -37,6 +37,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { PeopleComponent } from './people/people.component';
 import { Project } from '../../domain/project';
 import { ProjectComponent } from './project/project.component';
+import { RepoComponent } from './repo/repo.component';
 import { SpecifyDataComponent } from './specify-data/specify-data.component';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Store } from '@ngrx/store';
@@ -54,6 +55,7 @@ export class DmpComponent implements OnInit, OnDestroy {
   @ViewChild('specifyData') specifyDataComponent: SpecifyDataComponent;
   @ViewChild('legalEthicalAspects')
   legalEthicalAspectsComponent: LegalEthicalAspectsComponent;
+  @ViewChild('repo') repoComponent: RepoComponent;
 
   selectedViewStorage: 'primaryView' | 'secondaryView' = 'primaryView';
 
