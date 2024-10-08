@@ -188,6 +188,10 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formService.removeContributorFromForm(index);
   }
 
+  updateContributorDetails(event: { idx: number; contributor: Contributor }) {
+    this.formService.upadteContributorOfForm(event.idx, event.contributor);
+  }
+
   addDataset(dataset: Dataset) {
     dataset.referenceHash = this.generateReferenceHash();
     this.formService.addDatasetToForm(dataset);
