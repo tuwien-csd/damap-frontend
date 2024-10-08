@@ -8,7 +8,14 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { UntypedFormArray, UntypedFormGroup } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -21,6 +28,8 @@ import { IdentifierType } from '../../../domain/enum/identifier-type.enum';
 import { BackendService } from '../../../services/backend.service';
 import { PersonSearchComponent } from '../../../widgets/person-search/person-search.component';
 import { Config } from '../../../domain/config';
+import { orcidValidator } from '../../../validators/orcid.validator';
+import { notEmptyValidator } from '../../../validators/not-empty.validator';
 
 @Component({
   selector: 'app-dmp-people',
@@ -51,6 +60,18 @@ export class PeopleComponent implements OnInit, OnDestroy {
   serviceConfig$: ServiceConfig[];
   serviceConfigType: ServiceConfig;
 
+  currentUpdateContributorIdx: number = -1;
+  form = new UntypedFormGroup({
+    mbox: new UntypedFormControl('', [
+      notEmptyValidator(),
+      Validators.maxLength(4000),
+    ]),
+    personId: new UntypedFormControl('', [
+      orcidValidator(),
+      Validators.maxLength(19),
+    ]),
+  });
+
   constructor(
     private backendService: BackendService,
     public dialog: MatDialog,
@@ -73,6 +94,14 @@ export class PeopleComponent implements OnInit, OnDestroy {
     this.subscriptions.push(searchSubscription);
   }
 
+  mbox(): UntypedFormControl {
+    return this.form.controls.mbox as UntypedFormControl;
+  }
+
+  identifier(): UntypedFormControl {
+    return this.form.controls.personId as UntypedFormControl;
+  }
+
   onServiceConfigChange(serviceConfigType: ServiceConfig) {
     this.serviceConfigType = serviceConfigType;
     this.searchTerms.next(this.personSearch.currentSearchTerm);
@@ -91,6 +120,46 @@ export class PeopleComponent implements OnInit, OnDestroy {
     this.contributorToAdd.emit(contributor);
   }
 
+  triggerUpdateContributorDetails(idx: number) {
+    if (this.currentUpdateContributorIdx === idx) {
+      this.currentUpdateContributorIdx = -1;
+    } else {
+      this.currentUpdateContributorIdx = idx;
+      this.form.patchValue({
+        mbox: this.contributors.at(idx).value.mbox,
+        personId: this.contributors.at(idx).value.personId.identifier,
+      });
+    }
+  }
+
+  cancelUpdateContributorDetails() {
+    this.currentUpdateContributorIdx = -1;
+    this.form.reset();
+  }
+
+  updateContributorDetails(idx: number) {
+    if (this.form.invalid) {
+      return;
+    }
+
+    const newContributor = {
+      ...this.contributors.at(idx).value,
+      mbox: this.form.value.mbox,
+      personId: {
+        identifier: this.form.value.personId,
+        type: IdentifierType.ORCID,
+      },
+    };
+
+    this.contributorToUpdate.emit({
+      idx: idx,
+      contributor: newContributor,
+    });
+
+    this.currentUpdateContributorIdx = -1;
+    this.form.reset();
+  }
+
   removeContributor(index: number): void {
     const contributor = (
       this.dmpForm.controls.contributors as UntypedFormArray
@@ -98,6 +167,8 @@ export class PeopleComponent implements OnInit, OnDestroy {
     const datasets = this.getDatasetsForContributor(contributor);
     if (!datasets.length) {
       this.contributorToRemove.emit(index);
+      this.currentUpdateContributorIdx = -1;
+      this.form.reset();
     } else {
       const dialogRef = this.dialog.open(ConfirmDeletionDialogComponent, {
         data: datasets,
@@ -105,6 +176,8 @@ export class PeopleComponent implements OnInit, OnDestroy {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.contributorToRemove.emit(index);
+          this.currentUpdateContributorIdx = -1;
+          this.form.reset();
         }
       });
     }

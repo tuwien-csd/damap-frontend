@@ -324,6 +324,14 @@ export class FormService {
     (this.form.get('contributors') as UntypedFormArray).removeAt(index);
   }
 
+  public upadteContributorOfForm(index: number, contributor: Contributor) {
+    const contributor_ = (this.form.get('contributors') as UntypedFormArray).at(
+      index,
+    );
+
+    contributor_.patchValue(contributor);
+  }
+
   public addDatasetToForm(dataset: Dataset) {
     dataset.startDate = this.getStartDate();
 

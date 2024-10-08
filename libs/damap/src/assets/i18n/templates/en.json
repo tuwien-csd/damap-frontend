@@ -42,7 +42,10 @@
         "contact": {
           "person": "Contact person",
           "add": "Set as contact",
-          "remove": "Remove as contact"
+          "remove": "Remove as contact",
+          "edit": "Edit contact person",
+          "update": "Update",
+          "cancel": "Cancel"
         },
         "manual.input": {
           "show": "Add contributor manually",
