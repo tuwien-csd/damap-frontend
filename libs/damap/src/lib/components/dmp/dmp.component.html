@@ -32,13 +32,6 @@
         </ng-container>
       </mat-step>
       <mat-step label="{{ 'dmp.steps.documentation.label' | translate }}">
-        <ng-container *ngIf="selectedStep === 3">
-          <div class="example-button-row">
-            <button mat-flat-button disabled>
-              {{ "dmp.steps.documentation.instruction" | translate }}
-            </button>
-          </div>
-        </ng-container>
       </mat-step>
       <mat-step label="{{ 'dmp.steps.storage.label' | translate }}">
         <ng-container *ngIf="selectedStep === 4">
@@ -56,13 +49,6 @@
         </ng-container>
       </mat-step>
       <mat-step label="{{ 'dmp.steps.licensing.label' | translate }}">
-        <ng-container *ngIf="selectedStep === 6">
-          <div class="example-button-row">
-            <button mat-flat-button disabled>
-              {{ "dmp.steps.licensing.instruction" | translate }}
-            </button>
-          </div>
-        </ng-container>
       </mat-step>
       <mat-step label="{{ 'dmp.steps.repositories.label' | translate }}">
         <ng-container *ngIf="selectedStep === 7">
@@ -72,23 +58,8 @@
         </ng-container>
       </mat-step>
       <mat-step label="{{ 'dmp.steps.data.reuse.label' | translate }}">
-        <ng-container *ngIf="selectedStep === 8">
-          <div class="example-button-row">
-            <button mat-flat-button disabled>
-              {{ "dmp.steps.data.reuse.instruction" | translate }}
-            </button>
-          </div>
-        </ng-container>
       </mat-step>
-      <mat-step label="{{ 'dmp.steps.costs.label' | translate }}">
-        <ng-container *ngIf="selectedStep === 9">
-          <div class="example-button-row">
-            <button mat-flat-button disabled>
-              {{ "dmp.steps.costs.instruction" | translate }}
-            </button>
-          </div>
-        </ng-container>
-      </mat-step>
+      <mat-step label="{{ 'dmp.steps.costs.label' | translate }}"> </mat-step>
       <mat-step label="{{ 'dmp.steps.end.label' | translate }}"> </mat-step>
     </mat-vertical-stepper>
   </div>

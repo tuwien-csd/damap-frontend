@@ -19,8 +19,8 @@
         <mat-card-title>{{ element.title }}</mat-card-title>
       </mat-card-header>
       <ng-container *ngIf="element.url">
-        <mat-card-content
-          ><a href="{{ element.url }}" target="_blank" rel="noopener">{{
+        <mat-card-content>
+          <a href="{{ element.url }}" target="_blank" rel="noopener">{{
             "dmp.steps.storage.link" | translate
           }}</a>
         </mat-card-content>
@@ -31,7 +31,8 @@
     <ng-container formArrayName="storage">
       <mat-card
         appearance="raised"
-        *ngFor="let item of storageStep?.controls; let i = index">
+        *ngFor="let item of storageStep?.controls; let i = index"
+        class="selected-storage-card">
         <mat-card-header>
           <mat-card-title-group>
             <mat-card-title>{{ item.value.title }}</mat-card-title>

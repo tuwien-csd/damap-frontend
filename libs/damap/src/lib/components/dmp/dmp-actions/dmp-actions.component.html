@@ -1,5 +1,45 @@
-<mat-progress-bar mode="indeterminate" *ngIf="savingDmp"></mat-progress-bar>
-<div class="actions-bar">
+<mat-accordion class="mobile-accordion">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ "Actions" | translate }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div id="save-dmp">
+      <button
+        class="action-button"
+        mat-button
+        [routerLink]="'/plans'"
+        [disabled]="!formChanged"
+        routerLinkActive="active">
+        {{ "button.discard" | translate }}
+      </button>
+      <button
+        class="action-button button-color-primary"
+        mat-raised-button
+        (click)="saveDmp()"
+        [disabled]="dmpForm.invalid || !this.formChanged || this.savingDmp">
+        {{ "button.save" | translate }}
+      </button>
+      <button
+        class="action-button button-color-primary"
+        mat-raised-button
+        (click)="saveDmpVersion()"
+        [disabled]="dmpForm.invalid || this.savingDmp">
+        {{ "button.version" | translate }}
+      </button>
+      <button
+        class="action-button button-color-primary"
+        mat-raised-button
+        (click)="exportDmpTemplate()"
+        [disabled]="dmpForm.invalid || this.savingDmp">
+        {{ "button.export" | translate }}
+      </button>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div class="actions-bar desktop-actions">
   <app-save-status [saved]="!formChanged"></app-save-status>
   <div id="save-dmp">
     <button

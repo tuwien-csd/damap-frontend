@@ -14,6 +14,7 @@ import { HttpBackend } from '@angular/common/http';
 import { InfoCardComponent } from '../../widgets/info-card/info-card.component';
 import { LegalEthicalAspectsModule } from './legal-ethical-aspects/legal-ethical-aspects.module';
 import { LicensesModule } from './licenses/licenses.module';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import { NgModule } from '@angular/core';
@@ -46,6 +47,7 @@ export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
     FormsModule,
     ToggleButtonsModule,
     ProjectModule,
+    MatButtonToggleModule,
     TranslateModule.forChild({
       defaultLanguage: 'en',
       loader: {

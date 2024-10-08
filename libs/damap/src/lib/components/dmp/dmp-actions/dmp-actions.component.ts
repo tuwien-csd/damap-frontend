@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { filter, Observable, Subject, Subscription, take } from 'rxjs';
+import { Observable, Subject, Subscription, filter, take } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import {
   createDmp,
@@ -9,18 +9,18 @@ import {
   saveDmpVersion,
   updateDmp,
 } from '../../../store/actions/dmp.actions';
+import {
+  selectForm,
+  selectFormChanged,
+} from '../../../store/selectors/form.selectors';
 
 import { AppState } from '../../../store/states/app.state';
 import { ETemplateType } from '../../../domain/enum/export-template-type.enum';
 import { ExportWarningDialogComponent } from '../../../widgets/export-warning-dialog/export-warning-dialog.component';
 import { FormGroup } from '@angular/forms';
 import { FormService } from '../../../services/form.service';
-import { selectDmpSaving } from '../../../store/selectors/dmp.selectors';
-import {
-  selectForm,
-  selectFormChanged,
-} from '../../../store/selectors/form.selectors';
 import { Location } from '@angular/common';
+import { selectDmpSaving } from '../../../store/selectors/dmp.selectors';
 
 @Component({
   selector: 'app-actions',

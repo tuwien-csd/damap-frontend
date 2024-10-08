@@ -1,22 +1,23 @@
+import * as layoutTemplate from '../../../assets/i18n/layout/en.json';
+
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  OnDestroy,
   OnInit,
   ViewChild,
-  OnDestroy,
 } from '@angular/core';
+import { BehaviorSubject, Subscription, filter } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 
 import { AuthService } from '@damap/core';
 import { ConfigService } from '../../services/config.service';
+import { DmpComponent } from '../../../../../../libs/damap/src/lib/components/dmp/dmp.component'; // eslint-disable-line
 import { MatSidenav } from '@angular/material/sidenav';
 import { TranslateService } from '@ngx-translate/core';
 import pkg from '../../../../../../package.json'; // eslint-disable-line
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { DmpComponent } from '../../../../../../libs/damap/src/lib/components/dmp/dmp.component'; // eslint-disable-line
-import { BehaviorSubject, filter, Subscription } from 'rxjs';
-import * as layoutTemplate from '../../../assets/i18n/layout/en.json';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -61,11 +62,15 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     const browserLang = this.translate.getBrowserLang();
     this.translate.use(browserLang?.match(/en|de/) ? browserLang : 'en');
     this.lang = this.translate.currentLang.toUpperCase();
-    this.observer.observe([Breakpoints.Handset]).subscribe(result => {
-      this.isSmallScreen = result.matches;
-      this.checkScreenSize();
-      this.handleRouteChange();
-    });
+    this.observer
+      .observe([Breakpoints.Handset, Breakpoints.TabletLandscape])
+      .subscribe(result => {
+        const breakpoints = result.breakpoints;
+        this.isCollapsed = breakpoints[Breakpoints.TabletLandscape];
+        this.isSmallScreen = breakpoints[Breakpoints.Handset];
+        this.checkScreenSize();
+        this.handleRouteChange();
+      });
   }
 
   ngAfterViewInit(): void {

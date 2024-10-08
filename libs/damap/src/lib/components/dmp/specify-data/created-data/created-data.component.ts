@@ -6,17 +6,18 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs';
+
 import { AbstractBaseDataComponent } from '../abstract-base-data.component';
+import { Config } from '../../../../domain/config';
 import { DatasetDialogComponent } from '../dataset-dialog/dataset-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Config } from '../../../../domain/config';
-import { Observable, Subscription } from 'rxjs';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-created-data',
   templateUrl: './created-data.component.html',
-  styleUrls: [],
+  styleUrls: ['./created-data.component.css'],
 })
 export class CreatedDataComponent
   extends AbstractBaseDataComponent
