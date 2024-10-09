@@ -1,19 +1,84 @@
-.dmp-actions {
-  position: -webkit-sticky;
-  position: sticky;
-  bottom: 0;
-  z-index: 10;
-}
-
-:host {
+.dmp-container {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin: 20px;
 }
 
-.intro-step {
-  margin-top: 10px;
+.instructions-container {
+  flex: 1;
+  max-width: 300px;
+  padding: 20px;
+}
+
+.detailed-view-container {
+  flex: 2;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .verticalStepper {
-  margin: 20px;
+  width: 100%;
+}
+
+::ng-deep .mat-vertical-content {
+  display: flex;
+  padding: 20px !important;
+}
+
+@media (max-width: 1300px) {
+  .dmp-container {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 960px) {
+  .dmp-container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .instructions-container {
+    max-width: none;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .detailed-view-container {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .verticalStepper {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .dmp-container {
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin: 5px;
+  }
+
+  .instructions-container,
+  .detailed-view-container {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .verticalStepper {
+    width: 100%;
+  }
+
+  ::ng-deep .mat-vertical-content {
+    padding: 5px !important;
+    flex-direction: column;
+  }
 }

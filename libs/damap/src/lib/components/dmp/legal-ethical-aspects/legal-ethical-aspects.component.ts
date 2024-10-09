@@ -4,9 +4,10 @@ import {
   UntypedFormControl,
   UntypedFormGroup,
 } from '@angular/forms';
+
+import { Agreement } from '../../../domain/enum/agreement.enum';
 import { ComplianceType } from '../../../domain/enum/compliance-type.enum';
 import { SecurityMeasure } from '../../../domain/enum/security-measure.enum';
-import { Agreement } from '../../../domain/enum/agreement.enum';
 
 @Component({
   selector: 'app-dmp-legal-ethical-aspects',
@@ -21,6 +22,8 @@ export class LegalEthicalAspectsComponent {
   translateAgreementPrefixEnum = 'enum.agreement.';
   translateCompliancePrefixEnum = 'enum.compliance.';
   translateSecurityPrefixEnum = 'enum.securitymeasure.';
+
+  selectedView: 'primaryView' | 'secondaryView' = 'primaryView';
 
   optionsLinksEthics: string[] = [
     'Guidelines on Safeguarding Good Scientific Practice',
@@ -97,5 +100,9 @@ export class LegalEthicalAspectsComponent {
     return this.legalEthicalStep.controls.legalRestrictionsDocuments.value?.includes(
       Agreement.OTHER,
     );
+  }
+
+  onViewChange(view: 'primaryView' | 'secondaryView'): void {
+    this.selectedView = view;
   }
 }

@@ -1,5 +1,7 @@
 .form-row {
   display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .input-60 {
@@ -15,4 +17,8 @@
   .input-fill {
     flex: 1;
   }
+}
+
+.manual-project-input-card {
+  margin: 20px 5px;
 }

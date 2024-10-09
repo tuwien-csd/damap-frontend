@@ -11,8 +11,10 @@ import { DmpComponent } from './dmp.component';
 import { DocDataQualityModule } from './doc-data-quality/doc-data-quality.module';
 import { FormsModule } from '@angular/forms';
 import { HttpBackend } from '@angular/common/http';
+import { InfoCardComponent } from '../../widgets/info-card/info-card.component';
 import { LegalEthicalAspectsModule } from './legal-ethical-aspects/legal-ethical-aspects.module';
 import { LicensesModule } from './licenses/licenses.module';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import { NgModule } from '@angular/core';
@@ -23,8 +25,8 @@ import { ReuseModule } from './reuse/reuse.module';
 import { RouterModule } from '@angular/router';
 import { SpecifyDataModule } from './specify-data/specify-data.module';
 import { SummaryModule } from './summary/summary.module';
+import { ToggleButtonsModule } from '../../widgets/toggle-buttons/toggle-buttons.module';
 import { VersionModule } from '../version/version.module';
-import { InfoCardComponent } from '../../widgets/info-card/info-card.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
@@ -43,6 +45,9 @@ export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
     CommonModule,
     RouterModule.forChild(DMP_ROUTES),
     FormsModule,
+    ToggleButtonsModule,
+    ProjectModule,
+    MatButtonToggleModule,
     TranslateModule.forChild({
       defaultLanguage: 'en',
       loader: {
@@ -56,7 +61,6 @@ export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
     VersionModule,
     AccessComponent,
     // Steps
-    ProjectModule,
     PeopleModule,
     SpecifyDataModule,
     DocDataQualityModule,

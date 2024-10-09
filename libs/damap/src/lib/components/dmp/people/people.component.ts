@@ -72,6 +72,8 @@ export class PeopleComponent implements OnInit, OnDestroy {
     ]),
   });
 
+  selectedView: 'primaryView' | 'secondaryView' = 'primaryView';
+
   constructor(
     private backendService: BackendService,
     public dialog: MatDialog,
@@ -194,6 +196,10 @@ export class PeopleComponent implements OnInit, OnDestroy {
   private getDatasetsForContributor(contributor: Contributor): Dataset[] {
     const datasets = this.dmpForm.controls.datasets.value;
     return datasets.filter(item => item.deletionPerson?.id === contributor?.id);
+  }
+
+  onViewChange(view: 'primaryView' | 'secondaryView'): void {
+    this.selectedView = view;
   }
 }
 

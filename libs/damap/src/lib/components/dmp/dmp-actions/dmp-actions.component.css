@@ -1,3 +1,11 @@
+.mobile-accordion {
+  display: none;
+}
+
+.desktop-actions {
+  display: flex;
+}
+
 #save-dmp {
   position: relative;
   float: right;
@@ -11,6 +19,9 @@
 }
 
 .actions-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
   background-color: var(--surface-container-high);
   display: flex;
   justify-content: space-between;
@@ -26,4 +37,33 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@media (max-width: 960px) {
+  .desktop-actions {
+    display: none;
+  }
+
+  .mobile-panel {
+    background-color: var(--surface-container-high);
+  }
+
+  .mobile-accordion {
+    display: block;
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    background-color: var(--surface-container-high);
+    border-radius: 16px;
+  }
+
+  #save-dmp {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #save-dmp > button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
 }

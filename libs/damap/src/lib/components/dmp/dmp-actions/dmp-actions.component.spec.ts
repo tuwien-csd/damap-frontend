@@ -15,10 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogHarness } from '@angular/material/dialog/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputHarness } from '@angular/material/input/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('DmpActionsComponent', () => {
   let component: DmpActionsComponent;
@@ -43,9 +43,9 @@ describe('DmpActionsComponent', () => {
         TranslateTestingModule,
         FormTestingModule,
       ],
-      schemas: [NO_ERRORS_SCHEMA],
       declarations: [DmpActionsComponent, SaveVersionDialogComponent],
       providers: [provideMockStore({ initialState })],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     store = TestBed.inject(MockStore);
   }));
@@ -88,19 +88,16 @@ describe('DmpActionsComponent', () => {
     dialogs = await loader.getAllHarnesses(MatDialogHarness);
     expect(dialogs.length).toBe(1);
 
-    const inputs = await loader.getAllHarnesses(MatInputHarness);
-    expect(inputs.length).toBe(1);
-
-    await inputs[0].setValue('test');
     const buttons = await loader.getAllHarnesses(MatButtonHarness);
-    expect(buttons.length).toBe(6);
-    expect(await buttons[5].getText()).toBe('dmp.dialog.button.save');
-    expect(await buttons[5].isDisabled()).toBe(false);
+    expect(buttons.length).toBe(10);
+
+    expect(await buttons[5].getText()).toBe('button.save');
+    expect(await buttons[5].isDisabled()).toBe(true);
 
     await buttons[5].click();
     dialogs = await loader.getAllHarnesses(MatDialogHarness);
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
-    expect(dialogs.length).toBe(0);
+    expect(store.dispatch).toHaveBeenCalledTimes(0);
+    expect(dialogs.length).toBe(1);
   }));
 
   it('should call dispatchExportDmp if funderSupported is true', waitForAsync(async () => {

@@ -1,38 +1,49 @@
-:host {
-  margin: 1rem;
-}
-
 .tu-storage {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 
 .storage-grid {
-  min-width: 300px;
-  width: 30%;
-  max-height: 400px;
-  overflow-y: scroll;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  overflow: hidden;
+}
+
+.storage-card,
+.selected-storage-card {
+  width: 100%;
 }
 
 .storage-selected {
-  flex-grow: 100;
-}
-
-.storage-grid > mat-card > mat-card-header {
-  cursor: pointer;
-}
-
-.storage-card:hover {
-  background-color: #f5f5f5;
-}
-
-.storage-card-top {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.mat-mdc-card-actions {
-  margin: 0;
-  padding: 0;
+.full-width {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .storage-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .storage-card,
+  .selected-storage-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .storage-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .storage-card,
+  .selected-storage-card {
+    width: 100%;
+  }
 }

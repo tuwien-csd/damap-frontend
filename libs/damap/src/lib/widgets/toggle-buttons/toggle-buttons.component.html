@@ -1,0 +1,17 @@
+<div class="button-row">
+  <section class="button-section">
+    <mat-button-toggle-group
+      class="toggle-button"
+      [(ngModel)]="selectedView"
+      hideSingleSelectionIndicator
+      (change)="emitSelection($event.value)"
+      aria-label="View Selection">
+      <mat-button-toggle value="primaryView">
+        {{ primaryLabel | translate }}
+      </mat-button-toggle>
+      <mat-button-toggle value="secondaryView">
+        {{ secondaryLabel | translate }}
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </section>
+</div>

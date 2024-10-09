@@ -19,6 +19,7 @@
   width: 30%;
   max-height: 400px;
   overflow-y: scroll;
+  overflow: hidden;
 }
 
 .storage-card-container {

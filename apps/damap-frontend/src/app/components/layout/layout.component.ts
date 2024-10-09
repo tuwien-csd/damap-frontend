@@ -1,22 +1,23 @@
+import * as layoutTemplate from '../../../assets/i18n/layout/en.json';
+
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  OnDestroy,
   OnInit,
   ViewChild,
-  OnDestroy,
 } from '@angular/core';
+import { BehaviorSubject, Subscription, filter } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 
 import { AuthService } from '@damap/core';
 import { ConfigService } from '../../services/config.service';
+import { DmpComponent } from '../../../../../../libs/damap/src/lib/components/dmp/dmp.component'; // eslint-disable-line
 import { MatSidenav } from '@angular/material/sidenav';
 import { TranslateService } from '@ngx-translate/core';
 import pkg from '../../../../../../package.json'; // eslint-disable-line
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { DmpComponent } from '../../../../../../libs/damap/src/lib/components/dmp/dmp.component'; // eslint-disable-line
-import { BehaviorSubject, filter, Subscription } from 'rxjs';
-import * as layoutTemplate from '../../../assets/i18n/layout/en.json';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

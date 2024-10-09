@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { BackendService } from '../../../services/backend.service';
-import { RouterTestingModule } from '@angular/router/testing';
+import { RouterModule } from '@angular/router';
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
 import { VersionViewComponent } from './version-view.component';
 
@@ -17,7 +17,7 @@ describe('VersionViewComponent', () => {
     ]);
     TestBed.configureTestingModule({
       declarations: [VersionViewComponent],
-      imports: [RouterTestingModule, TranslateTestingModule],
+      imports: [RouterModule.forRoot([]), TranslateTestingModule], // Updated import
       providers: [{ provide: BackendService, useValue: backendSpy }],
     }).compileComponents();
   }));

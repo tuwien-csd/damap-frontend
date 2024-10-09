@@ -1,6 +1,10 @@
 <!-- Selected project -->
 <div *ngIf="projectStep?.value">
-  <p>{{ "dmp.steps.project.selected" | translate }}:</p>
+  <mat-label
+    class="label-title mat-title-large"
+    id="example-radio-group-label"
+    >{{ "dmp.steps.project.selected" | translate }}</mat-label
+  >
   <mat-card appearance="raised" class="card-selected">
     <mat-card-header>
       <mat-card-title>
@@ -27,26 +31,16 @@
   </mat-card>
 </div>
 
-<mat-tab-group #tabGroup mat-align-tabs="start" animationDuration="0ms">
-  <!-- Project list -->
-  <mat-tab label="{{ 'dmp.steps.project.list' | translate }}">
-    <app-project-list
-      [selectedProject]="projectStep?.value"
-      (projectToSet)="changeProject($event)">
-    </app-project-list>
-    <button
-      class="button-position button-color-primary"
-      mat-raised-button
-      (click)="changeTab(1)">
-      {{ "dmp.steps.project.manual.input" | translate }}
-    </button>
-  </mat-tab>
+<div *ngIf="selectedView === 'primaryView'">
+  <app-project-list
+    [selectedProject]="projectStep?.value"
+    (projectToSet)="changeProject($event)">
+  </app-project-list>
+</div>
 
-  <!-- Manual project input -->
-  <mat-tab label="{{ 'dmp.steps.project.manual.input' | translate }}">
-    <app-manual-project-input
-      [project]="projectStep?.value"
-      (projectUpdate)="changeProject($event)">
-    </app-manual-project-input>
-  </mat-tab>
-</mat-tab-group>
+<div *ngIf="selectedView === 'secondaryView'">
+  <app-manual-project-input
+    [project]="projectStep?.value"
+    (projectUpdate)="changeProject($event)">
+  </app-manual-project-input>
+</div>
