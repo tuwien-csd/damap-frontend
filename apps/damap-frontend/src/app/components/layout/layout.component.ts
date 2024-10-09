@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectionStrategy,
   Component,
   OnInit,
   ViewChild,
@@ -19,7 +18,6 @@ import { BehaviorSubject, filter, Subscription } from 'rxjs';
 import * as layoutTemplate from '../../../assets/i18n/layout/en.json';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],

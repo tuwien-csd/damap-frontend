@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { deleteDmp, loadDmps } from '../../store/actions/dmp.actions';
 import {
@@ -20,7 +20,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-plan',
   templateUrl: './plans.component.html',
   styleUrls: ['./plans.component.css'],
