@@ -97,6 +97,7 @@ export class AdminComponent implements OnInit {
   selectStorage(storageId: number) {
     if (storageId === null) {
       this.resetStorageSelection();
+      return;
     }
     this.backendService.getInternalStorage(storageId).subscribe(storage => {
       this.internalStorages = this.internalStorages.map(s =>
