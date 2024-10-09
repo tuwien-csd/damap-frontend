@@ -44,12 +44,17 @@
     display: none;
   }
 
+  .mobile-panel {
+    background-color: var(--surface-container-high);
+  }
+
   .mobile-accordion {
     display: block;
     position: sticky;
     bottom: 0;
     z-index: 10;
     background-color: var(--surface-container-high);
+    border-radius: 16px;
   }
 
   #save-dmp {

@@ -472,6 +472,7 @@
     }
   },
   "button": {
+    "actions": "Actions",
     "save": "Save changes",
     "discard": "Discard changes",
     "version": "Save new version",
