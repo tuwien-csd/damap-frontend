@@ -388,7 +388,7 @@ export class BackendService {
     id: number,
   ): Observable<InternalStorageTranslation[]> {
     return this.http.get<InternalStorageTranslation[]>(
-      `${this.backendUrl}storages/${id}/translations/all`,
+      `${this.backendUrl}storages/${id}/translations/`,
     );
   }
 
@@ -414,7 +414,7 @@ export class BackendService {
     id: number,
   ): Observable<InternalStorageTranslation[]> {
     return this.http.get<InternalStorageTranslation[]>(
-      `${this.backendUrl}storages/${id}/translations/all`,
+      `${this.backendUrl}storages/${id}/translations/`,
     );
   }
 
