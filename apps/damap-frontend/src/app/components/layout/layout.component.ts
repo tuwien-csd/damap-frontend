@@ -7,14 +7,14 @@ import {
 } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
-import { AuthService } from '@damap/core';
+import { AuthService, DashboardComponent } from '@damap/core';
 import { ConfigService } from '../../services/config.service';
 import { MatSidenav } from '@angular/material/sidenav';
 import { TranslateService } from '@ngx-translate/core';
 import pkg from '../../../../../../package.json'; // eslint-disable-line
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { DmpComponent } from '../../../../../../libs/damap/src/lib/components/dmp/dmp.component'; // eslint-disable-line
-import { BehaviorSubject, filter, Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import * as layoutTemplate from '../../../assets/i18n/layout/en.json';
 
 @Component({
@@ -24,7 +24,7 @@ import * as layoutTemplate from '../../../assets/i18n/layout/en.json';
 })
 export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('sidenav', { static: true }) sidenav!: MatSidenav;
-  @ViewChild('outlet') outlet: RouterOutlet;
+  @ViewChild('outlet') outlet: RouterOutlet | null;
 
   private routerEventsSubscription: Subscription;
   public title = 'Data Management Plan';
@@ -35,8 +35,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   public isCollapsed: boolean = false;
   public templateDataLayout = layoutTemplate;
   public icon = 'info';
-  public infoString: BehaviorSubject<any> | null;
-  private dataInfoService: Subscription | null = null;
+  private dataInfoService: Subscription | null;
   public greeting: string;
   public instructions: string;
   public summaryLine: string;
@@ -62,8 +61,9 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     this.observer.observe([Breakpoints.Handset]).subscribe(result => {
       this.isSmallScreen = result.matches;
       this.checkScreenSize();
-      this.handleRouteChange();
     });
+
+    this.handleRouteChange();
   }
 
   ngAfterViewInit(): void {
@@ -72,14 +72,12 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(() => {
         this.handleRouteChange();
       });
-    this.handleRouteChange();
     this.checkScreenSize();
   }
 
   ngOnDestroy(): void {
-    if (this.routerEventsSubscription) {
-      this.routerEventsSubscription.unsubscribe();
-    }
+    this.dataInfoService?.unsubscribe();
+    this.routerEventsSubscription?.unsubscribe();
   }
 
   private checkScreenSize(): void {
@@ -99,29 +97,45 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     this.isCollapsed = !this.isCollapsed;
   }
 
+  /**
+   * Handle UI updates when route changes. Update card content and listen to
+   * step changes of the DMP component.
+   * @return {void}
+   */
   private handleRouteChange(): void {
-    if (this.outlet && this.outlet.isActivated) {
-      const componentInstance = this.outlet.component;
-      if (componentInstance instanceof DmpComponent) {
-        const dmpComponent = componentInstance as DmpComponent;
-        this.infoString = dmpComponent.instructionStep$;
-        this.dataInfoService = dmpComponent.instructionStep$.subscribe(
-          value => {
-            this.greeting = this.replaceFirstname(this.name, value.greeting);
-            this.summaryLine = value.summaryLine;
-          },
-        );
-      } else {
-        this.greeting =
-          this.templateDataLayout.layout.menu.greeting +
-          ' ' +
-          this.name +
-          ' ' +
-          this.templateDataLayout.layout.menu.titleDashboard;
-        this.summaryLine = 'layout.menu.section';
-      }
+    // unsubscribe, if subscribed before. will subscribe again when redirecting to DMP component
+    this.dataInfoService?.unsubscribe();
+
+    const componentInstance =
+      this.outlet == null || !this.outlet.isActivated // outlet not yet initialized or not activated
+        ? null
+        : this.outlet.component;
+
+    if (componentInstance instanceof DmpComponent) {
+      // DMP component. Should listen to step changes and update text
+      const dmpComponent = componentInstance as DmpComponent;
+      this.dataInfoService = dmpComponent.instructionStep$.subscribe(value => {
+        this.greeting = this.replaceFirstname(this.name, value.greeting);
+        this.summaryLine = value.summaryLine;
+      });
+    } else if (
+      componentInstance instanceof DashboardComponent ||
+      componentInstance == null
+    ) {
+      // Dashboard or router not yet initialized
+      this.greeting =
+        this.templateDataLayout.layout.menu.greeting +
+        ' ' +
+        this.name +
+        ' ' +
+        this.templateDataLayout.layout.menu.titleDashboard;
+      this.summaryLine = 'layout.menu.section';
     }
   }
+
+  // TODO:  Update translation files to accept a parameter for strings where `Firstname` is used (https://github.com/ngx-translate/core?tab=readme-ov-file#4-define-the-translations)
+  //        Provide name to translate pipe or directive.
+  //        Remove this method.
   replaceFirstname(name: string, str: string): string {
     const regex = new RegExp(`\\b${'Firstname'}\\b`, 'g');
     if (regex.test(str)) {
