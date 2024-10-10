@@ -11,6 +11,7 @@ export class FlipCardComponent {
   @Input() frontContent: string;
   @Input() backContent: string;
   @Input() navigateRoute: string;
+  @Input() iconCard: string;
 
   constructor(private router: Router) {}
 
