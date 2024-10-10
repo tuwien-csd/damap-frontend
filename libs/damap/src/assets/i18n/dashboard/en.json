@@ -18,26 +18,26 @@
       }
     },
     "tool": {
-      "heading": "DAMAP",
+      "heading": "About DAMAP",
       "description": "DAMAP guides you through creating a DMP using pre-filled information and customizable templates. It aligns with Science Europe guidelines and national funder requirements, saving you time and effort.",
       "bulletpoints": {
         "dmp": {
-          "text": "guides you step by step through the different sections of a DMP following the ",
+          "text": "Guides you step by step through the different sections of a DMP following the ",
           "sepg": {
             "text": "Science Europe Practical Guide",
             "link": "https://www.scienceeurope.org/our-resources/practical-guide-to-the-international-alignment-of-research-data-management"
           }
         },
-        "document": "exports a pre-filled DMP as a document that you can customize and use for submission to European and national funders",
-        "supports": "delivers DMPs for FWF projects in the funder-specific format",
+        "document": "Exports a pre-filled DMP as a document that you can customize and use for submission to European and national funders",
+        "supports": "Delivers DMPs for FWF projects in the funder-specific format",
         "benefits": {
-          "text": "saves you work by",
-          "one": "pre-filling content with detailed information from your CRIS application and other systems",
-          "two": "providing wizards, guidance, and item lists to choose from",
-          "three": "suggesting answers that you can either comply with or adjust to your needs"
+          "text": "Saves you work by",
+          "one": "Pre-filling content with detailed information from your CRIS application and other systems",
+          "two": "Providing wizards, guidance, and item lists to choose from",
+          "three": "Suggesting answers that you can either comply with or adjust to your needs"
         },
         "madmp": {
-          "prefix": "is compatible with the",
+          "prefix": "Is compatible with the",
           "rda": {
             "text": "RDA recommendation on machine actionable DMPs",
             "link": "https://doi.org/10.15497/rda00039"

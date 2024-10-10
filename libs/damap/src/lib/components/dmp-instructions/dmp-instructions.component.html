@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="action-buttons">
+    <button
+      mat-raised-button
+      class="button-color-primary"
+      [routerLink]="'/dashboard'">
+      <mat-icon>Home</mat-icon>
+      {{ "Home" | translate }}
+    </button>
+  </div>
+
+  <mat-card class="full-height-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h2 translate class="card-title">dashboard.dmp.heading</h2>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="scrollable-content">
+      <p>
+        {{ "dashboard.dmp.text.prefix" | translate }}
+        <a [href]="'dashboard.dmp.text.dmp.link' | translate" target="_blank">
+          {{ "dashboard.dmp.text.dmp.text" | translate }}</a
+        >{{ "dashboard.dmp.text.middle" | translate }}
+        <a
+          [href]="'dashboard.dmp.text.fairprinciples.link' | translate"
+          target="_blank">
+          {{ "dashboard.dmp.text.fairprinciples.text" | translate }}</a
+        >{{ "dashboard.dmp.text.suffix" | translate }}
+      </p>
+
+      <mat-card-subtitle>
+        <h2 class="middle" translate>dashboard.instructions.heading</h2>
+      </mat-card-subtitle>
+
+      <ol class="icon-list">
+        <li translate>
+          <div class="icon-header-container">
+            <mat-icon class="list-icon material-icon-primary"
+              >list_alt</mat-icon
+            >
+            <h4 translate>dashboard.instructions.steps.heading</h4>
+          </div>
+        </li>
+        <p translate>dashboard.instructions.steps.body</p>
+
+        <li translate>
+          <div class="icon-header-container">
+            <mat-icon class="list-icon material-icon-primary"
+              >export_notes</mat-icon
+            >
+            <h4 translate>dashboard.instructions.export.heading</h4>
+          </div>
+        </li>
+        <p translate>dashboard.instructions.export.body</p>
+
+        <li translate>
+          <div class="icon-header-container">
+            <mat-icon class="list-icon material-icon-primary"
+              >edit_document</mat-icon
+            >
+            <h4 translate>dashboard.instructions.finalise.heading</h4>
+          </div>
+          <p translate>dashboard.instructions.finalise.body</p>
+        </li>
+
+        <li translate>
+          <div class="icon-header-container">
+            <mat-icon class="list-icon material-icon-primary"
+              >add_notes</mat-icon
+            >
+            <h4 translate>dashboard.instructions.update.heading</h4>
+          </div>
+          <p translate>dashboard.instructions.update.body</p>
+        </li>
+      </ol>
+    </mat-card-content>
+  </mat-card>
+</div>
