@@ -6,12 +6,14 @@
         <div class="flip-card-container">
           <app-flip-card
             [navigateRoute]="'/plans'"
+            iconCard="list_alt"
             frontContent="{{ 'plans.mydmps' | translate }}"
             backContent="{{ 'plans.myDmpsDescription' | translate }}">
           </app-flip-card>
 
           <app-flip-card
             [navigateRoute]="'/dmp'"
+            iconCard="add_circle"
             frontContent="{{
               'dashboard.instructions.create.heading' | translate
             }}"
@@ -28,15 +30,17 @@
       <mat-card-content>
         <div class="flip-card-container">
           <app-flip-card
-            [navigateRoute]="'/how-to-create'"
+            [navigateRoute]="'info/how-to-create'"
             frontContent="{{ 'dashboard.instructions.heading' | translate }}"
+            iconCard="contact_support"
             backContent="{{
               'dashboard.instructions.description' | translate
             }}">
           </app-flip-card>
 
           <app-flip-card
-            [navigateRoute]="'/damap'"
+            [navigateRoute]="'info/damap'"
+            iconCard="info"
             frontContent="{{ 'dashboard.tool.heading' | translate }}"
             backContent="{{ 'dashboard.tool.description' | translate }}">
           </app-flip-card>
