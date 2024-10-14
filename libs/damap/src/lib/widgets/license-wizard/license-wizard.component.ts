@@ -45,8 +45,13 @@ export class LicenseSelectorDialogComponent {
   matrix: string[] = []; // compatible software license codes
   options: LicenseDetails[][] = []; // compatible data licenses
   steps: Step[] = [QUESTION_TREE];
+  searchBox: string = '';
 
   constructor(public dialogRef: MatDialogRef<LicenseSelectorDialogComponent>) {}
+
+  searchChange(searchInput: string) {
+    this.searchBox = searchInput;
+  }
 
   setNextStep(
     currentIndex: number,
