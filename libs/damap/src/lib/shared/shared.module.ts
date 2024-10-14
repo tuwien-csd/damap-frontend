@@ -8,9 +8,14 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TooltipModule } from '../widgets/tooltip/tooltip.module';
+import { SearchFieldComponent } from './search-field/search-field.component';
 
 @NgModule({
-  declarations: [InputWrapperComponent, TextareaWrapperComponent],
+  declarations: [
+    InputWrapperComponent,
+    TextareaWrapperComponent,
+    SearchFieldComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -31,6 +36,7 @@ import { TooltipModule } from '../widgets/tooltip/tooltip.module';
     InputWrapperComponent,
     TextareaWrapperComponent,
     TooltipModule,
+    SearchFieldComponent,
 
     // Materials
     MatFormFieldModule,
