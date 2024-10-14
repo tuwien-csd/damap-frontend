@@ -52,7 +52,9 @@ export class StorageComponent implements OnInit {
   }
 
   get activeStorages() {
-    return this.internalStorages.filter(storage => storage.active);
+    return this.internalStorages.filter(
+      storage => storage.active && storage.translations.length > 0,
+    );
   }
 
   public getStorageTitle(storage: InternalStorage) {

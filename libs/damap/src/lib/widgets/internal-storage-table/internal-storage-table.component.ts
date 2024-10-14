@@ -18,6 +18,8 @@ import { BackendService } from '../../services/backend.service';
 import { FeedbackService } from '../../services/feedback.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InternalStorageDialogComponent } from '../../components/admin/internal-storage-dialog/internal-storage-dialog.component';
+import { DeleteStorageWarningDialogComponent } from './dialog/delete-storage-warning-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'damap-internal-storage-table',
@@ -31,6 +33,7 @@ export class InternalStorageTableComponent implements AfterViewInit, OnChanges {
     private backendService: BackendService,
     private feedbackService: FeedbackService,
     private dialog: MatDialog,
+    private translateService: TranslateService,
   ) {}
 
   @Input() internalStorages: InternalStorage[] = [];
@@ -74,16 +77,38 @@ export class InternalStorageTableComponent implements AfterViewInit, OnChanges {
   }
 
   deleteStorage(id: number) {
-    this.backendService.deleteInternalStorage(id).subscribe(
-      () => {
-        this.internalStorages = this.internalStorages.filter(s => s.id !== id);
-        this.dataSource.data = this.internalStorages;
-        this.editTranslations(null);
-      },
-      error => {
-        this.feedbackService.error(error.message);
-      },
-    );
+    this.dialog
+      .open(DeleteStorageWarningDialogComponent, {
+        data: { deleteType: 'storage' },
+      })
+      .afterClosed()
+      .subscribe({
+        next: response => {
+          if (response) {
+            this.backendService.deleteInternalStorage(id).subscribe(
+              () => {
+                this.internalStorages = this.internalStorages.filter(
+                  s => s.id !== id,
+                );
+                this.dataSource.data = this.internalStorages;
+                this.editTranslations(null);
+              },
+              error => {
+                if (error.status === 409) {
+                  this.feedbackService.error(
+                    this.translateService.instant(
+                      'http.error.storageErrors.stillInUse',
+                    ),
+                  );
+                  return;
+                } else {
+                  this.feedbackService.error(error.message);
+                }
+              },
+            );
+          }
+        },
+      });
   }
 
   editStorage(id: number) {

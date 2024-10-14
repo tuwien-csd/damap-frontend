@@ -45,8 +45,9 @@
           <mat-icon>edit</mat-icon>
           {{ "admin.table.action.edit" | translate }}
         </button>
+        <mat-divider></mat-divider>
         <button mat-menu-item (click)="deleteStorageTranslation(element.id)">
-          <mat-icon>delete</mat-icon>
+          <mat-icon style="color: var(--error-color)">delete</mat-icon>
           {{ "admin.table.action.delete" | translate }}
         </button>
       </mat-menu>

@@ -352,6 +352,10 @@ export class FormService {
   public addStorageToForm(storage: InternalStorage) {
     const storageFormGroup = this.createStorageFormGroup();
 
+    if (storage.translations.length === 0) {
+      return;
+    }
+
     const translation = storage.translations.find(
       t => t.languageCode === 'eng',
     );

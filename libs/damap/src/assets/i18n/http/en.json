@@ -31,6 +31,10 @@
         "delete": "Failed to delete DMP. "
       },
       "storages": "Failed to load storages. ",
+      "storageErrors": {
+        "stillInUse": "Storage is used in at least one DMP and therefore cannot be deleted.",
+        "lastTranslation": "The last translation for a given storage cannot be deleted."
+      },
       "versions": {
         "load": "Failed to load DMP versions. ",
         "save": "Failed to save DMP version. ",

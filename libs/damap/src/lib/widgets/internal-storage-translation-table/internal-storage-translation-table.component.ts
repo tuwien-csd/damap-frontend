@@ -20,6 +20,9 @@ import { FeedbackService } from '../../services/feedback.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InternalStorageDialogComponent } from '../../components/admin/internal-storage-dialog/internal-storage-dialog.component';
 import { InternalStorageTranslationDialogComponent } from '../../components/admin/internal-storage-translation-dialog/internal-storage-translation-dialog.component';
+import { DeleteWarningDialogComponent } from '../delete-warning-dialog/delete-warning-dialog.component';
+import { DeleteStorageTranslationWarningDialogComponent } from './dialog/delete-storage-translation-warning-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'damap-internal-storage-translation-table',
@@ -33,6 +36,7 @@ export class InternalStorageTranslationTableComponent
     private backendService: BackendService,
     private feedbackService: FeedbackService,
     private dialog: MatDialog,
+    private translateService: TranslateService,
   ) {}
 
   @Input() internalStorageTranslations: InternalStorageTranslation[] = [];
@@ -68,19 +72,40 @@ export class InternalStorageTranslationTableComponent
   }
 
   deleteStorageTranslation(id: number) {
-    const translation = this.internalStorageTranslations.find(t => t.id === id);
-    this.backendService
-      .deleteInternalStorageTranslation(translation.storageId, id)
-      .subscribe(
-        () => {
-          this.internalStorageTranslations =
-            this.internalStorageTranslations.filter(t => t.id !== id);
-          this.dataSource.data = this.internalStorageTranslations;
+    this.dialog
+      .open(DeleteStorageTranslationWarningDialogComponent)
+      .afterClosed()
+      .subscribe({
+        next: response => {
+          if (response) {
+            const translation = this.internalStorageTranslations.find(
+              t => t.id === id,
+            );
+            this.backendService
+              .deleteInternalStorageTranslation(translation.storageId, id)
+              .subscribe(
+                () => {
+                  this.internalStorageTranslations =
+                    this.internalStorageTranslations.filter(t => t.id !== id);
+                  this.dataSource.data = this.internalStorageTranslations;
+                },
+                error => {
+                  // Check if HTTP code 400, if yes, last translation cannot be deleted
+                  if (error.status === 400) {
+                    this.feedbackService.error(
+                      this.translateService.instant(
+                        'http.error.storageErrors.lastTranslation',
+                      ),
+                    );
+                    return;
+                  } else {
+                    this.feedbackService.error(error.message);
+                  }
+                },
+              );
+          }
         },
-        error => {
-          this.feedbackService.error(error.message);
-        },
-      );
+      });
   }
 
   editStorageTranslation(id: number) {

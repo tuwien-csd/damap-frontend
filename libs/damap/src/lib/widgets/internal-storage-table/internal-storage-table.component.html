@@ -45,17 +45,18 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="editTranslations(element.id)">
+          <mat-icon>language_us</mat-icon>
+          {{ "admin.table.action.translation" | translate }}
+        </button>
         <button mat-menu-item (click)="editStorage(element.id)">
           <mat-icon>edit</mat-icon>
           {{ "admin.table.action.edit" | translate }}
         </button>
+        <mat-divider></mat-divider>
         <button mat-menu-item (click)="deleteStorage(element.id)">
-          <mat-icon>delete</mat-icon>
+          <mat-icon style="color: var(--error-color)">delete</mat-icon>
           {{ "admin.table.action.delete" | translate }}
-        </button>
-        <button mat-menu-item (click)="editTranslations(element.id)">
-          <mat-icon>language_us</mat-icon>
-          {{ "admin.table.action.translation" | translate }}
         </button>
       </mat-menu>
     </td>
