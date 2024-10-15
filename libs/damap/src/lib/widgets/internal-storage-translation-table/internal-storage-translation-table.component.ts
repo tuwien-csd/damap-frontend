@@ -135,7 +135,9 @@ export class InternalStorageTranslationTableComponent
                   t.id === translation.id ? translation : t,
                 );
               this.dataSource.data = this.internalStorageTranslations;
-              this.feedbackService.success('http.success.storage.translations.edit');
+              this.feedbackService.success(
+                'http.success.storage.translations.edit',
+              );
             },
             error => {
               if (error.error.message) {

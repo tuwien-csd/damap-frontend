@@ -48,13 +48,12 @@
         "delete": "Failed to remove access. "
       }
     },
-    "success" : {
+    "success": {
       "storage": {
-        "translations" : {
-          "add" : "Storage translation created successfully.",
+        "translations": {
+          "add": "Storage translation created successfully.",
           "edit": "Storage translation updated successfully."
         }
-
       }
     }
   }
