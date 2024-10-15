@@ -84,6 +84,10 @@ export class InternalStorageDialogComponent {
   }
 
   isDisabled(): boolean {
-    return (this.mode == "add" &&  (this.storage.invalid || this.storageTranslation.invalid)) || (this.mode == "edit" && this.storage.invalid);
+    return (
+      (this.mode == 'add' &&
+        (this.storage.invalid || this.storageTranslation.invalid)) ||
+      (this.mode == 'edit' && this.storage.invalid)
+    );
   }
 }
