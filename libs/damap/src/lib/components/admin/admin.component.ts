@@ -84,6 +84,9 @@ export class AdminComponent implements OnInit {
                 )
                 .subscribe(data => {
                   this.internalStorageTranslations = data;
+                  this.feedbackService.success(
+                    'http.success.storage.translations.add'
+                  );
                 });
             },
             error => {

@@ -47,6 +47,15 @@
         "save": "Failed to update access. ",
         "delete": "Failed to remove access. "
       }
+    },
+    "success" : {
+      "storage": {
+        "translations" : {
+          "add" : "Storage translation created successfully.",
+          "edit": "Storage translation updated successfully."
+        }
+
+      }
     }
   }
 }
