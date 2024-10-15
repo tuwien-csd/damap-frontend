@@ -137,7 +137,11 @@ export class InternalStorageTranslationTableComponent
               this.dataSource.data = this.internalStorageTranslations;
             },
             error => {
-              this.feedbackService.error(error.message);
+              if (error.error.message) {
+                this.feedbackService.error(error.error.message);
+              } else {
+                this.feedbackService.error(error.message);
+              }
             },
           );
       }

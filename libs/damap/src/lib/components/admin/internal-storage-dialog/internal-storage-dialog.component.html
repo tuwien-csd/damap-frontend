@@ -86,7 +86,7 @@
     (click)="onDialogClose()"
     mat-raised-button
     class="button-color-primary"
-    [disabled]="storage.invalid || storageTranslation.invalid">
+    [disabled]="isDisabled()">
     <ng-container *ngIf="mode === 'edit'">{{
       "admin.dialog.internal-storage.button.update" | translate
     }}</ng-container>
