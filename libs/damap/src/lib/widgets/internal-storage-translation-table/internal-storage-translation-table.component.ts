@@ -140,7 +140,7 @@ export class InternalStorageTranslationTableComponent
               );
             },
             error => {
-              if (error.error.message) {
+              if (error.error?.message) {
                 this.feedbackService.error(error.error.message);
               } else {
                 this.feedbackService.error(error.message);
