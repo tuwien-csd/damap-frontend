@@ -12,7 +12,6 @@
     <mat-selection-list
       hideSingleSelectionIndicator
       [multiple]="false"
-      style="overflow: scroll"
       (selectionChange)="selectPerson($event)">
       <mat-list-option
         *ngFor="let person of result"
@@ -22,14 +21,20 @@
         <mat-card-content>
           <div class="mat-card-container">
             <div>
-              <div matListItemTitle>
+              <div matListItemTitle class="person-detail-content">
                 <strong> {{ person.firstName }} {{ person.lastName }} </strong>
               </div>
-              <div matListItemLine *ngIf="person.mbox">
+              <div
+                matListItemLine
+                *ngIf="person.mbox"
+                class="person-detail-content">
                 <mat-icon class="outline" inline="true">mail</mat-icon>
                 {{ person.mbox }}
               </div>
-              <div matListItemLine *ngIf="person.personId?.identifier">
+              <div
+                matListItemLine
+                *ngIf="person.personId?.identifier"
+                class="person-detail-content">
                 <mat-icon inline="true">fingerprint</mat-icon>
                 {{ person.personId?.type }}: {{ person.personId.identifier }}
               </div>
