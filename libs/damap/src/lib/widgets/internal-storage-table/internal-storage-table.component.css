@@ -1,0 +1,7 @@
+.mat-column-url,
+.mat-column-storageLocation,
+.mat-column-backupLocation {
+  max-width: 20vw;
+  word-wrap: break-word;
+  white-space: normal;
+}

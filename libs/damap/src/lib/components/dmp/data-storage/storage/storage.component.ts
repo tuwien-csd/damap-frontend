@@ -48,8 +48,19 @@ export class StorageComponent implements OnInit {
   }
 
   private getInternalStorages() {
-    if (this.internalStoragesLoaded !== LoadingState.LOADED) {
-      this.store.dispatch(loadInternalStorages());
-    }
+    this.store.dispatch(loadInternalStorages());
+  }
+
+  get activeStorages() {
+    return this.internalStorages.filter(
+      storage => storage.active && storage.translations.length > 0,
+    );
+  }
+
+  public getStorageTitle(storage: InternalStorage) {
+    const translation = storage.translations.find(
+      t => t.languageCode === 'eng',
+    );
+    return translation ? translation.title : storage.translations[0].title;
   }
 }

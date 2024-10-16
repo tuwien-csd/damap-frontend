@@ -4,7 +4,7 @@
     <mat-card
       appearance="raised"
       *ngFor="
-        let element of internalStorages
+        let element of activeStorages
           | storageFilter: storageStep?.getRawValue()
       "
       class="storage-card">
@@ -14,7 +14,7 @@
         <div mat-card-avatar>
           <mat-icon>folder_open</mat-icon>
         </div>
-        <mat-card-title>{{ element.title }}</mat-card-title>
+        <mat-card-title>{{ getStorageTitle(element) }}</mat-card-title>
       </mat-card-header>
       <ng-container *ngIf="element.url">
         <mat-card-content

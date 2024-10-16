@@ -43,6 +43,7 @@ tr.element-row:not(.expanded-row):active {
 
 .mat-column-dataset,
 .mat-column-source,
+.mat-column-fileFormat,
 .mat-column-description {
   max-width: 20vw;
   word-wrap: break-word;

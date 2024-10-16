@@ -351,9 +351,21 @@ export class FormService {
 
   public addStorageToForm(storage: InternalStorage) {
     const storageFormGroup = this.createStorageFormGroup();
+
+    if (storage.translations.length === 0) {
+      return;
+    }
+
+    const translation = storage.translations.find(
+      t => t.languageCode === 'eng',
+    );
+    const title: string = translation
+      ? translation.title
+      : storage.translations[0].title;
+
     storageFormGroup.patchValue({
       internalStorageId: storage.id,
-      title: storage.title,
+      title: title,
     });
     (this.form.get('storage') as UntypedFormArray).push(storageFormGroup);
   }
@@ -435,6 +447,62 @@ export class FormService {
       retentionPeriod: [10],
       source: [DataSource.NEW, Validators.required],
       datasetId: [null],
+    });
+  }
+
+  public createInternalStorageFormGroup(): UntypedFormGroup {
+    return this.formBuilder.group({
+      id: [null, { disabled: true }],
+      url: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+      storageLocation: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+      backupLocation: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+      active: [true],
+    });
+  }
+
+  public createInternalStorageTranslationFormGroup(): UntypedFormGroup {
+    return this.formBuilder.group({
+      id: [null, { disabled: true }],
+      storageId: [null, { disabled: true }],
+      title: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+      languageCode: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+      description: ['', [Validators.maxLength(this.TEXT_MAX_LENGTH)]],
+      backupFrequency: ['', [Validators.maxLength(this.TEXT_SHORT_LENGTH)]],
     });
   }
 
