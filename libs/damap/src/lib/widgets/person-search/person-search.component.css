@@ -19,3 +19,8 @@
   display: inline-block;
   margin: 10px;
 }
+
+.person-detail-content {
+  white-space: normal !important;
+  word-break: break-all !important;
+}
