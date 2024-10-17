@@ -62,11 +62,6 @@ mat-card {
   width: 100%;
 }
 
-.wrap-normal-label {
-  white-space: normal;
-  height: auto;
-}
-
 .flex-radio {
   display: flex;
   flex-direction: column;
@@ -145,4 +140,23 @@ mat-card {
 .mat-icon-shadow:hover {
   transform: scale(1.005) translateZ(0);
   box-shadow: 0px 0px 15px 10px rgba(246, 246, 246, 1);
+}
+
+.zebra-table {
+  & tbody tr:not(.expanded-row):hover {
+    background: var(--secondary-container);
+    color: var(--on-secondary-container);
+  }
+
+  & tbody tr:not(.expanded-row):active {
+    background: var(--secondary-fixed-dim);
+  }
+
+  & tbody tr:nth-child(odd) {
+    background-color: var(--surface-container-low);
+  }
+
+  .mat-mdc-cell {
+    border-bottom: none;
+  }
 }
