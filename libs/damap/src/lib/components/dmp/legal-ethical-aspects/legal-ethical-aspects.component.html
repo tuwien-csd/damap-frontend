@@ -44,7 +44,7 @@
       </div>
       <div>
         <div class="form-field-hint">
-          <mat-form-field appearance="fill" [style]="'width: 100%'">
+          <mat-form-field [style]="'width: 100%'">
             <mat-label
               >{{
                 "dmp.steps.legal.question.sensitiveDataSecurity" | translate
@@ -65,14 +65,12 @@
           <app-input-wrapper
             [label]="'dmp.steps.legal.question.otherDataSecurityMeasures'"
             [control]="otherDataSecurityMeasures"
-            [maxLength]="4000"
-            appearance="fill"></app-input-wrapper>
+            [maxLength]="4000"></app-input-wrapper>
         </ng-container>
         <app-input-wrapper
           [label]="'dmp.steps.legal.question.sensitiveDataAccess'"
           [control]="sensitiveDataAccess"
-          [maxLength]="4000"
-          appearance="fill"></app-input-wrapper>
+          [maxLength]="4000"></app-input-wrapper>
       </div>
     </ng-container>
     <hr />
@@ -117,7 +115,7 @@
         </section>
       </div>
       <div>
-        <mat-form-field appearance="fill" [style]="'width: 100%'">
+        <mat-form-field [style]="'width: 100%'">
           <mat-label>{{
             "dmp.steps.legal.question.personalDataCompliance" | translate
           }}</mat-label>
@@ -137,7 +135,6 @@
           <app-input-wrapper
             [label]="'dmp.steps.legal.question.otherPersonalDataCompliance'"
             [control]="otherPersonalDataCompliance"
-            appearance="fill"
             [maxLength]="4000"></app-input-wrapper>
         </ng-container>
       </div>
@@ -170,11 +167,10 @@
       <div>
         <app-input-wrapper
           [label]="'dmp.steps.legal.question.legalRestrictionsComment'"
-          appearance="fill"
           [control]="legalRestrictionsComment"
           [maxLength]="4000"></app-input-wrapper>
       </div>
-      <mat-form-field appearance="fill" [style]="'width: 100%'">
+      <mat-form-field [style]="'width: 100%'">
         <mat-label>{{
           "dmp.steps.legal.question.legalRestrictionsDocuments" | translate
         }}</mat-label>
@@ -190,7 +186,6 @@
         <app-input-wrapper
           [label]="'dmp.steps.legal.question.otherLegalRestrictionsDocuments'"
           [maxLength]="4000"
-          appearance="fill"
           [control]="otherLegalRestrictionsDocuments"></app-input-wrapper>
       </ng-container>
     </ng-container>
@@ -199,7 +194,6 @@
   <app-input-wrapper
     [label]="'dmp.steps.legal.question.dataRightsAndAccessControl'"
     [maxLength]="4000"
-    appearance="fill"
     [control]="dataRightsAndAccessControl"></app-input-wrapper>
 </div>
 

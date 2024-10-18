@@ -1,13 +1,9 @@
 <form>
-  <mat-form-field class="search-field">
-    <mat-label>{{ "dmp.steps.people.search" | translate }}</mat-label>
-    <input
-      #searchBox
-      type="search"
-      matInput
-      (input)="search(searchBox.value)" />
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
+  <damap-search-field
+    class="search-field"
+    [label]="'dmp.steps.people.search'"
+    [appearance]="'outline'"
+    (searchChange)="search($event)"></damap-search-field>
   <div class="result-list" *ngIf="currentSearchTerm && result.length > 0">
     <mat-selection-list
       hideSingleSelectionIndicator

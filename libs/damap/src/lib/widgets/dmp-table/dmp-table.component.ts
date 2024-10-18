@@ -14,6 +14,8 @@ import { FunctionRole } from '../../domain/enum/function-role.enum';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { LoadingState } from '../../domain/enum/loading-state.enum';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dmp-table',
@@ -23,6 +25,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class DmpTableComponent implements OnChanges, AfterViewInit {
   @Input() dmps: DmpListItem[];
   @Input() admin = false;
+  @Input() dmpsLoaded: Observable<LoadingState>;
   dataSource = new MatTableDataSource();
 
   @Output() createDocument = new EventEmitter<number>();
@@ -31,6 +34,8 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
+  searchTerm: string = '';
 
   readonly tableHeaders: string[] = [
     'title',
@@ -69,8 +74,8 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
     };
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+  applyFilter(filterValue: string) {
+    this.searchTerm = filterValue;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
@@ -89,4 +94,6 @@ export class DmpTableComponent implements OnChanges, AfterViewInit {
   deleteDmp(id: number) {
     this.dmpToDelete.emit(id);
   }
+
+  protected readonly LoadingState = LoadingState;
 }
