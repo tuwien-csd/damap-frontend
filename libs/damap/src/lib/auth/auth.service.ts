@@ -12,6 +12,23 @@ export class AuthService {
     return claims['name'];
   }
 
+  getDisplayName(): string {
+    const claims = this.oAuthService.getIdentityClaims();
+    const {
+      name,
+      given_name: firstName,
+      family_name: lastName,
+      email,
+    } = claims;
+
+    const displayName =
+      name ||
+      (firstName && lastName ? `${firstName} ${lastName}` : null) ||
+      email ||
+      '';
+    return displayName;
+  }
+
   getUsername(): string {
     const claims = this.oAuthService.getIdentityClaims();
     return claims['preferred_username'];

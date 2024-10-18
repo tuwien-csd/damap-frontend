@@ -1,21 +1,22 @@
+import * as layoutTemplate from '../../../assets/i18n/layout/en.json';
+
 import {
   AfterViewInit,
   Component,
+  OnDestroy,
   OnInit,
   ViewChild,
-  OnDestroy,
 } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-
 import { AuthService, DashboardComponent } from '@damap/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { Subscription, filter } from 'rxjs';
+
 import { ConfigService } from '../../services/config.service';
+import { DmpComponent } from '../../../../../../libs/damap/src/lib/components/dmp/dmp.component'; // eslint-disable-line
 import { MatSidenav } from '@angular/material/sidenav';
 import { TranslateService } from '@ngx-translate/core';
 import pkg from '../../../../../../package.json'; // eslint-disable-line
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { DmpComponent } from '../../../../../../libs/damap/src/lib/components/dmp/dmp.component'; // eslint-disable-line
-import { filter, Subscription } from 'rxjs';
-import * as layoutTemplate from '../../../assets/i18n/layout/en.json';
 
 @Component({
   selector: 'app-layout',
@@ -54,7 +55,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.name = this.auth.getName() ?? '';
+    this.name = this.auth.getDisplayName();
     const browserLang = this.translate.getBrowserLang();
     this.translate.use(browserLang?.match(/en|de/) ? browserLang : 'en');
     this.lang = this.translate.currentLang.toUpperCase();
