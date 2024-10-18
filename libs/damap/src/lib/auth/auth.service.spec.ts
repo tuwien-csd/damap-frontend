@@ -1,8 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-
 import { AuthService } from './auth.service';
-import { OAuthService } from 'angular-oauth2-oidc';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { TestBed } from '@angular/core/testing';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -23,6 +22,51 @@ describe('AuthService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should return full name if both first and last names are provided', () => {
+    spy.getIdentityClaims.and.returnValue({
+      given_name: 'John',
+      family_name: 'Doe',
+    });
+    expect(service.getDisplayName()).toEqual('John Doe');
+  });
+
+  it('should return name if name is provided', () => {
+    spy.getIdentityClaims.and.returnValue({
+      name: 'John Doe',
+    });
+    expect(service.getDisplayName()).toEqual('John Doe');
+  });
+
+  it('should return email if only email is provided', () => {
+    spy.getIdentityClaims.and.returnValue({
+      email: 'john.doe@example.com',
+    });
+    expect(service.getDisplayName()).toEqual('john.doe@example.com');
+  });
+
+  it('should return full name if both first and last names are present, and name is missing', () => {
+    spy.getIdentityClaims.and.returnValue({
+      given_name: 'John',
+      family_name: 'Doe',
+    });
+    expect(service.getDisplayName()).toEqual('John Doe');
+  });
+
+  it('should return empty string if no claims are available', () => {
+    spy.getIdentityClaims.and.returnValue({});
+    expect(service.getDisplayName()).toEqual('');
+  });
+
+  it('should return name if name and other details are provided', () => {
+    spy.getIdentityClaims.and.returnValue({
+      name: 'John Doe',
+      given_name: 'John',
+      family_name: 'Doe',
+      email: 'john.doe@example.com',
+    });
+    expect(service.getDisplayName()).toEqual('John Doe');
   });
 
   it('should return name and username', () => {
