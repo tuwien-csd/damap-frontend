@@ -66,7 +66,3 @@ For customising the DMP Tool JKU frontend, please refer to the [CUSTOMISING](CUS
 
 - Laura Thaci
 - Mojib Wali
-
-## Screenshots
-
-![jku-bew](https://github.com/user-attachments/assets/855aa8ad-0525-4f72-8647-8ee666a7f433)
