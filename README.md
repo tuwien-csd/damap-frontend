@@ -1,56 +1,72 @@
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tuwien-csd_damap-frontend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tuwien-csd_damap-frontend)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tuwien-csd_damap-frontend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=tuwien-csd_damap-frontend)
+# DMP Tool JKU - Johannes Kepler University Linz
 
-# DAMAP
+This repository contains the source code for the DMP Tool JKU, developed by Laura Thaci. The tool leverages the principles of machine-actionable Data Management Plans (maDMPs) to streamline the creation and management of data management plans (DMPs) for research purposes.
 
-## Introduction
+## Overview
 
-DAMAP is a tool that is currently being developed by TU Wien and TU Graz as part of the
-[FAIR Data Austria](https://forschungsdaten.at/fda/) project.
-It is based on the idea of machine actionable data management plans (maDMPs) and aims to facilitate the
-creation of data management plans (DMPs) for researchers.
-The tool aims to be closely integrated into the institutional environment, collecting information from
-various established systems, in order to perceive project information, research data and personnel data
-from existing systems.
-This saves DMP authors from having to enter the same data several times.
-Finally DAMAP delivers both a DMP that can be read and edited as a Word document, and an maDMP whose
-information can be used at machine level. The current content of DAMAP is based on
-[Science Europe’s Practical Guide to the International Alignment of Research Data Management](https://www.tuwien.at/fileadmin/Assets/forschung/Zentrum_Forschungsdatenmanagement/pdf-Sammlung/se_rdm_practical_guide_extended_final_2021.pdf)
-and is compatible with
-the [RDA recommendation on machine actionable DMPs](https://zenodo.org/record/4036060#.Yk20vjWxVaR).
+The DMP Tool JKU is designed to integrate seamlessly with Johannes Kepler University Linz's institutional systems, automating the collection of project details, research data, and personnel information. This integration minimizes repetitive data entry and enhances the accuracy and efficiency of DMP creation.
 
-For a showcase of some of the tools functions see the [demo video](https://youtu.be/IxQzqy26ZO4).
+The tool produces DMPs that are both human-readable and editable in formats such as Word, and machine-actionable, aligning with the Science Europe’s Practical Guide to the International Alignment of Research Data Management and the RDA recommendations on maDMPs.
 
-## Damap Project and Documentation
+For more information about the base DAMAP implementation, visit the [DAMAP frontend repository](https://github.com/tuwien-csd/damap-frontend).
 
-For an overview and instructions for running the whole damap package (backend and frontend),
-refer to the [damap-backend](https://github.com/tuwien-csd/damap-backend) project.
+## DMP Tool JKU Frontend
 
-## DamapFrontend
+This project is based on the DAMAP frontend developed in cooperation between TU Wien and TU Graz but has been adapted to meet the specific needs of Johannes Kepler University Linz. The project uses [Angular](https://angular.io/) as its framework and relies on [NX](https://nx.dev/) as a build system.
 
-This repository contains the source code for the frontend of DAMAP and need to be run
-with [damap-backend](https://github.com/tuwien-csd/damap-backend).
-The project is based on [Angular](https://angular.io/) and uses [NX](https://nx.dev/) as a build system.
+### Development Server
 
-### Development server
+To run the development server:
 
-Run `nx serve damap-frontend` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload
-if you change any of the source files.
+```bash
+nx serve damap-frontend
+```
+
+This will start the dev server, and the app will be accessible at `http://localhost:4200/`. Any changes made to the source files will trigger automatic reloading.
 
 ### Build
 
-Run `nx build damap-frontend` to build the project. The build artifacts will be stored in the `dist/` directory. Use
-the `--prod` flag for a production build.
+To build the project for production:
 
-### Running unit tests
+```bash
+nx build damap-frontend
+```
 
-Run `nx test damap` to execute the unit tests for the library and `nx test damap-frontend` for the application.
+The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-### Run the project with docker
+### Running Unit Tests
 
-For running the project in conjunction with the backend in a dockerized setup,
-please refer to the [damap-backend](https://github.com/tuwien-csd/damap-backend) project.
+To run the unit tests:
 
-### Customising
+- For the DAMAP library:
 
-Please refer to the [CUSTOMISING](CUSTOMISING.md) page.
+  ```bash
+  nx test damap
+  ```
+
+- For the DMP Tool JKU frontend:
+
+  ```bash
+  nx test damap-frontend
+  ```
+
+### Running with Docker
+
+To run the frontend and backend together in a dockerized setup, please refer to the [DMP Tool JKU backend repository](https://github.com/sharedRDM/damap-backend) for further instructions.
+
+### Documentation
+
+For more details, please refer to the [DMP Tool JKU Documentation](https://github.com/sharedRDM/dmp-jku-docs).
+
+### Customisation
+
+For customising the DMP Tool JKU frontend, please refer to the [CUSTOMISING](CUSTOMISING.md) page.
+
+## Author
+
+- Laura Thaci
+- Mojib Wali
+
+## Screenshots
+
+![jku-bew](https://github.com/user-attachments/assets/855aa8ad-0525-4f72-8647-8ee666a7f433)
