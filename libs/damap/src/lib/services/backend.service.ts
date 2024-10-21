@@ -294,9 +294,12 @@ export class BackendService {
 
   getPreviewPDF(dmpId: number, template: string): Observable<Blob> {
     return this.http
-      .get(`${this.backendUrl}document/preview/${dmpId}?template=${template}`, {
-        responseType: 'blob',
-      })
+      .get(
+        `${this.backendUrl}document/${dmpId}/export?template=${template}&download=false&filetype=pdf`,
+        {
+          responseType: 'blob',
+        },
+      )
       .pipe(catchError(this.handleError('http.error.document')));
   }
 
@@ -344,7 +347,7 @@ export class BackendService {
 
   getTemplateType(dmpId: number): Observable<string> {
     return this.http
-      .get<string>(`${this.backendUrl}document/template_type/${dmpId}`)
+      .get<string>(`${this.backendUrl}document/${dmpId}/template_type`)
       .pipe(retry(3), catchError(this.handleError('http.error.template')));
   }
 

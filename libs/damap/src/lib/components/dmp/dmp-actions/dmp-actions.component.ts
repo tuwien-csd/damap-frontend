@@ -141,6 +141,10 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
     });
   }
 
+  previewEnabled(): boolean {
+    return this.dmpForm.value.id !== null;
+  }
+
   showPreview(): void {
     if (this.dmpForm.controls.project?.getRawValue()?.funderSupported) {
       this.backendService

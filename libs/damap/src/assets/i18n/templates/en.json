@@ -469,7 +469,10 @@
     "discard": "Discard changes",
     "version": "Save new version",
     "export": "Export document",
-    "preview": "Show preview"
+    "preview": {
+      "tooltipDisabled": "Please save the DMP before being able to preview it.",
+      "content": "Show preview"
+    }
   },
   "form": {
     "error": {

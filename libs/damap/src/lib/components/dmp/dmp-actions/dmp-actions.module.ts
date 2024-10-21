@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { SaveStatusModule } from '../../../widgets/save-status/save-status.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { LivePreviewModule } from '../live-preview/live-preview.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [DmpActionsComponent, SaveVersionDialogComponent],
@@ -27,6 +28,7 @@ import { LivePreviewModule } from '../live-preview/live-preview.module';
     MatFormFieldModule,
     MatInputModule,
     MatProgressBarModule,
+    MatTooltipModule
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,7 @@ import { LivePreviewModule } from '../live-preview/live-preview.module';
     MatFormFieldModule,
     MatInputModule,
     MatProgressBarModule,
+    MatTooltipModule
   ],
 })
 export class DmpActionsModule {}
