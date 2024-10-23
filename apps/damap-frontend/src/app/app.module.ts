@@ -2,6 +2,8 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { EnvBannerModule, AuthGuard } from '@damap/core';
 import { HttpBackend, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '@damap/core';
 
 import { APP_ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
@@ -77,6 +79,7 @@ export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
       multi: true,
       deps: [ConfigService],
     },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthGuard,
     ConsentGuard,
   ],
