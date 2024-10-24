@@ -13,7 +13,7 @@ export class InputWrapperComponent implements OnInit {
   @Input() prefix: string;
   @Input() type: string;
   @Input() placeholder: string;
-  @Input() appearance: MatFormFieldAppearance = 'fill';
+  @Input() appearance: MatFormFieldAppearance = 'outline';
   @Input() maxLength = 255;
   @Input() info: string;
 

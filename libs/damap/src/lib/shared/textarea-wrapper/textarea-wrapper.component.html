@@ -1,7 +1,8 @@
 <mat-form-field
   [appearance]="appearance"
-  [class.custom-style]="applyCustomStyle">
-  <mat-label class="wrap-label">{{ label | translate }}</mat-label>
+  [class.custom-style]="applyCustomStyle"
+  class="mat-textarea-density">
+  <mat-label>{{ label | translate }}</mat-label>
 
   <ng-template #standard>
     <textarea
