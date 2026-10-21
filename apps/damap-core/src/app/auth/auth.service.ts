@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { ConfigService } from '@damap-frontend-shell/app/services/config.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -42,8 +43,7 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    const parts: string[] = this.oAuthService.getAccessToken().split('.');
-    const tokenBody: any = JSON.parse('' + window.atob(parts[1]));
+    const tokenBody: any = jwtDecode(this.oAuthService.getAccessToken());
     const rolesPath: string = this.configService.getUserRolesClaimPath();
     const pathSegments: string[] = rolesPath.split('/');
     let roles = tokenBody;
@@ -64,8 +64,7 @@ export class AuthService {
       // user not logged in
       return null;
     }
-    const parts: string[] = this.oAuthService.getAccessToken().split('.');
-    const tokenBody: any = JSON.parse('' + window.atob(parts[1]));
+    const tokenBody: any = jwtDecode(this.oAuthService.getAccessToken());
     const affiliations: string[] = tokenBody[this.configService.getAffiliationClaim()];
     if (!affiliations || affiliations.length === 0) {
       return null;
