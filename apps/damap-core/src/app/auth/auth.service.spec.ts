@@ -10,6 +10,9 @@ describe('AuthService', () => {
   let service: AuthService;
   let oAuthSpy: Partial<MockedObject<OAuthService>>;
   const configServiceSpy = {
+    getAffiliationClaim: vi.fn().mockReturnValue('affiliations'),
+    isMultitenancyEnabled: vi.fn().mockReturnValue(true),
+    getTenants: vi.fn().mockReturnValue(['example_org']),
     getNameClaim: vi.fn().mockReturnValue('name'),
     getGivenNameClaim: vi.fn().mockReturnValue('given_name'),
     getFamilyNameClaim: vi.fn().mockReturnValue('family_name'),
@@ -35,6 +38,78 @@ describe('AuthService', () => {
       ],
     });
     service = TestBed.inject(AuthService);
+  });
+
+  // Encode real UTF-8 JSON as unpadded Base64url, as an OIDC provider does.
+  // These are synthetic tokens; their signatures are irrelevant to claim decoding.
+  function accessToken(claims: Record<string, unknown>): string {
+    const bytes = new TextEncoder().encode(JSON.stringify(claims));
+    const payload = window
+      .btoa(String.fromCharCode(...bytes))
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=+$/, '');
+    return `eyJhbGciOiJSUzI1NiJ9.${payload}.signature`;
+  }
+
+  describe('JWT claim decoding', () => {
+    beforeEach(() => {
+      oAuthSpy.hasValidAccessToken!.mockReturnValue(true);
+    });
+
+    it.each(['>', '?'])(
+      'accepts Base64url tokens for name %s during tenant and admin checks',
+      (suffix) => {
+        const token = accessToken({
+          name: `aa${suffix}`,
+          affiliations: ['member@example.org'],
+          roles: ['damap-super-admin'],
+        });
+        // Ensure the fixture exercises the URL-specific alphabet, not ordinary Base64.
+        expect(token.split('.')[1]).toContain(suffix === '>' ? '-' : '_');
+        expect(token.split('.')[1]).not.toContain('=');
+        oAuthSpy.getAccessToken!.mockReturnValue(token);
+
+        expect(service.getAffiliation()).toBe('example_org');
+        expect(service.isUserAffiliatedWithATenant()).toBe(true);
+        expect(service.isAdmin()).toBe(true);
+      },
+    );
+
+    it('preserves UTF-8 in role values at the configured nested claim path', () => {
+      configServiceSpy.getUserRolesClaimPath.mockReturnValue('realm_access/roles');
+      configServiceSpy.getAdminRoleName.mockReturnValue('administrator-Łódź');
+      oAuthSpy.getAccessToken!.mockReturnValue(
+        accessToken({
+          realm_access: { roles: ['administrator-Łódź'] },
+        }),
+      );
+
+      try {
+        expect(service.isAdmin()).toBe(true);
+      } finally {
+        configServiceSpy.getUserRolesClaimPath.mockReturnValue('roles');
+        configServiceSpy.getAdminRoleName.mockReturnValue('damap-super-admin');
+      }
+    });
+
+    it('returns no affiliation without decoding when the access token is invalid', () => {
+      oAuthSpy.hasValidAccessToken!.mockReturnValue(false);
+      expect(service.getAffiliation()).toBeNull();
+      expect(oAuthSpy.getAccessToken).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      {},
+      { affiliations: [] },
+      {
+        affiliations: ['member@example.org', 'member@other.org'],
+      },
+    ])('rejects missing, empty, or conflicting tenant affiliations: %j', (claims) => {
+      oAuthSpy.getAccessToken!.mockReturnValue(accessToken(claims));
+      expect(service.getAffiliation()).toBeNull();
+      expect(service.isUserAffiliatedWithATenant()).toBe(false);
+    });
   });
 
   it('should be created', () => {
