@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] -
 
+## [5.1.1] - 2026-10-22
+
+### Fixed
+
+- Fixed a bug that prevented people with certain character sequences in their names from logging in [#585](https://github.com/damap-org/damap-frontend/pull/585)
+
 ## [5.1.0] - 2026-10-05
 
 ### Added
